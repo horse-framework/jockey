@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Horse.Core" Version="5.0.1" />
+      <PackageReference Include="Horse.Mq" Version="5.0.3" />
+      <PackageReference Include="Horse.Mq.Bus" Version="5.0.3" />
+      <PackageReference Include="Horse.Mq.Client" Version="5.0.3" />
+      <PackageReference Include="Horse.Mq.Data" Version="5.0.3" />
+      <PackageReference Include="Horse.Mvc" Version="5.0.2" />
+      <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="5.0.2" />
+      <PackageReference Include="Horse.Protocols.Http" Version="5.0.2" />
+      <PackageReference Include="Horse.Protocols.WebSocket" Version="5.0.2" />
+      <PackageReference Include="Horse.Server" Version="5.0.1" />
+      <PackageReference Include="Horse.WebSocket.Models" Version="5.0.2" />
+    </ItemGroup>
+
+</Project>
