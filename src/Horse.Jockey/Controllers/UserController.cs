@@ -1,4 +1,8 @@
-$HEADER$namespace $NAMESPACE$
+using Horse.Mvc.Controllers;
+
+namespace Horse.Jockey.Controllers
 {
-  public class $CLASS$ {$END$}
+    public class UserController : HorseController
+    {
+    }
 }

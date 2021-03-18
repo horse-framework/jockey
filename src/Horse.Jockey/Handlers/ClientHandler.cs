@@ -1,4 +1,7 @@
-$HEADER$namespace $NAMESPACE$
+namespace Horse.Jockey.Handlers
 {
-  public class $CLASS$ {$END$}
+    public class ClientHandler
+    {
+        
+    }
 }

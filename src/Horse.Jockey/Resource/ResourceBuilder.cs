@@ -1,4 +1,4 @@
-namespace Horse.Jockey.View
+namespace Horse.Jockey.Resource
 {
     public class ResourceBuilder
     {

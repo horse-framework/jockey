@@ -18,4 +18,9 @@
       <PackageReference Include="Horse.WebSocket.Models" Version="5.0.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Core" />
+      <Folder Include="Web" />
+    </ItemGroup>
+
 </Project>

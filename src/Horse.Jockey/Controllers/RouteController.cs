@@ -1,4 +1,7 @@
-$HEADER$namespace $NAMESPACE$
+namespace Horse.Jockey.Controllers
 {
-  public class $CLASS$ {$END$}
+    public class RouteController
+    {
+        
+    }
 }
