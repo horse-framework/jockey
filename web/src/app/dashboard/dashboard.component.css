@@ -1,0 +1,15 @@
+
+.dashboard {
+    min-width: 380px;
+    max-width: 1270px;
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+.dashboard-portlet {
+    flex: 0 1 50%;
+}

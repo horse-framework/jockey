@@ -95,6 +95,7 @@ export class SessionService {
 
         user.token = token;
         user.id = token_info.sub;
+        user.name = token_info.name;
         user.expiration = parseInt(token_info.exp) * 1000;
 
         return user;

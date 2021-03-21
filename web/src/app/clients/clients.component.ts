@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/lib/base-component';
 
 @Component({
-    selector: 'app-client',
-    templateUrl: './client.component.html',
-    styleUrls: ['./client.component.css']
+    selector: 'app-clients',
+    templateUrl: './clients.component.html',
+    styleUrls: ['./clients.component.css']
 })
-export class ClientComponent extends BaseComponent implements OnInit {
+export class ClientsComponent extends BaseComponent implements OnInit {
 
     constructor() {
         super();

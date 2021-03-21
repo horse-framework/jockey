@@ -1,0 +1,109 @@
+header {
+  display: block;
+  height: 60px;
+  border-bottom: 1px solid #cfcfcf;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.headline {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.headline .logo {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+  margin-right: 100px;
+}
+
+.headline .logo img {
+  height: 30px;
+  margin: 15px;
+  flex: 0 1 auto;
+}
+
+.headline .logo h1 {
+  flex: 1 2 auto;
+  margin: 14px 0px 0px 0px;
+  padding: 0px;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.headline .logo em {
+  padding: 0px 0px 0px 1px;
+  font-size: 10px;
+  font-weight: 300;
+  color: #555;
+  font-style: normal;
+}
+
+.headline .menu {
+  flex: 1 2 auto;
+}
+
+.headline .menu ul {
+  margin: 13px 20px 0px 20px;
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.headline .menu ul li {
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+  margin: 0px 4px;
+}
+
+.headline .menu ul li a {
+  text-decoration: none;
+  padding: 10px 14px;
+  background-color: #eee;
+  color: #333;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.headline .menu ul li a.active {
+  background-color: #333;
+  color: #eee;
+}
+
+.headline .user {
+  flex: 0 3 auto;
+  padding: 12px;
+}
+
+.headline .user-name {
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  margin: 0px;
+  padding: 0px 10px;
+}
+
+.headline .logout {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  color: #333;
+  font-style: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  line-height: 13px;
+  padding: 10px 10px;
+  margin: 0px 0px 0px 10px;
+}

@@ -31,9 +31,21 @@ const routes: Routes = [
         canActivate: [SessionGuard]
     },
     {
-        path: 'client',
+        path: 'clients',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./client/client.module').then(m => m.ClientModule),
+        loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule),
+        canActivate: [SessionGuard]
+    },
+    {
+        path: 'nodes',
+        component: PortalLayoutComponent,
+        loadChildren: () => import('./nodes/nodes.module').then(m => m.NodesModule),
+        canActivate: [SessionGuard]
+    },
+    {
+        path: 'handlers',
+        component: PortalLayoutComponent,
+        loadChildren: () => import('./handlers/handlers.module').then(m => m.HandlersModule),
         canActivate: [SessionGuard]
     },
     {
@@ -42,10 +54,15 @@ const routes: Routes = [
         loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
     },
     {
-        path: '',
+        path: 'dashboard',
         component: PortalLayoutComponent,
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
         canActivate: [SessionGuard]
+    },
+    {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
     }
 ];
 
