@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using Horse.Jockey.Helpers;
+using Horse.Mq.Queues;
 using Horse.WebSocket.Models;
 
 namespace Horse.Jockey.Models
@@ -13,10 +15,10 @@ namespace Horse.Jockey.Models
         public int Consumers { get; set; }
 
         [JsonPropertyName("storedMsg")]
-        public int StoredMsgs { get; set; }
+        public long StoredMsgs { get; set; }
 
         [JsonPropertyName("storedPrioMsgs")]
-        public int StoredPrioMsgs { get; set; }
+        public long StoredPrioMsgs { get; set; }
 
         [JsonPropertyName("processingMsgs")]
         public int ProcessingMsgs { get; set; }
@@ -36,16 +38,41 @@ namespace Horse.Jockey.Models
         [JsonPropertyName("totalSent")]
         public long TotalSent { get; set; }
 
-        [JsonPropertyName("totalAcks")]
-        public long TotalAcks { get; set; }
+        [JsonPropertyName("totalDelivered")]
+        public long TotalDelivered { get; set; }
 
-        [JsonPropertyName("totalNacks")]
-        public long TotalNacks { get; set; }
+        [JsonPropertyName("totalAck")]
+        public long TotalAck { get; set; }
 
-        [JsonPropertyName("totalTimedouts")]
-        public long TotalTimedouts { get; set; }
+        [JsonPropertyName("totalNack")]
+        public long TotalNack { get; set; }
+
+        [JsonPropertyName("totalTimedout")]
+        public long TotalTimedout { get; set; }
 
         [JsonPropertyName("totalErrors")]
         public long TotalErrors { get; set; }
+
+        public static HorseQueueStatistics Create(HorseQueue queue)
+        {
+            return new()
+                   {
+                       Consumers = queue.ClientsCount(),
+                       Name = queue.Name,
+                       LastReceived = queue.Info.LastMessageReceiveDate.ToUnixSeconds(),
+                       LastSent = queue.Info.LastMessageSendDate.ToUnixSeconds(),
+                       StoredMsgs = queue.Info.InQueueRegularMessages,
+                       StoredPrioMsgs = queue.Info.InQueueHighPriorityMessages,
+                       ProcessingMsgs = 0, //todo: if has processing message, value will be 1
+                       AckPendingMsgs = 0, //todo: get pending message count
+                       TotalAck = queue.Info.Acknowledges,
+                       TotalErrors = queue.Info.ErrorCount,
+                       TotalNack = queue.Info.NegativeAcknowledge,
+                       TotalReceived = queue.Info.ReceivedMessages,
+                       TotalSent = queue.Info.SentMessages,
+                       TotalTimedout = queue.Info.TimedOutMessages,
+                       TotalDelivered = queue.Info.Deliveries
+                   };
+        }
     }
 }
