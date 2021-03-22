@@ -1,15 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
+using Horse.Jockey.Core;
+using Horse.Mq;
 using Horse.Mq.Queues;
 
-namespace Horse.Jockey.Core
+namespace Horse.Jockey.Containers
 {
-    public class QueueWatcherProvider
+    public class QueueWatcherContainer
     {
         private readonly Dictionary<string, QueueWatcher> _queueWatchers = new();
 
         private List<QueueWatcher> _watchers = new();
         public IEnumerable<QueueWatcher> QueueWatchers => _watchers;
+
+        public void Initialize(HorseMq mq)
+        {
+            
+        }
 
         public QueueWatcher Watch(HorseQueue queue)
         {

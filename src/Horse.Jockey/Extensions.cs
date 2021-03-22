@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Horse.Jockey.Containers;
+using Horse.Jockey.Core;
+using Horse.Jockey.Handlers;
 using Horse.Jockey.Resource;
 using Horse.Mq;
 using Horse.Mvc;
@@ -28,9 +31,25 @@ namespace Horse.Jockey
                 ResourceProvider provider = new ResourceProvider();
                 await provider.Load();
 
-                services.AddSingleton(provider);
+                QueueWatcherContainer watcherContainer = new QueueWatcherContainer();
+                watcherContainer.Initialize(mq);
+
+                ClientHandler clientHandler = new ClientHandler();
+                mq.AddClientHandler(clientHandler);
+
+                QueueEventHandler queueEventHandler = new QueueEventHandler();
+                mq.AddQueueEventHandler(queueEventHandler);
+
+                ErrorHandler errorHandler = new ErrorHandler();
+                mq.AddErrorHandler(errorHandler);
+                
                 services.AddSingleton(mq);
                 services.AddSingleton(options);
+                services.AddSingleton(provider);
+                services.AddSingleton(watcherContainer);
+                services.AddSingleton(clientHandler);
+                services.AddSingleton(queueEventHandler);
+                services.AddSingleton(errorHandler);
 
                 services.AddJwt(Hub.Mvc, o =>
                 {
@@ -52,6 +71,8 @@ namespace Horse.Jockey
                 app.UseMiddleware(middleware);
 
                 IServiceProvider provider = app.GetProvider();
+                Hub.Provider = provider;
+                
                 ResourceProvider resourceProvider = provider.GetService<ResourceProvider>();
                 resourceProvider.Use(app);
             });

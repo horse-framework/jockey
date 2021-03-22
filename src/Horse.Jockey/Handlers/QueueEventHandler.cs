@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Horse.Mq;
 using Horse.Mq.Clients;
@@ -5,8 +6,9 @@ using Horse.Mq.Queues;
 
 namespace Horse.Jockey.Handlers
 {
-    public class QueueEventHandler : IQueueEventHandler
+    public class QueueEventHandler : BaseHandler, IQueueEventHandler
     {
+
         public async Task OnCreated(HorseQueue queue)
         {
             throw new System.NotImplementedException();

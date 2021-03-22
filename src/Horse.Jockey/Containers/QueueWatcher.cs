@@ -9,7 +9,8 @@ namespace Horse.Jockey.Core
     {
         public HorseQueue Queue { get; }
 
-        public HorseQueueStatistics Statistics { get; set; }
+        public HorseQueueStatistics Statistics { get; private set; }
+        public HorseQueueInformation Information { get; private set; }
 
         private Timer _timer;
 
