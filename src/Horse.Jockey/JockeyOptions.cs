@@ -4,6 +4,6 @@ namespace Horse.Jockey
 {
     public class JockeyOptions
     {
-        public HttpOptions HttpOptions { get; set; }
+        public int Port { get; set; }
     }
 }

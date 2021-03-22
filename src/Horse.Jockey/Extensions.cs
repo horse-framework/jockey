@@ -1,6 +1,12 @@
 using System;
-using Horse.Core;
+using System.Collections.Generic;
+using System.Linq;
+using Horse.Jockey.Resource;
 using Horse.Mq;
+using Horse.Mvc;
+using Horse.Mvc.Middlewares;
+using Horse.Server;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Horse.Jockey
 {
@@ -15,12 +21,32 @@ namespace Horse.Jockey
 
         public static void AddJockey(this HorseMq mq, JockeyOptions options)
         {
-            throw new NotImplementedException();
-        }
+            Hub.Mvc = new HorseMvc();
+            Hub.Mvc.Init(async services =>
+            {
+                ResourceProvider provider = new ResourceProvider();
+                await provider.Load();
 
-        public static void UseJockey(this HorseMq mq)
-        {
-            throw new NotImplementedException();
+                services.AddSingleton(provider);
+                services.AddSingleton(mq);
+                services.AddSingleton(options);
+            });
+
+            CorsMiddleware middleware = new CorsMiddleware();
+            middleware.AllowAll();
+
+            Hub.Mvc.Use(app =>
+            {
+                app.UseMiddleware(middleware);
+
+                IServiceProvider provider = app.GetProvider();
+                ResourceProvider resourceProvider = provider.GetService<ResourceProvider>();
+                resourceProvider.Use(app);
+            });
+
+            Hub.Server = new HorseServer();
+            Hub.Server.UseMvc(Hub.Mvc);
+            Hub.Server.Start(options.Port);
         }
     }
 }
