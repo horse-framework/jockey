@@ -31,7 +31,7 @@ namespace Horse.Jockey.Resource
 
                 if (info.VirtualPath.Equals("/index.html", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    app.UseActionRoute("", request => HandleRequest(info));
+                    app.UseActionRoute("/", request => HandleRequest(info));
                     Hub.Mvc.NotFoundResult = HandleRequest(info).GetAwaiter().GetResult();
                 }
             }

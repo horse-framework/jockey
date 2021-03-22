@@ -4,6 +4,7 @@ using System.Linq;
 using Horse.Jockey.Resource;
 using Horse.Mq;
 using Horse.Mvc;
+using Horse.Mvc.Auth.Jwt;
 using Horse.Mvc.Middlewares;
 using Horse.Server;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,17 @@ namespace Horse.Jockey
                 services.AddSingleton(provider);
                 services.AddSingleton(mq);
                 services.AddSingleton(options);
+
+                services.AddJwt(Hub.Mvc, o =>
+                {
+                    o.Key = $"{Guid.NewGuid()}-{Guid.NewGuid()}-{Guid.NewGuid()}";
+                    o.Issuer = "jockey";
+                    o.Audience = "jockey";
+                    o.Lifetime = TimeSpan.FromHours(24);
+                    o.ValidateAudience = false;
+                    o.ValidateIssuer = false;
+                    o.ValidateLifetime = true;
+                });
             });
 
             CorsMiddleware middleware = new CorsMiddleware();
