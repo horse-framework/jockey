@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Horse.Jockey.Models;
 using Horse.Mq.Queues;
 
-namespace Horse.Jockey.Core
+namespace Horse.Jockey.Containers
 {
     public class QueueWatcher
     {
@@ -12,7 +13,12 @@ namespace Horse.Jockey.Core
         public HorseQueueStatistics Statistics { get; private set; }
         public HorseQueueInformation Information { get; private set; }
 
+        private DateTime _lastInformationRefreshDate = DateTime.UtcNow.AddDays(-1);
+        private readonly TimeSpan _informationRefreshment = TimeSpan.FromSeconds(60);
         private Timer _timer;
+
+        //last 5 mins
+        private Queue<QueueGraphData> _graphData = new(300);
 
         public QueueWatcher(HorseQueue queue)
         {
@@ -24,6 +30,7 @@ namespace Horse.Jockey.Core
             if (_timer != null)
                 return;
 
+            Refresh();
             _timer = new Timer(s => Refresh(), null, 1000, 1000);
         }
 
@@ -43,7 +50,23 @@ namespace Horse.Jockey.Core
 
         private void Refresh()
         {
-            throw new NotImplementedException();
+            RefreshStats();
+
+            if (_lastInformationRefreshDate + _informationRefreshment < DateTime.UtcNow)
+            {
+                RefreshInfo();
+                _lastInformationRefreshDate = DateTime.UtcNow;
+            }
+        }
+
+        private void RefreshStats()
+        {
+            //todo: refresh stats
+        }
+
+        private void RefreshInfo()
+        {
+            //todo: refresh info
         }
     }
 }

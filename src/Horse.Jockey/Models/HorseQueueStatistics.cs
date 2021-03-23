@@ -53,6 +53,9 @@ namespace Horse.Jockey.Models
         [JsonPropertyName("totalErrors")]
         public long TotalErrors { get; set; }
 
+        [JsonPropertyName("totalRedelivered")]
+        public long TotalRedelivered { get; set; }
+
         public static HorseQueueStatistics Create(HorseQueue queue)
         {
             return new()
@@ -63,8 +66,8 @@ namespace Horse.Jockey.Models
                        LastSent = queue.Info.LastMessageSendDate.ToUnixSeconds(),
                        StoredMsgs = queue.Info.InQueueRegularMessages,
                        StoredPrioMsgs = queue.Info.InQueueHighPriorityMessages,
-                       ProcessingMsgs = 0, //todo: if has processing message, value will be 1
-                       AckPendingMsgs = 0, //todo: get pending message count
+                       ProcessingMsgs = queue.ProcessingMessage != null ? 1 : 0,
+                       AckPendingMsgs = queue.GetAckPendingMessageCount(),
                        TotalAck = queue.Info.Acknowledges,
                        TotalErrors = queue.Info.ErrorCount,
                        TotalNack = queue.Info.NegativeAcknowledge,

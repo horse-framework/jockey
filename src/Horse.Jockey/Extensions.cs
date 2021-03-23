@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Horse.Jockey.Containers;
-using Horse.Jockey.Core;
 using Horse.Jockey.Handlers;
 using Horse.Jockey.Resource;
 using Horse.Mq;

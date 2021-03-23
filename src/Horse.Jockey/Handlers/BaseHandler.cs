@@ -1,6 +1,5 @@
 using System;
 using Horse.Jockey.Containers;
-using Horse.Jockey.Core;
 using Horse.Mq.Queues;
 using Microsoft.Extensions.DependencyInjection;
 
