@@ -8,6 +8,8 @@ namespace Horse.Jockey
     {
         public int Port { get; set; }
 
+        public TimeSpan StatisticsKeepAliveDuration { get; set; } = TimeSpan.Zero;
+
         public Func<UserLogin, Task<UserInfo>> AuthAsync { get; set; }
     }
 }

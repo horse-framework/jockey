@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Horse.Mq;
 using Horse.Mq.Clients;
 
-namespace Horse.Jockey.Handlers
+namespace Horse.Jockey.Handlers.Queues
 {
     public class ClientHandler : BaseHandler, IClientHandler
     {

@@ -53,9 +53,6 @@ namespace Horse.Jockey.Models
         [JsonPropertyName("totalErrors")]
         public long TotalErrors { get; set; }
 
-        [JsonPropertyName("totalRedelivered")]
-        public long TotalRedelivered { get; set; }
-
         public static HorseQueueStatistics Create(HorseQueue queue)
         {
             return new()

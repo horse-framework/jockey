@@ -3,23 +3,24 @@ using System.Linq;
 using Horse.Mq;
 using Horse.Mq.Queues;
 
-namespace Horse.Jockey.Containers
+namespace Horse.Jockey.Core
 {
     public class QueueWatcherContainer
     {
+        private JockeyOptions _options;
         private readonly Dictionary<string, QueueWatcher> _queueWatchers = new();
 
         private List<QueueWatcher> _watchers = new();
         public IEnumerable<QueueWatcher> QueueWatchers => _watchers;
 
-        public void Initialize(HorseMq mq)
+        public void Initialize(HorseMq mq, JockeyOptions options)
         {
-            
+            _options = options;
         }
 
         public QueueWatcher Watch(HorseQueue queue)
         {
-            QueueWatcher watcher = new QueueWatcher(queue);
+            QueueWatcher watcher = new QueueWatcher(queue, _options);
             watcher.Watch();
 
             lock (_queueWatchers)

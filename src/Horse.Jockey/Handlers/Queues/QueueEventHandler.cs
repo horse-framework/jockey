@@ -1,10 +1,9 @@
-using System;
 using System.Threading.Tasks;
 using Horse.Mq;
 using Horse.Mq.Clients;
 using Horse.Mq.Queues;
 
-namespace Horse.Jockey.Handlers
+namespace Horse.Jockey.Handlers.Queues
 {
     public class QueueEventHandler : BaseHandler, IQueueEventHandler
     {

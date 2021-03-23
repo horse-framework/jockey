@@ -1,7 +1,7 @@
 using System;
 using Horse.Mq;
 
-namespace Horse.Jockey.Handlers
+namespace Horse.Jockey.Handlers.Queues
 {
     public class ErrorHandler : BaseHandler, IErrorHandler
     {

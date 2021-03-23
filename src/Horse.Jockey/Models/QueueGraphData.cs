@@ -7,39 +7,36 @@ namespace Horse.Jockey.Models
     public class QueueGraphData
     {
         [JsonPropertyName("stored")]
-        public int Stored { get; set; }
+        public long Stored { get; set; }
 
         [JsonPropertyName("storedPrio")]
-        public int StoredPrio { get; set; }
+        public long StoredPrio { get; set; }
 
         [JsonPropertyName("received")]
-        public int Received { get; set; }
+        public long Received { get; set; }
 
         [JsonPropertyName("sent")]
-        public int Sent { get; set; }
+        public long Sent { get; set; }
 
         [JsonPropertyName("delivery")]
-        public int Delivery { get; set; }
+        public long Delivery { get; set; }
 
         [JsonPropertyName("ack")]
-        public int Ack { get; set; }
+        public long Ack { get; set; }
 
         [JsonPropertyName("nack")]
-        public int Nack { get; set; }
+        public long Nack { get; set; }
 
         [JsonPropertyName("timeout")]
-        public int Timeout { get; set; }
+        public long Timeout { get; set; }
 
         [JsonPropertyName("processing")]
-        public int Processing { get; set; }
+        public long Processing { get; set; }
 
         [JsonPropertyName("pending")]
-        public int Pending { get; set; }
+        public long Pending { get; set; }
 
         [JsonPropertyName("error")]
-        public int Error { get; set; }
-        
-        [JsonPropertyName("redelivered")]
-        public int Redelivered { get; set; }
+        public long Error { get; set; }
     }
 }

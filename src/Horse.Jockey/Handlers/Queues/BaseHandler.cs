@@ -1,9 +1,8 @@
 using System;
-using Horse.Jockey.Containers;
-using Horse.Mq.Queues;
+using Horse.Jockey.Core;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Horse.Jockey.Handlers
+namespace Horse.Jockey.Handlers.Queues
 {
     public class BaseHandler
     {
