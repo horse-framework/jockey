@@ -1,4 +1,6 @@
 using System;
+using Horse.Mq;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Horse.Jockey.Helpers
 {
@@ -20,6 +22,19 @@ namespace Horse.Jockey.Helpers
         public static long ToMilliseconds(this TimeSpan span)
         {
             return Convert.ToInt64(span.TotalMilliseconds);
+        }
+
+        public static string ToHandlerString(this IMessageDeliveryHandler handler)
+        {
+            string handlerName = handler.GetType().Name;
+            
+            if (handlerName.EndsWith("DeliveryHandler"))
+                return handlerName.Replace("DeliveryHandler", "");
+            
+            if (handlerName.EndsWith("Handler"))
+                return handlerName.Replace("Handler", "");
+
+            return handlerName;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Horse.Jockey
 {
     internal class Hub
     {
+        internal static DateTime StartedDate { get; set; }
         internal static HorseMq Mq { get; set; }
         internal static HorseServer Server { get; set; }
         internal static HorseMvc Mvc { get; set; }

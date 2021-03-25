@@ -58,7 +58,7 @@ namespace Horse.Jockey.Models
             return new()
                    {
                        Acknowledge = queue.Options.Acknowledge.ToString(),
-                       Handler = queue.DeliveryHandler.GetType().Name,
+                       Handler = queue.DeliveryHandler.ToHandlerString(),
                        Name = queue.Name,
                        Status = queue.Status.ToString(),
                        Topic = queue.Topic,

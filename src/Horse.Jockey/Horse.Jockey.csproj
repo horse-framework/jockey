@@ -16,6 +16,7 @@
       <PackageReference Include="Horse.Protocols.WebSocket" Version="5.0.2" />
       <PackageReference Include="Horse.Server" Version="5.0.1" />
       <PackageReference Include="Horse.WebSocket.Models" Version="5.0.2" />
+      <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="5.0.1" />
     </ItemGroup>
 
     <ItemGroup>
