@@ -47,6 +47,9 @@ namespace Horse.Jockey.Models
         [JsonPropertyName("totalNack")]
         public long TotalNack { get; set; }
 
+        [JsonPropertyName("totalUnack")]
+        public long TotalUnack { get; set; }
+
         [JsonPropertyName("totalTimedout")]
         public long TotalTimedout { get; set; }
 
@@ -55,24 +58,35 @@ namespace Horse.Jockey.Models
 
         public static HorseQueueStatistics Create(HorseQueue queue)
         {
-            return new()
-                   {
-                       Consumers = queue.ClientsCount(),
-                       Name = queue.Name,
-                       LastReceived = queue.Info.LastMessageReceiveDate.ToUnixSeconds(),
-                       LastSent = queue.Info.LastMessageSendDate.ToUnixSeconds(),
-                       StoredMsgs = queue.Info.InQueueRegularMessages,
-                       StoredPrioMsgs = queue.Info.InQueueHighPriorityMessages,
-                       ProcessingMsgs = queue.ProcessingMessage != null ? 1 : 0,
-                       AckPendingMsgs = queue.GetAckPendingMessageCount(),
-                       TotalAck = queue.Info.Acknowledges,
-                       TotalErrors = queue.Info.ErrorCount,
-                       TotalNack = queue.Info.NegativeAcknowledge,
-                       TotalReceived = queue.Info.ReceivedMessages,
-                       TotalSent = queue.Info.SentMessages,
-                       TotalTimedout = queue.Info.TimedOutMessages,
-                       TotalDelivered = queue.Info.Deliveries
-                   };
+            var stats = new HorseQueueStatistics
+                        {
+                            Consumers = queue.ClientsCount(),
+                            Name = queue.Name,
+                            LastReceived = queue.Info.LastMessageReceiveDate.ToUnixSeconds(),
+                            LastSent = queue.Info.LastMessageSendDate.ToUnixSeconds(),
+                            StoredMsgs = queue.Info.InQueueRegularMessages,
+                            StoredPrioMsgs = queue.Info.InQueueHighPriorityMessages,
+                            ProcessingMsgs = queue.ProcessingMessage != null ? 1 : 0,
+                            AckPendingMsgs = queue.GetAckPendingMessageCount(),
+                            TotalAck = queue.Info.Acknowledges,
+                            TotalNack = queue.Info.NegativeAcknowledge,
+                            TotalUnack = queue.Info.Unacknowledges,
+                            TotalErrors = queue.Info.ErrorCount,
+                            TotalReceived = queue.Info.ReceivedMessages,
+                            TotalSent = queue.Info.SentMessages,
+                            TotalTimedout = queue.Info.TimedOutMessages,
+                            TotalDelivered = queue.Info.Deliveries
+                        };
+
+            if (queue.ProcessingMessage != null)
+            {
+                if (queue.ProcessingMessage.Message.HighPriority)
+                    stats.StoredPrioMsgs++;
+                else
+                    stats.StoredMsgs++;
+            }
+
+            return stats;
         }
     }
 }

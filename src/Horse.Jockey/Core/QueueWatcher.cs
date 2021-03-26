@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Mq.Queues;
 
@@ -89,9 +90,11 @@ namespace Horse.Jockey.Core
 
                 QueueGraphData graphData = new QueueGraphData
                                            {
+                                               Date = DateTime.UtcNow.ToUnixSeconds(),
                                                Ack = Statistics.TotalAck,
                                                Delivery = Statistics.TotalDelivered,
                                                Error = Statistics.TotalErrors,
+                                               Unack = Statistics.TotalUnack,
                                                Nack = Statistics.TotalNack,
                                                Pending = Statistics.AckPendingMsgs,
                                                Processing = Statistics.ProcessingMsgs,

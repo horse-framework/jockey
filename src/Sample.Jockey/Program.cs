@@ -3,7 +3,6 @@ using System.Diagnostics;
 using Horse.Jockey;
 using Horse.Mq;
 using Horse.Server;
-using Microsoft.VisualBasic;
 
 namespace Sample.Jockey
 {
@@ -11,13 +10,6 @@ namespace Sample.Jockey
     {
         static void Main(string[] args)
         {
-            PerformanceCounter cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-            PerformanceCounter ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-            Console.WriteLine(cpuCounter.NextValue() + "%");
-            Console.WriteLine(ramCounter.NextValue() + "MB");
-            Console.ReadLine();
-            return;
-            
             HorseMq mq = new HorseMq();
             mq.AddJockey(o => o.Port = 9998);
 

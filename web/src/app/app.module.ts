@@ -8,10 +8,11 @@ import { RouteService } from 'src/services/route.service';
 import { QueueService } from 'src/services/queue.service';
 import { LoginService } from 'src/services/login.service';
 import { ClientService } from 'src/services/client.service';
-import { DashboardService } from 'src/services/dashboard.service';
 import { GuestLayoutModule } from './layout/guest-layout/guest-layout.module';
 import { PortalLayoutModule } from './layout/portal-layout/portal-layout.module';
 import { ApiClient } from 'src/lib/api-client';
+import { GraphService } from 'src/services/graph.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { ApiClient } from 'src/lib/api-client';
         BrowserModule,
         AppRoutingModule,
         GuestLayoutModule,
-        PortalLayoutModule
+        PortalLayoutModule,
+        HttpClientModule
     ],
     providers: [
         WebsocketService,
@@ -30,7 +32,7 @@ import { ApiClient } from 'src/lib/api-client';
         QueueService,
         LoginService,
         ClientService,
-        DashboardService,
+        GraphService,
         ApiClient
     ],
     bootstrap: [AppComponent]

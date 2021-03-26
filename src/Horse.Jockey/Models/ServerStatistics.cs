@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text.Json.Serialization;
 using Horse.Jockey.Helpers;
 using Horse.Mq;
@@ -55,11 +54,11 @@ namespace Horse.Jockey.Models
                    {
                        Hosts = hosts.ToArray(),
                        QueueLimit = mq.Options.QueueLimit,
-                       RouterLimit = 0, //todo: #
+                       RouterLimit = mq.Options.RouterLimit,
                        AutoQueueCreation = mq.Options.AutoQueueCreation,
                        StartedDate = Hub.StartedDate.ToUnixSeconds(),
-                       IncomingNodes = 0, //todo: #
-                       OutgoingNodes = 0, //todo: #
+                       IncomingNodes = mq.NodeManager.IncomingNodes.Count,
+                       OutgoingNodes = mq.NodeManager.OutgoingNodes.Length,
                        OnlineClients = mq.GetOnlineClients()
                    };
         }
