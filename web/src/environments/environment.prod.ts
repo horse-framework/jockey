@@ -1,11 +1,11 @@
 export const environment = {
-  production: true,
+    production: true,
 
-  api: {
-      url: ''
-  },
+    api: {
+        url: 'http://localhost:9998'
+    },
 
-  storage: {
-      token: 'token'
-  }
+    storage: {
+        token: 'token'
+    }
 };
