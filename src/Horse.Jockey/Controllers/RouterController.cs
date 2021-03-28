@@ -4,8 +4,8 @@ using Horse.Mvc.Filters.Route;
 namespace Horse.Jockey.Controllers
 {
     [Authorize]
-    [Route("api/route")]
-    public class RouteController
+    [Route("api/router")]
+    public class RouterController
     {
         
     }

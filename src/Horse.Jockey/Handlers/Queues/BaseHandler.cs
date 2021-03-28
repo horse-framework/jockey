@@ -15,6 +15,5 @@ namespace Horse.Jockey.Handlers.Queues
         {
             return Hub.Provider.GetService<QueueWatcherContainer>();
         }
-
     }
 }

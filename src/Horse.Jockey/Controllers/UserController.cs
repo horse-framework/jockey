@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Horse.Jockey.Models;
+using Horse.Jockey.Models.User;
 using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
 using Horse.Mvc.Controllers;

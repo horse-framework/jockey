@@ -1,7 +1,8 @@
-using System;
 using System.Collections.Generic;
-using Horse.Jockey.Helpers;
+using Horse.Jockey.Core;
 using Horse.Jockey.Models;
+using Horse.Jockey.Models.Queues;
+using Horse.Mq;
 using Horse.Mvc;
 using Horse.Mvc.Controllers;
 using Horse.Mvc.Filters.Route;
@@ -12,32 +13,79 @@ namespace Horse.Jockey.Controllers
     [Route("api/dashboard")]
     public class DashboardController : HorseController
     {
+        private readonly HorseMq _mq;
+        private readonly QueueWatcherContainer _watcherContainer;
+
+        public DashboardController(QueueWatcherContainer watcherContainer, HorseMq mq)
+        {
+            _watcherContainer = watcherContainer;
+            _mq = mq;
+        }
+
+        [HttpGet("statistics")]
+        public IActionResult Statistics()
+        {
+            ServerStatistics serverStatistics = ServerStatistics.Create(_mq);
+            MessageStatistics messageStatistics = MessageStatistics.Create(_mq);
+            HorseServerOptions serverOptions = HorseServerOptions.Create(_mq);
+            DefaultQueueOptions queueOptions = DefaultQueueOptions.Create(_mq);
+
+            return Json(new
+                        {
+                            serverStatistics,
+                            messageStatistics,
+                            serverOptions,
+                            queueOptions
+                        });
+        }
+
         [HttpGet("graph")]
         public IActionResult Graph()
         {
+            List<QueueGraphData[]> dataList = new List<QueueGraphData[]>();
+
+            IEnumerable<QueueWatcher> watchers = _watcherContainer.GetAll();
+            foreach (QueueWatcher watcher in watchers)
+            {
+                QueueGraphData[] data = watcher.GetGraphData();
+                dataList.Add(data);
+            }
+
             List<QueueGraphData> list = new List<QueueGraphData>();
 
-            Random rnd = new Random();
-            for (int i = 0; i < 60; i++)
-            {
-                long time = DateTime.UtcNow.AddSeconds(i - 60).ToUnixSeconds();
+            if (dataList.Count == 0)
+                return Json(list);
 
-                list.Add(new QueueGraphData
-                         {
-                             Date = time,
-                             Ack = rnd.Next(8, 57),
-                             Nack = rnd.Next(0, 4),
-                             Unack = rnd.Next(0, 8),
-                             Delivery = rnd.Next(43, 104),
-                             Error = rnd.Next(0, 3),
-                             Pending = rnd.Next(0, 12),
-                             Processing = rnd.Next(0, 1),
-                             Received = rnd.Next(49, 133),
-                             Sent = rnd.Next(43, 88),
-                             Stored = rnd.Next(409, 782),
-                             Timeout = rnd.Next(0, 18),
-                             StoredPrio = rnd.Next(32, 81)
-                         });
+            int size = dataList[0].Length;
+            for (int i = 0; i < size; i++)
+            {
+                QueueGraphData overall = new QueueGraphData();
+
+                foreach (QueueGraphData[] array in dataList)
+                {
+                    if (size >= array.Length)
+                        continue;
+
+                    QueueGraphData data = array[size];
+
+                    if (overall.Date == 0)
+                        overall.Date = data.Date;
+
+                    overall.Ack += data.Ack;
+                    overall.Nack += data.Nack;
+                    overall.Unack += data.Unack;
+                    overall.Delivery += data.Delivery;
+                    overall.Error += data.Error;
+                    overall.Pending += data.Pending;
+                    overall.Processing += data.Processing;
+                    overall.Received += data.Received;
+                    overall.Sent += data.Sent;
+                    overall.Stored += data.Stored;
+                    overall.Timeout += data.Timeout;
+                    overall.StoredPrio += data.StoredPrio;
+                }
+
+                list.Add(overall);
             }
 
             return Json(list);

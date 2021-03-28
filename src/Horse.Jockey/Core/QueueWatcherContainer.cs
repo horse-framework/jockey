@@ -21,6 +21,7 @@ namespace Horse.Jockey.Core
         public QueueWatcher Watch(HorseQueue queue)
         {
             QueueWatcher watcher = new QueueWatcher(queue, _options);
+            queue.OnDestroyed += _ => Release(watcher);
             watcher.Watch();
 
             lock (_queueWatchers)
@@ -48,6 +49,16 @@ namespace Horse.Jockey.Core
                 _queueWatchers.TryGetValue(queueName, out watcher);
 
             return watcher;
+        }
+
+        public IEnumerable<QueueWatcher> GetAll()
+        {
+            List<QueueWatcher> watchers;
+            
+            lock (_queueWatchers)
+                watchers = new List<QueueWatcher>(_queueWatchers.Select(x => x.Value));
+
+            return watchers;
         }
     }
 }

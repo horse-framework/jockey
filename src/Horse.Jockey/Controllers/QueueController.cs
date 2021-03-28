@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Horse.Jockey.Core;
 using Horse.Jockey.Models;
+using Horse.Jockey.Models.Queues;
 using Horse.Mq;
 using Horse.Mq.Queues;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
+using Horse.Mvc.Controllers.Parameters;
 using Horse.Mvc.Filters.Route;
 
 namespace Horse.Jockey.Controllers
@@ -14,10 +18,12 @@ namespace Horse.Jockey.Controllers
     public class QueueController : HorseController
     {
         private readonly HorseMq _mq;
+        private readonly QueueWatcherContainer _watcherContainer;
 
-        public QueueController(HorseMq mq)
+        public QueueController(HorseMq mq, QueueWatcherContainer watcherContainer)
         {
             _mq = mq;
+            _watcherContainer = watcherContainer;
         }
 
         [HttpGet("list")]
@@ -34,6 +40,24 @@ namespace Horse.Jockey.Controllers
             }
 
             return Json(result);
+        }
+
+        [HttpGet("get")]
+        public Task<IActionResult> Get([FromQuery] string name)
+        {
+            HorseQueue queue = _mq.FindQueue(name);
+
+            if (queue == null)
+                return NotFound(null);
+
+            QueueWatcher watcher = _watcherContainer.Get(queue.Name);
+
+            QueueDetail detail = new QueueDetail();
+            detail.Info = HorseQueueInformation.Create(queue);
+            detail.Stats = HorseQueueStatistics.Create(queue);
+            detail.GraphData = watcher.GetGraphData();
+
+            return JsonAsync(detail);
         }
     }
 }

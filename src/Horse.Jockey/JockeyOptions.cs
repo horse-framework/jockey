@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Horse.Jockey.Models;
+using Horse.Jockey.Models.User;
 
 namespace Horse.Jockey
 {

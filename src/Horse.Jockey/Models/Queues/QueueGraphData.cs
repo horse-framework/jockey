@@ -2,9 +2,9 @@ using System.Text.Json.Serialization;
 using Horse.WebSocket.Models;
 using Newtonsoft.Json;
 
-namespace Horse.Jockey.Models
+namespace Horse.Jockey.Models.Queues
 {
-    [ModelType("graph-data")]
+    [ModelType("queue-graph-data")]
     public class QueueGraphData
     {
         [JsonProperty("date")]

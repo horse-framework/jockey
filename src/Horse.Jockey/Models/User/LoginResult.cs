@@ -1,14 +1,17 @@
 using System.Text.Json.Serialization;
 using Horse.WebSocket.Models;
+using Newtonsoft.Json;
 
-namespace Horse.Jockey.Models
+namespace Horse.Jockey.Models.User
 {
     [ModelType("login-result")]
     public class LoginResult
     {
+        [JsonProperty("ok")]
         [JsonPropertyName("ok")]
         public bool Ok { get; set; }
 
+        [JsonProperty("token")]
         [JsonPropertyName("token")]
         public string Token { get; set; }
     }
