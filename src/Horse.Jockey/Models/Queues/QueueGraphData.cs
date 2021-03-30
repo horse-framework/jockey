@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models.Queues
 {
     [ModelType("queue-graph-data")]
-    public class QueueGraphData
+    internal class QueueGraphData
     {
         [JsonProperty("date")]
         [JsonPropertyName("date")]

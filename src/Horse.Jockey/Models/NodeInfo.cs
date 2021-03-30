@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models
 {
     [ModelType("node-info")]
-    public class NodeInfo
+    internal class NodeInfo
     {
         /// <summary>
         /// Descriptor name for the node

@@ -7,7 +7,7 @@ using Horse.Mq.Queues;
 
 namespace Horse.Jockey.Core
 {
-    public class QueueWatcher
+    internal class QueueWatcher
     {
         #region Properties
 

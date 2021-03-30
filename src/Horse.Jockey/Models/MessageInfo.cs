@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models
 {
     [ModelType("msg-info")]
-    public class MessageInfo
+    internal class MessageInfo
     {
         [JsonProperty("id")]
         [JsonPropertyName("id")]

@@ -1,21 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using Horse.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models.Clients;
 using Horse.Mq;
-using Horse.Mq.Client.Annotations;
 using Horse.Mvc;
 using Horse.Mvc.Controllers;
 using Horse.Mvc.Filters.Route;
-using Horse.Server.Containers;
 
 namespace Horse.Jockey.Controllers
 {
     //[Authorize]
     [Route("api/client")]
-    public class ClientController : HorseController
+    internal class ClientController : HorseController
     {
         private readonly HorseMq _mq;
 

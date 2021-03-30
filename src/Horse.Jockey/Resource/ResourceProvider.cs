@@ -8,7 +8,7 @@ using Horse.Mvc.Results;
 
 namespace Horse.Jockey.Resource
 {
-    public class ResourceProvider
+    internal class ResourceProvider
     {
         private readonly Dictionary<string, ResourceInfo> _resources = new(StringComparer.InvariantCultureIgnoreCase);
 

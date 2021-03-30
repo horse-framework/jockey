@@ -7,7 +7,7 @@ using Horse.Protocols.Hmq;
 
 namespace Horse.Jockey.Handlers.Queues
 {
-    public class RouterMessageHandler : IRouterMessageHandler
+    internal class RouterMessageHandler : IRouterMessageHandler
     {
         private readonly MessageCounter _counter;
 

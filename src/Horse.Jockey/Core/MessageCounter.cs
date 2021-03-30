@@ -5,7 +5,7 @@ using Horse.Jockey.Models;
 
 namespace Horse.Jockey.Core
 {
-    public class MessageCounter
+    internal class MessageCounter
     {
         #region Fields
 

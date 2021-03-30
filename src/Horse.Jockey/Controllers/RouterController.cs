@@ -9,7 +9,7 @@ namespace Horse.Jockey.Controllers
 {
     //[Authorize]
     [Route("api/router")]
-    public class RouterController : HorseController
+    internal class RouterController : HorseController
     {
         private readonly HorseMq _mq;
 

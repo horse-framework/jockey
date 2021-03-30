@@ -5,7 +5,7 @@ using Horse.Mq.Queues;
 
 namespace Horse.Jockey.Handlers.Queues
 {
-    public class QueueEventHandler : BaseHandler, IQueueEventHandler
+    internal class QueueEventHandler : BaseHandler, IQueueEventHandler
     {
         public Task OnCreated(HorseQueue queue)
         {

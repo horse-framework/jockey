@@ -4,7 +4,7 @@ using Horse.Server;
 
 namespace Horse.Jockey.Helpers
 {
-    public static class HostExtensions
+    internal static class HostExtensions
     {
         public static string[] GetServerHostnames(this HorseMq mq)
         {

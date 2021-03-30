@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.Queues
 {
-    public class DefaultQueueOptions
+    internal class DefaultQueueOptions
     {
         /// <summary>
         /// Acknowledge decision.

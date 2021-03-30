@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models
 {
     [ModelType("msg-graph-data")]
-    public class MessageGraphData
+    internal class MessageGraphData
     {
         [JsonProperty("directMessage")]
         [JsonPropertyName("directMessage")]

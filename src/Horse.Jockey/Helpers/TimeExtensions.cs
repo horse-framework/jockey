@@ -1,10 +1,9 @@
 using System;
 using Horse.Mq;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Horse.Jockey.Helpers
 {
-    public static class TimeExtensions
+    internal static class TimeExtensions
     {
         public static long ToUnixSeconds(this DateTime? time)
         {

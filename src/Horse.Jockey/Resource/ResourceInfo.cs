@@ -1,6 +1,6 @@
 namespace Horse.Jockey.Resource
 {
-    public class ResourceInfo
+    internal class ResourceInfo
     {
         public string ResourceName { get; set; }
         public string VirtualPath { get; set; }

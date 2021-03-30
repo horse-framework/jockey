@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models.User
 {
     [ModelType("login-result")]
-    public class LoginResult
+    internal class LoginResult
     {
         [JsonProperty("ok")]
         [JsonPropertyName("ok")]

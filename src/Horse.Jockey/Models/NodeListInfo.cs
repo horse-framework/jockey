@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models
 {
     [ModelType("node-list")]
-    public class NodeListInfo
+    internal class NodeListInfo
     {
         [JsonProperty("incoming")]
         [JsonPropertyName("incoming")]

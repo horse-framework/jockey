@@ -11,7 +11,7 @@ namespace Horse.Jockey.Controllers
 {
     //[Authorize]
     [Route("api/dashboard")]
-    public class DashboardController : HorseController
+    internal class DashboardController : HorseController
     {
         private readonly HorseMq _mq;
         private readonly QueueWatcherContainer _watcherContainer;

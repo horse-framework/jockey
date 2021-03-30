@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Horse.Jockey.Resource
 {
-    public class ResourceBuilder
+    internal class ResourceBuilder
     {
         private const string PREFIX = "Horse.Jockey.Web.";
 

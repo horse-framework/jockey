@@ -5,7 +5,7 @@ using Horse.Mq.Queues;
 
 namespace Horse.Jockey.Core
 {
-    public class QueueWatcherContainer
+    internal class QueueWatcherContainer
     {
         private JockeyOptions _options;
         private readonly Dictionary<string, QueueWatcher> _queueWatchers = new();

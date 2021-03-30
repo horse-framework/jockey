@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models.Queues
 {
     [ModelType("queue-client")]
-    public class QueueClientInfo : ClientInfo
+    internal class QueueClientInfo : ClientInfo
     {
         [JsonProperty("subsDate")]
         [JsonPropertyName("subsDate")]

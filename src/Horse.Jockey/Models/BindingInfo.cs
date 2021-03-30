@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models
 {
-    public class BindingInfo
+    internal class BindingInfo
     {
         [JsonProperty("name")]
         [JsonPropertyName("name")]

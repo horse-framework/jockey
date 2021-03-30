@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Horse.Jockey.Handlers.Queues
 {
-    public class BaseHandler
+    internal class BaseHandler
     {
         protected IServiceProvider GetProvider()
         {
