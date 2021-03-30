@@ -7,30 +7,29 @@ namespace Horse.Jockey.Handlers.Queues
 {
     public class QueueEventHandler : BaseHandler, IQueueEventHandler
     {
-
-        public async Task OnCreated(HorseQueue queue)
+        public Task OnCreated(HorseQueue queue)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
 
-        public async Task OnRemoved(HorseQueue queue)
+        public Task OnRemoved(HorseQueue queue)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
 
-        public async Task OnConsumerSubscribed(QueueClient client)
+        public Task OnConsumerSubscribed(QueueClient client)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
 
-        public async Task OnConsumerUnsubscribed(QueueClient client)
+        public Task OnConsumerUnsubscribed(QueueClient client)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
 
-        public async Task OnStatusChanged(HorseQueue queue, QueueStatus @from, QueueStatus to)
+        public Task OnStatusChanged(HorseQueue queue, QueueStatus @from, QueueStatus to)
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }

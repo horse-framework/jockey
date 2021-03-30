@@ -7,7 +7,6 @@ namespace Horse.Jockey.Handlers.Queues
     {
         public void Error(string hint, Exception exception, string payload)
         {
-            throw new NotImplementedException();
         }
     }
 }

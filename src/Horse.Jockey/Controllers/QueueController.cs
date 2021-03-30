@@ -1,19 +1,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
-using Horse.Jockey.Models;
 using Horse.Jockey.Models.Queues;
 using Horse.Mq;
 using Horse.Mq.Queues;
 using Horse.Mvc;
-using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
 using Horse.Mvc.Controllers.Parameters;
 using Horse.Mvc.Filters.Route;
 
 namespace Horse.Jockey.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/queue")]
     public class QueueController : HorseController
     {

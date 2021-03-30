@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Horse.Jockey.Models;
 using Horse.Jockey.Models.User;
 using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
@@ -34,7 +33,7 @@ namespace Horse.Jockey.Controllers
 
             if (info == null)
                 return await JsonAsync(new LoginResult {Ok = false});
-            
+
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim("name", info.Name));
             JwtToken token = _jwtProvider.Create(info.Id, info.Name, claims);

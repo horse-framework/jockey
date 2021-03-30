@@ -1,10 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
-using Horse.Jockey.Handlers;
 using Horse.Jockey.Handlers.Queues;
 using Horse.Jockey.Resource;
 using Horse.Mq;
@@ -37,11 +33,11 @@ namespace Horse.Jockey
                 ResourceProvider provider = new ResourceProvider();
                 await provider.Load();
 
+                MessageCounter counter = new MessageCounter();
+                counter.Run();
+
                 QueueWatcherContainer watcherContainer = new QueueWatcherContainer();
                 watcherContainer.Initialize(mq, options);
-
-                ClientHandler clientHandler = new ClientHandler();
-                mq.AddClientHandler(clientHandler);
 
                 QueueEventHandler queueEventHandler = new QueueEventHandler();
                 mq.AddQueueEventHandler(queueEventHandler);
@@ -49,13 +45,17 @@ namespace Horse.Jockey
                 ErrorHandler errorHandler = new ErrorHandler();
                 mq.AddErrorHandler(errorHandler);
 
+                mq.AddDirectMessageHandler(new DirectMessageHandler(counter));
+                mq.AddRouterMessageHandler(new RouterMessageHandler(counter));
+                
                 services.AddSingleton(mq);
                 services.AddSingleton(options);
                 services.AddSingleton(provider);
                 services.AddSingleton(watcherContainer);
-                services.AddSingleton(clientHandler);
                 services.AddSingleton(queueEventHandler);
                 services.AddSingleton(errorHandler);
+                services.AddSingleton(counter);
+                services.AddSingleton(Hub.Clients);
 
                 services.AddJwt(Hub.Mvc, o =>
                 {

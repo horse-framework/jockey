@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Horse.Jockey.Helpers;
-using Horse.Jockey.Models;
 using Horse.Jockey.Models.Queues;
 using Horse.Mq.Queues;
 
@@ -10,10 +9,7 @@ namespace Horse.Jockey.Core
 {
     public class QueueWatcher
     {
-        public HorseQueue Queue { get; }
-
-        public HorseQueueStatistics Statistics { get; private set; }
-        public HorseQueueInformation Information { get; private set; }
+        #region Properties
 
         private DateTime _lastInformationRefreshDate = DateTime.UtcNow.AddDays(-1);
         private readonly TimeSpan _informationRefreshment = TimeSpan.FromSeconds(60);
@@ -23,6 +19,12 @@ namespace Horse.Jockey.Core
 
         private const int GRAPH_DATA_SIZE = 60;
         private readonly Queue<QueueGraphData> _graphData = new(GRAPH_DATA_SIZE);
+
+        public HorseQueue Queue { get; }
+        public HorseQueueStatistics Statistics { get; private set; }
+        public HorseQueueInformation Information { get; private set; }
+
+        #endregion
 
         public QueueWatcher(HorseQueue queue, JockeyOptions options)
         {
