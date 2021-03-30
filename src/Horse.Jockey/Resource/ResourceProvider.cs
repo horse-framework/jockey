@@ -27,17 +27,17 @@ namespace Horse.Jockey.Resource
             foreach (KeyValuePair<string, ResourceInfo> pair in _resources)
             {
                 ResourceInfo info = pair.Value;
-                app.UseActionRoute(info.VirtualPath, request => HandleRequest(info));
+                app.UseActionRoute(info.VirtualPath, _ => HandleRequest(info));
 
                 if (info.VirtualPath.Equals("/index.html", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    app.UseActionRoute("/", request => HandleRequest(info));
+                    app.UseActionRoute("/", _ => HandleRequest(info));
                     Hub.Mvc.NotFoundResult = HandleRequest(info).GetAwaiter().GetResult();
                 }
             }
         }
 
-        private async Task<IActionResult> HandleRequest(ResourceInfo resource)
+        private Task<IActionResult> HandleRequest(ResourceInfo resource)
         {
             IActionResult result;
 
@@ -69,7 +69,7 @@ namespace Horse.Jockey.Resource
                     break;
             }
 
-            return result;
+            return Task.FromResult(result);
         }
     }
 }

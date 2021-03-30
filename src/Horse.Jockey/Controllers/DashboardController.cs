@@ -15,20 +15,33 @@ namespace Horse.Jockey.Controllers
     {
         private readonly HorseMq _mq;
         private readonly QueueWatcherContainer _watcherContainer;
+        private readonly MessageCounter _messageCounter;
 
-        public DashboardController(QueueWatcherContainer watcherContainer, HorseMq mq)
+        public DashboardController(QueueWatcherContainer watcherContainer, HorseMq mq, MessageCounter messageCounter)
         {
             _watcherContainer = watcherContainer;
             _mq = mq;
+            _messageCounter = messageCounter;
         }
 
         [HttpGet("statistics")]
         public IActionResult Statistics()
         {
             ServerStatistics serverStatistics = ServerStatistics.Create(_mq);
-            MessageStatistics messageStatistics = MessageStatistics.Create(_mq);
             HorseServerOptions serverOptions = HorseServerOptions.Create(_mq);
             DefaultQueueOptions queueOptions = DefaultQueueOptions.Create(_mq);
+
+            MessageGraphData messageStatistics = new MessageGraphData
+                                                 {
+                                                     DirectDelivery = _messageCounter.DirectDelivery,
+                                                     DirectMessage = _messageCounter.DirectMessage,
+                                                     DirectResponse = _messageCounter.DirectResponse,
+                                                     DirectNoReceiver = _messageCounter.DirectNoReceiver,
+                                                     RouterPublish = _messageCounter.RouterPublish,
+                                                     RouterNotFound = _messageCounter.RouterNotFound,
+                                                     RouterOk = _messageCounter.RouterOk,
+                                                     RouterFailed = _messageCounter.RouterFailed
+                                                 };
 
             return Json(new
                         {

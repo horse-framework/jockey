@@ -11,7 +11,7 @@ namespace Horse.Jockey.Core
 
         private long _directMessage;
         private long _directResponse;
-        private long _directReceiverNotFound;
+        private long _directNoReceiver;
         private long _directDelivery;
 
         private long _routerPublish;
@@ -21,7 +21,7 @@ namespace Horse.Jockey.Core
 
         public long DirectMessage => _directMessage;
         public long DirectResponse => _directResponse;
-        public long DirectReceiverNotFound => _directReceiverNotFound;
+        public long DirectNoReceiver => _directNoReceiver;
         public long DirectDelivery => _directDelivery;
 
         public long RouterPublish => _routerPublish;
@@ -46,7 +46,7 @@ namespace Horse.Jockey.Core
                                             DirectResponse = _directResponse - previous.DirectResponse,
                                             RouterPublish = _routerPublish - previous.RouterPublish,
                                             RouterNotFound = _routerNotFound - previous.RouterNotFound,
-                                            DirectReceiverNotFound = _directReceiverNotFound - previous.DirectReceiverNotFound
+                                            DirectNoReceiver = _directNoReceiver - previous.DirectNoReceiver
                                         };
 
                 lock (_graphData)
@@ -83,7 +83,7 @@ namespace Horse.Jockey.Core
 
         internal void AddDirectNotFound()
         {
-            Interlocked.Increment(ref _directReceiverNotFound);
+            Interlocked.Increment(ref _directNoReceiver);
         }
 
         internal void AddDirectDelivery(int count)

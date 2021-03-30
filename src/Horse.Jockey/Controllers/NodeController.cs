@@ -1,5 +1,5 @@
-using System;
 using System.Linq;
+using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Mq;
 using Horse.Mvc;
@@ -22,7 +22,32 @@ namespace Horse.Jockey.Controllers
         [HttpGet("list")]
         public IActionResult List()
         {
-            throw new NotImplementedException();
+            NodeListInfo model = new NodeListInfo();
+            
+            model.Incoming = _mq.NodeManager.IncomingNodes
+                                .GetAsClone()
+                                .Select(x => new IncomingNodeInfo
+                                             {
+                                                 Id = x.UniqueId,
+                                                 Name = x.Name,
+                                                 Type = x.Type,
+                                                 IP = x.RemoteHost,
+                                                 ConnectedDate = x.ConnectedDate.ToUnixSeconds()
+                                             })
+                                .ToList();
+
+            model.Outgoing = _mq.NodeManager.OutgoingNodes
+                                .Select(x => new NodeInfo
+                                             {
+                                                 Name = x.Options.Name,
+                                                 Host = x.Options.Host,
+                                                 Token = x.Options.Token,
+                                                 KeepMessages = x.Options.KeepMessages,
+                                                 ReconnectWait = x.Options.ReconnectWait
+                                             })
+                                .ToList();
+
+            return Json(model);
         }
     }
 }
