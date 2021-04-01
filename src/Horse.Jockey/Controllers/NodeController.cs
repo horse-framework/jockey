@@ -3,12 +3,13 @@ using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Mq;
 using Horse.Mvc;
+using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
 using Horse.Mvc.Filters.Route;
 
 namespace Horse.Jockey.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/node")]
     internal class NodeController : HorseController
     {

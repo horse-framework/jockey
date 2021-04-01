@@ -39,7 +39,7 @@ namespace Horse.Jockey.Core
             _bus = Hub.Provider.GetService<IWebSocketServerBus>();
             return _bus;
         }
-        
+
         public QueueWatcher(HorseQueue queue, JockeyOptions options)
         {
             Queue = queue;
@@ -143,7 +143,7 @@ namespace Horse.Jockey.Core
                     Information = HorseQueueInformation.Create(Queue);
                     _lastInformationRefreshDate = DateTime.UtcNow;
                 }
-                
+
                 foreach (SocketBase socketBase in Hub.Clients.List())
                 {
                     WsServerSocket ws = (WsServerSocket) socketBase;

@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Horse.Core;
+using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Protocols.WebSocket;
 using Horse.WebSocket.Models;
@@ -55,6 +57,7 @@ namespace Horse.Jockey.Core
                 MessageGraphData previous = _graphData.Count == 0 ? new MessageGraphData() : _graphData.LastOrDefault();
                 MessageGraphData data = new MessageGraphData
                                         {
+                                            Date = DateTime.UtcNow.ToUnixSeconds(),
                                             DirectDelivery = _directDelivery - previous.DirectDelivery,
                                             DirectMessage = _directMessage - previous.DirectMessage,
                                             DirectResponse = _directResponse - previous.DirectResponse,

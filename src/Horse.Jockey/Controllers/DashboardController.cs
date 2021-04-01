@@ -1,15 +1,18 @@
+using System;
 using System.Collections.Generic;
 using Horse.Jockey.Core;
+using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Jockey.Models.Queues;
 using Horse.Mq;
 using Horse.Mvc;
+using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
 using Horse.Mvc.Filters.Route;
 
 namespace Horse.Jockey.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/dashboard")]
     internal class DashboardController : HorseController
     {
@@ -33,6 +36,7 @@ namespace Horse.Jockey.Controllers
 
             MessageGraphData messageStatistics = new MessageGraphData
                                                  {
+                                                     Date = DateTime.UtcNow.ToUnixSeconds(),
                                                      DirectDelivery = _messageCounter.DirectDelivery,
                                                      DirectMessage = _messageCounter.DirectMessage,
                                                      DirectResponse = _messageCounter.DirectResponse,

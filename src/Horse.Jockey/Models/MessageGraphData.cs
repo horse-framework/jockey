@@ -7,6 +7,10 @@ namespace Horse.Jockey.Models
     [ModelType("msg-graph-data")]
     internal class MessageGraphData
     {
+        [JsonProperty("date")]
+        [JsonPropertyName("date")]
+        public long Date { get; set; }
+
         [JsonProperty("directMessage")]
         [JsonPropertyName("directMessage")]
         public long DirectMessage { get; set; }

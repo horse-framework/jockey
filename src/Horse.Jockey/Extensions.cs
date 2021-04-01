@@ -1,7 +1,9 @@
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
 using Horse.Jockey.Handlers.Queues;
+using Horse.Jockey.Helpers;
 using Horse.Jockey.Resource;
 using Horse.Mq;
 using Horse.Mvc;
@@ -75,9 +77,21 @@ namespace Horse.Jockey
                                                 .AddSingletonHandlers(typeof(Hub))
                                                 .OnClientConnected((info, data) =>
                                                 {
-                                                    if (!data.Path.Contains("?token"))
+                                                    var pairs = data.Path.ParseQuerystring();
+                                                    
+                                                    string token;
+                                                    pairs.TryGetValue("token", out token);
+                                                    
+                                                    if (string.IsNullOrEmpty(token))
                                                         return null;
 
+                                                    if (Hub.Mvc.ClaimsPrincipalValidator != null)
+                                                    {
+                                                        ClaimsPrincipal principal = Hub.Mvc.ClaimsPrincipalValidator.Get(token);
+                                                        if (principal == null)
+                                                            return null;
+                                                    }
+                                                    
                                                     WsServerSocket websocket = new WsServerSocket(Hub.Server, info);
                                                     return Task.FromResult(websocket);
                                                 })
