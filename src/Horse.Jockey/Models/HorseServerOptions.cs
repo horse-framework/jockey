@@ -46,14 +46,16 @@ namespace Horse.Jockey.Models
                        RouterLimit = mq.Options.RouterLimit,
                        AutoQueueCreation = mq.Options.AutoQueueCreation,
                        NodeHosts = mq.GetNodeHostnames(),
-                       Nodes = mq.Options.Nodes.Select(x => new NodeInfo
-                                                            {
-                                                                Host = x.Host,
-                                                                Name = x.Name,
-                                                                Token = x.Token,
-                                                                KeepMessages = x.KeepMessages,
-                                                                ReconnectWait = x.ReconnectWait
-                                                            }).ToArray()
+                       Nodes = mq.Options.Nodes == null
+                                   ? new NodeInfo[0]
+                                   : mq.Options.Nodes.Select(x => new NodeInfo
+                                                                  {
+                                                                      Host = x.Host,
+                                                                      Name = x.Name,
+                                                                      Token = x.Token,
+                                                                      KeepMessages = x.KeepMessages,
+                                                                      ReconnectWait = x.ReconnectWait
+                                                                  }).ToArray()
                    };
         }
     }

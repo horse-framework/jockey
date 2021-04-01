@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Horse.Jockey", "Horse.Jocke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Jockey", "Sample.Jockey\Sample.Jockey.csproj", "{6765F7A6-30B7-4CD6-A245-A3C075C1CA94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmbedResSync", "EmbedResSync\EmbedResSync.csproj", "{7A8BC7D5-3056-4079-80F6-26BA95F50EB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{6765F7A6-30B7-4CD6-A245-A3C075C1CA94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6765F7A6-30B7-4CD6-A245-A3C075C1CA94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6765F7A6-30B7-4CD6-A245-A3C075C1CA94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A8BC7D5-3056-4079-80F6-26BA95F50EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A8BC7D5-3056-4079-80F6-26BA95F50EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A8BC7D5-3056-4079-80F6-26BA95F50EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A8BC7D5-3056-4079-80F6-26BA95F50EB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

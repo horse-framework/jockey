@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Horse.Mq;
 using Horse.Server;
 
@@ -27,6 +28,9 @@ namespace Horse.Jockey.Helpers
 
         public static string[] GetNodeHostnames(this HorseMq mq)
         {
+            if (mq.Options.NodeHost == null)
+                return new string[0];
+
             List<string> hosts = new List<string>();
             string protocol = mq.Options.NodeHost.SslEnabled ? "hmqs" : "hmq";
 

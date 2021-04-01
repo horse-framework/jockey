@@ -5,6 +5,7 @@ using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Jockey.Models.Queues;
 using Horse.Mq;
+using Horse.Mq.Queues;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
@@ -27,33 +28,47 @@ namespace Horse.Jockey.Controllers
             _messageCounter = messageCounter;
         }
 
-        [HttpGet("statistics")]
-        public IActionResult Statistics()
+        [HttpGet("stats")]
+        public IActionResult Stats()
         {
-            ServerStatistics serverStatistics = ServerStatistics.Create(_mq);
+            ServerStatistics server = ServerStatistics.Create(_mq);
             HorseServerOptions serverOptions = HorseServerOptions.Create(_mq);
             DefaultQueueOptions queueOptions = DefaultQueueOptions.Create(_mq);
 
-            MessageGraphData messageStatistics = new MessageGraphData
-                                                 {
-                                                     Date = DateTime.UtcNow.ToUnixSeconds(),
-                                                     DirectDelivery = _messageCounter.DirectDelivery,
-                                                     DirectMessage = _messageCounter.DirectMessage,
-                                                     DirectResponse = _messageCounter.DirectResponse,
-                                                     DirectNoReceiver = _messageCounter.DirectNoReceiver,
-                                                     RouterPublish = _messageCounter.RouterPublish,
-                                                     RouterNotFound = _messageCounter.RouterNotFound,
-                                                     RouterOk = _messageCounter.RouterOk,
-                                                     RouterFailed = _messageCounter.RouterFailed
-                                                 };
+            QueueGraphData queueMessages = new QueueGraphData();
+            foreach (HorseQueue queue in _mq.Queues)
+            {
+                queueMessages.Ack += queue.Info.Acknowledges;
+                queueMessages.Delivery += queue.Info.Deliveries;
+                queueMessages.Error += queue.Info.ErrorCount;
+                queueMessages.Unack += queue.Info.Unacknowledges;
+                queueMessages.Nack += queue.Info.NegativeAcknowledge;
+                queueMessages.Pending += queue.GetAckPendingMessageCount();
 
-            return Json(new
-                        {
-                            serverStatistics,
-                            messageStatistics,
-                            serverOptions,
-                            queueOptions
-                        });
+                queueMessages.Received += queue.Info.ReceivedMessages;
+                queueMessages.Sent += queue.Info.SentMessages;
+                queueMessages.Stored += queue.MessageCount();
+                queueMessages.StoredPrio += queue.PriorityMessageCount();
+                queueMessages.Timeout += queue.Info.TimedOutMessages;
+
+                if (queue.ProcessingMessage != null)
+                    queueMessages.Processing++;
+            }
+
+            MessageGraphData otherMessages = new MessageGraphData
+                                             {
+                                                 Date = DateTime.UtcNow.ToUnixSeconds(),
+                                                 DirectDelivery = _messageCounter.DirectDelivery,
+                                                 DirectMessage = _messageCounter.DirectMessage,
+                                                 DirectResponse = _messageCounter.DirectResponse,
+                                                 DirectNoReceiver = _messageCounter.DirectNoReceiver,
+                                                 RouterPublish = _messageCounter.RouterPublish,
+                                                 RouterNotFound = _messageCounter.RouterNotFound,
+                                                 RouterOk = _messageCounter.RouterOk,
+                                                 RouterFailed = _messageCounter.RouterFailed
+                                             };
+
+            return Json(new {server, queueMessages, otherMessages, serverOptions, queueOptions});
         }
 
         [HttpGet("graph")]

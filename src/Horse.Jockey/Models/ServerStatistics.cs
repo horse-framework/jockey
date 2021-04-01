@@ -29,26 +29,11 @@ namespace Horse.Jockey.Models
         [JsonPropertyName("outgoingNodes")]
         public int OutgoingNodes { get; set; }
 
-        [JsonProperty("queueLimit")]
-        [JsonPropertyName("queueLimit")]
-        public int QueueLimit { get; set; }
-
-        [JsonProperty("routerLimit")]
-        [JsonPropertyName("routerLimit")]
-        public int RouterLimit { get; set; }
-
-        [JsonProperty("autoQueueCreation")]
-        [JsonPropertyName("autoQueueCreation")]
-        public bool AutoQueueCreation { get; set; }
-
         public static ServerStatistics Create(HorseMq mq)
         {
             return new()
                    {
                        Hosts = mq.GetServerHostnames(),
-                       QueueLimit = mq.Options.QueueLimit,
-                       RouterLimit = mq.Options.RouterLimit,
-                       AutoQueueCreation = mq.Options.AutoQueueCreation,
                        StartedDate = Hub.StartedDate.ToUnixSeconds(),
                        IncomingNodes = mq.NodeManager.IncomingNodes.Count,
                        OutgoingNodes = mq.NodeManager.OutgoingNodes.Length,

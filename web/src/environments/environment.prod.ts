@@ -1,5 +1,6 @@
 export const environment = {
     production: true,
+    version: '5.0.3',
 
     api: {
         url: 'http://localhost:9998'

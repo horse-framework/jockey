@@ -13,6 +13,7 @@ import { PortalLayoutModule } from './layout/portal-layout/portal-layout.module'
 import { ApiClient } from 'src/lib/api-client';
 import { GraphService } from 'src/services/graph.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardService } from 'src/services/dashboard.service';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     ],
     providers: [
         WebsocketService,
+        DashboardService,
         SessionService,
         RouteService,
         QueueService,
