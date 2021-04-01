@@ -1,0 +1,83 @@
+.gbody {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #eee;
+  text-align: center;
+}
+
+.gframe {
+  padding: 32px;
+  box-sizing: border-box;
+  flex: 0 1 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.18);
+}
+
+.glogo {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 auto;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+  padding: 8px 8px 32px 8px;
+}
+
+.glogo img {
+  width: 48px;
+  flex: 0 0 auto;
+}
+
+.glogo div {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding: 0px 18px;
+}
+
+.glogo div h1 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #555;
+}
+
+.glogo div h2 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 500;
+  color: #333;
+}
+
+.gcontent {
+  flex: 1 1 auto;
+}
+
+@media screen and (min-height:700px) {
+  .gframe {
+    margin-bottom: 150px;
+  }
+}

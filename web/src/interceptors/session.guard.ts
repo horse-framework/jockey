@@ -1,15 +1,25 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { SessionService } from 'src/services/session.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SessionGuard implements CanActivate {
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  
+
+    constructor(private session: SessionService, private router: Router) { }
+
+    canActivate(
+        next: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+        let user = this.session.get();
+        if (user == null) {
+            this.router.navigateByUrl('/login');
+        }
+        
+        return user != null;
+    }
+
 }

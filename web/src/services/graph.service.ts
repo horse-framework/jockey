@@ -34,7 +34,7 @@ export class GraphService {
 
         return of(this)
             .pipe(
-                mergeMap(() => this.api.get(environment.api.url + '/api/dashboard/graph')),
+                mergeMap(() => this.api.get(environment.api.url + '/dashboard/graph')),
                 map(response => {
 
                     if (!response.success)

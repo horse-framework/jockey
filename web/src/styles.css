@@ -13,6 +13,10 @@ div {
   box-sizing: border-box;
 }
 
+a, button, input {
+    cursor: pointer;
+    outline: none;
+}
 
 .portlet {
   box-sizing: border-box;

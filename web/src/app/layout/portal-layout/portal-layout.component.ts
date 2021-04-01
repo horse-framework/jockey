@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BaseComponent } from 'src/lib/base-component';
 import { SessionUser } from 'src/models/session-user';
 import { SessionService } from 'src/services/session.service';
@@ -12,7 +13,7 @@ export class PortalLayoutComponent extends BaseComponent implements OnInit {
 
     user: SessionUser;
 
-    constructor(private session: SessionService) {
+    constructor(private session: SessionService, private router: Router) {
         super();
     }
 
@@ -21,7 +22,8 @@ export class PortalLayoutComponent extends BaseComponent implements OnInit {
     }
 
     logout(): void {
-
+        this.session.clear();
+        this.router.navigateByUrl('/login');
     }
 
 }
