@@ -1,5 +1,4 @@
 using System;
-using Horse.Mq;
 using Horse.Mvc;
 using Horse.Server;
 using Horse.Server.Containers;

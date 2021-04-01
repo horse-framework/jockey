@@ -7,6 +7,7 @@ using Horse.Mq;
 using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
 using Horse.Mvc.Middlewares;
+using Horse.Protocols.WebSocket;
 using Horse.Server;
 using Horse.WebSocket.Models;
 using Horse.WebSocket.Models.Serialization;
@@ -47,7 +48,7 @@ namespace Horse.Jockey
 
                 mq.AddDirectMessageHandler(new DirectMessageHandler(counter));
                 mq.AddRouterMessageHandler(new RouterMessageHandler(counter));
-                
+
                 services.AddSingleton(mq);
                 services.AddSingleton(options);
                 services.AddSingleton(provider);
@@ -72,6 +73,14 @@ namespace Horse.Jockey
                                                 .UsePayloadModelProvider(new SystemJsonModelSerializer())
                                                 .AddBus(services)
                                                 .AddSingletonHandlers(typeof(Hub))
+                                                .OnClientConnected((info, data) =>
+                                                {
+                                                    if (!data.Path.Contains("?token"))
+                                                        return null;
+
+                                                    WsServerSocket websocket = new WsServerSocket(Hub.Server, info);
+                                                    return Task.FromResult(websocket);
+                                                })
                                                 .OnClientReady(client =>
                                                 {
                                                     Hub.Clients.Add(client);

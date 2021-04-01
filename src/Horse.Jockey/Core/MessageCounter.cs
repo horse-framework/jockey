@@ -1,7 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Horse.Core;
 using Horse.Jockey.Models;
+using Horse.Protocols.WebSocket;
+using Horse.WebSocket.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Horse.Jockey.Core
 {
@@ -31,8 +35,18 @@ namespace Horse.Jockey.Core
 
         private Timer _runner;
         private readonly Queue<MessageGraphData> _graphData = new Queue<MessageGraphData>(60);
+        private IWebSocketServerBus _bus;
 
         #endregion
+
+        private IWebSocketServerBus GetBus()
+        {
+            if (_bus != null)
+                return _bus;
+
+            _bus = Hub.Provider.GetService<IWebSocketServerBus>();
+            return _bus;
+        }
 
         public void Run()
         {
@@ -55,6 +69,12 @@ namespace Horse.Jockey.Core
 
                     if (_graphData.Count > 60)
                         _graphData.Dequeue();
+                }
+
+                foreach (SocketBase socketBase in Hub.Clients.List())
+                {
+                    WsServerSocket ws = (WsServerSocket) socketBase;
+                    _ = GetBus().SendAsync(ws, data);
                 }
             }, null, 1000, 1000);
         }

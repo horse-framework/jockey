@@ -6,7 +6,9 @@ namespace Horse.Jockey
 {
     public class JockeyOptions
     {
-        public int Port { get; set; }
+        public int Port { get; set; } = 26000;
+
+        public bool UseWebsockets { get; set; } = true;
 
         public TimeSpan StatisticsKeepAliveDuration { get; set; } = TimeSpan.Zero;
 

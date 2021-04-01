@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Horse.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models.Queues;
 using Horse.Mq.Queues;
+using Horse.Protocols.WebSocket;
+using Horse.WebSocket.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Horse.Jockey.Core
 {
@@ -16,6 +20,7 @@ namespace Horse.Jockey.Core
         private DateTime _lastActiveTime;
         private readonly JockeyOptions _options;
         private Timer _timer;
+        private IWebSocketServerBus _bus;
 
         private const int GRAPH_DATA_SIZE = 60;
         private readonly Queue<QueueGraphData> _graphData = new(GRAPH_DATA_SIZE);
@@ -26,6 +31,15 @@ namespace Horse.Jockey.Core
 
         #endregion
 
+        private IWebSocketServerBus GetBus()
+        {
+            if (_bus != null)
+                return _bus;
+
+            _bus = Hub.Provider.GetService<IWebSocketServerBus>();
+            return _bus;
+        }
+        
         public QueueWatcher(HorseQueue queue, JockeyOptions options)
         {
             Queue = queue;
@@ -128,6 +142,12 @@ namespace Horse.Jockey.Core
                 {
                     Information = HorseQueueInformation.Create(Queue);
                     _lastInformationRefreshDate = DateTime.UtcNow;
+                }
+                
+                foreach (SocketBase socketBase in Hub.Clients.List())
+                {
+                    WsServerSocket ws = (WsServerSocket) socketBase;
+                    _ = GetBus().SendAsync(ws, graphData);
                 }
             }
             catch
