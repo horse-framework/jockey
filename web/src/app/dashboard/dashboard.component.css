@@ -8,6 +8,7 @@
   align-items: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
+  padding-bottom: 50px;
 }
 
 .dashboard-portlet {
@@ -17,3 +18,7 @@
 .dashboard-portlet.wide {
   flex: 0 1 100% !important;
 }
+
+.dashboard-portlet .portlet-body {
+    height: 350px;
+  }

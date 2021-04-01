@@ -4,6 +4,8 @@ import { BaseComponent } from 'src/lib/base-component';
 import { GraphService } from 'src/services/graph.service';
 import { DashboardService } from 'src/services/dashboard.service';
 import { Dashboard } from 'src/models/dashboard';
+import { interval } from 'rxjs';
+import { TimespanPipe } from '../layout/pipes/timespan.pipe';
 
 @Component({
     selector: 'app-dashboard',
@@ -15,6 +17,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     deliveryChart = null;
     msgChart = null;
     dashboard: Dashboard;
+    lifetime: string;
 
     constructor(private graphService: GraphService,
         private dashboardService: DashboardService) {
@@ -25,6 +28,15 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
         this.dashboardService.load().then(d => this.dashboard = d);
         await this.loadCharts();
+
+        let pipe = new TimespanPipe();
+        this.on(interval(1000)).subscribe(() => {
+            if (!this.dashboard)
+                return;
+
+            let now = new Date().getTime() / 1000;
+            this.lifetime = pipe.transform(now, this.dashboard.server.startedDate);
+        });
     }
 
     private async loadCharts(): Promise<any> {
@@ -167,5 +179,4 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 }
             });
     }
-
 }
