@@ -1,11 +1,12 @@
 import Chart from 'chart.js';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/lib/base-component';
-import { GraphService } from 'src/services/graph.service';
+import { QueueGraphService } from 'src/services/queue-graph.service';
 import { DashboardService } from 'src/services/dashboard.service';
 import { Dashboard } from 'src/models/dashboard';
 import { interval } from 'rxjs';
 import { TimespanPipe } from '../layout/pipes/timespan.pipe';
+import { MessageGraphService } from 'src/services/message-graph.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -16,10 +17,12 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
     deliveryChart = null;
     msgChart = null;
+    storeChart = null;
     dashboard: Dashboard;
     lifetime: string;
 
-    constructor(private graphService: GraphService,
+    constructor(private queueGraphService: QueueGraphService,
+        private messageGraphService: MessageGraphService,
         private dashboardService: DashboardService) {
         super();
     }
@@ -41,7 +44,8 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
     private async loadCharts(): Promise<any> {
 
-        let content = await this.graphService.load();
+        let content = await this.queueGraphService.load();
+        let messageContent = await this.messageGraphService.load();
 
         this.deliveryChart = new Chart(document.getElementById('delivery-chart'),
             {
@@ -121,7 +125,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 }
             });
 
-        this.msgChart = new Chart(document.getElementById('store-chart'),
+        this.storeChart = new Chart(document.getElementById('store-chart'),
             {
                 type: 'line',
                 hover: { mode: 'nearest', intersect: true },
@@ -163,6 +167,94 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                             label: 'Timeout',
                             borderColor: '#cc3333',
                             data: content.data.map(x => x.timeout),
+                            fill: false,
+                            pointRadius: 1,
+                            pointHitRadius: 8,
+                            lineTension: 0.2,
+                            borderWidth: 2
+                        }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{ display: false }],
+                        yAxes: [{ display: true }]
+                    }
+                }
+            });
+
+        this.msgChart = new Chart(document.getElementById('msg-chart'),
+            {
+                type: 'line',
+                hover: { mode: 'nearest', intersect: true },
+                data: {
+
+                    labels: messageContent.labels,
+                    datasets: [
+                        {
+                            label: 'Direct Message',
+                            borderColor: '#444',
+                            data: messageContent.data.map(x => x.directMessage),
+                            fill: false,
+                            pointRadius: 1,
+                            pointHitRadius: 8,
+                            lineTension: 0.2,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Direct Response',
+                            borderColor: '#1070af',
+                            data: messageContent.data.map(x => x.directResponse),
+                            fill: false,
+                            pointRadius: 1,
+                            pointHitRadius: 8,
+                            lineTension: 0.2,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Direct Delivery',
+                            borderColor: '#a020c0',
+                            data: messageContent.data.map(x => x.directDelivery),
+                            fill: false,
+                            pointRadius: 1,
+                            pointHitRadius: 8,
+                            lineTension: 0.2,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Direct No Receiver',
+                            borderColor: '#10b02a',
+                            data: messageContent.data.map(x => x.directNoReceiver),
+                            fill: false,
+                            pointRadius: 1,
+                            pointHitRadius: 8,
+                            lineTension: 0.2,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Router Publish',
+                            borderColor: '#999',
+                            data: messageContent.data.map(x => x.routerPublish),
+                            fill: false,
+                            pointRadius: 1,
+                            pointHitRadius: 8,
+                            lineTension: 0.2,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Router Received',
+                            borderColor: '#ff0000',
+                            data: messageContent.data.map(x => x.routerOk),
+                            fill: false,
+                            pointRadius: 1,
+                            pointHitRadius: 8,
+                            lineTension: 0.2,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Router No Receiver',
+                            borderColor: '#552255',
+                            data: messageContent.data.map(x => x.routerFailed),
                             fill: false,
                             pointRadius: 1,
                             pointHitRadius: 8,

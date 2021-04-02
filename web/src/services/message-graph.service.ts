@@ -2,22 +2,17 @@ import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { ApiClient } from 'src/lib/api-client';
-import { QueueGraphData } from 'src/models/queue-graph-data';
+import { GraphContent } from 'src/models/graph-content';
+import { MessageGraphData } from 'src/models/message-graph-data';
 import { WebsocketService } from './websocket.service';
-
-export interface GraphContent {
-    data: QueueGraphData[];
-    labels: string[];
-}
 
 @Injectable({
     providedIn: 'root'
 })
-export class GraphService {
+export class MessageGraphService {
 
-    private _data: QueueGraphData[];
+    private _data: MessageGraphData[];
     private _labels: string[];
     private _pipe: DatePipe = new DatePipe('en-US');
     private _maxLength: number = 60;
@@ -30,11 +25,11 @@ export class GraphService {
     }
 
     /** Refreshes graph data */
-    load(): Promise<GraphContent> {
+    load(): Promise<GraphContent<MessageGraphData>> {
 
         return of(this)
             .pipe(
-                mergeMap(() => this.api.get('/dashboard/graph')),
+                mergeMap(() => this.api.get('/dashboard/messages')),
                 map(response => {
 
                     if (!response.success)
@@ -49,7 +44,7 @@ export class GraphService {
 
                     this._labels = this.createLabels(this._data);
 
-                    let content: GraphContent = {
+                    let content: GraphContent<MessageGraphData> = {
                         data: this._data,
                         labels: this._labels
                     };
@@ -61,7 +56,7 @@ export class GraphService {
     }
 
     /** Creates labels of graph data */
-    private createLabels(data: QueueGraphData[]): string[] {
+    private createLabels(data: MessageGraphData[]): string[] {
 
         let labels = [];
         for (let i = 0; i < data.length; i++) {

@@ -11,9 +11,10 @@ import { ClientService } from 'src/services/client.service';
 import { GuestLayoutModule } from './layout/guest-layout/guest-layout.module';
 import { PortalLayoutModule } from './layout/portal-layout/portal-layout.module';
 import { ApiClient } from 'src/lib/api-client';
-import { GraphService } from 'src/services/graph.service';
+import { QueueGraphService } from 'src/services/queue-graph.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardService } from 'src/services/dashboard.service';
+import { MessageGraphService } from 'src/services/message-graph.service';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { DashboardService } from 'src/services/dashboard.service';
         HttpClientModule
     ],
     providers: [
+        ApiClient,
         WebsocketService,
         DashboardService,
         SessionService,
@@ -34,8 +36,8 @@ import { DashboardService } from 'src/services/dashboard.service';
         QueueService,
         LoginService,
         ClientService,
-        GraphService,
-        ApiClient
+        QueueGraphService,
+        MessageGraphService
     ],
     bootstrap: [AppComponent]
 })
