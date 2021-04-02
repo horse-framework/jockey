@@ -122,5 +122,11 @@ namespace Horse.Jockey.Controllers
 
             return Json(list);
         }
+
+        [HttpGet("messages")]
+        public IActionResult Messages()
+        {
+            return Json(_messageCounter.GetGraphData());
+        }
     }
 }

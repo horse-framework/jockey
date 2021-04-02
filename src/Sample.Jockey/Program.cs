@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Horse.Jockey;
 using Horse.Mq;
+using Horse.Mq.Queues;
 using Horse.Server;
 
 namespace Sample.Jockey
@@ -10,12 +11,24 @@ namespace Sample.Jockey
     {
         static void Main(string[] args)
         {
-            HorseMq mq = new HorseMq();
-            mq.AddJockey(o => o.Port = 9998);
+            HorseMq mq = HorseMqBuilder.Create()
+                                       .AddOptions(o => o.Status = QueueStatus.Push)
+                                       .AddJockey(o =>
+                                       {
+                                           o.Port = 9998;
+                                           o.StatisticsKeepAliveDuration = TimeSpan.FromDays(30);
+                                       })
+                                       .UseJustAllowDeliveryHandler()
+                                       .Build();
 
             HorseServer server = new HorseServer();
             server.UseHorseMq(mq);
-            server.Run(9999);
+            server.Start(9999);
+
+            while (true)
+            {
+                Console.ReadLine();
+            }
         }
     }
 }

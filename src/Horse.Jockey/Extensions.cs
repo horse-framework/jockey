@@ -19,6 +19,13 @@ namespace Horse.Jockey
 {
     public static class Extensions
     {
+        public static HorseMqBuilder AddJockey(this HorseMqBuilder builder, Action<JockeyOptions> options)
+        {
+            HorseMq mq = builder.Build();
+            AddJockey(mq, options);
+            return builder;
+        }
+
         public static void AddJockey(this HorseMq mq, Action<JockeyOptions> options)
         {
             JockeyOptions jopt = new JockeyOptions();
@@ -78,10 +85,10 @@ namespace Horse.Jockey
                                                 .OnClientConnected((info, data) =>
                                                 {
                                                     var pairs = data.Path.ParseQuerystring();
-                                                    
+
                                                     string token;
                                                     pairs.TryGetValue("token", out token);
-                                                    
+
                                                     if (string.IsNullOrEmpty(token))
                                                         return null;
 
@@ -91,7 +98,7 @@ namespace Horse.Jockey
                                                         if (principal == null)
                                                             return null;
                                                     }
-                                                    
+
                                                     WsServerSocket websocket = new WsServerSocket(Hub.Server, info);
                                                     return Task.FromResult(websocket);
                                                 })
