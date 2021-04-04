@@ -18,8 +18,6 @@ export class QueuesComponent extends BaseComponent implements OnInit {
 
     async ngOnInit() {
         this.queues = await this.queueService.list();
-        this.queues[0].info.msgTimeout=1800;
-        console.log(this.queues);
     }
 
 }

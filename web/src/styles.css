@@ -135,7 +135,7 @@ input {
   display: flex;
   align-items: stretch;
   align-content: stretch;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .trow {
