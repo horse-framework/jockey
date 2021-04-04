@@ -95,10 +95,12 @@ namespace Horse.Jockey.Controllers
 
                 foreach (QueueGraphData[] array in dataList)
                 {
-                    if (size >= array.Length)
+                    int padding = size - array.Length;
+                    int index = i - padding;
+                    if (index < 0 || index >= array.Length)
                         continue;
 
-                    QueueGraphData data = array[size];
+                    QueueGraphData data = array[index];
 
                     if (overall.Date == 0)
                         overall.Date = data.Date;

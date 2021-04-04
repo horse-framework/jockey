@@ -36,6 +36,7 @@ namespace Horse.Jockey.Core
         public long RouterFailed => _routerFailed;
 
         private Timer _runner;
+        private MessageGraphData _last = new MessageGraphData();
         private readonly Queue<MessageGraphData> _graphData = new Queue<MessageGraphData>(60);
         private IWebSocketServerBus _bus;
 
@@ -54,16 +55,15 @@ namespace Horse.Jockey.Core
         {
             _runner = new Timer(o =>
             {
-                MessageGraphData previous = _graphData.Count == 0 ? new MessageGraphData() : _graphData.LastOrDefault();
                 MessageGraphData data = new MessageGraphData
                                         {
                                             Date = DateTime.UtcNow.ToUnixSeconds(),
-                                            DirectDelivery = _directDelivery - previous.DirectDelivery,
-                                            DirectMessage = _directMessage - previous.DirectMessage,
-                                            DirectResponse = _directResponse - previous.DirectResponse,
-                                            RouterPublish = _routerPublish - previous.RouterPublish,
-                                            RouterNotFound = _routerNotFound - previous.RouterNotFound,
-                                            DirectNoReceiver = _directNoReceiver - previous.DirectNoReceiver
+                                            DirectDelivery = _directDelivery - _last.DirectDelivery,
+                                            DirectMessage = _directMessage - _last.DirectMessage,
+                                            DirectResponse = _directResponse - _last.DirectResponse,
+                                            RouterPublish = _routerPublish - _last.RouterPublish,
+                                            RouterNotFound = _routerNotFound - _last.RouterNotFound,
+                                            DirectNoReceiver = _directNoReceiver - _last.DirectNoReceiver
                                         };
 
                 lock (_graphData)
@@ -79,6 +79,17 @@ namespace Horse.Jockey.Core
                     WsServerSocket ws = (WsServerSocket) socketBase;
                     _ = GetBus().SendAsync(ws, data);
                 }
+
+                _last = new MessageGraphData
+                        {
+                            Date = DateTime.UtcNow.ToUnixSeconds(),
+                            DirectDelivery = _directDelivery,
+                            DirectMessage = _directMessage,
+                            DirectResponse = _directResponse,
+                            RouterPublish = _routerPublish,
+                            RouterNotFound = _routerNotFound,
+                            DirectNoReceiver = _directNoReceiver
+                        };
             }, null, 1000, 1000);
         }
 

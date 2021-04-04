@@ -1,4 +1,4 @@
-<div class="dashboard">
+<div class="dashboard" *ngIf="dashboard">
     <div class="dashboard-portlet">
         <div class="portlet">
             <h3 class="portlet-title">Stored Messages</h3>
@@ -21,7 +21,7 @@
                         <div class="kvt-value">{{dashboard.queueMessages.received}}</div>
                     </div>
                     <div class="kvt-row">
-                        <div class="kvt-key">Queue Message Consumes</div>
+                        <div class="kvt-key">Consumed Queue Messages</div>
                         <div class="kvt-value">{{dashboard.queueMessages.delivery}}</div>
                     </div>
                     <div class="kvt-row">

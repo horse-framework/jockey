@@ -38,7 +38,7 @@ input {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   margin: 0px;
-  padding: 10px 10px 0px 10px;
+  padding: 10px 10px 0px 14px;
   line-height: 20px;
   font-size: 14px;
   font-weight: 600;
@@ -101,4 +101,185 @@ input {
 
 .kvt-value span {
   padding-right: 12px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+  text-align: left;
+}
+
+.thead {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+  border-bottom: 1px solid #ccc;
+}
+
+.th {
+  display: flex;
+  box-sizing: border-box;
+  padding: 8px;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #a0a0a0;
+}
+
+.tbody {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+  flex-direction: row;
+}
+
+.trow {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+  border-bottom: 1px solid #eee;
+}
+
+.td {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table.grow .td,
+.table.grow .th {
+  flex-grow: 1;
+}
+
+.td span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.td a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #1060d0;
+  font-weight: 600;
+}
+
+.td a:hover {
+  color: #197ce2;
+}
+
+.td em {
+  font-style: normal;
+  font-size: 13px;
+  padding: 3px 0px 0px 0px;
+  color: #909090;
+  font-weight: 400;
+}
+
+.td span,
+.td em {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fgrow1 {
+  flex-grow: 1;
+}
+
+.fgrow2 {
+  flex-grow: 2;
+}
+
+.fgrow3 {
+  flex-grow: 3;
+}
+
+.fgrow4 {
+  flex-grow: 4;
+}
+
+.fgrow5 {
+  flex-grow: 5;
+}
+
+.fgrow6 {
+  flex-grow: 6;
+}
+
+.fgrow7 {
+  flex-grow: 7;
+}
+
+.fgrow8 {
+  flex-grow: 8;
+}
+
+.fx4 {
+  flex-basis: 4%;
+}
+
+.fx5 {
+  flex-basis: 5%;
+}
+
+.fx6 {
+  flex-basis: 6%;
+}
+
+.fx8 {
+  flex-basis: 8%;
+}
+
+.fx10 {
+  flex-basis: 10%;
+}
+
+.fx12 {
+  flex-basis: 12%;
+}
+
+.fx14 {
+  flex-basis: 15%;
+}
+
+.fx15 {
+  flex-basis: 15%;
+}
+
+.fx16 {
+  flex-basis: 15%;
+}
+
+.fx20 {
+  flex-basis: 20%;
+}
+
+.fx25 {
+  flex-basis: 25%;
+}
+
+.fx30 {
+  flex-basis: 30%;
+}
+
+.fx40 {
+  flex-basis: 40%;
+}
+
+.fx50 {
+  flex-basis: 50%;
 }

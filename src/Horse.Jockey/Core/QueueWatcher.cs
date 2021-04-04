@@ -44,7 +44,7 @@ namespace Horse.Jockey.Core
         {
             Queue = queue;
             _options = options;
-            _lastActiveTime = DateTime.UtcNow.AddMinutes(-30);
+            _lastActiveTime = DateTime.UtcNow;
         }
 
         public QueueGraphData[] GetGraphData()
@@ -112,23 +112,25 @@ namespace Horse.Jockey.Core
                     return;
                 }
 
-                Statistics = HorseQueueStatistics.Create(Queue);
+                HorseQueueStatistics statistics = HorseQueueStatistics.Create(Queue);
+                HorseQueueStatistics diff = GetStatsDiff(Statistics, statistics);
+                Statistics = statistics;
 
                 QueueGraphData graphData = new QueueGraphData
                                            {
                                                Date = DateTime.UtcNow.ToUnixSeconds(),
-                                               Ack = Statistics.TotalAck,
-                                               Delivery = Statistics.TotalDelivered,
-                                               Error = Statistics.TotalErrors,
-                                               Unack = Statistics.TotalUnack,
-                                               Nack = Statistics.TotalNack,
-                                               Pending = Statistics.AckPendingMsgs,
-                                               Processing = Statistics.ProcessingMsgs,
-                                               Received = Statistics.TotalReceived,
-                                               Sent = Statistics.TotalSent,
-                                               Stored = Statistics.StoredMsgs,
-                                               StoredPrio = Statistics.StoredPrioMsgs,
-                                               Timeout = Statistics.TotalTimedout
+                                               Ack = diff.TotalAck,
+                                               Delivery = diff.TotalDelivered,
+                                               Error = diff.TotalErrors,
+                                               Unack = diff.TotalUnack,
+                                               Nack = diff.TotalNack,
+                                               Pending = statistics.AckPendingMsgs,
+                                               Processing = statistics.ProcessingMsgs,
+                                               Received = diff.TotalReceived,
+                                               Sent = diff.TotalSent,
+                                               Stored = statistics.StoredMsgs,
+                                               StoredPrio = statistics.StoredPrioMsgs,
+                                               Timeout = diff.TotalTimedout
                                            };
 
                 lock (_graphData)
@@ -153,6 +155,32 @@ namespace Horse.Jockey.Core
             catch
             {
             }
+        }
+
+        private HorseQueueStatistics GetStatsDiff(HorseQueueStatistics before, HorseQueueStatistics after)
+        {
+            if (before == null)
+                return after;
+
+            return new HorseQueueStatistics
+                   {
+                       Consumers = after.Consumers - before.Consumers,
+                       Name = after.Name,
+                       LastReceived = after.LastReceived,
+                       LastSent = after.LastSent,
+                       ProcessingMsgs = after.ProcessingMsgs,
+                       StoredMsgs = after.StoredMsgs,
+                       StoredPrioMsgs = after.StoredPrioMsgs,
+                       TotalAck = after.TotalAck - before.TotalAck,
+                       TotalDelivered = after.TotalDelivered - before.TotalDelivered,
+                       TotalErrors = after.TotalErrors - before.TotalErrors,
+                       TotalNack = after.TotalNack - before.TotalNack,
+                       TotalReceived = after.TotalReceived - before.TotalReceived,
+                       TotalSent = after.TotalSent - before.TotalSent,
+                       TotalTimedout = after.TotalTimedout - before.TotalTimedout,
+                       TotalUnack = after.TotalUnack - before.TotalUnack,
+                       AckPendingMsgs = after.AckPendingMsgs
+                   };
         }
     }
 }

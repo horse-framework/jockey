@@ -120,7 +120,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                     responsive: true,
                     scales: {
                         xAxes: [{ display: false }],
-                        yAxes: [{ display: true }]
+                        yAxes: [{ display: true, ticks: { precision: 0 } }]
                     }
                 }
             });
@@ -178,7 +178,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                     responsive: true,
                     scales: {
                         xAxes: [{ display: false }],
-                        yAxes: [{ display: true }]
+                        yAxes: [{ display: true, ticks: { precision: 0 } }]
                     }
                 }
             });
@@ -188,12 +188,11 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 type: 'line',
                 hover: { mode: 'nearest', intersect: true },
                 data: {
-
                     labels: messageContent.labels,
                     datasets: [
                         {
-                            label: 'Direct Message',
-                            borderColor: '#444',
+                            label: 'Direct Sent',
+                            borderColor: '#1070c0',
                             data: messageContent.data.map(x => x.directMessage),
                             fill: false,
                             pointRadius: 1,
@@ -203,7 +202,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                         },
                         {
                             label: 'Direct Response',
-                            borderColor: '#1070af',
+                            borderColor: '#907010',
                             data: messageContent.data.map(x => x.directResponse),
                             fill: false,
                             pointRadius: 1,
@@ -213,7 +212,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                         },
                         {
                             label: 'Direct Delivery',
-                            borderColor: '#a020c0',
+                            borderColor: '#10a050',
                             data: messageContent.data.map(x => x.directDelivery),
                             fill: false,
                             pointRadius: 1,
@@ -223,7 +222,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                         },
                         {
                             label: 'Direct No Receiver',
-                            borderColor: '#10b02a',
+                            borderColor: '#8010e0',
                             data: messageContent.data.map(x => x.directNoReceiver),
                             fill: false,
                             pointRadius: 1,
@@ -233,7 +232,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                         },
                         {
                             label: 'Router Publish',
-                            borderColor: '#999',
+                            borderColor: '#606090',
                             data: messageContent.data.map(x => x.routerPublish),
                             fill: false,
                             pointRadius: 1,
@@ -243,7 +242,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                         },
                         {
                             label: 'Router Received',
-                            borderColor: '#ff0000',
+                            borderColor: '#20caca',
                             data: messageContent.data.map(x => x.routerOk),
                             fill: false,
                             pointRadius: 1,
@@ -253,7 +252,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                         },
                         {
                             label: 'Router No Receiver',
-                            borderColor: '#552255',
+                            borderColor: '#e02255',
                             data: messageContent.data.map(x => x.routerFailed),
                             fill: false,
                             pointRadius: 1,
@@ -266,7 +265,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                     responsive: true,
                     scales: {
                         xAxes: [{ display: false }],
-                        yAxes: [{ display: true }]
+                        yAxes: [{ display: true, ticks: { precision: 0 } }]
                     }
                 }
             });

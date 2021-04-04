@@ -17,8 +17,8 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("consumers")]
         public int Consumers { get; set; }
 
-        [JsonProperty("storedMsg")]
-        [JsonPropertyName("storedMsg")]
+        [JsonProperty("storedMsgs")]
+        [JsonPropertyName("storedMsgs")]
         public long StoredMsgs { get; set; }
 
         [JsonProperty("storedPrioMsgs")]

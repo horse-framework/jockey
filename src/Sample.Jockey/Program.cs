@@ -13,11 +13,7 @@ namespace Sample.Jockey
         {
             HorseMq mq = HorseMqBuilder.Create()
                                        .AddOptions(o => o.Status = QueueStatus.Push)
-                                       .AddJockey(o =>
-                                       {
-                                           o.Port = 9998;
-                                           o.StatisticsKeepAliveDuration = TimeSpan.FromDays(30);
-                                       })
+                                       .AddJockey(o =>o.Port = 9998)
                                        .UseJustAllowDeliveryHandler()
                                        .Build();
 

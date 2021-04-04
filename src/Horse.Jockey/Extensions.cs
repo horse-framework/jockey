@@ -1,4 +1,5 @@
 using System;
+using System.Data.SqlTypes;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
@@ -67,9 +68,15 @@ namespace Horse.Jockey
                 services.AddSingleton(counter);
                 services.AddSingleton(Hub.Clients);
 
+#if DEBUG
+                string securityKey = "Jockey-Development-Key-000";
+#else
+                string securityKey = $"{Guid.NewGuid()}-{Guid.NewGuid()}-{Guid.NewGuid()}";
+#endif
+                
                 services.AddJwt(Hub.Mvc, o =>
                 {
-                    o.Key = $"{Guid.NewGuid()}-{Guid.NewGuid()}-{Guid.NewGuid()}";
+                    o.Key = securityKey;
                     o.Issuer = "jockey";
                     o.Audience = "jockey";
                     o.Lifetime = TimeSpan.FromHours(24);

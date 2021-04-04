@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ApiClient } from 'src/lib/api-client';
 import { HorseQueue } from 'src/models/horse-queue';
 import { TransactionResult } from 'src/models/transaction-result';
@@ -21,6 +22,20 @@ export class QueueService {
     get onupdated(): Observable<HorseQueue> { return this._onupdated; }
 
     constructor(private api: ApiClient, private socket: WebsocketService) { }
+
+    list(): Promise<HorseQueue[]> {
+
+        return this.api.get('/queue/list')
+            .pipe(
+                map(response => {
+
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
 
     create(queue: HorseQueue): Promise<TransactionResult> {
         return null;

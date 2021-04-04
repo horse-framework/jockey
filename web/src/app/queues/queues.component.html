@@ -1,1 +1,49 @@
-<p>queues works!</p>
+<div class="queues" *ngIf="queues">
+    <h1>Queues</h1>
+    <div class="table">
+        <div class="thead">
+            <div class="th fx20">Name</div>
+            <div class="th fx16">Handler</div>
+            <div class="th fx10">Messages</div>
+            <div class="th fx12">Acknowledge</div>
+            <div class="th fx14">Auto&nbsp;Destroy</div>
+            <div class="th fx10">Message&nbsp;Limit</div>
+            <div class="th fx16">Delay</div>
+        </div>
+        <div class="tbody">
+            <div class="trow" *ngFor="let queue of queues">
+                <div class="td fx20">
+                    <span><a routerLink="/queue/{{queue.info.name}}">{{queue.info.name}}</a></span>
+                    <em>{{queue.info.topic}}</em>
+                </div>
+                <div class="td fx16">
+                    <span>{{queue.info.handler}}</span>
+                </div>
+                <div class="td fx10">
+                    <span><b>{{queue.stats.storedMsgs + queue.stats.storedPrioMsgs + queue.stats.processingMsgs}}</b> Messages</span>
+                    <em>{{queue.stats.consumers}} Consumers</em>
+                </div>
+                <div class="td fx12">
+                    <span>{{queue.info.acknowledge}}</span>
+                    <em *ngIf="queue.info.ackTimeout == 0">No ack timeout</em>
+                    <em *ngIf="queue.info.ackTimeout > 0">{{queue.info.ackTimeout}}ms timeout</em>                    
+                </div>
+                <div class="td fx14">
+                    <span>{{queue.info.autoDestroy}}</span>
+                    <em>Created at {{(queue.info.createdDate*1000) | date: 'yyyy-MM-dd HH:mm'}}</em>
+                </div>
+                <div class="td fx10">
+                    <span *ngIf="queue.info.messageLimit == 0">Unlimited</span>
+                    <span *ngIf="queue.info.messageLimit > 0">No Timeout</span>
+                    <em *ngIf="queue.info.msgTimeout > 0">{{queue.info.msgTimeout | timespan}} timeout</em>
+                </div>
+                <div class="td fx16">
+                    <span *ngIf="queue.info.putBackDelay == 0">No Putback delay</span>
+                    <span *ngIf="queue.info.putBackDelay > 0">{{queue.info.putBackDelay | timespan}} Putback Delay</span>
+                    <em *ngIf="queue.info.putBackDelay == 0">No Delay between msgs</em>
+                    <em *ngIf="queue.info.putBackDelay > 0">{{queue.info.putBackDelay | timespan}} Delay between msgs</em>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
