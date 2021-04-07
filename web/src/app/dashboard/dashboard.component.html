@@ -1,4 +1,4 @@
-<div class="dashboard" *ngIf="dashboard">
+<div class="dashboard" [hidden]="dashboard == null">
     <div class="dashboard-portlet">
         <div class="portlet">
             <h3 class="portlet-title">Stored Messages</h3>
@@ -7,7 +7,7 @@
             </div>
         </div>
     </div>
-    <div class="dashboard-portlet">
+    <div class="dashboard-portlet" *ngIf="dashboard">
         <div class="portlet">
             <h3 class="portlet-title">Message Statistics</h3>
             <div class="portlet-body" *ngIf="dashboard">
@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    <div class="dashboard-portlet">
+    <div class="dashboard-portlet" *ngIf="dashboard">
         <div class="portlet">
             <h3 class="portlet-title">Server Information</h3>
             <div class="portlet-body">
@@ -109,7 +109,7 @@
             </div>
         </div>
     </div>
-    <div class="dashboard-portlet">
+    <div class="dashboard-portlet" *ngIf="dashboard">
         <div class="portlet">
             <h3 class="portlet-title">Default Queue Options</h3>
             <div class="portlet-body">

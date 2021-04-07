@@ -33,7 +33,7 @@ namespace Horse.Jockey.Controllers
         {
             ServerStatistics server = ServerStatistics.Create(_mq);
             HorseServerOptions serverOptions = HorseServerOptions.Create(_mq);
-            DefaultQueueOptions queueOptions = DefaultQueueOptions.Create(_mq);
+            QueueOptionsInfo queueOptionsInfo = QueueOptionsInfo.CreateDefault(_mq);
 
             QueueGraphData queueMessages = new QueueGraphData();
             foreach (HorseQueue queue in _mq.Queues)
@@ -68,7 +68,7 @@ namespace Horse.Jockey.Controllers
                                                  RouterFailed = _messageCounter.RouterFailed
                                              };
 
-            return Json(new {server, queueMessages, otherMessages, serverOptions, queueOptions});
+            return Json(new {server, queueMessages, otherMessages, serverOptions, queueOptions = queueOptionsInfo});
         }
 
         [HttpGet("graph")]

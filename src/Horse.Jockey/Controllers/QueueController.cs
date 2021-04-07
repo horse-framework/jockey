@@ -41,8 +41,8 @@ namespace Horse.Jockey.Controllers
             return Json(result);
         }
 
-        [HttpGet("get")]
-        public Task<IActionResult> Get([FromQuery] string name)
+        [HttpGet("get/{name}")]
+        public Task<IActionResult> Get([FromRoute] string name)
         {
             HorseQueue queue = _mq.FindQueue(name);
 
@@ -54,6 +54,7 @@ namespace Horse.Jockey.Controllers
             QueueDetail detail = new QueueDetail();
             detail.Info = HorseQueueInformation.Create(queue);
             detail.Stats = HorseQueueStatistics.Create(queue);
+            detail.Options = QueueOptionsInfo.Create(queue);
             detail.GraphData = watcher.GetGraphData();
 
             return JsonAsync(detail);

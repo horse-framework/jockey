@@ -28,7 +28,19 @@ export class QueueService {
         return this.api.get('/queue/list')
             .pipe(
                 map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
 
+    get(name: string): Promise<HorseQueue> {
+
+        return this.api.get('/queue/get/' + name)
+            .pipe(
+                map(response => {
                     if (response.ok()) {
                         return response.data;
                     }

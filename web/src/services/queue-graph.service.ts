@@ -56,7 +56,7 @@ export class QueueGraphService {
     }
 
     /** Creates labels of graph data */
-    private createLabels(data: QueueGraphData[]): string[] {
+    createLabels(data: QueueGraphData[]): string[] {
 
         let labels = [];
         for (let i = 0; i < data.length; i++) {

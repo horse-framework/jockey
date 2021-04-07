@@ -1,11 +1,12 @@
 using System;
 using System.Text.Json.Serialization;
 using Horse.Mq;
+using Horse.Mq.Queues;
 using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.Queues
 {
-    internal class DefaultQueueOptions
+    internal class QueueOptionsInfo
     {
         /// <summary>
         /// Acknowledge decision.
@@ -96,7 +97,26 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("autoDestroy")]
         public string AutoDestroy { get; set; }
 
-        public static DefaultQueueOptions Create(HorseMq mq)
+        public static QueueOptionsInfo Create(HorseQueue queue)
+        {
+            return new()
+                   {
+                       Acknowledge = queue.Options.Acknowledge.ToString(),
+                       Status = queue.Options.Status.ToString(),
+                       AcknowledgeTimeout = Convert.ToInt32(queue.Options.AcknowledgeTimeout.TotalMilliseconds),
+                       AutoDestroy = queue.Options.AutoDestroy.ToString(),
+                       ClientLimit = queue.Options.ClientLimit,
+                       MessageLimit = queue.Options.MessageLimit,
+                       MessageTimeout = Convert.ToInt32(queue.Options.MessageTimeout.TotalMilliseconds),
+                       DelayBetweenMessages = queue.Options.DelayBetweenMessages,
+                       HideClientNames = queue.Options.HideClientNames,
+                       MessageSizeLimit = queue.Options.MessageSizeLimit,
+                       PutBackDelay = queue.Options.PutBackDelay,
+                       UseMessageId = queue.Options.UseMessageId
+                   };
+        }
+        
+        public static QueueOptionsInfo CreateDefault(HorseMq mq)
         {
             return new()
                    {

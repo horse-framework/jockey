@@ -15,6 +15,10 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("stats")]
         public HorseQueueStatistics Stats { get; set; }
 
+        [JsonProperty("options")]
+        [JsonPropertyName("options")]
+        public QueueOptionsInfo Options { get; set; }
+        
         [JsonProperty("graph")]
         [JsonPropertyName("graph")]
         public QueueGraphData[] GraphData { get; set; }
