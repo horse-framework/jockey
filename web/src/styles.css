@@ -159,7 +159,7 @@ input {
 .td {
   flex: 0 0 auto;
   box-sizing: border-box;
-  padding: 8px;
+  padding: 10px 8px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -192,7 +192,6 @@ input {
 .td em {
   font-style: normal;
   font-size: 13px;
-  padding: 3px 0px 0px 0px;
   color: #909090;
   font-weight: 400;
 }
@@ -202,6 +201,8 @@ input {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  padding: 2px 0px 2px 0px;
+  line-height: 18px;
 }
 
 .fgrow1 {
@@ -274,6 +275,10 @@ input {
 
 .fx20 {
   flex-basis: 20%;
+}
+
+.fx24 {
+  flex-basis: 24%;
 }
 
 .fx25 {

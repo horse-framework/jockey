@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/lib/base-component';
+import { HorseClient } from 'src/models/horse-client';
+import { ClientService } from 'src/services/client.service';
 
 @Component({
     selector: 'app-clients',
@@ -8,11 +10,16 @@ import { BaseComponent } from 'src/lib/base-component';
 })
 export class ClientsComponent extends BaseComponent implements OnInit {
 
-    constructor() {
+    clients: HorseClient[] = null;
+
+    constructor(private clientService: ClientService) {
         super();
     }
 
-    ngOnInit(): void {
+    async ngOnInit() {
+
+        this.clients = await this.clientService.list();
+
     }
 
 }

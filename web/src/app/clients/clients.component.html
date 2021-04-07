@@ -1,1 +1,38 @@
-<p>clients works!</p>
+<div class="clients" *ngIf="clients">
+    <h1>Active Clients</h1>
+    <div class="table">
+        <div class="thead">
+            <div class="th fx20">Name</div>
+            <div class="th fx16">Type</div>
+            <div class="th fx24">Unique Id</div>
+            <div class="th fx12">Remote IP Address</div>
+            <div class="th fx12">Is Authenticated</div>
+            <div class="th fx16">Connected Date</div>
+        </div>
+        <div class="tbody">
+            <div class="trow" *ngFor="let client of clients">
+                <div class="td fx20">
+                    <span *ngIf="client.name">{{client.name}}</span>
+                    <em *ngIf="!client.name">Not Specified</em>
+                </div>
+                <div class="td fx16">
+                    <span *ngIf="client.type">{{client.type}}</span>
+                    <em *ngIf="!client.type">Not Specified</em>
+                </div>
+                <div class="td fx24">
+                    <span>{{client.uniqueId}}</span>
+                </div>
+                <div class="td fx12">
+                    <span *ngIf="client.ip">{{client.ip}}</span>
+                    <em *ngIf="!client.ip">Unknown</em>
+                </div>
+                <div class="td fx12">
+                    <span>{{client.isAuthenticated}}</span>
+                </div>
+                <div class="td fx16">
+                    <span>{{(client.connectedDate*1000) | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
