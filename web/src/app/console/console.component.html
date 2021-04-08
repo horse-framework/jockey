@@ -1,1 +1,45 @@
-<p>console works!</p>
+<div class="console-frame">
+    <div class="console-panel">
+        <div class="console-filter">
+            <form>
+                <select [(ngModel)]="source" name="source">
+                    <option value="queue" selected>Queue</option>
+                    <option value="router">Router</option>
+                    <option value="direct">Direct</option>
+                </select>
+
+                <select [(ngModel)]="targetType" *ngIf="source == 'queue'" name="targetType">
+                    <option value="name">Target by Name</option>
+                    <option value="topic">Target by Topic</option>
+                </select>
+
+                <select [(ngModel)]="targetType" *ngIf="source == 'direct'" name="targetType">
+                    <option value="id">Target by Id</option>
+                    <option value="name">Target by Name</option>
+                    <option value="type">Target by Type</option>
+                </select>
+
+                <input type="text" [(ngModel)]="target" name="target" placeholder="Type target" />
+                <button>Apply Filter</button>
+            </form>
+        </div>
+        <div class="console-buttons">
+            <span class="toggle-button">Show Time</span>
+            <span class="toggle-button">Show Message Id</span>
+            <span class="toggle-button">Show Content Type</span>
+            <span class="toggle-button active">Auto Scroll</span>
+            <span class="red-button">Clear Console</span>
+        </div>
+    </div>
+    <div class="console" id="console">
+        <div class="citem" *ngFor="let b of a">
+            <em>12:30:08</em>
+            <strong>Queue-1</strong>
+            <span *ngIf="showContentType">120</span>
+            <div>
+                <b *ngIf="showMessageId">e8394-mdh34-xj278x-2k3hys-ks9043</b>
+                <p>{{html}}</p>
+            </div>
+        </div>
+    </div>
+</div>
