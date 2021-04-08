@@ -1,1 +1,37 @@
-<p>routes works!</p>
+<div class="routers" *ngIf="routers">
+    <h1>Routers</h1>
+    <div class="table">
+        <div class="thead">
+            <div class="th fx20">Router</div>
+            <div class="th fx14">Binding Name</div>
+            <div class="th fx10">Binding Type</div>
+            <div class="th fx28">Binding Target</div>
+            <div class="th fx10">Content Type</div>
+            <div class="th fx10">Interaction</div>
+            <div class="th fx8">Priority</div>
+        </div>
+        <div class="tbody">
+            <ng-container *ngFor="let router of routers">
+                <div *ngFor="let binding of router.bindings; let i = index"
+                     class="trow" [class.first-row]="i == 0" [class.last-row]="i == router.bindings.length - 1">
+                    <div class="td td-fr fx20">
+                        <ng-container *ngIf="i == 0">
+                            <i [class.green]="router.enabled" [class.red]="!router.enabled"></i>
+                            <span style="margin-right: 10px;">{{router.name}}</span>
+                            <small>{{router.method}}</small>
+                        </ng-container>
+                    </div>
+                    <div class="td fx14"><span>{{binding.name}}</span></div>
+                    <div class="td fx10"><span>{{binding.type}}</span></div>
+                    <div class="td td-fr fx28">
+                        <small>{{binding | bindingType}}</small>
+                        <span>{{binding.displayTarget}}</span>
+                    </div>
+                    <div class="td fx10"><span *ngIf="binding.type == 'Direct'">{{binding.contentType}}</span></div>
+                    <div class="td fx10"><span>{{binding.interaction}}</span></div>
+                    <div class="td fx8"><span>{{binding.priority}}</span></div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

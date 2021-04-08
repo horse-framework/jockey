@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace Horse.Jockey.Helpers
 {
@@ -28,6 +29,15 @@ namespace Horse.Jockey.Helpers
             }
 
             return values;
+        }
+
+        internal static string ToBindingString(this Type type)
+        {
+            string name = type.Name;
+            if (name.EndsWith("Binding"))
+                name = name.Substring(0, name.Length - 7);
+
+            return name;
         }
     }
 }

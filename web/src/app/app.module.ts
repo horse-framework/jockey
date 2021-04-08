@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WebsocketService } from 'src/services/websocket.service';
 import { SessionService } from 'src/services/session.service';
-import { RouteService } from 'src/services/route.service';
 import { QueueService } from 'src/services/queue.service';
 import { LoginService } from 'src/services/login.service';
 import { ClientService } from 'src/services/client.service';
@@ -15,6 +14,8 @@ import { QueueGraphService } from 'src/services/queue-graph.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardService } from 'src/services/dashboard.service';
 import { MessageGraphService } from 'src/services/message-graph.service';
+import { HorseRouterService } from 'src/services/horse-router.service';
+import { PipesModule } from './layout/pipes/pipes.module';
 
 @NgModule({
     declarations: [
@@ -25,14 +26,15 @@ import { MessageGraphService } from 'src/services/message-graph.service';
         AppRoutingModule,
         GuestLayoutModule,
         PortalLayoutModule,
-        HttpClientModule
+        HttpClientModule,
+        PipesModule
     ],
     providers: [
         ApiClient,
         WebsocketService,
         DashboardService,
         SessionService,
-        RouteService,
+        HorseRouterService,
         QueueService,
         LoginService,
         ClientService,

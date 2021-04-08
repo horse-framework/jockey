@@ -167,6 +167,10 @@ input {
   white-space: nowrap;
 }
 
+.td-fr {
+  flex-direction: row !important;
+}
+
 .table.grow .td,
 .table.grow .th {
   flex-grow: 1;
@@ -285,6 +289,10 @@ input {
   flex-basis: 25%;
 }
 
+.fx28 {
+  flex-basis: 28%;
+}
+
 .fx30 {
   flex-basis: 30%;
 }
@@ -296,6 +304,11 @@ input {
 .fx50 {
   flex-basis: 50%;
 }
+
+.fx100 {
+  flex-basis: 50%;
+}
+
 
 
 .vertical-content {
@@ -345,4 +358,36 @@ input {
   font-size: 13px;
   color: #999;
   font-weight: normal;
+}
+
+.td small {
+  padding: 3px 6px;
+  font-weight: 400;
+  font-size: 11px;
+  background-color: #dadada;
+  border-radius: 4px;
+  margin: 0px 8px 0px 0px;
+}
+
+.td i {
+  width: 11px;
+  height: 11px;
+  border-radius: 99px;
+  margin: 6px 8px 0px 0px;
+}
+
+.td i.red {
+  background-color: #ff1111;
+}
+
+.td i.green {
+  background-color: #10a030;
+}
+
+.first-row {
+  margin-top: 20px;
+}
+
+.last-row {
+  margin-bottom: 20px;
 }

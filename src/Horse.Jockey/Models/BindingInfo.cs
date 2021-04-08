@@ -1,4 +1,6 @@
+using System;
 using System.Text.Json.Serialization;
+using Horse.Mq.Routing;
 using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models
@@ -12,6 +14,10 @@ namespace Horse.Jockey.Models
         [JsonProperty("interaction")]
         [JsonPropertyName("interaction")]
         public string Interaction { get; set; }
+        
+        [JsonProperty("type")]
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
 
         [JsonProperty("target")]
         [JsonPropertyName("target")]

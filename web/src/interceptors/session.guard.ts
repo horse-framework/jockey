@@ -17,9 +17,16 @@ export class SessionGuard implements CanActivate {
         let user = this.session.get();
         if (user == null) {
             this.router.navigateByUrl('/login');
+            return false;
         }
-        
-        return user != null;
+
+        let now = new Date().getTime();
+        if (user.expiration < now) {
+            this.router.navigateByUrl('/login');
+            return false;
+        }
+
+        return true;
     }
 
 }

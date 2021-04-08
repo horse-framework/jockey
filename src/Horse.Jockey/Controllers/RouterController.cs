@@ -1,4 +1,5 @@
 using System.Linq;
+using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Mq;
 using Horse.Mvc;
@@ -26,10 +27,12 @@ namespace Horse.Jockey.Controllers
                                                 {
                                                     Name = x.Name,
                                                     IsEnabled = x.IsEnabled,
+                                                    Method = x.Method.ToString(),
                                                     Bindings = x.GetBindings().Select(y => new BindingInfo
                                                                                            {
                                                                                                Name = y.Name,
                                                                                                Interaction = y.Interaction.ToString(),
+                                                                                               Type = y.GetType().ToBindingString(),
                                                                                                Priority = y.Priority,
                                                                                                Target = y.Target,
                                                                                                ContentType = y.ContentType
