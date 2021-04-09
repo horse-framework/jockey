@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text.Json.Serialization;
 using Horse.Jockey.Helpers;
 using Horse.Mq.Queues;
@@ -75,6 +76,13 @@ namespace Horse.Jockey.Models.Queues
 
         public static HorseQueueStatistics Create(HorseQueue queue)
         {
+            int processingMessages = 0;
+            
+            if (queue.Status == QueueStatus.RoundRobin)
+                processingMessages = queue.ClientsClone.Count(x => x.CurrentlyProcessing != null);
+            else if (queue.ProcessingMessage != null)
+                processingMessages++;
+
             var stats = new HorseQueueStatistics
                         {
                             Consumers = queue.ClientsCount(),
@@ -83,7 +91,7 @@ namespace Horse.Jockey.Models.Queues
                             LastSent = queue.Info.LastMessageSendDate.ToUnixSeconds(),
                             StoredMsgs = queue.Info.InQueueRegularMessages,
                             StoredPrioMsgs = queue.Info.InQueueHighPriorityMessages,
-                            ProcessingMsgs = queue.ProcessingMessage != null ? 1 : 0,
+                            ProcessingMsgs = processingMessages,
                             AckPendingMsgs = queue.GetAckPendingMessageCount(),
                             TotalAck = queue.Info.Acknowledges,
                             TotalNack = queue.Info.NegativeAcknowledge,
