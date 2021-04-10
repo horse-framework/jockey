@@ -26,7 +26,7 @@ namespace Horse.Jockey.Handlers.WebSockets
                 throw new ArgumentNullException();
 
             SubscriptionSource source = model.Source.EnumValueFromDescription<SubscriptionSource>();
-            SubscriptionTargetType targetType = model.Source.EnumValueFromDescription<SubscriptionTargetType>();
+            SubscriptionTargetType targetType = model.TargetType.EnumValueFromDescription<SubscriptionTargetType>();
 
             _subscriptionService.SubscribeConsole((WsServerSocket) client, source, targetType, model.Target);
 

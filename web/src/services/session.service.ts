@@ -10,14 +10,17 @@ import { SessionUser } from 'src/models/session-user';
 })
 export class SessionService {
 
-    private _current: SessionUser;
-    private _changed: Subject<SessionUser>;
+    private _current: SessionUser = null;
+    private _changed: Subject<SessionUser> = new Subject<SessionUser>();
 
     get onchanged(): Observable<SessionUser> {
         return this._changed.pipe();
     }
 
     constructor() {
+    }
+
+    run(): void {
         this._current = this.read();
         this._changed = new Subject<SessionUser>();
 
@@ -77,7 +80,7 @@ export class SessionService {
 
             let user = this.deserialize(str);
 
-            if (!this._current && this._changed)
+            if (!this._current && this._changed && user)
                 this._changed.next(user);
 
             this._current = user;

@@ -20,26 +20,26 @@
                 </select>
 
                 <input type="text" [(ngModel)]="target" name="target" placeholder="Type target" />
-                <button>Apply Filter</button>
+                <button (click)="submit()">Apply Filter</button>
             </form>
         </div>
         <div class="console-buttons">
-            <span class="toggle-button">Show Time</span>
-            <span class="toggle-button">Show Message Id</span>
-            <span class="toggle-button">Show Content Type</span>
-            <span class="toggle-button active">Auto Scroll</span>
-            <span class="red-button">Clear Console</span>
+            <span class="toggle-button" [class.active]="showTime" (click)="toggleTime()">
+                Show Time
+            </span>
+            <span class="toggle-button" [class.active]="showMessageId" (click)="toggleMessageId()">
+                Show Message Id
+            </span>
+            <span class="toggle-button" [class.active]="showContentType" (click)="toggleContentType()">
+                Show Content Type
+            </span>
+            <span class="toggle-button" [class.active]="autoScroll" (click)="toggleAutoScroll()">
+                Auto Scroll
+            </span>
+            <span (click)="clear()" class="red-button">
+                Clear Console
+            </span>
         </div>
     </div>
-    <div class="console" id="console">
-        <div class="citem" *ngFor="let b of a">
-            <em>12:30:08</em>
-            <strong>Queue-1</strong>
-            <span *ngIf="showContentType">120</span>
-            <div>
-                <b *ngIf="showMessageId">e8394-mdh34-xj278x-2k3hys-ks9043</b>
-                <p>{{html}}</p>
-            </div>
-        </div>
-    </div>
+    <div class="console" id="console"></div>
 </div>

@@ -6,7 +6,6 @@ using Horse.Jockey.Handlers.Queues;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Resource;
 using Horse.Mq;
-using Horse.Mq.Clients;
 using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
 using Horse.Mvc.Middlewares;
@@ -130,6 +129,10 @@ namespace Horse.Jockey
                                                     }
 
                                                     return Task.CompletedTask;
+                                                })
+                                                .OnError(e =>
+                                                {
+                                                    Console.WriteLine("Jockey WebSocket Error: " + e);
                                                 }));
             });
 
