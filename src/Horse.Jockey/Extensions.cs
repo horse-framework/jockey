@@ -1,5 +1,4 @@
 using System;
-using System.Data.SqlTypes;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
@@ -67,6 +66,7 @@ namespace Horse.Jockey
                 services.AddSingleton(errorHandler);
                 services.AddSingleton(counter);
                 services.AddSingleton(Hub.Clients);
+                services.AddSingleton<SubscriptionService>();
 
 #if DEBUG
                 string securityKey = "Jockey-Development-Key-000";
@@ -117,6 +117,14 @@ namespace Horse.Jockey
                                                 .OnClientDisconnected(client =>
                                                 {
                                                     Hub.Clients.Remove(client);
+                                                    
+                                                    if (Hub.Provider != null)
+                                                    {
+                                                        SubscriptionService subsService = Hub.Provider.GetService<SubscriptionService>();
+                                                        subsService.UnsubscribeQueueDetail(client);
+                                                        subsService.UnsubscribeConsole(client);
+                                                    }
+
                                                     return Task.CompletedTask;
                                                 }));
             });

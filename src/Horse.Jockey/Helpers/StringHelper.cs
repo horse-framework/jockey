@@ -38,5 +38,19 @@ namespace Horse.Jockey.Helpers
 
             return name;
         }
+
+        internal static bool AsteriskEquals(this string value, string searchKey)
+        {
+            if (searchKey.StartsWith('*') && searchKey.EndsWith('*'))
+                return value.Contains(searchKey.Substring(1, searchKey.Length - 2), StringComparison.InvariantCultureIgnoreCase);
+
+            if (searchKey.StartsWith('*'))
+                return value.EndsWith(searchKey.Substring(1), StringComparison.InvariantCultureIgnoreCase);
+
+            if (searchKey.EndsWith('*'))
+                return value.StartsWith(searchKey.Substring(0, searchKey.Length - 1), StringComparison.InvariantCultureIgnoreCase);
+
+            return value.Equals(searchKey, StringComparison.InvariantCultureIgnoreCase);
+        }
     }
 }
