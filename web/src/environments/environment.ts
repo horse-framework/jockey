@@ -4,11 +4,11 @@
 
 export const environment = {
     production: false,
-    version: '5.0.3',
+    version: '5.0.8',
 
     api: {
-        url: 'http://localhost:9998/api',
-        websocket: 'ws://localhost:9998/'
+        url: '/api',
+        websocket: '/'
     },
 
     storage: {
