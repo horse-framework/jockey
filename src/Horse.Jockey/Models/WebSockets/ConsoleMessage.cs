@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models.WebSockets
 {
     [ModelType("console")]
-    public class ConsoleMessage
+    internal class ConsoleMessage
     {
         [JsonProperty("date")]
         [JsonPropertyName("date")]

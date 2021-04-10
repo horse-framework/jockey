@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models.WebSockets
 {
     [ModelType("console-response")]
-    public class ConsoleResponse
+    internal class ConsoleResponse
     {
         [JsonProperty("requestId")]
         [JsonPropertyName("requestId")]

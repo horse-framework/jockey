@@ -10,7 +10,7 @@ using Horse.Protocols.WebSocket;
 
 namespace Horse.Jockey.Core
 {
-    public class SubscriptionService
+    internal class SubscriptionService
     {
         private readonly List<ConsoleSubscription> _console = new List<ConsoleSubscription>();
         private readonly List<QueueDetailSubscription> _queue = new List<QueueDetailSubscription>();

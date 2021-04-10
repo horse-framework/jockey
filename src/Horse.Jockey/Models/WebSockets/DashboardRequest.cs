@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models.WebSockets
 {
     [ModelType("dashboard-request")]
-    public class DashboardRequest
+    internal class DashboardRequest
     {
         [JsonProperty("requestId")]
         [JsonPropertyName("requestId")]

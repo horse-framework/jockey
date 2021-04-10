@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Horse.Jockey.Models.WebSockets
 {
     [ModelType("queue-detail-request")]
-    public class QueueDetailRequest
+    internal class QueueDetailRequest
     {
         [JsonProperty("requestId")]
         [JsonPropertyName("requestId")]

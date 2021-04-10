@@ -9,7 +9,7 @@ using Horse.WebSocket.Models;
 
 namespace Horse.Jockey.Handlers.WebSockets
 {
-    public class QueueDetailHandler : IWebSocketMessageHandler<QueueDetailRequest>
+    internal class QueueDetailHandler : IWebSocketMessageHandler<QueueDetailRequest>
     {
         private readonly IWebSocketServerBus _bus;
         private readonly SubscriptionService _subscriptionService;

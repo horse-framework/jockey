@@ -7,7 +7,7 @@ using Horse.WebSocket.Models;
 
 namespace Horse.Jockey.Handlers.WebSockets
 {
-    public class DashboardHandler : IWebSocketMessageHandler<DashboardRequest>
+    internal class DashboardHandler : IWebSocketMessageHandler<DashboardRequest>
     {
         private readonly SubscriptionService _subscriptionService;
 
