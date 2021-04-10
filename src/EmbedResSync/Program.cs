@@ -21,7 +21,15 @@ namespace EmbedResSync
             StringBuilder builder = new StringBuilder();
             builder.Append(content.Substring(0, lastItemGroup));
             builder.AppendLine("<ItemGroup>");
+            
             foreach (string file in Directory.GetFiles(dir + "/Web"))
+            {
+                int index = file.IndexOf("/Horse.Jockey/", StringComparison.OrdinalIgnoreCase);
+                string fileName = file.Substring(index + 14);
+                builder.AppendLine($"        <EmbeddedResource Include=\"{fileName}\" />");
+            }
+            
+            foreach (string file in Directory.GetFiles(dir + "/Web/assets"))
             {
                 int index = file.IndexOf("/Horse.Jockey/", StringComparison.OrdinalIgnoreCase);
                 string fileName = file.Substring(index + 14);
