@@ -5,6 +5,8 @@ import { BaseComponent } from 'src/lib/base-component';
 import { HorseQueue } from 'src/models/horse-queue';
 import { QueueService } from 'src/services/queue.service';
 import { QueueGraphService } from 'src/services/queue-graph.service';
+import { WebsocketService } from 'src/services/websocket.service';
+import { SocketModels } from 'src/lib/socket-models';
 
 @Component({
     selector: 'app-queue',
@@ -19,6 +21,7 @@ export class QueueComponent extends BaseComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
         private queueGraphService: QueueGraphService,
+        private socket: WebsocketService,
         private queueService: QueueService) {
         super();
     }
@@ -169,5 +172,23 @@ export class QueueComponent extends BaseComponent implements OnInit {
                 }
             });
 
+        let request = {
+            requestId: new Date().getTime().toString(),
+            name: this.queue.info.name
+        };
+
+        this.socket.send(SocketModels.QueueDetailRequest, request);
+    }
+
+    ngOnDestroy(): void {
+
+        super.ngOnDestroy();
+
+        let request = {
+            requestId: new Date().getTime().toString(),
+            name: null
+        };
+
+        this.socket.send(SocketModels.QueueDetailRequest, request);
     }
 }

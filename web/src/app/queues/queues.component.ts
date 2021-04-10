@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/lib/base-component';
 import { HorseQueue } from 'src/models/horse-queue';
 import { QueueService } from 'src/services/queue.service';
@@ -8,7 +8,7 @@ import { QueueService } from 'src/services/queue.service';
     templateUrl: './queues.component.html',
     styleUrls: ['./queues.component.css']
 })
-export class QueuesComponent extends BaseComponent implements OnInit {
+export class QueuesComponent extends BaseComponent implements OnInit, OnDestroy {
 
     queues: HorseQueue[];
 
@@ -19,5 +19,4 @@ export class QueuesComponent extends BaseComponent implements OnInit {
     async ngOnInit() {
         this.queues = await this.queueService.list();
     }
-
 }
