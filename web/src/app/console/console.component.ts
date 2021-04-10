@@ -69,6 +69,10 @@ export class ConsoleComponent implements OnInit, OnDestroy {
         this.autoScroll = !this.autoScroll;
     }
 
+    searching(e: any) {
+        this.redraw();
+    }
+
     submit(): void {
 
         let request: ConsoleRequest = {

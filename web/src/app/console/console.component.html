@@ -24,21 +24,12 @@
             </form>
         </div>
         <div class="console-buttons">
-            <span class="toggle-button" [class.active]="showTime" (click)="toggleTime()">
-                Show Time
-            </span>
-            <span class="toggle-button" [class.active]="showMessageId" (click)="toggleMessageId()">
-                Show Message Id
-            </span>
-            <span class="toggle-button" [class.active]="showContentType" (click)="toggleContentType()">
-                Show Content Type
-            </span>
-            <span class="toggle-button" [class.active]="autoScroll" (click)="toggleAutoScroll()">
-                Auto Scroll
-            </span>
-            <span (click)="clear()" class="red-button">
-                Clear Console
-            </span>
+            <input type="text" [(ngModel)]="search" name="search" (input)="searching($event)" placeholder="Search in messages" />
+            <span class="toggle-button" [class.active]="showTime" (click)="toggleTime()">Time</span>
+            <span class="toggle-button" [class.active]="showMessageId" (click)="toggleMessageId()">Message Id</span>
+            <span class="toggle-button" [class.active]="showContentType" (click)="toggleContentType()">Content Type</span>
+            <span class="toggle-button" [class.active]="autoScroll" (click)="toggleAutoScroll()">Auto Scroll</span>
+            <span (click)="clear()" class="red-button">Clear Console</span>
         </div>
     </div>
     <div class="console" id="console"></div>
