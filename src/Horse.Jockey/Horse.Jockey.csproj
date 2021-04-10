@@ -4,9 +4,9 @@
         <TargetFramework>net5.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>1.0.1</AssemblyVersion>
-        <FileVersion>1.0.1</FileVersion>
-        <PackageVersion>1.0.1</PackageVersion>
+        <AssemblyVersion>1.0.2</AssemblyVersion>
+        <FileVersion>1.0.2</FileVersion>
+        <PackageVersion>1.0.2</PackageVersion>
         <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
         <Description>Administration website for Horse MQ</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
@@ -41,41 +41,41 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Web/12-es5.js"/>
-        <EmbeddedResource Include="Web/10-es2015.js"/>
-        <EmbeddedResource Include="Web/17-es2015.js"/>
-        <EmbeddedResource Include="Web/12-es2015.js"/>
-        <EmbeddedResource Include="Web/3-es5.js"/>
-        <EmbeddedResource Include="Web/9-es5.js"/>
-        <EmbeddedResource Include="Web/14-es5.js"/>
-        <EmbeddedResource Include="Web/16-es5.js"/>
-        <EmbeddedResource Include="Web/main-es5.js"/>
-        <EmbeddedResource Include="Web/index.html"/>
-        <EmbeddedResource Include="Web/main-es2015.js"/>
-        <EmbeddedResource Include="Web/2-es2015.js"/>
-        <EmbeddedResource Include="Web/common-es2015.js"/>
-        <EmbeddedResource Include="Web/15-es2015.js"/>
-        <EmbeddedResource Include="Web/13-es5.js"/>
-        <EmbeddedResource Include="Web/polyfills-es5.js"/>
-        <EmbeddedResource Include="Web/13-es2015.js"/>
-        <EmbeddedResource Include="Web/common-es5.js"/>
-        <EmbeddedResource Include="Web/17-es5.js"/>
-        <EmbeddedResource Include="Web/2-es5.js"/>
-        <EmbeddedResource Include="Web/runtime-es5.js"/>
-        <EmbeddedResource Include="Web/favicon.ico"/>
-        <EmbeddedResource Include="Web/14-es2015.js"/>
-        <EmbeddedResource Include="Web/10-es5.js"/>
-        <EmbeddedResource Include="Web/8-es2015.js"/>
-        <EmbeddedResource Include="Web/3-es2015.js"/>
-        <EmbeddedResource Include="Web/runtime-es2015.js"/>
-        <EmbeddedResource Include="Web/styles.css"/>
-        <EmbeddedResource Include="Web/8-es5.js"/>
-        <EmbeddedResource Include="Web/11-es5.js"/>
-        <EmbeddedResource Include="Web/16-es2015.js"/>
-        <EmbeddedResource Include="Web/polyfills-es2015.js"/>
-        <EmbeddedResource Include="Web/15-es5.js"/>
-        <EmbeddedResource Include="Web/11-es2015.js"/>
-        <EmbeddedResource Include="Web/9-es2015.js"/>
-        <EmbeddedResource Include="Web/assets/horse.svg"/>
+        <EmbeddedResource Include="Web/12-es5.js" />
+        <EmbeddedResource Include="Web/10-es2015.js" />
+        <EmbeddedResource Include="Web/17-es2015.js" />
+        <EmbeddedResource Include="Web/12-es2015.js" />
+        <EmbeddedResource Include="Web/3-es5.js" />
+        <EmbeddedResource Include="Web/9-es5.js" />
+        <EmbeddedResource Include="Web/14-es5.js" />
+        <EmbeddedResource Include="Web/16-es5.js" />
+        <EmbeddedResource Include="Web/main-es5.js" />
+        <EmbeddedResource Include="Web/index.html" />
+        <EmbeddedResource Include="Web/main-es2015.js" />
+        <EmbeddedResource Include="Web/2-es2015.js" />
+        <EmbeddedResource Include="Web/common-es2015.js" />
+        <EmbeddedResource Include="Web/15-es2015.js" />
+        <EmbeddedResource Include="Web/13-es5.js" />
+        <EmbeddedResource Include="Web/polyfills-es5.js" />
+        <EmbeddedResource Include="Web/13-es2015.js" />
+        <EmbeddedResource Include="Web/common-es5.js" />
+        <EmbeddedResource Include="Web/17-es5.js" />
+        <EmbeddedResource Include="Web/2-es5.js" />
+        <EmbeddedResource Include="Web/runtime-es5.js" />
+        <EmbeddedResource Include="Web/favicon.ico" />
+        <EmbeddedResource Include="Web/14-es2015.js" />
+        <EmbeddedResource Include="Web/10-es5.js" />
+        <EmbeddedResource Include="Web/8-es2015.js" />
+        <EmbeddedResource Include="Web/3-es2015.js" />
+        <EmbeddedResource Include="Web/runtime-es2015.js" />
+        <EmbeddedResource Include="Web/styles.css" />
+        <EmbeddedResource Include="Web/8-es5.js" />
+        <EmbeddedResource Include="Web/11-es5.js" />
+        <EmbeddedResource Include="Web/16-es2015.js" />
+        <EmbeddedResource Include="Web/polyfills-es2015.js" />
+        <EmbeddedResource Include="Web/15-es5.js" />
+        <EmbeddedResource Include="Web/11-es2015.js" />
+        <EmbeddedResource Include="Web/9-es2015.js" />
+        <EmbeddedResource Include="Web/assets/horse.svg" />
     </ItemGroup>
 </Project>
