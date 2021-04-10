@@ -6,6 +6,7 @@ using Horse.Jockey.Handlers.Queues;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Resource;
 using Horse.Mq;
+using Horse.Mq.Clients;
 using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
 using Horse.Mvc.Middlewares;
@@ -40,6 +41,8 @@ namespace Horse.Jockey
             Hub.Mvc = new HorseMvc();
             Hub.Mvc.Init(async services =>
             {
+                SubscriptionService subscriptionService = new SubscriptionService();
+
                 ResourceProvider provider = new ResourceProvider();
                 await provider.Load();
 
@@ -55,8 +58,9 @@ namespace Horse.Jockey
                 ErrorHandler errorHandler = new ErrorHandler();
                 mq.AddErrorHandler(errorHandler);
 
-                mq.AddDirectMessageHandler(new DirectMessageHandler(counter));
-                mq.AddRouterMessageHandler(new RouterMessageHandler(counter));
+                mq.AddQueueMessageHandler(new QueueMessageEventHandler(subscriptionService));
+                mq.AddDirectMessageHandler(new DirectMessageHandler(counter, subscriptionService));
+                mq.AddRouterMessageHandler(new RouterMessageHandler(counter, subscriptionService));
 
                 services.AddSingleton(mq);
                 services.AddSingleton(options);
@@ -66,14 +70,14 @@ namespace Horse.Jockey
                 services.AddSingleton(errorHandler);
                 services.AddSingleton(counter);
                 services.AddSingleton(Hub.Clients);
-                services.AddSingleton<SubscriptionService>();
+                services.AddSingleton(subscriptionService);
 
 #if DEBUG
                 string securityKey = "Jockey-Development-Key-000";
 #else
                 string securityKey = $"{Guid.NewGuid()}-{Guid.NewGuid()}-{Guid.NewGuid()}";
 #endif
-                
+
                 services.AddJwt(Hub.Mvc, o =>
                 {
                     o.Key = securityKey;
@@ -117,7 +121,7 @@ namespace Horse.Jockey
                                                 .OnClientDisconnected(client =>
                                                 {
                                                     Hub.Clients.Remove(client);
-                                                    
+
                                                     if (Hub.Provider != null)
                                                     {
                                                         SubscriptionService subsService = Hub.Provider.GetService<SubscriptionService>();

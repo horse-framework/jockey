@@ -15,11 +15,11 @@ namespace Horse.Jockey.Handlers.WebSockets
         private readonly SubscriptionService _subscriptionService;
         private readonly HorseMq _mq;
 
-        public QueueDetailHandler(IWebSocketServerBus bus, SubscriptionService subscriptionService, HorseMq _mq)
+        public QueueDetailHandler(IWebSocketServerBus bus, SubscriptionService subscriptionService, HorseMq mq)
         {
             _bus = bus;
             _subscriptionService = subscriptionService;
-            _mq=_mq;
+            _mq = mq;
         }
 
         public async Task Handle(QueueDetailRequest model, WebSocketMessage message, IHorseWebSocket client)
