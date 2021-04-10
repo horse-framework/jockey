@@ -4,13 +4,22 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.WebSockets
 {
+    /// <summary>
+    /// Queue detailed page events subscription request model for websocket clients
+    /// </summary>
     [ModelType("queue-detail-request")]
-    internal class QueueDetailRequest
+    public class QueueDetailRequest
     {
+        /// <summary>
+        /// Unique Request Id
+        /// </summary>
         [JsonProperty("requestId")]
         [JsonPropertyName("requestId")]
         public string RequestId { get; set; }
 
+        /// <summary>
+        /// Name of the queue
+        /// </summary>
         [JsonProperty("name")]
         [JsonPropertyName("name")]
         public string Name { get; set; }
