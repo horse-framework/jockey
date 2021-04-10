@@ -23,7 +23,11 @@ namespace Horse.Jockey.Handlers.WebSockets
         public async Task Handle(ConsoleRequest model, WebSocketMessage message, IHorseWebSocket client)
         {
             if (string.IsNullOrEmpty(model.Target))
-                throw new ArgumentNullException();
+            {
+                _subscriptionService.UnsubscribeConsole((WsServerSocket) client);
+                await _bus.SendAsync(client, new ConsoleResponse {RequestId = model.RequestId, Ok = true});
+                return;
+            }
 
             SubscriptionSource source = model.Source.EnumValueFromDescription<SubscriptionSource>();
             SubscriptionTargetType targetType = model.TargetType.EnumValueFromDescription<SubscriptionTargetType>();

@@ -47,6 +47,15 @@ export class ConsoleComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.active = false;
+        
+        let request: ConsoleRequest = {
+            requestId: new Date().getTime().toString(),
+            source: null,
+            targetType: null,
+            target: null
+        };
+
+        this.socket.send(SocketModels.ConsoleRequest, request);
     }
 
     toggleTime(): void {
