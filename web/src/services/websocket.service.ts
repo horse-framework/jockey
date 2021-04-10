@@ -36,7 +36,7 @@ export class WebsocketService {
 
     connect(token: string): void {
 
-        let host = environment.api.websocket + '?token=' + token;
+        let host = 'ws://' + location.host + '?token=' + token;
         this._socket = new WebSocket(host);
 
 
