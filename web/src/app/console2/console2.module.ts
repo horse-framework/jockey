@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ConsoleComponent } from './console.component';
+import { Console2Component } from './console2.component';
 
 @NgModule({
-  declarations: [ConsoleComponent],
+  declarations: [Console2Component],
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: ConsoleComponent }])
+    FlexLayoutModule,
+    RouterModule.forChild([{ path: '', component: Console2Component }])
   ]
 })
 export class Console2Module { }

@@ -18,7 +18,6 @@ export class Console2Component implements OnInit {
 
   readonly MessageLimit: number = 1000;
 
-  active: boolean = true;
   source: string = 'queue';
   targetType: string = 'name';
   target: string = '';
@@ -39,7 +38,6 @@ export class Console2Component implements OnInit {
 
   ngOnInit(): void {
 
-    this.active = true;
     this.element = document.getElementById('console') as HTMLDivElement;
 
     this._socket$.onmessage

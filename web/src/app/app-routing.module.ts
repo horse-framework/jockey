@@ -57,7 +57,7 @@ const routes: Routes = [
     {
         path: 'console2',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./console/console2.module').then(m => m.ConsoleModule),
+        loadChildren: () => import('./console2/console2.module').then(m => m.Console2Module),
         canActivate: [SessionGuard]
     },
     {
