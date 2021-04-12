@@ -1,0 +1,127 @@
+.console-frame {
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-content: stretch;
+  align-items: stretch;
+  height: calc(100vh - 110px);
+}
+
+.console-panel {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: space-between;
+}
+
+.console-filter {
+  flex: 1 0 auto;
+  padding: 0px 0px 12px 0px;
+}
+
+.console-filter form {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.console-filter select {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 6px;
+  margin: 0px 10px 0px 0px;
+  line-height: 30px;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.console-filter input {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  margin: 0px 10px 0px 0px;
+  line-height: 32px;
+  height: 32px;
+}
+
+.console-filter button {
+  border-radius: 6px;
+  border: none;
+  background-color: #444;
+  color: #eee;
+  box-sizing: border-box;
+  padding: 6px 12px;
+  margin: 0px 10px 0px 0px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+}
+
+.console-filter button:hover {
+  background-color: #030303;
+}
+
+.console-buttons {
+  flex: 0 1 auto;
+  padding-top: 12px;
+}
+
+.toggle-button {
+  margin: 0px 4px;
+  border-radius: 6px;
+  background-color: #dadada;
+  color: #222;
+  padding: 8px 10px;
+  line-height: 20px;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.toggle-button:hover {
+  background-color: #d0d0d0;
+}
+
+.toggle-button.active {
+  background-color: #f0d000;
+  color: #000;
+}
+
+.toggle-button:hover.active {
+  background-color: #f0e060;
+}
+
+.red-button {
+  margin: 0px 0px 0px 4px;
+  border-radius: 6px;
+  background-color: #d01010;
+  color: #fff;
+  padding: 8px 10px;
+  line-height: 20px;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.red-button:hover {
+  background-color: #ff3030;
+}
+
+.console {
+  background-color: #101010;
+  flex: 1 1 auto;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+  overflow: auto;
+  padding: 10px 14px;
+  font-family: 'Ubuntu Mono', monospace;
+}
