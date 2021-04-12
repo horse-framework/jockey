@@ -1,6 +1,6 @@
-import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { filter, takeUntil } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { merge, Observable, Subject } from 'rxjs';
+import { filter, map, pluck, scan, takeUntil, tap } from 'rxjs/operators';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
 import { ConsoleMessage } from 'src/models/console.message';
@@ -21,47 +21,63 @@ export class Console2Component implements OnInit {
   source: string = 'queue';
   targetType: string = 'name';
   target: string = '';
-  element: HTMLDivElement;
   search: string = '';
 
   showTime: boolean = true;
   showMessageId: boolean = true;
   showContentType: boolean = false;
   autoScroll: boolean = true;
+  messages$ = new Observable<Array<ConsoleMessage>>();
+  clearTrigger$ = new Subject();
+  triggerFilter$ = new Subject();
 
-  private _messages: ConsoleMessage[] = [];
-  private _datePipe = new DatePipe('en-US');
+  @ViewChild('console', { static: true }) element: ElementRef<HTMLDivElement>;
+
+  get colspan(): number {
+    let span = 0;
+    if (this.showContentType)
+      span++;
+    if (this.showMessageId)
+      span++;
+    return span;
+  }
 
   constructor(
     private _destroy$: DestroyService,
-    private _socket$: WebsocketService) { }
+    private _socket$: WebsocketService,
+    private _ngZone: NgZone) { }
 
   ngOnInit(): void {
-
-    this.element = document.getElementById('console') as HTMLDivElement;
-
-    this._socket$.onmessage
-      .pipe(
-        takeUntil(this._destroy$),
-        filter(msg => msg.type === SocketModels.ConsoleMessage)
-      )
-      .subscribe(msg => this.addMessage(msg.payload));
+    this.messages$ = merge(
+      this._socket$.onmessage.pipe(
+        filter(msg => msg.type === SocketModels.ConsoleMessage),
+        pluck('payload'),
+        map(this._addMessage)
+      ),
+      this.clearTrigger$.pipe(map(this._clearMessages))
+    ).pipe(
+      takeUntil(this._destroy$),
+      scan((state, callback) => callback(state), []),
+      tap(() => {
+        if (this.autoScroll)
+          this._ngZone.runOutsideAngular(() => this.element.nativeElement.scrollTo({
+            behavior: 'auto',
+            top: this.element.nativeElement.scrollHeight
+          }));
+      })
+    );
   }
 
   toggleTime(): void {
     this.showTime = !this.showTime;
-    this.redraw();
   }
 
   toggleMessageId(): void {
     this.showMessageId = !this.showMessageId;
-    this.redraw();
   }
 
   toggleContentType(): void {
     this.showContentType = !this.showContentType;
-    this.redraw();
-
   }
 
   toggleAutoScroll(): void {
@@ -81,71 +97,14 @@ export class Console2Component implements OnInit {
   }
 
   clear(): void {
-    this._messages = [];
-    this.redraw();
+    this.clearTrigger$.next();
   }
 
-  private redraw(): void {
+  trackByFn = (index: number, item: ConsoleMessage) => item.messageId;
 
-    let html = '';
-
-    this._messages.forEach(message => {
-      if (this.isInFilter(message))
-        html += this.createMessageHtml(message);
-    });
-
-    this.element.innerHTML = html;
-    this.element.scrollTop = this.element.scrollHeight;
-  }
-
-  private addMessage(message: ConsoleMessage): void {
-
-    if (this._messages.length > this.MessageLimit + 100)
-      this._messages.splice(0, 200);
-
-    this._messages.push(message);
-
-    if (this.isInFilter(message)) {
-      this.element.append(this.createMessageElement(message));
-
-      if (this.autoScroll)
-        this.element.scrollTop = this.element.scrollHeight;
-    }
-  }
-
-  private createMessageElement(message: ConsoleMessage): HTMLDivElement {
-    const html = (this.showTime ? '<em>' + this._datePipe.transform(message.date * 1000, 'HH:mm:ss') + '</em>' : '') +
-      '<strong>' + message.name + '</strong>' +
-      (this.showContentType ? '<span>' + message.contentType + '</span>' : '') +
-      '<div>' +
-      (this.showMessageId ? '<b>' + message.messageId + '</b>' : '') +
-      '<p>' + message.message + '</p>';
-
-
-    const div = document.createElement('div');
-    div.className = 'citem';
-    div.innerHTML = html;
-    return div;
-  }
-
-  private createMessageHtml(message: ConsoleMessage): string {
-
-    return '<div class="citem">' +
-      (this.showTime ? '<em>' + this._datePipe.transform(message.date * 1000, 'HH:mm:ss') + '</em>' : '') +
-      '<strong>' + message.name + '</strong>' +
-      (this.showContentType ? '<span>' + message.contentType + '</span>' : '') +
-      '<div>' +
-      (this.showMessageId ? '<b>' + message.messageId + '</b>' : '') +
-      '<p>' + message.message + '</p>' +
-      '</div>' +
-      '</div>';
-  }
-
-  private isInFilter(message: ConsoleMessage): boolean {
-    if (this.search.length < 1)
-      return true;
-
-    return message.messageId.includes(this.search) || message.message.includes(this.search);
-  }
+  private _addMessage = (value: ConsoleMessage) =>
+    (state: Array<ConsoleMessage>) => [...state, value]
+  private _clearMessages = () =>
+    (state: Array<ConsoleMessage>) => []
 
 }

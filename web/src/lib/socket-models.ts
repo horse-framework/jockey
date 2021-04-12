@@ -1,4 +1,3 @@
-
 export class SocketModels {
     static readonly ConsoleMessage: string = 'console';
 

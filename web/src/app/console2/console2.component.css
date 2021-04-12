@@ -125,3 +125,63 @@
   padding: 10px 14px;
   font-family: 'Ubuntu Mono', monospace;
 }
+
+.message-time {
+  color: #999;
+  font-size: 13px;
+  font-style: normal;
+  line-height: 20px;
+  font-weight: 400;
+  vertical-align: initial;
+}
+
+td.message-name {
+  font-weight: 700;
+  color: #f0d000;
+  font-size: 14px;
+  padding-right: 16px;
+}
+
+td.message-name.time-show {
+  padding: 0 16px;
+}
+
+td.message-content-type {
+  color: #20a0a0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  width: 1%;
+  white-space: nowrap;
+}
+
+td.message-id {
+  color: #888;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+td.message-content {
+  width: 100%;
+  font-weight: 400;
+  color: #f0f0f0;
+}
+
+td.message-content>div {
+  word-break: break-word;
+  white-space: pre-line;
+}
+
+td>table {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+table td {
+  white-space: nowrap;
+  vertical-align: initial;
+}
+
+table td.message {
+  white-space: normal;
+}

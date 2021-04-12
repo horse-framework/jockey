@@ -1,4 +1,3 @@
-
 export interface ConsoleMessage {
     date: number;
     name: string;
