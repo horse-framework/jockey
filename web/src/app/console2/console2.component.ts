@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
-import { filter, map, pluck, scan, takeUntil, tap } from 'rxjs/operators';
+import { filter, map, pluck, takeUntil, tap } from 'rxjs/operators';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
 import { ConsoleMessage } from 'src/models/console.message';
@@ -31,7 +31,9 @@ export class Console2Component implements OnInit {
   clearTrigger$ = new Subject();
   triggerFilter$ = new Subject();
 
-  @ViewChild('console', { static: true }) element: ElementRef<HTMLDivElement>;
+  @ViewChild('container', { static: true }) container: ElementRef<HTMLDivElement>;
+  @ViewChild('console', { read: ViewContainerRef }) console: ViewContainerRef;
+  @ViewChild('messageTemplate', { read: TemplateRef }) messageTemplate: TemplateRef<any>;
 
   get colspan(): number {
     let span = 0;
@@ -48,7 +50,7 @@ export class Console2Component implements OnInit {
     private _ngZone: NgZone) { }
 
   ngOnInit(): void {
-    this.messages$ = merge(
+    merge(
       this._socket$.onmessage.pipe(
         filter(msg => msg.type === SocketModels.ConsoleMessage),
         pluck('payload'),
@@ -57,15 +59,19 @@ export class Console2Component implements OnInit {
       this.clearTrigger$.pipe(map(this._clearMessages))
     ).pipe(
       takeUntil(this._destroy$),
-      scan((state, callback) => callback(state), []),
+      tap(() => {
+        this.console.createEmbeddedView(this.messageTemplate, {
+          $implicit$: {}
+        });
+      }),
       tap(() => {
         if (this.autoScroll)
-          this._ngZone.runOutsideAngular(() => this.element.nativeElement.scrollTo({
+          this._ngZone.runOutsideAngular(() => this.container.nativeElement.scrollTo({
             behavior: 'auto',
-            top: this.element.nativeElement.scrollHeight
+            top: this.container.nativeElement.scrollHeight
           }));
       })
-    );
+    ).subscribe();
   }
 
   toggleTime(): void {
@@ -102,9 +108,12 @@ export class Console2Component implements OnInit {
 
   trackByFn = (index: number, item: ConsoleMessage) => item.messageId;
 
-  private _addMessage = (value: ConsoleMessage) =>
-    (state: Array<ConsoleMessage>) => [...state, value]
-  private _clearMessages = () =>
-    (state: Array<ConsoleMessage>) => []
-
+  private _addMessage = (message: ConsoleMessage) => () => {
+    this.console.createEmbeddedView(this.messageTemplate, {
+      $implicit$: message
+    });
+  }
+  private _clearMessages = () => () => {
+    this.console.clear();
+  }
 }

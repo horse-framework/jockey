@@ -60,37 +60,38 @@
     </div>
   </div>
   <div class="console"
-       #console>
-    <table>
-      <ng-container *ngFor="let message of messages$ | async; trackBy:trackByFn">
-        <tr>
-          <td *ngIf="showTime"
-              class="message-time"
-              [textContent]="message.date | jockeyTime">
-          </td>
-          <td class="message-name"
-              [ngClass]="{'time-show': showTime}"
-              [textContent]="message.name">
-          </td>
-          <td>
-            <table>
-              <tr *ngIf="showMessageId || showContentType">
-                <td *ngIf="showContentType"
-                    class="message-content-type">[{{message.contentType}}]</td>
-                <td class="message-id"
-                    *ngIf="showMessageId"
-                    [textContent]="message.messageId"></td>
-              </tr>
-              <tr>
-                <td class="message-content"
-                    [attr.colspan]="colspan">
-                  <div [textContent]="message.message"></div>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </ng-container>
-    </table>
+       #container>
+    <table #console></table>
   </div>
 </div>
+
+<ng-template #messageTemplate
+             let-message>
+  <tr>
+    <td *ngIf="showTime"
+        class="message-time"
+        [textContent]="message.date | jockeyTime">
+    </td>
+    <td class="message-name"
+        [ngClass]="{'time-show': showTime}"
+        [textContent]="message.name">
+    </td>
+    <td>
+      <table>
+        <tr *ngIf="showMessageId || showContentType">
+          <td *ngIf="showContentType"
+              class="message-content-type">[{{message.contentType}}]</td>
+          <td class="message-id"
+              *ngIf="showMessageId"
+              [textContent]="message.messageId"></td>
+        </tr>
+        <tr>
+          <td class="message-content"
+              [attr.colspan]="colspan">
+            <div [textContent]="message.message"></div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</ng-template>
