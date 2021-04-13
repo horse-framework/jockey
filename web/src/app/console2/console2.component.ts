@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
-import { auditTime, filter, pluck, takeUntil, tap } from 'rxjs/operators';
+import { filter, pluck, takeUntil, tap } from 'rxjs/operators';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
 import { ConsoleMessage } from 'src/models/console.message';
@@ -59,7 +59,7 @@ export class Console2Component implements OnInit {
         tap((message) => {
           this.console.createEmbeddedView(this.messageTemplate, {
             $implicit: message
-          });
+          }).detectChanges();
         })
       ),
       this.clearTrigger$.pipe(
@@ -74,8 +74,6 @@ export class Console2Component implements OnInit {
             top: this.container.nativeElement.scrollHeight
           }));
       }),
-      auditTime(10),
-      tap(() => this._cd.detectChanges())
     ).subscribe();
 
   }
