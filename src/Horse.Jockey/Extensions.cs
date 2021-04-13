@@ -89,6 +89,9 @@ namespace Horse.Jockey
                 string securityKey = $"{Guid.NewGuid()}-{Guid.NewGuid()}-{Guid.NewGuid()}";
 #endif
 
+                if (!string.IsNullOrEmpty(options.CustomSecret))
+                    securityKey = options.CustomSecret;
+
                 services.AddJwt(Hub.Mvc, o =>
                 {
                     o.Key = securityKey;
@@ -142,10 +145,7 @@ namespace Horse.Jockey
 
                                                     return Task.CompletedTask;
                                                 })
-                                                .OnError(e =>
-                                                {
-                                                    Console.WriteLine("Jockey WebSocket Error: " + e);
-                                                }));
+                                                .OnError(e => { Console.WriteLine("Jockey WebSocket Error: " + e); }));
             });
 
 
