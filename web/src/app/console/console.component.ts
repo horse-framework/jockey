@@ -49,7 +49,7 @@ export class ConsoleComponent extends BaseComponent implements OnInit, OnDestroy
 
             if (this.autoScroll)
                 this.element.scrollTop = this.element.scrollHeight;
-        })
+        });
     }
 
     ngOnDestroy(): void {

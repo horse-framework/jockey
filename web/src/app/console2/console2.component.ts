@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { merge, Observable, Subject } from 'rxjs';
+import { SSL_OP_TLS_D5_BUG } from 'node:constants';
+import { interval, merge, Observable, Subject } from 'rxjs';
 import { filter, pluck, takeUntil, tap } from 'rxjs/operators';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
@@ -66,16 +67,17 @@ export class Console2Component implements OnInit {
         tap(() => this.console.clear())
       )
     ).pipe(
-      takeUntil(this._destroy$),
-      tap(() => {
-        if (this.autoScroll)
-          this._ngZone.runOutsideAngular(() => this.container.nativeElement.scrollTo({
-            behavior: 'auto',
-            top: this.container.nativeElement.scrollHeight
-          }));
-      }),
+      takeUntil(this._destroy$)
     ).subscribe();
 
+    interval(100).subscribe(() => {
+
+        if (this.autoScroll)
+            this.container.nativeElement.scrollTop = this.container.nativeElement.scrollHeight;
+
+            this._cd.detectChanges();
+    });
+    
   }
 
   toggleTime(): void {
