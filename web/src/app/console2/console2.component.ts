@@ -73,9 +73,9 @@ export class Console2Component implements OnInit {
             behavior: 'auto',
             top: this.container.nativeElement.scrollHeight
           }));
-        this._cd.detectChanges();
       }),
       auditTime(10),
+      tap(() => this._cd.detectChanges())
     ).subscribe();
 
   }
