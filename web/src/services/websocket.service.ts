@@ -35,7 +35,8 @@ export class WebsocketService {
 
     connect(token: string): void {
 
-        const host = environment.api.websocket + '?token=' + token;
+        //const host = environment.api.websocket + '?token=' + token;
+        const host = 'ws://' + location.host + '?token=' + token;
         this._socket = new WebSocket(host);
 
 

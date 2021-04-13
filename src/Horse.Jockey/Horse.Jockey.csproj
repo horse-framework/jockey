@@ -24,10 +24,10 @@
 
     <ItemGroup>
         <PackageReference Include="Horse.Core" Version="5.0.1" />
-        <PackageReference Include="Horse.Mq" Version="5.0.8" />
-        <PackageReference Include="Horse.Mq.Bus" Version="5.0.8" />
-        <PackageReference Include="Horse.Mq.Client" Version="5.0.8" />
-        <PackageReference Include="Horse.Mq.Data" Version="5.0.8" />
+        <PackageReference Include="Horse.Mq" Version="5.0.10" />
+        <PackageReference Include="Horse.Mq.Bus" Version="5.0.10" />
+        <PackageReference Include="Horse.Mq.Client" Version="5.0.10" />
+        <PackageReference Include="Horse.Mq.Data" Version="5.0.10" />
         <PackageReference Include="Horse.Mvc" Version="5.0.3" />
         <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="5.0.3" />
         <PackageReference Include="Horse.Protocols.Http" Version="5.0.3" />
