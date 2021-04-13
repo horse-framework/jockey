@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit,
-  TemplateRef, ViewChild, ViewContainerRef
+  TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation
 } from '@angular/core';
 import { BehaviorSubject, from, fromEvent, interval, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, delayWhen, distinctUntilChanged, filter, pluck, switchMap, takeLast, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, delayWhen, distinctUntilChanged, filter, map, pluck, switchMap, takeLast, takeUntil, tap } from 'rxjs/operators';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
 import { ConsoleMessage } from 'src/models/console.message';
@@ -15,7 +15,8 @@ import { WebsocketService } from 'src/services/websocket.service';
   templateUrl: './console2.component.html',
   styleUrls: ['./console2.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService]
+  providers: [DestroyService],
+  encapsulation: ViewEncapsulation.None
 })
 export class Console2Component implements OnInit {
 
@@ -28,6 +29,7 @@ export class Console2Component implements OnInit {
   showMessageId: boolean = true;
   showContentType: boolean = false;
   autoScroll: boolean = true;
+  isJson: boolean = false;
   clearTrigger$ = new Subject();
   triggerFilter$ = new Subject();
   pause: boolean = false;
@@ -40,8 +42,6 @@ export class Console2Component implements OnInit {
 
   get colspan(): number {
     let span = 0;
-    if (this.showContentType)
-      span++;
     if (this.showMessageId)
       span++;
     return span;
@@ -82,6 +82,10 @@ export class Console2Component implements OnInit {
         this._socket$.onmessage.pipe(
           filter(msg => msg.type === SocketModels.ConsoleMessage),
           pluck('payload'),
+          map((message: ConsoleMessage) => {
+            message.messageObj = JSON.parse(message.message);
+            return message;
+          }),
           tap((message) => {
             if (this._messages.size >= this._messageLimit) {
               const first = this._messages.values().next();
@@ -105,11 +109,9 @@ export class Console2Component implements OnInit {
     this._ngZone.runOutsideAngular(() => {
       interval(10).pipe(
         takeUntil(this._destroy$),
-        filter(() =>
-          this.autoScroll && !this.pause &&
-          this.consoleTable.nativeElement.scrollTop !== this.consoleTable.nativeElement.scrollHeight
-        ),
-        tap(() => (this.consoleTable.nativeElement.lastElementChild as HTMLTableRowElement)?.scrollIntoView())
+        filter(() => this.autoScroll && !this.pause &&
+          this.consoleTable.nativeElement.scrollTop !== this.consoleTable.nativeElement.scrollHeight),
+        tap(() => (this.container.nativeElement.scrollTo({ top: this.container.nativeElement.scrollHeight })))
       ).subscribe();
     });
 
@@ -129,6 +131,10 @@ export class Console2Component implements OnInit {
 
   toggleAutoScroll(): void {
     this.autoScroll = !this.autoScroll;
+  }
+
+  toggleJson(): void {
+    this.isJson = !this.isJson;
   }
 
   togglePause(): void {

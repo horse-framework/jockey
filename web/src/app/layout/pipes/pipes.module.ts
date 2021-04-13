@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BindingTypePipe } from './binding-type.pipe';
 import { FilesizePipe } from './filesize.pipe';
 import { JockeyTimePipe } from './jockey-time.pipe';
+import { PrettyPrintPipe } from './prett-print.pipe';
 import { TimespanPipe } from './timespan.pipe';
 import { UnlimitedPipe } from './unlimited.pipe';
 
@@ -12,7 +13,8 @@ import { UnlimitedPipe } from './unlimited.pipe';
         UnlimitedPipe,
         FilesizePipe,
         BindingTypePipe,
-        JockeyTimePipe
+        JockeyTimePipe,
+        PrettyPrintPipe
     ],
     imports: [
         CommonModule
@@ -22,7 +24,8 @@ import { UnlimitedPipe } from './unlimited.pipe';
         UnlimitedPipe,
         FilesizePipe,
         BindingTypePipe,
-        JockeyTimePipe
+        JockeyTimePipe,
+        PrettyPrintPipe
     ],
     providers: [
         DatePipe

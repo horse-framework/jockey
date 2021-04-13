@@ -55,6 +55,11 @@
         Content Type
       </span>
       <span class="toggle-button"
+            [class.active]="isJson"
+            (click)="toggleJson()">
+        JSON
+      </span>
+      <span class="toggle-button"
             [class.active]="autoScroll"
             (click)="toggleAutoScroll()">
         Auto Scroll
@@ -88,19 +93,21 @@
         [ngClass]="{'time-show': showTime}"
         [textContent]="message.name">
     </td>
+    <td *ngIf="showContentType"
+        class="message-content-type">
+      <span>[{{message.contentType}}]</span>
+    </td>
     <td class="message-container">
       <table>
-        <tr *ngIf="showMessageId || showContentType">
-          <td *ngIf="showContentType"
-              class="message-content-type">[{{message.contentType}}]</td>
+        <tr *ngIf="showMessageId">
           <td class="message-id"
-              *ngIf="showMessageId"
               [textContent]="message.messageId"></td>
         </tr>
         <tr>
           <td class="message-content"
               [attr.colspan]="colspan">
-            <div [textContent]="message.message"></div>
+            <pre class="dark-mode"
+                 [innerHTML]="isJson ? (message.messageObj | prettyprint ): message.message"></pre>
           </td>
         </tr>
       </table>

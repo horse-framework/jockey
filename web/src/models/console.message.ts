@@ -4,5 +4,6 @@ export interface ConsoleMessage {
     contentType: number;
     messageId: string;
     message: string;
+    messageObj: any;
     status: string;
 }
