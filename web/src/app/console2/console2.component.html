@@ -33,20 +33,26 @@
       </form>
     </div>
     <div class="console-buttons">
+      <input type="text"
+             #searchInput
+             [(ngModel)]="search"
+             name="search"
+             placeholder="Search in messages" />
+
       <span class="toggle-button"
             [class.active]="showTime"
             (click)="toggleTime()">
-        Show Time
+        Time
       </span>
       <span class="toggle-button"
             [class.active]="showMessageId"
             (click)="toggleMessageId()">
-        Show Message Id
+        Message Id
       </span>
       <span class="toggle-button"
             [class.active]="showContentType"
             (click)="toggleContentType()">
-        Show Content Type
+        Content Type
       </span>
       <span class="toggle-button"
             [class.active]="autoScroll"
@@ -56,6 +62,10 @@
       <span (click)="clear()"
             class="red-button">
         Clear Console
+      </span>
+      <span (click)="togglePause()"
+            [ngClass]="{'red-button': !pause, 'green-button': pause}"
+            [textContent]="!pause ? 'II' : '>'">
       </span>
     </div>
   </div>

@@ -5,12 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PipesModule } from '../layout/pipes/pipes.module';
 import { Console2Component } from './console2.component';
-import { FilterMessagesPipe } from './filter-messages.pipe';
 
 @NgModule({
   declarations: [
     Console2Component,
-    FilterMessagesPipe
   ],
   imports: [
     CommonModule,
