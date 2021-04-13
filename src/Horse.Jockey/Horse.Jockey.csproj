@@ -43,6 +43,7 @@
     <ItemGroup>
         <EmbeddedResource Include="Web/12-es5.js" />
         <EmbeddedResource Include="Web/10-es2015.js" />
+        <EmbeddedResource Include="Web/18-es5.js" />
         <EmbeddedResource Include="Web/17-es2015.js" />
         <EmbeddedResource Include="Web/12-es2015.js" />
         <EmbeddedResource Include="Web/3-es5.js" />
@@ -73,6 +74,7 @@
         <EmbeddedResource Include="Web/11-es5.js" />
         <EmbeddedResource Include="Web/16-es2015.js" />
         <EmbeddedResource Include="Web/polyfills-es2015.js" />
+        <EmbeddedResource Include="Web/18-es2015.js" />
         <EmbeddedResource Include="Web/15-es5.js" />
         <EmbeddedResource Include="Web/11-es2015.js" />
         <EmbeddedResource Include="Web/9-es2015.js" />
