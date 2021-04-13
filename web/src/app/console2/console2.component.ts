@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
-import { filter, map, pluck, takeUntil, tap } from 'rxjs/operators';
+import { filter, pluck, takeUntil, tap } from 'rxjs/operators';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
 import { ConsoleMessage } from 'src/models/console.message';
@@ -54,16 +54,17 @@ export class Console2Component implements OnInit {
       this._socket$.onmessage.pipe(
         filter(msg => msg.type === SocketModels.ConsoleMessage),
         pluck('payload'),
-        map(this._addMessage)
+        tap((message) => {
+          this.console.createEmbeddedView(this.messageTemplate, {
+            $implicit$: message
+          });
+        })
       ),
-      this.clearTrigger$.pipe(map(this._clearMessages))
+      this.clearTrigger$.pipe(
+        tap(() => this.console.clear())
+      )
     ).pipe(
       takeUntil(this._destroy$),
-      tap(() => {
-        this.console.createEmbeddedView(this.messageTemplate, {
-          $implicit$: {}
-        });
-      }),
       tap(() => {
         if (this.autoScroll)
           this._ngZone.runOutsideAngular(() => this.container.nativeElement.scrollTo({
@@ -106,14 +107,4 @@ export class Console2Component implements OnInit {
     this.clearTrigger$.next();
   }
 
-  trackByFn = (index: number, item: ConsoleMessage) => item.messageId;
-
-  private _addMessage = (message: ConsoleMessage) => () => {
-    this.console.createEmbeddedView(this.messageTemplate, {
-      $implicit$: message
-    });
-  }
-  private _clearMessages = () => () => {
-    this.console.clear();
-  }
 }
