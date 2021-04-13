@@ -42,6 +42,12 @@ namespace Horse.Jockey.Helpers
 
         internal static bool AsteriskEquals(this string value, string searchKey)
         {
+            if (string.IsNullOrEmpty(searchKey))
+                return false;
+
+            if (searchKey == "*")
+                return true;
+            
             if (searchKey.StartsWith('*') && searchKey.EndsWith('*'))
                 return value.Contains(searchKey.Substring(1, searchKey.Length - 2), StringComparison.InvariantCultureIgnoreCase);
 
