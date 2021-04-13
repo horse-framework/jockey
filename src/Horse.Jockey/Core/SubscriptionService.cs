@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models.Subscriptions;
 using Horse.Mq.Queues;
@@ -9,10 +10,11 @@ using Horse.Protocols.WebSocket;
 
 namespace Horse.Jockey.Core
 {
-    public class SubscriptionService
+    internal class SubscriptionService
     {
         private readonly List<ConsoleSubscription> _console = new List<ConsoleSubscription>();
         private readonly List<QueueDetailSubscription> _queue = new List<QueueDetailSubscription>();
+        private readonly List<WsServerSocket> _dashboard = new List<WsServerSocket>();
 
         #region Console
 
@@ -152,13 +154,41 @@ namespace Horse.Jockey.Core
             }
         }
 
-        public IEnumerable<QueueDetailSubscription> QueueDetailSubscriptions()
+        public IEnumerable<QueueDetailSubscription> FindQueueDetailSubscribers(string queueName)
         {
             List<QueueDetailSubscription> list;
             lock (_queue)
-                list = new List<QueueDetailSubscription>(_queue);
+                list = new List<QueueDetailSubscription>(_queue.Where(x => x.Queue.Name.Equals(queueName)));
 
             return list;
+        }
+
+        #endregion
+
+        #region Dashboard
+
+        public void SubscribeDashboard(WsServerSocket client)
+        {
+            lock (_dashboard)
+            {
+                if (!_dashboard.Contains(client))
+                    _dashboard.Add(client);
+            }
+        }
+
+        public void UnsubscribeDashboard(WsServerSocket client)
+        {
+            lock (_dashboard)
+                _dashboard.Remove(client);
+        }
+
+        public IEnumerable<WsServerSocket> GetDashboardSubscribers()
+        {
+            List<WsServerSocket> result;
+            lock (_dashboard)
+                result = new List<WsServerSocket>(_dashboard);
+
+            return result;
         }
 
         #endregion

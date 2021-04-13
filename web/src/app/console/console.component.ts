@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { filter, takeWhile } from 'rxjs/operators';
+import { BaseComponent } from 'src/lib/base-component';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
 import { ConsoleMessage } from 'src/models/console.message';
@@ -11,11 +12,10 @@ import { WebsocketService } from 'src/services/websocket.service';
     templateUrl: './console.component.html',
     styleUrls: ['./console.component.css']
 })
-export class ConsoleComponent implements OnInit, OnDestroy {
+export class ConsoleComponent extends BaseComponent implements OnInit, OnDestroy {
 
     readonly MessageLimit: number = 1000;
 
-    active: boolean = true;
     source: string = 'queue';
     targetType: string = 'name';
     target: string = '';
@@ -30,23 +30,33 @@ export class ConsoleComponent implements OnInit, OnDestroy {
     private _messages: ConsoleMessage[] = [];
     private _datePipe = new DatePipe('en-US');
 
-    constructor(private socket: WebsocketService) { }
+    constructor(private socket: WebsocketService) {
+        super();
+    }
 
     ngOnInit(): void {
 
-        this.active = true;
         this.element = <HTMLDivElement>document.getElementById('console');
 
-        this.socket.onmessage
+        this.on(this.socket.onmessage)
             .pipe(
-                takeWhile(() => this.active),
                 filter(msg => msg.type == SocketModels.ConsoleMessage)
             )
             .subscribe(msg => this.addMessage(msg.payload));
     }
 
     ngOnDestroy(): void {
-        this.active = false;
+
+        super.ngOnDestroy();
+
+        let request: ConsoleRequest = {
+            requestId: new Date().getTime().toString(),
+            source: null,
+            targetType: null,
+            target: null
+        };
+
+        this.socket.send(SocketModels.ConsoleRequest, request);
     }
 
     toggleTime(): void {
@@ -67,6 +77,10 @@ export class ConsoleComponent implements OnInit, OnDestroy {
 
     toggleAutoScroll(): void {
         this.autoScroll = !this.autoScroll;
+    }
+
+    searching(e: any) {
+        this.redraw();
     }
 
     submit(): void {

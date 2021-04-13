@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace Horse.Jockey.Models.Subscriptions
 {
-    public enum SubscriptionSource
+    internal enum SubscriptionSource
     {
         [Description("direct")]
         Direct,

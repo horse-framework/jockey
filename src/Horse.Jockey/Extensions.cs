@@ -17,8 +17,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Horse.Jockey
 {
+    /// <summary>
+    /// Extension methods for Jockey Implementation
+    /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// Adds Jockey to Horse MQ
+        /// </summary>
         public static HorseMqBuilder AddJockey(this HorseMqBuilder builder, Action<JockeyOptions> options)
         {
             HorseMq mq = builder.Build();
@@ -26,6 +32,9 @@ namespace Horse.Jockey
             return builder;
         }
 
+        /// <summary>
+        /// Adds Jockey to Horse MQ
+        /// </summary>
         public static void AddJockey(this HorseMq mq, Action<JockeyOptions> options)
         {
             JockeyOptions jopt = new JockeyOptions();
@@ -33,6 +42,9 @@ namespace Horse.Jockey
             AddJockey(mq, jopt);
         }
 
+        /// <summary>
+        /// Adds Jockey to Horse MQ
+        /// </summary>
         public static void AddJockey(this HorseMq mq, JockeyOptions options)
         {
             Hub.Server = new HorseServer();

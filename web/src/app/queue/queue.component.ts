@@ -5,6 +5,9 @@ import { BaseComponent } from 'src/lib/base-component';
 import { HorseQueue } from 'src/models/horse-queue';
 import { QueueService } from 'src/services/queue.service';
 import { QueueGraphService } from 'src/services/queue-graph.service';
+import { WebsocketService } from 'src/services/websocket.service';
+import { SocketModels } from 'src/lib/socket-models';
+import { interval } from 'rxjs';
 
 @Component({
     selector: 'app-queue',
@@ -16,21 +19,37 @@ export class QueueComponent extends BaseComponent implements OnInit {
     queue: HorseQueue;
     deliveryChart: any;
     storeChart: any;
+    queueName: string;
 
     constructor(private activatedRoute: ActivatedRoute,
         private queueGraphService: QueueGraphService,
+        private socket: WebsocketService,
         private queueService: QueueService) {
         super();
     }
 
     async ngOnInit() {
 
-        let queueName = this.activatedRoute.snapshot.params.name;
-        if (queueName == null || queueName.length == 0) {
+        this.queueName = this.activatedRoute.snapshot.params.name;
+        if (this.queueName == null || this.queueName.length == 0) {
             return;
         }
 
-        this.queue = await this.queueService.get(queueName);
+        await this.load();
+
+        let request = {
+            requestId: new Date().getTime().toString(),
+            name: this.queue.info.name
+        };
+
+        this.socket.send(SocketModels.QueueDetailRequest, request);
+
+        this.on(interval(5000)).subscribe(() => this.load());
+    }
+
+    private async load() {
+
+        this.queue = await this.queueService.get(this.queueName);
         let labels = this.queueGraphService.createLabels(this.queue.graph);
 
         this.deliveryChart = new Chart(document.getElementById('queue-delivery-chart'),
@@ -103,6 +122,9 @@ export class QueueComponent extends BaseComponent implements OnInit {
                         }]
                 },
                 options: {
+                    animation: {
+                        duration: 0
+                    },
                     responsive: true,
                     scales: {
                         xAxes: [{ display: false }],
@@ -161,6 +183,9 @@ export class QueueComponent extends BaseComponent implements OnInit {
                         }]
                 },
                 options: {
+                    animation: {
+                        duration: 0
+                    },
                     responsive: true,
                     scales: {
                         xAxes: [{ display: false }],
@@ -168,6 +193,17 @@ export class QueueComponent extends BaseComponent implements OnInit {
                     }
                 }
             });
+    }
 
+    ngOnDestroy(): void {
+
+        super.ngOnDestroy();
+
+        let request = {
+            requestId: new Date().getTime().toString(),
+            name: null
+        };
+
+        this.socket.send(SocketModels.QueueDetailRequest, request);
     }
 }
