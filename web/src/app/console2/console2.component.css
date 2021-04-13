@@ -38,7 +38,8 @@
   box-sizing: border-box;
 }
 
-.console-filter input {
+.console-filter input,
+.console-buttons input {
   border-radius: 4px;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -69,7 +70,7 @@
 
 .console-buttons {
   flex: 0 1 auto;
-  padding-top: 12px;
+  padding-top: 0;
 }
 
 .toggle-button {
@@ -113,6 +114,22 @@
   background-color: #ff3030;
 }
 
+.green-button {
+  margin: 0px 0px 0px 4px;
+  border-radius: 6px;
+  background-color: #43a047;
+  color: #fff;
+  padding: 8px 10px;
+  line-height: 20px;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.green-button:hover {
+  background-color: #4caf50;
+}
+
 .console {
   background-color: #101010;
   flex: 1 1 auto;
@@ -133,6 +150,8 @@
   line-height: 20px;
   font-weight: 400;
   vertical-align: initial;
+  width: 1%;
+  white-space: nowrap;
 }
 
 td.message-name {
@@ -140,6 +159,8 @@ td.message-name {
   color: #f0d000;
   font-size: 14px;
   padding-right: 16px;
+  width: 1%;
+  white-space: nowrap;
 }
 
 td.message-name.time-show {

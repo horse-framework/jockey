@@ -49,13 +49,13 @@ const routes: Routes = [
         canActivate: [SessionGuard]
     },
     {
-        path: 'console',
+        path: 'console-v1',
         component: PortalLayoutComponent,
         loadChildren: () => import('./console/console.module').then(m => m.ConsoleModule),
         canActivate: [SessionGuard]
     },
     {
-        path: 'console2',
+        path: 'console',
         component: PortalLayoutComponent,
         loadChildren: () => import('./console2/console2.module').then(m => m.Console2Module),
         canActivate: [SessionGuard]

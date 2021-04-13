@@ -33,20 +33,26 @@
       </form>
     </div>
     <div class="console-buttons">
+      <input type="text"
+             #searchInput
+             [(ngModel)]="search"
+             name="search"
+             placeholder="Search in messages" />
+
       <span class="toggle-button"
             [class.active]="showTime"
             (click)="toggleTime()">
-        Show Time
+        Time
       </span>
       <span class="toggle-button"
             [class.active]="showMessageId"
             (click)="toggleMessageId()">
-        Show Message Id
+        Message Id
       </span>
       <span class="toggle-button"
             [class.active]="showContentType"
             (click)="toggleContentType()">
-        Show Content Type
+        Content Type
       </span>
       <span class="toggle-button"
             [class.active]="autoScroll"
@@ -57,11 +63,17 @@
             class="red-button">
         Clear Console
       </span>
+      <span (click)="togglePause()"
+            [ngClass]="{'red-button': !pause, 'green-button': pause}"
+            [textContent]="!pause ? 'II' : '>'">
+      </span>
     </div>
   </div>
   <div class="console"
        #container>
-    <table #console></table>
+    <table #consoleTable>
+      <ng-container #consoleContainer></ng-container>
+    </table>
   </div>
 </div>
 
@@ -76,7 +88,7 @@
         [ngClass]="{'time-show': showTime}"
         [textContent]="message.name">
     </td>
-    <td>
+    <td class="message-container">
       <table>
         <tr *ngIf="showMessageId || showContentType">
           <td *ngIf="showContentType"
