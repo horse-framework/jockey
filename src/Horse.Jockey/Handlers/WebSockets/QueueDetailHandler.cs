@@ -9,7 +9,7 @@ using Horse.WebSocket.Models;
 
 namespace Horse.Jockey.Handlers.WebSockets
 {
-    public class QueueDetailHandler : IWebSocketMessageHandler<QueueDetailRequest>
+    internal class QueueDetailHandler : IWebSocketMessageHandler<QueueDetailRequest>
     {
         private readonly IWebSocketServerBus _bus;
         private readonly SubscriptionService _subscriptionService;
@@ -25,7 +25,11 @@ namespace Horse.Jockey.Handlers.WebSockets
         public async Task Handle(QueueDetailRequest model, WebSocketMessage message, IHorseWebSocket client)
         {
             if (string.IsNullOrEmpty(model.Name))
-                throw new ArgumentNullException();
+            {
+                _subscriptionService.UnsubscribeQueueDetail((WsServerSocket) client);
+                await _bus.SendAsync(client, new ConsoleResponse {RequestId = model.RequestId, Ok = true});
+                return;
+            }
 
             HorseQueue queue = _mq.FindQueue(model.Name);
             if (queue == null)

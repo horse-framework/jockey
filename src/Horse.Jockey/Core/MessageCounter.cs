@@ -39,6 +39,7 @@ namespace Horse.Jockey.Core
         private MessageGraphData _last = new MessageGraphData();
         private readonly Queue<MessageGraphData> _graphData = new Queue<MessageGraphData>(60);
         private IWebSocketServerBus _bus;
+        private SubscriptionService _subscriptionService;
 
         #endregion
 
@@ -49,6 +50,15 @@ namespace Horse.Jockey.Core
 
             _bus = Hub.Provider.GetService<IWebSocketServerBus>();
             return _bus;
+        }
+
+        private SubscriptionService GetSubscriptionService()
+        {
+            if (_subscriptionService != null)
+                return _subscriptionService;
+
+            _subscriptionService = Hub.Provider.GetService<SubscriptionService>();
+            return _subscriptionService;
         }
 
         public void Run()
@@ -74,11 +84,12 @@ namespace Horse.Jockey.Core
                         _graphData.Dequeue();
                 }
 
-                foreach (SocketBase socketBase in Hub.Clients.List())
-                {
-                    WsServerSocket ws = (WsServerSocket) socketBase;
-                    _ = GetBus().SendAsync(ws, data);
-                }
+                IWebSocketServerBus bus = GetBus();
+                SubscriptionService subscriptionService = GetSubscriptionService();
+                IEnumerable<WsServerSocket> subscribers = subscriptionService.GetDashboardSubscribers();
+
+                foreach (WsServerSocket socket in subscribers)
+                    _ = bus.SendAsync(socket, data);
 
                 _last = new MessageGraphData
                         {

@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
 import { filter, takeWhile } from 'rxjs/operators';
+import { BaseComponent } from 'src/lib/base-component';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
 import { ConsoleMessage } from 'src/models/console.message';
@@ -11,11 +13,10 @@ import { WebsocketService } from 'src/services/websocket.service';
     templateUrl: './console.component.html',
     styleUrls: ['./console.component.css']
 })
-export class ConsoleComponent implements OnInit, OnDestroy {
+export class ConsoleComponent extends BaseComponent implements OnInit, OnDestroy {
 
     readonly MessageLimit: number = 1000;
 
-    active: boolean = true;
     source: string = 'queue';
     targetType: string = 'name';
     target: string = '';
@@ -27,26 +28,42 @@ export class ConsoleComponent implements OnInit, OnDestroy {
     showContentType: boolean = false;
     autoScroll: boolean = true;
 
-    private _messages: ConsoleMessage[] = [];
+    private _messages: Set<ConsoleMessage> = new Set<ConsoleMessage>();
     private _datePipe = new DatePipe('en-US');
 
-    constructor(private socket: WebsocketService) { }
+    constructor(private socket: WebsocketService) {
+        super();
+    }
 
     ngOnInit(): void {
 
-        this.active = true;
         this.element = <HTMLDivElement>document.getElementById('console');
 
-        this.socket.onmessage
+        this.on(this.socket.onmessage)
             .pipe(
-                takeWhile(() => this.active),
                 filter(msg => msg.type == SocketModels.ConsoleMessage)
             )
             .subscribe(msg => this.addMessage(msg.payload));
+
+        interval(100).subscribe(() => {
+
+            if (this.autoScroll)
+                this.element.scrollTop = this.element.scrollHeight;
+        })
     }
 
     ngOnDestroy(): void {
-        this.active = false;
+
+        super.ngOnDestroy();
+
+        let request: ConsoleRequest = {
+            requestId: new Date().getTime().toString(),
+            source: null,
+            targetType: null,
+            target: null
+        };
+
+        this.socket.send(SocketModels.ConsoleRequest, request);
     }
 
     toggleTime(): void {
@@ -69,6 +86,10 @@ export class ConsoleComponent implements OnInit, OnDestroy {
         this.autoScroll = !this.autoScroll;
     }
 
+    searching(e: any) {
+        this.redraw();
+    }
+
     submit(): void {
 
         let request: ConsoleRequest = {
@@ -82,7 +103,7 @@ export class ConsoleComponent implements OnInit, OnDestroy {
     }
 
     clear(): void {
-        this._messages = [];
+        this._messages.clear();
         this.redraw();
     }
 
@@ -101,17 +122,18 @@ export class ConsoleComponent implements OnInit, OnDestroy {
 
     private addMessage(message: ConsoleMessage): void {
 
-        if (this._messages.length > this.MessageLimit + 100) {
-            this._messages.splice(0, 200);
+        if (this._messages.size > 2000) {
+            for (let i = 0; i < 500; i++) {
+                var e = this._messages.values().next();
+                this._messages.delete(e.value);
+            }
         }
 
-        this._messages.push(message);
+        this._messages.add(message);
 
         if (this.isInFilter(message)) {
-            this.element.append(this.createMessageElement(message));
+            this.element.appendChild(this.createMessageElement(message));
 
-            if (this.autoScroll)
-                this.element.scrollTop = this.element.scrollHeight;
         }
     }
 

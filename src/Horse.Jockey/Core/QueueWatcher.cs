@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Horse.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models.Queues;
+using Horse.Jockey.Models.Subscriptions;
 using Horse.Mq.Queues;
 using Horse.Protocols.WebSocket;
 using Horse.WebSocket.Models;
@@ -21,6 +21,7 @@ namespace Horse.Jockey.Core
         private readonly JockeyOptions _options;
         private Timer _timer;
         private IWebSocketServerBus _bus;
+        private SubscriptionService _subscriptionService;
 
         private const int GRAPH_DATA_SIZE = 60;
         private readonly Queue<QueueGraphData> _graphData = new(GRAPH_DATA_SIZE);
@@ -38,6 +39,15 @@ namespace Horse.Jockey.Core
 
             _bus = Hub.Provider.GetService<IWebSocketServerBus>();
             return _bus;
+        }
+
+        private SubscriptionService GetSubscriptionService()
+        {
+            if (_subscriptionService != null)
+                return _subscriptionService;
+
+            _subscriptionService = Hub.Provider.GetService<SubscriptionService>();
+            return _subscriptionService;
         }
 
         public QueueWatcher(HorseQueue queue, JockeyOptions options)
@@ -146,10 +156,16 @@ namespace Horse.Jockey.Core
                     _lastInformationRefreshDate = DateTime.UtcNow;
                 }
 
-                foreach (SocketBase socketBase in Hub.Clients.List())
+                IWebSocketServerBus bus = GetBus();
+                SubscriptionService subscriptionService = GetSubscriptionService();
+                IEnumerable<QueueDetailSubscription> subscribers = subscriptionService.FindQueueDetailSubscribers(Queue.Name);
+
+                foreach (QueueDetailSubscription subs in subscribers)
                 {
-                    WsServerSocket ws = (WsServerSocket) socketBase;
-                    _ = GetBus().SendAsync(ws, graphData);
+                    if (!subs.Client.IsConnected)
+                        subscriptionService.UnsubscribeQueueDetail(subs.Client);
+                    else
+                        _ = bus.SendAsync(subs.Client, graphData);
                 }
             }
             catch

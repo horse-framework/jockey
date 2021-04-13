@@ -2,7 +2,7 @@ using Horse.Protocols.WebSocket;
 
 namespace Horse.Jockey.Models.Subscriptions
 {
-    public class ConsoleSubscription
+    internal class ConsoleSubscription
     {
         public WsServerSocket Client { get; set; }
         public SubscriptionSource Source { get; set; }

@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace Horse.Jockey.Models.Subscriptions
 {
-    public enum SubscriptionTargetType
+    internal enum SubscriptionTargetType
     {
         [Description("id")]
         Id,
