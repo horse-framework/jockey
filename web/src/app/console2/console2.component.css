@@ -133,6 +133,8 @@
   line-height: 20px;
   font-weight: 400;
   vertical-align: initial;
+  width: 1%;
+  white-space: nowrap;
 }
 
 td.message-name {
@@ -140,6 +142,8 @@ td.message-name {
   color: #f0d000;
   font-size: 14px;
   padding-right: 16px;
+  width: 1%;
+  white-space: nowrap;
 }
 
 td.message-name.time-show {

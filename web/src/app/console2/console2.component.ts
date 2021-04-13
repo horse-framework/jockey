@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { merge, Observable, Subject } from 'rxjs';
+import {
+  ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit,
+  TemplateRef, ViewChild, ViewContainerRef
+} from '@angular/core';
+import { interval, merge, Observable, Subject } from 'rxjs';
 import { filter, pluck, takeUntil, tap } from 'rxjs/operators';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
@@ -16,7 +19,6 @@ import { WebsocketService } from 'src/services/websocket.service';
 })
 export class Console2Component implements OnInit {
 
-  readonly MessageLimit: number = 10000;
 
   source: string = 'queue';
   targetType: string = 'name';
@@ -32,8 +34,9 @@ export class Console2Component implements OnInit {
   triggerFilter$ = new Subject();
 
   @ViewChild('container', { static: true }) container: ElementRef<HTMLDivElement>;
-  @ViewChild('console', { read: ViewContainerRef }) console: ViewContainerRef;
-  @ViewChild('messageTemplate', { read: TemplateRef }) messageTemplate: TemplateRef<any>;
+  @ViewChild('consoleContainer', { static: true, read: ViewContainerRef }) consoleContainer: ViewContainerRef;
+  @ViewChild('consoleTable', { static: true, read: ElementRef }) consoleTable: ElementRef<HTMLTableElement>;
+  @ViewChild('messageTemplate', { static: true, read: TemplateRef }) messageTemplate: TemplateRef<any>;
 
   get colspan(): number {
     let span = 0;
@@ -43,6 +46,9 @@ export class Console2Component implements OnInit {
       span++;
     return span;
   }
+
+  private readonly _messageLimit: number = 100;
+  private _renderedMessage: number = 0;
 
   constructor(
     private _destroy$: DestroyService,
@@ -57,24 +63,31 @@ export class Console2Component implements OnInit {
         filter(msg => msg.type === SocketModels.ConsoleMessage),
         pluck('payload'),
         tap((message) => {
-          this.console.createEmbeddedView(this.messageTemplate, {
+          if (this._renderedMessage >= this._messageLimit)
+            this.consoleTable.nativeElement.firstChild.remove();
+
+          const template = this.consoleContainer.createEmbeddedView(this.messageTemplate, {
             $implicit: message
-          }).detectChanges();
-        })
+          });
+          template.detectChanges();
+          this._renderedMessage++;
+        }),
       ),
-      this.clearTrigger$.pipe(
-        tap(() => this.console.clear())
-      )
+      this.clearTrigger$.pipe(tap(() => {
+        this.consoleContainer.clear();
+        this._renderedMessage = 0;
+      }))
     ).pipe(
       takeUntil(this._destroy$),
-      tap(() => {
-        if (this.autoScroll)
-          this._ngZone.runOutsideAngular(() => this.container.nativeElement.scrollTo({
-            behavior: 'auto',
-            top: this.container.nativeElement.scrollHeight
-          }));
-      }),
     ).subscribe();
+
+    this._ngZone.runOutsideAngular(() => {
+      interval(10).pipe(
+        takeUntil(this._destroy$),
+        filter(() => this.autoScroll && this.consoleTable.nativeElement.scrollTop !== this.consoleTable.nativeElement.scrollHeight),
+        tap(() => (this.consoleTable.nativeElement.lastElementChild as HTMLTableRowElement)?.scrollIntoView())
+      ).subscribe();
+    });
 
   }
 

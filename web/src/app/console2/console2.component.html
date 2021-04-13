@@ -61,7 +61,9 @@
   </div>
   <div class="console"
        #container>
-    <table #console></table>
+    <table #consoleTable>
+      <ng-container #consoleContainer></ng-container>
+    </table>
   </div>
 </div>
 
@@ -76,7 +78,7 @@
         [ngClass]="{'time-show': showTime}"
         [textContent]="message.name">
     </td>
-    <td>
+    <td class="message-container">
       <table>
         <tr *ngIf="showMessageId || showContentType">
           <td *ngIf="showContentType"
