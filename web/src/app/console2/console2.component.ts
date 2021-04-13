@@ -16,7 +16,7 @@ import { WebsocketService } from 'src/services/websocket.service';
 })
 export class Console2Component implements OnInit {
 
-  readonly MessageLimit: number = 1000;
+  readonly MessageLimit: number = 10000;
 
   source: string = 'queue';
   targetType: string = 'name';
