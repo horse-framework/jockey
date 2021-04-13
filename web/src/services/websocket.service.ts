@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { SocketModels } from 'src/lib/socket-models';
 
 export enum WebClientStatus {
     Disconnected,
