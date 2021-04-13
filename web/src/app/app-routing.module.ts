@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { SessionGuard } from 'src/interceptors/session.guard';
 import { GuestLayoutComponent } from './layout/guest-layout/guest-layout.component';
 import { PortalLayoutComponent } from './layout/portal-layout/portal-layout.component';
@@ -49,9 +49,15 @@ const routes: Routes = [
         canActivate: [SessionGuard]
     },
     {
-        path: 'console',
+        path: 'console-v1',
         component: PortalLayoutComponent,
         loadChildren: () => import('./console/console.module').then(m => m.ConsoleModule),
+        canActivate: [SessionGuard]
+    },
+    {
+        path: 'console',
+        component: PortalLayoutComponent,
+        loadChildren: () => import('./console2/console2.module').then(m => m.Console2Module),
         canActivate: [SessionGuard]
     },
     {

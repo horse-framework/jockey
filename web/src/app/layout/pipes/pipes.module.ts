@@ -1,16 +1,20 @@
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { BindingTypePipe } from './binding-type.pipe';
+import { FilesizePipe } from './filesize.pipe';
+import { JockeyTimePipe } from './jockey-time.pipe';
+import { PrettyPrintPipe } from './prett-print.pipe';
 import { TimespanPipe } from './timespan.pipe';
 import { UnlimitedPipe } from './unlimited.pipe';
-import { FilesizePipe } from './filesize.pipe';
-import { BindingTypePipe } from './binding-type.pipe';
 
 @NgModule({
     declarations: [
         TimespanPipe,
         UnlimitedPipe,
         FilesizePipe,
-        BindingTypePipe
+        BindingTypePipe,
+        JockeyTimePipe,
+        PrettyPrintPipe
     ],
     imports: [
         CommonModule
@@ -19,7 +23,12 @@ import { BindingTypePipe } from './binding-type.pipe';
         TimespanPipe,
         UnlimitedPipe,
         FilesizePipe,
-        BindingTypePipe
+        BindingTypePipe,
+        JockeyTimePipe,
+        PrettyPrintPipe
+    ],
+    providers: [
+        DatePipe
     ]
 })
 export class PipesModule { }

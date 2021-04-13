@@ -4,9 +4,9 @@
         <TargetFramework>net5.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>1.0.5</AssemblyVersion>
-        <FileVersion>1.0.5</FileVersion>
-        <PackageVersion>1.0.5</PackageVersion>
+        <AssemblyVersion>1.0.6</AssemblyVersion>
+        <FileVersion>1.0.6</FileVersion>
+        <PackageVersion>1.0.6</PackageVersion>
         <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
         <Description>Administration website for Horse MQ</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
@@ -24,10 +24,10 @@
 
     <ItemGroup>
         <PackageReference Include="Horse.Core" Version="5.0.1" />
-        <PackageReference Include="Horse.Mq" Version="5.0.8" />
-        <PackageReference Include="Horse.Mq.Bus" Version="5.0.8" />
-        <PackageReference Include="Horse.Mq.Client" Version="5.0.8" />
-        <PackageReference Include="Horse.Mq.Data" Version="5.0.8" />
+        <PackageReference Include="Horse.Mq" Version="5.0.10" />
+        <PackageReference Include="Horse.Mq.Bus" Version="5.0.10" />
+        <PackageReference Include="Horse.Mq.Client" Version="5.0.10" />
+        <PackageReference Include="Horse.Mq.Data" Version="5.0.10" />
         <PackageReference Include="Horse.Mvc" Version="5.0.3" />
         <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="5.0.3" />
         <PackageReference Include="Horse.Protocols.Http" Version="5.0.3" />
@@ -43,6 +43,7 @@
     <ItemGroup>
         <EmbeddedResource Include="Web/12-es5.js" />
         <EmbeddedResource Include="Web/10-es2015.js" />
+        <EmbeddedResource Include="Web/18-es5.js" />
         <EmbeddedResource Include="Web/17-es2015.js" />
         <EmbeddedResource Include="Web/12-es2015.js" />
         <EmbeddedResource Include="Web/3-es5.js" />
@@ -73,6 +74,7 @@
         <EmbeddedResource Include="Web/11-es5.js" />
         <EmbeddedResource Include="Web/16-es2015.js" />
         <EmbeddedResource Include="Web/polyfills-es2015.js" />
+        <EmbeddedResource Include="Web/18-es2015.js" />
         <EmbeddedResource Include="Web/15-es5.js" />
         <EmbeddedResource Include="Web/11-es2015.js" />
         <EmbeddedResource Include="Web/9-es2015.js" />

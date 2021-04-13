@@ -41,8 +41,14 @@ namespace Sample.Jockey
             {
                 await client.Queues.Push("qq1", "Hello World: " + i, false);
                 i++;
+                
+                if (i >= 10000)
+                    break;
+
                 await Task.Delay(1);
             }
+
+            Console.ReadLine();
         }
     }
 }

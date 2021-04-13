@@ -27,6 +27,11 @@ namespace Horse.Jockey
         public TimeSpan StatisticsKeepAliveDuration { get; set; } = TimeSpan.Zero;
 
         /// <summary>
+        /// If you specify that value, it will used ad your JWT token secret
+        /// </summary>
+        public string CustomSecret { get; set; }
+
+        /// <summary>
         /// Authentication implementation.
         /// If this value is not set, all username and passwords are accepts as admin login.
         /// </summary>

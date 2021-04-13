@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { SocketModels } from 'src/lib/socket-models';
 
 export enum WebClientStatus {
     Disconnected,
@@ -30,13 +31,12 @@ export class WebsocketService {
     get onmessage(): Observable<SocketMessage> { return this._onmessage; }
     get status(): WebClientStatus { return this._status; }
 
-    constructor() {
-
-    }
+    constructor() { }
 
     connect(token: string): void {
 
-        let host = 'ws://' + location.host + '?token=' + token;
+        //const host = environment.api.websocket + '?token=' + token;
+        const host = 'ws://' + location.host + '?token=' + token;
         this._socket = new WebSocket(host);
 
 
@@ -55,15 +55,15 @@ export class WebsocketService {
 
     send(type: string, model: any): boolean {
 
-        if (!this._socket || this._status != WebClientStatus.Connected)
+        if (!this._socket || this._status !== WebClientStatus.Connected)
             return false;
 
-        let message: SocketMessage = {
-            type: type,
+        const message: SocketMessage = {
+            type,
             payload: model
         };
 
-        let str = JSON.stringify(message);
+        const str = JSON.stringify(message);
         this._socket.send(str);
         return true;
     }
@@ -81,7 +81,7 @@ export class WebsocketService {
 
     private messageReceived(event: MessageEvent) {
 
-        let message: SocketMessage = JSON.parse(event.data);
+        const message: SocketMessage = JSON.parse(event.data);
         if (message == null || message.type == null || message.payload == null)
             return;
 
