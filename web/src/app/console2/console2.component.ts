@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, NgZone, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
-import { filter, pluck, takeUntil, tap } from 'rxjs/operators';
+import { auditTime, filter, pluck, takeUntil, tap } from 'rxjs/operators';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
 import { ConsoleMessage } from 'src/models/console.message';
@@ -47,16 +47,18 @@ export class Console2Component implements OnInit {
   constructor(
     private _destroy$: DestroyService,
     private _socket$: WebsocketService,
+    private _cd: ChangeDetectorRef,
     private _ngZone: NgZone) { }
 
   ngOnInit(): void {
+
     merge(
       this._socket$.onmessage.pipe(
         filter(msg => msg.type === SocketModels.ConsoleMessage),
         pluck('payload'),
         tap((message) => {
           this.console.createEmbeddedView(this.messageTemplate, {
-            $implicit$: message
+            $implicit: message
           });
         })
       ),
@@ -71,8 +73,11 @@ export class Console2Component implements OnInit {
             behavior: 'auto',
             top: this.container.nativeElement.scrollHeight
           }));
-      })
+        this._cd.detectChanges();
+      }),
+      auditTime(10),
     ).subscribe();
+
   }
 
   toggleTime(): void {
