@@ -74,7 +74,7 @@ namespace Horse.Jockey.Models.Queues
             return new()
                    {
                        Acknowledge = queue.Options.Acknowledge.ToString(),
-                       Handler = queue.DeliveryHandler.ToHandlerString(),
+                       Handler = queue.DeliveryHandler != null ? queue.DeliveryHandler.ToHandlerString() : "(Not Initialized)",
                        Name = queue.Name,
                        Status = queue.Status.ToString(),
                        Topic = queue.Topic,

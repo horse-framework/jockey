@@ -9,8 +9,4 @@
       <ProjectReference Include="..\Horse.Jockey\Horse.Jockey.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="5.0.1" />
-    </ItemGroup>
-
 </Project>

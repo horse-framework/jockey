@@ -30,7 +30,7 @@ namespace Sample.Jockey
 
             HorseServer server = new HorseServer();
             server.UseHorseMq(mq);
-            server.Start(9999);
+            server.Start(26222);
 
             Console.ReadLine();
             HorseClient client = new HorseClient();
