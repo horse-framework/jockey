@@ -83,6 +83,13 @@ namespace Horse.Jockey.Models.Queues
 		[JsonPropertyName("autoDestroy")]
 		public string AutoDestroy { get; set; }
 
+		/// <summary>
+		///     Queue auto destroy options.
+		/// </summary>
+		[JsonProperty("autoQueueCreation")]
+		[JsonPropertyName("autoQueueCreation")]
+		public string AutoQueueCreation { get; set; }
+
 		public static QueueOptionsInfo Create(HorseQueue queue)
 		{
 			return new QueueOptionsInfo
@@ -108,6 +115,7 @@ namespace Horse.Jockey.Models.Queues
 				Type = rider.Queue.Options.Type.ToString(),
 				AcknowledgeTimeout = Convert.ToInt32(rider.Queue.Options.AcknowledgeTimeout.TotalMilliseconds),
 				AutoDestroy = rider.Queue.Options.AutoDestroy.ToString(),
+				AutoQueueCreation = rider.Queue.Options.AutoQueueCreation.ToString(),
 				ClientLimit = rider.Queue.Options.ClientLimit,
 				MessageLimit = rider.Queue.Options.MessageLimit,
 				MessageTimeout = Convert.ToInt32(rider.Queue.Options.MessageTimeout.TotalMilliseconds),

@@ -1,173 +1,180 @@
-<div class="centered-body" [hidden]="queue == null">
-    <div class="vertical-content">
-        <div class="vertical-col">
-            <div class="portlet">
-                <h3 class="portlet-title">Queue Delivery</h3>
-                <div class="portlet-body">
-                    <canvas id="queue-delivery-chart"></canvas>
-                </div>
-            </div>
-            <div class="portlet">
-                <h3 class="portlet-title">Queue Messages</h3>
-                <div class="portlet-body">
-                    <canvas id="queue-store-chart"></canvas>
-                </div>
-            </div>
-            <div class="portlet" *ngIf="queue">
-                <h3 class="portlet-title">Queue Statistics</h3>
-                <div class="portlet-body">
-                    <div class="key-value-table">
-                        <div class="kvt-row">
-                            <div class="kvt-key">Published Messages</div>
-                            <div class="kvt-value">{{queue.stats.totalReceived}}</div>
-                        </div>
-                        <div class="kvt-row">
-                            <div class="kvt-key">Consumed Messages</div>
-                            <div class="kvt-value">{{queue.stats.totalDelivered}} consumes, {{queue.stats.totalSent}} unique msgs</div>
-                        </div>
-                        <div class="kvt-row">
-                            <div class="kvt-key">Acknowledge Messages</div>
-                            <div class="kvt-value">{{queue.stats.totalAck}} ack, {{queue.stats.totalNack}} nack, {{queue.stats.totalUnack}} unack</div>
-                        </div>
-                        <div class="kvt-row">
-                            <div class="kvt-key">Total Timed out Messages</div>
-                            <div class="kvt-value">{{queue.stats.totalTimedout}}</div>
-                        </div>
-                        <div class="kvt-row">
-                            <div class="kvt-key">Total Errors</div>
-                            <div class="kvt-value">{{queue.stats.totalErrors}}</div>
-                        </div>
-                        <div class="kvt-row">
-                            <div class="kvt-key">Last Publish Date</div>
-                            <div class="kvt-value" *ngIf="queue.stats.lastReceived > 0">{{(queue.stats.lastReceived*1000) | date:'yyyy-MM-dd HH:mm:ss'}}</div>
-                            <div class="kvt-value" *ngIf="queue.stats.lastReceived == 0">None</div>
-                        </div>
-                        <div class="kvt-row">
-                            <div class="kvt-key">Last Consume Date</div>
-                            <div class="kvt-value" *ngIf="queue.stats.lastSent > 0">{{(queue.stats.lastSent*1000) | date:'yyyy-MM-dd HH:mm:ss'}}</div>
-                            <div class="kvt-value" *ngIf="queue.stats.lastSent == 0">None</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="centered-body"
+     [hidden]="queue == null">
+  <div class="vertical-content">
+    <div class="vertical-col">
+      <div class="portlet">
+        <h3 class="portlet-title">Queue Delivery</h3>
+        <div class="portlet-body">
+          <canvas id="queue-delivery-chart"></canvas>
         </div>
-        <div class="vertical-col">
-            <div *ngIf="queue">
-                <div class="portlet">
-                    <h3 class="portlet-title">Queue Actions</h3>
-                    <div class="portlet-body" style="height: 240px">
-                        <div>
-
-                            <p class="small-desc">
-                                <b>Under construction</b><br>
-                                Move messages to another queue, Clear messages, Export messages,<br>
-                                Remove all subscribers, Pause/Stop/Resume the queue operations, Delete queue,<br>
-                                Push new message into the queue, Change some queue options.
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="portlet">
-                    <h3 class="portlet-title">Queue Information</h3>
-                    <div class="portlet-body">
-                        <div class="key-value-table">
-                            <div class="kvt-row">
-                                <div class="kvt-key">Name</div>
-                                <div class="kvt-value">{{queue.info.name}}</div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Active Consumers</div>
-                                <div class="kvt-value">{{queue.stats.consumers}}</div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Stored Messages</div>
-                                <div class="kvt-value">{{queue.stats.storedMsgs + queue.stats.storedPrioMsgs + queue.stats.processingMsgs}}</div>
-                            </div>
-                            <div class="kvt-row kvt-seperator"></div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Topic</div>
-                                <div class="kvt-value">{{queue.info.topic}}</div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Status</div>
-                                <div class="kvt-value">{{queue.info.status}}</div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Delivery Handler</div>
-                                <div class="kvt-value">{{queue.info.handler}}</div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Subscribers Limit</div>
-                                <div class="kvt-value">{{queue.options.clientLimit | unlimited}}</div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Created Date</div>
-                                <div class="kvt-value">{{(queue.info.createdDate*1000) | date:'yyyy-MM-dd HH:mm:ss'}}</div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Hide Client Names</div>
-                                <div class="kvt-value">{{queue.info.hideClientNames}}</div>
-                            </div>
-                            <div class="kvt-row kvt-seperator"></div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Acknowledge</div>
-                                <div class="kvt-value">
-                                    {{queue.info.acknowledge}}
-                                </div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Acknowledge Timeout</div>
-                                <div class="kvt-value" *ngIf="queue.info.ackTimeout > 0">{{queue.info.ackTimeout}} ms timeout</div>
-                                <div class="kvt-value" *ngIf="queue.info.ackTimeout == 0">No timeout</div>
-                            </div>
-                            <div class="kvt-row kvt-seperator"></div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Message Timeout</div>
-                                <div class="kvt-value" *ngIf="queue.info.msgTimeout == 0">No Timeout</div>
-                                <div class="kvt-value" *ngIf="queue.info.msgTimeout > 0">
-                                    {{queue.info.msgTimeout}} milliseconds
-                                </div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Message Limit</div>
-                                <div class="kvt-value">
-                                    {{queue.info.messageLimit | unlimited}}
-                                </div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Message Size Limit</div>
-                                <div class="kvt-value">
-                                    {{queue.info.messageSizeLimit | filesize}}
-                                </div>
-                            </div>
-                            <div class="kvt-row kvt-seperator"></div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Delay Between Messages</div>
-                                <div class="kvt-value" *ngIf="queue.info.delayBetweenMessages == 0">No Delay</div>
-                                <div class="kvt-value" *ngIf="queue.info.delayBetweenMessages > 0">
-                                    {{queue.info.delayBetweenMessages}} milliseconds
-                                </div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Put Back Delay</div>
-                                <div class="kvt-value" *ngIf="queue.info.putBackDelay == 0">No Delay</div>
-                                <div class="kvt-value" *ngIf="queue.info.putBackDelay > 0">
-                                    {{queue.info.putBackDelay}} milliseconds
-                                </div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Auto Destroy</div>
-                                <div class="kvt-value">{{queue.info.autoDestroy}}</div>
-                            </div>
-                            <div class="kvt-row">
-                                <div class="kvt-key">Using Unique Message Id</div>
-                                <div class="kvt-value">{{queue.info.useMessageId}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="portlet">
+        <h3 class="portlet-title">Queue Messages</h3>
+        <div class="portlet-body">
+          <canvas id="queue-store-chart"></canvas>
         </div>
+      </div>
+      <div class="portlet"
+           *ngIf="queue">
+        <h3 class="portlet-title">Queue Statistics</h3>
+        <div class="portlet-body">
+          <div class="key-value-table">
+            <div class="kvt-row">
+              <div class="kvt-key">Published Messages</div>
+              <div class="kvt-value">{{queue.stats.totalReceived}}</div>
+            </div>
+            <div class="kvt-row">
+              <div class="kvt-key">Consumed Messages</div>
+              <div class="kvt-value">{{queue.stats.totalDelivered}} consumes, {{queue.stats.totalSent}} unique msgs</div>
+            </div>
+            <div class="kvt-row">
+              <div class="kvt-key">Acknowledge Messages</div>
+              <div class="kvt-value">{{queue.stats.totalAck}} ack, {{queue.stats.totalNack}} nack, {{queue.stats.totalUnack}} unack</div>
+            </div>
+            <div class="kvt-row">
+              <div class="kvt-key">Total Timed out Messages</div>
+              <div class="kvt-value">{{queue.stats.totalTimedout}}</div>
+            </div>
+            <div class="kvt-row">
+              <div class="kvt-key">Total Errors</div>
+              <div class="kvt-value">{{queue.stats.totalErrors}}</div>
+            </div>
+            <div class="kvt-row">
+              <div class="kvt-key">Last Publish Date</div>
+              <div class="kvt-value"
+                   *ngIf="queue.stats.lastReceived > 0">{{(queue.stats.lastReceived*1000) | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+              <div class="kvt-value"
+                   *ngIf="queue.stats.lastReceived == 0">None</div>
+            </div>
+            <div class="kvt-row">
+              <div class="kvt-key">Last Consume Date</div>
+              <div class="kvt-value"
+                   *ngIf="queue.stats.lastSent > 0">{{(queue.stats.lastSent*1000) | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+              <div class="kvt-value"
+                   *ngIf="queue.stats.lastSent == 0">None</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="vertical-col">
+      <div *ngIf="queue">
+        <div class="portlet">
+          <h3 class="portlet-title">Queue Actions</h3>
+          <div class="portlet-body"
+               style="height: 240px">
+            <div>
+
+              <p class="small-desc">
+                <b>Under construction</b><br>
+                Move messages to another queue, Clear messages, Export messages,<br>
+                Remove all subscribers, Pause/Stop/Resume the queue operations, Delete queue,<br>
+                Push new message into the queue, Change some queue options.
+              </p>
+
+            </div>
+          </div>
+        </div>
+        <div class="portlet">
+          <h3 class="portlet-title">Queue Information</h3>
+          <div class="portlet-body">
+            <div class="key-value-table">
+              <div class="kvt-row">
+                <div class="kvt-key">Name</div>
+                <div class="kvt-value">{{queue.info.name}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Active Consumers</div>
+                <div class="kvt-value">{{queue.stats.consumers}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Stored Messages</div>
+                <div class="kvt-value">{{queue.stats.storedMsgs + queue.stats.storedPrioMsgs + queue.stats.processingMsgs}}</div>
+              </div>
+              <div class="kvt-row kvt-seperator"></div>
+              <div class="kvt-row">
+                <div class="kvt-key">Topic</div>
+                <div class="kvt-value">{{queue.info.topic ?? "-"}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Type</div>
+                <div class="kvt-value">{{queue.info.type}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Delivery Handler</div>
+                <div class="kvt-value">{{queue.info.handler}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Subscribers Limit</div>
+                <div class="kvt-value">{{queue.options.clientLimit | unlimited}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Created Date</div>
+                <div class="kvt-value">{{(queue.info.createdDate*1000) | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+              </div>
+              <div class="kvt-row kvt-seperator"></div>
+              <div class="kvt-row">
+                <div class="kvt-key">Acknowledge</div>
+                <div class="kvt-value">
+                  {{queue.info.acknowledge}}
+                </div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Acknowledge Timeout</div>
+                <div class="kvt-value"
+                     *ngIf="queue.info.ackTimeout > 0">{{queue.info.ackTimeout}} ms timeout</div>
+                <div class="kvt-value"
+                     *ngIf="queue.info.ackTimeout == 0">No timeout</div>
+              </div>
+              <div class="kvt-row kvt-seperator"></div>
+              <div class="kvt-row">
+                <div class="kvt-key">Message Timeout</div>
+                <div class="kvt-value"
+                     *ngIf="queue.info.msgTimeout == 0">No Timeout</div>
+                <div class="kvt-value"
+                     *ngIf="queue.info.msgTimeout > 0">
+                  {{queue.info.msgTimeout}} milliseconds
+                </div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Message Limit</div>
+                <div class="kvt-value">
+                  {{queue.info.messageLimit | unlimited}}
+                </div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Message Size Limit</div>
+                <div class="kvt-value">
+                  {{queue.info.messageSizeLimit | filesize}}
+                </div>
+              </div>
+              <div class="kvt-row kvt-seperator"></div>
+              <div class="kvt-row">
+                <div class="kvt-key">Delay Between Messages</div>
+                <div class="kvt-value"
+                     *ngIf="queue.info.delayBetweenMessages == 0">No Delay</div>
+                <div class="kvt-value"
+                     *ngIf="queue.info.delayBetweenMessages > 0">
+                  {{queue.info.delayBetweenMessages}} milliseconds
+                </div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Put Back Delay</div>
+                <div class="kvt-value"
+                     *ngIf="queue.info.putBackDelay == 0">No Delay</div>
+                <div class="kvt-value"
+                     *ngIf="queue.info.putBackDelay > 0">
+                  {{queue.info.putBackDelay}} milliseconds
+                </div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Auto Destroy</div>
+                <div class="kvt-value">{{queue.info.autoDestroy}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

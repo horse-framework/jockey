@@ -21,10 +21,6 @@ namespace Horse.Jockey.Models
 		[JsonPropertyName("nodeHosts")]
 		public string[] NodeHosts { get; set; }
 
-		[JsonProperty("autoQueueCreation")]
-		[JsonPropertyName("autoQueueCreation")]
-		public bool AutoQueueCreation { get; set; } = true;
-
 		[JsonProperty("queueLimit")]
 		[JsonPropertyName("queueLimit")]
 		public int QueueLimit { get; set; }
@@ -45,7 +41,6 @@ namespace Horse.Jockey.Models
 				Type = rider.Options.Type,
 				QueueLimit = rider.Options.QueueLimit,
 				RouterLimit = rider.Options.RouterLimit,
-				AutoQueueCreation = rider.Options.AutoQueueCreation,
 				NodeHosts = rider.GetNodeHostnames(),
 				Nodes = rider.Options.Nodes == null
 					? Array.Empty<NodeInfo>()

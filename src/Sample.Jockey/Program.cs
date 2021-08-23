@@ -14,7 +14,11 @@ namespace Sample.Jockey
 		private static async Task Main(string[] args)
 		{
 			HorseRider mq = HorseRiderBuilder.Create()
-											 .ConfigureQueues(o => { o.UseJustAllowDeliveryHandler(); })
+											 .ConfigureQueues(o =>
+															  {
+																  o.UseJustAllowDeliveryHandler();
+																  o.Options.AutoQueueCreation = true;
+															  })
 											 .AddJockey(o => o.Port = 15400)
 											 .Build();
 
@@ -31,7 +35,7 @@ namespace Sample.Jockey
 
 			Console.ReadLine();
 			HorseClient client = new();
-			await client.ConnectAsync("hmq://localhost:9999");
+			await client.ConnectAsync("hmq://localhost:26222");
 			Console.ReadLine();
 			int i = 1;
 			while (true)
