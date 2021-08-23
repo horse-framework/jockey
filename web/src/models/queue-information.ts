@@ -8,7 +8,6 @@ export interface QueueInformation {
     acknowledge: string;
     ackTimeout: number;
     msgTimeout: number;
-    useMessageId: boolean;
     messageLimit: number;
     messageSizeLimit: number;
     delayBetweenMessages: number;
