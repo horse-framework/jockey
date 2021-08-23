@@ -1,43 +1,44 @@
-import Chart from 'chart.js';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BaseComponent } from 'src/lib/base-component';
-import { HorseQueue } from 'src/models/horse-queue';
-import { QueueService } from 'src/services/queue.service';
-import { QueueGraphService } from 'src/services/queue-graph.service';
-import { WebsocketService } from 'src/services/websocket.service';
-import { SocketModels } from 'src/lib/socket-models';
+import Chart from 'chart.js';
 import { interval } from 'rxjs';
+import { BaseComponent } from 'src/lib/base-component';
+import { SocketModels } from 'src/lib/socket-models';
+import { HorseQueue } from 'src/models/horse-queue';
+import { QueueGraphService } from 'src/services/queue-graph.service';
+import { QueueService } from 'src/services/queue.service';
+import { WebsocketService } from 'src/services/websocket.service';
 
 @Component({
     selector: 'app-queue',
     templateUrl: './queue.component.html',
     styleUrls: ['./queue.component.css']
 })
-export class QueueComponent extends BaseComponent implements OnInit {
+export class QueueComponent extends BaseComponent implements OnInit, OnDestroy {
 
     queue: HorseQueue;
     deliveryChart: any;
     storeChart: any;
     queueName: string;
 
-    constructor(private activatedRoute: ActivatedRoute,
+    constructor(
+        private activatedRoute: ActivatedRoute,
         private queueGraphService: QueueGraphService,
         private socket: WebsocketService,
         private queueService: QueueService) {
         super();
     }
 
+
+
     async ngOnInit() {
 
         this.queueName = this.activatedRoute.snapshot.params.name;
-        if (this.queueName == null || this.queueName.length == 0) {
-            return;
-        }
+        if (this.queueName == null || this.queueName.length === 0) return;
 
         await this.load();
 
-        let request = {
+        const request = {
             requestId: new Date().getTime().toString(),
             name: this.queue.info.name
         };
@@ -47,10 +48,12 @@ export class QueueComponent extends BaseComponent implements OnInit {
         this.on(interval(5000)).subscribe(() => this.load());
     }
 
+
+
     private async load() {
 
         this.queue = await this.queueService.get(this.queueName);
-        let labels = this.queueGraphService.createLabels(this.queue.graph);
+        const labels = this.queueGraphService.createLabels(this.queue.graph);
 
         this.deliveryChart = new Chart(document.getElementById('queue-delivery-chart'),
             {
@@ -58,7 +61,7 @@ export class QueueComponent extends BaseComponent implements OnInit {
                 hover: { mode: 'nearest', intersect: true },
                 data: {
 
-                    labels: labels,
+                    labels,
                     datasets: [
                         {
                             label: 'Received',
@@ -139,7 +142,7 @@ export class QueueComponent extends BaseComponent implements OnInit {
                 hover: { mode: 'nearest', intersect: true },
                 data: {
 
-                    labels: labels,
+                    labels,
                     datasets: [
                         {
                             label: 'Msgs',
@@ -199,11 +202,12 @@ export class QueueComponent extends BaseComponent implements OnInit {
 
         super.ngOnDestroy();
 
-        let request = {
+        const request = {
             requestId: new Date().getTime().toString(),
             name: null
         };
 
         this.socket.send(SocketModels.QueueDetailRequest, request);
     }
+
 }

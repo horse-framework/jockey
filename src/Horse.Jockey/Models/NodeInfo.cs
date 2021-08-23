@@ -29,13 +29,6 @@ namespace Horse.Jockey.Models
         public string Token { get; set; }
 
         /// <summary>
-        /// If true, messages will will queued if nodes are not connected, and they will be sent after short disconnections
-        /// </summary>
-        [JsonProperty("keepMsgs")]
-        [JsonPropertyName("keepMsgs")]
-        public bool KeepMessages { get; set; }
-
-        /// <summary>
         /// How many milliseconds should wait to try reconnect
         /// </summary>
         [JsonProperty("reconnectWait")]

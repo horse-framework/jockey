@@ -1,4 +1,3 @@
-
 export interface QueueGraphData {
     date: number;
     stored: number;
