@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 using Horse.Jockey.Helpers;
-using Horse.Mq.Queues;
+using Horse.Messaging.Server.Queues;
 using Horse.WebSocket.Models;
 using Newtonsoft.Json;
 

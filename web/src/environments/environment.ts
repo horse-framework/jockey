@@ -7,8 +7,8 @@ export const environment = {
     version: '5.0.10',
 
     api: {
-        url: 'http://localhost:15400/api',
-        websocket: 'ws://localhost:15400/'
+        url: 'http://localhost:14500/api',
+        websocket: 'ws://localhost:14500/'
     },
 
     storage: {

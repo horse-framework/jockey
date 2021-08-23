@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
 using Horse.Jockey.Handlers.Queues;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Resource;
-using Horse.Mq;
+using Horse.Messaging.Server;
 using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
 using Horse.Mvc.Middlewares;
@@ -17,156 +18,152 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Horse.Jockey
 {
-    /// <summary>
-    /// Extension methods for Jockey Implementation
-    /// </summary>
-    public static class Extensions
-    {
-        /// <summary>
-        /// Adds Jockey to Horse MQ
-        /// </summary>
-        public static HorseMqBuilder AddJockey(this HorseMqBuilder builder, Action<JockeyOptions> options)
-        {
-            HorseMq mq = builder.Build();
-            AddJockey(mq, options);
-            return builder;
-        }
+	/// <summary>
+	///     Extension methods for Jockey Implementation
+	/// </summary>
+	public static class Extensions
+	{
+		/// <summary>
+		///     Adds Jockey to Horse MQ
+		/// </summary>
+		public static HorseRiderBuilder AddJockey(this HorseRiderBuilder builder, Action<JockeyOptions> options)
+		{
+			HorseRider rider = builder.Build();
+			AddJockey(rider, options);
+			return builder;
+		}
 
-        /// <summary>
-        /// Adds Jockey to Horse MQ
-        /// </summary>
-        public static void AddJockey(this HorseMq mq, Action<JockeyOptions> options)
-        {
-            JockeyOptions jopt = new JockeyOptions();
-            options(jopt);
-            AddJockey(mq, jopt);
-        }
+		/// <summary>
+		///     Adds Jockey to Horse MQ
+		/// </summary>
+		public static void AddJockey(this HorseRider rider, Action<JockeyOptions> options)
+		{
+			JockeyOptions jopt = new();
+			options(jopt);
+			AddJockey(rider, jopt);
+		}
 
-        /// <summary>
-        /// Adds Jockey to Horse MQ
-        /// </summary>
-        public static void AddJockey(this HorseMq mq, JockeyOptions options)
-        {
-            Hub.Server = new HorseServer();
+		/// <summary>
+		///     Adds Jockey to Horse MQ
+		/// </summary>
+		public static void AddJockey(this HorseRider rider, JockeyOptions options)
+		{
+			Hub.Server = new HorseServer();
 
-            Hub.Mvc = new HorseMvc();
-            Hub.Mvc.Init(async services =>
-            {
-                SubscriptionService subscriptionService = new SubscriptionService();
+			Hub.Mvc = new HorseMvc();
+			Hub.Mvc.Init(async services =>
+						 {
+							 SubscriptionService subscriptionService = new();
 
-                ResourceProvider provider = new ResourceProvider();
-                await provider.Load();
+							 ResourceProvider provider = new();
+							 await provider.Load();
 
-                MessageCounter counter = new MessageCounter();
-                counter.Run();
+							 MessageCounter counter = new();
+							 counter.Run();
 
-                QueueWatcherContainer watcherContainer = new QueueWatcherContainer();
-                watcherContainer.Initialize(mq, options);
+							 QueueWatcherContainer watcherContainer = new();
+							 watcherContainer.Initialize(rider, options);
 
-                QueueEventHandler queueEventHandler = new QueueEventHandler();
-                mq.AddQueueEventHandler(queueEventHandler);
+							 QueueEventHandler queueEventHandler = new();
+							 rider.Queue.EventHandlers.Add(queueEventHandler);
 
-                ErrorHandler errorHandler = new ErrorHandler();
-                mq.AddErrorHandler(errorHandler);
+							 ErrorHandler errorHandler = new();
+							 rider.ErrorHandlers.Add(errorHandler);
 
-                mq.AddQueueMessageHandler(new QueueMessageEventHandler(subscriptionService));
-                mq.AddDirectMessageHandler(new DirectMessageHandler(counter, subscriptionService));
-                mq.AddRouterMessageHandler(new RouterMessageHandler(counter, subscriptionService));
+							 rider.Queue.MessageHandlers.Add(new QueueMessageEventHandler(subscriptionService));
+							 rider.Direct.MessageHandlers.Add(new DirectMessageHandler(counter, subscriptionService));
+							 rider.Router.MessageHandlers.Add(new RouterMessageHandler(counter, subscriptionService));
 
-                services.AddSingleton(mq);
-                services.AddSingleton(options);
-                services.AddSingleton(provider);
-                services.AddSingleton(watcherContainer);
-                services.AddSingleton(queueEventHandler);
-                services.AddSingleton(errorHandler);
-                services.AddSingleton(counter);
-                services.AddSingleton(Hub.Clients);
-                services.AddSingleton(subscriptionService);
+							 services.AddSingleton(rider);
+							 services.AddSingleton(options);
+							 services.AddSingleton(provider);
+							 services.AddSingleton(watcherContainer);
+							 services.AddSingleton(queueEventHandler);
+							 services.AddSingleton(errorHandler);
+							 services.AddSingleton(counter);
+							 services.AddSingleton(Hub.Clients);
+							 services.AddSingleton(subscriptionService);
 
-#if DEBUG
-                string securityKey = "Jockey-Development-Key-000";
-#else
+							 #if DEBUG
+							 string securityKey = "Jockey-Development-Key-000";
+							 #else
                 string securityKey = $"{Guid.NewGuid()}-{Guid.NewGuid()}-{Guid.NewGuid()}";
-#endif
+							 #endif
 
-                if (!string.IsNullOrEmpty(options.CustomSecret))
-                    securityKey = options.CustomSecret;
+							 if (!string.IsNullOrEmpty(options.CustomSecret))
+								 securityKey = options.CustomSecret;
 
-                services.AddJwt(Hub.Mvc, o =>
-                {
-                    o.Key = securityKey;
-                    o.Issuer = "jockey";
-                    o.Audience = "jockey";
-                    o.Lifetime = TimeSpan.FromHours(24);
-                    o.ValidateAudience = false;
-                    o.ValidateIssuer = false;
-                    o.ValidateLifetime = true;
-                });
+							 services.AddJwt(Hub.Mvc, o =>
+													  {
+														  o.Key = securityKey;
+														  o.Issuer = "jockey";
+														  o.Audience = "jockey";
+														  o.Lifetime = TimeSpan.FromHours(24);
+														  o.ValidateAudience = false;
+														  o.ValidateIssuer = false;
+														  o.ValidateLifetime = true;
+													  });
 
-                Hub.Server.AddWebSockets(cfg => cfg
-                                                .UsePayloadModelProvider(new SystemJsonModelSerializer())
-                                                .AddBus(services)
-                                                .AddSingletonHandlers(typeof(Hub))
-                                                .OnClientConnected((info, data) =>
-                                                {
-                                                    var pairs = data.Path.ParseQuerystring();
+							 Hub.Server.AddWebSockets(cfg => cfg
+															.UsePayloadModelProvider(new SystemJsonModelSerializer())
+															.AddBus(services)
+															.AddSingletonHandlers(typeof(Hub))
+															.OnClientConnected((info, data) =>
+																			   {
+																				   Dictionary<string, string> pairs = data.Path.ParseQuerystring();
 
-                                                    string token;
-                                                    pairs.TryGetValue("token", out token);
+																				   pairs.TryGetValue("token", out string token);
 
-                                                    if (string.IsNullOrEmpty(token))
-                                                        return null;
+																				   if (string.IsNullOrEmpty(token))
+																					   return null;
 
-                                                    if (Hub.Mvc.ClaimsPrincipalValidator != null)
-                                                    {
-                                                        ClaimsPrincipal principal = Hub.Mvc.ClaimsPrincipalValidator.Get(token);
-                                                        if (principal == null)
-                                                            return null;
-                                                    }
+																				   if (Hub.Mvc.ClaimsPrincipalValidator != null)
+																				   {
+																					   ClaimsPrincipal principal = Hub.Mvc.ClaimsPrincipalValidator.Get(token);
+																					   if (principal == null)
+																						   return null;
+																				   }
 
-                                                    WsServerSocket websocket = new WsServerSocket(Hub.Server, info);
-                                                    return Task.FromResult(websocket);
-                                                })
-                                                .OnClientReady(client =>
-                                                {
-                                                    Hub.Clients.Add(client);
-                                                    return Task.CompletedTask;
-                                                })
-                                                .OnClientDisconnected(client =>
-                                                {
-                                                    Hub.Clients.Remove(client);
+																				   WsServerSocket websocket = new(Hub.Server, info);
+																				   return Task.FromResult(websocket);
+																			   })
+															.OnClientReady(client =>
+																		   {
+																			   Hub.Clients.Add(client);
+																			   return Task.CompletedTask;
+																		   })
+															.OnClientDisconnected(client =>
+																				  {
+																					  Hub.Clients.Remove(client);
+																					  if (Hub.Provider == null) return Task.CompletedTask;
+																					  SubscriptionService subsService = Hub.Provider.GetRequiredService<SubscriptionService>();
+																					  subsService.UnsubscribeQueueDetail(client);
+																					  subsService.UnsubscribeConsole(client);
 
-                                                    if (Hub.Provider != null)
-                                                    {
-                                                        SubscriptionService subsService = Hub.Provider.GetService<SubscriptionService>();
-                                                        subsService.UnsubscribeQueueDetail(client);
-                                                        subsService.UnsubscribeConsole(client);
-                                                    }
-
-                                                    return Task.CompletedTask;
-                                                })
-                                                .OnError(e => { Console.WriteLine("Jockey WebSocket Error: " + e); }));
-            });
+																					  return Task.CompletedTask;
+																				  })
+															.OnError(e => { Console.WriteLine("Jockey WebSocket Error: " + e); }));
+						 });
 
 
-            CorsMiddleware middleware = new CorsMiddleware();
-            middleware.AllowAll();
+			CorsMiddleware middleware = new();
+			middleware.AllowAll();
 
-            Hub.Mvc.Use(app =>
-            {
-                app.UseMiddleware(middleware);
+			Hub.Mvc.Use(app =>
+						{
+							app.UseMiddleware(middleware);
 
-                IServiceProvider provider = app.GetProvider();
-                Hub.Provider = provider;
+							IServiceProvider provider = app.GetProvider();
+							Hub.Provider = provider;
 
-                ResourceProvider resourceProvider = provider.GetService<ResourceProvider>();
-                resourceProvider.Use(app);
-            });
+							ResourceProvider resourceProvider = provider.GetRequiredService<ResourceProvider>();
+							resourceProvider.Use(app);
+						});
 
-            Hub.Server.UseMvc(Hub.Mvc);
-            Hub.Server.UseWebSockets(Hub.Provider);
+			Hub.Server.UseMvc(Hub.Mvc);
+			Hub.Server.UseWebSockets(Hub.Provider);
 
-            Hub.Server.Start(options.Port);
-        }
-    }
+			Hub.Server.Start(options.Port);
+		}
+	}
 }
