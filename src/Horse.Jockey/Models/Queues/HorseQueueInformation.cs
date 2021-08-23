@@ -41,10 +41,6 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("msgTimeout")]
         public long MsgTimeout { get; set; }
 
-        [JsonProperty("hideClientNames")]
-        [JsonPropertyName("hideClientNames")]
-        public bool HideClientNames { get; set; }
-
         [JsonProperty("messageLimit")]
         [JsonPropertyName("messageLimit")]
         public int MessageLimit { get; set; }
@@ -80,7 +76,6 @@ namespace Horse.Jockey.Models.Queues
                        MessageLimit = queue.Options.MessageLimit,
                        MsgTimeout = queue.Options.MessageTimeout.ToMilliseconds(),
                        DelayBetweenMessages = queue.Options.DelayBetweenMessages,
-                       HideClientNames = queue.Options.HideClientNames,
                        MessageSizeLimit = queue.Options.MessageSizeLimit,
                        PutBackDelay = queue.Options.PutBackDelay,
                    };
