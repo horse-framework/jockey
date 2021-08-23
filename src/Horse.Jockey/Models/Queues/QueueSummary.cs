@@ -23,7 +23,7 @@ namespace Horse.Jockey.Models.Queues
 
 		[JsonProperty("status")]
 		[JsonPropertyName("status")]
-		public string Status { get; set; }
+		public string Type { get; set; }
 
 		[JsonProperty("handler")]
 		[JsonPropertyName("handler")]
@@ -52,7 +52,7 @@ namespace Horse.Jockey.Models.Queues
 				Name = queue.Name,
 				Topic = queue.Topic,
 				CreatedDate = queue.Info.CreatedDate.ToUnixSeconds(),
-				Status = queue.Status.ToString(),
+				Type = queue.Type.ToString(),
 				Handler = queue.DeliveryHandler.ToHandlerString(),
 				Acknowledge = queue.Options.Acknowledge.ToString(),
 				Consumers = queue.ClientsCount(),

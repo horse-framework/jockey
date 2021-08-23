@@ -30,13 +30,6 @@ namespace Horse.Jockey.Models.Queues
 		public int MessageTimeout { get; set; }
 
 		/// <summary>
-		///     If true, server creates unique id for each message.
-		/// </summary>
-		[JsonProperty("useMsgId")]
-		[JsonPropertyName("useMsgId")]
-		public bool UseMessageId { get; set; } = true;
-
-		/// <summary>
 		///     If true, server doesn't send client name to receivers in queueus.
 		/// </summary>
 		[JsonProperty("hideClientNames")]
@@ -111,8 +104,7 @@ namespace Horse.Jockey.Models.Queues
 				DelayBetweenMessages = queue.Options.DelayBetweenMessages,
 				HideClientNames = queue.Options.HideClientNames,
 				MessageSizeLimit = queue.Options.MessageSizeLimit,
-				PutBackDelay = queue.Options.PutBackDelay,
-				UseMessageId = queue.Options.UseMessageId
+				PutBackDelay = queue.Options.PutBackDelay
 			};
 		}
 
@@ -130,8 +122,7 @@ namespace Horse.Jockey.Models.Queues
 				DelayBetweenMessages = rider.Queue.Options.DelayBetweenMessages,
 				HideClientNames = rider.Queue.Options.HideClientNames,
 				MessageSizeLimit = rider.Queue.Options.MessageSizeLimit,
-				PutBackDelay = rider.Queue.Options.PutBackDelay,
-				UseMessageId = rider.Queue.Options.UseMessageId
+				PutBackDelay = rider.Queue.Options.PutBackDelay
 			};
 		}
 	}

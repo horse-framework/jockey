@@ -54,7 +54,6 @@ namespace Horse.Jockey.Models
 								Host = x.Host,
 								Name = x.Name,
 								Token = x.Token,
-								KeepMessages = x.KeepMessages,
 								ReconnectWait = x.ReconnectWait
 							})
 						   .ToArray()

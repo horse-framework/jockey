@@ -2,7 +2,6 @@ using System.Linq;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Messaging.Server;
-using Horse.Mq;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
@@ -24,7 +23,7 @@ namespace Horse.Jockey.Controllers
 		[HttpGet("list")]
 		public IActionResult List()
 		{
-			NodeListInfo model = new NodeListInfo();
+			NodeListInfo model = new();
 
 			model.Incoming = _rider.NodeManager.IncomingNodes
 								   .GetAsClone()
@@ -44,7 +43,6 @@ namespace Horse.Jockey.Controllers
 										Name = x.Options.Name,
 										Host = x.Options.Host,
 										Token = x.Options.Token,
-										KeepMessages = x.Options.KeepMessages,
 										ReconnectWait = x.Options.ReconnectWait
 									})
 								   .ToList();

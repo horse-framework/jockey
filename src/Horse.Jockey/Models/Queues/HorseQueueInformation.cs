@@ -41,10 +41,6 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("msgTimeout")]
         public long MsgTimeout { get; set; }
 
-        [JsonProperty("useMessageId")]
-        [JsonPropertyName("useMessageId")]
-        public bool UseMessageId { get; set; }
-
         [JsonProperty("hideClientNames")]
         [JsonPropertyName("hideClientNames")]
         public bool HideClientNames { get; set; }
@@ -87,7 +83,6 @@ namespace Horse.Jockey.Models.Queues
                        HideClientNames = queue.Options.HideClientNames,
                        MessageSizeLimit = queue.Options.MessageSizeLimit,
                        PutBackDelay = queue.Options.PutBackDelay,
-                       UseMessageId = queue.Options.UseMessageId
                    };
         }
     }
