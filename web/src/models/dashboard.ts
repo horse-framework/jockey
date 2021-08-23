@@ -8,7 +8,7 @@ import { ServerStatistics } from './server-statistics';
 export interface Dashboard {
 
     server: ServerStatistics;
-    queueMessages:QueueGraphData;
+    queueMessages: QueueGraphData;
     otherMessages: MessageGraphData;
     serverOptions: ServerOptions;
     queueOptions: QueueOptions;
