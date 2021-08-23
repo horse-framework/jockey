@@ -1,11 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
 using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Queues;
-using Horse.Mq;
-using Horse.Mq.Queues;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
@@ -30,15 +29,14 @@ namespace Horse.Jockey.Controllers
 		[HttpGet("list")]
 		public IActionResult List()
 		{
-			List<QueueDetail> result = new List<QueueDetail>();
-
-			foreach (HorseQueue queue in _rider.Queue.Queues)
-			{
-				QueueDetail detail = new QueueDetail();
-				detail.Info = HorseQueueInformation.Create(queue);
-				detail.Stats = HorseQueueStatistics.Create(queue);
-				result.Add(detail);
-			}
+			List<QueueDetail> result = _rider.Queue
+											 .Queues
+											 .Select(queue => new QueueDetail
+											  {
+												  Info = HorseQueueInformation.Create(queue),
+												  Stats = HorseQueueStatistics.Create(queue)
+											  })
+											 .ToList();
 
 			return Json(result);
 		}
@@ -53,11 +51,13 @@ namespace Horse.Jockey.Controllers
 
 			QueueWatcher watcher = _watcherContainer.Get(queue.Name);
 
-			QueueDetail detail = new QueueDetail();
-			detail.Info = HorseQueueInformation.Create(queue);
-			detail.Stats = HorseQueueStatistics.Create(queue);
-			detail.Options = QueueOptionsInfo.Create(queue);
-			detail.GraphData = watcher.GetGraphData();
+			QueueDetail detail = new()
+			{
+				Info = HorseQueueInformation.Create(queue),
+				Stats = HorseQueueStatistics.Create(queue),
+				Options = QueueOptionsInfo.Create(queue),
+				GraphData = watcher.GetGraphData()
+			};
 
 			return JsonAsync(detail);
 		}
