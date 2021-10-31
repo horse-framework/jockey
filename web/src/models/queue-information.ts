@@ -4,7 +4,7 @@ export interface QueueInformation {
     topic: string;
     createdDate: number;
     type: string;
-    handler: string;
+    manager: string;
     acknowledge: string;
     ackTimeout: number;
     msgTimeout: number;

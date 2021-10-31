@@ -4,9 +4,9 @@
         <TargetFramework>net5.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>1.0.8</AssemblyVersion>
-        <FileVersion>1.0.8</FileVersion>
-        <PackageVersion>1.0.8</PackageVersion>
+        <AssemblyVersion>6.1.0</AssemblyVersion>
+        <FileVersion>6.1.0</FileVersion>
+        <PackageVersion>6.1.0-beta</PackageVersion>
         <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
         <Description>Administration website for Horse MQ</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
@@ -38,43 +38,43 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Web/555-es2015.js" />
-        <EmbeddedResource Include="Web/957-es2015.js" />
-        <EmbeddedResource Include="Web/474-es2015.js" />
-        <EmbeddedResource Include="Web/54-es5.js" />
-        <EmbeddedResource Include="Web/49-es2015.js" />
-        <EmbeddedResource Include="Web/218-es5.js" />
-        <EmbeddedResource Include="Web/54-es2015.js" />
-        <EmbeddedResource Include="Web/571-es2015.js" />
-        <EmbeddedResource Include="Web/218-es2015.js" />
-        <EmbeddedResource Include="Web/338-es2015.js" />
-        <EmbeddedResource Include="Web/673-es5.js" />
-        <EmbeddedResource Include="Web/main-es2015.js" />
-        <EmbeddedResource Include="Web/963-es5.js" />
-        <EmbeddedResource Include="Web/665-es5.js" />
-        <EmbeddedResource Include="Web/runtime-es2015.js" />
-        <EmbeddedResource Include="Web/49-es5.js" />
-        <EmbeddedResource Include="Web/942-es5.js" />
-        <EmbeddedResource Include="Web/index.html" />
-        <EmbeddedResource Include="Web/474-es5.js" />
-        <EmbeddedResource Include="Web/727-es2015.js" />
-        <EmbeddedResource Include="Web/common-es5.js" />
-        <EmbeddedResource Include="Web/963-es2015.js" />
-        <EmbeddedResource Include="Web/673-es2015.js" />
-        <EmbeddedResource Include="Web/styles.css" />
-        <EmbeddedResource Include="Web/942-es2015.js" />
-        <EmbeddedResource Include="Web/727-es5.js" />
-        <EmbeddedResource Include="Web/main-es5.js" />
-        <EmbeddedResource Include="Web/polyfills-es2015.js" />
-        <EmbeddedResource Include="Web/favicon.ico" />
-        <EmbeddedResource Include="Web/665-es2015.js" />
-        <EmbeddedResource Include="Web/957-es5.js" />
-        <EmbeddedResource Include="Web/common-es2015.js" />
-        <EmbeddedResource Include="Web/338-es5.js" />
-        <EmbeddedResource Include="Web/polyfills-es5.js" />
-        <EmbeddedResource Include="Web/571-es5.js" />
-        <EmbeddedResource Include="Web/runtime-es5.js" />
-        <EmbeddedResource Include="Web/555-es5.js" />
-        <EmbeddedResource Include="Web/assets/horse.svg" />
+        <EmbeddedResource Include="Web\218-es2015.js" />
+        <EmbeddedResource Include="Web\218-es5.js" />
+        <EmbeddedResource Include="Web\338-es2015.js" />
+        <EmbeddedResource Include="Web\338-es5.js" />
+        <EmbeddedResource Include="Web\474-es2015.js" />
+        <EmbeddedResource Include="Web\474-es5.js" />
+        <EmbeddedResource Include="Web\49-es2015.js" />
+        <EmbeddedResource Include="Web\49-es5.js" />
+        <EmbeddedResource Include="Web\54-es2015.js" />
+        <EmbeddedResource Include="Web\54-es5.js" />
+        <EmbeddedResource Include="Web\555-es2015.js" />
+        <EmbeddedResource Include="Web\555-es5.js" />
+        <EmbeddedResource Include="Web\571-es2015.js" />
+        <EmbeddedResource Include="Web\571-es5.js" />
+        <EmbeddedResource Include="Web\665-es2015.js" />
+        <EmbeddedResource Include="Web\665-es5.js" />
+        <EmbeddedResource Include="Web\673-es2015.js" />
+        <EmbeddedResource Include="Web\673-es5.js" />
+        <EmbeddedResource Include="Web\727-es2015.js" />
+        <EmbeddedResource Include="Web\727-es5.js" />
+        <EmbeddedResource Include="Web\942-es2015.js" />
+        <EmbeddedResource Include="Web\942-es5.js" />
+        <EmbeddedResource Include="Web\957-es2015.js" />
+        <EmbeddedResource Include="Web\957-es5.js" />
+        <EmbeddedResource Include="Web\963-es2015.js" />
+        <EmbeddedResource Include="Web\963-es5.js" />
+        <EmbeddedResource Include="Web\common-es2015.js" />
+        <EmbeddedResource Include="Web\common-es5.js" />
+        <EmbeddedResource Include="Web\favicon.ico" />
+        <EmbeddedResource Include="Web\index.html" />
+        <EmbeddedResource Include="Web\main-es2015.js" />
+        <EmbeddedResource Include="Web\main-es5.js" />
+        <EmbeddedResource Include="Web\polyfills-es2015.js" />
+        <EmbeddedResource Include="Web\polyfills-es5.js" />
+        <EmbeddedResource Include="Web\runtime-es2015.js" />
+        <EmbeddedResource Include="Web\runtime-es5.js" />
+        <EmbeddedResource Include="Web\styles.css" />
+        <EmbeddedResource Include="Web/assets\horse.svg" />
     </ItemGroup>
 </Project>
