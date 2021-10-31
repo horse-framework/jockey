@@ -6,39 +6,39 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models
 {
-	[ModelType("server-stats")]
-	internal class ServerStatistics
-	{
-		[JsonProperty("hosts")]
-		[JsonPropertyName("hosts")]
-		public string[] Hosts { get; set; }
+    [ModelType("server-stats")]
+    internal class ServerStatistics
+    {
+        [JsonProperty("hosts")]
+        [JsonPropertyName("hosts")]
+        public string[] Hosts { get; set; }
 
-		[JsonProperty("startedDate")]
-		[JsonPropertyName("startedDate")]
-		public long StartedDate { get; set; }
+        [JsonProperty("startedDate")]
+        [JsonPropertyName("startedDate")]
+        public long StartedDate { get; set; }
 
-		[JsonProperty("onlineClients")]
-		[JsonPropertyName("onlineClients")]
-		public int OnlineClients { get; set; }
+        [JsonProperty("onlineClients")]
+        [JsonPropertyName("onlineClients")]
+        public int OnlineClients { get; set; }
 
-		[JsonProperty("incomingNodes")]
-		[JsonPropertyName("incomingNodes")]
-		public int IncomingNodes { get; set; }
+        [JsonProperty("totalNodes")]
+        [JsonPropertyName("totalNodes")]
+        public int TotalNodes { get; set; }
 
-		[JsonProperty("outgoingNodes")]
-		[JsonPropertyName("outgoingNodes")]
-		public int OutgoingNodes { get; set; }
+        [JsonProperty("connectedNodes")]
+        [JsonPropertyName("connectedNodes")]
+        public int ConnectedNodes { get; set; }
 
-		public static ServerStatistics Create(HorseRider rider)
-		{
-			return new ServerStatistics
-			{
-				Hosts = rider.GetServerHostnames(),
-				StartedDate = Hub.StartedDate.ToUnixSeconds(),
-				IncomingNodes = rider.NodeManager.IncomingNodes.Count,
-				OutgoingNodes = rider.NodeManager.OutgoingNodes.Length,
-				OnlineClients = rider.Client.GetOnlineClients()
-			};
-		}
-	}
+        public static ServerStatistics Create(HorseRider rider)
+        {
+            return new ServerStatistics
+            {
+                Hosts = rider.GetServerHostnames(),
+                StartedDate = Hub.StartedDate.ToUnixSeconds(),
+                TotalNodes = rider.Cluster.Clients.Length,
+                ConnectedNodes = 0,
+                OnlineClients = rider.Client.GetOnlineClients()
+            };
+        }
+    }
 }

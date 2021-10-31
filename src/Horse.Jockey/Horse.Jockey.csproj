@@ -24,13 +24,13 @@
 
     <ItemGroup>
         <PackageReference Include="Horse.Core" Version="5.0.2" />
-        <PackageReference Include="Horse.Messaging.Server" Version="6.0.7" />
+        <PackageReference Include="Horse.Messaging.Server" Version="6.1.0-beta" />
         <PackageReference Include="Horse.Mvc" Version="5.0.4" />
         <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="5.0.4" />
         <PackageReference Include="Horse.Protocols.Http" Version="5.0.4" />
-        <PackageReference Include="Horse.Protocols.WebSocket" Version="5.0.7" />
+        <PackageReference Include="Horse.Protocols.WebSocket" Version="6.0.2" />
         <PackageReference Include="Horse.Server" Version="5.0.2" />
-        <PackageReference Include="Horse.WebSocket.Models" Version="5.0.7" />
+        <PackageReference Include="Horse.WebSocket.Models" Version="6.0.2" />
     </ItemGroup>
 
     <ItemGroup>

@@ -8,6 +8,13 @@ namespace Horse.Jockey.Models
     internal class NodeInfo
     {
         /// <summary>
+        /// Node unique id
+        /// </summary>
+        [JsonProperty("id")]
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        /// <summary>
         /// Descriptor name for the node
         /// </summary>
         [JsonProperty("name")]
@@ -22,17 +29,24 @@ namespace Horse.Jockey.Models
         public string Host { get; set; }
 
         /// <summary>
-        /// Authentication token for the node
+        /// Public host name
         /// </summary>
-        [JsonProperty("token")]
-        [JsonPropertyName("token")]
-        public string Token { get; set; }
+        [JsonProperty("publicHost")]
+        [JsonPropertyName("publicHost")]
+        public string PublicHost { get; set; }
 
         /// <summary>
-        /// How many milliseconds should wait to try reconnect
+        /// Node state; Main, Successor, Replica
         /// </summary>
-        [JsonProperty("reconnectWait")]
-        [JsonPropertyName("reconnectWait")]
-        public int ReconnectWait { get; set; }
+        [JsonProperty("state")]
+        [JsonPropertyName("state")]
+        public string State { get; set; }
+
+        /// <summary>
+        /// Connected date in unix seconds
+        /// </summary>
+        [JsonProperty("connectedDate")]
+        [JsonPropertyName("connectedDate")]
+        public long ConnectedDate { get; set; }
     }
 }

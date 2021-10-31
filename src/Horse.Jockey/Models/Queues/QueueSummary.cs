@@ -25,9 +25,9 @@ namespace Horse.Jockey.Models.Queues
 		[JsonPropertyName("status")]
 		public string Type { get; set; }
 
-		[JsonProperty("handler")]
-		[JsonPropertyName("handler")]
-		public string Handler { get; set; }
+		[JsonProperty("manager")]
+		[JsonPropertyName("manager")]
+		public string Manager { get; set; }
 
 		[JsonProperty("acknowledge")]
 		[JsonPropertyName("acknowledge")]
@@ -53,11 +53,11 @@ namespace Horse.Jockey.Models.Queues
 				Topic = queue.Topic,
 				CreatedDate = queue.Info.CreatedDate.ToUnixSeconds(),
 				Type = queue.Type.ToString(),
-				Handler = queue.DeliveryHandler.ToHandlerString(),
+				Manager = queue.Manager.GetType().Name,
 				Acknowledge = queue.Options.Acknowledge.ToString(),
 				Consumers = queue.ClientsCount(),
-				StoredMsgs = queue.MessageCount(),
-				StoredPrioMsgs = queue.PriorityMessageCount()
+				StoredMsgs = queue.Manager.MessageStore.Count(),
+				StoredPrioMsgs = queue.Manager.PriorityMessageStore.Count()
 			};
 		}
 	}
