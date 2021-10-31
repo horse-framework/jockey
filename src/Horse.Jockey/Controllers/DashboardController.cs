@@ -43,13 +43,17 @@ namespace Horse.Jockey.Controllers
 				queueMessages.Error += queue.Info.ErrorCount;
 				queueMessages.Unack += queue.Info.Unacknowledges;
 				queueMessages.Nack += queue.Info.NegativeAcknowledge;
-				queueMessages.Pending += queue.Manager.DeliveryHandler.Tracker.GetDeliveryCount();
 
 				queueMessages.Received += queue.Info.ReceivedMessages;
 				queueMessages.Sent += queue.Info.SentMessages;
-				queueMessages.Stored += queue.Manager.MessageStore.Count();
-				queueMessages.StoredPrio += queue.Manager.PriorityMessageStore.Count();
 				queueMessages.Timeout += queue.Info.TimedOutMessages;
+
+				if (queue.Manager != null)
+				{
+					queueMessages.Pending += queue.Manager.DeliveryHandler.Tracker.GetDeliveryCount();
+					queueMessages.Stored += queue.Manager.MessageStore.Count();
+					queueMessages.StoredPrio += queue.Manager.PriorityMessageStore.Count();
+				}
 
 				if (queue.ProcessingMessage != null)
 					queueMessages.Processing++;
