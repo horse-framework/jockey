@@ -36,6 +36,47 @@ export class QueueService {
             .toPromise();
     }
 
+    clear(name: string): Promise<any> {
+        return this.api.put('/queue/clear/' + name, {})
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    delete(name: string): Promise<any> {
+        return this.api.delete('/queue/delete/' + name)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    move(name: string, target: string): Promise<any> {
+        
+        let form = new FormData();
+        form.append('name', name);
+        form.append('target', target);
+
+        return this.api.postForm('/queue/move-messages', form)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
     get(name: string): Promise<HorseQueue> {
 
         return this.api.get('/queue/get/' + name)

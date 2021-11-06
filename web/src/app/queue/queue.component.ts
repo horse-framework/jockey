@@ -64,7 +64,7 @@ export class QueueComponent extends BaseComponent implements OnInit, OnDestroy {
                     labels,
                     datasets: [
                         {
-                            label: 'Received',
+                            label: 'Produced',
                             borderColor: '#444',
                             data: this.queue.graph.map(x => x.received),
                             fill: false,

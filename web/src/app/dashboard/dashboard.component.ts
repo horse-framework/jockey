@@ -116,7 +116,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
             labels: content.labels,
             datasets: [
                 {
-                    label: 'Received',
+                    label: 'Produced',
                     borderColor: '#444',
                     data: content.data.map(x => x.received),
                     fill: false,
