@@ -5,10 +5,10 @@ import { HorseRouterService } from 'src/services/horse-router.service';
 
 @Component({
     selector: 'app-routes',
-    templateUrl: './routes.component.html',
-    styleUrls: ['./routes.component.css']
+    templateUrl: './routers.component.html',
+    styleUrls: ['./routers.component.css']
 })
-export class RoutesComponent extends BaseComponent implements OnInit {
+export class RoutersComponent extends BaseComponent implements OnInit {
 
     routers: HorseRouter[];
 

@@ -6,7 +6,6 @@ body {
   margin: 0px;
   padding: 0px;
   line-height: 18px;
-  /*font-family: 'Ubuntu', sans-serif;*/
   font-family: "Ubuntu", sans-serif;
   background-color: #222;
 }
@@ -111,7 +110,6 @@ input {
   font-weight: 500;
   line-height: 24px;
 }
-
 
 .kvt-value {
   flex: 5 1 auto;
@@ -503,4 +501,12 @@ body {
 .imp {
   font-weight: 500;
   color: #ff9900;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #111 inset !important;
+  -webkit-text-fill-color: #fff !important;
 }

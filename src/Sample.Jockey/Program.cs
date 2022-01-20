@@ -60,6 +60,7 @@ namespace Sample.Jockey
 
             var f = new {ok = true, id = Guid.NewGuid().ToString(), date = 312783621786, extra = new {a = 23, b = "foo"}};
             await client.Queue.PushJson("DemoQueue2", f, false);
+            await client.Channel.Publish("DemoChannel2", new {foo = "123"});
             Console.WriteLine("ok");
             Console.ReadLine();
             
@@ -77,6 +78,7 @@ namespace Sample.Jockey
                         break;
 
                     await Task.Delay(10);
+                    Console.ReadLine();
                 }
             }
         }

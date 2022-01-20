@@ -27,7 +27,7 @@ const routes: Routes = [
     {
         path: 'routers',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./routes/routes.module').then(m => m.RoutesModule),
+        loadChildren: () => import('./routes/routers.module').then(m => m.RoutersModule),
         canActivate: [SessionGuard]
     },
     {
@@ -63,7 +63,7 @@ const routes: Routes = [
     {
         path: 'console',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./console2/console2.module').then(m => m.Console2Module),
+        loadChildren: () => import('./console/console.module').then(m => m.ConsoleModule),
         canActivate: [SessionGuard]
     },
     {

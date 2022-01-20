@@ -2,8 +2,8 @@ import {
   ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit,
   TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation
 } from '@angular/core';
-import { BehaviorSubject, from, fromEvent, interval, merge, Observable, Subject } from 'rxjs';
-import { debounceTime, delayWhen, distinctUntilChanged, filter, map, pluck, switchMap, takeLast, takeUntil, tap } from 'rxjs/operators';
+import { BehaviorSubject, from, fromEvent, interval, merge, Observable, of, Subject } from 'rxjs';
+import { debounceTime, delay, delayWhen, distinctUntilChanged, filter, map, pluck, switchMap, take, takeLast, takeUntil, tap } from 'rxjs/operators';
 import { SocketModels } from 'src/lib/socket-models';
 import { ConsoleRequest } from 'src/models/console-request';
 import { ConsoleMessage } from 'src/models/console.message';
@@ -11,14 +11,14 @@ import { DestroyService } from 'src/services/destroy.service';
 import { WebsocketService } from 'src/services/websocket.service';
 
 @Component({
-  selector: 'app-console2',
-  templateUrl: './console2.component.html',
-  styleUrls: ['./console2.component.css'],
+  selector: 'app-console',
+  templateUrl: './console.component.html',
+  styleUrls: ['./console.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DestroyService],
   encapsulation: ViewEncapsulation.None
 })
-export class Console2Component implements OnInit {
+export class ConsoleComponent implements OnInit {
 
   source: string = 'queue';
   targetType: string = 'name';
@@ -39,6 +39,7 @@ export class Console2Component implements OnInit {
   @ViewChild('consoleTable', { static: true, read: ElementRef }) consoleTable: ElementRef<HTMLTableElement>;
   @ViewChild('messageTemplate', { static: true, read: TemplateRef }) messageTemplate: TemplateRef<any>;
   @ViewChild('searchInput', { static: true, read: ElementRef }) searchInput: ElementRef<HTMLInputElement>;
+  @ViewChild('applied', { static: true, read: ElementRef }) applied: ElementRef<HTMLSpanElement>;
 
   get colspan(): number {
     let span = 0;
@@ -83,7 +84,10 @@ export class Console2Component implements OnInit {
           filter(msg => msg.type === SocketModels.ConsoleMessage),
           pluck('payload'),
           map((message: ConsoleMessage) => {
-            message.messageObj = JSON.parse(message.message);
+            try {
+              message.messageObj = JSON.parse(message.message);
+            }
+            catch { }
             return message;
           }),
           tap((message) => {
@@ -152,6 +156,11 @@ export class Console2Component implements OnInit {
     };
 
     this._socket$.send(SocketModels.ConsoleRequest, request);
+
+    this.applied.nativeElement.setAttribute('class', 'applied show');
+    of(this.applied)
+      .pipe(delay(1000), take(1))
+      .subscribe(t => t.nativeElement.setAttribute('class', 'applied'));
   }
 
   clear(): void {
