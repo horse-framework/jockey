@@ -38,26 +38,28 @@
     </ItemGroup>
 
     <ItemGroup>
+        <EmbeddedResource Include="Web\156-es2015.js" />
+        <EmbeddedResource Include="Web\156-es5.js" />
         <EmbeddedResource Include="Web\218-es2015.js" />
         <EmbeddedResource Include="Web\218-es5.js" />
-        <EmbeddedResource Include="Web\338-es2015.js" />
-        <EmbeddedResource Include="Web\338-es5.js" />
+        <EmbeddedResource Include="Web\408-es2015.js" />
+        <EmbeddedResource Include="Web\408-es5.js" />
         <EmbeddedResource Include="Web\474-es2015.js" />
         <EmbeddedResource Include="Web\474-es5.js" />
-        <EmbeddedResource Include="Web\49-es2015.js" />
-        <EmbeddedResource Include="Web\49-es5.js" />
-        <EmbeddedResource Include="Web\54-es2015.js" />
-        <EmbeddedResource Include="Web\54-es5.js" />
-        <EmbeddedResource Include="Web\555-es2015.js" />
-        <EmbeddedResource Include="Web\555-es5.js" />
+        <EmbeddedResource Include="Web\515-es2015.js" />
+        <EmbeddedResource Include="Web\515-es5.js" />
         <EmbeddedResource Include="Web\571-es2015.js" />
         <EmbeddedResource Include="Web\571-es5.js" />
         <EmbeddedResource Include="Web\665-es2015.js" />
         <EmbeddedResource Include="Web\665-es5.js" />
         <EmbeddedResource Include="Web\673-es2015.js" />
         <EmbeddedResource Include="Web\673-es5.js" />
+        <EmbeddedResource Include="Web\677-es2015.js" />
+        <EmbeddedResource Include="Web\677-es5.js" />
         <EmbeddedResource Include="Web\727-es2015.js" />
         <EmbeddedResource Include="Web\727-es5.js" />
+        <EmbeddedResource Include="Web\874-es2015.js" />
+        <EmbeddedResource Include="Web\874-es5.js" />
         <EmbeddedResource Include="Web\942-es2015.js" />
         <EmbeddedResource Include="Web\942-es5.js" />
         <EmbeddedResource Include="Web\957-es2015.js" />
