@@ -6,5 +6,7 @@ export interface ServerOptions {
     nodeHosts: string[];
     queueLimit: number;
     routerLimit: number;
+    autoChannelCreation: boolean;
+    channelSubscriberLimit: number;
     nodes: ServerNode[];
 }

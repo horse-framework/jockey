@@ -2,6 +2,7 @@
 export interface QueueInformation {
     name: string;
     topic: string;
+    status: string;
     createdDate: number;
     type: string;
     manager: string;

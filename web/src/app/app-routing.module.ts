@@ -25,9 +25,21 @@ const routes: Routes = [
         canActivate: [SessionGuard]
     },
     {
-        path: 'routes',
+        path: 'routers',
         component: PortalLayoutComponent,
         loadChildren: () => import('./routes/routes.module').then(m => m.RoutesModule),
+        canActivate: [SessionGuard]
+    },
+    {
+        path: 'cache',
+        component: PortalLayoutComponent,
+        loadChildren: () => import('./cache/cache.module').then(m => m.CacheModule),
+        canActivate: [SessionGuard]
+    },
+    {
+        path: 'channels',
+        component: PortalLayoutComponent,
+        loadChildren: () => import('./channels/channels.module').then(m => m.ChannelsModule),
         canActivate: [SessionGuard]
     },
     {
@@ -46,12 +58,6 @@ const routes: Routes = [
         path: 'handlers',
         component: PortalLayoutComponent,
         loadChildren: () => import('./handlers/handlers.module').then(m => m.HandlersModule),
-        canActivate: [SessionGuard]
-    },
-    {
-        path: 'console-v1',
-        component: PortalLayoutComponent,
-        loadChildren: () => import('./console/console.module').then(m => m.ConsoleModule),
         canActivate: [SessionGuard]
     },
     {

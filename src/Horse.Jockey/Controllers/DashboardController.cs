@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Horse.Jockey.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
@@ -39,7 +40,6 @@ namespace Horse.Jockey.Controllers
 			foreach (HorseQueue queue in _rider.Queue.Queues)
 			{
 				queueMessages.Ack += queue.Info.Acknowledges;
-				queueMessages.Delivery += queue.Info.Deliveries;
 				queueMessages.Error += queue.Info.ErrorCount;
 				queueMessages.Unack += queue.Info.Unacknowledges;
 				queueMessages.Nack += queue.Info.NegativeAcknowledge;
@@ -72,7 +72,16 @@ namespace Horse.Jockey.Controllers
 				RouterFailed = _messageCounter.RouterFailed
 			};
 
-			return Json(new { server, queueMessages, otherMessages, serverOptions, queueOptions = queueOptionsInfo });
+			return Json(new
+			{
+				server,
+				queueMessages,
+				otherMessages,
+				serverOptions,
+				queueOptions = queueOptionsInfo,
+				channelCount = _rider.Channel.Channels.Count(),
+				queueCount = _rider.Queue.Queues.Count()
+			});
 		}
 
 		[HttpGet("graph")]
@@ -112,7 +121,6 @@ namespace Horse.Jockey.Controllers
 					overall.Ack += data.Ack;
 					overall.Nack += data.Nack;
 					overall.Unack += data.Unack;
-					overall.Delivery += data.Delivery;
 					overall.Error += data.Error;
 					overall.Pending += data.Pending;
 					overall.Processing += data.Processing;

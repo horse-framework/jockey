@@ -134,7 +134,6 @@ namespace Horse.Jockey.Core
 				{
 					Date = DateTime.UtcNow.ToUnixSeconds(),
 					Ack = diff.TotalAck,
-					Delivery = diff.TotalDelivered,
 					Error = diff.TotalErrors,
 					Unack = diff.TotalUnack,
 					Nack = diff.TotalNack,
@@ -191,7 +190,6 @@ namespace Horse.Jockey.Core
 				StoredMsgs = after.StoredMsgs,
 				StoredPrioMsgs = after.StoredPrioMsgs,
 				TotalAck = after.TotalAck - before.TotalAck,
-				TotalDelivered = after.TotalDelivered - before.TotalDelivered,
 				TotalErrors = after.TotalErrors - before.TotalErrors,
 				TotalNack = after.TotalNack - before.TotalNack,
 				TotalReceived = after.TotalReceived - before.TotalReceived,

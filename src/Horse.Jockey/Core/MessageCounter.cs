@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Horse.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
+using Horse.Messaging.Server;
+using Horse.Messaging.Server.Channels;
 using Horse.Protocols.WebSocket;
 using Horse.WebSocket.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,9 @@ namespace Horse.Jockey.Core
         private long _routerOk;
         private long _routerFailed;
 
+        private long _channelPublish;
+        private long _channelReceive;
+
         public long DirectMessage => _directMessage;
         public long DirectResponse => _directResponse;
         public long DirectNoReceiver => _directNoReceiver;
@@ -34,12 +38,21 @@ namespace Horse.Jockey.Core
         public long RouterNotFound => _routerNotFound;
         public long RouterOk => _routerOk;
         public long RouterFailed => _routerFailed;
-
+        
+        public long ChannelPublish => _channelPublish;
+        public long ChannelReceive => _channelReceive;
+        
         private Timer _runner;
         private MessageGraphData _last = new MessageGraphData();
         private readonly Queue<MessageGraphData> _graphData = new Queue<MessageGraphData>(60);
         private IWebSocketServerBus _bus;
         private SubscriptionService _subscriptionService;
+        private readonly HorseRider _rider;
+
+        public MessageCounter(HorseRider rider)
+        {
+            _rider = rider;
+        }
 
         #endregion
 
@@ -65,6 +78,18 @@ namespace Horse.Jockey.Core
         {
             _runner = new Timer(o =>
             {
+                long channelPublishTotal = 0;
+                long channelReceiveTotal = 0;
+                
+                foreach (HorseChannel channel in _rider.Channel.Channels)
+                {
+                    channelPublishTotal += channel.Info.Published;
+                    channelReceiveTotal += channel.Info.Received;
+                }
+
+                _channelPublish = channelPublishTotal;
+                _channelReceive = channelReceiveTotal;
+                
                 MessageGraphData data = new MessageGraphData
                                         {
                                             Date = DateTime.UtcNow.ToUnixSeconds(),
@@ -73,7 +98,9 @@ namespace Horse.Jockey.Core
                                             DirectResponse = _directResponse - _last.DirectResponse,
                                             RouterPublish = _routerPublish - _last.RouterPublish,
                                             RouterNotFound = _routerNotFound - _last.RouterNotFound,
-                                            DirectNoReceiver = _directNoReceiver - _last.DirectNoReceiver
+                                            DirectNoReceiver = _directNoReceiver - _last.DirectNoReceiver,
+                                            ChannelPublish = _channelPublish - _last.ChannelPublish,
+                                            ChannelReceive = _channelReceive - _last.ChannelReceive
                                         };
 
                 lock (_graphData)
@@ -99,7 +126,9 @@ namespace Horse.Jockey.Core
                             DirectResponse = _directResponse,
                             RouterPublish = _routerPublish,
                             RouterNotFound = _routerNotFound,
-                            DirectNoReceiver = _directNoReceiver
+                            DirectNoReceiver = _directNoReceiver,
+                            ChannelPublish = _channelPublish,
+                            ChannelReceive = _channelReceive
                         };
             }, null, 1000, 1000);
         }
@@ -155,7 +184,7 @@ namespace Horse.Jockey.Core
         {
             Interlocked.Increment(ref _routerFailed);
         }
-
+        
         #endregion
     }
 }

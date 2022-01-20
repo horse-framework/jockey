@@ -12,4 +12,6 @@ export interface Dashboard {
     otherMessages: MessageGraphData;
     serverOptions: ServerOptions;
     queueOptions: QueueOptions;
+    channelCount: number;
+    queueCount: number;
 }

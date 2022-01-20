@@ -42,5 +42,13 @@ namespace Horse.Jockey.Models
         [JsonProperty("routerFailed")]
         [JsonPropertyName("routerFailed")]
         public long RouterFailed { get; set; }
+        
+        [JsonProperty("channelPublish")]
+        [JsonPropertyName("channelPublish")]
+        public long ChannelPublish { get; set; }
+        
+        [JsonProperty("channelReceive")]
+        [JsonPropertyName("channelReceive")]
+        public long ChannelReceive { get; set; }
     }
 }

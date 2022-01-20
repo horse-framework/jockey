@@ -53,21 +53,24 @@ namespace Horse.Jockey
             Hub.Mvc = new HorseMvc();
             Hub.Mvc.Init(async services =>
             {
-                SubscriptionService subscriptionService = new();
+                SubscriptionService subscriptionService = new SubscriptionService();
 
-                ResourceProvider provider = new();
+                ResourceProvider provider = new ResourceProvider();
                 await provider.Load();
 
-                MessageCounter counter = new();
+                MessageCounter counter = new MessageCounter(rider);
                 counter.Run();
 
-                QueueWatcherContainer watcherContainer = new();
+                QueueWatcherContainer watcherContainer = new QueueWatcherContainer();
                 watcherContainer.Initialize(rider, options);
 
-                QueueEventHandler queueEventHandler = new();
+                QueueEventHandler queueEventHandler = new QueueEventHandler();
                 rider.Queue.EventHandlers.Add(queueEventHandler);
 
-                ErrorHandler errorHandler = new();
+                ChannelEventHandler channelEventHandler = new ChannelEventHandler(subscriptionService);
+                rider.Channel.EventHandlers.Add(channelEventHandler);
+
+                ErrorHandler errorHandler = new ErrorHandler();
                 rider.ErrorHandlers.Add(errorHandler);
 
                 rider.Queue.MessageHandlers.Add(new QueueMessageEventHandler(subscriptionService));

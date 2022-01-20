@@ -9,4 +9,6 @@ export interface MessageGraphData {
     routerNotFound: number;
     routerOk: number;
     routerFailed: number;
+    channelPublish: number;
+    channelReceive: number;
 }

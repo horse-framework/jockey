@@ -1,19 +1,10 @@
 
 .queues {
     margin: auto;
-    max-width: 1500px;
+    padding: 0px 60px;
     text-align: center;
 }
 .queues .table {
     width: 100%;
     text-align: left;
-}
-.queues h1 {
-    text-align: left;
-    display: flex;
-    font-size: 20px;
-    font-weight: 600;
-    color: #333;
-    margin: 0px;
-    padding: 0px 0px 24px 6px;
 }

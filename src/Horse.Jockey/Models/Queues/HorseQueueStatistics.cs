@@ -50,10 +50,6 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("totalSent")]
         public long TotalSent { get; set; }
 
-        [JsonProperty("totalDelivered")]
-        [JsonPropertyName("totalDelivered")]
-        public long TotalDelivered { get; set; }
-
         [JsonProperty("totalAck")]
         [JsonPropertyName("totalAck")]
         public long TotalAck { get; set; }
@@ -99,8 +95,7 @@ namespace Horse.Jockey.Models.Queues
                 TotalErrors = queue.Info.ErrorCount,
                 TotalReceived = queue.Info.ReceivedMessages,
                 TotalSent = queue.Info.SentMessages,
-                TotalTimedout = queue.Info.TimedOutMessages,
-                TotalDelivered = queue.Info.Deliveries
+                TotalTimedout = queue.Info.TimedOutMessages
             };
 
             if (queue.ProcessingMessage != null)

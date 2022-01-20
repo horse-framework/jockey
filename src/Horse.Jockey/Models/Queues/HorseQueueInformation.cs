@@ -25,6 +25,10 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("type")]
         public string Type { get; set; }
 
+        [JsonProperty("status")]
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
+
         [JsonProperty("manager")]
         [JsonPropertyName("manager")]
         public string Manager { get; set; }
@@ -73,6 +77,7 @@ namespace Horse.Jockey.Models.Queues
                 Manager = queue.Manager == null ? "(Not Initialized)" : queue.Manager.GetType().Name,
                 Name = queue.Name,
                 Type = queue.Type.ToString(),
+                Status = queue.Status.ToString(),
                 Topic = queue.Topic,
                 AckTimeout = queue.Options.AcknowledgeTimeout.ToMilliseconds(),
                 AutoDestroy = queue.Options.AutoDestroy.ToString(),
@@ -83,6 +88,7 @@ namespace Horse.Jockey.Models.Queues
                 DelayBetweenMessages = queue.Options.DelayBetweenMessages,
                 MessageSizeLimit = queue.Options.MessageSizeLimit,
                 PutBackDelay = queue.Options.PutBackDelay,
+                
             };
         }
     }

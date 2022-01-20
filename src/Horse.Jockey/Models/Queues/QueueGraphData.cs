@@ -27,10 +27,6 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("sent")]
         public long Sent { get; set; }
 
-        [JsonProperty("delivery")]
-        [JsonPropertyName("delivery")]
-        public long Delivery { get; set; }
-
         [JsonProperty("ack")]
         [JsonPropertyName("ack")]
         public long Ack { get; set; }

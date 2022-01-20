@@ -11,4 +11,5 @@ export interface QueueOptions {
     putbackDelay: number;
     autoDestroy: string;
     autoQueueCreation: boolean;
+    commitWhen: string;
 }

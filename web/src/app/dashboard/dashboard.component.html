@@ -1,180 +1,253 @@
-<div class="dashboard"
-     [hidden]="dashboard == null">
-  <div class="dashboard-portlet">
-    <div class="portlet">
-      <h3 class="portlet-title">Stored Messages</h3>
-      <div class="portlet-body">
-        <canvas id="store-chart"></canvas>
+<div class="dashboard" [hidden]="dashboard == null">
+  <div class="dashboard-row">
+    <div class="dashboard-portlet">
+      <div class="portlet">
+        <h3 class="portlet-title">Stored Queue Messages</h3>
+        <div class="portlet-body">
+          <div class="portlet-canvas">
+            <canvas id="store-chart"></canvas>
+          </div>
+          <div class="portlet-table" *ngIf="dashboard">
+            <div class="key-value-table">
+              <div class="kvt-row">
+                <div class="kvt-key">Queue Count</div>
+                <div class="kvt-value">{{dashboard.queueCount}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Stored Queue Messages</div>
+                <div class="kvt-value">{{dashboard.queueMessages.stored + dashboard.queueMessages.storedPrio}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Published Queue Messages</div>
+                <div class="kvt-value">{{dashboard.queueMessages.received}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Queue Messages Consume Count</div>
+                <div class="kvt-value">{{dashboard.queueMessages.sent}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="dashboard-portlet"
-       *ngIf="dashboard">
-    <div class="portlet">
-      <h3 class="portlet-title">Message Statistics</h3>
-      <div class="portlet-body"
-           *ngIf="dashboard">
-        <div class="key-value-table">
-          <div class="kvt-row">
-            <div class="kvt-key">Stored Queue Messages</div>
-            <div class="kvt-value">{{dashboard.queueMessages.stored + dashboard.queueMessages.storedPrio}}</div>
+    <div class="dashboard-portlet">
+      <div class="portlet">
+        <h3 class="portlet-title">Queue Messages and Deliveries</h3>
+        <div class="portlet-body">
+          <div class="portlet-canvas">
+            <canvas id="delivery-chart"></canvas>
           </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Published Queue Messages</div>
-            <div class="kvt-value">{{dashboard.queueMessages.received}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Consumed Queue Messages</div>
-            <div class="kvt-value">{{dashboard.queueMessages.delivery}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Sent Direct Messages</div>
-            <div class="kvt-value">{{dashboard.otherMessages.directMessage}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Delivered Direct Messages</div>
-            <div class="kvt-value">{{dashboard.otherMessages.directDelivery}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Direct Responses</div>
-            <div class="kvt-value">{{dashboard.otherMessages.directResponse}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Published Router Messages</div>
-            <div class="kvt-value">{{dashboard.otherMessages.routerPublish}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Delivered Router Messages</div>
-            <div class="kvt-value">{{dashboard.otherMessages.routerOk}}</div>
+          <div class="portlet-table" *ngIf="dashboard">
+            <div class="key-value-table">
+              <div class="kvt-row">
+                <div class="kvt-key">Stored Queue Messages</div>
+                <div class="kvt-value">{{dashboard.queueMessages.stored + dashboard.queueMessages.storedPrio}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Published Queue Messages</div>
+                <div class="kvt-value">{{dashboard.queueMessages.received}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Queue Messages Consume Count</div>
+                <div class="kvt-value">{{dashboard.queueMessages.sent}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Sent Direct Messages</div>
+                <div class="kvt-value">{{dashboard.otherMessages.directMessage}}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="dashboard-portlet">
-    <div class="portlet">
-      <h3 class="portlet-title">Queue Messages and Deliveries</h3>
-      <div class="portlet-body">
-        <canvas id="delivery-chart"></canvas>
+
+  <div class="dashboard-row">
+    <div class="dashboard-portlet">
+      <div class="portlet">
+        <h3 class="portlet-title">Direct Messages and Responses</h3>
+        <div class="portlet-body">
+          <div class="portlet-canvas">
+            <canvas id="msg-chart"></canvas>
+          </div>
+          <div class="portlet-table" *ngIf="dashboard">
+            <div class="key-value-table">
+              <div class="kvt-row">
+                <div class="kvt-key">Sent Direct Messages</div>
+                <div class="kvt-value">{{dashboard.otherMessages.directMessage}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Delivered Direct Messages</div>
+                <div class="kvt-value">{{dashboard.otherMessages.directDelivery}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Direct Responses</div>
+                <div class="kvt-value">{{dashboard.otherMessages.directResponse}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dashboard-portlet">
+      <div class="portlet">
+        <h3 class="portlet-title">Router Messages</h3>
+        <div class="portlet-body">
+          <div class="portlet-canvas">
+            <canvas id="router-chart"></canvas>
+          </div>
+          <div class="portlet-table" *ngIf="dashboard">
+            <div class="key-value-table">
+              <div class="kvt-row">
+                <div class="kvt-key">Published Router Messages</div>
+                <div class="kvt-value">{{dashboard.otherMessages.routerPublish}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Delivered Router Messages</div>
+                <div class="kvt-value">{{dashboard.otherMessages.routerOk}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Not Received Messages</div>
+                <div class="kvt-value">{{dashboard.otherMessages.routerFailed}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="dashboard-portlet"
-       *ngIf="dashboard">
-    <div class="portlet">
-      <h3 class="portlet-title">Server Information</h3>
-      <div class="portlet-body">
-        <div class="key-value-table">
-          <div class="kvt-row">
-            <div class="kvt-key">Service Lifetime</div>
-            <div class="kvt-value">{{lifetime}}</div>
+
+  <div class="dashboard-row">
+    <div class="dashboard-portlet">
+      <div class="portlet">
+        <h3 class="portlet-title">Channel Messages</h3>
+        <div class="portlet-body">
+          <div class="portlet-canvas" style="min-height: 255px;">
+            <canvas id="channel-chart"></canvas>
           </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Hostname</div>
-            <div class="kvt-value">
-              <span *ngFor="let host of dashboard.server.hosts">{{host}}</span>
+          <div class="portlet-table" *ngIf="dashboard">
+            <div class="key-value-table">
+              <div class="kvt-row">
+                <div class="kvt-key">Channel Count</div>
+                <div class="kvt-value">{{dashboard.channelCount}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Published Messages</div>
+                <div class="kvt-value">{{dashboard.queueMessages.stored + dashboard.queueMessages.storedPrio}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Received Messages</div>
+                <div class="kvt-value">{{dashboard.queueMessages.received}}</div>
+              </div>
             </div>
           </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Online Clients</div>
-            <div class="kvt-value">{{dashboard.server.onlineClients}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="dashboard-portlet">
+      <div class="portlet">
+        <h3 class="portlet-title">Server Information and Default Options</h3>
+        <div class="portlet-body" *ngIf="dashboard" style="min-height: 275px;">
+          <div class="portlet-table">
+            <div class="key-value-table">
+              <div class="kvt-row">
+                <div class="kvt-key">Service Lifetime</div>
+                <div class="kvt-value">{{lifetime}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Hostname</div>
+                <div class="kvt-value">
+                  <span *ngFor="let host of dashboard.server.hosts">{{host}}</span>
+                </div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Online Clients</div>
+                <div class="kvt-value">{{dashboard.server.onlineClients}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-info">All defined remote nodes.</div>
+                <div class="kvt-key">Total Nodes</div>
+                <div class="kvt-value">{{dashboard.server.totalNodes}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-info">Connected nodes</div>
+                <div class="kvt-key">Online Nodes</div>
+                <div class="kvt-value">{{dashboard.server.connectedNodes}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Channel Subscribers Limit</div>
+                <div class="kvt-value">{{dashboard.serverOptions.channelSubscriberLimit | unlimited}}</div>
+              </div>
+            </div>
           </div>
-          <div class="kvt-row">
-            <div class="kvt-info">All defined remote nodes.</div>
-            <div class="kvt-key">Total Nodes</div>
-            <div class="kvt-value">{{dashboard.server.totalNodes}}</div>
+          <div class="portlet-table">
+            <div class="key-value-table">
+              <div class="kvt-row">
+                <div class="kvt-key">Max Queue Limit</div>
+                <div class="kvt-value">{{dashboard.serverOptions.queueLimit | unlimited}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Max Router Limit</div>
+                <div class="kvt-value">{{dashboard.serverOptions.routerLimit | unlimited}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Auto Channel Creation</div>
+                <div class="kvt-value">{{dashboard.serverOptions.autoChannelCreation}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Auto Queue Creation</div>
+                <div class="kvt-value">{{dashboard.queueOptions.autoQueueCreation}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Auto Queue Destroy</div>
+                <div class="kvt-value">{{dashboard.queueOptions.autoDestroy}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Queue Subscribers Limit</div>
+                <div class="kvt-value">{{dashboard.queueOptions.clientLimit | unlimited}}</div>
+              </div>
+            </div>
           </div>
-          <div class="kvt-row">
-            <div class="kvt-info">Connected nodes</div>
-            <div class="kvt-key">Online Nodes</div>
-            <div class="kvt-value">{{dashboard.server.connectedNodes}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Max Queue Limit</div>
-            <div class="kvt-value">{{dashboard.serverOptions.queueLimit | unlimited}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Max Router Limit</div>
-            <div class="kvt-value">{{dashboard.serverOptions.routerLimit | unlimited}}</div>
+          <div class="portlet-table">
+            <div class="key-value-table">
+              <div class="kvt-row">
+                <div class="kvt-key">Default Queue Type</div>
+                <div class="kvt-value">{{dashboard.queueOptions.type}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Queue Acknowledge</div>
+                <div class="kvt-value">
+                  {{dashboard.queueOptions.ack}}
+                  <em *ngIf="dashboard.queueOptions.ackTimeout > 0">
+                    {{dashboard.queueOptions.ackTimeout}} ms timeout
+                  </em>
+                </div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Queue Message Timeout</div>
+                <div class="kvt-value" *ngIf="dashboard.queueOptions.msgTimeout == 0">No Timeout</div>
+                <div class="kvt-value" *ngIf="dashboard.queueOptions.msgTimeout > 0">
+                  {{dashboard.queueOptions.msgTimeout}} milliseconds
+                </div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Message Limit</div>
+                <div class="kvt-value">
+                  {{dashboard.queueOptions.msgLimit | unlimited}}
+                  <em>Size Limit: {{dashboard.queueOptions.msgSizeLimit | filesize}}</em>
+                </div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Delay Between Messages</div>
+                <div class="kvt-value" *ngIf="dashboard.queueOptions.delayBetweenMsgs == 0">No Delay</div>
+                <div class="kvt-value" *ngIf="dashboard.queueOptions.delayBetweenMsgs > 0">
+                  {{dashboard.queueOptions.delayBetweenMsgs}} milliseconds
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
       </div>
     </div>
   </div>
-  <div class="dashboard-portlet">
-    <div class="portlet">
-      <h3 class="portlet-title">Direct and Route Messages and Deliveries</h3>
-      <div class="portlet-body">
-        <canvas id="msg-chart"></canvas>
-      </div>
-    </div>
-  </div>
-  <div class="dashboard-portlet"
-       *ngIf="dashboard">
-    <div class="portlet">
-      <h3 class="portlet-title">Default Queue Options</h3>
-      <div class="portlet-body">
-        <div class="key-value-table">
-          <div class="kvt-row">
-            <div class="kvt-key">Type</div>
-            <div class="kvt-value">{{dashboard.queueOptions.type}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Acknowledge</div>
-            <div class="kvt-value">
-              {{dashboard.queueOptions.ack}}
-              <em *ngIf="dashboard.queueOptions.ackTimeout > 0">({{dashboard.queueOptions.ackTimeout}} ms timeout)</em>
-            </div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Message Timeout</div>
-            <div class="kvt-value"
-                 *ngIf="dashboard.queueOptions.msgTimeout == 0">No Timeout</div>
-            <div class="kvt-value"
-                 *ngIf="dashboard.queueOptions.msgTimeout > 0">
-              {{dashboard.queueOptions.msgTimeout}} milliseconds
-            </div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Message Limit</div>
-            <div class="kvt-value">
-              {{dashboard.queueOptions.msgLimit | unlimited}}
-              <em>(Size Limit: {{dashboard.queueOptions.msgSizeLimit | filesize}})</em>
-            </div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Subscribers Limit</div>
-            <div class="kvt-value">{{dashboard.queueOptions.clientLimit | unlimited}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Delay Between Messages</div>
-            <div class="kvt-value"
-                 *ngIf="dashboard.queueOptions.delayBetweenMsgs == 0">No Delay</div>
-            <div class="kvt-value"
-                 *ngIf="dashboard.queueOptions.delayBetweenMsgs > 0">
-              {{dashboard.queueOptions.delayBetweenMsgs}} milliseconds
-            </div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Put Back Delay</div>
-            <div class="kvt-value"
-                 *ngIf="dashboard.queueOptions.putbackDelay == 0">No Delay</div>
-            <div class="kvt-value"
-                 *ngIf="dashboard.queueOptions.putbackDelay > 0">
-              {{dashboard.queueOptions.putbackDelay}} milliseconds
-            </div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Auto Creation</div>
-            <div class="kvt-value">{{dashboard.queueOptions.autoQueueCreation}}</div>
-          </div>
-          <div class="kvt-row">
-            <div class="kvt-key">Auto Destroy</div>
-            <div class="kvt-value">{{dashboard.queueOptions.autoDestroy}}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

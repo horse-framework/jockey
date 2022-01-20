@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ApiClient } from 'src/lib/api-client';
 import { HorseQueue } from 'src/models/horse-queue';
+import { QueueMessage } from 'src/models/queue-message';
 import { TransactionResult } from 'src/models/transaction-result';
 import { WebsocketService } from './websocket.service';
 
@@ -36,8 +37,64 @@ export class QueueService {
             .toPromise();
     }
 
+    get(name: string): Promise<HorseQueue> {
+
+        return this.api.get('/queue/get?name=' + name)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    read(name: string): Promise<QueueMessage> {
+
+        return this.api.get('/queue/read?name=' + name)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    consume(name: string): Promise<QueueMessage> {
+
+        return this.api.get('/queue/consume?name=' + name)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    status(name: string, status: string): Promise<any> {
+        let form = new FormData();
+        form.append('name', name);
+        form.append('status', status);
+        return this.api.putForm('/queue/status', form)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
     clear(name: string): Promise<any> {
-        return this.api.put('/queue/clear/' + name, {})
+        let form = new FormData();
+        form.append('name', name);
+        return this.api.putForm('/queue/clear', form)
             .pipe(
                 map(response => {
                     if (response.ok()) {
@@ -49,7 +106,7 @@ export class QueueService {
     }
 
     delete(name: string): Promise<any> {
-        return this.api.delete('/queue/delete/' + name)
+        return this.api.delete('/queue/delete?name=' + name)
             .pipe(
                 map(response => {
                     if (response.ok()) {
@@ -61,7 +118,7 @@ export class QueueService {
     }
 
     move(name: string, target: string): Promise<any> {
-        
+
         let form = new FormData();
         form.append('name', name);
         form.append('target', target);
@@ -75,30 +132,5 @@ export class QueueService {
                     return null;
                 }))
             .toPromise();
-    }
-
-    get(name: string): Promise<HorseQueue> {
-
-        return this.api.get('/queue/get/' + name)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
-    }
-
-    create(queue: HorseQueue): Promise<TransactionResult> {
-        return null;
-    }
-
-    update(queue: HorseQueue): Promise<TransactionResult> {
-        return null;
-    }
-
-    remove(queue: HorseQueue): Promise<TransactionResult> {
-        return null;
     }
 }

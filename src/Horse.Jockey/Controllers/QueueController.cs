@@ -43,8 +43,8 @@ namespace Horse.Jockey.Controllers
             return Json(result);
         }
 
-        [HttpGet("get/{name}")]
-        public Task<IActionResult> Get([FromRoute] string name)
+        [HttpGet("get")]
+        public Task<IActionResult> Get([FromQuery] string name)
         {
             HorseQueue queue = _rider.Queue.Find(name);
 
@@ -64,8 +64,48 @@ namespace Horse.Jockey.Controllers
             return JsonAsync(detail);
         }
 
-        [HttpPut("clear/{name}")]
-        public Task<IActionResult> Clear([FromRoute] string name)
+        [HttpGet("read")]
+        public Task<IActionResult> Read([FromQuery] string name)
+        {
+            HorseQueue queue = _rider.Queue.Find(name);
+
+            if (queue == null)
+                return NotFound(null);
+
+            QueueMessage msg = null;
+
+            if (!queue.Manager.PriorityMessageStore.IsEmpty)
+                msg = queue.Manager.PriorityMessageStore.ReadFirst();
+
+            if (msg == null)
+                msg = queue.Manager.MessageStore.ReadFirst();
+
+            QueueMessageModel model = msg != null ? new QueueMessageModel(msg) : null;
+            return JsonAsync(model);
+        }
+
+        [HttpGet("consume")]
+        public Task<IActionResult> Consume([FromQuery] string name)
+        {
+            HorseQueue queue = _rider.Queue.Find(name);
+
+            if (queue == null)
+                return NotFound(null);
+
+            QueueMessage msg = null;
+
+            if (!queue.Manager.PriorityMessageStore.IsEmpty)
+                msg = queue.Manager.PriorityMessageStore.ConsumeFirst();
+
+            if (msg == null)
+                msg = queue.Manager.MessageStore.ConsumeFirst();
+
+            QueueMessageModel model = msg != null ? new QueueMessageModel(msg) : null;
+            return JsonAsync(model);
+        }
+
+        [HttpPut("clear")]
+        public Task<IActionResult> Clear([FromForm] string name)
         {
             HorseQueue queue = _rider.Queue.Find(name);
 
@@ -77,8 +117,23 @@ namespace Horse.Jockey.Controllers
             return Ok(new {name = name, clear = true});
         }
 
-        [HttpDelete("delete/{name}")]
-        public async Task<IActionResult> Delete([FromRoute] string name)
+        [HttpPut("status")]
+        public Task<IActionResult> SetStatus([FromForm] string name, [FromForm] string status)
+        {
+            HorseQueue queue = _rider.Queue.Find(name);
+            if (queue == null)
+                return NotFound(new {ok = false});
+
+            QueueStatus queueStatus = Enum.Parse<QueueStatus>(status);
+            if (queueStatus == QueueStatus.Syncing || queueStatus == QueueStatus.NotInitialized)
+                return NotAcceptable(new {ok = false});
+
+            queue.SetStatus(queueStatus);
+            return Ok(new {name = name, ok = true});
+        }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete([FromQuery] string name)
         {
             HorseQueue queue = _rider.Queue.Find(name);
 
@@ -110,7 +165,7 @@ namespace Horse.Jockey.Controllers
                     return await Ok(new {ok = true, completed = false, count = moveCount});
 
                 moveCount++;
-                queue.Manager.PriorityMessageStore.Remove(message);
+                await queue.Manager.RemoveMessage(message);
             }
 
             while (true)
@@ -124,11 +179,8 @@ namespace Horse.Jockey.Controllers
                     return await Ok(new {ok = true, completed = false, count = moveCount});
 
                 moveCount++;
-                queue.Manager.MessageStore.Remove(message);
+                await queue.Manager.RemoveMessage(message);
             }
-
-            await queue.Manager.PriorityMessageStore.Clear();
-            await queue.Manager.MessageStore.Clear();
 
             return await Ok(new {ok = true, completed = true, count = moveCount});
         }

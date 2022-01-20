@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Text.Json.Serialization;
 using Horse.Jockey.Helpers;
@@ -25,6 +24,14 @@ namespace Horse.Jockey.Models
         [JsonPropertyName("routerLimit")]
         public int RouterLimit { get; set; }
 
+        [JsonProperty("autoChannelCreation")]
+        [JsonPropertyName("autoChannelCreation")]
+        public bool AutoChannelCreation { get; set; }
+
+        [JsonProperty("channelSubscriberLimit")]
+        [JsonPropertyName("channelSubscriberLimit")]
+        public int ChannelSubscriberLimit { get; set; }
+
         [JsonProperty("nodes")]
         [JsonPropertyName("nodes")]
         public NodeInfo[] Nodes { get; set; }
@@ -37,6 +44,8 @@ namespace Horse.Jockey.Models
                 Type = rider.Options.Type,
                 QueueLimit = rider.Options.QueueLimit,
                 RouterLimit = rider.Options.RouterLimit,
+                AutoChannelCreation = rider.Channel.Options.AutoChannelCreation,
+                ChannelSubscriberLimit = rider.Channel.Options.ClientLimit,
                 Nodes = rider.Cluster.Clients.Select(x => new NodeInfo
                     {
                         Id = x.Info.Id,
