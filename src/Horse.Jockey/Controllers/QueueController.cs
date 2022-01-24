@@ -53,13 +53,11 @@ namespace Horse.Jockey.Controllers
 
             QueueWatcher watcher = _watcherContainer.Get(queue.Name);
 
-            QueueDetail detail = new()
-            {
-                Info = HorseQueueInformation.Create(queue),
-                Stats = HorseQueueStatistics.Create(queue),
-                Options = QueueOptionsInfo.Create(queue),
-                GraphData = watcher.GetGraphData()
-            };
+            QueueDetail detail = new QueueDetail();
+            detail.Info = HorseQueueInformation.Create(queue);
+            detail.Stats = HorseQueueStatistics.Create(queue);
+            detail.Options = QueueOptionsInfo.Create(queue);
+            detail.GraphData = watcher.GetGraphData();
 
             return JsonAsync(detail);
         }

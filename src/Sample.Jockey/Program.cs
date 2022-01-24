@@ -3,9 +3,12 @@ using System.IO;
 using System.Threading.Tasks;
 using Horse.Jockey;
 using Horse.Messaging.Client;
+using Horse.Messaging.Data;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Channels;
+using Horse.Messaging.Server.Queues;
+using Horse.Messaging.Server.Queues.Delivery;
 using Horse.Messaging.Server.Routing;
 using Horse.Server;
 
@@ -18,17 +21,25 @@ namespace Sample.Jockey
             HorseRider rider = HorseRiderBuilder.Create()
                 .ConfigureQueues(o =>
                 {
-                    o.UseMemoryQueues();
                     o.Options.AutoQueueCreation = true;
+                    o.UsePersistentQueues(d => { d.UseAutoFlush(TimeSpan.FromMilliseconds(250)); }, q =>
+                    {
+                        q.Options.AutoQueueCreation = true;
+                        q.Options.AutoDestroy = QueueDestroy.Disabled;
+                        q.Options.CommitWhen = CommitWhen.AfterSaved;
+                        q.Options.PutBack = PutBackDecision.Regular;
+                        q.Options.Acknowledge = QueueAckDecision.WaitForAcknowledge;
+                    });
+                    
                 })
                 .AddJockey(o => o.Port = 15400)
                 .Build();
-
+/*
             await rider.Queue.Create("DemoQueue1");
             await rider.Queue.Create("DemoQueue2");
             await rider.Queue.Create("DemoQueue3");
             await rider.Queue.Create("DemoQueue4");
-
+*/
             rider.Channel.Options.AutoDestroy = false;
             await rider.Channel.Create("DemoChannel1");
             await rider.Channel.Create("DemoChannel2");
@@ -63,6 +74,11 @@ namespace Sample.Jockey
             await client.Channel.Publish("DemoChannel2", new {foo = "123"});
             Console.WriteLine("ok");
             Console.ReadLine();
+            
+            HorseClient consumer = new();
+            await consumer.ConnectAsync("horse://localhost:26222");
+            consumer.AutoAcknowledge = true;
+            await consumer.Queue.Subscribe("DemoQueue2", true);
             
             while (true)
             {

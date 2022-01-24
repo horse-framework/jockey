@@ -22,11 +22,27 @@
 
 .dashboard-portlet {
   flex: 1 1;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   align-items: stretch;
   align-content: stretch;
   justify-content: stretch;
   justify-items: stretch;
+}
+
+.dashboard-portlet .portlet {
+  flex: 1 1;
+}
+
+.dp-40 {
+  flex: 45 1;
+}
+.dp-50 {
+  flex: 50 1;
+}
+.dp-60 {
+  flex: 55 1;
 }
 
 .dashboard-portlet.wide {

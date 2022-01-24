@@ -207,6 +207,16 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                     borderWidth: 2
                 },
                 {
+                    label: 'Pending Ack',
+                    borderColor: '#df3faf',
+                    data: content.data.map(x => x.pending),
+                    fill: false,
+                    pointRadius: 1,
+                    pointHitRadius: 8,
+                    lineTension: 0.2,
+                    borderWidth: 2
+                },
+                {
                     label: 'Error',
                     borderColor: '#ff3333',
                     data: content.data.map(x => x.error),
@@ -238,16 +248,6 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                     label: 'High Prio Msgs',
                     borderColor: '#ff9911',
                     data: content.data.map(x => x.storedPrio),
-                    fill: false,
-                    pointRadius: 1,
-                    pointHitRadius: 8,
-                    lineTension: 0.2,
-                    borderWidth: 2
-                },
-                {
-                    label: 'Pending for Ack',
-                    borderColor: '#df3faf',
-                    data: content.data.map(x => x.pending),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,

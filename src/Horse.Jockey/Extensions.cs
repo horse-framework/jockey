@@ -155,9 +155,12 @@ namespace Horse.Jockey
             Hub.Mvc.Use(app =>
             {
                 app.UseMiddleware(middleware);
-
+                
                 IServiceProvider provider = app.GetProvider();
                 Hub.Provider = provider;
+
+                QueueWatcherContainer watchers = provider.GetService<QueueWatcherContainer>();
+                watchers.LoadAll(rider);
 
                 ResourceProvider resourceProvider = provider.GetRequiredService<ResourceProvider>();
                 resourceProvider.Use(app);

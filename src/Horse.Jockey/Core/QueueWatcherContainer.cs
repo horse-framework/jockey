@@ -5,68 +5,87 @@ using Horse.Messaging.Server.Queues;
 
 namespace Horse.Jockey.Core
 {
-	internal class QueueWatcherContainer
-	{
-		private JockeyOptions _options;
-		private readonly Dictionary<string, QueueWatcher> _queueWatchers = new();
+    internal class QueueWatcherContainer
+    {
+        private JockeyOptions _options;
+        private readonly Dictionary<string, QueueWatcher> _queueWatchers = new();
 
-		private List<QueueWatcher> _watchers = new();
-		public IEnumerable<QueueWatcher> QueueWatchers => _watchers;
+        private List<QueueWatcher> _watchers = new();
+        public IEnumerable<QueueWatcher> QueueWatchers => _watchers;
 
-		public void Initialize(HorseRider rider, JockeyOptions options)
-		{
-			_options = options;
-		}
+        public void Initialize(HorseRider rider, JockeyOptions options)
+        {
+            _options = options;
+        }
 
-		public QueueWatcher Watch(HorseQueue queue)
-		{
-			QueueWatcher watcher = new(queue, _options);
-			queue.OnDestroyed += _ => Release(watcher);
-			watcher.Watch();
+        public QueueWatcher Watch(HorseQueue queue)
+        {
+            QueueWatcher watcher = new(queue, _options);
+            queue.OnDestroyed += _ => Release(watcher);
+            watcher.Watch();
 
-			lock (_queueWatchers)
-			{
-				_queueWatchers.Add(queue.Name, watcher);
-			}
+            lock (_queueWatchers)
+            {
+                _queueWatchers.Add(queue.Name, watcher);
+                _watchers = _queueWatchers.Values.ToList();
+            }
 
-			_watchers = _queueWatchers.Values.ToList();
+            return watcher;
+        }
 
-			return watcher;
-		}
+        public void LoadAll(HorseRider rider)
+        {
+            lock (_queueWatchers)
+            {
+                foreach (HorseQueue queue in rider.Queue.Queues)
+                {
+                    if (!_queueWatchers.ContainsKey(queue.Name))
+                    {
+                        QueueWatcher watcher = new(queue, _options);
+                        queue.OnDestroyed += _ => Release(watcher);
+                        watcher.Watch();
+                        
+                        _queueWatchers.Add(queue.Name, watcher);
+                    }
+                }
+                
+                _watchers = _queueWatchers.Values.ToList();
+            }
+        }
 
-		public void Release(QueueWatcher watcher)
-		{
-			watcher.Destroy();
+        public void Release(QueueWatcher watcher)
+        {
+            watcher.Destroy();
 
-			lock (_queueWatchers)
-			{
-				_queueWatchers.Remove(watcher.Queue.Name);
-			}
+            lock (_queueWatchers)
+            {
+                _queueWatchers.Remove(watcher.Queue.Name);
+            }
 
-			_watchers = _queueWatchers.Values.ToList();
-		}
+            _watchers = _queueWatchers.Values.ToList();
+        }
 
-		public QueueWatcher Get(string queueName)
-		{
-			QueueWatcher watcher;
-			lock (_queueWatchers)
-			{
-				_queueWatchers.TryGetValue(queueName, out watcher);
-			}
+        public QueueWatcher Get(string queueName)
+        {
+            QueueWatcher watcher;
+            lock (_queueWatchers)
+            {
+                _queueWatchers.TryGetValue(queueName, out watcher);
+            }
 
-			return watcher;
-		}
+            return watcher;
+        }
 
-		public IEnumerable<QueueWatcher> GetAll()
-		{
-			List<QueueWatcher> watchers;
+        public IEnumerable<QueueWatcher> GetAll()
+        {
+            List<QueueWatcher> watchers;
 
-			lock (_queueWatchers)
-			{
-				watchers = new List<QueueWatcher>(_queueWatchers.Select(x => x.Value));
-			}
+            lock (_queueWatchers)
+            {
+                watchers = new List<QueueWatcher>(_queueWatchers.Select(x => x.Value));
+            }
 
-			return watchers;
-		}
-	}
+            return watchers;
+        }
+    }
 }

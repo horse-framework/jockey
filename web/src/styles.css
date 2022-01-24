@@ -55,6 +55,7 @@ input {
   flex-grow: 1;
   padding-right: 18px;
   border-right: 1px solid #404040;
+  text-align: center;
 }
 .portlet-table {
   flex-grow: 0;

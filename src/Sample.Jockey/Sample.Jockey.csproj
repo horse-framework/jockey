@@ -9,4 +9,8 @@
       <ProjectReference Include="..\Horse.Jockey\Horse.Jockey.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Horse.Messaging.Data" Version="6.1.10" />
+    </ItemGroup>
+
 </Project>
