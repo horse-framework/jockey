@@ -19,3 +19,12 @@ export interface QueueMessage {
     deliveryCount: number;
     messageObj: any;
 }
+
+export class QueuePushMessage {
+    queue: string;
+    id: string;
+    contentType: number;
+    priority: boolean;
+    headers: QueueMessageHeader[];
+    message: string;
+}

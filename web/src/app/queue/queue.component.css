@@ -92,6 +92,9 @@
 .btn-green {
   border-color: #109030;
 }
+.btn-yellow {
+  border-color: #b2b200;
+}
 .btn-purple {
   border-color: #7620af;
 }
@@ -112,4 +115,7 @@
 }
 .btn-cyan:hover {
   border-color: #30c0c0;
+}
+.btn-yellow:hover {
+  border-color: #fafa20;
 }

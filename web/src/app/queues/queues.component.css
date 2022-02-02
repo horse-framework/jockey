@@ -1,10 +1,28 @@
-
 .queues {
-    margin: auto;
-    padding: 0px 60px;
-    text-align: center;
+  margin: auto;
+  padding: 0px 60px;
+  text-align: center;
 }
 .queues .table {
-    width: 100%;
-    text-align: left;
+  width: 100%;
+  text-align: left;
+}
+.create-queue {
+  text-align: center;
+  padding: 40px;
+}
+
+.create-queue button {
+  font-size: 13px;
+  border: 2px solid;
+  border-radius: 2px;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  font-weight: 500;
+  background-color: transparent;
+  border-color: #109030;
+}
+.create-queue button:hover {
+  border-color: #10f070;
 }

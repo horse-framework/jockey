@@ -14,6 +14,7 @@ import { take } from 'rxjs/operators';
 import { MesssageMoveModalComponent } from './messsage-move-modal/messsage-move-modal.component';
 import { QueueMessageModalComponent } from './queue-message-modal/queue-message-modal.component';
 import { QueueMessage } from 'src/models/queue-message';
+import { QueuePushModalComponent } from './queue-push-modal/queue-push-modal.component';
 
 @Component({
     selector: 'app-queue',
@@ -53,7 +54,6 @@ export class QueueComponent extends BaseComponent implements OnInit, OnDestroy {
 
         this.on(interval(5000)).subscribe(() => this.load());
     }
-
 
 
     private async load() {
@@ -213,6 +213,22 @@ export class QueueComponent extends BaseComponent implements OnInit, OnDestroy {
     }
 
 
+    push(): void {
+        let dialogRef = this.dialog.open(QueuePushModalComponent, { width: '550px' });
+        let component = <QueuePushModalComponent>dialogRef.componentInstance;
+        component.message.queue = this.queueName;
+        component.onconfirmed
+            .pipe(take(1))
+            .subscribe(msg => {
+                if (msg)
+                    this.queueService
+                        .push(msg)
+                        .then(result => {
+
+                        });
+            });
+    }
+
     read(): void {
         this.queueService
             .read(this.queueName)
@@ -240,7 +256,7 @@ export class QueueComponent extends BaseComponent implements OnInit, OnDestroy {
             return;
         }
 
-        let dialogRef = this.dialog.open(QueueMessageModalComponent, { width: '900px' });
+        let dialogRef = this.dialog.open(QueueMessageModalComponent, { width: '920px' });
         let component = <QueueMessageModalComponent>dialogRef.componentInstance;
         try {
             message.messageObj = JSON.parse(message.message);

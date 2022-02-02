@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
 using Horse.Jockey.Models.Queues;
+using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Queues;
-using Horse.Messaging.Server.Queues.Sync;
+using Horse.Messaging.Server.Queues.Delivery;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
@@ -60,6 +61,78 @@ namespace Horse.Jockey.Controllers
             detail.GraphData = watcher.GetGraphData();
 
             return JsonAsync(detail);
+        }
+
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] QueueCreateModel model)
+        {
+            HorseQueue queue = _rider.Queue.Find(model.Name);
+
+            if (queue != null)
+                return await NotFound(new {ok = false, message = "There is already a queue with same name"});
+
+            queue = await _rider.Queue.Create(model.Name, o =>
+            {
+                if (!string.IsNullOrEmpty(model.CommitWhen))
+                    o.CommitWhen = Enum.Parse<CommitWhen>(model.CommitWhen);
+
+                if (!string.IsNullOrEmpty(model.Acknowledge))
+                    o.Acknowledge = Enum.Parse<QueueAckDecision>(model.Acknowledge);
+
+                if (!string.IsNullOrEmpty(model.Type))
+                    o.Type = Enum.Parse<QueueType>(model.Type);
+
+                if (!string.IsNullOrEmpty(model.AutoDestroy))
+                    o.AutoDestroy = Enum.Parse<QueueDestroy>(model.AutoDestroy);
+
+                if (!string.IsNullOrEmpty(model.PutBack))
+                    o.PutBack = Enum.Parse<PutBackDecision>(model.PutBack);
+
+                if (model.AcknowledgeTimeout.HasValue)
+                    o.AcknowledgeTimeout = TimeSpan.FromMilliseconds(model.AcknowledgeTimeout.Value);
+
+                if (model.MessageTimeout.HasValue)
+                    o.MessageTimeout = TimeSpan.FromSeconds(model.MessageTimeout.Value);
+
+                if (model.PutBackDelay.HasValue)
+                    o.PutBackDelay = model.PutBackDelay.Value;
+
+                if (model.DelayBetweenMessages.HasValue)
+                    o.DelayBetweenMessages = model.DelayBetweenMessages.Value;
+
+                if (model.ClientLimit.HasValue)
+                    o.ClientLimit = model.ClientLimit.Value;
+
+                if (model.MessageLimit.HasValue)
+                    o.MessageLimit = model.MessageLimit.Value;
+
+                if (model.MessageSizeLimit.HasValue)
+                    o.MessageSizeLimit = model.MessageSizeLimit.Value;
+
+            }, model.Manager);
+
+            return Json(new {ok = queue != null});
+        }
+
+        [HttpPost("push")]
+        public async Task<IActionResult> Push([FromBody] QueuePushModel model)
+        {
+            HorseQueue queue = _rider.Queue.Find(model.Queue);
+
+            if (queue == null)
+                return await NotFound(new {result = "NotFound"});
+
+            HorseMessage message = new HorseMessage(MessageType.QueueMessage, queue.Name, model.ContentType);
+            message.HighPriority = model.Priority;
+            message.SetMessageId(model.Id);
+
+            foreach (QueueHeaderModel header in model.Headers)
+                message.AddHeader(header.Name, header.Value);
+
+            message.SetStringContent(model.Message);
+
+            PushResult result = await queue.Push(message);
+            return Json(new {result = result.ToString()});
         }
 
         [HttpGet("read")]

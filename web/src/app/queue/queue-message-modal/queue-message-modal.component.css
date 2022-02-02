@@ -50,7 +50,7 @@
 }
 
 .message-props {
-  flex: 1 1 200px;
+  flex: 1 1 440px;
 }
 
 .message-content {
@@ -85,6 +85,7 @@
   justify-items: stretch;
   justify-content: stretch;
   height: 28px;
+  width: 440px;
 }
 .message-content-title h4 {
   flex: 1 0 auto;

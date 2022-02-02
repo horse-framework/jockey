@@ -3,7 +3,7 @@
     <div class="vertical-col">
       <div class="portlet">
         <h3 class="portlet-title">Queue Delivery</h3>
-        <div class="portlet-body">
+        <div class="portlet-body" style="height: 330px;">
           <canvas id="queue-delivery-chart"></canvas>
         </div>
       </div>
@@ -15,7 +15,7 @@
       </div>
       <div class="portlet" *ngIf="queue">
         <h3 class="portlet-title">Queue Statistics</h3>
-        <div class="portlet-body" style="min-height: 307px;">
+        <div class="portlet-body" style="min-height: 377px;">
           <div class="key-value-table">
             <div class="kvt-row">
               <div class="kvt-key">Published Messages</div>
@@ -60,11 +60,15 @@
       <div *ngIf="queue">
         <div class="portlet">
           <h3 class="portlet-title">Queue Actions</h3>
-          <div class="portlet-body" style="height: 281px">
+          <div class="portlet-body" style="height: 330px">
             <div class="queue-panel">
               <div class="operation-panel">
                 <div>
-                  <button (click)="read()" class="operation-button btn-green">Read First Message</button>
+                  <button (click)="push()" class="operation-button btn-green">Push New Message</button>
+                  <p>Creates and pushes a message into the queue</p>
+                </div>
+                <div>
+                  <button (click)="read()" class="operation-button btn-yellow">Read First Message</button>
                   <p>Shows the first message information. Message will <b>not</b> be consumed.</p>
                 </div>
                 <div>
@@ -80,7 +84,8 @@
                   <p>Clears queue. Deletes all messages <b>permanently!</b></p>
                 </div>
                 <div>
-                  <button (click)="remove()" class="operation-button btn-red">Delete Queue and All Messages</button>
+                  <button (click)="remove()" class="operation-button btn-red">Delete Queue</button>
+                  <p>Deletes queue and <b>all messages</b> in it <b>permanently!</b></p>
                 </div>
               </div>
               <div class="status-panel">

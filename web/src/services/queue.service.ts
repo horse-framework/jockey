@@ -3,7 +3,8 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ApiClient } from 'src/lib/api-client';
 import { HorseQueue } from 'src/models/horse-queue';
-import { QueueMessage } from 'src/models/queue-message';
+import { QueueCreateModel } from 'src/models/queue-create-model';
+import { QueueMessage, QueuePushMessage } from 'src/models/queue-message';
 import { TransactionResult } from 'src/models/transaction-result';
 import { WebsocketService } from './websocket.service';
 
@@ -40,6 +41,32 @@ export class QueueService {
     get(name: string): Promise<HorseQueue> {
 
         return this.api.get('/queue/get?name=' + name)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    create(model: QueueCreateModel): Promise<any> {
+
+        return this.api.post('/queue/create', model)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    push(message: QueuePushMessage): Promise<any> {
+
+        return this.api.post('/queue/push', message)
             .pipe(
                 map(response => {
                     if (response.ok()) {

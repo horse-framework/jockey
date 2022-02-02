@@ -8,13 +8,15 @@ import { ConfirmModalComponent } from '../layout/portal-layout/confirm-modal/con
 import { QueueMessageModalComponent } from './queue-message-modal/queue-message-modal.component';
 import { MesssageMoveModalComponent } from './messsage-move-modal/messsage-move-modal.component';
 import { FormsModule } from '@angular/forms';
+import { QueuePushModalComponent } from './queue-push-modal/queue-push-modal.component';
 
 
 @NgModule({
   declarations: [
     QueueComponent,
     QueueMessageModalComponent,
-    MesssageMoveModalComponent
+    MesssageMoveModalComponent,
+    QueuePushModalComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { FormsModule } from '@angular/forms';
   entryComponents: [
     ConfirmModalComponent,
     QueueMessageModalComponent,
-    MesssageMoveModalComponent
+    MesssageMoveModalComponent,
+    QueuePushModalComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
