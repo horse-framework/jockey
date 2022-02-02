@@ -19,15 +19,15 @@ const routes: Routes = [
         canActivate: [SessionGuard]
     },
     {
-        path: 'route',
+        path: 'router',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./route/route.module').then(m => m.RouteModule),
+        loadChildren: () => import('./router/router.module').then(m => m.HorseRouterModule),
         canActivate: [SessionGuard]
     },
     {
         path: 'routers',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./routes/routers.module').then(m => m.RoutersModule),
+        loadChildren: () => import('./routers/routers.module').then(m => m.RoutersModule),
         canActivate: [SessionGuard]
     },
     {
