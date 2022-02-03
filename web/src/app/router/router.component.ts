@@ -53,6 +53,7 @@ export class RouterComponent extends BaseComponent implements OnInit {
 
         let dialogRef = this.dialog.open(BindingAddModalComponent, { width: '600px' });
         let component = <BindingAddModalComponent>dialogRef.componentInstance;
+        component.model.router = this.routerName;
         component.onconfirmed
             .pipe(take(1))
             .subscribe(value => {

@@ -46,8 +46,6 @@ export class BindingAddModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._confirmed = true;
-    this._onconfirmed.next(this.model);
   }
 
   ngOnDestroy(): void {
@@ -56,7 +54,8 @@ export class BindingAddModalComponent implements OnInit, OnDestroy {
   }
 
   add() {
-
+    this._confirmed = true;
+    this._onconfirmed.next(this.model);
   }
 
 }
