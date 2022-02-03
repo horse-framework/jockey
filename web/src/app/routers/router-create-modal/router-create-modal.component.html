@@ -8,7 +8,7 @@
         <div class="form-item">
             <label>Router Method</label>
             <select [(ngModel)]="model.method" class="jockey-select">
-                <option value="{{m.value}}" *ngFor="let m of routerMethods">{{m.text}}</option>
+                <option [ngValue]="m.value" *ngFor="let m of routerMethods">{{m.text}}</option>
             </select>
         </div>
     </div>

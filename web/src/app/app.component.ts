@@ -29,4 +29,5 @@ export class AppComponent extends BaseComponent implements OnInit {
 
     ngOnInit(): void {
     }
+
 }

@@ -3,9 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
+using Horse.Jockey.Models.Queues;
 using Horse.Jockey.Models.Routers;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
+using Horse.Messaging.Server.Queues;
 using Horse.Messaging.Server.Routing;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
@@ -153,6 +155,27 @@ namespace Horse.Jockey.Controllers
 
             router.RemoveBinding(bindingName);
             return JsonAsync(new {ok = true});
+        }
+
+        [HttpPost("publish")]
+        public async Task<IActionResult> Publish([FromBody] QueuePushModel model)
+        {
+            IRouter router = _rider.Router.Find(model.Queue);
+
+            if (router == null)
+                return await NotFound(new {result = "NotFound"});
+
+            HorseMessage message = new HorseMessage(MessageType.Router, model.Queue, model.ContentType);
+            message.HighPriority = model.Priority;
+            message.SetMessageId(model.Id);
+
+            foreach (QueueHeaderModel header in model.Headers)
+                message.AddHeader(header.Name, header.Value);
+
+            message.SetStringContent(model.Message);
+
+            RouterPublishResult result = await router.Publish(null, message);
+            return Json(new {result = result.ToString()});
         }
     }
 }

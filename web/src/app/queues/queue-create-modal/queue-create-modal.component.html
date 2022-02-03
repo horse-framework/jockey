@@ -13,31 +13,31 @@
         <div class="form-item">
             <label>Queue Type</label>
             <select [(ngModel)]="model.type" class="jockey-select">
-                <option value="{{i.value}}" *ngFor="let i of typeItems">{{i.text}}</option>
+                <option [ngValue]="i.value" *ngFor="let i of typeItems">{{i.text}}</option>
             </select>
         </div>
         <div class="form-item">
             <label>Commit When</label>
             <select [(ngModel)]="model.commit" class="jockey-select">
-                <option value="{{i.value}}" *ngFor="let i of commitWhenItems">{{i.text}}</option>
+                <option [ngValue]="i.value" *ngFor="let i of commitWhenItems">{{i.text}}</option>
             </select>
         </div>
         <div class="form-item">
             <label>Acknowledge</label>
             <select [(ngModel)]="model.ack" class="jockey-select">
-                <option value="{{i.value}}" *ngFor="let i of ackItems">{{i.text}}</option>
+                <option [ngValue]="i.value" *ngFor="let i of ackItems">{{i.text}}</option>
             </select>
         </div>
         <div class="form-item">
             <label>Put Back</label>
             <select [(ngModel)]="model.putBack" class="jockey-select">
-                <option value="{{i.value}}" *ngFor="let i of putBackItems">{{i.text}}</option>
+                <option [ngValue]="i.value" *ngFor="let i of putBackItems">{{i.text}}</option>
             </select>
         </div>
         <div class="form-item">
             <label>Auto Destroy</label>
             <select [(ngModel)]="model.autoDestroy" class="jockey-select">
-                <option value="{{i.value}}" *ngFor="let i of autoDestroyItems">{{i.text}}</option>
+                <option [ngValue]="i.value" *ngFor="let i of autoDestroyItems">{{i.text}}</option>
             </select>
         </div>
         <div class="form-item">
