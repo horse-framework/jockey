@@ -4,9 +4,9 @@
         <TargetFramework>net5.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>6.1.12</AssemblyVersion>
-        <FileVersion>6.1.12</FileVersion>
-        <PackageVersion>6.1.12</PackageVersion>
+        <AssemblyVersion>6.1.13</AssemblyVersion>
+        <FileVersion>6.1.13</FileVersion>
+        <PackageVersion>6.1.13</PackageVersion>
         <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
         <Description>Administration Portal for Horse Messaging</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
@@ -42,6 +42,8 @@
         <EmbeddedResource Include="Web\205-es5.js" />
         <EmbeddedResource Include="Web\218-es2015.js" />
         <EmbeddedResource Include="Web\218-es5.js" />
+        <EmbeddedResource Include="Web\388-es2015.js" />
+        <EmbeddedResource Include="Web\388-es5.js" />
         <EmbeddedResource Include="Web\474-es2015.js" />
         <EmbeddedResource Include="Web\474-es5.js" />
         <EmbeddedResource Include="Web\515-es2015.js" />
@@ -64,8 +66,6 @@
         <EmbeddedResource Include="Web\957-es5.js" />
         <EmbeddedResource Include="Web\963-es2015.js" />
         <EmbeddedResource Include="Web\963-es5.js" />
-        <EmbeddedResource Include="Web\982-es2015.js" />
-        <EmbeddedResource Include="Web\982-es5.js" />
         <EmbeddedResource Include="Web\common-es2015.js" />
         <EmbeddedResource Include="Web\common-es5.js" />
         <EmbeddedResource Include="Web\favicon.ico" />
