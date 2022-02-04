@@ -9,6 +9,7 @@ export interface QueueGraphData {
     unack: number;
     timeout: number;
     processing: number;
+    puttingBack: number;
     pending: number;
     error: number;
 }
