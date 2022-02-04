@@ -43,6 +43,7 @@ namespace Horse.Jockey.Controllers
                 queueMessages.Error += queue.Info.ErrorCount;
                 queueMessages.Unack += queue.Info.Unacknowledges;
                 queueMessages.Nack += queue.Info.NegativeAcknowledge;
+                queueMessages.PuttingBack += queue.GetMessageCountPendingForPutBack();
 
                 queueMessages.Received += queue.Info.ReceivedMessages;
                 queueMessages.Sent += queue.Info.SentMessages;

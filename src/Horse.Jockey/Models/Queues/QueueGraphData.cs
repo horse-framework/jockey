@@ -47,6 +47,10 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("processing")]
         public long Processing { get; set; }
 
+        [JsonProperty("puttingBack")]
+        [JsonPropertyName("puttingBack")]
+        public int PuttingBack { get; set; }
+
         [JsonProperty("pending")]
         [JsonPropertyName("pending")]
         public long Pending { get; set; }
