@@ -15,6 +15,7 @@ import { MesssageMoveModalComponent } from './messsage-move-modal/messsage-move-
 import { QueueMessageModalComponent } from './queue-message-modal/queue-message-modal.component';
 import { QueueMessage } from 'src/models/queue-message';
 import { QueuePushModalComponent } from './queue-push-modal/queue-push-modal.component';
+import { QueueOptionModalComponent } from './queue-option-modal/queue-option-modal.component';
 
 @Component({
     selector: 'app-queue',
@@ -328,4 +329,21 @@ export class QueueComponent extends BaseComponent implements OnInit, OnDestroy {
             });
     }
 
+    changeOption(title: string, name: string, value: any): void {
+
+        let dialogRef = this.dialog.open(QueueOptionModalComponent, { width: '500px' });
+        let component = <QueueOptionModalComponent>dialogRef.componentInstance;
+
+        component.model.title = title;
+        component.model.property = name;
+        component.model.value = value;
+
+        component.onconfirmed
+            .pipe(take(1))
+            .subscribe(value => {
+                if (value.confirmed) {
+                    this.queueService.setOption(this.queueName, value.property, value.value).then(() => this.load());
+                }
+            });
+    }
 }

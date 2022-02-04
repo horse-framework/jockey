@@ -34,6 +34,10 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("ackPendingMsgs")]
         public int AckPendingMsgs { get; set; }
 
+        [JsonProperty("puttingBackMsgs")]
+        [JsonPropertyName("puttingBackMsgs")]
+        public int PuttingBackMsgs { get; set; }
+
         [JsonProperty("lastReceived")]
         [JsonPropertyName("lastReceived")]
         public long LastReceived { get; set; }
@@ -89,6 +93,7 @@ namespace Horse.Jockey.Models.Queues
                 StoredPrioMsgs = queue.Manager == null ? 0 : queue.Manager.PriorityMessageStore.Count(),
                 ProcessingMsgs = processingMessages,
                 AckPendingMsgs = queue.Manager == null ? 0 : queue.Manager.DeliveryHandler.Tracker.GetDeliveryCount(),
+                PuttingBackMsgs = queue.GetMessageCountPendingForPutBack(),
                 TotalAck = queue.Info.Acknowledges,
                 TotalNack = queue.Info.NegativeAcknowledge,
                 TotalUnack = queue.Info.Unacknowledges,

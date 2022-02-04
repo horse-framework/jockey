@@ -38,10 +38,10 @@ namespace Horse.Jockey.Core
         public long RouterNotFound => _routerNotFound;
         public long RouterOk => _routerOk;
         public long RouterFailed => _routerFailed;
-        
+
         public long ChannelPublish => _channelPublish;
         public long ChannelReceive => _channelReceive;
-        
+
         private Timer _runner;
         private MessageGraphData _last = new MessageGraphData();
         private readonly Queue<MessageGraphData> _graphData = new Queue<MessageGraphData>(60);
@@ -80,7 +80,7 @@ namespace Horse.Jockey.Core
             {
                 long channelPublishTotal = 0;
                 long channelReceiveTotal = 0;
-                
+
                 foreach (HorseChannel channel in _rider.Channel.Channels)
                 {
                     channelPublishTotal += channel.Info.Published;
@@ -89,19 +89,19 @@ namespace Horse.Jockey.Core
 
                 _channelPublish = channelPublishTotal;
                 _channelReceive = channelReceiveTotal;
-                
+
                 MessageGraphData data = new MessageGraphData
-                                        {
-                                            Date = DateTime.UtcNow.ToUnixSeconds(),
-                                            DirectDelivery = _directDelivery - _last.DirectDelivery,
-                                            DirectMessage = _directMessage - _last.DirectMessage,
-                                            DirectResponse = _directResponse - _last.DirectResponse,
-                                            RouterPublish = _routerPublish - _last.RouterPublish,
-                                            RouterNotFound = _routerNotFound - _last.RouterNotFound,
-                                            DirectNoReceiver = _directNoReceiver - _last.DirectNoReceiver,
-                                            ChannelPublish = _channelPublish - _last.ChannelPublish,
-                                            ChannelReceive = _channelReceive - _last.ChannelReceive
-                                        };
+                {
+                    Date = DateTime.UtcNow.ToUnixSeconds(),
+                    DirectDelivery = _directDelivery - _last.DirectDelivery,
+                    DirectMessage = _directMessage - _last.DirectMessage,
+                    DirectResponse = _directResponse - _last.DirectResponse,
+                    RouterPublish = _routerPublish - _last.RouterPublish,
+                    RouterNotFound = _routerNotFound - _last.RouterNotFound,
+                    DirectNoReceiver = _directNoReceiver - _last.DirectNoReceiver,
+                    ChannelPublish = Math.Max(0, _channelPublish - _last.ChannelPublish),
+                    ChannelReceive = Math.Max(0, _channelReceive - _last.ChannelReceive)
+                };
 
                 lock (_graphData)
                 {
@@ -119,17 +119,17 @@ namespace Horse.Jockey.Core
                     _ = bus.SendAsync(socket, data);
 
                 _last = new MessageGraphData
-                        {
-                            Date = DateTime.UtcNow.ToUnixSeconds(),
-                            DirectDelivery = _directDelivery,
-                            DirectMessage = _directMessage,
-                            DirectResponse = _directResponse,
-                            RouterPublish = _routerPublish,
-                            RouterNotFound = _routerNotFound,
-                            DirectNoReceiver = _directNoReceiver,
-                            ChannelPublish = _channelPublish,
-                            ChannelReceive = _channelReceive
-                        };
+                {
+                    Date = DateTime.UtcNow.ToUnixSeconds(),
+                    DirectDelivery = _directDelivery,
+                    DirectMessage = _directMessage,
+                    DirectResponse = _directResponse,
+                    RouterPublish = _routerPublish,
+                    RouterNotFound = _routerNotFound,
+                    DirectNoReceiver = _directNoReceiver,
+                    ChannelPublish = _channelPublish,
+                    ChannelReceive = _channelReceive
+                };
             }, null, 1000, 1000);
         }
 
@@ -184,7 +184,7 @@ namespace Horse.Jockey.Core
         {
             Interlocked.Increment(ref _routerFailed);
         }
-        
+
         #endregion
     }
 }

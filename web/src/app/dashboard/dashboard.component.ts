@@ -43,7 +43,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     }
 
     private async load() {
-        this.dashboardService.load().then(d => this.dashboard = d);
+        this.dashboard = await this.dashboardService.load();
         await this.loadCharts();
 
         let pipe = new TimespanPipe();

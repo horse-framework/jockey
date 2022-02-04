@@ -64,6 +64,25 @@ export class QueueService {
             .toPromise();
     }
 
+    setOption(queueName: string, optionName: string, value: any): Promise<any> {
+
+        let model = {
+            queue: queueName,
+            name: optionName,
+            value: value
+        };
+
+        return this.api.put('/queue/option', model)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
     push(message: QueuePushMessage): Promise<any> {
 
         return this.api.post('/queue/push', message)

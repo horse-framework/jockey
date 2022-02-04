@@ -9,6 +9,7 @@ import { QueueMessageModalComponent } from './queue-message-modal/queue-message-
 import { MesssageMoveModalComponent } from './messsage-move-modal/messsage-move-modal.component';
 import { FormsModule } from '@angular/forms';
 import { QueuePushModalComponent } from './queue-push-modal/queue-push-modal.component';
+import { QueueOptionModalComponent } from './queue-option-modal/queue-option-modal.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { QueuePushModalComponent } from './queue-push-modal/queue-push-modal.com
     QueueComponent,
     QueueMessageModalComponent,
     MesssageMoveModalComponent,
-    QueuePushModalComponent
+    QueuePushModalComponent,
+    QueueOptionModalComponent
   ],
   imports: [
     CommonModule,

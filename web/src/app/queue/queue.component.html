@@ -132,7 +132,10 @@
               <div class="kvt-row kvt-seperator"></div>
               <div class="kvt-row">
                 <div class="kvt-key">Topic</div>
-                <div class="kvt-value">{{queue.info.topic ?? "-"}}</div>
+                <div class="kvt-value">
+                  {{queue.info.topic ?? "-"}}
+                  <a class="change-option" (click)="changeOption('Topic', 'topic', queue.info.topic)">Change</a>
+                </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Type</div>
@@ -144,7 +147,10 @@
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Consumer Limit</div>
-                <div class="kvt-value">{{queue.options.clientLimit | unlimited}}</div>
+                <div class="kvt-value">
+                  {{queue.options.clientLimit | unlimited}}
+                  <a class="change-option" (click)="changeOption('Consumer Limit', 'clientLimit', queue.options.clientLimit)">Change</a>
+                </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Created Date</div>
@@ -159,8 +165,14 @@
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Acknowledge Timeout</div>
-                <div class="kvt-value" *ngIf="queue.info.ackTimeout > 0">{{queue.info.ackTimeout}} ms timeout</div>
-                <div class="kvt-value" *ngIf="queue.info.ackTimeout == 0">No timeout</div>
+                <div class="kvt-value" *ngIf="queue.info.ackTimeout > 0">
+                  {{queue.info.ackTimeout}} ms Timeout
+                  <a class="change-option" (click)="changeOption('Acknowledge Timeout', 'ackTimeout', queue.info.ackTimeout)">Change</a>
+                </div>
+                <div class="kvt-value" *ngIf="queue.info.ackTimeout == 0">
+                  No Timeout
+                  <a class="change-option" (click)="changeOption('Acknowledge Timeout', 'ackTimeout', queue.info.ackTimeout)">Change</a>
+                </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Commit When</div>
@@ -173,39 +185,56 @@
                 <div class="kvt-key">Message Timeout</div>
                 <div class="kvt-value" *ngIf="queue.info.msgTimeout == 0">No Timeout</div>
                 <div class="kvt-value" *ngIf="queue.info.msgTimeout > 0">
-                  {{queue.info.msgTimeout}} milliseconds
+                  {{queue.info.msgTimeout}} Milliseconds
+                  <a class="change-option" (click)="changeOption('Message Timeout', 'msgTimeout', queue.info.msgTimeout)">Change</a>
                 </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Message Limit</div>
                 <div class="kvt-value">
-                  {{queue.info.messageLimit | unlimited}}
+                  {{queue.info.msgLimit | unlimited}}
+                  <a class="change-option" (click)="changeOption('Message Timeout', 'msgLimit', queue.info.msgLimit)">Change</a>
                 </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Message Size Limit</div>
                 <div class="kvt-value">
-                  {{queue.info.messageSizeLimit | filesize}}
+                  {{queue.info.msgSizeLimit | filesize}}
+                  <a class="change-option"
+                     (click)="changeOption('Message Size Limit', 'msgSizeLimit', queue.info.msgSizeLimit)">Change</a>
                 </div>
               </div>
               <div class="kvt-row kvt-seperator"></div>
               <div class="kvt-row">
                 <div class="kvt-key">Delay Between Messages</div>
-                <div class="kvt-value" *ngIf="queue.info.delayBetweenMessages == 0">No Delay</div>
-                <div class="kvt-value" *ngIf="queue.info.delayBetweenMessages > 0">
-                  {{queue.info.delayBetweenMessages}} milliseconds
+                <div class="kvt-value" *ngIf="queue.info.delayBetweenMsgs == 0">
+                  No Delay
+                  <a class="change-option"
+                     (click)="changeOption('Delay Between Messages', 'delayBetweenMsgs', queue.info.delayBetweenMsgs)">Change</a>
+                </div>
+                <div class="kvt-value" *ngIf="queue.info.delayBetweenMsgs > 0">
+                  {{queue.info.delayBetweenMsgs}} Milliseconds
+                  <a class="change-option"
+                     (click)="changeOption('Delay Between Messages', 'delayBetweenMsgs', queue.info.delayBetweenMsgs)">Change</a>
                 </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Put Back Delay</div>
-                <div class="kvt-value" *ngIf="queue.info.putBackDelay == 0">No Delay</div>
+                <div class="kvt-value" *ngIf="queue.info.putBackDelay == 0">
+                  No Delay
+                  <a class="change-option" (click)="changeOption('Put Back Delay', 'putBackDelay', queue.info.putBackDelay)">Change</a>
+                </div>
                 <div class="kvt-value" *ngIf="queue.info.putBackDelay > 0">
-                  {{queue.info.putBackDelay}} milliseconds
+                  {{queue.info.putBackDelay}} Milliseconds
+                  <a class="change-option" (click)="changeOption('Put Back Delay', 'putBackDelay', queue.info.putBackDelay)">Change</a>
                 </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Auto Destroy</div>
-                <div class="kvt-value">{{queue.info.autoDestroy}}</div>
+                <div class="kvt-value">
+                  {{queue.info.autoDestroy}}
+                  <a class="change-option" (click)="changeOption('Auto Destroy', 'autoDestroy', queue.info.autoDestroy)">Change</a>
+                </div>
               </div>
             </div>
           </div>

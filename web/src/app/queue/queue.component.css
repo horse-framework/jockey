@@ -119,3 +119,16 @@
 .btn-yellow:hover {
   border-color: #fafa20;
 }
+
+.change-option {
+  font-size: 12px;
+  font-weight: 500;
+  color: #109030;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 2px;
+  margin-left: 10px;
+}
+.change-option:hover {
+  color: #10f070;
+}

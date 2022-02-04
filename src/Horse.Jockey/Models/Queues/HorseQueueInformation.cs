@@ -45,16 +45,16 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("msgTimeout")]
         public long MsgTimeout { get; set; }
 
-        [JsonProperty("messageLimit")]
-        [JsonPropertyName("messageLimit")]
+        [JsonProperty("msgLimit")]
+        [JsonPropertyName("msgLimit")]
         public int MessageLimit { get; set; }
 
-        [JsonProperty("messageSizeLimit")]
-        [JsonPropertyName("messageSizeLimit")]
+        [JsonProperty("msgSizeLimit")]
+        [JsonPropertyName("msgSizeLimit")]
         public ulong MessageSizeLimit { get; set; }
 
-        [JsonProperty("delayBetweenMessages")]
-        [JsonPropertyName("delayBetweenMessages")]
+        [JsonProperty("delayBetweenMsgs")]
+        [JsonPropertyName("delayBetweenMsgs")]
         public int DelayBetweenMessages { get; set; }
 
         [JsonProperty("putBackDelay")]
@@ -87,8 +87,7 @@ namespace Horse.Jockey.Models.Queues
                 MsgTimeout = queue.Options.MessageTimeout.ToMilliseconds(),
                 DelayBetweenMessages = queue.Options.DelayBetweenMessages,
                 MessageSizeLimit = queue.Options.MessageSizeLimit,
-                PutBackDelay = queue.Options.PutBackDelay,
-                
+                PutBackDelay = queue.Options.PutBackDelay
             };
         }
     }

@@ -1,0 +1,16 @@
+<h2 class="title" mat-dialog-title>Queue Option Change</h2>
+<mat-dialog-content class="content">
+    <div class="form-item">
+        <label>{{model.title}}</label>
+        
+        <input *ngIf="model.property != 'autoDestroy'" placeholder="Option Value" class="target-text" type="text" [(ngModel)]="model.value" />
+
+        <select *ngIf="model.property == 'autoDestroy'" [(ngModel)]="model.value" class="jockey-select">
+            <option [ngValue]="i.value" *ngFor="let i of autoDestroyItems">{{i.text}}</option>
+        </select>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button (click)="confirm()" mat-button mat-dialog-close class="modal-btn btn-confirm">Confirm</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-cancel">Cancel</button>
+</mat-dialog-actions>

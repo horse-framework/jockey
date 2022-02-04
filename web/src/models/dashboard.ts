@@ -14,4 +14,6 @@ export interface Dashboard {
     queueOptions: QueueOptions;
     channelCount: number;
     queueCount: number;
+    channelPublished: number;
+    channelReceived: number;
 }

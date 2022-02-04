@@ -108,11 +108,57 @@ namespace Horse.Jockey.Controllers
 
                 if (model.MessageSizeLimit.HasValue)
                     o.MessageSizeLimit = model.MessageSizeLimit.Value;
-
             }, model.Manager);
 
             return Json(new {ok = queue != null});
         }
+
+        [HttpPut("option")]
+        public async Task<IActionResult> ChangeOption([FromBody] QueueOptionChange model)
+        {
+            HorseQueue queue = _rider.Queue.Find(model.Queue);
+
+            if (queue == null)
+                return await NotFound(new {ok = false, message = "There is already a queue with same name"});
+
+            switch (model.Name)
+            {
+                case "ackTimeout":
+                    queue.Options.AcknowledgeTimeout = TimeSpan.FromMilliseconds(Convert.ToInt32(model.Value));
+                    break;
+
+                case "autoDestroy":
+                    queue.Options.AutoDestroy = Enum.Parse<QueueDestroy>(model.Value);
+                    break;
+
+                case "clientLimit":
+                    queue.Options.ClientLimit = Convert.ToInt32(model.Value);
+                    break;
+
+                case "delayBetweenMsgs":
+                    queue.Options.DelayBetweenMessages = Convert.ToInt32(model.Value);
+                    break;
+
+                case "msgLimit":
+                    queue.Options.MessageLimit = Convert.ToInt32(model.Value);
+                    break;
+
+                case "msgSizeLimit":
+                    queue.Options.MessageSizeLimit = Convert.ToUInt64(model.Value);
+                    break;
+
+                case "putBackDelay":
+                    queue.Options.PutBackDelay = Convert.ToInt32(model.Value);
+                    break;
+
+                case "topic":
+                    queue.Topic = model.Value;
+                    break;
+            }
+
+            return Json(new {ok = queue != null});
+        }
+
 
         [HttpPost("push")]
         public async Task<IActionResult> Push([FromBody] QueuePushModel model)
@@ -183,6 +229,7 @@ namespace Horse.Jockey.Controllers
             if (queue == null)
                 return NotFound(null);
 
+            queue.ClearPuttingBackMessages();
             queue.Manager.PriorityMessageStore.Clear();
             queue.Manager.MessageStore.Clear();
             return Ok(new {name = name, clear = true});
@@ -225,6 +272,17 @@ namespace Horse.Jockey.Controllers
                 return await NotFound(null);
 
             int moveCount = 0;
+
+            List<QueueMessage> puttingBackMessages = queue.ClearPuttingBackMessages();
+            foreach (QueueMessage message in puttingBackMessages)
+            {
+                PushResult result = await targetQueue.Push(message.Message);
+                if (result != PushResult.Success)
+                    return await Ok(new {ok = true, completed = false, count = moveCount});
+
+                moveCount++;
+            }
+
             while (true)
             {
                 QueueMessage message = queue.Manager.PriorityMessageStore.ConsumeFirst();
