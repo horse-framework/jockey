@@ -11,7 +11,7 @@ using Horse.Messaging.Server;
 using Horse.Messaging.Server.Clients;
 using Horse.Messaging.Server.Queues;
 using Horse.Messaging.Server.Queues.Delivery;
-using Horse.WebSocket.Models;
+using Horse.WebSocket.Server;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Horse.Jockey.Handlers.Queues

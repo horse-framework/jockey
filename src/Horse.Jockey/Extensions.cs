@@ -11,9 +11,9 @@ using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
 using Horse.Mvc.Middlewares;
 using Horse.Protocols.WebSocket;
+using Horse.Protocols.WebSocket.Serialization;
 using Horse.Server;
-using Horse.WebSocket.Models;
-using Horse.WebSocket.Models.Serialization;
+using Horse.WebSocket.Server;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Horse.Jockey

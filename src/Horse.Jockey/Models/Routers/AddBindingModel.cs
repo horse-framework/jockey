@@ -25,6 +25,10 @@ namespace Horse.Jockey.Models.Routers
         [JsonPropertyName("type")]
         public string Type { get; set; }
         
+        [JsonProperty("customBindingType")]
+        [JsonPropertyName("customBindingType")]
+        public string CustomBindingType { get; set; }
+        
         [JsonProperty("interaction")]
         [JsonPropertyName("interaction")]
         public string Interaction { get; set; }

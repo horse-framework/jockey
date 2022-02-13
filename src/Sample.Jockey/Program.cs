@@ -30,8 +30,8 @@ namespace Sample.Jockey
                         q.Options.PutBack = PutBackDecision.Regular;
                         q.Options.Acknowledge = QueueAckDecision.WaitForAcknowledge;
                     });
-                    
                 })
+                .ConfigureRouters(c => c.UsePersistentRouters())
                 .AddJockey(o => o.Port = 15400)
                 .Build();
 /*
@@ -54,13 +54,6 @@ namespace Sample.Jockey
             rider.Cache.Set("DemoCache6", new MemoryStream(), TimeSpan.FromMinutes(174));
             rider.Cache.Set("DemoCache7", new MemoryStream(), TimeSpan.FromMinutes(200));
 
-            IRouter router1 = rider.Router.Add("router-1", RouteMethod.Distribute);
-            router1.AddBinding(new DirectBinding("direct-1", "@name:client-x", 123, 1, BindingInteraction.None));
-            router1.AddBinding(new DirectBinding("direct-2", "@name:client-y", 200, 2, BindingInteraction.None));
-
-            IRouter router2 = rider.Router.Add("router-2", RouteMethod.RoundRobin);
-            router2.AddBinding(new HttpBinding("http1", "http://localhost:123/endpoint", HttpBindingMethod.Post, 100, BindingInteraction.Response));
-
             HorseServer server = new();
             server.UseRider(rider);
             server.Start(26222);
@@ -74,12 +67,12 @@ namespace Sample.Jockey
             await client.Channel.Publish("DemoChannel2", new {foo = "123"});
             Console.WriteLine("ok");
             Console.ReadLine();
-            
+
             HorseClient consumer = new();
             await consumer.ConnectAsync("horse://localhost:26222");
             consumer.AutoAcknowledge = true;
             await consumer.Queue.Subscribe("DemoQueue2", true);
-            
+
             while (true)
             {
                 Console.ReadLine();

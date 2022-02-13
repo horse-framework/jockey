@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Horse.Jockey.Core;
 using Horse.Jockey.Models.WebSockets;
 using Horse.Protocols.WebSocket;
-using Horse.WebSocket.Models;
 
 namespace Horse.Jockey.Handlers.WebSockets
 {

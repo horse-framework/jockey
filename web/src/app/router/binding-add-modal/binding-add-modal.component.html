@@ -1,6 +1,6 @@
 <h2 class="title" mat-dialog-title>Add Binding</h2>
 <mat-dialog-content class="content">
-    <div #queueForm class="queue-form scroll">
+    <div #queueForm>
         <div class="form-item">
             <label>Binding Name</label>
             <input placeholder="Binding Name" class="jockey-text" type="text" [(ngModel)]="model.name" />
@@ -11,13 +11,17 @@
                 <option [ngValue]="i.value" *ngFor="let i of bindingTypes">{{i.text}}</option>
             </select>
         </div>
-        <div class="form-item" *ngIf="model.type == 'http'">
+        <div class="form-item" *ngIf="model.type == 'custom'">
+            <label>Full Binding Type Name (Namespace.TypeName, AssemblyName)</label>
+            <input placeholder="Binding Full Type Name" class="jockey-text" type="text" [(ngModel)]="model.customBindingType" />
+        </div>
+        <div class="form-item" *ngIf="model.type == 'HttpBinding'">
             <label>Binding Method</label>
             <select [(ngModel)]="model.method" class="jockey-select" placeholder="Select an HTTP Method">
                 <option [ngValue]="i.value" *ngFor="let i of httpMethods">{{i.text}}</option>
             </select>
         </div>
-        <div class="form-item" *ngIf="model.type != 'http'">
+        <div class="form-item" *ngIf="model.type != 'HttpBinding'">
             <label>Binding Method</label>
             <select [(ngModel)]="model.method" class="jockey-select" placeholder="Default value is Distribute">
                 <option [ngValue]="i.value" *ngFor="let i of routerMethods">{{i.text}}</option>

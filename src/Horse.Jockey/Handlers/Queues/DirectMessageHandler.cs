@@ -9,7 +9,7 @@ using Horse.Jockey.Models.WebSockets;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server.Clients;
 using Horse.Messaging.Server.Direct;
-using Horse.WebSocket.Models;
+using Horse.WebSocket.Server;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Horse.Jockey.Handlers.Queues

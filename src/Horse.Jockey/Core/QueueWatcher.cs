@@ -5,7 +5,7 @@ using Horse.Jockey.Helpers;
 using Horse.Jockey.Models.Queues;
 using Horse.Jockey.Models.Subscriptions;
 using Horse.Messaging.Server.Queues;
-using Horse.WebSocket.Models;
+using Horse.WebSocket.Server;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Horse.Jockey.Core

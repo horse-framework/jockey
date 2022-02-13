@@ -5,7 +5,8 @@ export class AddBindingModel {
     target: string;
     priority: number = 0;
     contentType: number = null;
-    type: 'queue' | 'dynamic' | 'topic' | 'direct' | 'http';
+    type: string;
+    customBindingType: string;
     interaction: 'None' | 'Response';
     method: 'RoundRobin' | 'Distribute' | 'OnlyFirst' | 'Get' | 'Post' | 'Put' | 'Patch' | 'Delete';
 }

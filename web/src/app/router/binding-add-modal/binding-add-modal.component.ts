@@ -12,11 +12,13 @@ export class BindingAddModalComponent implements OnInit, OnDestroy {
   model: AddBindingModel = new AddBindingModel();
 
   bindingTypes = [
-    { value: 'queue', text: 'Queue Binding' },
-    { value: 'dynamic', text: 'Dynamic Queue Binding' },
-    { value: 'topic', text: 'Topic Binding' },
-    { value: 'direct', text: 'Direct Binding' },
-    { value: 'http', text: 'Http Binding' },
+    { value: 'QueueBinding', text: 'Queue Binding' },
+    { value: 'AutoQueueBinding', text: 'Auto Queue Binding' },
+    { value: 'DynamicQueueBinding', text: 'Dynamic Queue Binding' },
+    { value: 'TopicBinding', text: 'Topic Binding' },
+    { value: 'DirectBinding', text: 'Direct Binding' },
+    { value: 'HttpBinding', text: 'Http Binding' },
+    { value: 'custom', text: '(Custom Binding)' }
   ];
 
   routerMethods = [

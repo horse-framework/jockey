@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
@@ -7,7 +8,6 @@ using Horse.Jockey.Models.Queues;
 using Horse.Jockey.Models.Routers;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
-using Horse.Messaging.Server.Queues;
 using Horse.Messaging.Server.Routing;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
@@ -103,37 +103,39 @@ namespace Horse.Jockey.Controllers
             if (router == null)
                 return NotFound(null);
 
-            BindingInteraction interaction = Enum.Parse<BindingInteraction>(model.Interaction);
-            Binding binding = null;
+            BindingInteraction interaction = string.IsNullOrEmpty(model.Interaction) ? BindingInteraction.None : Enum.Parse<BindingInteraction>(model.Interaction);
+            RouteMethod method = string.IsNullOrEmpty(model.Method) ? RouteMethod.Distribute : Enum.Parse<RouteMethod>(model.Method);
 
-            switch (model.Type)
+            string bindingType = model.Type;
+            if (bindingType.Equals("custom", StringComparison.InvariantCultureIgnoreCase))
             {
-                case "queue":
-                    binding = new QueueBinding(model.Name, model.Target, model.Priority, interaction);
-                    break;
-
-                case "dynamic":
-                    binding = new DynamicQueueBinding(model.Name, model.Priority, interaction);
-                    break;
-
-                case "topic":
-                    RouteMethod topicMethod = !string.IsNullOrEmpty(model.Method) ? Enum.Parse<RouteMethod>(model.Method) : RouteMethod.Distribute;
-                    binding = new TopicBinding(model.Name, model.Target, model.ContentType, model.Priority, interaction, topicMethod);
-                    break;
-
-                case "direct":
-                    RouteMethod directMethod = !string.IsNullOrEmpty(model.Method) ? Enum.Parse<RouteMethod>(model.Method) : RouteMethod.Distribute;
-                    binding = new DirectBinding(model.Name, model.Target, model.ContentType, model.Priority, interaction, directMethod);
-                    break;
-
-                case "http":
-                    HttpBindingMethod httpMethod = Enum.Parse<HttpBindingMethod>(model.Method);
-                    binding = new HttpBinding(model.Name, model.Target, httpMethod, model.Priority, interaction);
-                    break;
+                bindingType = model.CustomBindingType;
+            }
+            else
+            {
+                if (bindingType.IndexOf('.') < 0)
+                    bindingType = "Horse.Messaging.Server.Routing." + bindingType;
             }
 
+            Type type = Type.GetType(bindingType);
+            if (type == null)
+                type = Type.GetType($"{bindingType}, Horse.Messaging.Server");
+            
+            if (type == null && !bindingType.EndsWith("Binding"))
+                type = Type.GetType($"{bindingType}Binding");
+            
+            if (type == null)
+                type = Type.GetType($"{bindingType}, Horse.Messaging.Server");
+
+            Binding binding = (Binding) Activator.CreateInstance(type);
             if (binding == null)
                 return BadRequest(new {error = "Invalid Binding Type"});
+
+            binding.Name = model.Name;
+            binding.Target = model.Target;
+            binding.Priority = model.Priority;
+            binding.Interaction = interaction;
+            binding.RouteMethod = method;
 
             bool added = router.AddBinding(binding);
 
