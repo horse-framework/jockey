@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    version: '6.1.13',
+    version: '6.2.0',
 
     api: {
         url: '/api',
