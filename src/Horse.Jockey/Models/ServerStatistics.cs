@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Horse.Jockey.Helpers;
 using Horse.Messaging.Server;
-using Horse.Protocols.WebSocket;
+using Horse.WebSocket.Protocol;
 using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models

@@ -7,7 +7,7 @@ using Horse.Messaging.Protocol;
 using Horse.Messaging.Server.Channels;
 using Horse.Messaging.Server.Queues;
 using Horse.Messaging.Server.Routing;
-using Horse.Protocols.WebSocket;
+using Horse.WebSocket.Protocol;
 
 namespace Horse.Jockey.Core
 {

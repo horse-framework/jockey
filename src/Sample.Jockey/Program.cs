@@ -6,10 +6,8 @@ using Horse.Messaging.Client;
 using Horse.Messaging.Data;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
-using Horse.Messaging.Server.Channels;
 using Horse.Messaging.Server.Queues;
 using Horse.Messaging.Server.Queues.Delivery;
-using Horse.Messaging.Server.Routing;
 using Horse.Server;
 
 namespace Sample.Jockey
@@ -31,7 +29,6 @@ namespace Sample.Jockey
                         q.Options.Acknowledge = QueueAckDecision.WaitForAcknowledge;
                     });
                 })
-                .ConfigureRouters(c => c.UsePersistentRouters())
                 .AddJockey(o => o.Port = 15400)
                 .Build();
 /*

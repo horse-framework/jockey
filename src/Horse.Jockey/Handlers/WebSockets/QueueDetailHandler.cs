@@ -4,7 +4,7 @@ using Horse.Jockey.Core;
 using Horse.Jockey.Models.WebSockets;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Queues;
-using Horse.Protocols.WebSocket;
+using Horse.WebSocket.Protocol;
 using Horse.WebSocket.Server;
 
 namespace Horse.Jockey.Handlers.WebSockets

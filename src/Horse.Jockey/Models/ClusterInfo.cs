@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Horse.Protocols.WebSocket;
+using Horse.WebSocket.Protocol;
 using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models

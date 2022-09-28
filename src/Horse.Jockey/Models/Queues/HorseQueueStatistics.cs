@@ -2,7 +2,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using Horse.Jockey.Helpers;
 using Horse.Messaging.Server.Queues;
-using Horse.Protocols.WebSocket;
+using Horse.WebSocket.Protocol;
 using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.Queues

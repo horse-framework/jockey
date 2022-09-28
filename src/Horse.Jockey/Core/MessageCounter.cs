@@ -6,7 +6,7 @@ using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Channels;
-using Horse.Protocols.WebSocket;
+using Horse.WebSocket.Protocol;
 using Horse.WebSocket.Server;
 using Microsoft.Extensions.DependencyInjection;
 

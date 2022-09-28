@@ -10,9 +10,9 @@ using Horse.Messaging.Server;
 using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
 using Horse.Mvc.Middlewares;
-using Horse.Protocols.WebSocket;
-using Horse.Protocols.WebSocket.Serialization;
 using Horse.Server;
+using Horse.WebSocket.Protocol;
+using Horse.WebSocket.Protocol.Serialization;
 using Horse.WebSocket.Server;
 using Microsoft.Extensions.DependencyInjection;
 
