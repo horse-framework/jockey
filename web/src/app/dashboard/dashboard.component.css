@@ -7,6 +7,7 @@
   flex-wrap: wrap;
   margin: 0px 52px 50px 52px;
   box-sizing: border-box;
+  padding-bottom: 60px;
 }
 
 .dashboard-row {
@@ -52,4 +53,12 @@
 .dashboard-portlet .portlet-body {
   min-height: 240px;
   max-height: 500px;
+}
+
+.dashboard-portlet .portlet-body canvas {
+  max-width: calc(50vw - 400px);
+}
+
+.portlet-table.canvas-info {
+  width: 280px;
 }

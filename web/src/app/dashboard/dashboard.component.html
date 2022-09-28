@@ -1,13 +1,13 @@
 <div class="dashboard" [hidden]="dashboard == null">
   <div class="dashboard-row">
-    <div class="dashboard-portlet dp-40">
+    <div class="dashboard-portlet">
       <div class="portlet">
         <h3 class="portlet-title">Stored Queue Messages</h3>
         <div class="portlet-body">
           <div class="portlet-canvas">
             <canvas id="store-chart"></canvas>
           </div>
-          <div class="portlet-table" *ngIf="dashboard">
+          <div class="portlet-table canvas-info" *ngIf="dashboard">
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Queue Count</div>
@@ -38,14 +38,14 @@
         </div>
       </div>
     </div>
-    <div class="dashboard-portlet dp-50">
+    <div class="dashboard-portlet">
       <div class="portlet">
         <h3 class="portlet-title">Queue Messages and Deliveries</h3>
         <div class="portlet-body">
           <div class="portlet-canvas">
             <canvas id="delivery-chart"></canvas>
           </div>
-          <div class="portlet-table" *ngIf="dashboard">
+          <div class="portlet-table canvas-info" *ngIf="dashboard">
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Produced</div>
@@ -221,7 +221,7 @@
           <div class="portlet-canvas">
             <canvas id="router-chart"></canvas>
           </div>
-          <div class="portlet-table" *ngIf="dashboard">
+          <div class="portlet-table canvas-info" *ngIf="dashboard">
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Published Router Messages</div>
@@ -247,7 +247,7 @@
           <div class="portlet-canvas">
             <canvas id="msg-chart"></canvas>
           </div>
-          <div class="portlet-table" *ngIf="dashboard">
+          <div class="portlet-table canvas-info" *ngIf="dashboard">
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Sent Direct Messages</div>
