@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy, Component, ElementRef, NgZone, OnInit,
+  ChangeDetectionStrategy, Component, ElementRef, NgZone, OnDestroy, OnInit,
   TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation
 } from '@angular/core';
 import { BehaviorSubject, from, fromEvent, interval, merge, Observable, of, Subject } from 'rxjs';
@@ -18,7 +18,7 @@ import { WebsocketService } from 'src/services/websocket.service';
   providers: [DestroyService],
   encapsulation: ViewEncapsulation.None
 })
-export class ConsoleComponent implements OnInit {
+export class ConsoleComponent implements OnInit, OnDestroy {
 
   source: string = 'queue';
   targetType: string = 'name';
@@ -33,6 +33,7 @@ export class ConsoleComponent implements OnInit {
   clearTrigger$ = new Subject();
   triggerFilter$ = new Subject();
   pause: boolean = false;
+  allSubscribed: boolean = false;
 
   @ViewChild('container', { static: true }) container: ElementRef<HTMLDivElement>;
   @ViewChild('consoleContainer', { static: true, read: ViewContainerRef }) consoleContainer: ViewContainerRef;
@@ -58,6 +59,10 @@ export class ConsoleComponent implements OnInit {
     private _destroy$: DestroyService,
     private _socket$: WebsocketService,
     private _ngZone: NgZone) { }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll();
+  }
 
   ngOnInit(): void {
 
@@ -176,6 +181,7 @@ export class ConsoleComponent implements OnInit {
         return message.messageId.includes(this.search) || message.message.includes(this.search);
       })
     )
+
   private renderMessage = () => (source: Observable<ConsoleMessage>) =>
     source.pipe(
       tap((message) => {
@@ -190,4 +196,33 @@ export class ConsoleComponent implements OnInit {
         this._renderedMessage++;
       })
     )
+
+  subscribeAll() {
+
+    const request: ConsoleRequest = {
+      requestId: new Date().getTime().toString(),
+      source: 'all',
+      targetType: 'name',
+      target: '*'
+    };
+
+    this._socket$.send(SocketModels.ConsoleRequest, request);
+    this.allSubscribed = true;
+
+    this.applied.nativeElement.setAttribute('class', 'applied show');
+    of(this.applied)
+      .pipe(delay(1000), take(1))
+      .subscribe(t => t.nativeElement.setAttribute('class', 'applied'));
+  }
+
+  unsubscribeAll() {
+    const request: ConsoleRequest = {
+      requestId: new Date().getTime().toString(),
+      source: 'all',
+      targetType: 'name',
+      target: null
+    };
+    this._socket$.send(SocketModels.ConsoleRequest, request);
+    this.allSubscribed = false;
+  }
 }

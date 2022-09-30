@@ -7,8 +7,9 @@
         </div>
         <div class="form-item">
             <label>Queue Manager</label>
-            <input placeholder="Left blank for server default" class="jockey-text" type="text"
-                [(ngModel)]="model.manager" />
+            <select [(ngModel)]="model.manager" class="jockey-select">
+                <option [ngValue]="m" *ngFor="let m of managers">{{m}}</option>
+            </select>
         </div>
         <div class="form-item">
             <label>Queue Type</label>

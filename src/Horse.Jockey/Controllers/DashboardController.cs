@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using Horse.Core;
 using Horse.Jockey.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Server;
+using Horse.Messaging.Server.Cluster;
 using Horse.Messaging.Server.Queues;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
@@ -21,12 +24,14 @@ namespace Horse.Jockey.Controllers
         private readonly HorseRider _rider;
         private readonly QueueWatcherContainer _watcherContainer;
         private readonly MessageCounter _messageCounter;
+        private readonly JockeyOptions _jockeyOptions;
 
-        public DashboardController(QueueWatcherContainer watcherContainer, HorseRider rider, MessageCounter messageCounter)
+        public DashboardController(QueueWatcherContainer watcherContainer, HorseRider rider, MessageCounter messageCounter, JockeyOptions jockeyOptions)
         {
             _watcherContainer = watcherContainer;
             _rider = rider;
             _messageCounter = messageCounter;
+            _jockeyOptions = jockeyOptions;
         }
 
         [HttpGet("stats")]
@@ -73,6 +78,15 @@ namespace Horse.Jockey.Controllers
                 RouterFailed = _messageCounter.RouterFailed
             };
 
+
+            string mainNodeHost = null;
+            if (_rider.Cluster.MainNode != null)
+            {
+                DnsResolver resolver = new DnsResolver();
+                DnsInfo info = resolver.Resolve(_rider.Cluster.MainNode.PublicHost);
+                mainNodeHost = $"http://{info.Hostname}:{_jockeyOptions.Port}";
+            }
+
             return Json(new
             {
                 server,
@@ -83,7 +97,9 @@ namespace Horse.Jockey.Controllers
                 channelCount = _rider.Channel.Channels.Count(),
                 channelPublished = _rider.Channel.Channels.Sum(x => x.Info.Published),
                 channelReceived = _rider.Channel.Channels.Sum(x => x.Info.Received),
-                queueCount = _rider.Queue.Queues.Count()
+                queueCount = _rider.Queue.Queues.Count(),
+                nodeState = _rider.Cluster.State.ToString(),
+                mainNodeHost = mainNodeHost
             });
         }
 

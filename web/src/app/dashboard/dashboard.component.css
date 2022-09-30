@@ -1,3 +1,27 @@
+.warning-bar {
+  margin: -18px 0px 10px 0px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0px;
+  background-color: #ffb850;
+}
+.warning-bar p {
+  margin: 0px;
+  padding: 12px 12px 11px 12px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+}
+.warning-bar p a {
+  text-decoration: none;
+  color: #0040c0;
+  cursor: pointer;
+}
+.warning-bar p a:hover {
+  color: #1080e0;
+}
+
 .dashboard {
   margin: auto;
   display: flex;

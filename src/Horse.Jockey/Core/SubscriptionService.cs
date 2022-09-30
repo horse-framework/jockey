@@ -61,6 +61,12 @@ namespace Horse.Jockey.Core
             {
                 foreach (ConsoleSubscription subscription in _console)
                 {
+                    if (subscription.Source == SubscriptionSource.All)
+                    {
+                        result.Add(subscription);
+                        continue;
+                    }
+                    
                     if (subscription.Source != SubscriptionSource.Direct)
                         continue;
 
@@ -93,6 +99,12 @@ namespace Horse.Jockey.Core
             {
                 foreach (ConsoleSubscription subscription in _console)
                 {
+                    if (subscription.Source == SubscriptionSource.All)
+                    {
+                        result.Add(subscription);
+                        continue;
+                    }
+                    
                     if (subscription.Source != SubscriptionSource.Router)
                         continue;
 
@@ -113,6 +125,12 @@ namespace Horse.Jockey.Core
             {
                 foreach (ConsoleSubscription subscription in _console)
                 {
+                    if (subscription.Source == SubscriptionSource.All)
+                    {
+                        result.Add(subscription);
+                        continue;
+                    }
+                    
                     if (subscription.Source != SubscriptionSource.Queue)
                         continue;
 
@@ -140,6 +158,12 @@ namespace Horse.Jockey.Core
             {
                 foreach (ConsoleSubscription subscription in _console)
                 {
+                    if (subscription.Source == SubscriptionSource.All)
+                    {
+                        result.Add(subscription);
+                        continue;
+                    }
+                    
                     if (subscription.Source != SubscriptionSource.Channel)
                         continue;
 

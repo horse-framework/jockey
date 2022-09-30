@@ -27,7 +27,13 @@
                 <option [ngValue]="i.value" *ngFor="let i of routerMethods">{{i.text}}</option>
             </select>
         </div>
-        <div class="form-item">
+        <div class="form-item" *ngIf="model.type == 'QueueBinding'">
+            <label>Binding Target Queue</label>
+            <select [(ngModel)]="model.target" class="jockey-select">
+                <option [ngValue]="q.name" *ngFor="let q of queues">{{q.name}} ({{q.type}})</option>
+            </select>
+        </div>
+        <div class="form-item" *ngIf="model.type != 'QueueBinding'">
             <label>Binding Target</label>
             <input placeholder="Binding Target" class="jockey-text" type="text" [(ngModel)]="model.target" />
         </div>

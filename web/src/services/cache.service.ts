@@ -23,6 +23,19 @@ export class CacheService {
       .toPromise();
   }
 
+  get(key: string): Promise<any> {
+
+    return this.api.get('/cache/get?key=' + key)
+      .pipe(
+        map(response => {
+          if (response.ok()) {
+            return response.data;
+          }
+          return null;
+        }))
+      .toPromise();
+  }
+
   remove(key: string): Promise<any> {
 
     return this.api.delete('/cache/remove?key=' + key)

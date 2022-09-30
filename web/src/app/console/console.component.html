@@ -2,26 +2,32 @@
   <div class="console-panel">
     <div class="console-filter">
       <form>
-        <select [(ngModel)]="source" name="source">
-          <option value="queue" selected>Queue</option>
-          <option value="channel">Channel</option>
-          <option value="router">Router</option>
-          <option value="direct">Direct</option>
-        </select>
+        <ng-container *ngIf="!allSubscribed">
+          <select [(ngModel)]="source" name="source">
+            <option value="queue" selected>Queue</option>
+            <option value="channel">Channel</option>
+            <option value="router">Router</option>
+            <option value="direct">Direct</option>
+          </select>
 
-        <select [(ngModel)]="targetType" *ngIf="source == 'queue'" name="targetType">
-          <option value="name">Target by Name</option>
-          <option value="topic">Target by Topic</option>
-        </select>
+          <select [(ngModel)]="targetType" *ngIf="source == 'queue'" name="targetType">
+            <option value="name">Target by Name</option>
+            <option value="topic">Target by Topic</option>
+          </select>
 
-        <select [(ngModel)]="targetType" *ngIf="source == 'direct'" name="targetType">
-          <option value="id">Target by Id</option>
-          <option value="name">Target by Name</option>
-          <option value="type">Target by Type</option>
-        </select>
+          <select [(ngModel)]="targetType" *ngIf="source == 'direct'" name="targetType">
+            <option value="id">Target by Id</option>
+            <option value="name">Target by Name</option>
+            <option value="type">Target by Type</option>
+          </select>
 
-        <input type="text" [(ngModel)]="target" name="target" placeholder="Type target" />
-        <button (click)="submit()">Apply Filter</button>
+          <input type="text" [(ngModel)]="target" name="target" placeholder="Type target" />
+          <button (click)="submit()" class="green">Apply Filter</button>
+          <button (click)="subscribeAll()" class="yellow">Subscribe to all events</button>
+        </ng-container>
+        <ng-container *ngIf="allSubscribed">
+          <button (click)="unsubscribeAll()" class="red">Unsubscribe from all events</button>
+        </ng-container>
         <span class="applied" #applied>Applied</span>
       </form>
     </div>
@@ -47,7 +53,7 @@
         Clear Console
       </span>
       <span (click)="togglePause()" [ngClass]="{'red-button': !pause, 'green-button': pause}"
-        [textContent]="!pause ? 'II' : '>'">
+            [textContent]="!pause ? 'II' : '>'">
       </span>
     </div>
   </div>

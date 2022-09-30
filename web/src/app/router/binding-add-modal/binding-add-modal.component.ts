@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { AddBindingModel } from 'src/models/add-binding-model';
+import { HorseQueueSummary } from 'src/models/horse-queue';
+import { QueueService } from 'src/services/queue.service';
 
 @Component({
   selector: 'app-binding-add-modal',
@@ -44,10 +46,15 @@ export class BindingAddModalComponent implements OnInit, OnDestroy {
   get onconfirmed(): Observable<AddBindingModel> { return this._onconfirmed; }
   private _confirmed: boolean = false;
 
-  constructor() {
+  queues: HorseQueueSummary[];
+
+  constructor(private queueService: QueueService) {
   }
 
   ngOnInit(): void {
+    this.queueService.listSummary().then(items => {
+      this.queues = items;
+    });
   }
 
   ngOnDestroy(): void {

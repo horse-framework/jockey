@@ -1,3 +1,11 @@
+<div class="warning-bar" *ngIf="dashboard && (dashboard.nodeState == 'Replica' || dashboard.nodeState == 'Successor')">
+  <p>
+    That node is a <b>{{dashboard.nodeState}}</b> Node. <a href="{{dashboard.nodeState}}">Click here</a> to open main node jockey panel.
+  </p>
+
+</div>
+
+
 <div class="dashboard" [hidden]="dashboard == null">
   <div class="dashboard-row">
     <div class="dashboard-portlet">

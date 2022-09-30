@@ -12,10 +12,20 @@
 .cache-button {
   border: none;
   border-radius: 2px;
-  background-color: #c02020;
   color: #f0f0f0;
-  padding: 8px 22px;
+  padding: 8px 12px;
+  min-width: 90px;
+  margin-left: 18px;
 }
-.cache-button:hover {
+.cache-button.red {
+  background-color: #c02020;
+}
+.cache-button.red:hover {
   background-color: #f02020;
+}
+.cache-button.blue {
+  background-color: #1050a0;
+}
+.cache-button.blue:hover {
+  background-color: #1070c0;
 }

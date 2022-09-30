@@ -4,9 +4,9 @@
         <TargetFramework>net6.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>6.3.0</AssemblyVersion>
-        <FileVersion>6.3.0</FileVersion>
-        <PackageVersion>6.3.0</PackageVersion>
+        <AssemblyVersion>6.3.1</AssemblyVersion>
+        <FileVersion>6.3.1</FileVersion>
+        <PackageVersion>6.3.1</PackageVersion>
         <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
         <Description>Administration Portal for Horse Messaging</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
@@ -24,8 +24,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Enums.NET" Version="4.0.0" />
         <PackageReference Include="Horse.Core" Version="6.0.1" />
-        <PackageReference Include="Horse.Messaging.Server" Version="6.3.0" />
+        <PackageReference Include="Horse.Messaging.Server" Version="6.3.1" />
         <PackageReference Include="Horse.Mvc" Version="6.0.2" />
         <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.0.2" />
         <PackageReference Include="Horse.Protocols.Http" Version="6.0.2" />
@@ -43,12 +44,12 @@
         <EmbeddedResource Include="Web\205-es5.js" />
         <EmbeddedResource Include="Web\218-es2015.js" />
         <EmbeddedResource Include="Web\218-es5.js" />
+        <EmbeddedResource Include="Web\342-es2015.js" />
+        <EmbeddedResource Include="Web\342-es5.js" />
         <EmbeddedResource Include="Web\388-es2015.js" />
         <EmbeddedResource Include="Web\388-es5.js" />
         <EmbeddedResource Include="Web\474-es2015.js" />
         <EmbeddedResource Include="Web\474-es5.js" />
-        <EmbeddedResource Include="Web\515-es2015.js" />
-        <EmbeddedResource Include="Web\515-es5.js" />
         <EmbeddedResource Include="Web\526-es2015.js" />
         <EmbeddedResource Include="Web\526-es5.js" />
         <EmbeddedResource Include="Web\571-es2015.js" />

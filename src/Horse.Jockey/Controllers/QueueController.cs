@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EnumsNET;
 using Horse.Jockey.Core;
 using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Protocol;
@@ -42,6 +43,29 @@ namespace Horse.Jockey.Controllers
                 .ToList();
 
             return Json(result);
+        }
+
+        [HttpGet("list-names")]
+        public IActionResult ListNames()
+        {
+            var result = _rider.Queue
+                .Queues
+                .Select(queue => new
+                {
+                    name = queue.Name,
+                    type = queue.Type.AsString(EnumFormat.Description),
+                    status = queue.Status.AsString(EnumFormat.Description)
+                })
+                .ToList();
+
+            return Json(result);
+        }
+
+        [HttpGet("managers")]
+        public IActionResult GetManagers()
+        {
+            string[] managers = _rider.Queue.GetQueueManagers();
+            return Json(managers);
         }
 
         [HttpGet("get")]
@@ -158,7 +182,6 @@ namespace Horse.Jockey.Controllers
 
             return Json(new {ok = queue != null});
         }
-
 
         [HttpPost("push")]
         public async Task<IActionResult> Push([FromBody] QueuePushModel model)

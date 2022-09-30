@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using Horse.Jockey;
 using Horse.Messaging.Client;
@@ -31,25 +32,31 @@ namespace Sample.Jockey
                 })
                 .AddJockey(o => o.Port = 15400)
                 .Build();
-/*
-            await rider.Queue.Create("DemoQueue1");
-            await rider.Queue.Create("DemoQueue2");
-            await rider.Queue.Create("DemoQueue3");
-            await rider.Queue.Create("DemoQueue4");
-*/
-            rider.Channel.Options.AutoDestroy = false;
-            await rider.Channel.Create("DemoChannel1");
-            await rider.Channel.Create("DemoChannel2");
-            await rider.Channel.Create("DemoChannel3");
-            await rider.Channel.Create("DemoChannel4");
 
-            rider.Cache.Set("DemoCache1", new MemoryStream(), TimeSpan.FromMinutes(24));
-            rider.Cache.Set("DemoCache2", new MemoryStream(), TimeSpan.FromMinutes(51));
-            rider.Cache.Set("DemoCache3", new MemoryStream(), TimeSpan.FromMinutes(76));
-            rider.Cache.Set("DemoCache4", new MemoryStream(), TimeSpan.FromMinutes(113));
-            rider.Cache.Set("DemoCache5", new MemoryStream(), TimeSpan.FromMinutes(131));
-            rider.Cache.Set("DemoCache6", new MemoryStream(), TimeSpan.FromMinutes(174));
-            rider.Cache.Set("DemoCache7", new MemoryStream(), TimeSpan.FromMinutes(200));
+            if (rider.Queue.Find("DemoQueue1") != null)
+            {
+                await rider.Queue.Create("DemoQueue1");
+                await rider.Queue.Create("DemoQueue2");
+                await rider.Queue.Create("DemoQueue3");
+                await rider.Queue.Create("DemoQueue4");
+            }
+
+            rider.Channel.Options.AutoDestroy = false;
+            if (rider.Channel.Find("DemoChannel1") == null)
+            {
+                await rider.Channel.Create("DemoChannel1");
+                await rider.Channel.Create("DemoChannel2");
+                await rider.Channel.Create("DemoChannel3");
+                await rider.Channel.Create("DemoChannel4");
+            }
+
+            rider.Cache.Set("DemoCache1", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue1")), TimeSpan.FromMinutes(24));
+            rider.Cache.Set("DemoCache2", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue2")), TimeSpan.FromMinutes(51));
+            rider.Cache.Set("DemoCache3", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue3")), TimeSpan.FromMinutes(76));
+            rider.Cache.Set("DemoCache4", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue4")), TimeSpan.FromMinutes(113));
+            rider.Cache.Set("DemoCache5", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue5")), TimeSpan.FromMinutes(131));
+            rider.Cache.Set("DemoCache6", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue6")), TimeSpan.FromMinutes(174));
+            rider.Cache.Set("DemoCache7", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue7")), TimeSpan.FromMinutes(200));
 
             HorseServer server = new();
             server.UseRider(rider);

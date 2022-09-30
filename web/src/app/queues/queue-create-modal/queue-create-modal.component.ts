@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { interval, Observable, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { QueueCreateModel } from 'src/models/queue-create-model';
+import { QueueService } from 'src/services/queue.service';
 
 @Component({
   selector: 'app-queue-create-modal',
@@ -50,6 +51,8 @@ export class QueueCreateModalComponent implements OnInit, OnDestroy {
     { value: 'Regular', text: 'Message is put back as last message (end of the queue)' }
   ];
 
+  managers: string[] = [];
+
   @ViewChild('queueForm')
   queueForm: ElementRef;
 
@@ -57,10 +60,10 @@ export class QueueCreateModalComponent implements OnInit, OnDestroy {
   get onconfirmed(): Observable<QueueCreateModel> { return this._onconfirmed; }
   private _confirmed: boolean = false;
 
-  constructor() { }
+  constructor(private queueService: QueueService) { }
 
   ngOnInit(): void {
-
+    this.queueService.getManagers().then(m => this.managers = m);
     interval(50)
       .pipe(filter(() => this.queueForm != null), take(1))
       .subscribe(() => {

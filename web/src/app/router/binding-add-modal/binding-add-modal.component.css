@@ -87,4 +87,5 @@
 .form-item input,
 .form-item select {
   flex: 1 1 auto;
+  line-height: 18px;
 }

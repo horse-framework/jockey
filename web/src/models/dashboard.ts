@@ -16,4 +16,6 @@ export interface Dashboard {
     queueCount: number;
     channelPublished: number;
     channelReceived: number;
+    nodeState: string;
+    mainNodeHost: string;
 }

@@ -56,7 +56,6 @@
 .console-filter button {
   border-radius: 2px;
   border: none;
-  background-color: #108030;
   color: #eee;
   box-sizing: border-box;
   padding: 6px 12px;
@@ -67,8 +66,28 @@
   cursor: pointer;
 }
 
-.console-filter button:hover {
+.console-filter button.green {
+  background-color: #108030;
+}
+
+.console-filter button.green:hover {
   background-color: #129040;
+}
+
+.console-filter button.yellow {
+  background-color: #a27010;
+}
+
+.console-filter button.yellow:hover {
+  background-color: #b09020;
+}
+
+.console-filter button.red {
+  background-color: #d01010;
+}
+
+.console-filter button.red:hover {
+  background-color: #ff2020;
 }
 
 .console-buttons {

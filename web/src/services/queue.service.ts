@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ApiClient } from 'src/lib/api-client';
-import { HorseQueue } from 'src/models/horse-queue';
+import { HorseQueue, HorseQueueSummary } from 'src/models/horse-queue';
 import { QueueCreateModel } from 'src/models/queue-create-model';
 import { QueueMessage, QueuePushMessage } from 'src/models/queue-message';
 import { TransactionResult } from 'src/models/transaction-result';
@@ -28,6 +28,32 @@ export class QueueService {
     list(): Promise<HorseQueue[]> {
 
         return this.api.get('/queue/list')
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    listSummary(): Promise<HorseQueueSummary[]> {
+
+        return this.api.get('/queue/list-names')
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    getManagers(): Promise<string[]> {
+
+        return this.api.get('/queue/managers')
             .pipe(
                 map(response => {
                     if (response.ok()) {

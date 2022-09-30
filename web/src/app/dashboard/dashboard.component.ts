@@ -37,7 +37,9 @@ export class DashboardComponent extends BaseComponent implements OnInit {
         await this.load();
 
         this.on(interval(5000)).subscribe(async () => {
-            this.dashboardService.load().then(d => this.dashboard = d);
+            this.dashboardService.load().then(d => {
+                this.dashboard = d;
+            });
             await this.loadCharts();
         });
     }
