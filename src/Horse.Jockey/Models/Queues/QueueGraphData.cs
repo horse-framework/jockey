@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using Horse.WebSocket.Models;
+using Horse.WebSocket.Protocol;
 using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.Queues
@@ -27,10 +27,6 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("sent")]
         public long Sent { get; set; }
 
-        [JsonProperty("delivery")]
-        [JsonPropertyName("delivery")]
-        public long Delivery { get; set; }
-
         [JsonProperty("ack")]
         [JsonPropertyName("ack")]
         public long Ack { get; set; }
@@ -50,6 +46,10 @@ namespace Horse.Jockey.Models.Queues
         [JsonProperty("processing")]
         [JsonPropertyName("processing")]
         public long Processing { get; set; }
+
+        [JsonProperty("puttingBack")]
+        [JsonPropertyName("puttingBack")]
+        public int PuttingBack { get; set; }
 
         [JsonProperty("pending")]
         [JsonPropertyName("pending")]

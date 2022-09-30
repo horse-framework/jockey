@@ -21,6 +21,8 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     deliveryChart = null;
     msgChart = null;
     storeChart = null;
+    routerChart = null;
+    channelChart = null;
     dashboard: Dashboard;
     lifetime: string;
 
@@ -35,13 +37,15 @@ export class DashboardComponent extends BaseComponent implements OnInit {
         await this.load();
 
         this.on(interval(5000)).subscribe(async () => {
-            this.dashboardService.load().then(d => this.dashboard = d);
+            this.dashboardService.load().then(d => {
+                this.dashboard = d;
+            });
             await this.loadCharts();
         });
     }
 
     private async load() {
-        this.dashboardService.load().then(d => this.dashboard = d);
+        this.dashboard = await this.dashboardService.load();
         await this.loadCharts();
 
         let pipe = new TimespanPipe();
@@ -58,6 +62,9 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
         let content = await this.queueGraphService.load();
         let messageContent = await this.messageGraphService.load();
+
+        if (this.deliveryChart)
+            this.deliveryChart.destroy();
 
         this.deliveryChart = new Chart(document.getElementById('delivery-chart'),
             {
@@ -76,6 +83,9 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 }
             });
 
+        if (this.storeChart)
+            this.storeChart.destroy();
+
         this.storeChart = new Chart(document.getElementById('store-chart'),
             {
                 type: 'line',
@@ -93,11 +103,54 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 }
             });
 
+        if (this.msgChart)
+            this.msgChart.destroy();
+
         this.msgChart = new Chart(document.getElementById('msg-chart'),
             {
                 type: 'line',
                 hover: { mode: 'nearest', intersect: true },
                 data: this.getMessageChartData(messageContent),
+                options: {
+                    animation: {
+                        duration: 0
+                    },
+                    responsive: true,
+                    scales: {
+                        xAxes: [{ display: false }],
+                        yAxes: [{ display: true, ticks: { precision: 0 } }]
+                    }
+                }
+            });
+
+        if (this.routerChart)
+            this.routerChart.destroy();
+
+        this.routerChart = new Chart(document.getElementById('router-chart'),
+            {
+                type: 'line',
+                hover: { mode: 'nearest', intersect: true },
+                data: this.getRouterChartData(messageContent),
+                options: {
+                    animation: {
+                        duration: 0
+                    },
+                    responsive: true,
+                    scales: {
+                        xAxes: [{ display: false }],
+                        yAxes: [{ display: true, ticks: { precision: 0 } }]
+                    }
+                }
+            });
+
+        if (this.channelChart)
+            this.channelChart.destroy();
+
+        this.channelChart = new Chart(document.getElementById('channel-chart'),
+            {
+                type: 'line',
+                hover: { mode: 'nearest', intersect: true },
+                data: this.getChannelChartData(messageContent),
                 options: {
                     animation: {
                         duration: 0
@@ -116,8 +169,8 @@ export class DashboardComponent extends BaseComponent implements OnInit {
             labels: content.labels,
             datasets: [
                 {
-                    label: 'Received',
-                    borderColor: '#444',
+                    label: 'Produced',
+                    borderColor: '#2070e0',
                     data: content.data.map(x => x.received),
                     fill: false,
                     pointRadius: 1,
@@ -126,18 +179,8 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                     borderWidth: 2
                 },
                 {
-                    label: 'Delivered',
-                    borderColor: '#1070af',
-                    data: content.data.map(x => x.delivery),
-                    fill: false,
-                    pointRadius: 1,
-                    pointHitRadius: 8,
-                    lineTension: 0.2,
-                    borderWidth: 2
-                },
-                {
                     label: 'Ack',
-                    borderColor: '#10b02a',
+                    borderColor: '#12bf4a',
                     data: content.data.map(x => x.ack),
                     fill: false,
                     pointRadius: 1,
@@ -147,7 +190,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 },
                 {
                     label: 'Neg. Ack',
-                    borderColor: '#a020c0',
+                    borderColor: '#c042ef',
                     data: content.data.map(x => x.nack),
                     fill: false,
                     pointRadius: 1,
@@ -157,7 +200,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 },
                 {
                     label: 'Unack',
-                    borderColor: '#999',
+                    borderColor: '#eec236',
                     data: content.data.map(x => x.unack),
                     fill: false,
                     pointRadius: 1,
@@ -166,8 +209,18 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                     borderWidth: 2
                 },
                 {
+                    label: 'Pending Ack',
+                    borderColor: '#df3faf',
+                    data: content.data.map(x => x.pending),
+                    fill: false,
+                    pointRadius: 1,
+                    pointHitRadius: 8,
+                    lineTension: 0.2,
+                    borderWidth: 2
+                },
+                {
                     label: 'Error',
-                    borderColor: '#ff0000',
+                    borderColor: '#ff3333',
                     data: content.data.map(x => x.error),
                     fill: false,
                     pointRadius: 1,
@@ -185,7 +238,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
             datasets: [
                 {
                     label: 'Msgs',
-                    borderColor: '#104090',
+                    borderColor: '#2070e0',
                     data: content.data.map(x => x.stored),
                     fill: false,
                     pointRadius: 1,
@@ -195,7 +248,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 },
                 {
                     label: 'High Prio Msgs',
-                    borderColor: '#f07000',
+                    borderColor: '#ff9911',
                     data: content.data.map(x => x.storedPrio),
                     fill: false,
                     pointRadius: 1,
@@ -204,18 +257,8 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                     borderWidth: 2
                 },
                 {
-                    label: 'Pending for Ack',
-                    borderColor: '#aa2080',
-                    data: content.data.map(x => x.pending),
-                    fill: false,
-                    pointRadius: 1,
-                    pointHitRadius: 8,
-                    lineTension: 0.2,
-                    borderWidth: 2
-                },
-                {
                     label: 'Timeout',
-                    borderColor: '#cc3333',
+                    borderColor: '#ff4444',
                     data: content.data.map(x => x.timeout),
                     fill: false,
                     pointRadius: 1,
@@ -232,7 +275,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
             datasets: [
                 {
                     label: 'Direct Sent',
-                    borderColor: '#1070c0',
+                    borderColor: '#2070e0',
                     data: content.data.map(x => x.directMessage),
                     fill: false,
                     pointRadius: 1,
@@ -242,7 +285,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 },
                 {
                     label: 'Direct Response',
-                    borderColor: '#907010',
+                    borderColor: '#f0f010',
                     data: content.data.map(x => x.directResponse),
                     fill: false,
                     pointRadius: 1,
@@ -252,7 +295,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 },
                 {
                     label: 'Direct Delivery',
-                    borderColor: '#10a050',
+                    borderColor: '#10cf70',
                     data: content.data.map(x => x.directDelivery),
                     fill: false,
                     pointRadius: 1,
@@ -262,17 +305,24 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 },
                 {
                     label: 'Direct No Receiver',
-                    borderColor: '#8010e0',
+                    borderColor: '#9a2ef0',
                     data: content.data.map(x => x.directNoReceiver),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
                     lineTension: 0.2,
                     borderWidth: 2
-                },
+                }]
+        };
+    }
+
+    private getRouterChartData(content: GraphContent<MessageGraphData>) {
+        return {
+            labels: content.labels,
+            datasets: [
                 {
                     label: 'Router Publish',
-                    borderColor: '#606090',
+                    borderColor: '#2070e0',
                     data: content.data.map(x => x.routerPublish),
                     fill: false,
                     pointRadius: 1,
@@ -282,7 +332,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 },
                 {
                     label: 'Router Received',
-                    borderColor: '#20caca',
+                    borderColor: '#10c070',
                     data: content.data.map(x => x.routerOk),
                     fill: false,
                     pointRadius: 1,
@@ -292,7 +342,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 },
                 {
                     label: 'Router No Receiver',
-                    borderColor: '#e02255',
+                    borderColor: '#f06010',
                     data: content.data.map(x => x.routerFailed),
                     fill: false,
                     pointRadius: 1,
@@ -302,4 +352,32 @@ export class DashboardComponent extends BaseComponent implements OnInit {
                 }]
         };
     }
+
+    private getChannelChartData(content: GraphContent<MessageGraphData>) {
+        return {
+            labels: content.labels,
+            datasets: [
+                {
+                    label: 'Published',
+                    borderColor: '#2070e0',
+                    data: content.data.map(x => x.channelPublish),
+                    fill: false,
+                    pointRadius: 1,
+                    pointHitRadius: 8,
+                    lineTension: 0.2,
+                    borderWidth: 2
+                },
+                {
+                    label: 'Received',
+                    borderColor: '#10c070',
+                    data: content.data.map(x => x.channelReceive),
+                    fill: false,
+                    pointRadius: 1,
+                    pointHitRadius: 8,
+                    lineTension: 0.2,
+                    borderWidth: 2
+                }]
+        };
+    }
+
 }

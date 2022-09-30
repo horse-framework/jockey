@@ -1,0 +1,27 @@
+.routers {
+  margin: auto;
+  padding: 0px 60px;
+  text-align: center;
+}
+.routers .table {
+  width: 100%;
+  text-align: left;
+}
+.create-router {
+  text-align: center;
+  padding: 40px;
+}
+.create-router button {
+  font-size: 13px;
+  border: 2px solid;
+  border-radius: 2px;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  font-weight: 500;
+  background-color: transparent;
+  border-color: #109030;
+}
+.create-router button:hover {
+  border-color: #10f070;
+}

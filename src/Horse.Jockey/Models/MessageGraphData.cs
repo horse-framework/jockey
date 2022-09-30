@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using Horse.WebSocket.Models;
+using Horse.WebSocket.Protocol;
 using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models
@@ -42,5 +42,13 @@ namespace Horse.Jockey.Models
         [JsonProperty("routerFailed")]
         [JsonPropertyName("routerFailed")]
         public long RouterFailed { get; set; }
+        
+        [JsonProperty("channelPublish")]
+        [JsonPropertyName("channelPublish")]
+        public long ChannelPublish { get; set; }
+        
+        [JsonProperty("channelReceive")]
+        [JsonPropertyName("channelReceive")]
+        public long ChannelReceive { get; set; }
     }
 }

@@ -16,6 +16,10 @@ import { DashboardService } from 'src/services/dashboard.service';
 import { MessageGraphService } from 'src/services/message-graph.service';
 import { HorseRouterService } from 'src/services/horse-router.service';
 import { PipesModule } from './layout/pipes/pipes.module';
+import { ChannelService } from 'src/services/channel.service';
+import { CacheService } from 'src/services/cache.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -27,7 +31,9 @@ import { PipesModule } from './layout/pipes/pipes.module';
         GuestLayoutModule,
         PortalLayoutModule,
         HttpClientModule,
-        PipesModule
+        PipesModule,
+        BrowserAnimationsModule,
+        MatDialogModule
     ],
     providers: [
         ApiClient,
@@ -39,7 +45,9 @@ import { PipesModule } from './layout/pipes/pipes.module';
         LoginService,
         ClientService,
         QueueGraphService,
-        MessageGraphService
+        MessageGraphService,
+        ChannelService,
+        CacheService
     ],
     bootstrap: [AppComponent]
 })

@@ -1,0 +1,36 @@
+<div *ngIf="model">
+    <div class="router-info">
+        <h2>{{model.name}}</h2>
+        <div>
+            <small>{{model.method}}</small>
+            <span (click)="remove()">Delete Router</span>
+        </div>
+    </div>
+    <div class="bindings">
+        <div class="table">
+            <div class="thead">
+                <div class="th fx16">Binding Name</div>
+                <div class="th fx16">Binding Type</div>
+                <div class="th fx28">Binding Target</div>
+                <div class="th fx10">Content Type</div>
+                <div class="th fx10">Interaction</div>
+                <div class="th fx10">Priority</div>
+                <div class="th fx10">Action</div>
+            </div>
+            <div class="tbody">
+                <div class="trow" *ngFor="let binding of model.bindings">
+                    <div class="td fx16">{{binding.name}}</div>
+                    <div class="td fx16">{{binding.type}}</div>
+                    <div class="td fx28">{{binding.target}}</div>
+                    <div class="td fx10">{{binding.contentType}}</div>
+                    <div class="td fx10">{{binding.interaction}}</div>
+                    <div class="td fx10">{{binding.priority}}</div>
+                    <div class="td fx10"><button class="remove-binding" (click)="removeBinding(binding)">Remove</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="add-binding">
+        <button (click)="addBinding()">Add Binding</button>
+    </div>
+</div>

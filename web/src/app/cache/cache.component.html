@@ -1,0 +1,23 @@
+<div class="cache" *ngIf="caches">
+    <div class="table">
+        <div class="thead">
+            <div class="th fx40">Key</div>
+            <div class="th fx30">Expiration</div>
+            <div class="th fx30 tright" style="display: block;">Action</div>
+        </div>
+        <div class="tbody">
+            <div class="trow" *ngFor="let cache of caches">
+                <div class="td fx40">
+                    <span>{{cache.Key}}</span>
+                </div>
+                <div class="td fx30">
+                    <span>{{(cache.Expiration) | date: 'yyyy-MM-dd HH:mm:ss'}} UTC</span>
+                </div>
+                <div class="td fx30 tright">
+                    <button (click)="remove(cache.Key)" class="cache-button red">Remove</button>
+                    <button (click)="view(cache.Key)" class="cache-button blue">View</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<h2 class="title" mat-dialog-title>Create New Router</h2>
+<mat-dialog-content class="content">
+    <div #queueForm class="router-form scroll">
+        <div class="form-item">
+            <label>Router Name</label>
+            <input placeholder="Router Name" class="jockey-text" type="text" [(ngModel)]="model.name" />
+        </div>
+        <div class="form-item">
+            <label>Router Method</label>
+            <select [(ngModel)]="model.method" class="jockey-select">
+                <option [ngValue]="m.value" *ngFor="let m of routerMethods">{{m.text}}</option>
+            </select>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button (click)="create()" mat-button mat-dialog-close class="modal-btn btn-confirm">Create Router</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-cancel">Cancel</button>
+</mat-dialog-actions>

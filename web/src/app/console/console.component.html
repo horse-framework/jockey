@@ -1,36 +1,89 @@
 <div class="console-frame">
-    <div class="console-panel">
-        <div class="console-filter">
-            <form>
-                <select [(ngModel)]="source" name="source">
-                    <option value="queue" selected>Queue</option>
-                    <option value="router">Router</option>
-                    <option value="direct">Direct</option>
-                </select>
+  <div class="console-panel">
+    <div class="console-filter">
+      <form>
+        <ng-container *ngIf="!allSubscribed">
+          <select [(ngModel)]="source" name="source">
+            <option value="queue" selected>Queue</option>
+            <option value="channel">Channel</option>
+            <option value="router">Router</option>
+            <option value="direct">Direct</option>
+          </select>
 
-                <select [(ngModel)]="targetType" *ngIf="source == 'queue'" name="targetType">
-                    <option value="name">Target by Name</option>
-                    <option value="topic">Target by Topic</option>
-                </select>
+          <select [(ngModel)]="targetType" *ngIf="source == 'queue'" name="targetType">
+            <option value="name">Target by Name</option>
+            <option value="topic">Target by Topic</option>
+          </select>
 
-                <select [(ngModel)]="targetType" *ngIf="source == 'direct'" name="targetType">
-                    <option value="id">Target by Id</option>
-                    <option value="name">Target by Name</option>
-                    <option value="type">Target by Type</option>
-                </select>
+          <select [(ngModel)]="targetType" *ngIf="source == 'direct'" name="targetType">
+            <option value="id">Target by Id</option>
+            <option value="name">Target by Name</option>
+            <option value="type">Target by Type</option>
+          </select>
 
-                <input type="text" [(ngModel)]="target" name="target" placeholder="Type target" />
-                <button (click)="submit()">Apply Filter</button>
-            </form>
-        </div>
-        <div class="console-buttons">
-            <input type="text" [(ngModel)]="search" name="search" (input)="searching($event)" placeholder="Search in messages" />
-            <span class="toggle-button" [class.active]="showTime" (click)="toggleTime()">Time</span>
-            <span class="toggle-button" [class.active]="showMessageId" (click)="toggleMessageId()">Message Id</span>
-            <span class="toggle-button" [class.active]="showContentType" (click)="toggleContentType()">Content Type</span>
-            <span class="toggle-button" [class.active]="autoScroll" (click)="toggleAutoScroll()">Auto Scroll</span>
-            <span (click)="clear()" class="red-button">Clear Console</span>
-        </div>
+          <input type="text" [(ngModel)]="target" name="target" placeholder="Type target" />
+          <button (click)="submit()" class="green">Apply Filter</button>
+          <button (click)="subscribeAll()" class="yellow">Subscribe to all events</button>
+        </ng-container>
+        <ng-container *ngIf="allSubscribed">
+          <button (click)="unsubscribeAll()" class="red">Unsubscribe from all events</button>
+        </ng-container>
+        <span class="applied" #applied>Applied</span>
+      </form>
     </div>
-    <div class="console" id="console"></div>
+    <div class="console-buttons">
+      <input type="text" #searchInput [(ngModel)]="search" name="search" placeholder="Search in messages" />
+
+      <span class="toggle-button" [class.active]="showTime" (click)="toggleTime()">
+        Time
+      </span>
+      <span class="toggle-button" [class.active]="showMessageId" (click)="toggleMessageId()">
+        Message Id
+      </span>
+      <span class="toggle-button" [class.active]="showContentType" (click)="toggleContentType()">
+        Content Type
+      </span>
+      <span class="toggle-button" [class.active]="isJson" (click)="toggleJson()">
+        JSON
+      </span>
+      <span class="toggle-button" [class.active]="autoScroll" (click)="toggleAutoScroll()">
+        Auto Scroll
+      </span>
+      <span (click)="clear()" class="red-button">
+        Clear Console
+      </span>
+      <span (click)="togglePause()" [ngClass]="{'red-button': !pause, 'green-button': pause}"
+            [textContent]="!pause ? 'II' : '>'">
+      </span>
+    </div>
+  </div>
+  <div class="console" #container>
+    <table #consoleTable>
+      <ng-container #consoleContainer></ng-container>
+    </table>
+  </div>
 </div>
+
+<ng-template #messageTemplate let-message>
+  <tr>
+    <td *ngIf="showTime" class="message-time" [textContent]="message.date | jockeyTime">
+    </td>
+    <td class="message-name" [ngClass]="{'time-show': showTime}" [textContent]="message.name">
+    </td>
+    <td *ngIf="showContentType" class="message-content-type">
+      <span>[{{message.contentType}}]</span>
+    </td>
+    <td class="message-container">
+      <table>
+        <tr *ngIf="showMessageId">
+          <td class="message-id" [textContent]="message.messageId"></td>
+        </tr>
+        <tr>
+          <td class="message-content" [attr.colspan]="colspan">
+            <pre class="dark-mode" [innerHTML]="isJson ? (message.messageObj | prettyprint ): message.message"></pre>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</ng-template>

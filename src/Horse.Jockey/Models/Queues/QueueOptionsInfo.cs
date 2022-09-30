@@ -90,6 +90,10 @@ namespace Horse.Jockey.Models.Queues
 		[JsonPropertyName("autoQueueCreation")]
 		public string AutoQueueCreation { get; set; }
 
+		[JsonProperty("commitWhen")]
+		[JsonPropertyName("commitWhen")]
+		public string CommitWhen { get; set; }
+		
 		public static QueueOptionsInfo Create(HorseQueue queue)
 		{
 			return new QueueOptionsInfo
@@ -103,7 +107,8 @@ namespace Horse.Jockey.Models.Queues
 				MessageTimeout = Convert.ToInt32(queue.Options.MessageTimeout.TotalMilliseconds),
 				DelayBetweenMessages = queue.Options.DelayBetweenMessages,
 				MessageSizeLimit = queue.Options.MessageSizeLimit,
-				PutBackDelay = queue.Options.PutBackDelay
+				PutBackDelay = queue.Options.PutBackDelay,
+				CommitWhen = queue.Options.CommitWhen.ToString()
 			};
 		}
 

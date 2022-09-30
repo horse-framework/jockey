@@ -1,0 +1,84 @@
+.router-info {
+  margin: auto;
+  padding: 0px 60px 50px 60px;
+  text-align: left;
+  color: #eee;
+}
+.router-info h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+}
+.router-info div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+.router-info div small {
+  margin-right: 12px;
+  background-color: #106030;
+  padding: 6px 10px;
+  border-radius: 2px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+}
+.router-info div span {
+  cursor: pointer;
+  margin-right: 6px;
+  background-color: #c00000;
+  padding: 6px 10px;
+  border-radius: 2px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 20px;
+}
+.router-info div span:hover {
+  background-color: #ff1010;
+}
+
+.bindings {
+  margin: auto;
+  padding: 0px 60px;
+  text-align: center;
+  color: #eee;
+}
+.bindings .table {
+  width: 100%;
+  text-align: left;
+}
+.add-binding {
+  text-align: center;
+  padding: 40px;
+}
+.add-binding button {
+  font-size: 13px;
+  border: 2px solid;
+  border-radius: 2px;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  font-weight: 500;
+  background-color: transparent;
+  border-color: #109030;
+}
+.add-binding button:hover {
+  border-color: #10f070;
+}
+
+.remove-binding {
+  border: none;
+  border-radius: 2px;
+  background-color: #c00000;
+  color: #fafafa;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 12px;
+  cursor: pointer;
+  width: 90px;
+}
+
+.remove-binding:hover {
+  background-color: #ff2020;
+}

@@ -2,15 +2,16 @@
 export interface QueueInformation {
     name: string;
     topic: string;
+    status: string;
     createdDate: number;
     type: string;
-    handler: string;
+    manager: string;
     acknowledge: string;
     ackTimeout: number;
     msgTimeout: number;
-    messageLimit: number;
-    messageSizeLimit: number;
-    delayBetweenMessages: number;
+    msgLimit: number;
+    msgSizeLimit: number;
+    delayBetweenMsgs: number;
     putBackDelay: number;
     autoDestroy: string;
 }

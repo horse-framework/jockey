@@ -1,9 +1,8 @@
 header {
   display: block;
   height: 60px;
-  border-bottom: 1px solid #cfcfcf;
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: #111;
   position: fixed;
   width: 100%;
 }
@@ -41,14 +40,14 @@ header {
   font-size: 16px;
   line-height: 16px;
   font-weight: 500;
-  color: #333;
+  color: #e0e0e0;
 }
 
 .headline .logo em {
   padding: 0px 0px 0px 1px;
   font-size: 10px;
   font-weight: 300;
-  color: #555;
+  color: #aaa;
   font-style: normal;
 }
 
@@ -75,9 +74,9 @@ header {
 .headline .menu ul li a {
   text-decoration: none;
   padding: 10px 14px;
-  background-color: #eee;
-  color: #333;
-  border-radius: 8px;
+  background-color: transparent;
+  color: #999;
+  border-radius: 2px;
   font-size: 13px;
   line-height: 13px;
   font-weight: 500;
@@ -85,13 +84,13 @@ header {
 }
 
 .headline .menu ul li a:hover {
-    background-color: #e4e4e4;
-    color: #000;
+    background-color: #222;
+    color: #eee;
   }
 
 .headline .menu ul li a.active {
-  background-color: #333;
-  color: #eee;
+  background-color: #108030;
+  color: #fff;
 }
 
 .headline .user {
@@ -102,19 +101,19 @@ header {
 .headline .user-name {
   font-size: 14px;
   font-weight: 400;
-  color: #333;
+  color: #ccc;
   margin: 0px;
-  padding: 0px 10px;
+  padding: 2px 10px 0px 10px;
 }
 
 .headline .logout {
-  border: 1px solid #ccc;
-  background-color: #eee;
-  color: #333;
+  border: none;
+  background-color: #c01010;
+  color: #e0e0e0;
   font-style: 13px;
   font-weight: 500;
-  border-radius: 8px;
+  border-radius: 2px;
   line-height: 13px;
-  padding: 10px 10px;
-  margin: 0px 0px 0px 10px;
+  padding: 10px 14px;
+  margin: 0px 45px 0px 20px;
 }

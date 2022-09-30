@@ -1,0 +1,77 @@
+<h2 class="title" mat-dialog-title>Create New Queue</h2>
+<mat-dialog-content class="content">
+    <div #queueForm class="queue-form scroll">
+        <div class="form-item">
+            <label>Queue Name</label>
+            <input placeholder="Queue Name" class="jockey-text" type="text" [(ngModel)]="model.name" />
+        </div>
+        <div class="form-item">
+            <label>Queue Manager</label>
+            <select [(ngModel)]="model.manager" class="jockey-select">
+                <option [ngValue]="m" *ngFor="let m of managers">{{m}}</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label>Queue Type</label>
+            <select [(ngModel)]="model.type" class="jockey-select">
+                <option [ngValue]="i.value" *ngFor="let i of typeItems">{{i.text}}</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label>Commit When</label>
+            <select [(ngModel)]="model.commit" class="jockey-select">
+                <option [ngValue]="i.value" *ngFor="let i of commitWhenItems">{{i.text}}</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label>Acknowledge</label>
+            <select [(ngModel)]="model.ack" class="jockey-select">
+                <option [ngValue]="i.value" *ngFor="let i of ackItems">{{i.text}}</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label>Put Back</label>
+            <select [(ngModel)]="model.putBack" class="jockey-select">
+                <option [ngValue]="i.value" *ngFor="let i of putBackItems">{{i.text}}</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label>Auto Destroy</label>
+            <select [(ngModel)]="model.autoDestroy" class="jockey-select">
+                <option [ngValue]="i.value" *ngFor="let i of autoDestroyItems">{{i.text}}</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label>Acknowledge Timeout (in milliseconds)</label>
+            <input placeholder="Left blank for server default" class="jockey-text" type="number" [(ngModel)]="model.ackTimeout" />
+        </div>
+        <div class="form-item">
+            <label>Message Timeout (in seconds)</label>
+            <input placeholder="Left blank for server default" class="jockey-text" type="number" [(ngModel)]="model.msgTimeout" />
+        </div>
+        <div class="form-item">
+            <label>Put Back Delay (in milliseconds)</label>
+            <input placeholder="Left blank for server default" class="jockey-text" type="number" [(ngModel)]="model.putBackDelay" />
+        </div>
+        <div class="form-item">
+            <label>Delay Between Message Consumes (in milliseconds)</label>
+            <input placeholder="Left blank for server default" class="jockey-text" type="number" [(ngModel)]="model.delay" />
+        </div>
+        <div class="form-item">
+            <label>Allowed Maximum Consumers (0 for unlimited)</label>
+            <input placeholder="Left blank for server default" class="jockey-text" type="number" [(ngModel)]="model.clientLimit" />
+        </div>
+        <div class="form-item">
+            <label>Allowed Maximum Messages (0 for unlimited)</label>
+            <input placeholder="Left blank for server default" class="jockey-text" type="number" [(ngModel)]="model.msgLimit" />
+        </div>
+        <div class="form-item">
+            <label>Allowed Maximum Size for single message in bytes (0 for unlimited)</label>
+            <input placeholder="Left blank for server default" class="jockey-text" type="number" [(ngModel)]="model.msgSizeLimit" />
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button (click)="create()" mat-button mat-dialog-close class="modal-btn btn-confirm">Create Queue</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-cancel">Cancel</button>
+</mat-dialog-actions>

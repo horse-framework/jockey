@@ -1,10 +1,9 @@
-<div class="centered-body"
-     [hidden]="queue == null">
+<div class="centered-body" [hidden]="queue == null">
   <div class="vertical-content">
     <div class="vertical-col">
       <div class="portlet">
         <h3 class="portlet-title">Queue Delivery</h3>
-        <div class="portlet-body">
+        <div class="portlet-body" style="height: 330px;">
           <canvas id="queue-delivery-chart"></canvas>
         </div>
       </div>
@@ -14,10 +13,9 @@
           <canvas id="queue-store-chart"></canvas>
         </div>
       </div>
-      <div class="portlet"
-           *ngIf="queue">
+      <div class="portlet" *ngIf="queue">
         <h3 class="portlet-title">Queue Statistics</h3>
-        <div class="portlet-body">
+        <div class="portlet-body" style="min-height: 377px;">
           <div class="key-value-table">
             <div class="kvt-row">
               <div class="kvt-key">Published Messages</div>
@@ -25,11 +23,13 @@
             </div>
             <div class="kvt-row">
               <div class="kvt-key">Consumed Messages</div>
-              <div class="kvt-value">{{queue.stats.totalDelivered}} consumes, {{queue.stats.totalSent}} unique msgs</div>
+              <div class="kvt-value">{{queue.stats.totalDelivered}} consumes, {{queue.stats.totalSent}} unique msgs
+              </div>
             </div>
             <div class="kvt-row">
               <div class="kvt-key">Acknowledge Messages</div>
-              <div class="kvt-value">{{queue.stats.totalAck}} ack, {{queue.stats.totalNack}} nack, {{queue.stats.totalUnack}} unack</div>
+              <div class="kvt-value">{{queue.stats.totalAck}} ack, {{queue.stats.totalNack}} nack,
+                {{queue.stats.totalUnack}} unack</div>
             </div>
             <div class="kvt-row">
               <div class="kvt-key">Total Timed out Messages</div>
@@ -41,17 +41,16 @@
             </div>
             <div class="kvt-row">
               <div class="kvt-key">Last Publish Date</div>
-              <div class="kvt-value"
-                   *ngIf="queue.stats.lastReceived > 0">{{(queue.stats.lastReceived*1000) | date:'yyyy-MM-dd HH:mm:ss'}}</div>
-              <div class="kvt-value"
-                   *ngIf="queue.stats.lastReceived == 0">None</div>
+              <div class="kvt-value" *ngIf="queue.stats.lastReceived > 0">{{(queue.stats.lastReceived*1000) |
+                date:'yyyy-MM-dd HH:mm:ss'}}</div>
+              <div class="kvt-value" *ngIf="queue.stats.lastReceived == 0">None</div>
             </div>
             <div class="kvt-row">
               <div class="kvt-key">Last Consume Date</div>
-              <div class="kvt-value"
-                   *ngIf="queue.stats.lastSent > 0">{{(queue.stats.lastSent*1000) | date:'yyyy-MM-dd HH:mm:ss'}}</div>
-              <div class="kvt-value"
-                   *ngIf="queue.stats.lastSent == 0">None</div>
+              <div class="kvt-value" *ngIf="queue.stats.lastSent > 0">
+                {{(queue.stats.lastSent*1000) | date:'yyyy-MM-dd HH:mm:ss'}}
+              </div>
+              <div class="kvt-value" *ngIf="queue.stats.lastSent == 0">None</div>
             </div>
           </div>
         </div>
@@ -61,17 +60,55 @@
       <div *ngIf="queue">
         <div class="portlet">
           <h3 class="portlet-title">Queue Actions</h3>
-          <div class="portlet-body"
-               style="height: 240px">
-            <div>
-
-              <p class="small-desc">
-                <b>Under construction</b><br>
-                Move messages to another queue, Clear messages, Export messages,<br>
-                Remove all subscribers, Pause/Stop/Resume the queue operations, Delete queue,<br>
-                Push new message into the queue, Change some queue options.
-              </p>
-
+          <div class="portlet-body" style="height: 330px">
+            <div class="queue-panel">
+              <div class="operation-panel">
+                <div>
+                  <button (click)="push()" class="operation-button btn-green">Push New Message</button>
+                  <p>Creates and pushes a message into the queue</p>
+                </div>
+                <div>
+                  <button (click)="read()" class="operation-button btn-yellow">Read First Message</button>
+                  <p>Shows the first message information. Message will <b>not</b> be consumed.</p>
+                </div>
+                <div>
+                  <button (click)="consume()" class="operation-button btn-cyan">Consume First Message</button>
+                  <p>Shows the first message information. Message will be <b>consumed.</b></p>
+                </div>
+                <div>
+                  <button (click)="move()" class="operation-button btn-purple">Move Messages</button>
+                  <p>Moves all messages to another queue and removes them <b>permanently.</b></p>
+                </div>
+                <div>
+                  <button (click)="clear()" class="operation-button btn-orange">Clear All Messages</button>
+                  <p>Clears queue. Deletes all messages <b>permanently!</b></p>
+                </div>
+                <div>
+                  <button (click)="remove()" class="operation-button btn-red">Delete Queue</button>
+                  <p>Deletes queue and <b>all messages</b> in it <b>permanently!</b></p>
+                </div>
+              </div>
+              <div class="status-panel">
+                <div>
+                  <em>Current Status</em>
+                  <strong>{{queue.info.status}}</strong>
+                </div>
+                <div>
+                  <em>New Status</em>
+                  <div>
+                    <button (click)="setStatus('Paused')" class="status-button btn-orange">Paused</button>
+                  </div>
+                  <div>
+                    <button (click)="setStatus('Running')" class="status-button btn-green">Running</button>
+                  </div>
+                  <div>
+                    <button (click)="setStatus('OnlyPush')" class="status-button btn-purple">Only Push</button>
+                  </div>
+                  <div>
+                    <button (click)="setStatus('OnlyConsume')" class="status-button btn-cyan">Only Consume</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -89,24 +126,31 @@
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Stored Messages</div>
-                <div class="kvt-value">{{queue.stats.storedMsgs + queue.stats.storedPrioMsgs + queue.stats.processingMsgs}}</div>
+                <div class="kvt-value">{{queue.stats.storedMsgs + queue.stats.storedPrioMsgs +
+                  queue.stats.processingMsgs + queue.stats.ackPendingMsgs}}</div>
               </div>
               <div class="kvt-row kvt-seperator"></div>
               <div class="kvt-row">
                 <div class="kvt-key">Topic</div>
-                <div class="kvt-value">{{queue.info.topic ?? "-"}}</div>
+                <div class="kvt-value">
+                  {{queue.info.topic ?? "-"}}
+                  <a class="change-option" (click)="changeOption('Topic', 'topic', queue.info.topic)">Change</a>
+                </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Type</div>
                 <div class="kvt-value">{{queue.info.type}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Delivery Handler</div>
-                <div class="kvt-value">{{queue.info.handler}}</div>
+                <div class="kvt-key">Manager</div>
+                <div class="kvt-value">{{queue.info.manager}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Subscribers Limit</div>
-                <div class="kvt-value">{{queue.options.clientLimit | unlimited}}</div>
+                <div class="kvt-key">Consumer Limit</div>
+                <div class="kvt-value">
+                  {{queue.options.clientLimit | unlimited}}
+                  <a class="change-option" (click)="changeOption('Consumer Limit', 'clientLimit', queue.options.clientLimit)">Change</a>
+                </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Created Date</div>
@@ -121,55 +165,76 @@
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Acknowledge Timeout</div>
-                <div class="kvt-value"
-                     *ngIf="queue.info.ackTimeout > 0">{{queue.info.ackTimeout}} ms timeout</div>
-                <div class="kvt-value"
-                     *ngIf="queue.info.ackTimeout == 0">No timeout</div>
+                <div class="kvt-value" *ngIf="queue.info.ackTimeout > 0">
+                  {{queue.info.ackTimeout}} ms Timeout
+                  <a class="change-option" (click)="changeOption('Acknowledge Timeout', 'ackTimeout', queue.info.ackTimeout)">Change</a>
+                </div>
+                <div class="kvt-value" *ngIf="queue.info.ackTimeout == 0">
+                  No Timeout
+                  <a class="change-option" (click)="changeOption('Acknowledge Timeout', 'ackTimeout', queue.info.ackTimeout)">Change</a>
+                </div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Commit When</div>
+                <div class="kvt-value">
+                  {{queue.options.commitWhen}}
+                </div>
               </div>
               <div class="kvt-row kvt-seperator"></div>
               <div class="kvt-row">
                 <div class="kvt-key">Message Timeout</div>
-                <div class="kvt-value"
-                     *ngIf="queue.info.msgTimeout == 0">No Timeout</div>
-                <div class="kvt-value"
-                     *ngIf="queue.info.msgTimeout > 0">
-                  {{queue.info.msgTimeout}} milliseconds
+                <div class="kvt-value" *ngIf="queue.info.msgTimeout == 0">No Timeout</div>
+                <div class="kvt-value" *ngIf="queue.info.msgTimeout > 0">
+                  {{queue.info.msgTimeout}} Milliseconds
+                  <a class="change-option" (click)="changeOption('Message Timeout', 'msgTimeout', queue.info.msgTimeout)">Change</a>
                 </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Message Limit</div>
                 <div class="kvt-value">
-                  {{queue.info.messageLimit | unlimited}}
+                  {{queue.info.msgLimit | unlimited}}
+                  <a class="change-option" (click)="changeOption('Message Timeout', 'msgLimit', queue.info.msgLimit)">Change</a>
                 </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Message Size Limit</div>
                 <div class="kvt-value">
-                  {{queue.info.messageSizeLimit | filesize}}
+                  {{queue.info.msgSizeLimit | filesize}}
+                  <a class="change-option"
+                     (click)="changeOption('Message Size Limit', 'msgSizeLimit', queue.info.msgSizeLimit)">Change</a>
                 </div>
               </div>
               <div class="kvt-row kvt-seperator"></div>
               <div class="kvt-row">
                 <div class="kvt-key">Delay Between Messages</div>
-                <div class="kvt-value"
-                     *ngIf="queue.info.delayBetweenMessages == 0">No Delay</div>
-                <div class="kvt-value"
-                     *ngIf="queue.info.delayBetweenMessages > 0">
-                  {{queue.info.delayBetweenMessages}} milliseconds
+                <div class="kvt-value" *ngIf="queue.info.delayBetweenMsgs == 0">
+                  No Delay
+                  <a class="change-option"
+                     (click)="changeOption('Delay Between Messages', 'delayBetweenMsgs', queue.info.delayBetweenMsgs)">Change</a>
+                </div>
+                <div class="kvt-value" *ngIf="queue.info.delayBetweenMsgs > 0">
+                  {{queue.info.delayBetweenMsgs}} Milliseconds
+                  <a class="change-option"
+                     (click)="changeOption('Delay Between Messages', 'delayBetweenMsgs', queue.info.delayBetweenMsgs)">Change</a>
                 </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Put Back Delay</div>
-                <div class="kvt-value"
-                     *ngIf="queue.info.putBackDelay == 0">No Delay</div>
-                <div class="kvt-value"
-                     *ngIf="queue.info.putBackDelay > 0">
-                  {{queue.info.putBackDelay}} milliseconds
+                <div class="kvt-value" *ngIf="queue.info.putBackDelay == 0">
+                  No Delay
+                  <a class="change-option" (click)="changeOption('Put Back Delay', 'putBackDelay', queue.info.putBackDelay)">Change</a>
+                </div>
+                <div class="kvt-value" *ngIf="queue.info.putBackDelay > 0">
+                  {{queue.info.putBackDelay}} Milliseconds
+                  <a class="change-option" (click)="changeOption('Put Back Delay', 'putBackDelay', queue.info.putBackDelay)">Change</a>
                 </div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Auto Destroy</div>
-                <div class="kvt-value">{{queue.info.autoDestroy}}</div>
+                <div class="kvt-value">
+                  {{queue.info.autoDestroy}}
+                  <a class="change-option" (click)="changeOption('Auto Destroy', 'autoDestroy', queue.info.autoDestroy)">Change</a>
+                </div>
               </div>
             </div>
           </div>

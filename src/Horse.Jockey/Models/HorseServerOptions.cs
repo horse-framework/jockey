@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Text.Json.Serialization;
 using Horse.Jockey.Helpers;
@@ -7,52 +6,57 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models
 {
-	internal class HorseServerOptions
-	{
-		[JsonProperty("name")]
-		[JsonPropertyName("name")]
-		public string Name { get; set; }
+    internal class HorseServerOptions
+    {
+        [JsonProperty("name")]
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
-		[JsonProperty("type")]
-		[JsonPropertyName("type")]
-		public string Type { get; set; }
+        [JsonProperty("type")]
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
 
-		[JsonProperty("nodeHosts")]
-		[JsonPropertyName("nodeHosts")]
-		public string[] NodeHosts { get; set; }
+        [JsonProperty("queueLimit")]
+        [JsonPropertyName("queueLimit")]
+        public int QueueLimit { get; set; }
 
-		[JsonProperty("queueLimit")]
-		[JsonPropertyName("queueLimit")]
-		public int QueueLimit { get; set; }
+        [JsonProperty("routerLimit")]
+        [JsonPropertyName("routerLimit")]
+        public int RouterLimit { get; set; }
 
-		[JsonProperty("routerLimit")]
-		[JsonPropertyName("routerLimit")]
-		public int RouterLimit { get; set; }
+        [JsonProperty("autoChannelCreation")]
+        [JsonPropertyName("autoChannelCreation")]
+        public bool AutoChannelCreation { get; set; }
 
-		[JsonProperty("nodes")]
-		[JsonPropertyName("nodes")]
-		public NodeInfo[] Nodes { get; set; }
+        [JsonProperty("channelSubscriberLimit")]
+        [JsonPropertyName("channelSubscriberLimit")]
+        public int ChannelSubscriberLimit { get; set; }
 
-		public static HorseServerOptions Create(HorseRider rider)
-		{
-			return new HorseServerOptions
-			{
-				Name = rider.Options.Name,
-				Type = rider.Options.Type,
-				QueueLimit = rider.Options.QueueLimit,
-				RouterLimit = rider.Options.RouterLimit,
-				NodeHosts = rider.GetNodeHostnames(),
-				Nodes = rider.Options.Nodes == null
-					? Array.Empty<NodeInfo>()
-					: rider.Options.Nodes.Select(x => new NodeInfo
-							{
-								Host = x.Host,
-								Name = x.Name,
-								Token = x.Token,
-								ReconnectWait = x.ReconnectWait
-							})
-						   .ToArray()
-			};
-		}
-	}
+        [JsonProperty("nodes")]
+        [JsonPropertyName("nodes")]
+        public NodeInfo[] Nodes { get; set; }
+
+        public static HorseServerOptions Create(HorseRider rider)
+        {
+            return new HorseServerOptions
+            {
+                Name = rider.Options.Name,
+                Type = rider.Options.Type,
+                QueueLimit = rider.Options.QueueLimit,
+                RouterLimit = rider.Options.RouterLimit,
+                AutoChannelCreation = rider.Channel.Options.AutoChannelCreation,
+                ChannelSubscriberLimit = rider.Channel.Options.ClientLimit,
+                Nodes = rider.Cluster.Clients.Select(x => new NodeInfo
+                    {
+                        Id = x.Info.Id,
+                        Name = x.Info.Name,
+                        Host = x.Info.Host,
+                        PublicHost = x.Info.PublicHost,
+                        State = "-",
+                        ConnectedDate = x.ConnectedDate.ToUnixSeconds()
+                    })
+                    .ToArray()
+            };
+        }
+    }
 }

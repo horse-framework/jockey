@@ -1,4 +1,4 @@
-using Horse.Protocols.WebSocket;
+using Horse.WebSocket.Protocol;
 
 namespace Horse.Jockey.Models.Subscriptions
 {

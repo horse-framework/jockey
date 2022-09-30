@@ -22,18 +22,5 @@ namespace Horse.Jockey.Helpers
 		{
 			return Convert.ToInt64(span.TotalMilliseconds);
 		}
-
-		public static string ToHandlerString(this IMessageDeliveryHandler handler)
-		{
-			string handlerName = handler.GetType().Name;
-
-			if (handlerName.EndsWith("DeliveryHandler"))
-				return handlerName.Replace("DeliveryHandler", "");
-
-			if (handlerName.EndsWith("Handler"))
-				return handlerName.Replace("Handler", "");
-
-			return handlerName;
-		}
 	}
 }

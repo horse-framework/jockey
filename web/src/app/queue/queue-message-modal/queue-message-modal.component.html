@@ -1,0 +1,74 @@
+<h2 class="title" mat-dialog-title>Queue Message</h2>
+<mat-dialog-content class="content">
+
+    <div class="queue-message">
+
+        <div class="message-props">
+            <div class="key-value-table">
+                <div class="kvt-row">
+                    <div class="kvt-key-narrow">Id</div>
+                    <div class="kvt-value">{{message.id}}</div>
+                </div>
+                <div class="kvt-row">
+                    <div class="kvt-key-narrow">Source</div>
+                    <div class="kvt-value">{{message.source}}</div>
+                </div>
+                <div class="kvt-row">
+                    <div class="kvt-key-narrow">High Priority</div>
+                    <div class="kvt-value">{{message.priority}}</div>
+                </div>
+                <div class="kvt-row">
+                    <div class="kvt-key-narrow">Created Date</div>
+                    <div class="kvt-value">
+                        {{(message.createdDate*1000) | date:'yyyy-MM-dd HH:mm:ss'}}
+                    </div>
+                </div>
+                <div class="kvt-row">
+                    <div class="kvt-key-narrow">Deadline</div>
+                    <div class="kvt-value">
+                        {{ message.deadline == 0 ? 'No' : (message.deadline*1000) | date:'yyyy-MM-dd HH:mm:ss'}}
+                    </div>
+                </div>
+                <div class="kvt-row">
+                    <div class="kvt-key-narrow">Persistently Saved</div>
+                    <div class="kvt-value">{{message.isSaved}}</div>
+                </div>
+                <div class="kvt-row">
+                    <div class="kvt-key-narrow">Send Count</div>
+                    <div class="kvt-value">{{message.sendCount}}</div>
+                </div>
+                <div class="kvt-row">
+                    <div class="kvt-key-narrow">Delivery Count</div>
+                    <div class="kvt-value">{{message.deliveryCount}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message-content">
+            <h4>Headers</h4>
+            <div class="message-headers">
+                <div class="key-value-table" *ngIf="message.headers.length > 0">
+                    <div class="kvt-row" *ngFor="let h of message.headers">
+                        <div class="kvt-key">{{h.name}}</div>
+                        <div class="kvt-value">{{h.value}}</div>
+                    </div>
+                </div>
+                <p *ngIf="message.headers.length == 0">
+                    The message has no headers
+                </p>
+            </div>
+
+            <div class="message-content-title">
+                <h4>Message Content</h4>
+                <span (click)="setJson(false)" [class.active]="!isJson">String</span>
+                <span (click)="setJson(true)" [class.active]="isJson">JSON</span>
+            </div>
+            <div class="string-content" *ngIf="!isJson">{{message.message}}</div>
+            <pre class="string-content"  *ngIf="isJson" [innerHTML]="message.messageObj | prettyprint"></pre>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button mat-button mat-dialog-close class="modal-btn btn-cancel">Close</button>
+</mat-dialog-actions>

@@ -19,15 +19,27 @@ const routes: Routes = [
         canActivate: [SessionGuard]
     },
     {
-        path: 'route',
+        path: 'router',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./route/route.module').then(m => m.RouteModule),
+        loadChildren: () => import('./router/router.module').then(m => m.HorseRouterModule),
         canActivate: [SessionGuard]
     },
     {
-        path: 'routes',
+        path: 'routers',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./routes/routes.module').then(m => m.RoutesModule),
+        loadChildren: () => import('./routers/routers.module').then(m => m.RoutersModule),
+        canActivate: [SessionGuard]
+    },
+    {
+        path: 'cache',
+        component: PortalLayoutComponent,
+        loadChildren: () => import('./cache/cache.module').then(m => m.CacheModule),
+        canActivate: [SessionGuard]
+    },
+    {
+        path: 'channels',
+        component: PortalLayoutComponent,
+        loadChildren: () => import('./channels/channels.module').then(m => m.ChannelsModule),
         canActivate: [SessionGuard]
     },
     {
@@ -49,15 +61,9 @@ const routes: Routes = [
         canActivate: [SessionGuard]
     },
     {
-        path: 'console-v1',
-        component: PortalLayoutComponent,
-        loadChildren: () => import('./console/console.module').then(m => m.ConsoleModule),
-        canActivate: [SessionGuard]
-    },
-    {
         path: 'console',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./console2/console2.module').then(m => m.Console2Module),
+        loadChildren: () => import('./console/console.module').then(m => m.ConsoleModule),
         canActivate: [SessionGuard]
     },
     {

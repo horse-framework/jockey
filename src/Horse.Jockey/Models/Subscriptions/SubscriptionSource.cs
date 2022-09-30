@@ -4,6 +4,9 @@ namespace Horse.Jockey.Models.Subscriptions
 {
     internal enum SubscriptionSource
     {
+        [Description("all")]
+        All,
+        
         [Description("direct")]
         Direct,
 
@@ -11,6 +14,9 @@ namespace Horse.Jockey.Models.Subscriptions
         Queue,
 
         [Description("router")]
-        Router
+        Router,
+        
+        [Description("channel")]
+        Channel
     }
 }

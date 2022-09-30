@@ -1,0 +1,31 @@
+.cache {
+  margin: auto;
+  padding: 0px 60px;
+  max-width: 1290px;
+  text-align: center;
+}
+.cache .table {
+  width: 100%;
+  text-align: left;
+}
+
+.cache-button {
+  border: none;
+  border-radius: 2px;
+  color: #f0f0f0;
+  padding: 8px 12px;
+  min-width: 90px;
+  margin-left: 18px;
+}
+.cache-button.red {
+  background-color: #c02020;
+}
+.cache-button.red:hover {
+  background-color: #f02020;
+}
+.cache-button.blue {
+  background-color: #1050a0;
+}
+.cache-button.blue:hover {
+  background-color: #1070c0;
+}

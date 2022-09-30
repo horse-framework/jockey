@@ -1,0 +1,61 @@
+<h2 class="title" mat-dialog-title>Add Binding</h2>
+<mat-dialog-content class="content">
+    <div #queueForm>
+        <div class="form-item">
+            <label>Binding Name</label>
+            <input placeholder="Binding Name" class="jockey-text" type="text" [(ngModel)]="model.name" />
+        </div>
+        <div class="form-item">
+            <label>Binding Type</label>
+            <select [(ngModel)]="model.type" class="jockey-select">
+                <option [ngValue]="i.value" *ngFor="let i of bindingTypes">{{i.text}}</option>
+            </select>
+        </div>
+        <div class="form-item" *ngIf="model.type == 'custom'">
+            <label>Full Binding Type Name (Namespace.TypeName, AssemblyName)</label>
+            <input placeholder="Binding Full Type Name" class="jockey-text" type="text" [(ngModel)]="model.customBindingType" />
+        </div>
+        <div class="form-item" *ngIf="model.type == 'HttpBinding'">
+            <label>Binding Method</label>
+            <select [(ngModel)]="model.method" class="jockey-select" placeholder="Select an HTTP Method">
+                <option [ngValue]="i.value" *ngFor="let i of httpMethods">{{i.text}}</option>
+            </select>
+        </div>
+        <div class="form-item" *ngIf="model.type != 'HttpBinding'">
+            <label>Binding Method</label>
+            <select [(ngModel)]="model.method" class="jockey-select" placeholder="Default value is Distribute">
+                <option [ngValue]="i.value" *ngFor="let i of routerMethods">{{i.text}}</option>
+            </select>
+        </div>
+        <div class="form-item" *ngIf="model.type == 'QueueBinding'">
+            <label>Binding Target Queue</label>
+            <select [(ngModel)]="model.target" class="jockey-select">
+                <option [ngValue]="q.name" *ngFor="let q of queues">{{q.name}} ({{q.type}})</option>
+            </select>
+        </div>
+        <div class="form-item" *ngIf="model.type != 'QueueBinding'">
+            <label>Binding Target</label>
+            <input placeholder="Binding Target" class="jockey-text" type="text" [(ngModel)]="model.target" />
+        </div>
+        <div class="form-item">
+            <label>Binding Interaction</label>
+            <select [(ngModel)]="model.interaction" class="jockey-select">
+                <option [ngValue]="m.value" *ngFor="let m of interactions">{{m.text}}</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label>Binding Priority</label>
+            <input placeholder="Higher values for higher priority" class="jockey-text" type="number"
+                [(ngModel)]="model.priority" />
+        </div>
+        <div class="form-item">
+            <label>Content Type</label>
+            <input placeholder="Left blank for router default" class="jockey-text" type="number"
+                [(ngModel)]="model.contentType" />
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button (click)="add()" mat-button mat-dialog-close class="modal-btn btn-confirm">Add Binding</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-cancel">Cancel</button>
+</mat-dialog-actions>

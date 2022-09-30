@@ -9,3 +9,9 @@ export interface HorseQueue {
     graph?: QueueGraphData[];
     options?: QueueOptions;
 }
+
+export interface HorseQueueSummary {
+    name: string;
+    type: string;
+    status: string;
+}

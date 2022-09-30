@@ -21,30 +21,31 @@
   text-align: left;
   font-size: 13px;
   font-weight: 400;
-  color: #666;
+  color: #888;
   margin: 0px;
   padding: 4px;
 }
 
 .login-row input {
   flex: 1 1 auto;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1px solid #666;
+  border-radius: 2px;
   padding: 8px;
   line-height: 22px;
   font-size: 16px;
   font-weight: 400;
-  color: #333;
+  color: #ddd;
+  background-color: #222;
 }
 
 .login-row input:focus {
-  border-color: #555;
+  border-color: #109040;
 }
 
 .login-row button {
   border: none;
-  border-radius: 6px;
-  background-color: #4a4a4a;
+  border-radius: 2px;
+  background-color: #108030;
   color: #fff;
   font-size: 14px;
   font-weight: 500;
@@ -53,5 +54,5 @@
 }
 
 .login-row button:hover {
-  background-color: #222;
+  background-color: #129040;
 }

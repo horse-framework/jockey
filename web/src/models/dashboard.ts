@@ -12,4 +12,10 @@ export interface Dashboard {
     otherMessages: MessageGraphData;
     serverOptions: ServerOptions;
     queueOptions: QueueOptions;
+    channelCount: number;
+    queueCount: number;
+    channelPublished: number;
+    channelReceived: number;
+    nodeState: string;
+    mainNodeHost: string;
 }

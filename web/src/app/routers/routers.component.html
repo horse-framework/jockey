@@ -1,0 +1,58 @@
+<div class="routers" *ngIf="routers">
+    <div class="table">
+        <div class="thead">
+            <div class="th fx20">Router</div>
+            <div class="th fx14">Binding Name</div>
+            <div class="th fx10">Binding Type</div>
+            <div class="th fx28">Binding Target</div>
+            <div class="th fx10">Content Type</div>
+            <div class="th fx10">Interaction</div>
+            <div class="th fx8">Priority</div>
+        </div>
+        <div class="tbody">
+            <ng-container *ngFor="let router of routers">
+                <div *ngFor="let binding of router.bindings; let i = index" class="trow" [class.first-row]="i == 0"
+                    [class.last-row]="i == router.bindings.length - 1">
+                    <div class="td td-fr fx20">
+                        <ng-container *ngIf="i == 0">
+                            <i [class.green]="router.enabled" [class.red]="!router.enabled"></i>
+                            <a style="margin-right: 18px; font-weight: 500; line-height: 23px; font-size: 14px;"
+                                routerLink="/router/{{router.name}}">
+                                {{router.name}}
+                            </a>
+                            <small>{{router.method}}</small>
+                        </ng-container>
+                    </div>
+                    <div class="td fx14"><span>{{binding.name}}</span></div>
+                    <div class="td fx10"><span>{{binding.type}}</span></div>
+                    <div class="td td-fr fx28">
+                        <small>{{binding | bindingType}}</small>
+                        <span>{{binding.displayTarget}}</span>
+                    </div>
+                    <div class="td fx10"><span *ngIf="binding.type == 'Direct'">{{binding.contentType}}</span></div>
+                    <div class="td fx10"><span>{{binding.interaction}}</span></div>
+                    <div class="td fx8"><span>{{binding.priority}}</span></div>
+                </div>
+                <div *ngIf="router.bindings.length == 0" class="trow">
+                    <div class="td td-fr fx20">
+                        <i [class.green]="router.enabled" [class.red]="!router.enabled"></i>
+                        <a style="margin-right: 18px; font-weight: 500; line-height: 23px; font-size: 14px;"
+                            routerLink="/router/{{router.name}}">
+                            {{router.name}}
+                        </a>
+                        <small>{{router.method}}</small>
+                    </div>
+                    <div class="td fx14"><span></span></div>
+                    <div class="td fx10"><span></span></div>
+                    <div class="td td-fr fx28"></div>
+                    <div class="td fx10"></div>
+                    <div class="td fx10"></div>
+                    <div class="td fx8"></div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="create-router">
+        <button (click)="create()">Create New Router</button>
+    </div>
+</div>

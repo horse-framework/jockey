@@ -1,0 +1,15 @@
+<h2 class="title" mat-dialog-title>Confirmation</h2>
+<mat-dialog-content class="content">
+    <p>
+        You are about to move <b class="imp">{{messageCount}}</b> messages.
+        Please type the target queue name.<br/>
+        If the target queue doesn't exist, it will be created with default queue options.
+    </p>
+    <div>
+        <input placeholder="Queue Name" class="target-text" type="text" [(ngModel)]="target" />
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button (click)="confirm()" mat-button mat-dialog-close class="modal-btn btn-confirm">Confirm</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-cancel">Cancel</button>
+</mat-dialog-actions>
