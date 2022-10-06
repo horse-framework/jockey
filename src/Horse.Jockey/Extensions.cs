@@ -153,8 +153,6 @@ namespace Horse.Jockey
             CorsMiddleware middleware = new();
             middleware.AllowAll();
 
-            //Hub.Mvc.ErrorHandler = new DevelopmentErrorHandler();
-            Hub.Mvc.IsDevelopment = true;
             Hub.Mvc.Use(app =>
             {
                 app.UseMiddleware(middleware);

@@ -4,9 +4,9 @@
         <TargetFramework>net6.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>6.3.1</AssemblyVersion>
-        <FileVersion>6.3.1</FileVersion>
-        <PackageVersion>6.3.1</PackageVersion>
+        <AssemblyVersion>6.3.2</AssemblyVersion>
+        <FileVersion>6.3.2</FileVersion>
+        <PackageVersion>6.3.2</PackageVersion>
         <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
         <Description>Administration Portal for Horse Messaging</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
