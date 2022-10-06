@@ -9,6 +9,7 @@ using Horse.Jockey.Resource;
 using Horse.Messaging.Server;
 using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
+using Horse.Mvc.Errors;
 using Horse.Mvc.Middlewares;
 using Horse.Server;
 using Horse.WebSocket.Protocol;
@@ -152,6 +153,8 @@ namespace Horse.Jockey
             CorsMiddleware middleware = new();
             middleware.AllowAll();
 
+            //Hub.Mvc.ErrorHandler = new DevelopmentErrorHandler();
+            Hub.Mvc.IsDevelopment = true;
             Hub.Mvc.Use(app =>
             {
                 app.UseMiddleware(middleware);
