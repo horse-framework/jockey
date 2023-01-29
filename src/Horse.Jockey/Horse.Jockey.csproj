@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>6.3.4</AssemblyVersion>
-        <FileVersion>6.3.4</FileVersion>
-        <PackageVersion>6.3.4</PackageVersion>
+        <AssemblyVersion>6.4.1</AssemblyVersion>
+        <FileVersion>6.4.1</FileVersion>
+        <PackageVersion>6.4.1</PackageVersion>
         <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
         <Description>Administration Portal for Horse Messaging</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/horse-framework/jockey/blob/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/horse-framework/jockey</RepositoryUrl>
         <LangVersion>10</LangVersion>
+        <TargetFramework>net7.0</TargetFramework>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -24,9 +24,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Enums.NET" Version="4.0.0" />
+        <PackageReference Include="Enums.NET" Version="4.0.1" />
         <PackageReference Include="Horse.Core" Version="6.0.1" />
-        <PackageReference Include="Horse.Messaging.Server" Version="6.3.4" />
+        <PackageReference Include="Horse.Messaging.Server" Version="6.4.1" />
         <PackageReference Include="Horse.Mvc" Version="6.0.3" />
         <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.0.2" />
         <PackageReference Include="Horse.Protocols.Http" Version="6.0.2" />

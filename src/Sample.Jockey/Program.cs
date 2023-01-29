@@ -25,14 +25,14 @@ namespace Sample.Jockey
                     {
                         q.Options.AutoQueueCreation = true;
                         q.Options.AutoDestroy = QueueDestroy.Disabled;
-                        q.Options.CommitWhen = CommitWhen.AfterSaved;
+                        q.Options.CommitWhen = CommitWhen.AfterReceived;
                         q.Options.PutBack = PutBackDecision.Regular;
                         q.Options.Acknowledge = QueueAckDecision.WaitForAcknowledge;
                     });
                 })
                 .AddJockey(o => o.Port = 15400)
                 .Build();
-
+                
             if (rider.Queue.Find("DemoQueue1") != null)
             {
                 await rider.Queue.Create("DemoQueue1");
