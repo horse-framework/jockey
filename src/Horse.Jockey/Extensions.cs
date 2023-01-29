@@ -9,6 +9,7 @@ using Horse.Jockey.Resource;
 using Horse.Messaging.Server;
 using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
+using Horse.Mvc.Errors;
 using Horse.Mvc.Middlewares;
 using Horse.Server;
 using Horse.WebSocket.Protocol;

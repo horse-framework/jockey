@@ -157,8 +157,10 @@ export class ApiClient {
                 result.error = e.error;
                 result.success = false;
 
-                if (result.statusCode == 401)
+                if (result.statusCode == 401) {
                     this.session.clear();
+                    window.location.href = '/';
+                }
 
                 return of(result);
             })
