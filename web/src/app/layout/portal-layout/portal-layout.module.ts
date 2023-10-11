@@ -18,9 +18,6 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
         RouterModule,
         MatDialogModule
     ],
-    entryComponents: [
-        ConfirmModalComponent
-    ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
     ]

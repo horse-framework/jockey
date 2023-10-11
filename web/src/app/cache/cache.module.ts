@@ -7,18 +7,15 @@ import { CacheViewModalComponent } from './cache-view-modal/cache-view-modal.com
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [CacheComponent, CacheViewModalComponent],
-  imports: [
-    CommonModule,
-    PipesModule,
-    MatDialogModule,
-    RouterModule.forChild([{ path: '', component: CacheComponent }])
-  ],
-  entryComponents: [
-    CacheViewModalComponent
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+    declarations: [CacheComponent, CacheViewModalComponent],
+    imports: [
+        CommonModule,
+        PipesModule,
+        MatDialogModule,
+        RouterModule.forChild([{ path: '', component: CacheComponent }])
+    ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+    ]
 })
 export class CacheModule { }

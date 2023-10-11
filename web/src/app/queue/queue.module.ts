@@ -13,28 +13,22 @@ import { QueueOptionModalComponent } from './queue-option-modal/queue-option-mod
 
 
 @NgModule({
-  declarations: [
-    QueueComponent,
-    QueueMessageModalComponent,
-    MesssageMoveModalComponent,
-    QueuePushModalComponent,
-    QueueOptionModalComponent
-  ],
-  imports: [
-    CommonModule,
-    PipesModule,
-    MatDialogModule,
-    FormsModule,
-    RouterModule.forChild([{ path: ':name', component: QueueComponent }])
-  ],
-  entryComponents: [
-    ConfirmModalComponent,
-    QueueMessageModalComponent,
-    MesssageMoveModalComponent,
-    QueuePushModalComponent
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+    declarations: [
+        QueueComponent,
+        QueueMessageModalComponent,
+        MesssageMoveModalComponent,
+        QueuePushModalComponent,
+        QueueOptionModalComponent
+    ],
+    imports: [
+        CommonModule,
+        PipesModule,
+        MatDialogModule,
+        FormsModule,
+        RouterModule.forChild([{ path: ':name', component: QueueComponent }])
+    ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+    ]
 })
 export class QueueModule { }

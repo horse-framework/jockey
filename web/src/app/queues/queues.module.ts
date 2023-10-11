@@ -9,19 +9,16 @@ import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [QueuesComponent, QueueCreateModalComponent],
-  imports: [
-    CommonModule,
-    PipesModule,
-    MatDialogModule,
-    FormsModule,
-    RouterModule.forChild([{ path: '', component: QueuesComponent }])
-  ],
-  entryComponents: [
-    QueueCreateModalComponent
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+    declarations: [QueuesComponent, QueueCreateModalComponent],
+    imports: [
+        CommonModule,
+        PipesModule,
+        MatDialogModule,
+        FormsModule,
+        RouterModule.forChild([{ path: '', component: QueuesComponent }])
+    ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+    ]
 })
 export class QueuesModule { }

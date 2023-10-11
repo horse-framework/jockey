@@ -9,13 +9,12 @@ import { ConfirmModalComponent } from '../layout/portal-layout/confirm-modal/con
 
 
 @NgModule({
-  declarations: [RouterComponent, BindingAddModalComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatDialogModule,
-    RouterModule.forChild([{ path: ':name', component: RouterComponent }])
-  ],
-  entryComponents: [ConfirmModalComponent]
+    declarations: [RouterComponent, BindingAddModalComponent],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatDialogModule,
+        RouterModule.forChild([{ path: ':name', component: RouterComponent }])
+    ]
 })
 export class HorseRouterModule { }
