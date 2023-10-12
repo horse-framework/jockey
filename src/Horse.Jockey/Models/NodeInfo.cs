@@ -42,6 +42,10 @@ namespace Horse.Jockey.Models
         [JsonPropertyName("state")]
         public string State { get; set; }
 
+        [JsonProperty("connected")]
+        [JsonPropertyName("connected")]
+        public bool IsConnected { get; set; }
+
         /// <summary>
         /// Connected date in unix seconds
         /// </summary>

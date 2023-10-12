@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using EnumsNET;
 using Horse.Jockey.Helpers;
 using Horse.Messaging.Server.Queues;
 using Horse.WebSocket.Protocol;
@@ -6,6 +7,8 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.Queues
 {
+    public record MessageTimeoutModel(int duration, string policy, string target);
+
     [ModelType("queue-info")]
     internal class HorseQueueInformation
     {
@@ -43,7 +46,7 @@ namespace Horse.Jockey.Models.Queues
 
         [JsonProperty("msgTimeout")]
         [JsonPropertyName("msgTimeout")]
-        public long MsgTimeout { get; set; }
+        public MessageTimeoutModel MsgTimeout { get; set; }
 
         [JsonProperty("msgLimit")]
         [JsonPropertyName("msgLimit")]
@@ -84,7 +87,7 @@ namespace Horse.Jockey.Models.Queues
                 AutoQueueCreation = queue.Options.AutoQueueCreation.ToString(),
                 CreatedDate = queue.Info.CreatedDate.ToUnixSeconds(),
                 MessageLimit = queue.Options.MessageLimit,
-                MsgTimeout = queue.Options.MessageTimeout.ToMilliseconds(),
+                MsgTimeout = new MessageTimeoutModel(queue.Options.MessageTimeout.MessageDuration, queue.Options.MessageTimeout.Policy.AsString(EnumFormat.Description), queue.Options.MessageTimeout.TargetName),
                 DelayBetweenMessages = queue.Options.DelayBetweenMessages,
                 MessageSizeLimit = queue.Options.MessageSizeLimit,
                 PutBackDelay = queue.Options.PutBackDelay

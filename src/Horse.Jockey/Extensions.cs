@@ -9,7 +9,6 @@ using Horse.Jockey.Resource;
 using Horse.Messaging.Server;
 using Horse.Mvc;
 using Horse.Mvc.Auth.Jwt;
-using Horse.Mvc.Errors;
 using Horse.Mvc.Middlewares;
 using Horse.Server;
 using Horse.WebSocket.Protocol;
@@ -108,11 +107,11 @@ namespace Horse.Jockey
                     o.ValidateLifetime = true;
                 });
 
-                Hub.Server.AddWebSockets(cfg => cfg
+                Hub.Server.AddWebSockets(services, cfg => cfg
                     .UsePayloadModelProvider(new SystemJsonModelSerializer())
                     .UseMSDI(services)
                     .AddSingletonHandlers(typeof(Hub))
-                    .OnClientConnected((info, data) =>
+                    .OnClientConnected((services, info, data) =>
                     {
                         Dictionary<string, string> pairs = data.Path.ParseQuerystring();
 
@@ -131,12 +130,12 @@ namespace Horse.Jockey
                         WsServerSocket websocket = new(Hub.Server, info);
                         return Task.FromResult(websocket);
                     })
-                    .OnClientReady(client =>
+                    .OnClientReady((services, client) =>
                     {
                         Hub.Clients.Add(client);
                         return Task.CompletedTask;
                     })
-                    .OnClientDisconnected(client =>
+                    .OnClientDisconnected((services, client) =>
                     {
                         Hub.Clients.Remove(client);
                         if (Hub.Provider == null) return Task.CompletedTask;
@@ -146,7 +145,7 @@ namespace Horse.Jockey
 
                         return Task.CompletedTask;
                     })
-                    .OnError(e => { Console.WriteLine("Jockey WebSocket Error: " + e); }));
+                    .OnError((e, msg, client) => { Console.WriteLine("Jockey WebSocket Error: " + e); }));
             });
 
 
@@ -156,7 +155,7 @@ namespace Horse.Jockey
             Hub.Mvc.Use(app =>
             {
                 app.UseMiddleware(middleware);
-                
+
                 IServiceProvider provider = app.GetProvider();
                 Hub.Provider = provider;
 

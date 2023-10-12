@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Horse.Messaging.Protocol.Models;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Cache;
@@ -23,29 +24,29 @@ namespace Horse.Jockey.Controllers
         }
 
         [HttpGet("list")]
-        public IActionResult List()
+        public async Task<IActionResult> List()
         {
-            List<CacheInformation> result = _rider.Cache.GetCacheKeys();
+            List<CacheInformation> result = await _rider.Cache.GetCacheKeys();
             return Json(result);
         }
 
         [HttpDelete("remove")]
-        public IActionResult Remove([FromQuery] string key)
+        public async Task<IActionResult> Remove([FromQuery] string key)
         {
-            _rider.Cache.Remove(key);
+            await _rider.Cache.Remove(key);
             return Json(new {ok = true});
         }
 
         [HttpGet("get")]
-        public IActionResult Get([FromQuery] string key)
+        public async Task<IActionResult> Get([FromQuery] string key)
         {
-            HorseCacheItem item = _rider.Cache.Get(key);
+            var result = await _rider.Cache.Get(key);
             string value = null;
 
-            if (item != null)
-                value = Encoding.UTF8.GetString(item.Value.ToArray());
+            if (result.item != null)
+                value = Encoding.UTF8.GetString(result.item.Value.ToArray());
 
-            return Json(new {ok = item != null, key, value});
+            return Json(new {ok = result.item != null, key, value});
         }
     }
 }

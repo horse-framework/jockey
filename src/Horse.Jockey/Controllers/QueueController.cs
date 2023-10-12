@@ -115,8 +115,13 @@ namespace Horse.Jockey.Controllers
                 if (model.AcknowledgeTimeout.HasValue)
                     o.AcknowledgeTimeout = TimeSpan.FromMilliseconds(model.AcknowledgeTimeout.Value);
 
-                if (model.MessageTimeout.HasValue)
-                    o.MessageTimeout = TimeSpan.FromSeconds(model.MessageTimeout.Value);
+                if (model.MessageTimeout != null)
+                    o.MessageTimeout = new MessageTimeoutStrategy
+                    {
+                        MessageDuration = model.MessageTimeout.duration,
+                        Policy = Enums.Parse<MessageTimeoutPolicy>(model.MessageTimeout.policy),
+                        TargetName = model.MessageTimeout.target
+                    };
 
                 if (model.PutBackDelay.HasValue)
                     o.PutBackDelay = model.PutBackDelay.Value;

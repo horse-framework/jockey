@@ -25,14 +25,14 @@
 
     <ItemGroup>
         <PackageReference Include="Enums.NET" Version="4.0.1" />
-        <PackageReference Include="Horse.Core" Version="6.4.1" />
-        <PackageReference Include="Horse.Messaging.Server" Version="6.4.2" />
-        <PackageReference Include="Horse.Mvc" Version="6.4.1" />
-        <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.4.1" />
-        <PackageReference Include="Horse.Protocols.Http" Version="6.4.1" />
-        <PackageReference Include="Horse.Server" Version="6.4.1" />
-        <PackageReference Include="Horse.WebSocket.Protocol" Version="6.4.1" />
-        <PackageReference Include="Horse.WebSocket.Server" Version="6.4.1" />
+        <PackageReference Include="Horse.Core" Version="6.5.0" />
+        <PackageReference Include="Horse.Messaging.Server" Version="6.6.2" />
+        <PackageReference Include="Horse.Mvc" Version="6.5.1" />
+        <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.5.1" />
+        <PackageReference Include="Horse.Protocols.Http" Version="6.5.1" />
+        <PackageReference Include="Horse.Server" Version="6.5.0" />
+        <PackageReference Include="Horse.WebSocket.Protocol" Version="6.5.11" />
+        <PackageReference Include="Horse.WebSocket.Server" Version="6.5.11" />
     </ItemGroup>
 
     <ItemGroup>

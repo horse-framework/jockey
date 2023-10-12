@@ -55,7 +55,7 @@ namespace Horse.Jockey.Models.Queues
 
         [JsonProperty("msgTimeout")]
         [JsonPropertyName("msgTimeout")]
-        public int? MessageTimeout { get; set; }
+        public MessageTimeoutModel MessageTimeout { get; set; }
 
         [JsonProperty("msgSizeLimit")]
         [JsonPropertyName("msgSizeLimit")]

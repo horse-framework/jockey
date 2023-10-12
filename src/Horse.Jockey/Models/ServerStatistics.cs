@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text.Json.Serialization;
 using Horse.Jockey.Helpers;
 using Horse.Messaging.Server;
@@ -36,7 +37,7 @@ namespace Horse.Jockey.Models
                 Hosts = rider.GetServerHostnames(),
                 StartedDate = Hub.StartedDate.ToUnixSeconds(),
                 TotalNodes = rider.Cluster.Clients.Length,
-                ConnectedNodes = 0,
+                ConnectedNodes = rider.Cluster.Clients.Count(x => x.IsConnected),
                 OnlineClients = rider.Client.GetOnlineClients()
             };
         }

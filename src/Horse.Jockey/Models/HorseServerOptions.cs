@@ -53,6 +53,7 @@ namespace Horse.Jockey.Models
                         Host = x.Info.Host,
                         PublicHost = x.Info.PublicHost,
                         State = "-",
+                        IsConnected = x.IsConnected,
                         ConnectedDate = x.ConnectedDate.ToUnixSeconds()
                     })
                     .ToArray()
