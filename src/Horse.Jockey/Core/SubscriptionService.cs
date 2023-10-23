@@ -91,7 +91,7 @@ namespace Horse.Jockey.Core
             return result;
         }
 
-        public IEnumerable<ConsoleSubscription> FindConsoleSubscribers(IRouter router)
+        public IEnumerable<ConsoleSubscription> FindConsoleSubscribers(Router router)
         {
             List<ConsoleSubscription> result = new();
 

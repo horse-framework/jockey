@@ -1,7 +1,13 @@
 <div class="channels" *ngIf="channels">
     <div class="table">
         <div class="thead">
-            <div class="th fx20">Name</div>
+            <div class="th fx40px">
+                <a class="fa fa-solid fa-plus hreverse" (click)="create()" title="Create New Channel"></a>
+            </div>
+            <div class="th fx20">
+                Name
+                <em>({{channels.length}} Channels)</em>
+            </div>
             <div class="th fx14">Topic</div>
             <div class="th fx12">Status</div>
             <div class="th fx12">Published</div>
@@ -11,6 +17,7 @@
         </div>
         <div class="tbody">
             <div class="trow" *ngFor="let channel of channels">
+                <div class="td fx40px"></div>
                 <div class="td fx20">
                     <span>{{channel.name}}</span>
                 </div>
@@ -34,5 +41,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="create-end">
+        <button (click)="create()">Create New Channel</button>
     </div>
 </div>

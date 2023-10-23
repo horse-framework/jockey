@@ -32,5 +32,9 @@ namespace Horse.Jockey.Models
         [JsonProperty("subscriberCount")]
         [JsonPropertyName("subscriberCount")]
         public int SubscriberCount { get; set; }
+
+        [JsonProperty("hasInitialMessaage")]
+        [JsonPropertyName("hasInitialMessaage")]
+        public bool HasInitialMessage { get; set; }
     }
 }

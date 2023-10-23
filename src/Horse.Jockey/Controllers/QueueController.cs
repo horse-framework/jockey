@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using EnumsNET;
 using Horse.Jockey.Core;
+using Horse.Jockey.Helpers;
 using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
@@ -14,6 +16,7 @@ using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
 using Horse.Mvc.Controllers.Parameters;
 using Horse.Mvc.Filters.Route;
+using Horse.Mvc.Results;
 
 namespace Horse.Jockey.Controllers
 {
@@ -83,6 +86,19 @@ namespace Horse.Jockey.Controllers
             detail.Stats = HorseQueueStatistics.Create(queue);
             detail.Options = QueueOptionsInfo.Create(queue);
             detail.GraphData = watcher.GetGraphData();
+            detail.Consumers = queue.ClientsClone
+                .Select(x => new QueueConsumerInfo
+                {
+                    Id = x.Client?.UniqueId,
+                    Type = x.Client?.Type,
+                    Name = x.Client?.Name,
+                    SubscriptionDate = x.JoinDate.ToUnixSeconds(),
+                    CurrentlyProcessing = x.CurrentlyProcessing != null,
+                    ProcessingDeadline = x.ProcessDeadline.ToUnixSeconds(),
+                    ConsumeCount = x.ConsumeCount,
+                    AcknowledgeCount = x.AcknowledgeCount,
+                    AckTimeoutCount = x.AckTimeoutCount
+                }).ToList();
 
             return JsonAsync(detail);
         }
@@ -212,10 +228,17 @@ namespace Horse.Jockey.Controllers
         [HttpGet("read")]
         public Task<IActionResult> Read([FromQuery] string name)
         {
+            QueueMessage msg = GetQueueMessage(name);
+            QueueMessageModel model = msg != null ? new QueueMessageModel(msg) : null;
+            return JsonAsync(model);
+        }
+
+        private QueueMessage GetQueueMessage(string name)
+        {
             HorseQueue queue = _rider.Queue.Find(name);
 
             if (queue == null)
-                return NotFound(null);
+                return null;
 
             QueueMessage msg = null;
 
@@ -225,25 +248,17 @@ namespace Horse.Jockey.Controllers
             if (msg == null)
                 msg = queue.Manager.MessageStore.ReadFirst();
 
-            QueueMessageModel model = msg != null ? new QueueMessageModel(msg) : null;
-            return JsonAsync(model);
+            return msg;
         }
 
         [HttpGet("consume")]
         public Task<IActionResult> Consume([FromQuery] string name)
         {
             HorseQueue queue = _rider.Queue.Find(name);
+            QueueMessage msg = GetQueueMessage(name);
 
-            if (queue == null)
-                return NotFound(null);
-
-            QueueMessage msg = null;
-
-            if (!queue.Manager.PriorityMessageStore.IsEmpty)
-                msg = queue.Manager.PriorityMessageStore.ConsumeFirst();
-
-            if (msg == null)
-                msg = queue.Manager.MessageStore.ConsumeFirst();
+            if (msg != null)
+                queue.RemoveMessage(msg);
 
             QueueMessageModel model = msg != null ? new QueueMessageModel(msg) : null;
             return JsonAsync(model);
@@ -257,9 +272,7 @@ namespace Horse.Jockey.Controllers
             if (queue == null)
                 return NotFound(null);
 
-            queue.ClearPuttingBackMessages();
-            queue.Manager.PriorityMessageStore.Clear();
-            queue.Manager.MessageStore.Clear();
+            queue.ClearMessages();
             return Ok(new {name = name, clear = true});
         }
 
@@ -340,6 +353,23 @@ namespace Horse.Jockey.Controllers
             }
 
             return await Ok(new {ok = true, completed = true, count = moveCount});
+        }
+
+        [HttpPut("reset-stats")]
+        public IActionResult ResetStats([FromQuery] string queueName)
+        {
+            if (string.IsNullOrEmpty(queueName))
+            {
+                foreach (HorseQueue queue in _rider.Queue.Queues)
+                    queue.Info.Reset();
+            }
+            else
+            {
+                HorseQueue queue = _rider.Queue.Find(queueName);
+                queue?.Info.Reset();
+            }
+
+            return new StatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

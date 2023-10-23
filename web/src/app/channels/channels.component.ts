@@ -20,4 +20,8 @@ export class ChannelsComponent extends BaseComponent implements OnInit {
     this.channels = await this.channelService.list();
   }
 
+  create(): void {
+
+  }
+
 }

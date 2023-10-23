@@ -30,5 +30,9 @@ namespace Horse.Jockey.Models.Clients
         [JsonProperty("connectedDate")]
         [JsonPropertyName("connectedDate")]
         public long ConnectedDate { get; set; }
+        
+        [JsonProperty("protocol")]
+        [JsonPropertyName("protocol")]
+        public string Protocol { get; set; }
     }
 }

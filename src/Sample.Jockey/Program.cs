@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Horse.Jockey;
+using Horse.Jockey.Models.User;
 using Horse.Messaging.Client;
 using Horse.Messaging.Data;
 using Horse.Messaging.Protocol;
@@ -30,9 +31,17 @@ namespace Sample.Jockey
                         q.Options.Acknowledge = QueueAckDecision.WaitForAcknowledge;
                     });
                 })
-                .AddJockey(o => o.Port = 15400)
+                .AddJockey(o =>
+                {
+                    o.Port = 15400;
+                    o.AuthAsync = async login =>
+                    {
+                        
+                        return new UserInfo {Name = "Admin", Id = "*"};
+                    };
+                })
                 .Build();
-                
+
             if (rider.Queue.Find("DemoQueue1") != null)
             {
                 await rider.Queue.Create("DemoQueue1");

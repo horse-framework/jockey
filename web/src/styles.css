@@ -227,6 +227,36 @@ textarea {
   font-weight: 400;
 }
 
+.th .hreverse {
+  text-decoration: none;
+  cursor: pointer;
+  color: #12a050;
+  font-weight: 600;
+  text-transform: none;
+  padding: 6px;
+  border-radius: 3px;
+  margin-top: -4px;
+}
+
+.th a:hover {
+  color: #129244;
+}
+
+.th .hreverse:hover {
+  background-color: #129244;
+  color: #fff;
+}
+
+.th em {
+  text-transform: none;
+  font-style: normal;
+  font-size: 13px;
+  color: #909090;
+  font-weight: 400;
+  padding: 0px 6px;
+  margin: 0px 6px;
+}
+
 .td span,
 .td em {
   overflow: hidden;
@@ -266,6 +296,22 @@ textarea {
 
 .fgrow8 {
   flex-grow: 8;
+}
+
+.fx20px {
+  flex-basis: 20px;
+}
+
+.fx30px {
+  flex-basis: 30px;
+}
+
+.fx40px {
+  flex-basis: 40px;
+}
+
+.fx50px {
+  flex-basis: 50px;
 }
 
 .fx4 {
@@ -552,4 +598,24 @@ select:focus > option:checked {
 .scroll::-webkit-scrollbar-thumb:hover {
   background: #999;
   border-radius: 99px;
+}
+
+.create-end {
+  text-align: center;
+  padding: 40px;
+}
+
+.create-end button {
+  font-size: 13px;
+  border: 2px solid;
+  border-radius: 2px;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 12px 20px;
+  font-weight: 500;
+  background-color: transparent;
+  border-color: #109030;
+}
+.create-end button:hover {
+  border-color: #10f070;
 }

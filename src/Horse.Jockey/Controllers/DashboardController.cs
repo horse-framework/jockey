@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using Horse.Core;
 using Horse.Jockey.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Server;
-using Horse.Messaging.Server.Cluster;
 using Horse.Messaging.Server.Queues;
 using Horse.Mvc;
 using Horse.Mvc.Auth;

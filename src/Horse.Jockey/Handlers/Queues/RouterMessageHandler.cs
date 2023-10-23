@@ -33,7 +33,7 @@ namespace Horse.Jockey.Handlers.Queues
 			return Task.CompletedTask;
 		}
 
-		public Task OnNotRouted(MessagingClient sender, IRouter router, HorseMessage message)
+		public Task OnNotRouted(MessagingClient sender, Router router, HorseMessage message)
 		{
 			_counter.AddRouterPublish();
 			_counter.AddRouterFailed();
@@ -41,7 +41,7 @@ namespace Horse.Jockey.Handlers.Queues
 			return Task.CompletedTask;
 		}
 
-		public Task OnRouted(MessagingClient sender, IRouter router, HorseMessage message)
+		public Task OnRouted(MessagingClient sender, Router router, HorseMessage message)
 		{
 			_counter.AddRouterPublish();
 			_counter.AddRouterOk();
@@ -49,7 +49,7 @@ namespace Horse.Jockey.Handlers.Queues
 			return Task.CompletedTask;
 		}
 
-		private void SendToConsole(IRouter router, HorseMessage message, string status)
+		private void SendToConsole(Router router, HorseMessage message, string status)
 		{
 			IEnumerable<ConsoleSubscription> subscriptions = _subscriptionService.FindConsoleSubscribers(router).ToList();
 			if (!subscriptions.Any()) return;

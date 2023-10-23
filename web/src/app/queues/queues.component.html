@@ -1,7 +1,13 @@
 <div class="queues" *ngIf="queues">
     <div class="table">
         <div class="thead">
-            <div class="th fx20">Name</div>
+            <div class="th fx40px">
+                <a class="fa fa-solid fa-plus hreverse" (click)="create()" title="Create New Queue"></a>
+            </div>
+            <div class="th fx20">
+                Name
+                <em>({{queues.length}} Queues)</em>
+            </div>
             <div class="th fx16">Manager</div>
             <div class="th fx10">Messages</div>
             <div class="th fx12">Acknowledge</div>
@@ -11,6 +17,7 @@
         </div>
         <div class="tbody">
             <div class="trow" *ngFor="let queue of queues">
+                <div class="td fx40px"></div>
                 <div class="td fx20">
                     <span><a routerLink="/queue/{{queue.info.name}}">{{queue.info.name}}</a></span>
                     <em>{{queue.info.topic}}</em>
@@ -25,7 +32,7 @@
                 <div class="td fx12">
                     <span>{{queue.info.acknowledge}}</span>
                     <em *ngIf="queue.info.ackTimeout == 0">No Ack Timeout</em>
-                    <em *ngIf="queue.info.ackTimeout > 0">{{queue.info.ackTimeout}} ms Timeout</em>                    
+                    <em *ngIf="queue.info.ackTimeout > 0">{{queue.info.ackTimeout}} ms Timeout</em>
                 </div>
                 <div class="td fx14">
                     <span>{{queue.info.autoDestroy}}</span>
@@ -45,8 +52,7 @@
             </div>
         </div>
     </div>
-
-    <div class="create-queue">
+    <div class="create-end">
         <button (click)="create()">Create New Queue</button>
     </div>
 </div>

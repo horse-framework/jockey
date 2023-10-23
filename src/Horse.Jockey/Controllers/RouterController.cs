@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
@@ -53,7 +52,7 @@ namespace Horse.Jockey.Controllers
         [HttpGet("get")]
         public IActionResult Get([FromQuery] string name)
         {
-            IRouter router = _rider.Router.Find(name);
+            Router router = _rider.Router.Find(name);
             return Json(new RouterInfo
             {
                 Name = router.Name,
@@ -76,7 +75,7 @@ namespace Horse.Jockey.Controllers
         public Task<IActionResult> Create([FromBody] CreateRouterModel model)
         {
             RouteMethod method = Enum.Parse<RouteMethod>(model.Method);
-            IRouter router = _rider.Router.Add(model.Name, method);
+            Router router = _rider.Router.Add(model.Name, method);
 
             if (router == null)
                 return NotFound(null);
@@ -87,7 +86,7 @@ namespace Horse.Jockey.Controllers
         [HttpDelete("remove")]
         public Task<IActionResult> Remove([FromQuery] string name)
         {
-            IRouter router = _rider.Router.Find(name);
+            Router router = _rider.Router.Find(name);
             if (router == null)
                 return NotFound(null);
 
@@ -98,7 +97,7 @@ namespace Horse.Jockey.Controllers
         [HttpPost("binding")]
         public Task<IActionResult> AddBinding([FromBody] AddBindingModel model)
         {
-            IRouter router = _rider.Router.Find(model.Router);
+            Router router = _rider.Router.Find(model.Router);
 
             if (router == null)
                 return NotFound(null);
@@ -145,7 +144,7 @@ namespace Horse.Jockey.Controllers
         [HttpDelete("binding")]
         public Task<IActionResult> RemoveBinding([FromQuery] string routerName, [FromQuery] string bindingName)
         {
-            IRouter router = _rider.Router.Find(routerName);
+            Router router = _rider.Router.Find(routerName);
 
             if (router == null)
                 return NotFound(null);
@@ -162,7 +161,7 @@ namespace Horse.Jockey.Controllers
         [HttpPost("publish")]
         public async Task<IActionResult> Publish([FromBody] QueuePushModel model)
         {
-            IRouter router = _rider.Router.Find(model.Queue);
+            Router router = _rider.Router.Find(model.Queue);
 
             if (router == null)
                 return await NotFound(new {result = "NotFound"});

@@ -88,7 +88,8 @@ namespace Horse.Jockey
                 services.AddSingleton(subscriptionService);
 
 #if DEBUG
-                string securityKey = "Jockey-Development-Key-000";
+                Hub.Mvc.IsDevelopment = true;
+                string securityKey = "Jockey-Development-Key-xxxxxxxxxx";
 #else
                 string securityKey = $"{Guid.NewGuid()}-{Guid.NewGuid()}-{Guid.NewGuid()}";
 #endif
@@ -147,7 +148,6 @@ namespace Horse.Jockey
                     })
                     .OnError((e, msg, client) => { Console.WriteLine("Jockey WebSocket Error: " + e); }));
             });
-
 
             CorsMiddleware middleware = new();
             middleware.AllowAll();

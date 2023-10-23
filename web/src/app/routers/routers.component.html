@@ -1,7 +1,13 @@
 <div class="routers" *ngIf="routers">
     <div class="table">
         <div class="thead">
-            <div class="th fx20">Router</div>
+            <div class="th fx40px">
+                <a class="fa fa-solid fa-plus hreverse" (click)="create()" title="Create New Router"></a>
+            </div>
+            <div class="th fx20">
+                Router
+                <em>({{routers.length}} Routers)</em>
+            </div>
             <div class="th fx14">Binding Name</div>
             <div class="th fx10">Binding Type</div>
             <div class="th fx28">Binding Target</div>
@@ -11,13 +17,14 @@
         </div>
         <div class="tbody">
             <ng-container *ngFor="let router of routers">
+                <div class="td fx40px"></div>
                 <div *ngFor="let binding of router.bindings; let i = index" class="trow" [class.first-row]="i == 0"
-                    [class.last-row]="i == router.bindings.length - 1">
+                     [class.last-row]="i == router.bindings.length - 1">
                     <div class="td td-fr fx20">
                         <ng-container *ngIf="i == 0">
                             <i [class.green]="router.enabled" [class.red]="!router.enabled"></i>
                             <a style="margin-right: 18px; font-weight: 500; line-height: 23px; font-size: 14px;"
-                                routerLink="/router/{{router.name}}">
+                               routerLink="/router/{{router.name}}">
                                 {{router.name}}
                             </a>
                             <small>{{router.method}}</small>
@@ -37,7 +44,7 @@
                     <div class="td td-fr fx20">
                         <i [class.green]="router.enabled" [class.red]="!router.enabled"></i>
                         <a style="margin-right: 18px; font-weight: 500; line-height: 23px; font-size: 14px;"
-                            routerLink="/router/{{router.name}}">
+                           routerLink="/router/{{router.name}}">
                             {{router.name}}
                         </a>
                         <small>{{router.method}}</small>
@@ -52,7 +59,7 @@
             </ng-container>
         </div>
     </div>
-    <div class="create-router">
+    <div class="create-end">
         <button (click)="create()">Create New Router</button>
     </div>
 </div>
