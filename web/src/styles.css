@@ -33,6 +33,9 @@ textarea {
   align-items: stretch;
   text-align: left;
 }
+.portlet.full {
+  width: 100%;
+}
 
 .portlet-title {
   text-align: left;
@@ -44,6 +47,18 @@ textarea {
   font-size: 14px;
   font-weight: 500;
   color: #d2d2d2;
+}
+
+.portlet-title a {
+  float: right;
+  color: #12a050;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.portlet-title a:hover {
+  color: #129244;
 }
 
 .portlet-body {
@@ -111,7 +126,7 @@ textarea {
   font-size: 10px;
   color: #999;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 21px;
 }
 
 .kvt-value {
@@ -152,7 +167,7 @@ textarea {
   flex-direction: row;
   align-items: stretch;
   align-content: stretch;
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #444;
 }
 
 .th {
@@ -163,6 +178,9 @@ textarea {
   font-size: 13px;
   text-transform: uppercase;
   color: #bbb;
+}
+.table-small .th {
+  font-size: 12px;
 }
 
 .tbody {
@@ -180,10 +198,11 @@ textarea {
   flex-direction: row;
   align-items: stretch;
   align-content: stretch;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #333;
 }
 
 .td {
+  font-size: 14px;
   flex: 0 0 auto;
   box-sizing: border-box;
   padding: 14px 8px;
@@ -204,16 +223,18 @@ textarea {
 }
 
 .td span {
-  font-size: 14px;
   font-weight: 500;
   color: #bbb;
+}
+.table-small .td {
+  font-size: 12px;
 }
 
 .td a {
   text-decoration: none;
   cursor: pointer;
   color: #12a050;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .td a:hover {
@@ -227,6 +248,10 @@ textarea {
   font-weight: 400;
 }
 
+.table-small .td em {
+  font-size: 11px;
+}
+
 .th .hreverse {
   text-decoration: none;
   cursor: pointer;
@@ -236,6 +261,19 @@ textarea {
   padding: 6px;
   border-radius: 3px;
   margin-top: -4px;
+}
+
+.th a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #12a050;
+  font-weight: 400;
+  text-transform: none;
+  margin-bottom: 1px;
+}
+
+.th a.small {
+  font-size: 11px;
 }
 
 .th a:hover {
@@ -298,6 +336,10 @@ textarea {
   flex-grow: 8;
 }
 
+.ml18 {
+  margin-left: 18px;
+}
+
 .fx20px {
   flex-basis: 20px;
 }
@@ -308,6 +350,9 @@ textarea {
 
 .fx40px {
   flex-basis: 40px;
+  width: 40px;
+  max-width: 40px;
+  box-sizing: border-box;
 }
 
 .fx50px {
@@ -339,7 +384,7 @@ textarea {
 }
 
 .fx14 {
-  flex-basis: 15%;
+  flex-basis: 14%;
 }
 
 .fx15 {
@@ -347,11 +392,19 @@ textarea {
 }
 
 .fx16 {
-  flex-basis: 15%;
+  flex-basis: 16%;
+}
+
+.fx18 {
+  flex-basis: 18%;
 }
 
 .fx20 {
   flex-basis: 20%;
+}
+
+.fx22 {
+  flex-basis: 22%;
 }
 
 .fx24 {
@@ -360,6 +413,10 @@ textarea {
 
 .fx25 {
   flex-basis: 25%;
+}
+
+.fx26 {
+  flex-basis: 26%;
 }
 
 .fx28 {
@@ -388,7 +445,7 @@ textarea {
   width: 100%;
   max-width: 1400px;
   box-sizing: border-box;
-  margin: 0px 20px 40px 20px;
+  margin: 0px 20px 0px 20px;
   display: flex;
   align-items: stretch;
   align-content: stretch;
@@ -398,6 +455,8 @@ textarea {
 .vertical-col {
   flex: 0 1 50%;
   box-sizing: border-box;
+  justify-items: stretch;
+  align-items: stretch;
 }
 
 .vc-flex-40 {
@@ -618,4 +677,68 @@ select:focus > option:checked {
 }
 .create-end button:hover {
   border-color: #10f070;
+}
+
+.modal-btn {
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 14px;
+  color: #f0f0f0;
+  margin-left: 16px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding: 15px 0px;
+}
+
+.btn-red {
+  border-color: #c01010;
+}
+.btn-orange {
+  border-color: #e06000;
+}
+.btn-green {
+  border-color: #109030;
+}
+.btn-yellow {
+  border-color: #b2b200;
+}
+.btn-purple {
+  border-color: #7620af;
+}
+.btn-cyan {
+  border-color: #208585;
+}
+.btn-red:hover {
+  border-color: #ff3030;
+}
+.btn-orange:hover {
+  border-color: #ffaa00;
+}
+.btn-green:hover {
+  border-color: #10f070;
+}
+.btn-purple:hover {
+  border-color: #9010e0;
+}
+.btn-cyan:hover {
+  border-color: #30c0c0;
+}
+.btn-yellow:hover {
+  border-color: #fafa20;
+}
+.btn-gray,
+.btn-grey {
+  border-color: #777;
+}
+.btn-gray:hover,
+.btn-grey:hover {
+  border-color: #999;
 }

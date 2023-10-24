@@ -8,6 +8,7 @@ using Horse.Messaging.Client;
 using Horse.Messaging.Data;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
+using Horse.Messaging.Server.Channels;
 using Horse.Messaging.Server.Queues;
 using Horse.Messaging.Server.Queues.Delivery;
 using Horse.Server;
@@ -34,15 +35,11 @@ namespace Sample.Jockey
                 .AddJockey(o =>
                 {
                     o.Port = 15400;
-                    o.AuthAsync = async login =>
-                    {
-                        
-                        return new UserInfo {Name = "Admin", Id = "*"};
-                    };
+                    o.AuthAsync = async login => { return new UserInfo {Name = "Admin", Id = "*"}; };
                 })
                 .Build();
 
-            if (rider.Queue.Find("DemoQueue1") != null)
+            if (rider.Queue.Find("DemoQueue1") == null)
             {
                 await rider.Queue.Create("DemoQueue1");
                 await rider.Queue.Create("DemoQueue2");
@@ -51,20 +48,21 @@ namespace Sample.Jockey
             }
 
             rider.Channel.Options.AutoDestroy = false;
-            if (rider.Channel.Find("DemoChannel1") == null)
-            {
-                await rider.Channel.Create("DemoChannel1");
-                await rider.Channel.Create("DemoChannel2");
-                await rider.Channel.Create("DemoChannel3");
-                await rider.Channel.Create("DemoChannel4");
-            }
+
+            HorseChannel ch1 = rider.Channel.Find("DemoChannel1") ?? await rider.Channel.Create("DemoChannel1"); /*
+            await rider.Channel.Create("DemoChannel2");
+            await rider.Channel.Create("DemoChannel3");
+            await rider.Channel.Create("DemoChannel4");*/
+
+            ch1.Options.SendLastMessageAsInitial = true;
+            ch1.Push("{\"name\":\"foo\",\"type\":1234}");
 
             rider.Cache.Set("DemoCache1", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue1")), TimeSpan.FromMinutes(24));
-            rider.Cache.Set("DemoCache2", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue2")), TimeSpan.FromMinutes(51));
-            rider.Cache.Set("DemoCache3", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue3")), TimeSpan.FromMinutes(76));
+            rider.Cache.Set("DemoCache2", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue2")), TimeSpan.FromMinutes(51), TimeSpan.FromMinutes(46));
+            rider.Cache.Set("DemoCache3", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue3")), TimeSpan.FromMinutes(76), null, new[] {"Exchange", "Music"});
             rider.Cache.Set("DemoCache4", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue4")), TimeSpan.FromMinutes(113));
-            rider.Cache.Set("DemoCache5", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue5")), TimeSpan.FromMinutes(131));
-            rider.Cache.Set("DemoCache6", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue6")), TimeSpan.FromMinutes(174));
+            rider.Cache.Set("DemoCache5", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue5")), TimeSpan.FromMinutes(131), TimeSpan.FromMinutes(120), new[] {"Games", "Movies", "Social Media"});
+            rider.Cache.Set("DemoCache6", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue6")), TimeSpan.FromMinutes(174), null, new[] {"Books"});
             rider.Cache.Set("DemoCache7", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue7")), TimeSpan.FromMinutes(200));
 
             HorseServer server = new();

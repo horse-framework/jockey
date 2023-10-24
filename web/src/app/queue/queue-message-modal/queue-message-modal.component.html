@@ -1,8 +1,6 @@
 <h2 class="title" mat-dialog-title>Queue Message</h2>
 <mat-dialog-content class="content">
-
     <div class="queue-message">
-
         <div class="message-props">
             <div class="key-value-table">
                 <div class="kvt-row">
@@ -43,7 +41,6 @@
                 </div>
             </div>
         </div>
-
         <div class="message-content">
             <h4>Headers</h4>
             <div class="message-headers">
@@ -57,7 +54,6 @@
                     The message has no headers
                 </p>
             </div>
-
             <div class="message-content-title">
                 <h4>Message Content</h4>
                 <span (click)="setJson(false)" [class.active]="!isJson">String</span>
@@ -67,8 +63,7 @@
             <pre class="string-content"  *ngIf="isJson" [innerHTML]="message.messageObj | prettyprint"></pre>
         </div>
     </div>
-
 </mat-dialog-content>
 <mat-dialog-actions class="buttons">
-    <button mat-button mat-dialog-close class="modal-btn btn-cancel">Close</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-grey">Close</button>
 </mat-dialog-actions>

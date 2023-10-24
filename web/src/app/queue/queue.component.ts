@@ -213,7 +213,6 @@ export class QueueComponent extends BaseComponent implements OnInit, OnDestroy {
         this.socket.send(SocketModels.QueueDetailRequest, request);
     }
 
-
     push(): void {
         let dialogRef = this.dialog.open(QueuePushModalComponent, { width: '550px' });
         let component = <QueuePushModalComponent>dialogRef.componentInstance;
@@ -343,6 +342,24 @@ export class QueueComponent extends BaseComponent implements OnInit, OnDestroy {
             .subscribe(value => {
                 if (value.confirmed) {
                     this.queueService.setOption(this.queueName, value.property, value.value).then(() => this.load());
+                }
+            });
+    }
+
+    resetStats(): void {
+
+        let dialogRef = this.dialog.open(ConfirmModalComponent, { width: '450px' });
+        let component = <ConfirmModalComponent>dialogRef.componentInstance;
+        component.message = 'Queue statistics will be reset. Are you sure?';
+        component.onclosed
+            .pipe(take(1))
+            .subscribe(value => {
+                if (value) {
+                    this.queueService
+                        .resetStats(this.queue.info.name)
+                        .then(() => {
+                            this.load();
+                        });
                 }
             });
     }

@@ -39,4 +39,11 @@ export class QueuesComponent extends BaseComponent implements OnInit, OnDestroy 
                         });
             });
     }
+
+    viewManagers(): void {
+        this.queueService.getManagers().then(managers => {
+            let str = 'Defined manager names are: ' + managers.join(', ');
+            alert(str);
+        });
+    }
 }

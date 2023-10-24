@@ -74,7 +74,7 @@ namespace Horse.Jockey.Controllers
             return Json(model);
         }
 
-        [HttpPost("craate")]
+        [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateChannelModel model)
         {
             HorseChannel channel = await _rider.Channel.Create(model.Name, opt =>
@@ -85,6 +85,10 @@ namespace Horse.Jockey.Controllers
                 opt.AutoDestroyIdleSeconds = 5;
                 opt.SendLastMessageAsInitial = true;
             });
+
+            if (!string.IsNullOrEmpty(model.Topic))
+                channel.Topic = model.Topic;
+            
             return Json(new {created = channel != null});
         }
 

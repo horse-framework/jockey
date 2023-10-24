@@ -8,4 +8,5 @@ public class CreateChannelModel
     public ulong MessageSizeLimit { get; set; }
     public int AutoDestroyIdleSeconds { get; set; }
     public bool SendLastMessageAsInitial { get; set; }
+    public string Topic { get; set; }
 }

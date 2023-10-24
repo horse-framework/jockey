@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Messaging.Protocol.Models;
 using Horse.Messaging.Server;
@@ -12,6 +15,7 @@ using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
 using Horse.Mvc.Controllers.Parameters;
 using Horse.Mvc.Filters.Route;
+using Horse.Mvc.Results;
 
 namespace Horse.Jockey.Controllers
 {
@@ -30,7 +34,14 @@ namespace Horse.Jockey.Controllers
         public async Task<IActionResult> List()
         {
             List<CacheInformation> result = await _rider.Cache.GetCacheKeys();
-            return Json(result);
+            return Json(result.Select(x => new CacheItemModel
+            {
+                Expiration = x.Expiration,
+                WarnCount = x.WarnCount,
+                WarningDate = x.WarningDate,
+                Key = x.Key,
+                Tags = x.Tags
+            }));
         }
 
         [HttpDelete("remove")]
@@ -49,7 +60,18 @@ namespace Horse.Jockey.Controllers
             if (result.item != null)
                 value = Encoding.UTF8.GetString(result.item.Value.ToArray());
 
-            return Json(new {ok = result.item != null, key, value});
+            if (result.item == null)
+                return new StatusCodeResult(HttpStatusCode.NotFound);
+
+            return Json(new CacheItemModel
+            {
+                Expiration = result.item.Expiration.ToUnixSeconds(),
+                WarnCount = result.item.ExpirationWarnCount,
+                WarningDate = result.item.ExpirationWarning?.ToUnixSeconds() ?? 0,
+                Key = result.item.Key,
+                Tags = result.item.Tags,
+                Value = value
+            });
         }
 
         [HttpPost("create")]

@@ -1,5 +1,9 @@
 
 export interface CacheInfo {
-    Key: string;
-    Expiration: number;
+    key: string;
+    expiration: number;
+    warningDate: number;
+    warnCount: number;
+    tags: string[];
+    value?: string;
 }

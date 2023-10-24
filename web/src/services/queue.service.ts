@@ -205,4 +205,16 @@ export class QueueService {
                 }))
             .toPromise();
     }
+    
+    resetStats(name: string): Promise<any> {
+        return this.api.putForm('/queue/reset-stats', null)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
 }

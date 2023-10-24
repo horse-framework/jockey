@@ -14,7 +14,10 @@
         </div>
       </div>
       <div class="portlet" *ngIf="queue">
-        <h3 class="portlet-title">Queue Statistics</h3>
+        <h3 class="portlet-title">
+          Queue Statistics
+          <a (click)="resetStats()">Reset</a>
+        </h3>
         <div class="portlet-body" style="min-height: 377px;">
           <div class="key-value-table">
             <div class="kvt-row">
@@ -114,7 +117,7 @@
         </div>
         <div class="portlet">
           <h3 class="portlet-title">Queue Information</h3>
-          <div class="portlet-body">
+          <div class="portlet-body" style="height: 790px;">
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Name</div>
@@ -243,3 +246,39 @@
     </div>
   </div>
 </div>
+<div class="centered-body" *ngIf="queue && queue.consumers">
+  <div class="vertical-content">
+    <div class="portlet full">
+      <h3 class="portlet-title">Queue Consumers</h3>
+      <div class="portlet-body table table-small">
+        <div class="thead">
+          <div class="th fx14">Type</div>
+          <div class="th fx14">Name</div>
+          <div class="th fx22">Id</div>
+          <div class="th fx10">Subscribed Date</div>
+          <div class="th fx10">Consumed</div>
+          <div class="th fx10">Acknowledged</div>
+          <div class="th fx10">Ack Timed out</div>
+          <div class="th fx10">Status</div>
+        </div>
+        <div class="tbody">
+          <div class="trow" *ngFor="let consumer of queue.consumers">
+            <div class="td fx14"><span>{{consumer.type}}</span></div>
+            <div class="td fx14"><span>{{consumer.name}}</span></div>
+            <div class="td fx22"><a routerLink="/client/{{consumer.id}}">{{consumer.id}}</a></div>
+            <div class="td fx10"><span>{{(consumer.subscriptionDate*1000)| date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
+            <div class="td fx10"><span>{{consumer.consumes}}</span></div>
+            <div class="td fx10"><span>{{consumer.acks}}</span></div>
+            <div class="td fx10"><span>{{consumer.ackTimeouts}}</span></div>
+            <div class="td fx10" *ngIf="consumer.currentlyProcessing">
+              <span>Processing</span>
+              <em>{{(consumer.processingDeadline*1000)| date: 'yyyy-MM-dd HH:mm:ss'}}</em>
+            </div>
+            <div class="td fx10" *ngIf="!consumer.currentlyProcessing"><span>Idle</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="height: 80px;"></div>

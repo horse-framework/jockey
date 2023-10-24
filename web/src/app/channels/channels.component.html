@@ -9,11 +9,12 @@
                 <em>({{channels.length}} Channels)</em>
             </div>
             <div class="th fx14">Topic</div>
-            <div class="th fx12">Status</div>
-            <div class="th fx12">Published</div>
-            <div class="th fx12">Received</div>
-            <div class="th fx12">Subscribers</div>
-            <div class="th fx16">Last Publish Date</div>
+            <div class="th fx10">Status</div>
+            <div class="th fx10">Published</div>
+            <div class="th fx10">Received</div>
+            <div class="th fx10">Subscribers</div>
+            <div class="th fx12">Last Publish Date</div>
+            <div class="th fx10">Initial Message</div>
         </div>
         <div class="tbody">
             <div class="trow" *ngFor="let channel of channels">
@@ -24,20 +25,26 @@
                 <div class="td fx14">
                     <span>{{channel.topic}}</span>
                 </div>
-                <div class="td fx12">
+                <div class="td fx10">
                     <span>{{channel.status}}</span>
                 </div>
-                <div class="td fx12">
+                <div class="td fx10">
                     <span>{{channel.publish}}</span>
                 </div>
-                <div class="td fx12">
+                <div class="td fx10">
                     <span>{{channel.receive}}</span>
                 </div>
-                <div class="td fx12">
+                <div class="td fx10">
                     <span>{{channel.subscriberCount}} Online</span>
                 </div>
-                <div class="td fx16">
+                <div class="td fx12">
                     <span>{{(channel.lastPublishDate*1000) | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+                </div>
+                <div class="td fx10">
+                    <em *ngIf="!channel.hasInitialMessage">No Initial Message</em>
+                    <span *ngIf="channel.hasInitialMessage">
+                        <a (click)="viewInitialMessage(channel)">View</a>
+                    </span>
                 </div>
             </div>
         </div>
