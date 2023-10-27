@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject, of } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 import { ApiClient } from 'src/lib/api-client';
 import { HorseClient } from 'src/models/horse-client';
 import { TransactionResult } from 'src/models/transaction-result';
 import { WebsocketService } from './websocket.service';
+import { MessageCount } from 'src/models/message-count';
+import { DateHelper } from 'src/lib/date-helper';
 
 @Injectable({
     providedIn: 'root'
@@ -40,6 +42,30 @@ export class ClientService {
 
     remove(client: HorseClient): Promise<TransactionResult> {
         return null;
+    }
+
+    getGraph(name: string, resolution: string): Promise<MessageCount> {
+
+        let url = '/client/graph?resolution=' + resolution;
+        if (name != null && name.length > 0) {
+            url += '&name=' + name;
+        }
+
+        return of(this)
+            .pipe(
+                mergeMap(() => this.api.get(url)),
+                map(response => {
+
+                    if (!response.success)
+                        return null;
+
+                    let result = <MessageCount>response.data;
+                    result.labels = DateHelper.createLabels(result.d.map(x => x.u));
+
+                    return result;
+                })
+            )
+            .toPromise();
     }
 
 }

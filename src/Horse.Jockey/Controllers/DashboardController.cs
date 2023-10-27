@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Horse.Core;
 using Horse.Jockey.Core;
-using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Server;
-using Horse.Messaging.Server.Queues;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
@@ -20,16 +16,14 @@ namespace Horse.Jockey.Controllers
     internal class DashboardController : HorseController
     {
         private readonly HorseRider _rider;
-        private readonly QueueWatcherContainer _watcherContainer;
-        private readonly MessageCounter _messageCounter;
         private readonly JockeyOptions _jockeyOptions;
+        private readonly MessageCounter _counter;
 
-        public DashboardController(QueueWatcherContainer watcherContainer, HorseRider rider, MessageCounter messageCounter, JockeyOptions jockeyOptions)
+        public DashboardController(HorseRider rider, JockeyOptions jockeyOptions, MessageCounter counter)
         {
-            _watcherContainer = watcherContainer;
             _rider = rider;
-            _messageCounter = messageCounter;
             _jockeyOptions = jockeyOptions;
+            _counter = counter;
         }
 
         [HttpGet("stats")]
@@ -37,45 +31,7 @@ namespace Horse.Jockey.Controllers
         {
             ServerStatistics server = ServerStatistics.Create(_rider);
             HorseServerOptions serverOptions = HorseServerOptions.Create(_rider);
-            QueueOptionsInfo queueOptionsInfo = QueueOptionsInfo.CreateDefault(_rider);
-
-            QueueGraphData queueMessages = new QueueGraphData();
-            foreach (HorseQueue queue in _rider.Queue.Queues)
-            {
-                queueMessages.Ack += queue.Info.Acknowledges;
-                queueMessages.Error += queue.Info.ErrorCount;
-                queueMessages.Unack += queue.Info.Unacknowledges;
-                queueMessages.Nack += queue.Info.NegativeAcknowledge;
-                queueMessages.PuttingBack += queue.GetMessageCountPendingForPutBack();
-
-                queueMessages.Received += queue.Info.ReceivedMessages;
-                queueMessages.Sent += queue.Info.SentMessages;
-                queueMessages.Timeout += queue.Info.TimedOutMessages;
-
-                if (queue.Manager != null)
-                {
-                    queueMessages.Pending += queue.Manager.DeliveryHandler.Tracker.GetDeliveryCount();
-                    queueMessages.Stored += queue.Manager.MessageStore.Count();
-                    queueMessages.StoredPrio += queue.Manager.PriorityMessageStore.Count();
-                }
-
-                if (queue.ProcessingMessage != null)
-                    queueMessages.Processing++;
-            }
-
-            MessageGraphData otherMessages = new MessageGraphData
-            {
-                Date = DateTime.UtcNow.ToUnixSeconds(),
-                DirectDelivery = _messageCounter.DirectDelivery,
-                DirectMessage = _messageCounter.DirectMessage,
-                DirectResponse = _messageCounter.DirectResponse,
-                DirectNoReceiver = _messageCounter.DirectNoReceiver,
-                RouterPublish = _messageCounter.RouterPublish,
-                RouterNotFound = _messageCounter.RouterNotFound,
-                RouterOk = _messageCounter.RouterOk,
-                RouterFailed = _messageCounter.RouterFailed
-            };
-
+            QueueOptionsInfo queueOptions = QueueOptionsInfo.CreateDefault(_rider);
 
             string mainNodeHost = null;
             if (_rider.Cluster.MainNode != null)
@@ -85,79 +41,23 @@ namespace Horse.Jockey.Controllers
                 mainNodeHost = $"http://{info.Hostname}:{_jockeyOptions.Port}";
             }
 
+            var atc = _counter.GetChannelCounter().AllTimeTotal;
+            var atq = _counter.GetQueueCounter().AllTimeTotal;
+            var ats = _counter.GetQueueStoreCounter().AllTimeTotal;
+
             return Json(new
             {
                 server,
-                queueMessages,
-                otherMessages,
                 serverOptions,
-                queueOptions = queueOptionsInfo,
+                mainNodeHost,
+                queueOptions,
                 channelCount = _rider.Channel.Channels.Count(),
-                channelPublished = _rider.Channel.Channels.Sum(x => x.Info.Published),
-                channelReceived = _rider.Channel.Channels.Sum(x => x.Info.Received),
                 queueCount = _rider.Queue.Queues.Count(),
                 nodeState = _rider.Cluster.State.ToString(),
-                mainNodeHost = mainNodeHost
+                channels = new CountRecord(atc.UnixTime, atc.Received, atc.Sent, atc.Respond, atc.Error, atc.Delivered, atc.NotRouted, atc.Timeout),
+                queues =  new CountRecord(atq.UnixTime, atq.Received, atq.Sent, atq.Respond, atq.Error, atq.Delivered, atq.NotRouted, atq.Timeout),
+                queueStore =  new CountRecord(ats.UnixTime, ats.Received, ats.Sent, ats.Respond, ats.Error, ats.Delivered, ats.NotRouted, ats.Timeout),
             });
-        }
-
-        [HttpGet("graph")]
-        public IActionResult Graph()
-        {
-            List<QueueGraphData[]> dataList = new List<QueueGraphData[]>();
-
-            IEnumerable<QueueWatcher> watchers = _watcherContainer.GetAll();
-            foreach (QueueWatcher watcher in watchers)
-            {
-                QueueGraphData[] data = watcher.GetGraphData();
-                dataList.Add(data);
-            }
-
-            List<QueueGraphData> list = new List<QueueGraphData>();
-
-            if (dataList.Count == 0)
-                return Json(list);
-
-            int size = dataList[0].Length;
-            for (int i = 0; i < size; i++)
-            {
-                QueueGraphData overall = new QueueGraphData();
-
-                foreach (QueueGraphData[] array in dataList)
-                {
-                    int padding = size - array.Length;
-                    int index = i - padding;
-                    if (index < 0 || index >= array.Length)
-                        continue;
-
-                    QueueGraphData data = array[index];
-
-                    if (overall.Date == 0)
-                        overall.Date = data.Date;
-
-                    overall.Ack += data.Ack;
-                    overall.Nack += data.Nack;
-                    overall.Unack += data.Unack;
-                    overall.Error += data.Error;
-                    overall.Pending += data.Pending;
-                    overall.Processing += data.Processing;
-                    overall.Received += data.Received;
-                    overall.Sent += data.Sent;
-                    overall.Stored += data.Stored;
-                    overall.Timeout += data.Timeout;
-                    overall.StoredPrio += data.StoredPrio;
-                }
-
-                list.Add(overall);
-            }
-
-            return Json(list);
-        }
-
-        [HttpGet("messages")]
-        public IActionResult Messages()
-        {
-            return Json(_messageCounter.GetGraphData());
         }
     }
 }

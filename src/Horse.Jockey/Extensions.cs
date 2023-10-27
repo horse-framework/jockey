@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
+using Horse.Jockey.Handlers;
 using Horse.Jockey.Handlers.Queues;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Resource;
@@ -58,32 +59,29 @@ namespace Horse.Jockey
                 ResourceProvider provider = new ResourceProvider();
                 await provider.Load();
 
-                MessageCounter counter = new MessageCounter(rider);
-                counter.Run();
+                MessageCounter messageCounter = new MessageCounter(rider);
+                messageCounter.Run();
 
-                QueueWatcherContainer watcherContainer = new QueueWatcherContainer();
-                watcherContainer.Initialize(rider, options);
-
-                QueueEventHandler queueEventHandler = new QueueEventHandler();
+                QueueEventHandler queueEventHandler = new QueueEventHandler(messageCounter);
                 rider.Queue.EventHandlers.Add(queueEventHandler);
 
-                ChannelEventHandler channelEventHandler = new ChannelEventHandler(subscriptionService);
+                ChannelEventHandler channelEventHandler = new ChannelEventHandler(subscriptionService, messageCounter);
                 rider.Channel.EventHandlers.Add(channelEventHandler);
 
                 ErrorHandler errorHandler = new ErrorHandler();
                 rider.ErrorHandlers.Add(errorHandler);
 
                 rider.Queue.MessageHandlers.Add(new QueueMessageEventHandler(subscriptionService));
-                rider.Direct.MessageHandlers.Add(new DirectMessageHandler(counter, subscriptionService));
-                rider.Router.MessageHandlers.Add(new RouterMessageHandler(counter, subscriptionService));
+                rider.Direct.MessageHandlers.Add(new DirectMessageHandler(messageCounter, subscriptionService));
+                rider.Router.MessageHandlers.Add(new RouterMessageHandler(messageCounter, subscriptionService));
+                rider.Client.Handlers.Add(new ClientHandler(messageCounter));
 
                 services.AddSingleton(rider);
                 services.AddSingleton(options);
                 services.AddSingleton(provider);
-                services.AddSingleton(watcherContainer);
                 services.AddSingleton(queueEventHandler);
                 services.AddSingleton(errorHandler);
-                services.AddSingleton(counter);
+                services.AddSingleton(messageCounter);
                 services.AddSingleton(Hub.Clients);
                 services.AddSingleton(subscriptionService);
 
@@ -158,9 +156,6 @@ namespace Horse.Jockey
 
                 IServiceProvider provider = app.GetProvider();
                 Hub.Provider = provider;
-
-                QueueWatcherContainer watchers = provider.GetService<QueueWatcherContainer>();
-                watchers.LoadAll(rider);
 
                 ResourceProvider resourceProvider = provider.GetRequiredService<ResourceProvider>();
                 resourceProvider.Use(app);

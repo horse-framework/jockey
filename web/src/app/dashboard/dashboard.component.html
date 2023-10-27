@@ -1,10 +1,6 @@
 <div class="warning-bar" *ngIf="dashboard && (dashboard.nodeState == 'Replica' || dashboard.nodeState == 'Successor')">
-  <p>
-    That node is a <b>{{dashboard.nodeState}}</b> Node. <a href="{{dashboard.nodeState}}">Click here</a> to open main node jockey panel.
-  </p>
-
+  <p>That node is a <b>{{dashboard.nodeState}}</b> Node. <a href="{{dashboard.mainNodeHost}}">Click here</a> to open main node jockey panel.</p>
 </div>
-
 
 <div class="dashboard" [hidden]="dashboard == null">
   <div class="dashboard-row">
@@ -23,23 +19,23 @@
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Stored Messages</div>
-                <div class="kvt-value">{{dashboard.queueMessages.stored}}</div>
+                <div class="kvt-value">{{dashboard.queueStore.r}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Stored Priority Messages</div>
-                <div class="kvt-value">{{dashboard.queueMessages.storedPrio}}</div>
+                <div class="kvt-value">{{dashboard.queueStore.d}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Timed out Messages</div>
-                <div class="kvt-value">{{dashboard.queueMessages.timeout}}</div>
+                <div class="kvt-key">Pending Delivery</div>
+                <div class="kvt-value">{{dashboard.queueStore.rs}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Currently Processing Messages</div>
-                <div class="kvt-value">{{dashboard.queueMessages.processing}}</div>
+                <div class="kvt-key">Waiting for Put Back</div>
+                <div class="kvt-value">{{dashboard.queueStore.nr}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Putting Back Messages</div>
-                <div class="kvt-value">{{dashboard.queueMessages.puttingBack}}</div>
+                <div class="kvt-key">Processing</div>
+                <div class="kvt-value">{{dashboard.queueStore.s}}</div>
               </div>
             </div>
           </div>
@@ -57,27 +53,27 @@
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Produced</div>
-                <div class="kvt-value">{{dashboard.queueMessages.stored + dashboard.queueMessages.received}}</div>
+                <div class="kvt-value">{{dashboard.queues.r}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Acknowledged</div>
-                <div class="kvt-value">{{dashboard.queueMessages.ack}}</div>
+                <div class="kvt-value">{{dashboard.queues.d}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Negative Acknowledged</div>
-                <div class="kvt-value">{{dashboard.queueMessages.nack}}</div>
+                <div class="kvt-value">{{dashboard.queues.rs}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Pending for Acknowledge</div>
-                <div class="kvt-value">{{dashboard.queueMessages.pending}}</div>
+                <div class="kvt-value">{{dashboard.queues.r}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Acknowledge Timed out</div>
-                <div class="kvt-value">{{dashboard.queueMessages.unack}}</div>
+                <div class="kvt-value">{{dashboard.queues.nr}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Delivery Errors</div>
-                <div class="kvt-value">{{dashboard.queueMessages.error}}</div>
+                <div class="kvt-value">{{dashboard.queues.e}}</div>
               </div>
             </div>
           </div>
@@ -102,11 +98,11 @@
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Published Messages</div>
-                <div class="kvt-value">{{dashboard.channelPublished}}</div>
+                <div class="kvt-value">{{dashboard.channels.s}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Received Messages</div>
-                <div class="kvt-value">{{dashboard.channelReceived}}</div>
+                <div class="kvt-value">{{dashboard.channels.r}}</div>
               </div>
             </div>
           </div>
@@ -233,15 +229,15 @@
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Published Router Messages</div>
-                <div class="kvt-value">{{dashboard.otherMessages.routerPublish}}</div>
+                <div class="kvt-value">***</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Delivered Router Messages</div>
-                <div class="kvt-value">{{dashboard.otherMessages.routerOk}}</div>
+                <div class="kvt-value">***</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Not Received Messages</div>
-                <div class="kvt-value">{{dashboard.otherMessages.routerFailed}}</div>
+                <div class="kvt-value">***</div>
               </div>
             </div>
           </div>
@@ -259,15 +255,15 @@
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Sent Direct Messages</div>
-                <div class="kvt-value">{{dashboard.otherMessages.directMessage}}</div>
+                <div class="kvt-value">***</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Delivered Direct Messages</div>
-                <div class="kvt-value">{{dashboard.otherMessages.directDelivery}}</div>
+                <div class="kvt-value">***</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Direct Responses</div>
-                <div class="kvt-value">{{dashboard.otherMessages.directResponse}}</div>
+                <div class="kvt-value">***</div>
               </div>
             </div>
           </div>

@@ -14,7 +14,8 @@ namespace Horse.Jockey.Core
     internal class SubscriptionService
     {
         private readonly List<ConsoleSubscription> _console = new();
-        private readonly List<QueueDetailSubscription> _queue = new();
+        private readonly List<ChannelDetailSubscription> _channels = new();
+        private readonly List<QueueDetailSubscription> _queues = new();
         private readonly List<WsServerSocket> _dashboard = new();
 
         #region Console
@@ -66,7 +67,7 @@ namespace Horse.Jockey.Core
                         result.Add(subscription);
                         continue;
                     }
-                    
+
                     if (subscription.Source != SubscriptionSource.Direct)
                         continue;
 
@@ -104,7 +105,7 @@ namespace Horse.Jockey.Core
                         result.Add(subscription);
                         continue;
                     }
-                    
+
                     if (subscription.Source != SubscriptionSource.Router)
                         continue;
 
@@ -130,7 +131,7 @@ namespace Horse.Jockey.Core
                         result.Add(subscription);
                         continue;
                     }
-                    
+
                     if (subscription.Source != SubscriptionSource.Queue)
                         continue;
 
@@ -163,7 +164,7 @@ namespace Horse.Jockey.Core
                         result.Add(subscription);
                         continue;
                     }
-                    
+
                     if (subscription.Source != SubscriptionSource.Channel)
                         continue;
 
@@ -187,40 +188,101 @@ namespace Horse.Jockey.Core
 
         #region Queue
 
-        public void SubscribeQueueDetail(WsServerSocket client, HorseQueue queue)
+        public void SubscribeQueueDetail(WsServerSocket client, HorseQueue queue, string resolution)
         {
             UnsubscribeQueueDetail(client);
 
             QueueDetailSubscription subscription = new()
             {
                 Client = client,
-                Queue = queue
+                Queue = queue,
+                Resolution = resolution
             };
-            lock (_queue)
+            lock (_queues)
             {
-                _queue.Add(subscription);
+                _queues.Add(subscription);
             }
         }
 
         public void UnsubscribeQueueDetail(WsServerSocket client)
         {
-            lock (_queue)
+            lock (_queues)
             {
-                int index = _queue.FindIndex(x => x.Client == client);
+                int index = _queues.FindIndex(x => x.Client == client);
                 if (index < 0)
                     return;
 
-                _queue.RemoveAt(index);
+                _queues.RemoveAt(index);
             }
         }
 
-        public IEnumerable<QueueDetailSubscription> FindQueueDetailSubscribers(string queueName)
+        public List<QueueDetailSubscription> FindQueueDetailSubscribers(string queueName)
         {
             List<QueueDetailSubscription> list;
-            lock (_queue)
+            lock (_queues)
             {
-                list = new List<QueueDetailSubscription>(_queue.Where(x => x.Queue.Name.Equals(queueName)));
+                list = new List<QueueDetailSubscription>(_queues.Where(x => x.Queue.Name.Equals(queueName)));
             }
+
+            return list;
+        }
+
+        public List<QueueDetailSubscription> GetAllQueueDetailSubscribers()
+        {
+            List<QueueDetailSubscription> list;
+            lock (_queues)
+                list = new List<QueueDetailSubscription>(_queues);
+
+            return list;
+        }
+
+        #endregion
+
+        #region Channel
+
+        public void SubscribeChannelDetail(WsServerSocket client, HorseChannel channel, string resolution)
+        {
+            UnsubscribeChannelDetail(client);
+
+            ChannelDetailSubscription subscription = new()
+            {
+                Client = client,
+                Channel = channel,
+                Resolution = resolution
+            };
+
+            lock (_channels)
+                _channels.Add(subscription);
+        }
+
+        public void UnsubscribeChannelDetail(WsServerSocket client)
+        {
+            lock (_channels)
+            {
+                int index = _channels.FindIndex(x => x.Client == client);
+                if (index < 0)
+                    return;
+
+                _channels.RemoveAt(index);
+            }
+        }
+
+        public List<ChannelDetailSubscription> FindChannelDetailSubscribers(string channelName)
+        {
+            List<ChannelDetailSubscription> list;
+            lock (_channels)
+            {
+                list = new List<ChannelDetailSubscription>(_channels.Where(x => x.Channel.Name.Equals(channelName)));
+            }
+
+            return list;
+        }
+
+        public List<ChannelDetailSubscription> GetAllChannelDetailSubscribers()
+        {
+            List<ChannelDetailSubscription> list;
+            lock (_channels)
+                list = new List<ChannelDetailSubscription>(_channels);
 
             return list;
         }
@@ -246,7 +308,7 @@ namespace Horse.Jockey.Core
             }
         }
 
-        public IEnumerable<WsServerSocket> GetDashboardSubscribers()
+        public List<WsServerSocket> GetDashboardSubscribers()
         {
             List<WsServerSocket> result;
             lock (_dashboard)

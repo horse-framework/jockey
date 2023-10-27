@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { AddBindingModel } from 'src/models/add-binding-model';
-import { HorseQueueSummary } from 'src/models/horse-queue';
-import { QueueService } from 'src/services/queue.service';
+import { HorseQueueSummary } from 'src/app/queue/models/horse-queue';
+import { QueueService } from 'src/app/queue/services/queue.service';
 
 @Component({
   selector: 'app-binding-add-modal',

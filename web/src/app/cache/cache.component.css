@@ -1,7 +1,6 @@
 .cache {
   margin: auto;
   padding: 0px 60px;
-  max-width: 1290px;
   text-align: center;
 }
 .cache .table {
@@ -10,22 +9,23 @@
 }
 
 .cache-button {
-  border: none;
+  border: 2px solid transparent;
   border-radius: 2px;
   color: #f0f0f0;
-  padding: 8px 12px;
+  padding: 6px 10px;
   min-width: 90px;
-  margin-left: 18px;
+  margin: -6px 0px -6px 14px;
+  background-color: transparent;
 }
 .cache-button.red {
-  background-color: #c02020;
+  border-color: #c02020;
 }
 .cache-button.red:hover {
-  background-color: #f02020;
+  border-color: #f02020;
 }
 .cache-button.blue {
-  background-color: #1050a0;
+  border-color: #1050a0;
 }
 .cache-button.blue:hover {
-  background-color: #1070c0;
+  border-color: #1070c0;
 }

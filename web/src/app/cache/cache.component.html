@@ -1,21 +1,37 @@
 <div class="cache" *ngIf="caches">
     <div class="table">
         <div class="thead">
-            <div class="th fx40">Key</div>
-            <div class="th fx30">Expiration</div>
-            <div class="th fx30 tright" style="display: block;">Action</div>
+            <div class="th fx40px">
+                <a class="fa fa-solid fa-plus hreverse" (click)="create()" title="Create New Item"></a>
+            </div>
+            <div class="th fx20">Key</div>
+            <div class="th fx14">Expiration</div>
+            <div class="th fx14">Warning Date</div>
+            <div class="th fx12">Warn Count</div>
+            <div class="th fx26">Tags</div>
+            <div class="th fx12 tright" style="display: block;">Action</div>
         </div>
         <div class="tbody">
             <div class="trow" *ngFor="let cache of caches">
-                <div class="td fx40">
-                    <span>{{cache.Key}}</span>
+                <div class="td fx40px"></div>
+                <div class="td fx20">
+                    <span>{{cache.key}}</span>
                 </div>
-                <div class="td fx30">
-                    <span>{{(cache.Expiration) | date: 'yyyy-MM-dd HH:mm:ss'}} UTC</span>
+                <div class="td fx14">
+                    <span>{{(cache.expiration * 1000) | date: 'yyyy-MM-dd HH:mm:ss'}} UTC</span>
                 </div>
-                <div class="td fx30 tright">
-                    <button (click)="remove(cache.Key)" class="cache-button red">Remove</button>
-                    <button (click)="view(cache.Key)" class="cache-button blue">View</button>
+                <div class="td fx14">
+                    <span>{{(cache.warningDate * 1000) | date: 'yyyy-MM-dd HH:mm:ss'}} UTC</span>
+                </div>
+                <div class="td fx12">
+                    <span>{{cache.warnCount}}</span>
+                </div>
+                <div class="td fx26">
+                    <span>{{cache.tags.join(', ')}}</span>
+                </div>
+                <div class="td fx12 tright">
+                    <button (click)="remove(cache.key)" class="cache-button red">Remove</button>
+                    <button (click)="view(cache.key)" class="cache-button blue">View</button>
                 </div>
             </div>
         </div>

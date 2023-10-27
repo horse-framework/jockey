@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/lib/base-component';
-import { ChannelInfo } from 'src/models/channel-info';
-import { ChannelService } from 'src/services/channel.service';
+import { ChannelInfo } from 'src/app/channels/models/channel-info';
+import { ChannelService } from 'src/app/channels/services/channel.service';
 import { ChannelCreateModalComponent } from './channel-create-modal/channel-create-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';

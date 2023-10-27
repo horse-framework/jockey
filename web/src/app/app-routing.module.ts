@@ -9,13 +9,13 @@ const routes: Routes = [
     {
         path: 'queue',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./queue/queue.module').then(m => m.QueueModule),
+        loadChildren: () => import('./queue/detail/queue-detail.module').then(m => m.QueueModule),
         canActivate: [SessionGuard]
     },
     {
         path: 'queues',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./queues/queues.module').then(m => m.QueuesModule),
+        loadChildren: () => import('./queue/list/queues.module').then(m => m.QueuesModule),
         canActivate: [SessionGuard]
     },
     {

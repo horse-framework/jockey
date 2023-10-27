@@ -8,9 +8,7 @@ import { Dashboard } from 'src/models/dashboard';
 })
 export class DashboardService {
 
-    constructor(private api: ApiClient) {
-
-    }
+    constructor(private api: ApiClient) { }
 
     /** Refreshes graph data */
     load(): Promise<Dashboard> {

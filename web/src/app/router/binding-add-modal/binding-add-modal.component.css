@@ -10,37 +10,6 @@
   font-size: 14px;
   line-height: 30px;
 }
-.buttons {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
-  align-content: flex-start;
-  padding: 15px 0px;
-}
-.modal-btn {
-  padding: 10px 20px;
-  border: 2px solid;
-  border-radius: 2px;
-  background-color: transparent;
-  font-weight: 500;
-  font-size: 14px;
-  color: #f0f0f0;
-  margin-left: 16px;
-}
-.btn-cancel {
-  border-color: #777;
-}
-.btn-cancel:hover {
-  border-color: #999;
-}
-.btn-confirm {
-  border-color: #10a040;
-}
-
-.btn-confirm:hover {
-  border-color: #10d060;
-}
-
 .target-text {
   border: 1px solid #555;
   background-color: #000;

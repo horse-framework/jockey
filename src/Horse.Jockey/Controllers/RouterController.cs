@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Horse.Jockey.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Jockey.Models.Queues;
@@ -21,10 +23,12 @@ namespace Horse.Jockey.Controllers
     internal class RouterController : HorseController
     {
         private readonly HorseRider _rider;
+        private readonly MessageCounter _counter;
 
-        public RouterController(HorseRider rider)
+        public RouterController(HorseRider rider, MessageCounter counter)
         {
             _rider = rider;
+            _counter = counter;
         }
 
         [HttpGet("list")]
@@ -69,6 +73,22 @@ namespace Horse.Jockey.Controllers
                         ContentType = y.ContentType
                     })
             });
+        }
+
+        [HttpGet("graph")]
+        public IActionResult GetGraph([FromQuery] string name, [FromQuery] string resolution)
+        {
+            CountableObject countable = _counter.GetRouterCounter(name);
+            IEnumerable<MessageCount> counts = countable.GetDataByResolution(resolution);
+
+            var model = new MessageCountModel
+            {
+                Name = countable.Name,
+                Resolution = resolution,
+                Data = counts.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
+            };
+
+            return Json(model);
         }
 
         [HttpPost("create")]
@@ -119,10 +139,10 @@ namespace Horse.Jockey.Controllers
             Type type = Type.GetType(bindingType);
             if (type == null)
                 type = Type.GetType($"{bindingType}, Horse.Messaging.Server");
-            
+
             if (type == null && !bindingType.EndsWith("Binding"))
                 type = Type.GetType($"{bindingType}Binding");
-            
+
             if (type == null)
                 type = Type.GetType($"{bindingType}, Horse.Messaging.Server");
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using EnumsNET;
 using Horse.Jockey.Core;
 using Horse.Jockey.Helpers;
+using Horse.Jockey.Models;
 using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
@@ -25,12 +26,12 @@ namespace Horse.Jockey.Controllers
     internal class QueueController : HorseController
     {
         private readonly HorseRider _rider;
-        private readonly QueueWatcherContainer _watcherContainer;
+        private readonly MessageCounter _counter;
 
-        public QueueController(HorseRider rider, QueueWatcherContainer watcherContainer)
+        public QueueController(HorseRider rider, MessageCounter counter)
         {
             _rider = rider;
-            _watcherContainer = watcherContainer;
+            _counter = counter;
         }
 
         [HttpGet("list")]
@@ -79,13 +80,10 @@ namespace Horse.Jockey.Controllers
             if (queue == null)
                 return NotFound(null);
 
-            QueueWatcher watcher = _watcherContainer.Get(queue.Name);
-
             QueueDetail detail = new QueueDetail();
             detail.Info = HorseQueueInformation.Create(queue);
             detail.Stats = HorseQueueStatistics.Create(queue);
             detail.Options = QueueOptionsInfo.Create(queue);
-            detail.GraphData = watcher.GetGraphData();
             detail.Consumers = queue.ClientsClone
                 .Select(x => new QueueConsumerInfo
                 {
@@ -101,6 +99,23 @@ namespace Horse.Jockey.Controllers
                 }).ToList();
 
             return JsonAsync(detail);
+        }
+
+        [HttpGet("graph")]
+        public IActionResult GetGraph([FromQuery] string name, [FromQuery] string resolution)
+        {
+            CountableObject countable = _counter.GetQueueCounter(name);
+            CountableObject storeCountable = _counter.GetQueueStoreCounter(name);
+            IEnumerable<MessageCount> counts = countable.GetDataByResolution(resolution);
+            IEnumerable<MessageCount> storeCounts = storeCountable.GetDataByResolution(resolution);
+
+            return Json(new
+            {
+                name = countable.Name,
+                resolution = resolution,
+                stream = counts.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout)),
+                store = storeCounts.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
+            });
         }
 
         [HttpPost("create")]

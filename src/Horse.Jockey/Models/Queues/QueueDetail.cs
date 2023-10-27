@@ -21,10 +21,6 @@ namespace Horse.Jockey.Models.Queues
         [JsonPropertyName("options")]
         public QueueOptionsInfo Options { get; set; }
         
-        [JsonProperty("graph")]
-        [JsonPropertyName("graph")]
-        public QueueGraphData[] GraphData { get; set; }
-        
         [JsonProperty("consumers")]
         [JsonPropertyName("consumers")]
         public List<QueueConsumerInfo> Consumers { get; set; }

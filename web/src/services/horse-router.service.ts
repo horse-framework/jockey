@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 import { ApiClient } from 'src/lib/api-client';
+import { DateHelper } from 'src/lib/date-helper';
 import { AddBindingModel } from 'src/models/add-binding-model';
 import { CreateRouterModel } from 'src/models/create-router-model';
 import { HorseRouter } from 'src/models/horse-router';
+import { MessageCount } from 'src/models/message-count';
 
 @Injectable({
     providedIn: 'root'
@@ -50,6 +53,30 @@ export class HorseRouterService {
                     }
                     return null;
                 }))
+            .toPromise();
+    }
+
+    getGraph(name: string, resolution: string): Promise<MessageCount> {
+
+        let url = '/router/graph?resolution=' + resolution;
+        if (name != null && name.length > 0) {
+            url += '&name=' + name;
+        }
+
+        return of(this)
+            .pipe(
+                mergeMap(() => this.api.get(url)),
+                map(response => {
+
+                    if (!response.success)
+                        return null;
+
+                    let result = <MessageCount>response.data;
+                    result.labels = DateHelper.createLabels(result.d.map(x => x.u));
+
+                    return result;
+                })
+            )
             .toPromise();
     }
 

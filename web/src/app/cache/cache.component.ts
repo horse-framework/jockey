@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from 'src/lib/base-component';
-import { CacheInfo } from 'src/models/cache-info';
-import { CacheService } from 'src/services/cache.service';
+import { CacheInfo } from 'src/app/cache/models/cache-info';
+import { CacheService } from 'src/app/cache/services/cache.service';
 import { CacheViewModalComponent } from './cache-view-modal/cache-view-modal.component';
+import { CacheCreateModalComponent } from './cache-create-modal/cache-create-modal.component';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cache',
@@ -30,10 +32,28 @@ export class CacheComponent extends BaseComponent implements OnInit {
 
   async view(key: string) {
     var value = await this.cacheService.get(key);
-    if (value.ok) {
-      let dialogRef = this.dialog.open(CacheViewModalComponent, { width: '500px' });
+    if (value) {
+      let dialogRef = this.dialog.open(CacheViewModalComponent, { width: '600px' });
       let component = <CacheViewModalComponent>dialogRef.componentInstance;
       component.model = value;
     }
+  }
+
+  create(): void {
+
+    let dialogRef = this.dialog.open(CacheCreateModalComponent, { width: '600px' });
+    let component = <CacheCreateModalComponent>dialogRef.componentInstance;
+
+    component.onconfirmed
+      .pipe(take(1))
+      .subscribe(value => {
+        if (value) {
+          this.cacheService.create(value.key, value.content, value.duration, value.expirationWarning, value.tags).then(success => {
+            if (success) {
+              this.ngOnInit();
+            }
+          })
+        }
+      });
   }
 }

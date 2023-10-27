@@ -1,10 +1,30 @@
-<h2 class="title" mat-dialog-title>Cache Value</h2>
+<h2 class="title" mat-dialog-title>{{model?.key}}</h2>
 <mat-dialog-content class="content">
     <div *ngIf="model" class="cache-value">
-        <label>{{model.key}}</label>
-        <textarea readonly>{{model.value}}</textarea>
+
+        <div class="key-value-table">
+            <div class="kvt-row">
+                <div class="kvt-key-narrow">Expiration</div>
+                <div class="kvt-value">{{(model.expiration*1000) | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
+            </div>
+            <div class="kvt-row">
+                <div class="kvt-key-narrow">Warning Time</div>
+                <div class="kvt-value">{{(model.warningDate*1000) | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
+            </div>
+            <div class="kvt-row">
+                <div class="kvt-key-narrow">Warn Count</div>
+                <div class="kvt-value">{{model.warnCount}}</div>
+            </div>
+            <div class="kvt-row">
+                <div class="kvt-key-narrow">Tags</div>
+                <div class="kvt-value">{{model.tags.join(', ')}}</div>
+            </div>
+        </div>
+
+        <textarea readonly style="cursor: text;">{{model.value}}</textarea>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions class="buttons">
-    <button mat-button mat-dialog-close class="modal-btn btn-cancel">Close</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-grey">Close</button>
+    <button mat-button (click)="remove()" class="modal-btn btn-red">Remove</button>
 </mat-dialog-actions>

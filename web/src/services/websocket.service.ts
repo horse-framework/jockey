@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { SocketModels } from 'src/lib/socket-models';
 
 export enum WebClientStatus {
     Disconnected,
@@ -21,6 +20,7 @@ export class WebsocketService {
 
     private _status: WebClientStatus;
     private _socket: WebSocket;
+    private _subscriptions: any[] = [];
 
     private _onconnected: Subject<WebsocketService> = new Subject<WebsocketService>();
     private _ondisconnected: Subject<WebsocketService> = new Subject<WebsocketService>();
@@ -35,14 +35,14 @@ export class WebsocketService {
 
     connect(token: string): void {
 
-        //const host = environment.api.websocket + '?token=' + token;
-        const host = 'ws://' + location.host + '?token=' + token;
+        const host = environment.api.websocket + '?token=' + token;
+        //const host = 'ws://' + location.host + '?token=' + token;
         this._socket = new WebSocket(host);
-
 
         this._socket.onopen = (ev: Event) => {
             this._status = WebClientStatus.Connected;
             this._onconnected.next(this);
+            this._subscriptions.forEach(s => this.subscribe(s.channel, s.resolution));
         };
 
         this._socket.onclose = (ev: Event) => {
@@ -86,5 +86,15 @@ export class WebsocketService {
             return;
 
         this._onmessage.next(message);
+    }
+
+    subscribe(channel: string, resolution: string): void {
+        this._subscriptions.push({ channel, resolution });
+        this.send('subscribe', { channel: channel, join: true, resolution });
+    }
+
+    unsubscribe(channel: string): void {
+        this._subscriptions = this._subscriptions.filter(x => x.channel != channel);
+        this.send('subscribe', { channel: channel, join: false });
     }
 }

@@ -7,16 +7,9 @@ namespace Horse.Jockey.Models.WebSockets
     /// <summary>
     /// Dashboard subscription request model for websocket clients
     /// </summary>
-    [ModelType("dashboard-request")]
+    [ModelType("dashboard")]
     public class DashboardRequest
     {
-        /// <summary>
-        /// Unique Request Id
-        /// </summary>
-        [JsonProperty("requestId")]
-        [JsonPropertyName("requestId")]
-        public string RequestId { get; set; }
-
         /// <summary>
         /// If true, subscribes to dashboard events. If false, unsubscribes.
         /// </summary>
