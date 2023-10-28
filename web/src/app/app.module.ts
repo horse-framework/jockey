@@ -14,10 +14,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardService } from 'src/services/dashboard.service';
 import { HorseRouterService } from 'src/services/horse-router.service';
 import { PipesModule } from './layout/pipes/pipes.module';
-import { ChannelService } from 'src/app/channels/services/channel.service';
 import { CacheService } from 'src/app/cache/services/cache.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ChannelService } from './channel/services/channel.service';
 
 @NgModule({
     declarations: [

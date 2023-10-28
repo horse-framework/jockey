@@ -174,12 +174,12 @@ namespace Horse.Jockey.Controllers
         }
 
         [HttpPut("option")]
-        public async Task<IActionResult> ChangeOption([FromBody] QueueOptionChange model)
+        public async Task<IActionResult> ChangeOption([FromBody] OptionChange model)
         {
-            HorseQueue queue = _rider.Queue.Find(model.Queue);
+            HorseQueue queue = _rider.Queue.Find(model.Target);
 
             if (queue == null)
-                return await NotFound(new {ok = false, message = "There is already a queue with same name"});
+                return await NotFound(new {ok = false, message = "Queue could not found"});
 
             switch (model.Name)
             {

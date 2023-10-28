@@ -44,6 +44,8 @@ namespace Horse.Jockey.Controllers
             var atc = _counter.GetChannelCounter().AllTimeTotal;
             var atq = _counter.GetQueueCounter().AllTimeTotal;
             var ats = _counter.GetQueueStoreCounter().AllTimeTotal;
+            var atd = _counter.GetDirectCounter().AllTimeTotal;
+            var atr = _counter.GetRouterCounter().AllTimeTotal;
 
             return Json(new
             {
@@ -56,7 +58,9 @@ namespace Horse.Jockey.Controllers
                 nodeState = _rider.Cluster.State.ToString(),
                 channels = new CountRecord(atc.UnixTime, atc.Received, atc.Sent, atc.Respond, atc.Error, atc.Delivered, atc.NotRouted, atc.Timeout),
                 queues =  new CountRecord(atq.UnixTime, atq.Received, atq.Sent, atq.Respond, atq.Error, atq.Delivered, atq.NotRouted, atq.Timeout),
-                queueStore =  new CountRecord(ats.UnixTime, ats.Received, ats.Sent, ats.Respond, ats.Error, ats.Delivered, ats.NotRouted, ats.Timeout),
+                queueStore = new CountRecord(ats.UnixTime, ats.Received, ats.Sent, ats.Respond, ats.Error, ats.Delivered, ats.NotRouted, ats.Timeout),
+                direct = new CountRecord(atd.UnixTime, atd.Received, atd.Sent, atd.Respond, atd.Error, atd.Delivered, atd.NotRouted, atd.Timeout),
+                router = new CountRecord(atr.UnixTime, atr.Received, atr.Sent, atr.Respond, atr.Error, atr.Delivered, atr.NotRouted, atr.Timeout)
             });
         }
     }

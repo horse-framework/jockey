@@ -7,9 +7,11 @@ using Horse.Jockey.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Jockey.Models.Channels;
+using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Channels;
+using Horse.Messaging.Server.Queues;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
@@ -179,6 +181,40 @@ namespace Horse.Jockey.Controllers
             }
 
             return new StatusCodeResult(HttpStatusCode.OK);
+        }
+
+        [HttpPut("option")]
+        public async Task<IActionResult> ChangeOption([FromBody] OptionChange model)
+        {
+            HorseChannel channel = _rider.Channel.Find(model.Target);
+
+            if (channel == null)
+                return await NotFound(new {ok = false, message = "Channel could not found"});
+
+            switch (model.Name)
+            {
+                case "topic":
+                    channel.Topic = model.Value;
+                    break;
+
+                case "clientLimit":
+                    channel.Options.ClientLimit = Convert.ToInt32(model.Value);
+                    break;
+
+                case "messageSizeLimit":
+                    channel.Options.MessageSizeLimit = Convert.ToUInt64(model.Value);
+                    break;
+
+                case "autoDestroy":
+                    channel.Options.AutoDestroy = model.Value.Equals("true") || model.Value.Equals("1");
+                    break;
+
+                case "autoDestroyIdleSeconds":
+                    channel.Options.AutoDestroyIdleSeconds = Convert.ToInt32(model.Value);
+                    break;
+            }
+
+            return Json(new {ok = channel != null});
         }
     }
 }

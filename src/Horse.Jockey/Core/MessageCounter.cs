@@ -313,6 +313,10 @@ internal class MessageCounter
         {
             CountableObject countable = GetQueueCounter(sub.Queue.Name);
             MessageCount current = countable.GetCurrentByResolution(sub.Resolution);
+            
+            if (current == null)
+                continue;
+
             QueueGraphModel model = new QueueGraphModel
             {
                 Name = sub.Queue.Name,
@@ -381,6 +385,10 @@ internal class MessageCounter
         {
             CountableObject countable = GetChannelCounter(sub.Channel.Name);
             MessageCount current = countable.GetCurrentByResolution(sub.Resolution);
+            
+            if (current == null)
+                continue;
+            
             QueueGraphModel model = new QueueGraphModel
             {
                 Name = sub.Channel.Name,
@@ -393,6 +401,26 @@ internal class MessageCounter
 
     private void TickRouters()
     {
+        IWebSocketServerBus bus = GetBus();
+        SubscriptionService subscriptionService = GetSubscriptionService();
+        List<WsServerSocket> dashboardSubs = subscriptionService.GetDashboardSubscribers();
+
+        if (dashboardSubs.Count > 0)
+        {
+            MessageCount current = _routerTotal.GetCurrent();
+            RouterGraphModel model = new RouterGraphModel
+            {
+                Name = "*",
+                Resolution = "1m",
+                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
+            };
+
+            foreach (WsServerSocket socket in dashboardSubs)
+                _ = bus.SendAsync(socket, model);
+        }
+
+        _routerTotal.Tick(null);
+
         List<CountableObject> removingObjects = new List<CountableObject>();
 
         lock (_routerCounters)
@@ -409,27 +437,30 @@ internal class MessageCounter
             foreach (CountableObject removingObject in removingObjects)
                 _routerCounters.Remove(removingObject.Name);
         }
+    }
 
+    private void TickDirect()
+    {
         IWebSocketServerBus bus = GetBus();
         SubscriptionService subscriptionService = GetSubscriptionService();
         List<WsServerSocket> dashboardSubs = subscriptionService.GetDashboardSubscribers();
 
         if (dashboardSubs.Count > 0)
         {
-            MessageCount current = _routerTotal.GetCurrent();
-            RouterGraphModel model = new RouterGraphModel
+            MessageCount current = _directTotal.GetCurrent();
+            DirectGraphModel model = new DirectGraphModel
             {
-                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)},
-                Resolution = "1m"
+                Name = "*",
+                Resolution = "1m",
+                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
 
             foreach (WsServerSocket socket in dashboardSubs)
                 _ = bus.SendAsync(socket, model);
         }
-    }
 
-    private void TickDirect()
-    {
+        _directTotal.Tick(null);
+
         List<CountableObject> removingObjects = new List<CountableObject>();
 
         lock (_directCounters)
@@ -445,23 +476,6 @@ internal class MessageCounter
 
             foreach (CountableObject removingObject in removingObjects)
                 _directCounters.Remove(removingObject.Name);
-        }
-
-        IWebSocketServerBus bus = GetBus();
-        SubscriptionService subscriptionService = GetSubscriptionService();
-        List<WsServerSocket> dashboardSubs = subscriptionService.GetDashboardSubscribers();
-
-        if (dashboardSubs.Count > 0)
-        {
-            MessageCount current = _directTotal.GetCurrent();
-            RouterGraphModel model = new RouterGraphModel
-            {
-                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)},
-                Resolution = "1m"
-            };
-
-            foreach (WsServerSocket socket in dashboardSubs)
-                _ = bus.SendAsync(socket, model);
         }
     }
 

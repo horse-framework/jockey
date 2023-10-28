@@ -16,4 +16,6 @@ export interface Dashboard {
     channels: CountRecord;
     queues: CountRecord;
     queueStore: CountRecord;
+    direct: CountRecord;
+    router: CountRecord;
 }

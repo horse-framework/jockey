@@ -4,7 +4,6 @@ import { SessionGuard } from 'src/interceptors/session.guard';
 import { GuestLayoutComponent } from './layout/guest-layout/guest-layout.component';
 import { PortalLayoutComponent } from './layout/portal-layout/portal-layout.component';
 
-
 const routes: Routes = [
     {
         path: 'queue',
@@ -37,15 +36,27 @@ const routes: Routes = [
         canActivate: [SessionGuard]
     },
     {
+        path: 'channel',
+        component: PortalLayoutComponent,
+        loadChildren: () => import('./channel/channel-detail/channel-detail.module').then(m => m.ChannelDetailModule),
+        canActivate: [SessionGuard]
+    },
+    {
         path: 'channels',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./channels/channels.module').then(m => m.ChannelsModule),
+        loadChildren: () => import('./channel/channels/channels.module').then(m => m.ChannelsModule),
+        canActivate: [SessionGuard]
+    },
+    {
+        path: 'client',
+        component: PortalLayoutComponent,
+        loadChildren: () => import('./client/client-detail/client-detail.module').then(m => m.ClientDetailModule),
         canActivate: [SessionGuard]
     },
     {
         path: 'clients',
         component: PortalLayoutComponent,
-        loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule),
+        loadChildren: () => import('./client/clients/clients.module').then(m => m.ClientsModule),
         canActivate: [SessionGuard]
     },
     {

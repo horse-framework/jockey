@@ -3,11 +3,11 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.Queues
 {
-    public class QueueOptionChange
+    public class OptionChange
     {
-        [JsonProperty("queue")]
-        [JsonPropertyName("queue")]
-        public string Queue { get; set; }
+        [JsonProperty("target")]
+        [JsonPropertyName("target")]
+        public string Target { get; set; }
 
         [JsonProperty("name")]
         [JsonPropertyName("name")]

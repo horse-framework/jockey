@@ -1,6 +1,9 @@
-﻿namespace Horse.Jockey.Core;
+﻿using System;
+using Horse.Jockey.Helpers;
 
-internal struct MessageCount
+namespace Horse.Jockey.Core;
+
+internal class MessageCount
 {
     public long UnixTime;
     public long Received;
@@ -10,4 +13,9 @@ internal struct MessageCount
     public long Delivered;
     public long NotRouted;
     public long Timeout;
+
+    public MessageCount()
+    {
+        UnixTime = DateTime.UtcNow.ToUnixSeconds();
+    }
 };

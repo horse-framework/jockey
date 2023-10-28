@@ -8,15 +8,15 @@ internal class CountableObject
 {
     internal string Name { get; }
 
-    private int _minCounter = 0;
-    private int _min10Counter = 0;
+    private int _minCounter;
+    private int _min10Counter;
 
     private MessageCount _latest10Min;
     private MessageCount _latest3Hours;
     private MessageCount _curent;
-    private MessageCount? _latest;
-    
-    internal MessageCount AllTimeTotal { get; private set; }
+    private MessageCount _latest;
+
+    internal MessageCount AllTimeTotal { get; private set; } = new MessageCount();
 
     /// <summary>
     /// 1 Record for per 5 seconds
@@ -41,7 +41,6 @@ internal class CountableObject
     {
         Name = name;
         _curent = new MessageCount();
-        _curent.UnixTime = DateTime.UtcNow.ToUnixSeconds();
     }
 
     public IEnumerable<MessageCount> GetDataByResolution(string resolution)
@@ -73,13 +72,13 @@ internal class CountableObject
         };
     }
 
-    internal void Tick(MessageCount? recent, bool calculateDifference = true)
+    internal void Tick(MessageCount recent, bool calculateDifference = true)
     {
         if (_minCounter == 12)
         {
             MessageCount[] items = _lastMin.ToArray();
             _latest10Min = FindTotalsOf(items);
-            _min10Counter = 0;
+            _minCounter = 0;
             _lastMin.Clear();
 
             _min10Counter++;
@@ -98,20 +97,26 @@ internal class CountableObject
             }
         }
 
-        if (recent.HasValue)
+        if (recent != null)
         {
-            MessageCount count = _latest.HasValue && calculateDifference ? FindDifference(recent.Value, _latest.Value) : recent.Value;
+            MessageCount count = _latest != null && calculateDifference ? FindDifference(recent, _latest) : recent;
             _lastMin.Enqueue(count);
             _latest = recent;
             _curent = count;
-            AllTimeTotal = recent.Value;
+            AllTimeTotal = recent;
         }
         else
         {
-            _curent = new MessageCount
-            {
-                UnixTime = DateTime.UtcNow.ToUnixSeconds()
-            };
+            AllTimeTotal.UnixTime = DateTime.UtcNow.ToUnixSeconds();
+            AllTimeTotal.Received += _curent.Received;
+            AllTimeTotal.NotRouted += _curent.NotRouted;
+            AllTimeTotal.Delivered += _curent.Delivered;
+            AllTimeTotal.Error += _curent.Error;
+            AllTimeTotal.Sent += _curent.Sent;
+            AllTimeTotal.Respond += _curent.Respond;
+            AllTimeTotal.Timeout += _curent.Timeout;
+
+            _curent = new MessageCount();
             _lastMin.Enqueue(_curent);
         }
 

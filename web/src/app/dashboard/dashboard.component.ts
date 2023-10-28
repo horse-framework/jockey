@@ -12,8 +12,8 @@ import { filter, map } from 'rxjs/operators';
 import { ChartService } from 'src/services/chart.service';
 import { QueueService } from '../queue/services/queue.service';
 import { HorseRouterService } from 'src/services/horse-router.service';
-import { ChannelService } from '../channels/services/channel.service';
 import { ClientService } from 'src/services/client.service';
+import { ChannelService } from '../channel/services/channel.service';
 
 @Component({
     selector: 'app-dashboard',

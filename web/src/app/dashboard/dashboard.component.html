@@ -229,15 +229,15 @@
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Published Router Messages</div>
-                <div class="kvt-value">***</div>
+                <div class="kvt-value">{{dashboard.router.r}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Delivered Router Messages</div>
-                <div class="kvt-value">***</div>
+                <div class="kvt-value">{{dashboard.router.s}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Not Received Messages</div>
-                <div class="kvt-value">***</div>
+                <div class="kvt-value">{{dashboard.router.nr}}</div>
               </div>
             </div>
           </div>
@@ -255,15 +255,19 @@
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Sent Direct Messages</div>
-                <div class="kvt-value">***</div>
+                <div class="kvt-value">{{dashboard.direct.s}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Delivered Direct Messages</div>
-                <div class="kvt-value">***</div>
+                <div class="kvt-value">{{dashboard.router.r}}</div>
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Direct Responses</div>
-                <div class="kvt-value">***</div>
+                <div class="kvt-value">{{dashboard.direct.rs}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Not Routed Messages</div>
+                <div class="kvt-value">{{dashboard.router.nr}}</div>
               </div>
             </div>
           </div>

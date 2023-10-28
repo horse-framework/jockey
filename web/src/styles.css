@@ -78,6 +78,9 @@ textarea {
   flex-grow: 0;
   padding: 0px 10px 0px 2px;
 }
+.portlet-table.grow {
+  flex-grow: 1;
+}
 
 .key-value-table {
   display: flex;
@@ -473,6 +476,7 @@ textarea {
 
 .centered-body {
   display: flex;
+  flex-direction: row;
   align-content: center;
   align-items: center;
   text-align: center;
@@ -741,4 +745,106 @@ select:focus > option:checked {
 .btn-gray:hover,
 .btn-grey:hover {
   border-color: #999;
+}
+
+.warning-bar {
+  margin: -18px 0px 10px 0px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0px;
+  background-color: #ffb850;
+}
+.warning-bar p {
+  margin: 0px;
+  padding: 12px 12px 11px 12px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+}
+.warning-bar p a {
+  text-decoration: none;
+  color: #0040c0;
+  cursor: pointer;
+}
+.warning-bar p a:hover {
+  color: #1080e0;
+}
+
+.dashboard {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+  flex-wrap: wrap;
+  margin: 0px 52px 50px 52px;
+  box-sizing: border-box;
+  padding-bottom: 60px;
+}
+
+.dashboard-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content: stretch;
+  justify-items: stretch;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.dashboard-portlet {
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content: stretch;
+  justify-items: stretch;
+}
+
+.dashboard-portlet .portlet {
+  flex: 1 1;
+}
+
+.dp-40 {
+  flex: 45 1;
+}
+.dp-50 {
+  flex: 50 1;
+}
+.dp-60 {
+  flex: 55 1;
+}
+
+.dashboard-portlet.wide {
+  flex: 0 1 100% !important;
+}
+
+.dashboard-portlet .portlet-body {
+  min-height: 240px;
+  max-height: 500px;
+}
+
+.dashboard-portlet .portlet-body canvas {
+  max-width: calc(50vw - 400px);
+}
+
+.portlet-table.canvas-info {
+  width: 280px;
+}
+
+.change-option {
+  font-size: 12px;
+  font-weight: 500;
+  color: #109030;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 2px;
+  margin-left: 10px;
+}
+.change-option:hover {
+  color: #10f070;
 }
