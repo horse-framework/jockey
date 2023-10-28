@@ -1,0 +1,29 @@
+<h2 class="title" mat-dialog-title>Create Cache Item</h2>
+<mat-dialog-content class="content">
+    <div>
+        <div class="form-item">
+            <label>Key</label>
+            <input placeholder="Cache Key" class="jockey-text" type="text" [(ngModel)]="model.key" />
+        </div>
+        <div class="form-item">
+            <label>Duration</label>
+            <input placeholder="Duration in seconds" class="jockey-text" type="number" [(ngModel)]="model.duration" />
+        </div>
+        <div class="form-item">
+            <label>Warning Duration</label>
+            <input placeholder="Zero for disabled. In seconds." class="jockey-text" type="number" [(ngModel)]="model.expirationWarning" />
+        </div>
+        <div class="form-item">
+            <label>Tags</label>
+            <input placeholder="Type multiple tags with comma seperator" class="jockey-text" type="text" [(ngModel)]="model.tagsAll" />
+        </div>
+        <div class="form-item">
+            <label>Value</label>
+            <textarea placeholder="Cache Item Content" class="jockey-text" type="text" [(ngModel)]="model.content"></textarea>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button (click)="create()" mat-button mat-dialog-close class="modal-btn btn-green">Create</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-grey">Cancel</button>
+</mat-dialog-actions>

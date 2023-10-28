@@ -1,0 +1,78 @@
+<div class="centered-body">
+    <div class="vertical-content">
+        <div class="dashboard-portlet">
+            <div class="portlet">
+                <h3 class="portlet-title">Direct Messages</h3>
+                <div class="portlet-canvas">
+                    <canvas id="messages-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-portlet">
+            <div class="portlet">
+                <h3 class="portlet-title">Options &amp; Actions</h3>
+                <div class="portlet-body" *ngIf="client">
+                    <div class="portlet-table grow canvas-info">
+                        <div class="key-value-table">
+                            <div class="kvt-row">
+                                <div class="kvt-key">Id</div>
+                                <div class="kvt-value">{{client.id}}</div>
+                            </div>
+                            <div class="kvt-row">
+                                <div class="kvt-key">Name</div>
+                                <div class="kvt-value">{{client.name}}</div>
+                            </div>
+                            <div class="kvt-row">
+                                <div class="kvt-key">Type</div>
+                                <div class="kvt-value">{{client.type}}</div>
+                            </div>
+                            <div class="kvt-row">
+                                <div class="kvt-key">Coonected Time</div>
+                                <div class="kvt-value">{{(client.connectedDate*1000) | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="centered-body">
+    <div class="vertical-content">
+        <div class="dashboard-portlet">
+            <div class="portlet ">
+                <h3 class="portlet-title">Channels</h3>
+                <div class="portlet-body table table-small">
+                    <div class="thead">
+                        <div class="th fx50">Name</div>
+                        <div class="th fx50">Subscribed Date</div>
+                    </div>
+                    <div class="tbody" *ngIf="client && client.channels">
+                        <div class="trow" *ngFor="let item of client.channels">
+                            <div class="td fx50"><span><a routerLink="/channel/{{item.name}}">{{item.name}}</a></span></div>
+                            <div class="td fx50"><span>{{(item.subscribedAt*1000)| date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-portlet">
+            <div class="portlet ">
+                <h3 class="portlet-title">Queues</h3>
+                <div class="portlet-body table table-small">
+                    <div class="thead">
+                        <div class="th fx50">Name</div>
+                        <div class="th fx50">Subscribed Date</div>
+                    </div>
+                    <div class="tbody" *ngIf="client && client.queues">
+                        <div class="trow" *ngFor="let item of client.queues">
+                            <div class="td fx50"><span><a routerLink="/queue/{{item.name}}">{{item.name}}</a></span></div>
+                            <div class="td fx50"><span>{{(item.subscribedAt*1000)| date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height: 80px;"></div>

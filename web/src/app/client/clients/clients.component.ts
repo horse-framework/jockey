@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/lib/base-component';
-import { HorseClient } from 'src/models/horse-client';
+import { HorseClient } from 'src/app/client/models/horse-client';
 import { ClientService } from 'src/services/client.service';
 
 interface NameGroupedClients {

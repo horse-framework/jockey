@@ -1,0 +1,59 @@
+<h2 class="title" mat-dialog-title>Push New Queue Message</h2>
+<mat-dialog-content class="content">
+    <div class="queue-message">
+        <h4>Message Properties</h4>
+        <div class="key-value-table">
+            <div class="kvt-row">
+                <div class="kvt-key-narrow">Id</div>
+                <div class="kvt-value">
+                    <input class="jockey-text" type="text" style="width: 280px;" [(ngModel)]="message.id" />
+                </div>
+            </div>
+            <div class="kvt-row">
+                <div class="kvt-key-narrow">Content Type</div>
+                <div class="kvt-value">
+                    <input class="jockey-text" type="number" style="width: 120px;" min="0" max="65535"
+                        [(ngModel)]="message.contentType" />
+                </div>
+            </div>
+            <div class="kvt-row">
+                <div class="kvt-key-narrow">High Priority</div>
+                <div class="kvt-value">
+                    <input class="jockey-text" type="checkbox" [(ngModel)]="message.priority" />
+                </div>
+            </div>
+        </div>
+        <br>
+        <h4>Headers</h4>
+        <div class="message-headers">
+            <div class="header-scroll scroll">
+                <table class="message-header-table">
+                    <tr *ngFor="let h of message.headers">
+                        <td class="header-key">{{h.name}}</td>
+                        <td class="header-value">{{h.value}}</td>
+                        <td class="header-action"><span (click)="removeHeader(h.name)">Remove</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="header-row">
+            <div class="header-input">
+                <input #headerKeyInput (keyup)="headerKeyUp(true, $event)" class="jockey-text" placeholder="Key"
+                    type="text" [(ngModel)]="addingHeaderKey" />
+            </div>
+            <div class="header-seperator">:</div>
+            <div class="header-input">
+                <input #headerValueInput (keyup)="headerKeyUp(false, $event)" class="jockey-text" placeholder="Value"
+                    type="text" [(ngModel)]="addingHeaderValue" />
+            </div>
+        </div>
+        <br>
+        <h4>Message Content</h4>
+        <textarea class="jockey-text scroll" [(ngModel)]="message.message"></textarea>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button (click)="push()" mat-button mat-dialog-close class="modal-btn btn-green">Push Message</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-grey">Close</button>
+</mat-dialog-actions>

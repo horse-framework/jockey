@@ -30,7 +30,9 @@
                         </ng-container>
                     </div>
                     <div class="td fx20">
-                        <span>{{item.client.uniqueId}}</span>
+                        <span>
+                            <a routerLink="/client/{{item.client.uniqueId}}">{{item.client.uniqueId}}</a>
+                        </span>
                     </div>
                     <div class="td fx12">
                         <span *ngIf="item.client.ip">{{item.client.ip}}</span>
@@ -40,7 +42,7 @@
                         <span>{{item.client.isAuthenticated ? 'Yes' : 'No'}}</span>
                     </div>
                     <div class="td fx12">
-                        <span>{{item.client.protocol}}</span>                        
+                        <span>{{item.client.protocol}}</span>
                     </div>
                     <div class="td fx12">
                         <span>{{(item.client.connectedDate*1000) | date: 'yyyy-MM-dd HH:mm:ss'}}</span>

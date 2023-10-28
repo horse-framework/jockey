@@ -1,0 +1,31 @@
+<h2 class="title" mat-dialog-title>Channel Message</h2>
+<mat-dialog-content class="content">
+    <div class="queue-message" *ngIf="message">
+        <div class="message-props">
+            <h4>Headers</h4>
+            <div class="message-headers">
+                <div class="key-value-table" *ngIf="message.headers && message.headers.length > 0">
+                    <div class="kvt-row" *ngFor="let h of message.headers">
+                        <div class="kvt-key">{{h.name}}</div>
+                        <div class="kvt-value">{{h.value}}</div>
+                    </div>
+                </div>
+                <p *ngIf="!message.headers || message.headers.length == 0">
+                    The message has no headers
+                </p>
+            </div>
+        </div>
+        <div class="message-content" *ngIf="message">
+            <div class="message-content-title">
+                <h4>Message Content</h4>
+                <span (click)="setJson(false)" [class.active]="!isJson">String</span>
+                <span (click)="setJson(true)" [class.active]="isJson">JSON</span>
+            </div>
+            <div class="string-content" *ngIf="!isJson">{{message.content}}</div>
+            <pre class="string-content" *ngIf="isJson" [innerHTML]="message.contentObj | prettyprint"></pre>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button mat-button mat-dialog-close class="modal-btn btn-red">Close</button>
+</mat-dialog-actions>

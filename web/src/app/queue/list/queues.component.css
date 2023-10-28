@@ -1,0 +1,9 @@
+.queues {
+  margin: auto;
+  padding: 0px 60px;
+  text-align: center;
+}
+.queues .table {
+  width: 100%;
+  text-align: left;
+}

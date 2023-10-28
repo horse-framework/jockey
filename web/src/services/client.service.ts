@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { ApiClient } from 'src/lib/api-client';
-import { HorseClient } from 'src/models/horse-client';
+import { HorseClient } from 'src/app/client/models/horse-client';
 import { TransactionResult } from 'src/models/transaction-result';
 import { WebsocketService } from './websocket.service';
-import { MessageCount } from 'src/models/message-count';
 import { DateHelper } from 'src/lib/date-helper';
+import { HorseClientDetail } from 'src/app/client/models/horse-client-detail';
+import { MessageCount } from 'src/models/message-count';
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +26,19 @@ export class ClientService {
 
     list(): Promise<HorseClient[]> {
         return this.api.get('/client/list')
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        this._clients = response.data;
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    get(id: string): Promise<HorseClientDetail> {
+        return this.api.get('/client/get?id=' + id)
             .pipe(
                 map(response => {
                     if (response.ok()) {

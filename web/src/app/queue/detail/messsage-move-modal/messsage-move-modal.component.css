@@ -1,0 +1,28 @@
+.title {
+  color: #eee;
+}
+.content {
+  padding: 0px 25px 10px 25px;
+  display: block;
+}
+.content p {
+  color: #d2d2d2;
+  font-size: 14px;
+  line-height: 30px;
+}
+.content div {
+    padding: 20px 0px;
+}
+.target-text {
+  border: 1px solid #555;
+  background-color: #000;
+  color: #eee;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px;
+  width: 320px;
+}
+.target-text:focus,
+.target-text:active {
+  border-color: #10a040;
+}

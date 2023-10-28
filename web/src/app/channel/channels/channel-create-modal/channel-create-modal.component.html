@@ -1,0 +1,41 @@
+<h2 class="title" mat-dialog-title>Create New Channel</h2>
+<mat-dialog-content class="content">
+    <div>
+        <div class="form-item">
+            <label>Channel Name</label>
+            <input placeholder="Channel Name" class="jockey-text" type="text" [(ngModel)]="model.name" />
+        </div>
+        <div class="form-item">
+            <label>Topic</label>
+            <input placeholder="Left blank if you don't need" class="jockey-text" type="text" [(ngModel)]="model.topic" />
+        </div>
+        <div class="form-item">
+            <label>Client Limit</label>
+            <input placeholder="Zero for unlimited" class="jockey-text" type="number" [(ngModel)]="model.clientLimit" />
+        </div>
+        <div class="form-item">
+            <label>Message Size Limit (in bytes)</label>
+            <input placeholder="Zero for unlimited" class="jockey-text" type="number" [(ngModel)]="model.messageSizeLimit" />
+        </div>
+        <div class="kvt-row">
+            <div class="kvt-key-narrow">Use Initial Message</div>
+            <div class="kvt-value">
+                <input class="jockey-text" type="checkbox" [(ngModel)]="model.sendLastMessageAsInitial" />
+            </div>
+        </div>
+        <div class="kvt-row">
+            <div class="kvt-key-narrow">Auto Destroy</div>
+            <div class="kvt-value">
+                <input class="jockey-text" type="checkbox" [(ngModel)]="model.autoDestroy" />
+            </div>
+        </div>
+        <div class="form-item">
+            <label>Auto Destroy Idle (in seconds)</label>
+            <input placeholder="Left blank for server default" class="jockey-text" type="number" [(ngModel)]="model.autoDestroyIdleSeconds" />
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button (click)="create()" mat-button mat-dialog-close class="modal-btn btn-green">Create Channel</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-grey">Cancel</button>
+</mat-dialog-actions>

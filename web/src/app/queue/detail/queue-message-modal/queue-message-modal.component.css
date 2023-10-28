@@ -1,0 +1,93 @@
+.title {
+  color: #eee;
+}
+.content {
+  padding: 0px 25px 10px 25px;
+}
+.content p {
+  color: #d2d2d2;
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.queue-message {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content: stretch;
+  justify-items: stretch;
+}
+
+.message-props {
+  flex: 1 1 440px;
+}
+
+.message-content {
+  flex: 1 1 auto;
+  border-left: 1px solid #333;
+  padding-left: 20px;
+}
+
+.message-content h4 {
+  display: block;
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0px;
+  padding: 0px;
+}
+.message-headers {
+  padding: 5px 0px 10px 0px;
+}
+.message-headers p {
+  font-size: 12px;
+  margin: 10px 0px;
+  padding: 0px;
+  color: #aaa;
+}
+.message-content-title {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+  align-items: stretch;
+  justify-items: stretch;
+  justify-content: stretch;
+  height: 28px;
+  width: 440px;
+}
+.message-content-title h4 {
+  flex: 1 0 auto;
+}
+.message-content-title span {
+  flex: 0 1 auto;
+  padding: 4px;
+  margin-left: 10px;
+  color: #aaa;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: -4px;
+}
+.message-content-title span:hover {
+  color: #eee;
+}
+.message-content-title span.active {
+  color: #ffaa22;
+}
+.string-content {
+  width: 440px;
+  clear: both;
+  border: 1px solid #333;
+  border-radius: 2px;
+  padding: 10px;
+  margin: 0px;
+  background-color: #000;
+  height: 222px;
+  box-sizing: border-box;
+  color: #eee;
+  line-height: 22px;
+  font-size: 13px;
+  font-family: "Ubuntu Mono", monospace;
+  overflow: auto;
+}

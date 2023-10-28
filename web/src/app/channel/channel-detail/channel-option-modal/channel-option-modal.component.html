@@ -1,0 +1,15 @@
+<h2 class="title" mat-dialog-title>Channel Option Change</h2>
+<mat-dialog-content class="content">
+    <div class="form-item">
+        <label>{{model.title}}</label>
+        <input *ngIf="model.type == 'text'" placeholder="Option Value" class="target-text" type="text" [(ngModel)]="model.value" />
+        <select *ngIf="model.type == 'checkbox'" [(ngModel)]="model.value" class="jockey-select">
+            <option [ngValue]="true">Yes</option>
+            <option [ngValue]="false">No</option>
+        </select>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="buttons">
+    <button (click)="confirm()" mat-button mat-dialog-close class="modal-btn btn-green">Confirm</button>
+    <button mat-button mat-dialog-close class="modal-btn btn-grey">Cancel</button>
+</mat-dialog-actions>

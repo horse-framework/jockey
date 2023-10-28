@@ -1,0 +1,108 @@
+.title {
+  color: #eee;
+}
+.content {
+  padding: 0px 25px 10px 25px;
+}
+.content p {
+  color: #d2d2d2;
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.queue-message {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content: stretch;
+  justify-items: stretch;
+}
+
+.queue-message h4 {
+  display: block;
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 10px 0px;
+  padding: 0px;
+}
+.message-headers {
+  padding: 0px 0px 10px 0px;
+}
+.header-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content: stretch;
+  justify-items: stretch;
+  font-size: 14px;
+  font-weight: 500;
+}
+.message-header-table {
+  width: 100%;
+}
+.header-key {
+  color: #aaa;
+  text-align: right;
+  padding: 10px;
+  font-size: 15px;
+}
+.header-value {
+  color: #eee;
+  text-align: left;
+  padding: 10px;
+  font-size: 14px;
+}
+.header-action {
+  text-align: right;
+  padding: 4px 0px 4px 4px;
+  flex: 0 2 50px;
+}
+.header-action span {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px;
+  color: #ff2020;
+  cursor: pointer;
+}
+.header-action span:hover {
+  color: #ff9900;
+}
+.header-scroll {
+  max-height: 125px;
+  overflow-y: auto;
+  margin-right: 8px;
+  margin-bottom: 12px;
+}
+
+.header-seperator {
+  color: #ccc;
+  font-size: 12px;
+  flex: 0 1 15px;
+  box-sizing: border-box;
+  padding: 5px 0px;
+  line-height: 32px;
+  text-align: center;
+}
+.header-input {
+  font-size: 12px;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  padding: 5px;
+}
+.header-input input {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.queue-message textarea {
+  width: 484px;
+  height: 90px;
+  resize: none;
+  line-height: 22px;
+  font-size: 13px;
+  font-family: "Ubuntu Mono", monospace;
+}
