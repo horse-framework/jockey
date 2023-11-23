@@ -18,7 +18,7 @@
     "@angular/core": "~17.0.4",
     "@angular/flex-layout": "^11.0.0-beta.33",
     "@angular/forms": "~17.0.4",
-    "@angular/material": "^16.2.12",
+    "@angular/material": "^17.0.1",
     "@angular/platform-browser": "~17.0.4",
     "@angular/platform-browser-dynamic": "~17.0.4",
     "@angular/router": "~17.0.4",
@@ -42,7 +42,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "protractor": "^3.3.0",
+    "protractor": "^7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~5.2.2"

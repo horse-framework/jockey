@@ -26,7 +26,7 @@
     <ItemGroup>
         <PackageReference Include="Enums.NET" Version="4.0.1" />
         <PackageReference Include="Horse.Core" Version="6.6.0" />
-        <PackageReference Include="Horse.Messaging.Server" Version="6.7.1" />
+        <PackageReference Include="Horse.Messaging.Server" Version="6.8.0" />
         <PackageReference Include="Horse.Mvc" Version="6.6.0" />
         <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.6.0" />
         <PackageReference Include="Horse.Protocols.Http" Version="6.6.0" />
@@ -36,22 +36,22 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Web\102.js" />
-        <EmbeddedResource Include="Web\113.js" />
-        <EmbeddedResource Include="Web\182.js" />
-        <EmbeddedResource Include="Web\198.js" />
-        <EmbeddedResource Include="Web\220.js" />
-        <EmbeddedResource Include="Web\297.js" />
-        <EmbeddedResource Include="Web\333.js" />
-        <EmbeddedResource Include="Web\367.js" />
-        <EmbeddedResource Include="Web\380.js" />
-        <EmbeddedResource Include="Web\415.js" />
-        <EmbeddedResource Include="Web\632.js" />
-        <EmbeddedResource Include="Web\636.js" />
-        <EmbeddedResource Include="Web\789.js" />
-        <EmbeddedResource Include="Web\817.js" />
-        <EmbeddedResource Include="Web\845.js" />
-        <EmbeddedResource Include="Web\928.js" />
+        <EmbeddedResource Include="Web\285.js" />
+        <EmbeddedResource Include="Web\295.js" />
+        <EmbeddedResource Include="Web\317.js" />
+        <EmbeddedResource Include="Web\321.js" />
+        <EmbeddedResource Include="Web\364.js" />
+        <EmbeddedResource Include="Web\38.js" />
+        <EmbeddedResource Include="Web\386.js" />
+        <EmbeddedResource Include="Web\394.js" />
+        <EmbeddedResource Include="Web\41.js" />
+        <EmbeddedResource Include="Web\428.js" />
+        <EmbeddedResource Include="Web\512.js" />
+        <EmbeddedResource Include="Web\54.js" />
+        <EmbeddedResource Include="Web\804.js" />
+        <EmbeddedResource Include="Web\909.js" />
+        <EmbeddedResource Include="Web\957.js" />
+        <EmbeddedResource Include="Web\989.js" />
         <EmbeddedResource Include="Web\common.js" />
         <EmbeddedResource Include="Web\favicon.ico" />
         <EmbeddedResource Include="Web\index.html" />
@@ -59,6 +59,6 @@
         <EmbeddedResource Include="Web\polyfills.js" />
         <EmbeddedResource Include="Web\runtime.js" />
         <EmbeddedResource Include="Web\styles.css" />
-        <EmbeddedResource Include="Web\assets\horse.svg" />
+        <EmbeddedResource Include="Web/assets\horse.svg" />
     </ItemGroup>
 </Project>
