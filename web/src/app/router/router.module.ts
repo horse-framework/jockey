@@ -5,8 +5,6 @@ import { RouterModule } from '@angular/router';
 import { BindingAddModalComponent } from './binding-add-modal/binding-add-modal.component';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ConfirmModalComponent } from '../layout/portal-layout/confirm-modal/confirm-modal.component';
-
 
 @NgModule({
     declarations: [RouterComponent, BindingAddModalComponent],
