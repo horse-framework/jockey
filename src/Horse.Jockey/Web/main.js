@@ -1,2174 +1,2556 @@
-"use strict";
-(self["webpackChunkweb"] = self["webpackChunkweb"] || []).push([["main"],{
-
-/***/ 158:
-/*!***************************************!*\
-  !*** ./src/app/app-routing.module.ts ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AppRoutingModule": () => (/* binding */ AppRoutingModule)
-/* harmony export */ });
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 2816);
-/* harmony import */ var src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/interceptors/session.guard */ 9439);
-/* harmony import */ var _layout_guest_layout_guest_layout_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layout/guest-layout/guest-layout.component */ 3821);
-/* harmony import */ var _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layout/portal-layout/portal-layout.component */ 1151);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 3184);
-
-
-
-
-
-
-const routes = [
-    {
-        path: 'queue',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_tslib_tslib_es6_js"), __webpack_require__.e("default-node_modules_angular_forms_fesm2015_forms_mjs"), __webpack_require__.e("default-src_lib_socket-models_ts-src_services_chart_service_ts-node_modules_chart_js_dist_Chart_js"), __webpack_require__.e("src_app_queue_detail_queue-detail_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./queue/detail/queue-detail.module */ 3451)).then(m => m.QueueModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: 'queues',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_tslib_tslib_es6_js"), __webpack_require__.e("default-node_modules_angular_forms_fesm2015_forms_mjs"), __webpack_require__.e("src_app_queue_list_queues_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./queue/list/queues.module */ 1775)).then(m => m.QueuesModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: 'router',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_tslib_tslib_es6_js"), __webpack_require__.e("default-node_modules_angular_forms_fesm2015_forms_mjs"), __webpack_require__.e("src_app_router_router_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./router/router.module */ 881)).then(m => m.HorseRouterModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: 'routers',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_tslib_tslib_es6_js"), __webpack_require__.e("default-node_modules_angular_forms_fesm2015_forms_mjs"), __webpack_require__.e("src_app_routers_routers_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./routers/routers.module */ 2571)).then(m => m.RoutersModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: 'cache',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_tslib_tslib_es6_js"), __webpack_require__.e("default-node_modules_angular_forms_fesm2015_forms_mjs"), __webpack_require__.e("src_app_cache_cache_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./cache/cache.module */ 4408)).then(m => m.CacheModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: 'channels',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_tslib_tslib_es6_js"), __webpack_require__.e("default-node_modules_angular_forms_fesm2015_forms_mjs"), __webpack_require__.e("src_app_channels_channels_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./channels/channels.module */ 8282)).then(m => m.ChannelsModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: 'clients',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_tslib_tslib_es6_js"), __webpack_require__.e("src_app_clients_clients_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./clients/clients.module */ 7158)).then(m => m.ClientsModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: 'nodes',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_nodes_nodes_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./nodes/nodes.module */ 5882)).then(m => m.NodesModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: 'handlers',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_handlers_handlers_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./handlers/handlers.module */ 3508)).then(m => m.HandlersModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: 'console',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_angular_forms_fesm2015_forms_mjs"), __webpack_require__.e("src_app_console_console_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./console/console.module */ 4998)).then(m => m.ConsoleModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: 'login',
-        component: _layout_guest_layout_guest_layout_component__WEBPACK_IMPORTED_MODULE_1__.GuestLayoutComponent,
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_tslib_tslib_es6_js"), __webpack_require__.e("default-node_modules_angular_forms_fesm2015_forms_mjs"), __webpack_require__.e("src_app_login_login_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./login/login.module */ 107)).then(m => m.LoginModule)
-    },
-    {
-        path: 'dashboard',
-        component: _layout_portal_layout_portal_layout_component__WEBPACK_IMPORTED_MODULE_2__.PortalLayoutComponent,
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_tslib_tslib_es6_js"), __webpack_require__.e("default-src_lib_socket-models_ts-src_services_chart_service_ts-node_modules_chart_js_dist_Chart_js"), __webpack_require__.e("src_app_dashboard_dashboard_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./dashboard/dashboard.module */ 4814)).then(m => m.DashboardModule),
-        canActivate: [src_interceptors_session_guard__WEBPACK_IMPORTED_MODULE_0__.SessionGuard]
-    },
-    {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-    }
-];
-class AppRoutingModule {
-}
-AppRoutingModule.ɵfac = function AppRoutingModule_Factory(t) { return new (t || AppRoutingModule)(); };
-AppRoutingModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({ type: AppRoutingModule });
-AppRoutingModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({ imports: [[_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })], _angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsetNgModuleScope"](AppRoutingModule, { imports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule], exports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule] }); })();
-
-
-/***/ }),
-
-/***/ 5041:
-/*!**********************************!*\
-  !*** ./src/app/app.component.ts ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
-/* harmony export */ });
-/* harmony import */ var src_lib_base_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/lib/base-component */ 2962);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_services_session_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/services/session.service */ 5920);
-/* harmony import */ var src_services_websocket_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/services/websocket.service */ 5608);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 2816);
-
-
-
-
-
-class AppComponent extends src_lib_base_component__WEBPACK_IMPORTED_MODULE_0__.BaseComponent {
-    constructor(session, websocketService) {
-        super();
-        this.session = session;
-        this.websocketService = websocketService;
-        this.session.onchanged.subscribe(user => {
-            if (user) {
-                this.websocketService.connect(user.token);
-            }
-            else {
-                this.websocketService.disconnect();
-            }
-        });
-        this.session.run();
-    }
-    ngOnInit() {
-    }
-}
-AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](src_services_session_service__WEBPACK_IMPORTED_MODULE_1__.SessionService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](src_services_websocket_service__WEBPACK_IMPORTED_MODULE_2__.WebsocketService)); };
-AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵInheritDefinitionFeature"]], decls: 1, vars: 0, template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](0, "router-outlet");
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterOutlet], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LmNzcyJ9 */"] });
-
-
-/***/ }),
-
-/***/ 6747:
-/*!*******************************!*\
-  !*** ./src/app/app.module.ts ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AppModule": () => (/* binding */ AppModule)
-/* harmony export */ });
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/platform-browser */ 318);
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app-routing.module */ 158);
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component */ 5041);
-/* harmony import */ var src_services_websocket_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/services/websocket.service */ 5608);
-/* harmony import */ var src_services_session_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/services/session.service */ 5920);
-/* harmony import */ var src_app_queue_services_queue_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/queue/services/queue.service */ 3349);
-/* harmony import */ var src_services_login_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/services/login.service */ 4461);
-/* harmony import */ var src_services_client_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/services/client.service */ 7334);
-/* harmony import */ var _layout_guest_layout_guest_layout_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./layout/guest-layout/guest-layout.module */ 3955);
-/* harmony import */ var _layout_portal_layout_portal_layout_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layout/portal-layout/portal-layout.module */ 7735);
-/* harmony import */ var src_lib_api_client__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/lib/api-client */ 4586);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/common/http */ 8784);
-/* harmony import */ var src_services_dashboard_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/services/dashboard.service */ 5037);
-/* harmony import */ var src_services_horse_router_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/services/horse-router.service */ 1632);
-/* harmony import */ var _layout_pipes_pipes_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./layout/pipes/pipes.module */ 1887);
-/* harmony import */ var src_app_channels_services_channel_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/channels/services/channel.service */ 1208);
-/* harmony import */ var src_app_cache_services_cache_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/cache/services/cache.service */ 6252);
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/platform-browser/animations */ 3598);
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/material/dialog */ 6991);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/core */ 3184);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class AppModule {
-}
-AppModule.ɵfac = function AppModule_Factory(t) { return new (t || AppModule)(); };
-AppModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_15__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent] });
-AppModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_15__["ɵɵdefineInjector"]({ providers: [
-        src_lib_api_client__WEBPACK_IMPORTED_MODULE_9__.ApiClient,
-        src_services_websocket_service__WEBPACK_IMPORTED_MODULE_2__.WebsocketService,
-        src_services_dashboard_service__WEBPACK_IMPORTED_MODULE_10__.DashboardService,
-        src_services_session_service__WEBPACK_IMPORTED_MODULE_3__.SessionService,
-        src_services_horse_router_service__WEBPACK_IMPORTED_MODULE_11__.HorseRouterService,
-        src_app_queue_services_queue_service__WEBPACK_IMPORTED_MODULE_4__.QueueService,
-        src_services_login_service__WEBPACK_IMPORTED_MODULE_5__.LoginService,
-        src_services_client_service__WEBPACK_IMPORTED_MODULE_6__.ClientService,
-        src_app_channels_services_channel_service__WEBPACK_IMPORTED_MODULE_13__.ChannelService,
-        src_app_cache_services_cache_service__WEBPACK_IMPORTED_MODULE_14__.CacheService
-    ], imports: [[
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_16__.BrowserModule,
-            _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule,
-            _layout_guest_layout_guest_layout_module__WEBPACK_IMPORTED_MODULE_7__.GuestLayoutModule,
-            _layout_portal_layout_portal_layout_module__WEBPACK_IMPORTED_MODULE_8__.PortalLayoutModule,
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_17__.HttpClientModule,
-            _layout_pipes_pipes_module__WEBPACK_IMPORTED_MODULE_12__.PipesModule,
-            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_18__.BrowserAnimationsModule,
-            _angular_material_dialog__WEBPACK_IMPORTED_MODULE_19__.MatDialogModule
-        ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_15__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_16__.BrowserModule,
-        _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule,
-        _layout_guest_layout_guest_layout_module__WEBPACK_IMPORTED_MODULE_7__.GuestLayoutModule,
-        _layout_portal_layout_portal_layout_module__WEBPACK_IMPORTED_MODULE_8__.PortalLayoutModule,
-        _angular_common_http__WEBPACK_IMPORTED_MODULE_17__.HttpClientModule,
-        _layout_pipes_pipes_module__WEBPACK_IMPORTED_MODULE_12__.PipesModule,
-        _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_18__.BrowserAnimationsModule,
-        _angular_material_dialog__WEBPACK_IMPORTED_MODULE_19__.MatDialogModule] }); })();
-
-
-/***/ }),
-
-/***/ 6252:
-/*!*************************************************!*\
-  !*** ./src/app/cache/services/cache.service.ts ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CacheService": () => (/* binding */ CacheService)
-/* harmony export */ });
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ 6942);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_lib_api_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/lib/api-client */ 4586);
-
-
-
-class CacheService {
-    constructor(api) {
-        this.api = api;
-    }
-    list() {
-        return this.api.get('/cache/list')
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    get(key) {
-        return this.api.get('/cache/get?key=' + key)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    remove(key) {
-        return this.api.delete('/cache/remove?key=' + key)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    create(key, content, duration, expirationWarning, tags) {
-        let model = { key, content, duration, expirationWarning, tags };
-        return this.api.post('/cache/create', model)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.map)(response => {
-            if (response.ok()) {
-                return response.data != null && response.data.ok;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-}
-CacheService.ɵfac = function CacheService_Factory(t) { return new (t || CacheService)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](src_lib_api_client__WEBPACK_IMPORTED_MODULE_0__.ApiClient)); };
-CacheService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({ token: CacheService, factory: CacheService.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
-/***/ 1208:
-/*!******************************************************!*\
-  !*** ./src/app/channels/services/channel.service.ts ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ChannelService": () => (/* binding */ ChannelService)
-/* harmony export */ });
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ 6942);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ 522);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 4139);
-/* harmony import */ var src_lib_date_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/lib/date-helper */ 5145);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_lib_api_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/lib/api-client */ 4586);
-/* harmony import */ var _services_websocket_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/websocket.service */ 5608);
-
-
-
-
-
-
-class ChannelService {
-    constructor(api, socket) {
-        this.api = api;
-        this.socket = socket;
-    }
-    list() {
-        return this.api.get('/channel/list')
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    create(form) {
-        return this.api.post('/channel/create', form)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    getInitialMessage(channelName) {
-        return this.api.get('/channel/initial-message?name=' + channelName)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    getGraph(name, resolution) {
-        let url = '/channel/graph?resolution=' + resolution;
-        if (name != null && name.length > 0) {
-            url += '&name=' + name;
-        }
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(this)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.mergeMap)(() => this.api.get(url)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_3__.map)(response => {
-            if (!response.success)
-                return null;
-            let result = response.data;
-            result.labels = src_lib_date_helper__WEBPACK_IMPORTED_MODULE_0__.DateHelper.createLabels(result.d.map(x => x.u));
-            return result;
-        }))
-            .toPromise();
-    }
-}
-ChannelService.ɵfac = function ChannelService_Factory(t) { return new (t || ChannelService)(_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](src_lib_api_client__WEBPACK_IMPORTED_MODULE_1__.ApiClient), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](_services_websocket_service__WEBPACK_IMPORTED_MODULE_2__.WebsocketService)); };
-ChannelService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineInjectable"]({ token: ChannelService, factory: ChannelService.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
-/***/ 3821:
-/*!***************************************************************!*\
-  !*** ./src/app/layout/guest-layout/guest-layout.component.ts ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GuestLayoutComponent": () => (/* binding */ GuestLayoutComponent)
-/* harmony export */ });
-/* harmony import */ var src_lib_base_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/lib/base-component */ 2962);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 2816);
-
-
-
-class GuestLayoutComponent extends src_lib_base_component__WEBPACK_IMPORTED_MODULE_0__.BaseComponent {
-    constructor() {
-        super();
-    }
-    ngOnInit() {
-    }
-}
-GuestLayoutComponent.ɵfac = function GuestLayoutComponent_Factory(t) { return new (t || GuestLayoutComponent)(); };
-GuestLayoutComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: GuestLayoutComponent, selectors: [["app-guest-layout"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵInheritDefinitionFeature"]], decls: 11, vars: 0, consts: [[1, "gbody"], [1, "gframe", 2, "min-width", "340px"], [1, "glogo"], ["src", "/assets/horse.svg", "alt", "Horse Messaging"], [1, "gcontent"]], template: function GuestLayoutComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "img", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "div")(5, "h2");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](6, "Jockey");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "h1");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, "Horse Messaging Server");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "div", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](10, "router-outlet");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_2__.RouterOutlet], styles: [".gbody[_ngcontent-%COMP%] {\r\n  margin: 0px;\r\n  padding: 0px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  align-content: center;\r\n  justify-content: center;\r\n  justify-items: center;\r\n  height: 100vh;\r\n  box-sizing: border-box;\r\n  background-color: #222;\r\n  text-align: center;\r\n}\r\n\r\n.gframe[_ngcontent-%COMP%] {\r\n  padding: 32px;\r\n  box-sizing: border-box;\r\n  flex: 0 1 auto;\r\n  text-align: center;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-content: stretch;\r\n  align-items: stretch;\r\n  background-color: #111;\r\n  border-radius: 3px;\r\n  border: 1px solid #040404;\r\n  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.28);\r\n}\r\n\r\n.glogo[_ngcontent-%COMP%] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex: 0 0 auto;\r\n  text-align: center;\r\n  align-items: center;\r\n  align-content: center;\r\n  justify-items: center;\r\n  justify-content: center;\r\n  padding: 8px 8px 32px 8px;\r\n}\r\n\r\n.glogo[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\r\n  width: 48px;\r\n  flex: 0 0 auto;\r\n}\r\n\r\n.glogo[_ngcontent-%COMP%]   div[_ngcontent-%COMP%] {\r\n  flex: 0 1 auto;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: flex-start;\r\n  align-content: flex-start;\r\n  padding: 0px 18px;\r\n}\r\n\r\n.glogo[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\r\n  margin: 0px;\r\n  padding: 0px;\r\n  font-size: 12px;\r\n  line-height: 20px;\r\n  font-weight: 400;\r\n  color: #aaa;\r\n}\r\n\r\n.glogo[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\r\n  margin: 0px;\r\n  padding: 0px;\r\n  font-size: 20px;\r\n  line-height: 20px;\r\n  font-weight: 500;\r\n  color: #ccc;\r\n}\r\n\r\n.gcontent[_ngcontent-%COMP%] {\r\n  flex: 1 1 auto;\r\n}\r\n\r\n@media screen and (min-height:700px) {\r\n  .gframe[_ngcontent-%COMP%] {\r\n    margin-bottom: 150px;\r\n  }\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImd1ZXN0LWxheW91dC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBVztFQUNYLFlBQVk7RUFDWixhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLG1CQUFtQjtFQUNuQixxQkFBcUI7RUFDckIsdUJBQXVCO0VBQ3ZCLHFCQUFxQjtFQUNyQixhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLHNCQUFzQjtFQUN0QixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLGNBQWM7RUFDZCxrQkFBa0I7RUFDbEIsYUFBYTtFQUNiLHNCQUFzQjtFQUN0QixzQkFBc0I7RUFDdEIsb0JBQW9CO0VBQ3BCLHNCQUFzQjtFQUN0QixrQkFBa0I7RUFDbEIseUJBQXlCO0VBQ3pCLGdEQUFnRDtBQUNsRDs7QUFFQTtFQUNFLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIsY0FBYztFQUNkLGtCQUFrQjtFQUNsQixtQkFBbUI7RUFDbkIscUJBQXFCO0VBQ3JCLHFCQUFxQjtFQUNyQix1QkFBdUI7RUFDdkIseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsV0FBVztFQUNYLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxjQUFjO0VBQ2QsYUFBYTtFQUNiLHNCQUFzQjtFQUN0Qix1QkFBdUI7RUFDdkIseUJBQXlCO0VBQ3pCLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixnQkFBZ0I7RUFDaEIsV0FBVztBQUNiOztBQUVBO0VBQ0UsV0FBVztFQUNYLFlBQVk7RUFDWixlQUFlO0VBQ2YsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixXQUFXO0FBQ2I7O0FBRUE7RUFDRSxjQUFjO0FBQ2hCOztBQUVBO0VBQ0U7SUFDRSxvQkFBb0I7RUFDdEI7QUFDRiIsImZpbGUiOiJndWVzdC1sYXlvdXQuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5nYm9keSB7XHJcbiAgbWFyZ2luOiAwcHg7XHJcbiAgcGFkZGluZzogMHB4O1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gIGFsaWduLWNvbnRlbnQ6IGNlbnRlcjtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICBqdXN0aWZ5LWl0ZW1zOiBjZW50ZXI7XHJcbiAgaGVpZ2h0OiAxMDB2aDtcclxuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICMyMjI7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59XHJcblxyXG4uZ2ZyYW1lIHtcclxuICBwYWRkaW5nOiAzMnB4O1xyXG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgZmxleDogMCAxIGF1dG87XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICBhbGlnbi1jb250ZW50OiBzdHJldGNoO1xyXG4gIGFsaWduLWl0ZW1zOiBzdHJldGNoO1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICMxMTE7XHJcbiAgYm9yZGVyLXJhZGl1czogM3B4O1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkICMwNDA0MDQ7XHJcbiAgYm94LXNoYWRvdzogMHB4IDBweCAxMnB4IDBweCByZ2JhKDAsIDAsIDAsIDAuMjgpO1xyXG59XHJcblxyXG4uZ2xvZ28ge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcclxuICBmbGV4OiAwIDAgYXV0bztcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICBhbGlnbi1jb250ZW50OiBjZW50ZXI7XHJcbiAganVzdGlmeS1pdGVtczogY2VudGVyO1xyXG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gIHBhZGRpbmc6IDhweCA4cHggMzJweCA4cHg7XHJcbn1cclxuXHJcbi5nbG9nbyBpbWcge1xyXG4gIHdpZHRoOiA0OHB4O1xyXG4gIGZsZXg6IDAgMCBhdXRvO1xyXG59XHJcblxyXG4uZ2xvZ28gZGl2IHtcclxuICBmbGV4OiAwIDEgYXV0bztcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgYWxpZ24taXRlbXM6IGZsZXgtc3RhcnQ7XHJcbiAgYWxpZ24tY29udGVudDogZmxleC1zdGFydDtcclxuICBwYWRkaW5nOiAwcHggMThweDtcclxufVxyXG5cclxuLmdsb2dvIGRpdiBoMSB7XHJcbiAgbWFyZ2luOiAwcHg7XHJcbiAgcGFkZGluZzogMHB4O1xyXG4gIGZvbnQtc2l6ZTogMTJweDtcclxuICBsaW5lLWhlaWdodDogMjBweDtcclxuICBmb250LXdlaWdodDogNDAwO1xyXG4gIGNvbG9yOiAjYWFhO1xyXG59XHJcblxyXG4uZ2xvZ28gZGl2IGgyIHtcclxuICBtYXJnaW46IDBweDtcclxuICBwYWRkaW5nOiAwcHg7XHJcbiAgZm9udC1zaXplOiAyMHB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAyMHB4O1xyXG4gIGZvbnQtd2VpZ2h0OiA1MDA7XHJcbiAgY29sb3I6ICNjY2M7XHJcbn1cclxuXHJcbi5nY29udGVudCB7XHJcbiAgZmxleDogMSAxIGF1dG87XHJcbn1cclxuXHJcbkBtZWRpYSBzY3JlZW4gYW5kIChtaW4taGVpZ2h0OjcwMHB4KSB7XHJcbiAgLmdmcmFtZSB7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxNTBweDtcclxuICB9XHJcbn1cclxuIl19 */"] });
-
-
-/***/ }),
-
-/***/ 3955:
-/*!************************************************************!*\
-  !*** ./src/app/layout/guest-layout/guest-layout.module.ts ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GuestLayoutModule": () => (/* binding */ GuestLayoutModule)
-/* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 6362);
-/* harmony import */ var _guest_layout_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./guest-layout.component */ 3821);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 2816);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 3184);
-
-
-
-
-class GuestLayoutModule {
-}
-GuestLayoutModule.ɵfac = function GuestLayoutModule_Factory(t) { return new (t || GuestLayoutModule)(); };
-GuestLayoutModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({ type: GuestLayoutModule });
-GuestLayoutModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ imports: [[
-            _angular_common__WEBPACK_IMPORTED_MODULE_2__.CommonModule,
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule
-        ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](GuestLayoutModule, { declarations: [_guest_layout_component__WEBPACK_IMPORTED_MODULE_0__.GuestLayoutComponent], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.CommonModule,
-        _angular_router__WEBPACK_IMPORTED_MODULE_3__.RouterModule] }); })();
-
-
-/***/ }),
-
-/***/ 1238:
-/*!***************************************************!*\
-  !*** ./src/app/layout/pipes/binding-type.pipe.ts ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "BindingTypePipe": () => (/* binding */ BindingTypePipe)
-/* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 3184);
-
-class BindingTypePipe {
-    transform(binding) {
-        let type = binding.type;
-        if (type == 'Direct') {
-            if (binding.target.startsWith('@')) {
-                let i = binding.target.indexOf(':');
-                if (i > 0) {
-                    return binding.target.substr(1, i - 1);
-                }
-            }
-            else {
-                return 'Id';
-            }
-        }
-        if (type == 'Http') {
-            switch (binding.contentType) {
-                case 0: return 'GET';
-                case 1: return 'POST';
-                case 2: return 'PUT';
-                case 3: return 'PATCH';
-                case 4: return 'DELETE';
-            }
-        }
-        if (type.indexOf('Queue') >= 0)
-            return 'Queue';
-        return type;
-    }
-}
-BindingTypePipe.ɵfac = function BindingTypePipe_Factory(t) { return new (t || BindingTypePipe)(); };
-BindingTypePipe.ɵpipe = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePipe"]({ name: "bindingType", type: BindingTypePipe, pure: true });
-
-
-/***/ }),
-
-/***/ 3369:
-/*!***********************************************!*\
-  !*** ./src/app/layout/pipes/filesize.pipe.ts ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FilesizePipe": () => (/* binding */ FilesizePipe)
-/* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 3184);
-
-class FilesizePipe {
-    transform(value) {
-        if (value == 0)
-            return 'None';
-        if (value < 2014)
-            return value + ' bytes';
-        if (value < 1048576)
-            return (value / 1024).toFixed(2) + ' KB';
-        if (value > 1073741824)
-            return (value / 1073741824).toFixed(2) + ' GB';
-        return (value / 1048576).toFixed(2) + ' MB';
-    }
-}
-FilesizePipe.ɵfac = function FilesizePipe_Factory(t) { return new (t || FilesizePipe)(); };
-FilesizePipe.ɵpipe = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePipe"]({ name: "filesize", type: FilesizePipe, pure: true });
-
-
-/***/ }),
-
-/***/ 2809:
-/*!**************************************************!*\
-  !*** ./src/app/layout/pipes/jockey-time.pipe.ts ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "JockeyTimePipe": () => (/* binding */ JockeyTimePipe)
-/* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ 6362);
-
-
-class JockeyTimePipe {
-    constructor(_datePipe) {
-        this._datePipe = _datePipe;
-    }
-    transform(value) {
-        return this._datePipe.transform(value * 1000, 'HH:mm:ss');
-    }
-}
-JockeyTimePipe.ɵfac = function JockeyTimePipe_Factory(t) { return new (t || JockeyTimePipe)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common__WEBPACK_IMPORTED_MODULE_1__.DatePipe, 16)); };
-JockeyTimePipe.ɵpipe = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePipe"]({ name: "jockeyTime", type: JockeyTimePipe, pure: true });
-
-
-/***/ }),
-
-/***/ 1887:
-/*!**********************************************!*\
-  !*** ./src/app/layout/pipes/pipes.module.ts ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PipesModule": () => (/* binding */ PipesModule)
-/* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ 6362);
-/* harmony import */ var _binding_type_pipe__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./binding-type.pipe */ 1238);
-/* harmony import */ var _filesize_pipe__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filesize.pipe */ 3369);
-/* harmony import */ var _jockey_time_pipe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./jockey-time.pipe */ 2809);
-/* harmony import */ var _prett_print_pipe__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./prett-print.pipe */ 9281);
-/* harmony import */ var _timespan_pipe__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./timespan.pipe */ 7966);
-/* harmony import */ var _unlimited_pipe__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./unlimited.pipe */ 8392);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 3184);
-
-
-
-
-
-
-
-
-class PipesModule {
-}
-PipesModule.ɵfac = function PipesModule_Factory(t) { return new (t || PipesModule)(); };
-PipesModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineNgModule"]({ type: PipesModule });
-PipesModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineInjector"]({ providers: [
-        _angular_common__WEBPACK_IMPORTED_MODULE_7__.DatePipe
-    ], imports: [[
-            _angular_common__WEBPACK_IMPORTED_MODULE_7__.CommonModule
-        ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵsetNgModuleScope"](PipesModule, { declarations: [_timespan_pipe__WEBPACK_IMPORTED_MODULE_4__.TimespanPipe,
-        _unlimited_pipe__WEBPACK_IMPORTED_MODULE_5__.UnlimitedPipe,
-        _filesize_pipe__WEBPACK_IMPORTED_MODULE_1__.FilesizePipe,
-        _binding_type_pipe__WEBPACK_IMPORTED_MODULE_0__.BindingTypePipe,
-        _jockey_time_pipe__WEBPACK_IMPORTED_MODULE_2__.JockeyTimePipe,
-        _prett_print_pipe__WEBPACK_IMPORTED_MODULE_3__.PrettyPrintPipe], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_7__.CommonModule], exports: [_timespan_pipe__WEBPACK_IMPORTED_MODULE_4__.TimespanPipe,
-        _unlimited_pipe__WEBPACK_IMPORTED_MODULE_5__.UnlimitedPipe,
-        _filesize_pipe__WEBPACK_IMPORTED_MODULE_1__.FilesizePipe,
-        _binding_type_pipe__WEBPACK_IMPORTED_MODULE_0__.BindingTypePipe,
-        _jockey_time_pipe__WEBPACK_IMPORTED_MODULE_2__.JockeyTimePipe,
-        _prett_print_pipe__WEBPACK_IMPORTED_MODULE_3__.PrettyPrintPipe] }); })();
-
-
-/***/ }),
-
-/***/ 9281:
-/*!**************************************************!*\
-  !*** ./src/app/layout/pipes/prett-print.pipe.ts ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PrettyPrintPipe": () => (/* binding */ PrettyPrintPipe)
-/* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 3184);
-
-const settings = { indent: 3, linkUrls: true, quoteKeys: false };
-class PrettyPrintPipe {
-    constructor() {
-        this.htmlEntities = (text) => {
-            // Makes text displayable in browsers
-            return text
-                .replace(/&/g, '&amp;')
-                .replace(/\\"/g, '&bsol;&quot;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;');
-        };
-        this.replacer = (match, p1, p2, p3, p4) => {
-            // Converts the four parenthesized capture groups (indent, key, value, end) into HTML
-            const part = { indent: p1, key: p2, value: p3, end: p4 };
-            const findName = settings.quoteKeys ? /(.*)(): / : /"([\w$]+)": |(.*): /;
-            const indentHtml = part.indent || '';
-            const keyName = part.key && part.key.replace(findName, '$1$2');
-            const keyHtml = part.key ? this.spanTag('key', keyName) + this.spanTag('mark', ': ') : '';
-            const valueHtml = part.value ? this.buildValueHtml(part.value) : '';
-            const endHtml = this.spanTag('mark', part.end);
-            return indentHtml + keyHtml + valueHtml + endHtml;
-        };
-        this.buildValueHtml = (value) => {
-            // Returns a string like: "<span class=json-number>3.1415</span>"
-            const strType = /^"/.test(value) && 'string';
-            const boolType = ['true', 'false'].includes(value) && 'boolean';
-            const nullType = value === 'null' && 'null';
-            const type = boolType || nullType || strType || 'number';
-            const urlRegex = /https?:\/\/[^\s"]+/g;
-            const makeLink = (link) => '<a class=json-link href="' + link + '">' + link + '</a>';
-            const display = strType && settings.linkUrls ? value.replace(urlRegex, makeLink) : value;
-            return this.spanTag(type, display);
-        };
-        this.spanTag = (type, display) => display ? '<span class=json-' + type + '>' + display + '</span>' : '';
-    }
-    transform(data) {
-        const jsonLine = /^( *)("[^"]+": )?("[^"]*"|[\w.+-]*)?([{}[\],]*)?$/mg;
-        // Regex parses each line of the JSON string into four parts:
-        //    Capture group       Part        Description                  '   "active": true,'
-        //    ------------------  ----------  ---------------------------  --------------------
-        //    ( *)                p1: indent  Spaces for indentation       '   '
-        //    ("[^"]+": )         p2: key     Key name                     '"active": '
-        //    ("[^"]*"|[\w.+-]*)  p3: value   Key value                    'true'
-        //    ([{}[\],]*)         p4: end     Line termination characters  ','
-        const json = JSON.stringify(data, null, settings.indent) || 'undefined';
-        return this.htmlEntities(json).replace(jsonLine, this.replacer);
-    }
-}
-PrettyPrintPipe.ɵfac = function PrettyPrintPipe_Factory(t) { return new (t || PrettyPrintPipe)(); };
-PrettyPrintPipe.ɵpipe = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePipe"]({ name: "prettyprint", type: PrettyPrintPipe, pure: true });
-
-
-/***/ }),
-
-/***/ 7966:
-/*!***********************************************!*\
-  !*** ./src/app/layout/pipes/timespan.pipe.ts ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TimespanPipe": () => (/* binding */ TimespanPipe)
-/* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 3184);
-
-const MIN = 60;
-const HOUR = 60 * 60;
-const DAY = 60 * 60 * 24;
-class TimespanPipe {
-    transform(value, ref = 0) {
-        let totalSeconds = Math.round(value - ref);
-        let days = 0;
-        let hours = 0;
-        let mins = 0;
-        while (totalSeconds >= DAY) {
-            days++;
-            totalSeconds -= DAY;
-        }
-        while (totalSeconds >= HOUR) {
-            hours++;
-            totalSeconds -= HOUR;
-        }
-        while (totalSeconds >= MIN) {
-            mins++;
-            totalSeconds -= MIN;
-        }
-        let result = '';
-        if (days > 0) {
-            result += days + ' ' + (days > 1 ? 'days' : 'day') + ' ';
-        }
-        if (hours > 0) {
-            result += hours + ' ' + (hours > 1 ? 'hours' : 'hour') + ' ';
-        }
-        if (mins > 0) {
-            result += mins + ' ' + (mins > 1 ? 'mins' : 'min') + ' ';
-        }
-        if (totalSeconds > 0) {
-            result += totalSeconds + ' ' + (totalSeconds > 1 ? 'secs' : 'sec');
-        }
-        return result;
-    }
-}
-TimespanPipe.ɵfac = function TimespanPipe_Factory(t) { return new (t || TimespanPipe)(); };
-TimespanPipe.ɵpipe = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePipe"]({ name: "timespan", type: TimespanPipe, pure: true });
-
-
-/***/ }),
-
-/***/ 8392:
-/*!************************************************!*\
-  !*** ./src/app/layout/pipes/unlimited.pipe.ts ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "UnlimitedPipe": () => (/* binding */ UnlimitedPipe)
-/* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 3184);
-
-class UnlimitedPipe {
-    transform(value) {
-        if (value == 0)
-            return 'Unlimited';
-        return value.toString();
-    }
-}
-UnlimitedPipe.ɵfac = function UnlimitedPipe_Factory(t) { return new (t || UnlimitedPipe)(); };
-UnlimitedPipe.ɵpipe = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePipe"]({ name: "unlimited", type: UnlimitedPipe, pure: true });
-
-
-/***/ }),
-
-/***/ 8782:
-/*!*******************************************************************************!*\
-  !*** ./src/app/layout/portal-layout/confirm-modal/confirm-modal.component.ts ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ConfirmModalComponent": () => (/* binding */ ConfirmModalComponent)
-/* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 2218);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/dialog */ 6991);
-
-
-
-class ConfirmModalComponent {
-    constructor() {
-        this._onclosed = new rxjs__WEBPACK_IMPORTED_MODULE_0__.Subject();
-        this._confirmed = false;
-    }
-    get onclosed() { return this._onclosed; }
-    ngOnDestroy() {
-        if (!this._confirmed)
-            this._onclosed.next(false);
-    }
-    confirm(value) {
-        this._confirmed = true;
-        this._onclosed.next(value);
-    }
-}
-ConfirmModalComponent.ɵfac = function ConfirmModalComponent_Factory(t) { return new (t || ConfirmModalComponent)(); };
-ConfirmModalComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: ConfirmModalComponent, selectors: [["app-confirm-modal"]], decls: 11, vars: 1, consts: [["mat-dialog-title", "", 1, "title"], [1, "content"], [3, "innerHTML"], [1, "buttons"], ["mat-button", "", "mat-dialog-close", "", 1, "modal-btn", "btn-red", 3, "click"], ["mat-button", "", "mat-dialog-close", "", 1, "modal-btn", "btn-grey", 3, "click"]], template: function ConfirmModalComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "h2", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, "Confirmation");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "mat-dialog-content", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "p", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5, "Please confirm your action.");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "mat-dialog-actions", 3)(7, "button", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function ConfirmModalComponent_Template_button_click_7_listener() { return ctx.confirm(true); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, "Confirm");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "button", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function ConfirmModalComponent_Template_button_click_9_listener() { return ctx.confirm(false); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, "Cancel");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-    } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("innerHTML", ctx.message, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsanitizeHtml"]);
-    } }, directives: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__.MatDialogTitle, _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__.MatDialogContent, _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__.MatDialogActions, _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__.MatDialogClose], styles: [".title[_ngcontent-%COMP%] {\r\n  color: #eee;\r\n}\r\n.content[_ngcontent-%COMP%] {\r\n  padding: 0px 25px 10px 25px;\r\n}\r\n.content[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\r\n  color: #d2d2d2;\r\n  font-size: 14px;\r\n  line-height: 30px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbmZpcm0tbW9kYWwuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVc7QUFDYjtBQUNBO0VBQ0UsMkJBQTJCO0FBQzdCO0FBQ0E7RUFDRSxjQUFjO0VBQ2QsZUFBZTtFQUNmLGlCQUFpQjtBQUNuQiIsImZpbGUiOiJjb25maXJtLW1vZGFsLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGl0bGUge1xyXG4gIGNvbG9yOiAjZWVlO1xyXG59XHJcbi5jb250ZW50IHtcclxuICBwYWRkaW5nOiAwcHggMjVweCAxMHB4IDI1cHg7XHJcbn1cclxuLmNvbnRlbnQgcCB7XHJcbiAgY29sb3I6ICNkMmQyZDI7XHJcbiAgZm9udC1zaXplOiAxNHB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAzMHB4O1xyXG59XHJcbiJdfQ== */"] });
-
-
-/***/ }),
-
-/***/ 1151:
-/*!*****************************************************************!*\
-  !*** ./src/app/layout/portal-layout/portal-layout.component.ts ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PortalLayoutComponent": () => (/* binding */ PortalLayoutComponent)
-/* harmony export */ });
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 2340);
-/* harmony import */ var src_lib_base_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/lib/base-component */ 2962);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_services_session_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/services/session.service */ 5920);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 2816);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 6362);
-
-
-
-
-
-
-function PortalLayoutComponent_div_32_Template(rf, ctx) { if (rf & 1) {
-    const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 14)(1, "span", 15);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](3, "button", 16);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function PortalLayoutComponent_div_32_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵrestoreView"](_r2); const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"](); return ctx_r1.logout(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](4, "Logout");
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
-} if (rf & 2) {
-    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate"](ctx_r0.user.name);
-} }
-class PortalLayoutComponent extends src_lib_base_component__WEBPACK_IMPORTED_MODULE_1__.BaseComponent {
-    constructor(session, router) {
-        super();
-        this.session = session;
-        this.router = router;
-    }
-    ngOnInit() {
-        this.user = this.session.get();
-        this.version = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.version;
-    }
-    logout() {
-        this.session.clear();
-        this.router.navigateByUrl('/login');
-    }
-}
-PortalLayoutComponent.ɵfac = function PortalLayoutComponent_Factory(t) { return new (t || PortalLayoutComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](src_services_session_service__WEBPACK_IMPORTED_MODULE_2__.SessionService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__.Router)); };
-PortalLayoutComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({ type: PortalLayoutComponent, selectors: [["app-portal-layout"]], features: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵInheritDefinitionFeature"]], decls: 36, vars: 2, consts: [[1, "headline"], [1, "logo"], ["src", "/assets/horse.svg", "alt", "Horse Messaging"], [1, "menu"], ["routerLinkActive", "active", "routerLink", "/dashboard"], ["routerLinkActive", "active", "routerLink", "/channels"], ["routerLinkActive", "active", "routerLink", "/queues"], ["routerLinkActive", "active", "routerLink", "/routers"], ["routerLinkActive", "active", "routerLink", "/cache"], ["routerLinkActive", "active", "routerLink", "/clients"], ["routerLinkActive", "active", "routerLink", "/console"], ["class", "user", 4, "ngIf"], [1, "after-header"], [1, "portal-content"], [1, "user"], [1, "user-name"], [1, "logout", 3, "click"]], template: function PortalLayoutComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "header")(1, "div", 0)(2, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](3, "img", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](4, "div")(5, "h1");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](6, "Horse Messaging Jockey");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](7, "em");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](9, "div", 3)(10, "ul")(11, "li")(12, "a", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](13, "Dashboard");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](14, "li")(15, "a", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](16, "Channels");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](17, "li")(18, "a", 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](19, "Queues");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](20, "li")(21, "a", 7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](22, "Routers");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](23, "li")(24, "a", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](25, "Cache");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](26, "li")(27, "a", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](28, "Clients");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](29, "li")(30, "a", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](31, "Console");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](32, PortalLayoutComponent_div_32_Template, 5, 1, "div", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](33, "div", 12);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](34, "div", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](35, "router-outlet");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-    } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtextInterpolate1"]("Version ", ctx.version, "");
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](24);
-        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", ctx.user);
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterLinkWithHref, _angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterLinkActive, _angular_common__WEBPACK_IMPORTED_MODULE_5__.NgIf, _angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterOutlet], styles: ["header[_ngcontent-%COMP%] {\r\n  display: block;\r\n  height: 60px;\r\n  box-sizing: border-box;\r\n  background-color: #111;\r\n  position: fixed;\r\n  width: 100%;\r\n}\r\n.after-header[_ngcontent-%COMP%] {\r\n    display: block;\r\n    height: 80px;\r\n}\r\n.headline[_ngcontent-%COMP%] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: stretch;\r\n  align-content: stretch;\r\n}\r\n.headline[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%] {\r\n  flex: 0 1 auto;\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: stretch;\r\n  align-content: stretch;\r\n  margin-right: 100px;\r\n}\r\n.headline[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\r\n  height: 30px;\r\n  margin: 15px;\r\n  flex: 0 1 auto;\r\n}\r\n.headline[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%] {\r\n  flex: 1 2 auto;\r\n  margin: 14px 0px 0px 0px;\r\n  padding: 0px;\r\n  font-size: 16px;\r\n  line-height: 16px;\r\n  font-weight: 500;\r\n  color: #e0e0e0;\r\n}\r\n.headline[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   em[_ngcontent-%COMP%] {\r\n  padding: 0px 0px 0px 1px;\r\n  font-size: 10px;\r\n  font-weight: 300;\r\n  color: #aaa;\r\n  font-style: normal;\r\n}\r\n.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%] {\r\n  flex: 1 2 auto;\r\n}\r\n.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%] {\r\n  margin: 13px 20px 0px 20px;\r\n  padding: 0px;\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: flex-start;\r\n  align-content: flex-start;\r\n}\r\n.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\r\n  display: flex;\r\n  align-items: stretch;\r\n  align-content: stretch;\r\n  margin: 0px 4px;\r\n}\r\n.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a[_ngcontent-%COMP%] {\r\n  text-decoration: none;\r\n  padding: 10px 14px;\r\n  background-color: transparent;\r\n  color: #999;\r\n  border-radius: 2px;\r\n  font-size: 13px;\r\n  line-height: 13px;\r\n  font-weight: 500;\r\n  cursor: pointer;\r\n}\r\n.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover {\r\n    background-color: #222;\r\n    color: #eee;\r\n  }\r\n.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a.active[_ngcontent-%COMP%] {\r\n  background-color: #108030;\r\n  color: #fff;\r\n}\r\n.headline[_ngcontent-%COMP%]   .user[_ngcontent-%COMP%] {\r\n  flex: 0 3 auto;\r\n  padding: 12px;\r\n}\r\n.headline[_ngcontent-%COMP%]   .user-name[_ngcontent-%COMP%] {\r\n  font-size: 14px;\r\n  font-weight: 400;\r\n  color: #ccc;\r\n  margin: 0px;\r\n  padding: 2px 10px 0px 10px;\r\n}\r\n.headline[_ngcontent-%COMP%]   .logout[_ngcontent-%COMP%] {\r\n  border: none;\r\n  background-color: #c01010;\r\n  color: #e0e0e0;\r\n  font-style: 13px;\r\n  font-weight: 500;\r\n  border-radius: 2px;\r\n  line-height: 13px;\r\n  padding: 10px 14px;\r\n  margin: 0px 45px 0px 20px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvcnRhbC1sYXlvdXQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGNBQWM7RUFDZCxZQUFZO0VBQ1osc0JBQXNCO0VBQ3RCLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2YsV0FBVztBQUNiO0FBQ0E7SUFDSSxjQUFjO0lBQ2QsWUFBWTtBQUNoQjtBQUVBO0VBQ0UsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixvQkFBb0I7RUFDcEIsc0JBQXNCO0FBQ3hCO0FBRUE7RUFDRSxjQUFjO0VBQ2QsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixvQkFBb0I7RUFDcEIsc0JBQXNCO0VBQ3RCLG1CQUFtQjtBQUNyQjtBQUVBO0VBQ0UsWUFBWTtFQUNaLFlBQVk7RUFDWixjQUFjO0FBQ2hCO0FBRUE7RUFDRSxjQUFjO0VBQ2Qsd0JBQXdCO0VBQ3hCLFlBQVk7RUFDWixlQUFlO0VBQ2YsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixjQUFjO0FBQ2hCO0FBRUE7RUFDRSx3QkFBd0I7RUFDeEIsZUFBZTtFQUNmLGdCQUFnQjtFQUNoQixXQUFXO0VBQ1gsa0JBQWtCO0FBQ3BCO0FBRUE7RUFDRSxjQUFjO0FBQ2hCO0FBRUE7RUFDRSwwQkFBMEI7RUFDMUIsWUFBWTtFQUNaLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIsdUJBQXVCO0VBQ3ZCLHlCQUF5QjtBQUMzQjtBQUVBO0VBQ0UsYUFBYTtFQUNiLG9CQUFvQjtFQUNwQixzQkFBc0I7RUFDdEIsZUFBZTtBQUNqQjtBQUVBO0VBQ0UscUJBQXFCO0VBQ3JCLGtCQUFrQjtFQUNsQiw2QkFBNkI7RUFDN0IsV0FBVztFQUNYLGtCQUFrQjtFQUNsQixlQUFlO0VBQ2YsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixlQUFlO0FBQ2pCO0FBRUE7SUFDSSxzQkFBc0I7SUFDdEIsV0FBVztFQUNiO0FBRUY7RUFDRSx5QkFBeUI7RUFDekIsV0FBVztBQUNiO0FBRUE7RUFDRSxjQUFjO0VBQ2QsYUFBYTtBQUNmO0FBRUE7RUFDRSxlQUFlO0VBQ2YsZ0JBQWdCO0VBQ2hCLFdBQVc7RUFDWCxXQUFXO0VBQ1gsMEJBQTBCO0FBQzVCO0FBRUE7RUFDRSxZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLGNBQWM7RUFDZCxnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtFQUNsQixpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLHlCQUF5QjtBQUMzQiIsImZpbGUiOiJwb3J0YWwtbGF5b3V0LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJoZWFkZXIge1xyXG4gIGRpc3BsYXk6IGJsb2NrO1xyXG4gIGhlaWdodDogNjBweDtcclxuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICMxMTE7XHJcbiAgcG9zaXRpb246IGZpeGVkO1xyXG4gIHdpZHRoOiAxMDAlO1xyXG59XHJcbi5hZnRlci1oZWFkZXIge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBoZWlnaHQ6IDgwcHg7XHJcbn1cclxuXHJcbi5oZWFkbGluZSB7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjogcm93O1xyXG4gIGFsaWduLWl0ZW1zOiBzdHJldGNoO1xyXG4gIGFsaWduLWNvbnRlbnQ6IHN0cmV0Y2g7XHJcbn1cclxuXHJcbi5oZWFkbGluZSAubG9nbyB7XHJcbiAgZmxleDogMCAxIGF1dG87XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjogcm93O1xyXG4gIGFsaWduLWl0ZW1zOiBzdHJldGNoO1xyXG4gIGFsaWduLWNvbnRlbnQ6IHN0cmV0Y2g7XHJcbiAgbWFyZ2luLXJpZ2h0OiAxMDBweDtcclxufVxyXG5cclxuLmhlYWRsaW5lIC5sb2dvIGltZyB7XHJcbiAgaGVpZ2h0OiAzMHB4O1xyXG4gIG1hcmdpbjogMTVweDtcclxuICBmbGV4OiAwIDEgYXV0bztcclxufVxyXG5cclxuLmhlYWRsaW5lIC5sb2dvIGgxIHtcclxuICBmbGV4OiAxIDIgYXV0bztcclxuICBtYXJnaW46IDE0cHggMHB4IDBweCAwcHg7XHJcbiAgcGFkZGluZzogMHB4O1xyXG4gIGZvbnQtc2l6ZTogMTZweDtcclxuICBsaW5lLWhlaWdodDogMTZweDtcclxuICBmb250LXdlaWdodDogNTAwO1xyXG4gIGNvbG9yOiAjZTBlMGUwO1xyXG59XHJcblxyXG4uaGVhZGxpbmUgLmxvZ28gZW0ge1xyXG4gIHBhZGRpbmc6IDBweCAwcHggMHB4IDFweDtcclxuICBmb250LXNpemU6IDEwcHg7XHJcbiAgZm9udC13ZWlnaHQ6IDMwMDtcclxuICBjb2xvcjogI2FhYTtcclxuICBmb250LXN0eWxlOiBub3JtYWw7XHJcbn1cclxuXHJcbi5oZWFkbGluZSAubWVudSB7XHJcbiAgZmxleDogMSAyIGF1dG87XHJcbn1cclxuXHJcbi5oZWFkbGluZSAubWVudSB1bCB7XHJcbiAgbWFyZ2luOiAxM3B4IDIwcHggMHB4IDIwcHg7XHJcbiAgcGFkZGluZzogMHB4O1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcclxuICBhbGlnbi1pdGVtczogZmxleC1zdGFydDtcclxuICBhbGlnbi1jb250ZW50OiBmbGV4LXN0YXJ0O1xyXG59XHJcblxyXG4uaGVhZGxpbmUgLm1lbnUgdWwgbGkge1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgYWxpZ24taXRlbXM6IHN0cmV0Y2g7XHJcbiAgYWxpZ24tY29udGVudDogc3RyZXRjaDtcclxuICBtYXJnaW46IDBweCA0cHg7XHJcbn1cclxuXHJcbi5oZWFkbGluZSAubWVudSB1bCBsaSBhIHtcclxuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbiAgcGFkZGluZzogMTBweCAxNHB4O1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50O1xyXG4gIGNvbG9yOiAjOTk5O1xyXG4gIGJvcmRlci1yYWRpdXM6IDJweDtcclxuICBmb250LXNpemU6IDEzcHg7XHJcbiAgbGluZS1oZWlnaHQ6IDEzcHg7XHJcbiAgZm9udC13ZWlnaHQ6IDUwMDtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbn1cclxuXHJcbi5oZWFkbGluZSAubWVudSB1bCBsaSBhOmhvdmVyIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICMyMjI7XHJcbiAgICBjb2xvcjogI2VlZTtcclxuICB9XHJcblxyXG4uaGVhZGxpbmUgLm1lbnUgdWwgbGkgYS5hY3RpdmUge1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICMxMDgwMzA7XHJcbiAgY29sb3I6ICNmZmY7XHJcbn1cclxuXHJcbi5oZWFkbGluZSAudXNlciB7XHJcbiAgZmxleDogMCAzIGF1dG87XHJcbiAgcGFkZGluZzogMTJweDtcclxufVxyXG5cclxuLmhlYWRsaW5lIC51c2VyLW5hbWUge1xyXG4gIGZvbnQtc2l6ZTogMTRweDtcclxuICBmb250LXdlaWdodDogNDAwO1xyXG4gIGNvbG9yOiAjY2NjO1xyXG4gIG1hcmdpbjogMHB4O1xyXG4gIHBhZGRpbmc6IDJweCAxMHB4IDBweCAxMHB4O1xyXG59XHJcblxyXG4uaGVhZGxpbmUgLmxvZ291dCB7XHJcbiAgYm9yZGVyOiBub25lO1xyXG4gIGJhY2tncm91bmQtY29sb3I6ICNjMDEwMTA7XHJcbiAgY29sb3I6ICNlMGUwZTA7XHJcbiAgZm9udC1zdHlsZTogMTNweDtcclxuICBmb250LXdlaWdodDogNTAwO1xyXG4gIGJvcmRlci1yYWRpdXM6IDJweDtcclxuICBsaW5lLWhlaWdodDogMTNweDtcclxuICBwYWRkaW5nOiAxMHB4IDE0cHg7XHJcbiAgbWFyZ2luOiAwcHggNDVweCAwcHggMjBweDtcclxufVxyXG4iXX0= */"] });
-
-
-/***/ }),
-
-/***/ 7735:
-/*!**************************************************************!*\
-  !*** ./src/app/layout/portal-layout/portal-layout.module.ts ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PortalLayoutModule": () => (/* binding */ PortalLayoutModule)
-/* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 6362);
-/* harmony import */ var _portal_layout_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./portal-layout.component */ 1151);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 2816);
-/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/dialog */ 6991);
-/* harmony import */ var _confirm_modal_confirm_modal_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./confirm-modal/confirm-modal.component */ 8782);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 3184);
-
-
-
-
-
-
-class PortalLayoutModule {
-}
-PortalLayoutModule.ɵfac = function PortalLayoutModule_Factory(t) { return new (t || PortalLayoutModule)(); };
-PortalLayoutModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineNgModule"]({ type: PortalLayoutModule });
-PortalLayoutModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjector"]({ imports: [[
-            _angular_common__WEBPACK_IMPORTED_MODULE_3__.CommonModule,
-            _angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule,
-            _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__.MatDialogModule
-        ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵsetNgModuleScope"](PortalLayoutModule, { declarations: [_portal_layout_component__WEBPACK_IMPORTED_MODULE_0__.PortalLayoutComponent,
-        _confirm_modal_confirm_modal_component__WEBPACK_IMPORTED_MODULE_1__.ConfirmModalComponent], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.CommonModule,
-        _angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule,
-        _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__.MatDialogModule], exports: [_confirm_modal_confirm_modal_component__WEBPACK_IMPORTED_MODULE_1__.ConfirmModalComponent] }); })();
-
-
-/***/ }),
-
-/***/ 3349:
-/*!*************************************************!*\
-  !*** ./src/app/queue/services/queue.service.ts ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "QueueService": () => (/* binding */ QueueService)
-/* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 2218);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 4139);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ 6942);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ 522);
-/* harmony import */ var src_lib_date_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/lib/date-helper */ 5145);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_lib_api_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/lib/api-client */ 4586);
-/* harmony import */ var _services_websocket_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/websocket.service */ 5608);
-
-
-
-
-
-
-class QueueService {
-    constructor(api, socket) {
-        this.api = api;
-        this.socket = socket;
-        this._queues = [];
-        this._oncreated = new rxjs__WEBPACK_IMPORTED_MODULE_3__.Subject();
-        this._onremoved = new rxjs__WEBPACK_IMPORTED_MODULE_3__.Subject();
-        this._onupdated = new rxjs__WEBPACK_IMPORTED_MODULE_3__.Subject();
-    }
-    get queues() { return this._queues; }
-    get oncreated() { return this._oncreated; }
-    get onremoved() { return this._onremoved; }
-    get onupdated() { return this._onupdated; }
-    list() {
-        return this.api.get('/queue/list')
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    listSummary() {
-        return this.api.get('/queue/list-names')
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    getManagers() {
-        return this.api.get('/queue/managers')
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    get(name) {
-        return this.api.get('/queue/get?name=' + name)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    getGraph(name, resolution) {
-        let url = '/queue/graph?resolution=' + resolution;
-        if (name != null && name.length > 0) {
-            url += '&name=' + name;
-        }
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_5__.of)(this)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.mergeMap)(() => this.api.get(url)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (!response.success)
-                return null;
-            let result = {
-                store: {
-                    n: response.data.name,
-                    r: response.data.resolution,
-                    d: response.data.store
-                },
-                stream: {
-                    n: response.data.name,
-                    r: response.data.resolution,
-                    d: response.data.stream
-                }
-            };
-            result.store.labels = src_lib_date_helper__WEBPACK_IMPORTED_MODULE_0__.DateHelper.createLabels(result.store.d.map(x => x.u));
-            result.stream.labels = src_lib_date_helper__WEBPACK_IMPORTED_MODULE_0__.DateHelper.createLabels(result.stream.d.map(x => x.u));
-            return result;
-        }))
-            .toPromise();
-    }
-    create(model) {
-        return this.api.post('/queue/create', model)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    setOption(queueName, optionName, value) {
-        let model = {
-            queue: queueName,
-            name: optionName,
-            value: value
-        };
-        return this.api.put('/queue/option', model)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    push(message) {
-        return this.api.post('/queue/push', message)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    read(name) {
-        return this.api.get('/queue/read?name=' + name)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    consume(name) {
-        return this.api.get('/queue/consume?name=' + name)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    status(name, status) {
-        let form = new FormData();
-        form.append('name', name);
-        form.append('status', status);
-        return this.api.putForm('/queue/status', form)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    clear(name) {
-        let form = new FormData();
-        form.append('name', name);
-        return this.api.putForm('/queue/clear', form)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    delete(name) {
-        return this.api.delete('/queue/delete?name=' + name)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    move(name, target) {
-        let form = new FormData();
-        form.append('name', name);
-        form.append('target', target);
-        return this.api.postForm('/queue/move-messages', form)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    resetStats(name) {
-        return this.api.putForm('/queue/reset-stats', null)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-}
-QueueService.ɵfac = function QueueService_Factory(t) { return new (t || QueueService)(_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵinject"](src_lib_api_client__WEBPACK_IMPORTED_MODULE_1__.ApiClient), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵinject"](_services_websocket_service__WEBPACK_IMPORTED_MODULE_2__.WebsocketService)); };
-QueueService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineInjectable"]({ token: QueueService, factory: QueueService.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
-/***/ 2340:
-/*!*****************************************!*\
-  !*** ./src/environments/environment.ts ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "environment": () => (/* binding */ environment)
-/* harmony export */ });
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-const environment = {
-    production: false,
-    version: '6.6.2',
-    api: {
-        url: 'http://localhost:15400/api',
-        websocket: 'ws://localhost:15400/'
-    },
-    storage: {
-        token: 'token'
-    }
-};
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
-
-
-/***/ }),
-
-/***/ 9439:
-/*!*******************************************!*\
-  !*** ./src/interceptors/session.guard.ts ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SessionGuard": () => (/* binding */ SessionGuard)
-/* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_services_session_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/services/session.service */ 5920);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 2816);
-
-
-
-class SessionGuard {
-    constructor(session, router) {
-        this.session = session;
-        this.router = router;
-    }
-    canActivate(next, state) {
-        let user = this.session.get();
-        if (user == null) {
-            this.router.navigateByUrl('/login');
-            return false;
-        }
-        let now = new Date().getTime();
-        if (user.expiration < now) {
-            this.router.navigateByUrl('/login');
-            return false;
-        }
-        return true;
-    }
-}
-SessionGuard.ɵfac = function SessionGuard_Factory(t) { return new (t || SessionGuard)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](src_services_session_service__WEBPACK_IMPORTED_MODULE_0__.SessionService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.Router)); };
-SessionGuard.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: SessionGuard, factory: SessionGuard.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
-/***/ 4586:
-/*!*******************************!*\
-  !*** ./src/lib/api-client.ts ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApiClient": () => (/* binding */ ApiClient)
-/* harmony export */ });
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 8784);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ 3910);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ 522);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ 6942);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ 7418);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs/operators */ 5050);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs/operators */ 9151);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 4139);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 2340);
-/* harmony import */ var src_models_api_response__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/models/api-response */ 6501);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_services_session_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/services/session.service */ 5920);
-
-
-
-
-
-
-
-
-class ApiClient {
-    constructor(http, session) {
-        this.http = http;
-        this.session = session;
-    }
-    getOptions(contentType) {
-        let user = this.session.get();
-        let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpHeaders();
-        headers = headers.set('Access-Control-Allow-Origin', '*');
-        if (contentType != null)
-            headers = headers.set('Content-Type', contentType);
-        if (user != null && user.token != null && user.token.length > 0)
-            headers = headers.set('Authorization', 'Bearer ' + user.token);
-        let httpOptions = {
-            headers: headers,
-            withCredentials: true
-        };
-        return httpOptions;
-    }
-    get(url, progress) {
-        if (progress)
-            return this.requestProgress(true, 'GET', url, null, progress);
-        return this.request(true, 'GET', url, null);
-    }
-    delete(url, model, progress) {
-        if (progress)
-            return this.requestProgress(true, 'DELETE', url, JSON.stringify(model), progress);
-        return this.request(true, 'DELETE', url, JSON.stringify(model));
-    }
-    post(url, model, progress) {
-        if (progress)
-            return this.requestProgress(true, 'POST', url, JSON.stringify(model), progress);
-        return this.request(true, 'POST', url, JSON.stringify(model));
-    }
-    put(url, model, progress) {
-        if (progress)
-            return this.requestProgress(true, 'PUT', url, JSON.stringify(model), progress);
-        return this.request(true, 'PUT', url, JSON.stringify(model));
-    }
-    patch(url, model, progress) {
-        if (progress)
-            return this.requestProgress(true, 'PATCH', url, JSON.stringify(model), progress);
-        return this.request(true, 'PATCH', url, JSON.stringify(model));
-    }
-    postForm(url, form, progress) {
-        if (progress)
-            return this.requestProgress(false, 'POST', url, form, progress);
-        return this.request(false, 'POST', url, form);
-    }
-    putForm(url, form, progress) {
-        if (progress)
-            return this.requestProgress(false, 'PUT', url, form, progress);
-        return this.request(false, 'PUT', url, form);
-    }
-    patchForm(url, form, progress) {
-        if (progress)
-            return this.requestProgress(false, 'PATCH', url, form, progress);
-        return this.request(false, 'PATCH', url, form);
-    }
-    request(json, method, url, body) {
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)({
-            json: json,
-            method: method,
-            url: url,
-            body: body
-        }).pipe(
-        //subscribe only once
-        (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_5__.take)(1), 
-        //prepares the request
-        (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.mergeMap)(input => {
-            let options = this.getOptions(input.json ? 'application/json' : null);
-            let fullUrl = input.url;
-            if (fullUrl.indexOf('//') < 0) {
-                let url_slash = '';
-                if (!fullUrl.startsWith('/'))
-                    url_slash = '/';
-                fullUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.api.url + url_slash + fullUrl;
-            }
-            switch (method) {
-                case 'GET':
-                    return this.http.get(fullUrl, options);
-                case 'DELETE':
-                    return this.http.delete(fullUrl, options);
-                case 'POST':
-                    return this.http.post(fullUrl, body, options);
-                case 'PUT':
-                    return this.http.put(fullUrl, body, options);
-                case 'PATCH':
-                    return this.http.patch(fullUrl, body, options);
-            }
-            return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(null);
-        }), 
-        //gets the response
-        (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.map)(value => {
-            var response = value;
-            let result = new src_models_api_response__WEBPACK_IMPORTED_MODULE_1__.ApiResponse();
-            result.statusCode = 200;
-            result.statusMessage = 'OK';
-            result.data = response;
-            result.success = true;
-            return result;
-        }), 
-        //gets the failed response
-        (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.catchError)(err => {
-            let e = err;
-            let result = new src_models_api_response__WEBPACK_IMPORTED_MODULE_1__.ApiResponse();
-            result.statusCode = e.status;
-            result.statusMessage = e.message;
-            result.error = e.error;
-            result.success = false;
-            if (result.statusCode == 401) {
-                this.session.clear();
-                window.location.href = '/';
-            }
-            return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(result);
-        }));
-    }
-    requestProgress(json, method, url, body, progress) {
-        let finished = false;
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)({
-            json: json,
-            method: method,
-            url: url,
-            body: body
-        }).pipe(
-        //subscribe only once
-        (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_9__.takeWhile)(() => !finished && !progress.canceled), 
-        //prepares the request
-        (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.mergeMap)(input => {
-            let options = this.getOptions(input.json ? 'application/json' : null);
-            options.reportProgress = true;
-            options.observe = 'events';
-            let fullUrl = input.url;
-            if (fullUrl.indexOf('//') < 0) {
-                let url_slash = '';
-                if (!fullUrl.startsWith('/'))
-                    url_slash = '/';
-                fullUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.api.url + url_slash + fullUrl;
-            }
-            switch (method) {
-                case 'GET':
-                    return this.http.get(fullUrl, options);
-                case 'DELETE':
-                    return this.http.delete(fullUrl, options);
-                case 'POST':
-                    return this.http.post(fullUrl, body, options);
-                case 'PUT':
-                    return this.http.put(fullUrl, body, options);
-                case 'PATCH':
-                    return this.http.patch(fullUrl, body, options);
-            }
-            return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(null);
-        }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.map)(value => {
-            if (progress.canceled)
-                throw new Error('file upload canceled');
-            if (value.type == _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpEventType.UploadProgress) {
-                if (progress) {
-                    let num = Math.round(100 * value.loaded / value.total);
-                    progress.progress(num);
-                }
-                return null;
-            }
-            else if (value.type == _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpEventType.Response) {
-                finished = true;
-                return value;
-            }
-            return null;
-        }), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_10__.filter)(value => value != null), 
-        //gets the response
-        (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_7__.map)(value => {
-            var response = value;
-            let result = new src_models_api_response__WEBPACK_IMPORTED_MODULE_1__.ApiResponse();
-            result.statusCode = 200;
-            result.statusMessage = 'OK';
-            result.data = response.body;
-            result.success = true;
-            return result;
-        }), 
-        //gets the failed response
-        (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_8__.catchError)(err => {
-            let e = err;
-            let result = new src_models_api_response__WEBPACK_IMPORTED_MODULE_1__.ApiResponse();
-            result.statusCode = e.status;
-            result.statusMessage = e.message;
-            result.error = e.error;
-            result.success = false;
-            if (result.statusCode == 401)
-                this.session.clear();
-            return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(result);
-        }));
-    }
-    toTransaction(response) {
-        return response.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.mergeMap)(response => {
-            if (response.data != null)
-                return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(response.data);
-            else if (response.error != null)
-                return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(response.error);
-            return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(null);
-        })).toPromise();
-    }
-    toObject(response) {
-        return response.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.mergeMap)(response => {
-            if (response.ok())
-                return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(response.data);
-            return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.of)(null);
-        })).toPromise();
-    }
-}
-ApiClient.ɵfac = function ApiClient_Factory(t) { return new (t || ApiClient)(_angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵinject"](src_services_session_service__WEBPACK_IMPORTED_MODULE_2__.SessionService)); };
-ApiClient.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵdefineInjectable"]({ token: ApiClient, factory: ApiClient.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
-/***/ 2962:
-/*!***********************************!*\
-  !*** ./src/lib/base-component.ts ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "BaseComponent": () => (/* binding */ BaseComponent)
-/* harmony export */ });
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs/operators */ 5050);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 3184);
-
-
-// tslint:disable-next-line:directive-class-suffix
-class BaseComponent {
-    constructor() {
-        this._destroyed = false;
-    }
-    on(observable) {
-        return observable.pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.takeWhile)(() => !this._destroyed));
-    }
-    ngOnDestroy() {
-        this._destroyed = true;
-    }
-}
-BaseComponent.ɵfac = function BaseComponent_Factory(t) { return new (t || BaseComponent)(); };
-BaseComponent.ɵdir = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineDirective"]({ type: BaseComponent });
-
-
-/***/ }),
-
-/***/ 8821:
-/*!**********************************!*\
-  !*** ./src/lib/base64-helper.ts ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Base64Helper": () => (/* binding */ Base64Helper)
-/* harmony export */ });
-class Base64Helper {
-    static encode(plain) {
-        return btoa(encodeURIComponent(plain).replace(/%([0-9A-F]{2})/g, function (match, p1) {
-            return String.fromCharCode(parseInt(p1, 16));
-        }));
-    }
-    static decode(encoded) {
-        // Going backwards: from bytestream, to percent-encoding, to original string.
-        return decodeURIComponent(atob(encoded).split('').map(function (c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-    }
-    static readBearer(token) {
-        let sp = token.split('.');
-        if (sp.length != 3)
-            return null;
-        let decoded = this.decode(sp[1]);
-        return decoded;
-    }
-    static encryptx(plain, full = false) {
-        let n1 = this.randomizeInteger(10, 40);
-        let n2 = this.randomizeInteger(10, 99);
-        let start = this._keyStr.substr(n1, 1);
-        let n3 = this.randomizeInteger(10, 40);
-        let n4 = this.randomizeInteger(10, 99);
-        let end = this._keyStr.substr(n3, 1);
-        let str;
-        if (full)
-            str = plain;
-        else
-            str = plain.length > 15 ? plain.substr(0, 15) : plain;
-        return start + n2 + this.encode(str).replace('=', '') + end + n4;
-    }
-    static decryptx(cipher) {
-        if (cipher.length < 7)
-            return null;
-        let encoded = cipher.substr(3, cipher.length - 6);
-        if (encoded.length % 2 == 1)
-            encoded += '=';
-        return this.decode(encoded);
-    }
-    static randomizeInteger(min, max) {
-        if (max == null) {
-            max = (min == null ? Number.MAX_SAFE_INTEGER : min);
-            min = 0;
-        }
-        min = Math.ceil(min); // inclusive min
-        max = Math.floor(max); // exclusive max
-        if (min > max - 1) {
-            throw new Error("Incorrect arguments.");
-        }
-        return min + Math.floor((max - min) * Math.random());
-    }
-}
-Base64Helper._keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-
-
-/***/ }),
-
-/***/ 5145:
-/*!********************************!*\
-  !*** ./src/lib/date-helper.ts ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DateHelper": () => (/* binding */ DateHelper)
-/* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common */ 6362);
-
-class DateHelper {
-    /** Create Time Labels */
-    static createTimeLabels(count, scaleSeconds, reverse) {
-        let labels = [];
-        let seconds = new Date().getTime() / 1000;
-        if (!reverse) {
-            seconds -= scaleSeconds * count;
-        }
-        for (let i = 0; i < count; i++) {
-            labels.push(this.findTimeFromUnixSeconds(seconds));
-            if (reverse) {
-                seconds -= scaleSeconds;
-            }
-            else {
-                seconds += scaleSeconds;
-            }
-        }
-        return labels;
-    }
-    /** Create Time Labels. Each time must be in unix seconds. */
-    static createLabels(times) {
-        let labels = [];
-        for (let i = 0; i < times.length; i++) {
-            labels.push(this.findTimeFromUnixSeconds(times[i]));
-        }
-        return labels;
-    }
-    /** Returns HH:mm:ss string from unix time in seconds */
-    static findTimeFromUnixSeconds(unix) {
-        let date = new Date(unix * 1000);
-        return this._pipe.transform(date, 'HH:mm:ss');
-    }
-}
-DateHelper._pipe = new _angular_common__WEBPACK_IMPORTED_MODULE_0__.DatePipe('en-US');
-
-
-/***/ }),
-
-/***/ 4431:
-/*!*********************!*\
-  !*** ./src/main.ts ***!
-  \*********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ 318);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app/app.module */ 6747);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./environments/environment */ 2340);
-
-
-
-
-if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.production) {
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.enableProdMode)();
-}
-_angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__.platformBrowser().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_0__.AppModule)
-    .catch(err => console.error(err));
-
-
-/***/ }),
-
-/***/ 6501:
-/*!************************************!*\
-  !*** ./src/models/api-response.ts ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApiResponse": () => (/* binding */ ApiResponse)
-/* harmony export */ });
-class ApiResponse {
-    ok() {
-        return this.success && this.data;
-    }
-    getErrorMessage() {
-        if (this.statusMessage)
-            return this.statusMessage;
-        return null;
-    }
-}
-
-
-/***/ }),
-
-/***/ 2163:
-/*!************************************!*\
-  !*** ./src/models/session-user.ts ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SessionUser": () => (/* binding */ SessionUser)
-/* harmony export */ });
-class SessionUser {
-}
-
-
-/***/ }),
-
-/***/ 7334:
-/*!****************************************!*\
-  !*** ./src/services/client.service.ts ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ClientService": () => (/* binding */ ClientService)
-/* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 2218);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 4139);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ 6942);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ 522);
-/* harmony import */ var src_lib_date_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/lib/date-helper */ 5145);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_lib_api_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/lib/api-client */ 4586);
-/* harmony import */ var _websocket_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./websocket.service */ 5608);
-
-
-
-
-
-
-class ClientService {
-    constructor(api, socket) {
-        this.api = api;
-        this.socket = socket;
-        this._clients = [];
-        this._onconnected = new rxjs__WEBPACK_IMPORTED_MODULE_3__.Subject();
-        this._ondisconnected = new rxjs__WEBPACK_IMPORTED_MODULE_3__.Subject();
-    }
-    get clients() { return this._clients; }
-    get onconnected() { return this._onconnected; }
-    get ondisconnected() { return this._ondisconnected; }
-    list() {
-        return this.api.get('/client/list')
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (response.ok()) {
-                this._clients = response.data;
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    refresh() {
-        return null;
-    }
-    remove(client) {
-        return null;
-    }
-    getGraph(name, resolution) {
-        let url = '/client/graph?resolution=' + resolution;
-        if (name != null && name.length > 0) {
-            url += '&name=' + name;
-        }
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_5__.of)(this)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_6__.mergeMap)(() => this.api.get(url)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.map)(response => {
-            if (!response.success)
-                return null;
-            let result = response.data;
-            result.labels = src_lib_date_helper__WEBPACK_IMPORTED_MODULE_0__.DateHelper.createLabels(result.d.map(x => x.u));
-            return result;
-        }))
-            .toPromise();
-    }
-}
-ClientService.ɵfac = function ClientService_Factory(t) { return new (t || ClientService)(_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵinject"](src_lib_api_client__WEBPACK_IMPORTED_MODULE_1__.ApiClient), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵinject"](_websocket_service__WEBPACK_IMPORTED_MODULE_2__.WebsocketService)); };
-ClientService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineInjectable"]({ token: ClientService, factory: ClientService.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
-/***/ 5037:
-/*!*******************************************!*\
-  !*** ./src/services/dashboard.service.ts ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DashboardService": () => (/* binding */ DashboardService)
-/* harmony export */ });
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ 6942);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_lib_api_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/lib/api-client */ 4586);
-
-
-
-class DashboardService {
-    constructor(api) {
-        this.api = api;
-    }
-    /** Refreshes graph data */
-    load() {
-        return this.api.get('/dashboard/stats')
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-}
-DashboardService.ɵfac = function DashboardService_Factory(t) { return new (t || DashboardService)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](src_lib_api_client__WEBPACK_IMPORTED_MODULE_0__.ApiClient)); };
-DashboardService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({ token: DashboardService, factory: DashboardService.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
-/***/ 1632:
-/*!**********************************************!*\
-  !*** ./src/services/horse-router.service.ts ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "HorseRouterService": () => (/* binding */ HorseRouterService)
-/* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 4139);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 6942);
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ 522);
-/* harmony import */ var src_lib_date_helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/lib/date-helper */ 5145);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_lib_api_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/lib/api-client */ 4586);
-
-
-
-
-
-class HorseRouterService {
-    constructor(api) {
-        this.api = api;
-    }
-    list() {
-        return this.api.get('/router/list')
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)(response => {
-            if (response.ok()) {
-                this._routers = response.data;
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    create(model) {
-        return this.api.post('/router/create', model)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    get(name) {
-        return this.api.get('/router/get?name=' + name)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    getGraph(name, resolution) {
-        let url = '/router/graph?resolution=' + resolution;
-        if (name != null && name.length > 0) {
-            url += '&name=' + name;
-        }
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_3__.of)(this)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_4__.mergeMap)(() => this.api.get(url)), (0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)(response => {
-            if (!response.success)
-                return null;
-            let result = response.data;
-            result.labels = src_lib_date_helper__WEBPACK_IMPORTED_MODULE_0__.DateHelper.createLabels(result.d.map(x => x.u));
-            return result;
-        }))
-            .toPromise();
-    }
-    remove(name) {
-        return this.api.delete('/router/remove?name=' + name)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    addBinding(model) {
-        return this.api.post('/router/binding', model)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-    removeBinding(router, binding) {
-        return this.api.delete('/router/binding?routerName=' + router + '&bindingName=' + binding)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)(response => {
-            if (response.ok()) {
-                return response.data;
-            }
-            return null;
-        }))
-            .toPromise();
-    }
-}
-HorseRouterService.ɵfac = function HorseRouterService_Factory(t) { return new (t || HorseRouterService)(_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵinject"](src_lib_api_client__WEBPACK_IMPORTED_MODULE_1__.ApiClient)); };
-HorseRouterService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjectable"]({ token: HorseRouterService, factory: HorseRouterService.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
-/***/ 4461:
-/*!***************************************!*\
-  !*** ./src/services/login.service.ts ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LoginService": () => (/* binding */ LoginService)
-/* harmony export */ });
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 6942);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 3184);
-/* harmony import */ var src_lib_api_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/lib/api-client */ 4586);
-/* harmony import */ var _session_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session.service */ 5920);
-
-
-
-
-class LoginService {
-    constructor(api, session) {
-        this.api = api;
-        this.session = session;
-    }
-    login(username, password) {
-        let model = {
-            username: username,
-            password: password
-        };
-        return this.api.post('/user/login', model)
-            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.map)(response => {
-            this.session.clear();
-            if (response.ok()) {
-                if (response.data.ok) {
-                    this.session.set(response.data);
-                    return this.session.get();
-                }
-            }
-            return this.session.get();
-        }))
-            .toPromise();
-    }
-}
-LoginService.ɵfac = function LoginService_Factory(t) { return new (t || LoginService)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵinject"](src_lib_api_client__WEBPACK_IMPORTED_MODULE_0__.ApiClient), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵinject"](_session_service__WEBPACK_IMPORTED_MODULE_1__.SessionService)); };
-LoginService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjectable"]({ token: LoginService, factory: LoginService.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
-/***/ 5920:
-/*!*****************************************!*\
-  !*** ./src/services/session.service.ts ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SessionService": () => (/* binding */ SessionService)
-/* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 2218);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 3491);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 2340);
-/* harmony import */ var src_lib_base64_helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/lib/base64-helper */ 8821);
-/* harmony import */ var src_models_session_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/models/session-user */ 2163);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 3184);
-
-
-
-
-
-class SessionService {
-    constructor() {
-        this._current = null;
-        this._changed = new rxjs__WEBPACK_IMPORTED_MODULE_3__.Subject();
-    }
-    get onchanged() {
-        return this._changed.pipe();
-    }
-    run() {
-        this._current = this.read();
-        this._changed = new rxjs__WEBPACK_IMPORTED_MODULE_3__.Subject();
-        (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.interval)(1000)
-            .subscribe(() => {
-            this._current = this.read();
-        });
-    }
-    set(login) {
-        localStorage.setItem(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.storage.token, login.token);
-        let user = this.deserialize(login.token);
-        this._current = user;
-        this._changed.next(user);
-        return user;
-    }
-    refresh(token) {
-        let current = localStorage.getItem(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.storage.token);
-        if (!current)
-            return;
-        localStorage.setItem(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.storage.token, token);
-    }
-    clear() {
-        let old = this._current;
-        localStorage.removeItem(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.storage.token);
-        this._current = null;
-        if (this._changed && old != null)
-            this._changed.next(null);
-    }
-    get() {
-        if (this._current)
-            return this._current;
-        this._current = this.read();
-        return this._current;
-    }
-    read() {
-        try {
-            let str = localStorage.getItem(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.storage.token);
-            if (str == null) {
-                if (this._current && this._changed)
-                    this._changed.next(null);
-                return null;
-            }
-            let user = this.deserialize(str);
-            if (!this._current && this._changed && user)
-                this._changed.next(user);
-            this._current = user;
-            return user;
-        }
-        catch (_a) {
-            localStorage.removeItem(src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.storage.token);
-            return null;
-        }
-    }
-    deserialize(token) {
-        let token_info = JSON.parse(src_lib_base64_helper__WEBPACK_IMPORTED_MODULE_1__.Base64Helper.readBearer(token));
-        let user = new src_models_session_user__WEBPACK_IMPORTED_MODULE_2__.SessionUser();
-        user.token = token;
-        user.id = token_info.sub;
-        user.name = token_info.name;
-        user.expiration = parseInt(token_info.exp) * 1000;
-        return user;
-    }
-}
-SessionService.ɵfac = function SessionService_Factory(t) { return new (t || SessionService)(); };
-SessionService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineInjectable"]({ token: SessionService, factory: SessionService.ɵfac, providedIn: 'root' });
-
-
-/***/ }),
-
-/***/ 5608:
-/*!*******************************************!*\
-  !*** ./src/services/websocket.service.ts ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "WebClientStatus": () => (/* binding */ WebClientStatus),
-/* harmony export */   "WebsocketService": () => (/* binding */ WebsocketService)
-/* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 2218);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 3184);
-
-
-var WebClientStatus;
-(function (WebClientStatus) {
-    WebClientStatus[WebClientStatus["Disconnected"] = 0] = "Disconnected";
-    WebClientStatus[WebClientStatus["Connecting"] = 1] = "Connecting";
-    WebClientStatus[WebClientStatus["Connected"] = 2] = "Connected";
-})(WebClientStatus || (WebClientStatus = {}));
-class WebsocketService {
-    constructor() {
-        this._onconnected = new rxjs__WEBPACK_IMPORTED_MODULE_0__.Subject();
-        this._ondisconnected = new rxjs__WEBPACK_IMPORTED_MODULE_0__.Subject();
-        this._onmessage = new rxjs__WEBPACK_IMPORTED_MODULE_0__.Subject();
-    }
-    get onconnected() { return this._onconnected; }
-    get ondisconnected() { return this._ondisconnected; }
-    get onmessage() { return this._onmessage; }
-    get status() { return this._status; }
-    connect(token) {
-        //const host = environment.api.websocket + '?token=' + token;
-        const host = 'ws://' + location.host + '?token=' + token;
-        this._socket = new WebSocket(host);
-        this._socket.onopen = (ev) => {
-            this._status = WebClientStatus.Connected;
-            this._onconnected.next(this);
-        };
-        this._socket.onclose = (ev) => {
-            this._status = WebClientStatus.Disconnected;
-            this._ondisconnected.next(this);
-        };
-        this._socket.onmessage = this.messageReceived.bind(this);
-    }
-    send(type, model) {
-        if (!this._socket || this._status !== WebClientStatus.Connected)
-            return false;
-        const message = {
-            type,
-            payload: model
-        };
-        const str = JSON.stringify(message);
-        this._socket.send(str);
-        return true;
-    }
-    disconnect() {
-        if (this._socket != null) {
-            try {
-                this._socket.close();
-            }
-            catch (_a) { }
-            this._status = WebClientStatus.Disconnected;
-            this._socket = null;
-        }
-    }
-    messageReceived(event) {
-        const message = JSON.parse(event.data);
-        if (message == null || message.type == null || message.payload == null)
-            return;
-        this._onmessage.next(message);
-    }
-}
-WebsocketService.ɵfac = function WebsocketService_Factory(t) { return new (t || WebsocketService)(); };
-WebsocketService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: WebsocketService, factory: WebsocketService.ɵfac, providedIn: 'root' });
-
-
-/***/ })
-
-},
-/******/ __webpack_require__ => { // webpackRuntimeModules
-/******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["vendor"], () => (__webpack_exec__(4431)));
-/******/ var __webpack_exports__ = __webpack_require__.O();
-/******/ }
-]);
-//# sourceMappingURL=main.js.map
+"use strict";(self.webpackChunkweb=self.webpackChunkweb||[]).push([[179],{3887:(Le,he,S)=>{S.d(he,{Is:()=>G,vT:()=>$});var D=S(6435),h=S(9808);
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const j=new D.OlP("cdk-dir-doc",{providedIn:"root",factory:function Q(){return(0,D.f3M)(h.K0)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */});let G=(()=>{class U{constructor(L){if(this.value="ltr",this.change=new D.vpe,L){const X=L.documentElement?L.documentElement.dir:null,ie=(L.body?L.body.dir:null)||X;this.value="ltr"===ie||"rtl"===ie?ie:"ltr"}}ngOnDestroy(){this.change.complete()}}return U.\u0275fac=function(L){return new(L||U)(D.LFG(j,8))},U.\u0275prov=(0,D.Yz7)({factory:function(){return new U((0,D.LFG)(j,8))},token:U,providedIn:"root"}),U})(),$=(()=>{class U{}return U.\u0275fac=function(L){return new(L||U)},U.\u0275mod=D.oAB({type:U}),U.\u0275inj=D.cJS({}),U})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */,4865:(Le,he,S)=>{S.d(he,{Eq:()=>G,HM:()=>H,Ig:()=>h,fI:()=>$,su:()=>j});var D=S(6435);
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function h(z){return null!=z&&"false"!=`${z}`}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function j(z,L=0){return function Q(z){return!isNaN(parseFloat(z))&&!isNaN(Number(z))}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(z)?Number(z):L}function G(z){return Array.isArray(z)?z:[z]}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function H(z){return null==z?"":"string"==typeof z?z:`${z}px`}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function $(z){return z instanceof D.SBq?z.nativeElement:z}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */,6663:(Le,he,S)=>{S.d(he,{uw:()=>Wo,H8:()=>Ol,ZT:()=>Al,xY:()=>Il,Is:()=>Yo,uh:()=>Us});var D=S(4865),h=S(6435),j=S(8929),Q=S(1086),G=S(2916),H=S(3753),$=S(6686),z=S(2268);new class L extends z.v{flush(a){this.active=!0,this.scheduled=void 0;const{actions:s}=this;let d,w=-1,N=s.length;a=a||s.shift();do{if(d=a.execute(a.state,a.delay))break}while(++w<N&&(a=s.shift()));if(this.active=!1,d){for(;++w<N&&(a=s.shift());)a.unsubscribe();throw d}}}(class U extends $.o{constructor(a,s){super(a,s),this.scheduler=a,this.work=s}requestAsyncId(a,s,d=0){return null!==d&&d>0?super.requestAsyncId(a,s,d):(a.actions.push(this),a.scheduled||(a.scheduled=requestAnimationFrame(()=>a.flush(null))))}recycleAsyncId(a,s,d=0){if(null!==d&&d>0||null===d&&this.delay>0)return super.recycleAsyncId(a,s,d);0===a.actions.length&&(cancelAnimationFrame(s),a.scheduled=void 0)}});let ie=1;const ye=Promise.resolve(),De={};function pe(m){return m in De&&(delete De[m],!0)}const fe={setImmediate(m){const a=ie++;return De[a]=!0,ye.then(()=>pe(a)&&m()),a},clearImmediate(m){pe(m)}};new class Ue extends z.v{flush(a){this.active=!0,this.scheduled=void 0;const{actions:s}=this;let d,w=-1,N=s.length;a=a||s.shift();do{if(d=a.execute(a.state,a.delay))break}while(++w<N&&(a=s.shift()));if(this.active=!1,d){for(;++w<N&&(a=s.shift());)a.unsubscribe();throw d}}}(class Ye extends $.o{constructor(a,s){super(a,s),this.scheduler=a,this.work=s}requestAsyncId(a,s,d=0){return null!==d&&d>0?super.requestAsyncId(a,s,d):(a.actions.push(this),a.scheduled||(a.scheduled=fe.setImmediate(a.flush.bind(a,null))))}recycleAsyncId(a,s,d=0){if(null!==d&&d>0||null===d&&this.delay>0)return super.recycleAsyncId(a,s,d);0===a.actions.length&&(fe.clearImmediate(s),a.scheduled=void 0)}});var Pe=S(2654);S(5778);var Nt=S(353),Tt=S(1177);class Ut{constructor(a){this.durationSelector=a}call(a,s){return s.subscribe(new ft(a,this.durationSelector))}}class ft extends Tt.Ds{constructor(a,s){super(a),this.durationSelector=s,this.hasValue=!1}_next(a){if(this.value=a,this.hasValue=!0,!this.throttled){let s;try{const{durationSelector:w}=this;s=w(a)}catch(w){return this.destination.error(w)}const d=(0,Tt.ft)(s,new Tt.IY(this));!d||d.closed?this.clearThrottle():this.add(this.throttled=d)}}clearThrottle(){const{value:a,hasValue:s,throttled:d}=this;d&&(this.remove(d),this.throttled=void 0,d.unsubscribe()),s&&(this.value=void 0,this.hasValue=!1,this.destination.next(a))}notifyNext(){this.clearThrottle()}notifyComplete(){this.clearThrottle()}}var _e=S(4241),Re=S(2866);function un(m){const{index:a,period:s,subscriber:d}=m;if(d.next(a),!d.closed){if(-1===s)return d.complete();m.index=a+1,this.schedule(m,s)}}function Ln(m,a=Nt.P){return function lt(m){return function(s){return s.lift(new Ut(m))}}(()=>function mt(m=0,a,s){let d=-1;return(0,_e.k)(a)?d=Number(a)<1?1:Number(a):(0,Re.K)(a)&&(s=a),(0,Re.K)(s)||(s=Nt.P),new G.y(w=>{const N=(0,_e.k)(m)?m:+m-s.now();return s.schedule(un,N,{index:0,period:d,subscriber:w})})}(m,a))}var fr=S(2198),Or=S(7625),Yr=S(1059);S(3489),S(7545),new class pn extends z.v{}(class Yt extends $.o{constructor(a,s){super(a,s),this.scheduler=a,this.work=s}schedule(a,s=0){return s>0?super.schedule(a,s):(this.delay=s,this.state=a,this.scheduler.flush(this),this)}execute(a,s){return s>0||this.closed?super.execute(a,s):this._execute(a,s)}requestAsyncId(a,s,d=0){return null!==d&&d>0||null===d&&this.delay>0?super.requestAsyncId(a,s,d):a.flush(this)}}),S(9312),S(5279),S(5283);var me=S(9808);
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let oe;try{oe="undefined"!=typeof Intl&&Intl.v8BreakIterator}catch(m){oe=!1}let Kt,jt,tt,ee=(()=>{class m{constructor(s){this._platformId=s,this.isBrowser=this._platformId?(0,me.NF)(this._platformId):"object"==typeof document&&!!document,this.EDGE=this.isBrowser&&/(edge)/i.test(navigator.userAgent),this.TRIDENT=this.isBrowser&&/(msie|trident)/i.test(navigator.userAgent),this.BLINK=this.isBrowser&&!(!window.chrome&&!oe)&&"undefined"!=typeof CSS&&!this.EDGE&&!this.TRIDENT,this.WEBKIT=this.isBrowser&&/AppleWebKit/i.test(navigator.userAgent)&&!this.BLINK&&!this.EDGE&&!this.TRIDENT,this.IOS=this.isBrowser&&/iPad|iPhone|iPod/.test(navigator.userAgent)&&!("MSStream"in window),this.FIREFOX=this.isBrowser&&/(firefox|minefield)/i.test(navigator.userAgent),this.ANDROID=this.isBrowser&&/android/i.test(navigator.userAgent)&&!this.TRIDENT,this.SAFARI=this.isBrowser&&/safari/i.test(navigator.userAgent)&&this.WEBKIT}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(h.Lbi))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(h.Lbi))},token:m,providedIn:"root"}),m})(),Ie=(()=>{class m{}return m.\u0275fac=function(s){return new(s||m)},m.\u0275mod=h.oAB({type:m}),m.\u0275inj=h.cJS({}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function xt(m){return function bt(){if(null==Kt&&"undefined"!=typeof window)try{window.addEventListener("test",null,Object.defineProperty({},"passive",{get:()=>Kt=!0}))}finally{Kt=Kt||!1}return Kt}()?m:!!m.capture}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function et(){if(null==jt){if("object"!=typeof document||!document||"function"!=typeof Element||!Element)return jt=!1,jt;if("scrollBehavior"in document.documentElement.style)jt=!0;else{const m=Element.prototype.scrollTo;jt=!!m&&!/\{\s*\[native code\]\s*\}/.test(m.toString())}}return jt}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+var Ct=S(3887);
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let yt=(()=>{class m{constructor(s,d,w){this._ngZone=s,this._platform=d,this._scrolled=new j.xQ,this._globalSubscription=null,this._scrolledCount=0,this.scrollContainers=new Map,this._document=w}register(s){this.scrollContainers.has(s)||this.scrollContainers.set(s,s.elementScrolled().subscribe(()=>this._scrolled.next(s)))}deregister(s){const d=this.scrollContainers.get(s);d&&(d.unsubscribe(),this.scrollContainers.delete(s))}scrolled(s=20){return this._platform.isBrowser?new G.y(d=>{this._globalSubscription||this._addGlobalListener();const w=s>0?this._scrolled.pipe(Ln(s)).subscribe(d):this._scrolled.subscribe(d);return this._scrolledCount++,()=>{w.unsubscribe(),this._scrolledCount--,this._scrolledCount||this._removeGlobalListener()}}):(0,Q.of)()}ngOnDestroy(){this._removeGlobalListener(),this.scrollContainers.forEach((s,d)=>this.deregister(d)),this._scrolled.complete()}ancestorScrolled(s,d){const w=this.getAncestorScrollContainers(s);return this.scrolled(d).pipe((0,fr.h)(N=>!N||w.indexOf(N)>-1))}getAncestorScrollContainers(s){const d=[];return this.scrollContainers.forEach((w,N)=>{this._scrollableContainsElement(N,s)&&d.push(N)}),d}_getWindow(){return this._document.defaultView||window}_scrollableContainsElement(s,d){let w=(0,D.fI)(d),N=s.getElementRef().nativeElement;do{if(w==N)return!0}while(w=w.parentElement);return!1}_addGlobalListener(){this._globalSubscription=this._ngZone.runOutsideAngular(()=>{const s=this._getWindow();return(0,H.R)(s.document,"scroll").subscribe(()=>this._scrolled.next())})}_removeGlobalListener(){this._globalSubscription&&(this._globalSubscription.unsubscribe(),this._globalSubscription=null)}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(h.R0b),h.LFG(ee),h.LFG(me.K0,8))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(h.R0b),(0,h.LFG)(ee),(0,h.LFG)(me.K0,8))},token:m,providedIn:"root"}),m})(),dn=(()=>{class m{constructor(s,d,w){this._platform=s,this._change=new j.xQ,this._changeListener=N=>{this._change.next(N)},this._document=w,d.runOutsideAngular(()=>{if(s.isBrowser){const N=this._getWindow();N.addEventListener("resize",this._changeListener),N.addEventListener("orientationchange",this._changeListener)}this.change().subscribe(()=>this._updateViewportSize())})}ngOnDestroy(){if(this._platform.isBrowser){const s=this._getWindow();s.removeEventListener("resize",this._changeListener),s.removeEventListener("orientationchange",this._changeListener)}this._change.complete()}getViewportSize(){this._viewportSize||this._updateViewportSize();const s={width:this._viewportSize.width,height:this._viewportSize.height};return this._platform.isBrowser||(this._viewportSize=null),s}getViewportRect(){const s=this.getViewportScrollPosition(),{width:d,height:w}=this.getViewportSize();return{top:s.top,left:s.left,bottom:s.top+w,right:s.left+d,height:w,width:d}}getViewportScrollPosition(){if(!this._platform.isBrowser)return{top:0,left:0};const s=this._document,d=this._getWindow(),w=s.documentElement,N=w.getBoundingClientRect();return{top:-N.top||s.body.scrollTop||d.scrollY||w.scrollTop||0,left:-N.left||s.body.scrollLeft||d.scrollX||w.scrollLeft||0}}change(s=20){return s>0?this._change.pipe(Ln(s)):this._change}_getWindow(){return this._document.defaultView||window}_updateViewportSize(){const s=this._getWindow();this._viewportSize=this._platform.isBrowser?{width:s.innerWidth,height:s.innerHeight}:{width:0,height:0}}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(ee),h.LFG(h.R0b),h.LFG(me.K0,8))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(ee),(0,h.LFG)(h.R0b),(0,h.LFG)(me.K0,8))},token:m,providedIn:"root"}),m})(),Zr=(()=>{class m{}return m.\u0275fac=function(s){return new(s||m)},m.\u0275mod=h.oAB({type:m}),m.\u0275inj=h.cJS({}),m})(),gr=(()=>{class m{}return m.\u0275fac=function(s){return new(s||m)},m.\u0275mod=h.oAB({type:m}),m.\u0275inj=h.cJS({imports:[[Ct.vT,Ie,Zr],Ct.vT,Zr]}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class hn{attach(a){return this._attachedHost=a,a.attach(this)}detach(){let a=this._attachedHost;null!=a&&(this._attachedHost=null,a.detach())}get isAttached(){return null!=this._attachedHost}setAttachedHost(a){this._attachedHost=a}}class Fn extends hn{constructor(a,s,d,w){super(),this.component=a,this.viewContainerRef=s,this.injector=d,this.componentFactoryResolver=w}}class on extends hn{constructor(a,s,d){super(),this.templateRef=a,this.viewContainerRef=s,this.context=d}get origin(){return this.templateRef.elementRef}attach(a,s=this.context){return this.context=s,super.attach(a)}detach(){return this.context=void 0,super.detach()}}class mr extends hn{constructor(a){super(),this.element=a instanceof h.SBq?a.nativeElement:a}}class Xt{constructor(){this._isDisposed=!1,this.attachDomPortal=null}hasAttached(){return!!this._attachedPortal}attach(a){return a instanceof Fn?(this._attachedPortal=a,this.attachComponentPortal(a)):a instanceof on?(this._attachedPortal=a,this.attachTemplatePortal(a)):this.attachDomPortal&&a instanceof mr?(this._attachedPortal=a,this.attachDomPortal(a)):void 0}detach(){this._attachedPortal&&(this._attachedPortal.setAttachedHost(null),this._attachedPortal=null),this._invokeDisposeFn()}dispose(){this.hasAttached()&&this.detach(),this._invokeDisposeFn(),this._isDisposed=!0}setDisposeFn(a){this._disposeFn=a}_invokeDisposeFn(){this._disposeFn&&(this._disposeFn(),this._disposeFn=null)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class Nr extends Xt{constructor(a,s,d,w,N){super(),this.outletElement=a,this._componentFactoryResolver=s,this._appRef=d,this._defaultInjector=w,this.attachDomPortal=te=>{const Se=te.element,xe=this._document.createComment("dom-portal");Se.parentNode.insertBefore(xe,Se),this.outletElement.appendChild(Se),this._attachedPortal=te,super.setDisposeFn(()=>{xe.parentNode&&xe.parentNode.replaceChild(Se,xe)})},this._document=N}attachComponentPortal(a){const d=(a.componentFactoryResolver||this._componentFactoryResolver).resolveComponentFactory(a.component);let w;return a.viewContainerRef?(w=a.viewContainerRef.createComponent(d,a.viewContainerRef.length,a.injector||a.viewContainerRef.injector),this.setDisposeFn(()=>w.destroy())):(w=d.create(a.injector||this._defaultInjector),this._appRef.attachView(w.hostView),this.setDisposeFn(()=>{this._appRef.detachView(w.hostView),w.destroy()})),this.outletElement.appendChild(this._getComponentRootNode(w)),this._attachedPortal=a,w}attachTemplatePortal(a){let s=a.viewContainerRef,d=s.createEmbeddedView(a.templateRef,a.context);return d.rootNodes.forEach(w=>this.outletElement.appendChild(w)),d.detectChanges(),this.setDisposeFn(()=>{let w=s.indexOf(d);-1!==w&&s.remove(w)}),this._attachedPortal=a,d}dispose(){super.dispose(),null!=this.outletElement.parentNode&&this.outletElement.parentNode.removeChild(this.outletElement)}_getComponentRootNode(a){return a.hostView.rootNodes[0]}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let Lr=(()=>{class m extends Xt{constructor(s,d,w){super(),this._componentFactoryResolver=s,this._viewContainerRef=d,this._isInitialized=!1,this.attached=new h.vpe,this.attachDomPortal=N=>{const te=N.element,Se=this._document.createComment("dom-portal");N.setAttachedHost(this),te.parentNode.insertBefore(Se,te),this._getRootNode().appendChild(te),this._attachedPortal=N,super.setDisposeFn(()=>{Se.parentNode&&Se.parentNode.replaceChild(te,Se)})},this._document=w}get portal(){return this._attachedPortal}set portal(s){this.hasAttached()&&!s&&!this._isInitialized||(this.hasAttached()&&super.detach(),s&&super.attach(s),this._attachedPortal=s)}get attachedRef(){return this._attachedRef}ngOnInit(){this._isInitialized=!0}ngOnDestroy(){super.dispose(),this._attachedPortal=null,this._attachedRef=null}attachComponentPortal(s){s.setAttachedHost(this);const d=null!=s.viewContainerRef?s.viewContainerRef:this._viewContainerRef,N=(s.componentFactoryResolver||this._componentFactoryResolver).resolveComponentFactory(s.component),te=d.createComponent(N,d.length,s.injector||d.injector);return d!==this._viewContainerRef&&this._getRootNode().appendChild(te.hostView.rootNodes[0]),super.setDisposeFn(()=>te.destroy()),this._attachedPortal=s,this._attachedRef=te,this.attached.emit(te),te}attachTemplatePortal(s){s.setAttachedHost(this);const d=this._viewContainerRef.createEmbeddedView(s.templateRef,s.context);return super.setDisposeFn(()=>this._viewContainerRef.clear()),this._attachedPortal=s,this._attachedRef=d,this.attached.emit(d),d}_getRootNode(){const s=this._viewContainerRef.element.nativeElement;return s.nodeType===s.ELEMENT_NODE?s:s.parentNode}}return m.\u0275fac=function(s){return new(s||m)(h.Y36(h._Vd),h.Y36(h.s_b),h.Y36(me.K0))},m.\u0275dir=h.lG2({type:m,selectors:[["","cdkPortalOutlet",""]],inputs:{portal:["cdkPortalOutlet","portal"]},outputs:{attached:"attached"},exportAs:["cdkPortalOutlet"],features:[h.qOj]}),m})(),mn=(()=>{class m{}return m.\u0275fac=function(s){return new(s||m)},m.\u0275mod=h.oAB({type:m}),m.\u0275inj=h.cJS({}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+var Bn=S(6787),_n=S(2986);
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */S(4290);
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const wi=et();class cs{constructor(a,s){this._viewportRuler=a,this._previousHTMLStyles={top:"",left:""},this._isEnabled=!1,this._document=s}attach(){}enable(){if(this._canBeEnabled()){const a=this._document.documentElement;this._previousScrollPosition=this._viewportRuler.getViewportScrollPosition(),this._previousHTMLStyles.left=a.style.left||"",this._previousHTMLStyles.top=a.style.top||"",a.style.left=(0,D.HM)(-this._previousScrollPosition.left),a.style.top=(0,D.HM)(-this._previousScrollPosition.top),a.classList.add("cdk-global-scrollblock"),this._isEnabled=!0}}disable(){if(this._isEnabled){const a=this._document.documentElement,d=a.style,w=this._document.body.style,N=d.scrollBehavior||"",te=w.scrollBehavior||"";this._isEnabled=!1,d.left=this._previousHTMLStyles.left,d.top=this._previousHTMLStyles.top,a.classList.remove("cdk-global-scrollblock"),wi&&(d.scrollBehavior=w.scrollBehavior="auto"),window.scroll(this._previousScrollPosition.left,this._previousScrollPosition.top),wi&&(d.scrollBehavior=N,w.scrollBehavior=te)}}_canBeEnabled(){if(this._document.documentElement.classList.contains("cdk-global-scrollblock")||this._isEnabled)return!1;const s=this._document.body,d=this._viewportRuler.getViewportSize();return s.scrollHeight>d.height||s.scrollWidth>d.width}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class qe{constructor(a,s,d,w){this._scrollDispatcher=a,this._ngZone=s,this._viewportRuler=d,this._config=w,this._scrollSubscription=null,this._detach=()=>{this.disable(),this._overlayRef.hasAttached()&&this._ngZone.run(()=>this._overlayRef.detach())}}attach(a){this._overlayRef=a}enable(){if(this._scrollSubscription)return;const a=this._scrollDispatcher.scrolled(0);this._config&&this._config.threshold&&this._config.threshold>1?(this._initialScrollPosition=this._viewportRuler.getViewportScrollPosition().top,this._scrollSubscription=a.subscribe(()=>{const s=this._viewportRuler.getViewportScrollPosition().top;Math.abs(s-this._initialScrollPosition)>this._config.threshold?this._detach():this._overlayRef.updatePosition()})):this._scrollSubscription=a.subscribe(this._detach)}disable(){this._scrollSubscription&&(this._scrollSubscription.unsubscribe(),this._scrollSubscription=null)}detach(){this.disable(),this._overlayRef=null}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class ot{enable(){}disable(){}attach(){}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function St(m,a){return a.some(s=>m.bottom<s.top||m.top>s.bottom||m.right<s.left||m.left>s.right)}function y(m,a){return a.some(s=>m.top<s.top||m.bottom>s.bottom||m.left<s.left||m.right>s.right)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class M{constructor(a,s,d,w){this._scrollDispatcher=a,this._viewportRuler=s,this._ngZone=d,this._config=w,this._scrollSubscription=null}attach(a){this._overlayRef=a}enable(){this._scrollSubscription||(this._scrollSubscription=this._scrollDispatcher.scrolled(this._config?this._config.scrollThrottle:0).subscribe(()=>{if(this._overlayRef.updatePosition(),this._config&&this._config.autoClose){const s=this._overlayRef.overlayElement.getBoundingClientRect(),{width:d,height:w}=this._viewportRuler.getViewportSize();St(s,[{width:d,height:w,bottom:w,right:d,top:0,left:0}])&&(this.disable(),this._ngZone.run(()=>this._overlayRef.detach()))}}))}disable(){this._scrollSubscription&&(this._scrollSubscription.unsubscribe(),this._scrollSubscription=null)}detach(){this.disable(),this._overlayRef=null}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let E=(()=>{class m{constructor(s,d,w,N){this._scrollDispatcher=s,this._viewportRuler=d,this._ngZone=w,this.noop=()=>new ot,this.close=te=>new qe(this._scrollDispatcher,this._ngZone,this._viewportRuler,te),this.block=()=>new cs(this._viewportRuler,this._document),this.reposition=te=>new M(this._scrollDispatcher,this._viewportRuler,this._ngZone,te),this._document=N}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(yt),h.LFG(dn),h.LFG(h.R0b),h.LFG(me.K0))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(yt),(0,h.LFG)(dn),(0,h.LFG)(h.R0b),(0,h.LFG)(me.K0))},token:m,providedIn:"root"}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class R{constructor(a){if(this.scrollStrategy=new ot,this.panelClass="",this.hasBackdrop=!1,this.backdropClass="cdk-overlay-dark-backdrop",this.disposeOnNavigation=!1,a){const s=Object.keys(a);for(const d of s)void 0!==a[d]&&(this[d]=a[d])}}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class W{constructor(a,s,d,w,N){this.offsetX=d,this.offsetY=w,this.panelClass=N,this.originX=a.originX,this.originY=a.originY,this.overlayX=s.overlayX,this.overlayY=s.overlayY}}class we{constructor(a,s){this.connectionPair=a,this.scrollableViewProperties=s}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let ct=(()=>{class m{constructor(s){this._attachedOverlays=[],this._document=s}ngOnDestroy(){this.detach()}add(s){this.remove(s),this._attachedOverlays.push(s)}remove(s){const d=this._attachedOverlays.indexOf(s);d>-1&&this._attachedOverlays.splice(d,1),0===this._attachedOverlays.length&&this.detach()}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(me.K0))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(me.K0))},token:m,providedIn:"root"}),m})(),Et=(()=>{class m extends ct{constructor(s){super(s),this._keydownListener=d=>{const w=this._attachedOverlays;for(let N=w.length-1;N>-1;N--)if(w[N]._keydownEvents.observers.length>0){w[N]._keydownEvents.next(d);break}}}add(s){super.add(s),this._isAttached||(this._document.body.addEventListener("keydown",this._keydownListener),this._isAttached=!0)}detach(){this._isAttached&&(this._document.body.removeEventListener("keydown",this._keydownListener),this._isAttached=!1)}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(me.K0))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(me.K0))},token:m,providedIn:"root"}),m})(),Mt=(()=>{class m extends ct{constructor(s,d){super(s),this._platform=d,this._cursorStyleIsSet=!1,this._clickListener=w=>{const N=w.composedPath?w.composedPath()[0]:w.target,te=this._attachedOverlays.slice();for(let Se=te.length-1;Se>-1;Se--){const xe=te[Se];if(!(xe._outsidePointerEvents.observers.length<1)&&xe.hasAttached()){if(xe.overlayElement.contains(N))break;xe._outsidePointerEvents.next(w)}}}}add(s){super.add(s),this._isAttached||(this._document.body.addEventListener("click",this._clickListener,!0),this._document.body.addEventListener("contextmenu",this._clickListener,!0),this._platform.IOS&&!this._cursorStyleIsSet&&(this._cursorOriginalValue=this._document.body.style.cursor,this._document.body.style.cursor="pointer",this._cursorStyleIsSet=!0),this._isAttached=!0)}detach(){this._isAttached&&(this._document.body.removeEventListener("click",this._clickListener,!0),this._document.body.removeEventListener("contextmenu",this._clickListener,!0),this._platform.IOS&&this._cursorStyleIsSet&&(this._document.body.style.cursor=this._cursorOriginalValue,this._cursorStyleIsSet=!1),this._isAttached=!1)}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(me.K0),h.LFG(ee))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(me.K0),(0,h.LFG)(ee))},token:m,providedIn:"root"}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const Tn=!("undefined"==typeof window||!window||!window.__karma__&&!window.jasmine);let Gt=(()=>{class m{constructor(s,d){this._platform=d,this._document=s}ngOnDestroy(){const s=this._containerElement;s&&s.parentNode&&s.parentNode.removeChild(s)}getContainerElement(){return this._containerElement||this._createContainer(),this._containerElement}_createContainer(){const s="cdk-overlay-container";if(this._platform.isBrowser||Tn){const w=this._document.querySelectorAll(`.${s}[platform="server"], .${s}[platform="test"]`);for(let N=0;N<w.length;N++)w[N].parentNode.removeChild(w[N])}const d=this._document.createElement("div");d.classList.add(s),Tn?d.setAttribute("platform","test"):this._platform.isBrowser||d.setAttribute("platform","server"),this._document.body.appendChild(d),this._containerElement=d}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(me.K0),h.LFG(ee))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(me.K0),(0,h.LFG)(ee))},token:m,providedIn:"root"}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Un{constructor(a,s,d,w,N,te,Se,xe,ze){this._portalOutlet=a,this._host=s,this._pane=d,this._config=w,this._ngZone=N,this._keyboardDispatcher=te,this._document=Se,this._location=xe,this._outsideClickDispatcher=ze,this._backdropElement=null,this._backdropClick=new j.xQ,this._attachments=new j.xQ,this._detachments=new j.xQ,this._locationChanges=Pe.w.EMPTY,this._backdropClickHandler=gt=>this._backdropClick.next(gt),this._keydownEvents=new j.xQ,this._outsidePointerEvents=new j.xQ,w.scrollStrategy&&(this._scrollStrategy=w.scrollStrategy,this._scrollStrategy.attach(this)),this._positionStrategy=w.positionStrategy}get overlayElement(){return this._pane}get backdropElement(){return this._backdropElement}get hostElement(){return this._host}attach(a){let s=this._portalOutlet.attach(a);return!this._host.parentElement&&this._previousHostParent&&this._previousHostParent.appendChild(this._host),this._positionStrategy&&this._positionStrategy.attach(this),this._updateStackingOrder(),this._updateElementSize(),this._updateElementDirection(),this._scrollStrategy&&this._scrollStrategy.enable(),this._ngZone.onStable.pipe((0,_n.q)(1)).subscribe(()=>{this.hasAttached()&&this.updatePosition()}),this._togglePointerEvents(!0),this._config.hasBackdrop&&this._attachBackdrop(),this._config.panelClass&&this._toggleClasses(this._pane,this._config.panelClass,!0),this._attachments.next(),this._keyboardDispatcher.add(this),this._config.disposeOnNavigation&&(this._locationChanges=this._location.subscribe(()=>this.dispose())),this._outsideClickDispatcher.add(this),s}detach(){if(!this.hasAttached())return;this.detachBackdrop(),this._togglePointerEvents(!1),this._positionStrategy&&this._positionStrategy.detach&&this._positionStrategy.detach(),this._scrollStrategy&&this._scrollStrategy.disable();const a=this._portalOutlet.detach();return this._detachments.next(),this._keyboardDispatcher.remove(this),this._detachContentWhenStable(),this._locationChanges.unsubscribe(),this._outsideClickDispatcher.remove(this),a}dispose(){const a=this.hasAttached();this._positionStrategy&&this._positionStrategy.dispose(),this._disposeScrollStrategy(),this.detachBackdrop(),this._locationChanges.unsubscribe(),this._keyboardDispatcher.remove(this),this._portalOutlet.dispose(),this._attachments.complete(),this._backdropClick.complete(),this._keydownEvents.complete(),this._outsidePointerEvents.complete(),this._outsideClickDispatcher.remove(this),this._host&&this._host.parentNode&&(this._host.parentNode.removeChild(this._host),this._host=null),this._previousHostParent=this._pane=null,a&&this._detachments.next(),this._detachments.complete()}hasAttached(){return this._portalOutlet.hasAttached()}backdropClick(){return this._backdropClick}attachments(){return this._attachments}detachments(){return this._detachments}keydownEvents(){return this._keydownEvents}outsidePointerEvents(){return this._outsidePointerEvents}getConfig(){return this._config}updatePosition(){this._positionStrategy&&this._positionStrategy.apply()}updatePositionStrategy(a){a!==this._positionStrategy&&(this._positionStrategy&&this._positionStrategy.dispose(),this._positionStrategy=a,this.hasAttached()&&(a.attach(this),this.updatePosition()))}updateSize(a){this._config=Object.assign(Object.assign({},this._config),a),this._updateElementSize()}setDirection(a){this._config=Object.assign(Object.assign({},this._config),{direction:a}),this._updateElementDirection()}addPanelClass(a){this._pane&&this._toggleClasses(this._pane,a,!0)}removePanelClass(a){this._pane&&this._toggleClasses(this._pane,a,!1)}getDirection(){const a=this._config.direction;return a?"string"==typeof a?a:a.value:"ltr"}updateScrollStrategy(a){a!==this._scrollStrategy&&(this._disposeScrollStrategy(),this._scrollStrategy=a,this.hasAttached()&&(a.attach(this),a.enable()))}_updateElementDirection(){this._host.setAttribute("dir",this.getDirection())}_updateElementSize(){if(!this._pane)return;const a=this._pane.style;a.width=(0,D.HM)(this._config.width),a.height=(0,D.HM)(this._config.height),a.minWidth=(0,D.HM)(this._config.minWidth),a.minHeight=(0,D.HM)(this._config.minHeight),a.maxWidth=(0,D.HM)(this._config.maxWidth),a.maxHeight=(0,D.HM)(this._config.maxHeight)}_togglePointerEvents(a){this._pane.style.pointerEvents=a?"":"none"}_attachBackdrop(){const a="cdk-overlay-backdrop-showing";this._backdropElement=this._document.createElement("div"),this._backdropElement.classList.add("cdk-overlay-backdrop"),this._config.backdropClass&&this._toggleClasses(this._backdropElement,this._config.backdropClass,!0),this._host.parentElement.insertBefore(this._backdropElement,this._host),this._backdropElement.addEventListener("click",this._backdropClickHandler),"undefined"!=typeof requestAnimationFrame?this._ngZone.runOutsideAngular(()=>{requestAnimationFrame(()=>{this._backdropElement&&this._backdropElement.classList.add(a)})}):this._backdropElement.classList.add(a)}_updateStackingOrder(){this._host.nextSibling&&this._host.parentNode.appendChild(this._host)}detachBackdrop(){let a=this._backdropElement;if(!a)return;let s,d=()=>{a&&(a.removeEventListener("click",this._backdropClickHandler),a.removeEventListener("transitionend",d),a.parentNode&&a.parentNode.removeChild(a)),this._backdropElement==a&&(this._backdropElement=null),this._config.backdropClass&&this._toggleClasses(a,this._config.backdropClass,!1),clearTimeout(s)};a.classList.remove("cdk-overlay-backdrop-showing"),this._ngZone.runOutsideAngular(()=>{a.addEventListener("transitionend",d)}),a.style.pointerEvents="none",s=this._ngZone.runOutsideAngular(()=>setTimeout(d,500))}_toggleClasses(a,s,d){const w=a.classList;(0,D.Eq)(s).forEach(N=>{N&&(d?w.add(N):w.remove(N))})}_detachContentWhenStable(){this._ngZone.runOutsideAngular(()=>{const a=this._ngZone.onStable.pipe((0,Or.R)((0,Bn.T)(this._attachments,this._detachments))).subscribe(()=>{(!this._pane||!this._host||0===this._pane.children.length)&&(this._pane&&this._config.panelClass&&this._toggleClasses(this._pane,this._config.panelClass,!1),this._host&&this._host.parentElement&&(this._previousHostParent=this._host.parentElement,this._previousHostParent.removeChild(this._host)),a.unsubscribe())})})}_disposeScrollStrategy(){const a=this._scrollStrategy;a&&(a.disable(),a.detach&&a.detach())}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const or="cdk-overlay-connected-position-bounding-box",ar=/([A-Za-z%]+)$/;class lr{constructor(a,s,d,w,N){this._viewportRuler=s,this._document=d,this._platform=w,this._overlayContainer=N,this._lastBoundingBoxSize={width:0,height:0},this._isPushed=!1,this._canPush=!0,this._growAfterOpen=!1,this._hasFlexibleDimensions=!0,this._positionLocked=!1,this._viewportMargin=0,this._scrollables=[],this._preferredPositions=[],this._positionChanges=new j.xQ,this._resizeSubscription=Pe.w.EMPTY,this._offsetX=0,this._offsetY=0,this._appliedPanelClasses=[],this.positionChanges=this._positionChanges,this.setOrigin(a)}get positions(){return this._preferredPositions}attach(a){this._validatePositions(),a.hostElement.classList.add(or),this._overlayRef=a,this._boundingBox=a.hostElement,this._pane=a.overlayElement,this._isDisposed=!1,this._isInitialRender=!0,this._lastPosition=null,this._resizeSubscription.unsubscribe(),this._resizeSubscription=this._viewportRuler.change().subscribe(()=>{this._isInitialRender=!0,this.apply()})}apply(){if(this._isDisposed||!this._platform.isBrowser)return;if(!this._isInitialRender&&this._positionLocked&&this._lastPosition)return void this.reapplyLastPosition();this._clearPanelClasses(),this._resetOverlayElementStyles(),this._resetBoundingBoxStyles(),this._viewportRect=this._getNarrowedViewportRect(),this._originRect=this._getOriginRect(),this._overlayRect=this._pane.getBoundingClientRect();const a=this._originRect,s=this._overlayRect,d=this._viewportRect,w=[];let N;for(let te of this._preferredPositions){let Se=this._getOriginPoint(a,te),xe=this._getOverlayPoint(Se,s,te),ze=this._getOverlayFit(xe,s,d,te);if(ze.isCompletelyWithinViewport)return this._isPushed=!1,void this._applyPosition(te,Se);this._canFitWithFlexibleDimensions(ze,xe,d)?w.push({position:te,origin:Se,overlayRect:s,boundingBoxRect:this._calculateBoundingBoxRect(Se,te)}):(!N||N.overlayFit.visibleArea<ze.visibleArea)&&(N={overlayFit:ze,overlayPoint:xe,originPoint:Se,position:te,overlayRect:s})}if(w.length){let te=null,Se=-1;for(const xe of w){const ze=xe.boundingBoxRect.width*xe.boundingBoxRect.height*(xe.position.weight||1);ze>Se&&(Se=ze,te=xe)}return this._isPushed=!1,void this._applyPosition(te.position,te.origin)}if(this._canPush)return this._isPushed=!0,void this._applyPosition(N.position,N.originPoint);this._applyPosition(N.position,N.originPoint)}detach(){this._clearPanelClasses(),this._lastPosition=null,this._previousPushAmount=null,this._resizeSubscription.unsubscribe()}dispose(){this._isDisposed||(this._boundingBox&&jn(this._boundingBox.style,{top:"",left:"",right:"",bottom:"",height:"",width:"",alignItems:"",justifyContent:""}),this._pane&&this._resetOverlayElementStyles(),this._overlayRef&&this._overlayRef.hostElement.classList.remove(or),this.detach(),this._positionChanges.complete(),this._overlayRef=this._boundingBox=null,this._isDisposed=!0)}reapplyLastPosition(){if(!this._isDisposed&&(!this._platform||this._platform.isBrowser)){this._originRect=this._getOriginRect(),this._overlayRect=this._pane.getBoundingClientRect(),this._viewportRect=this._getNarrowedViewportRect();const a=this._lastPosition||this._preferredPositions[0],s=this._getOriginPoint(this._originRect,a);this._applyPosition(a,s)}}withScrollableContainers(a){return this._scrollables=a,this}withPositions(a){return this._preferredPositions=a,-1===a.indexOf(this._lastPosition)&&(this._lastPosition=null),this._validatePositions(),this}withViewportMargin(a){return this._viewportMargin=a,this}withFlexibleDimensions(a=!0){return this._hasFlexibleDimensions=a,this}withGrowAfterOpen(a=!0){return this._growAfterOpen=a,this}withPush(a=!0){return this._canPush=a,this}withLockedPosition(a=!0){return this._positionLocked=a,this}setOrigin(a){return this._origin=a,this}withDefaultOffsetX(a){return this._offsetX=a,this}withDefaultOffsetY(a){return this._offsetY=a,this}withTransformOriginOn(a){return this._transformOriginSelector=a,this}_getOriginPoint(a,s){let d,w;if("center"==s.originX)d=a.left+a.width/2;else{const N=this._isRtl()?a.right:a.left,te=this._isRtl()?a.left:a.right;d="start"==s.originX?N:te}return w="center"==s.originY?a.top+a.height/2:"top"==s.originY?a.top:a.bottom,{x:d,y:w}}_getOverlayPoint(a,s,d){let w,N;return w="center"==d.overlayX?-s.width/2:"start"===d.overlayX?this._isRtl()?-s.width:0:this._isRtl()?0:-s.width,N="center"==d.overlayY?-s.height/2:"top"==d.overlayY?0:-s.height,{x:a.x+w,y:a.y+N}}_getOverlayFit(a,s,d,w){const N=Si(s);let{x:te,y:Se}=a,xe=this._getOffset(w,"x"),ze=this._getOffset(w,"y");xe&&(te+=xe),ze&&(Se+=ze);let hr=0-Se,js=Se+N.height-d.height,Hi=this._subtractOverflows(N.width,0-te,te+N.width-d.width),Rl=this._subtractOverflows(N.height,hr,js),xl=Hi*Rl;return{visibleArea:xl,isCompletelyWithinViewport:N.width*N.height===xl,fitsInViewportVertically:Rl===N.height,fitsInViewportHorizontally:Hi==N.width}}_canFitWithFlexibleDimensions(a,s,d){if(this._hasFlexibleDimensions){const w=d.bottom-s.y,N=d.right-s.x,te=cr(this._overlayRef.getConfig().minHeight),Se=cr(this._overlayRef.getConfig().minWidth),ze=a.fitsInViewportHorizontally||null!=Se&&Se<=N;return(a.fitsInViewportVertically||null!=te&&te<=w)&&ze}return!1}_pushOverlayOnScreen(a,s,d){if(this._previousPushAmount&&this._positionLocked)return{x:a.x+this._previousPushAmount.x,y:a.y+this._previousPushAmount.y};const w=Si(s),N=this._viewportRect,te=Math.max(a.x+w.width-N.width,0),Se=Math.max(a.y+w.height-N.height,0),xe=Math.max(N.top-d.top-a.y,0),ze=Math.max(N.left-d.left-a.x,0);let gt=0,Wt=0;return gt=w.width<=N.width?ze||-te:a.x<this._viewportMargin?N.left-d.left-a.x:0,Wt=w.height<=N.height?xe||-Se:a.y<this._viewportMargin?N.top-d.top-a.y:0,this._previousPushAmount={x:gt,y:Wt},{x:a.x+gt,y:a.y+Wt}}_applyPosition(a,s){if(this._setTransformOrigin(a),this._setOverlayElementStyles(s,a),this._setBoundingBoxStyles(s,a),a.panelClass&&this._addPanelClasses(a.panelClass),this._lastPosition=a,this._positionChanges.observers.length){const d=this._getScrollVisibility(),w=new we(a,d);this._positionChanges.next(w)}this._isInitialRender=!1}_setTransformOrigin(a){if(!this._transformOriginSelector)return;const s=this._boundingBox.querySelectorAll(this._transformOriginSelector);let d,w=a.overlayY;d="center"===a.overlayX?"center":this._isRtl()?"start"===a.overlayX?"right":"left":"start"===a.overlayX?"left":"right";for(let N=0;N<s.length;N++)s[N].style.transformOrigin=`${d} ${w}`}_calculateBoundingBoxRect(a,s){const d=this._viewportRect,w=this._isRtl();let N,te,Se,gt,Wt,hr;if("top"===s.overlayY)te=a.y,N=d.height-te+this._viewportMargin;else if("bottom"===s.overlayY)Se=d.height-a.y+2*this._viewportMargin,N=d.height-Se+this._viewportMargin;else{const js=Math.min(d.bottom-a.y+d.top,a.y),Hi=this._lastBoundingBoxSize.height;N=2*js,te=a.y-js,N>Hi&&!this._isInitialRender&&!this._growAfterOpen&&(te=a.y-Hi/2)}if("end"===s.overlayX&&!w||"start"===s.overlayX&&w)hr=d.width-a.x+this._viewportMargin,gt=a.x-this._viewportMargin;else if("start"===s.overlayX&&!w||"end"===s.overlayX&&w)Wt=a.x,gt=d.right-a.x;else{const js=Math.min(d.right-a.x+d.left,a.x),Hi=this._lastBoundingBoxSize.width;gt=2*js,Wt=a.x-js,gt>Hi&&!this._isInitialRender&&!this._growAfterOpen&&(Wt=a.x-Hi/2)}return{top:te,left:Wt,bottom:Se,right:hr,width:gt,height:N}}_setBoundingBoxStyles(a,s){const d=this._calculateBoundingBoxRect(a,s);!this._isInitialRender&&!this._growAfterOpen&&(d.height=Math.min(d.height,this._lastBoundingBoxSize.height),d.width=Math.min(d.width,this._lastBoundingBoxSize.width));const w={};if(this._hasExactPosition())w.top=w.left="0",w.bottom=w.right=w.maxHeight=w.maxWidth="",w.width=w.height="100%";else{const N=this._overlayRef.getConfig().maxHeight,te=this._overlayRef.getConfig().maxWidth;w.height=(0,D.HM)(d.height),w.top=(0,D.HM)(d.top),w.bottom=(0,D.HM)(d.bottom),w.width=(0,D.HM)(d.width),w.left=(0,D.HM)(d.left),w.right=(0,D.HM)(d.right),w.alignItems="center"===s.overlayX?"center":"end"===s.overlayX?"flex-end":"flex-start",w.justifyContent="center"===s.overlayY?"center":"bottom"===s.overlayY?"flex-end":"flex-start",N&&(w.maxHeight=(0,D.HM)(N)),te&&(w.maxWidth=(0,D.HM)(te))}this._lastBoundingBoxSize=d,jn(this._boundingBox.style,w)}_resetBoundingBoxStyles(){jn(this._boundingBox.style,{top:"0",left:"0",right:"0",bottom:"0",height:"",width:"",alignItems:"",justifyContent:""})}_resetOverlayElementStyles(){jn(this._pane.style,{top:"",left:"",bottom:"",right:"",position:"",transform:""})}_setOverlayElementStyles(a,s){const d={},w=this._hasExactPosition(),N=this._hasFlexibleDimensions,te=this._overlayRef.getConfig();if(w){const gt=this._viewportRuler.getViewportScrollPosition();jn(d,this._getExactOverlayY(s,a,gt)),jn(d,this._getExactOverlayX(s,a,gt))}else d.position="static";let Se="",xe=this._getOffset(s,"x"),ze=this._getOffset(s,"y");xe&&(Se+=`translateX(${xe}px) `),ze&&(Se+=`translateY(${ze}px)`),d.transform=Se.trim(),te.maxHeight&&(w?d.maxHeight=(0,D.HM)(te.maxHeight):N&&(d.maxHeight="")),te.maxWidth&&(w?d.maxWidth=(0,D.HM)(te.maxWidth):N&&(d.maxWidth="")),jn(this._pane.style,d)}_getExactOverlayY(a,s,d){let w={top:"",bottom:""},N=this._getOverlayPoint(s,this._overlayRect,a);this._isPushed&&(N=this._pushOverlayOnScreen(N,this._overlayRect,d));let te=this._overlayContainer.getContainerElement().getBoundingClientRect().top;return N.y-=te,"bottom"===a.overlayY?w.bottom=this._document.documentElement.clientHeight-(N.y+this._overlayRect.height)+"px":w.top=(0,D.HM)(N.y),w}_getExactOverlayX(a,s,d){let te,w={left:"",right:""},N=this._getOverlayPoint(s,this._overlayRect,a);return this._isPushed&&(N=this._pushOverlayOnScreen(N,this._overlayRect,d)),te=this._isRtl()?"end"===a.overlayX?"left":"right":"end"===a.overlayX?"right":"left","right"===te?w.right=this._document.documentElement.clientWidth-(N.x+this._overlayRect.width)+"px":w.left=(0,D.HM)(N.x),w}_getScrollVisibility(){const a=this._getOriginRect(),s=this._pane.getBoundingClientRect(),d=this._scrollables.map(w=>w.getElementRef().nativeElement.getBoundingClientRect());return{isOriginClipped:y(a,d),isOriginOutsideView:St(a,d),isOverlayClipped:y(s,d),isOverlayOutsideView:St(s,d)}}_subtractOverflows(a,...s){return s.reduce((d,w)=>d-Math.max(w,0),a)}_getNarrowedViewportRect(){const a=this._document.documentElement.clientWidth,s=this._document.documentElement.clientHeight,d=this._viewportRuler.getViewportScrollPosition();return{top:d.top+this._viewportMargin,left:d.left+this._viewportMargin,right:d.left+a-this._viewportMargin,bottom:d.top+s-this._viewportMargin,width:a-2*this._viewportMargin,height:s-2*this._viewportMargin}}_isRtl(){return"rtl"===this._overlayRef.getDirection()}_hasExactPosition(){return!this._hasFlexibleDimensions||this._isPushed}_getOffset(a,s){return"x"===s?null==a.offsetX?this._offsetX:a.offsetX:null==a.offsetY?this._offsetY:a.offsetY}_validatePositions(){}_addPanelClasses(a){this._pane&&(0,D.Eq)(a).forEach(s=>{""!==s&&-1===this._appliedPanelClasses.indexOf(s)&&(this._appliedPanelClasses.push(s),this._pane.classList.add(s))})}_clearPanelClasses(){this._pane&&(this._appliedPanelClasses.forEach(a=>{this._pane.classList.remove(a)}),this._appliedPanelClasses=[])}_getOriginRect(){const a=this._origin;if(a instanceof h.SBq)return a.nativeElement.getBoundingClientRect();if(a instanceof Element)return a.getBoundingClientRect();const s=a.width||0,d=a.height||0;return{top:a.y,bottom:a.y+d,left:a.x,right:a.x+s,height:d,width:s}}}function jn(m,a){for(let s in a)a.hasOwnProperty(s)&&(m[s]=a[s]);return m}function cr(m){if("number"!=typeof m&&null!=m){const[a,s]=m.split(ar);return s&&"px"!==s?null:parseFloat(a)}return m||null}function Si(m){return{top:Math.floor(m.top),right:Math.floor(m.right),bottom:Math.floor(m.bottom),left:Math.floor(m.left),width:Math.floor(m.width),height:Math.floor(m.height)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class ci{constructor(a,s,d,w,N,te,Se){this._preferredPositions=[],this._positionStrategy=new lr(d,w,N,te,Se).withFlexibleDimensions(!1).withPush(!1).withViewportMargin(0),this.withFallbackPosition(a,s),this.onPositionChange=this._positionStrategy.positionChanges}get positions(){return this._preferredPositions}attach(a){this._overlayRef=a,this._positionStrategy.attach(a),this._direction&&(a.setDirection(this._direction),this._direction=null)}dispose(){this._positionStrategy.dispose()}detach(){this._positionStrategy.detach()}apply(){this._positionStrategy.apply()}recalculateLastPosition(){this._positionStrategy.reapplyLastPosition()}withScrollableContainers(a){this._positionStrategy.withScrollableContainers(a)}withFallbackPosition(a,s,d,w){const N=new W(a,s,d,w);return this._preferredPositions.push(N),this._positionStrategy.withPositions(this._preferredPositions),this}withDirection(a){return this._overlayRef?this._overlayRef.setDirection(a):this._direction=a,this}withOffsetX(a){return this._positionStrategy.withDefaultOffsetX(a),this}withOffsetY(a){return this._positionStrategy.withDefaultOffsetY(a),this}withLockedPosition(a){return this._positionStrategy.withLockedPosition(a),this}withPositions(a){return this._preferredPositions=a.slice(),this._positionStrategy.withPositions(this._preferredPositions),this}setOrigin(a){return this._positionStrategy.setOrigin(a),this}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Oo="cdk-global-overlay-wrapper";class us{constructor(){this._cssPosition="static",this._topOffset="",this._bottomOffset="",this._leftOffset="",this._rightOffset="",this._alignItems="",this._justifyContent="",this._width="",this._height=""}attach(a){const s=a.getConfig();this._overlayRef=a,this._width&&!s.width&&a.updateSize({width:this._width}),this._height&&!s.height&&a.updateSize({height:this._height}),a.hostElement.classList.add(Oo),this._isDisposed=!1}top(a=""){return this._bottomOffset="",this._topOffset=a,this._alignItems="flex-start",this}left(a=""){return this._rightOffset="",this._leftOffset=a,this._justifyContent="flex-start",this}bottom(a=""){return this._topOffset="",this._bottomOffset=a,this._alignItems="flex-end",this}right(a=""){return this._leftOffset="",this._rightOffset=a,this._justifyContent="flex-end",this}width(a=""){return this._overlayRef?this._overlayRef.updateSize({width:a}):this._width=a,this}height(a=""){return this._overlayRef?this._overlayRef.updateSize({height:a}):this._height=a,this}centerHorizontally(a=""){return this.left(a),this._justifyContent="center",this}centerVertically(a=""){return this.top(a),this._alignItems="center",this}apply(){if(!this._overlayRef||!this._overlayRef.hasAttached())return;const a=this._overlayRef.overlayElement.style,s=this._overlayRef.hostElement.style,d=this._overlayRef.getConfig(),{width:w,height:N,maxWidth:te,maxHeight:Se}=d,xe=!("100%"!==w&&"100vw"!==w||te&&"100%"!==te&&"100vw"!==te),ze=!("100%"!==N&&"100vh"!==N||Se&&"100%"!==Se&&"100vh"!==Se);a.position=this._cssPosition,a.marginLeft=xe?"0":this._leftOffset,a.marginTop=ze?"0":this._topOffset,a.marginBottom=this._bottomOffset,a.marginRight=this._rightOffset,xe?s.justifyContent="flex-start":"center"===this._justifyContent?s.justifyContent="center":"rtl"===this._overlayRef.getConfig().direction?"flex-start"===this._justifyContent?s.justifyContent="flex-end":"flex-end"===this._justifyContent&&(s.justifyContent="flex-start"):s.justifyContent=this._justifyContent,s.alignItems=ze?"flex-start":this._alignItems}dispose(){if(this._isDisposed||!this._overlayRef)return;const a=this._overlayRef.overlayElement.style,s=this._overlayRef.hostElement,d=s.style;s.classList.remove(Oo),d.justifyContent=d.alignItems=a.marginTop=a.marginBottom=a.marginLeft=a.marginRight=a.position="",this._overlayRef=null,this._isDisposed=!0}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let uo=(()=>{class m{constructor(s,d,w,N){this._viewportRuler=s,this._document=d,this._platform=w,this._overlayContainer=N}global(){return new us}connectedTo(s,d,w){return new ci(d,w,s,this._viewportRuler,this._document,this._platform,this._overlayContainer)}flexibleConnectedTo(s){return new lr(s,this._viewportRuler,this._document,this._platform,this._overlayContainer)}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(dn),h.LFG(me.K0),h.LFG(ee),h.LFG(Gt))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(dn),(0,h.LFG)(me.K0),(0,h.LFG)(ee),(0,h.LFG)(Gt))},token:m,providedIn:"root"}),m})(),Ys=0,Ns=(()=>{class m{constructor(s,d,w,N,te,Se,xe,ze,gt,Wt,hr){this.scrollStrategies=s,this._overlayContainer=d,this._componentFactoryResolver=w,this._positionBuilder=N,this._keyboardDispatcher=te,this._injector=Se,this._ngZone=xe,this._document=ze,this._directionality=gt,this._location=Wt,this._outsideClickDispatcher=hr}create(s){const d=this._createHostElement(),w=this._createPaneElement(d),N=this._createPortalOutlet(w),te=new R(s);return te.direction=te.direction||this._directionality.value,new Un(N,d,w,te,this._ngZone,this._keyboardDispatcher,this._document,this._location,this._outsideClickDispatcher)}position(){return this._positionBuilder}_createPaneElement(s){const d=this._document.createElement("div");return d.id="cdk-overlay-"+Ys++,d.classList.add("cdk-overlay-pane"),s.appendChild(d),d}_createHostElement(){const s=this._document.createElement("div");return this._overlayContainer.getContainerElement().appendChild(s),s}_createPortalOutlet(s){return this._appRef||(this._appRef=this._injector.get(h.z2F)),new Nr(s,this._componentFactoryResolver,this._appRef,this._injector,this._document)}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(E),h.LFG(Gt),h.LFG(h._Vd),h.LFG(uo),h.LFG(Et),h.LFG(h.zs3),h.LFG(h.R0b),h.LFG(me.K0),h.LFG(Ct.Is),h.LFG(me.Ye),h.LFG(Mt))},m.\u0275prov=h.Yz7({token:m,factory:m.\u0275fac}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const po={provide:new h.OlP("cdk-connected-overlay-scroll-strategy"),deps:[Ns],useFactory:function Bi(m){return()=>m.scrollStrategies.reposition()}};
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let go=(()=>{class m{}return m.\u0275fac=function(s){return new(s||m)},m.\u0275mod=h.oAB({type:m}),m.\u0275inj=h.cJS({providers:[Ns,po],imports:[[Ct.vT,mn,gr],gr]}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */S(13);let ks=(()=>{class m{constructor(s){this._platform=s}isDisabled(s){return s.hasAttribute("disabled")}isVisible(s){return function pc(m){return!!(m.offsetWidth||m.offsetHeight||"function"==typeof m.getClientRects&&m.getClientRects().length)}(s)&&"visible"===getComputedStyle(s).visibility}isTabbable(s){if(!this._platform.isBrowser)return!1;const d=function Zd(m){try{return m.frameElement}catch(a){return null}}(function th(m){return m.ownerDocument&&m.ownerDocument.defaultView||window}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(s));if(d&&(-1===yc(d)||!this.isVisible(d)))return!1;let w=s.nodeName.toLowerCase(),N=yc(s);return s.hasAttribute("contenteditable")?-1!==N:!("iframe"===w||"object"===w||this._platform.WEBKIT&&this._platform.IOS&&!function eh(m){let a=m.nodeName.toLowerCase(),s="input"===a&&m.type;return"text"===s||"password"===s||"select"===a||"textarea"===a}(s))&&("audio"===w?!!s.hasAttribute("controls")&&-1!==N:"video"===w?-1!==N&&(null!==N||this._platform.FIREFOX||s.hasAttribute("controls")):s.tabIndex>=0)}isFocusable(s,d){return function mo(m){return!function gc(m){return function Xd(m){return"input"==m.nodeName.toLowerCase()}(m)&&"hidden"==m.type}(m)&&(function On(m){let a=m.nodeName.toLowerCase();return"input"===a||"select"===a||"button"===a||"textarea"===a}(m)||function Jd(m){return function qd(m){return"a"==m.nodeName.toLowerCase()}(m)&&m.hasAttribute("href")}(m)||m.hasAttribute("contenteditable")||mc(m))}(s)&&!this.isDisabled(s)&&((null==d?void 0:d.ignoreVisibility)||this.isVisible(s))}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(ee))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(ee))},token:m,providedIn:"root"}),m})();function mc(m){if(!m.hasAttribute("tabindex")||void 0===m.tabIndex)return!1;let a=m.getAttribute("tabindex");return"-32768"!=a&&!(!a||isNaN(parseInt(a,10)))}function yc(m){if(!mc(m))return null;const a=parseInt(m.getAttribute("tabindex")||"",10);return isNaN(a)?-1:a}class Gn{constructor(a,s,d,w,N=!1){this._element=a,this._checker=s,this._ngZone=d,this._document=w,this._hasAttached=!1,this.startAnchorListener=()=>this.focusLastTabbableElement(),this.endAnchorListener=()=>this.focusFirstTabbableElement(),this._enabled=!0,N||this.attachAnchors()}get enabled(){return this._enabled}set enabled(a){this._enabled=a,this._startAnchor&&this._endAnchor&&(this._toggleAnchorTabIndex(a,this._startAnchor),this._toggleAnchorTabIndex(a,this._endAnchor))}destroy(){const a=this._startAnchor,s=this._endAnchor;a&&(a.removeEventListener("focus",this.startAnchorListener),a.parentNode&&a.parentNode.removeChild(a)),s&&(s.removeEventListener("focus",this.endAnchorListener),s.parentNode&&s.parentNode.removeChild(s)),this._startAnchor=this._endAnchor=null,this._hasAttached=!1}attachAnchors(){return!!this._hasAttached||(this._ngZone.runOutsideAngular(()=>{this._startAnchor||(this._startAnchor=this._createAnchor(),this._startAnchor.addEventListener("focus",this.startAnchorListener)),this._endAnchor||(this._endAnchor=this._createAnchor(),this._endAnchor.addEventListener("focus",this.endAnchorListener))}),this._element.parentNode&&(this._element.parentNode.insertBefore(this._startAnchor,this._element),this._element.parentNode.insertBefore(this._endAnchor,this._element.nextSibling),this._hasAttached=!0),this._hasAttached)}focusInitialElementWhenReady(){return new Promise(a=>{this._executeOnStable(()=>a(this.focusInitialElement()))})}focusFirstTabbableElementWhenReady(){return new Promise(a=>{this._executeOnStable(()=>a(this.focusFirstTabbableElement()))})}focusLastTabbableElementWhenReady(){return new Promise(a=>{this._executeOnStable(()=>a(this.focusLastTabbableElement()))})}_getRegionBoundary(a){let s=this._element.querySelectorAll(`[cdk-focus-region-${a}], [cdkFocusRegion${a}], [cdk-focus-${a}]`);for(let d=0;d<s.length;d++)s[d].hasAttribute(`cdk-focus-${a}`)?console.warn(`Found use of deprecated attribute 'cdk-focus-${a}', use 'cdkFocusRegion${a}' instead. The deprecated attribute will be removed in 8.0.0.`,s[d]):s[d].hasAttribute(`cdk-focus-region-${a}`)&&console.warn(`Found use of deprecated attribute 'cdk-focus-region-${a}', use 'cdkFocusRegion${a}' instead. The deprecated attribute will be removed in 8.0.0.`,s[d]);return"start"==a?s.length?s[0]:this._getFirstTabbableElement(this._element):s.length?s[s.length-1]:this._getLastTabbableElement(this._element)}focusInitialElement(){const a=this._element.querySelector("[cdk-focus-initial], [cdkFocusInitial]");if(a){if(a.hasAttribute("cdk-focus-initial")&&console.warn("Found use of deprecated attribute 'cdk-focus-initial', use 'cdkFocusInitial' instead. The deprecated attribute will be removed in 8.0.0",a),!this._checker.isFocusable(a)){const s=this._getFirstTabbableElement(a);return null==s||s.focus(),!!s}return a.focus(),!0}return this.focusFirstTabbableElement()}focusFirstTabbableElement(){const a=this._getRegionBoundary("start");return a&&a.focus(),!!a}focusLastTabbableElement(){const a=this._getRegionBoundary("end");return a&&a.focus(),!!a}hasAttached(){return this._hasAttached}_getFirstTabbableElement(a){if(this._checker.isFocusable(a)&&this._checker.isTabbable(a))return a;let s=a.children||a.childNodes;for(let d=0;d<s.length;d++){let w=s[d].nodeType===this._document.ELEMENT_NODE?this._getFirstTabbableElement(s[d]):null;if(w)return w}return null}_getLastTabbableElement(a){if(this._checker.isFocusable(a)&&this._checker.isTabbable(a))return a;let s=a.children||a.childNodes;for(let d=s.length-1;d>=0;d--){let w=s[d].nodeType===this._document.ELEMENT_NODE?this._getLastTabbableElement(s[d]):null;if(w)return w}return null}_createAnchor(){const a=this._document.createElement("div");return this._toggleAnchorTabIndex(this._enabled,a),a.classList.add("cdk-visually-hidden"),a.classList.add("cdk-focus-trap-anchor"),a.setAttribute("aria-hidden","true"),a}_toggleAnchorTabIndex(a,s){a?s.setAttribute("tabindex","0"):s.removeAttribute("tabindex")}toggleAnchors(a){this._startAnchor&&this._endAnchor&&(this._toggleAnchorTabIndex(a,this._startAnchor),this._toggleAnchorTabIndex(a,this._endAnchor))}_executeOnStable(a){this._ngZone.isStable?a():this._ngZone.onStable.pipe((0,_n.q)(1)).subscribe(a)}}let yo=(()=>{class m{constructor(s,d,w){this._checker=s,this._ngZone=d,this._document=w}create(s,d=!1){return new Gn(s,this._checker,this._ngZone,this._document,d)}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(ks),h.LFG(h.R0b),h.LFG(me.K0))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(ks),(0,h.LFG)(h.R0b),(0,h.LFG)(me.K0))},token:m,providedIn:"root"}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */"undefined"!=typeof Element&&Element;
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const il=new h.OlP("cdk-focus-monitor-default-options"),Ti=xt({passive:!0,capture:!0});let sl=(()=>{class m{constructor(s,d,w,N){this._ngZone=s,this._platform=d,this._origin=null,this._windowFocused=!1,this._elementInfo=new Map,this._monitoredElementCount=0,this._rootNodeFocusListenerCount=new Map,this._documentKeydownListener=()=>{this._lastTouchTarget=null,this._setOriginForCurrentEventQueue("keyboard")},this._documentMousedownListener=te=>{if(!this._lastTouchTarget){const Se=
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Bs(m){return 0===m.buttons}(te)?"keyboard":"mouse";this._setOriginForCurrentEventQueue(Se)}},this._documentTouchstartListener=te=>{!function Dc(m){const a=m.touches&&m.touches[0]||m.changedTouches&&m.changedTouches[0];return!(!a||-1!==a.identifier||null!=a.radiusX&&1!==a.radiusX||null!=a.radiusY&&1!==a.radiusY)}(te)?(null!=this._touchTimeoutId&&clearTimeout(this._touchTimeoutId),this._lastTouchTarget=No(te),this._touchTimeoutId=setTimeout(()=>this._lastTouchTarget=null,650)):this._lastTouchTarget||this._setOriginForCurrentEventQueue("keyboard")},this._windowFocusListener=()=>{this._windowFocused=!0,this._windowFocusTimeoutId=setTimeout(()=>this._windowFocused=!1)},this._rootNodeFocusAndBlurListener=te=>{const Se=No(te),xe="focus"===te.type?this._onFocus:this._onBlur;for(let ze=Se;ze;ze=ze.parentElement)xe.call(this,te,ze)},this._document=w,this._detectionMode=(null==N?void 0:N.detectionMode)||0}monitor(s,d=!1){const w=(0,D.fI)(s);if(!this._platform.isBrowser||1!==w.nodeType)return(0,Q.of)(null);const N=function Kn(m){if(function It(){if(null==tt){const m="undefined"!=typeof document?document.head:null;tt=!(!m||!m.createShadowRoot&&!m.attachShadow)}return tt}()){const a=m.getRootNode?m.getRootNode():null;if("undefined"!=typeof ShadowRoot&&ShadowRoot&&a instanceof ShadowRoot)return a}return null}(w)||this._getDocument(),te=this._elementInfo.get(w);if(te)return d&&(te.checkChildren=!0),te.subject;const Se={checkChildren:d,subject:new j.xQ,rootNode:N};return this._elementInfo.set(w,Se),this._registerGlobalListeners(Se),Se.subject}stopMonitoring(s){const d=(0,D.fI)(s),w=this._elementInfo.get(d);w&&(w.subject.complete(),this._setClasses(d),this._elementInfo.delete(d),this._removeGlobalListeners(w))}focusVia(s,d,w){const N=(0,D.fI)(s);N===this._getDocument().activeElement?this._getClosestElementsInfo(N).forEach(([Se,xe])=>this._originChanged(Se,d,xe)):(this._setOriginForCurrentEventQueue(d),"function"==typeof N.focus&&N.focus(w))}ngOnDestroy(){this._elementInfo.forEach((s,d)=>this.stopMonitoring(d))}_getDocument(){return this._document||document}_getWindow(){return this._getDocument().defaultView||window}_toggleClass(s,d,w){w?s.classList.add(d):s.classList.remove(d)}_getFocusOrigin(s){return this._origin?this._origin:this._windowFocused&&this._lastFocusOrigin?this._lastFocusOrigin:this._wasCausedByTouch(s)?"touch":"program"}_setClasses(s,d){this._toggleClass(s,"cdk-focused",!!d),this._toggleClass(s,"cdk-touch-focused","touch"===d),this._toggleClass(s,"cdk-keyboard-focused","keyboard"===d),this._toggleClass(s,"cdk-mouse-focused","mouse"===d),this._toggleClass(s,"cdk-program-focused","program"===d)}_setOriginForCurrentEventQueue(s){this._ngZone.runOutsideAngular(()=>{this._origin=s,0===this._detectionMode&&(this._originTimeoutId=setTimeout(()=>this._origin=null,1))})}_wasCausedByTouch(s){const d=No(s);return this._lastTouchTarget instanceof Node&&d instanceof Node&&(d===this._lastTouchTarget||d.contains(this._lastTouchTarget))}_onFocus(s,d){const w=this._elementInfo.get(d);!w||!w.checkChildren&&d!==No(s)||this._originChanged(d,this._getFocusOrigin(s),w)}_onBlur(s,d){const w=this._elementInfo.get(d);!w||w.checkChildren&&s.relatedTarget instanceof Node&&d.contains(s.relatedTarget)||(this._setClasses(d),this._emitOrigin(w.subject,null))}_emitOrigin(s,d){this._ngZone.run(()=>s.next(d))}_registerGlobalListeners(s){if(!this._platform.isBrowser)return;const d=s.rootNode,w=this._rootNodeFocusListenerCount.get(d)||0;w||this._ngZone.runOutsideAngular(()=>{d.addEventListener("focus",this._rootNodeFocusAndBlurListener,Ti),d.addEventListener("blur",this._rootNodeFocusAndBlurListener,Ti)}),this._rootNodeFocusListenerCount.set(d,w+1),1==++this._monitoredElementCount&&this._ngZone.runOutsideAngular(()=>{const N=this._getDocument(),te=this._getWindow();N.addEventListener("keydown",this._documentKeydownListener,Ti),N.addEventListener("mousedown",this._documentMousedownListener,Ti),N.addEventListener("touchstart",this._documentTouchstartListener,Ti),te.addEventListener("focus",this._windowFocusListener)})}_removeGlobalListeners(s){const d=s.rootNode;if(this._rootNodeFocusListenerCount.has(d)){const w=this._rootNodeFocusListenerCount.get(d);w>1?this._rootNodeFocusListenerCount.set(d,w-1):(d.removeEventListener("focus",this._rootNodeFocusAndBlurListener,Ti),d.removeEventListener("blur",this._rootNodeFocusAndBlurListener,Ti),this._rootNodeFocusListenerCount.delete(d))}if(!--this._monitoredElementCount){const w=this._getDocument(),N=this._getWindow();w.removeEventListener("keydown",this._documentKeydownListener,Ti),w.removeEventListener("mousedown",this._documentMousedownListener,Ti),w.removeEventListener("touchstart",this._documentTouchstartListener,Ti),N.removeEventListener("focus",this._windowFocusListener),clearTimeout(this._windowFocusTimeoutId),clearTimeout(this._touchTimeoutId),clearTimeout(this._originTimeoutId)}}_originChanged(s,d,w){this._setClasses(s,d),this._emitOrigin(w.subject,d),this._lastFocusOrigin=d}_getClosestElementsInfo(s){const d=[];return this._elementInfo.forEach((w,N)=>{(N===s||w.checkChildren&&N.contains(s))&&d.push([N,w])}),d}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(h.R0b),h.LFG(ee),h.LFG(me.K0,8),h.LFG(il,8))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(h.R0b),(0,h.LFG)(ee),(0,h.LFG)(me.K0,8),(0,h.LFG)(il,8))},token:m,providedIn:"root"}),m})();function No(m){return m.composedPath?m.composedPath()[0]:m.target}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const ba="cdk-high-contrast-black-on-white",Lo="cdk-high-contrast-white-on-black",Zs="cdk-high-contrast-active";let bc=(()=>{class m{constructor(s,d){this._platform=s,this._document=d}getHighContrastMode(){if(!this._platform.isBrowser)return 0;const s=this._document.createElement("div");s.style.backgroundColor="rgb(1,2,3)",s.style.position="absolute",this._document.body.appendChild(s);const d=this._document.defaultView||window,w=d&&d.getComputedStyle?d.getComputedStyle(s):null,N=(w&&w.backgroundColor||"").replace(/ /g,"");switch(this._document.body.removeChild(s),N){case"rgb(0,0,0)":return 2;case"rgb(255,255,255)":return 1}return 0}_applyBodyHighContrastModeCssClasses(){if(this._platform.isBrowser&&this._document.body){const s=this._document.body.classList;s.remove(Zs),s.remove(ba),s.remove(Lo);const d=this.getHighContrastMode();1===d?(s.add(Zs),s.add(ba)):2===d&&(s.add(Zs),s.add(Lo))}}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(ee),h.LFG(me.K0))},m.\u0275prov=(0,h.Yz7)({factory:function(){return new m((0,h.LFG)(ee),(0,h.LFG)(me.K0))},token:m,providedIn:"root"}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const Bo=new h.GfV("11.2.8");
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */S(6360);const qn=new h.GfV("11.2.8"),ll=new h.OlP("mat-sanity-checks",{providedIn:"root",factory:function al(){return!0}});let ji,Ai=(()=>{class m{constructor(s,d,w){this._hasDoneGlobalChecks=!1,this._document=w,s._applyBodyHighContrastModeCssClasses(),this._sanityChecks=d,this._hasDoneGlobalChecks||(this._checkDoctypeIsDefined(),this._checkThemeIsPresent(),this._checkCdkVersionMatch(),this._hasDoneGlobalChecks=!0)}_getWindow(){const s=this._document.defaultView||window;return"object"==typeof s&&s?s:null}_checksAreEnabled(){return(0,h.X6Q)()&&!this._isTestEnv()}_isTestEnv(){const s=this._getWindow();return s&&(s.__karma__||s.jasmine)}_checkDoctypeIsDefined(){this._checksAreEnabled()&&(!0===this._sanityChecks||this._sanityChecks.doctype)&&!this._document.doctype&&console.warn("Current document does not have a doctype. This may cause some Angular Material components not to behave as expected.")}_checkThemeIsPresent(){if(!this._checksAreEnabled()||!1===this._sanityChecks||!this._sanityChecks.theme||!this._document.body||"function"!=typeof getComputedStyle)return;const d=this._document.createElement("div");d.classList.add("mat-theme-loaded-marker"),this._document.body.appendChild(d);const w=getComputedStyle(d);w&&"none"!==w.display&&console.warn("Could not find Angular Material core theme. Most Material components may not work as expected. For more info refer to the theming guide: https://material.angular.io/guide/theming"),this._document.body.removeChild(d)}_checkCdkVersionMatch(){this._checksAreEnabled()&&(!0===this._sanityChecks||this._sanityChecks.version)&&qn.full!==Bo.full&&console.warn("The Angular Material version ("+qn.full+") does not match the Angular CDK version ("+Bo.full+").\nPlease ensure the versions of these two packages exactly match.")}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(bc),h.LFG(ll,8),h.LFG(me.K0))},m.\u0275mod=h.oAB({type:m}),m.\u0275inj=h.cJS({imports:[[Ct.vT],Ct.vT]}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */try{ji="undefined"!=typeof Intl}catch(m){ji=!1}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+var Ma=S(8514),si=S(1777);
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function gh(m,a){}class fs{constructor(){this.role="dialog",this.panelClass="",this.hasBackdrop=!0,this.backdropClass="",this.disableClose=!1,this.width="",this.height="",this.maxWidth="80vw",this.data=null,this.ariaDescribedBy=null,this.ariaLabelledBy=null,this.ariaLabel=null,this.autoFocus=!0,this.restoreFocus=!0,this.closeOnNavigation=!0}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Ta={dialogContainer:(0,si.X$)("dialogContainer",[(0,si.SB)("void, exit",(0,si.oB)({opacity:0,transform:"scale(0.7)"})),(0,si.SB)("enter",(0,si.oB)({transform:"none"})),(0,si.eR)("* => enter",(0,si.jt)("150ms cubic-bezier(0, 0, 0.2, 1)",(0,si.oB)({transform:"none",opacity:1}))),(0,si.eR)("* => void, * => exit",(0,si.jt)("75ms cubic-bezier(0.4, 0.0, 0.2, 1)",(0,si.oB)({opacity:0})))])};
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let Hc=(()=>{class m extends Xt{constructor(s,d,w,N,te,Se){super(),this._elementRef=s,this._focusTrapFactory=d,this._changeDetectorRef=w,this._config=te,this._focusMonitor=Se,this._animationStateChanged=new h.vpe,this._elementFocusedBeforeDialogWasOpened=null,this._closeInteractionType=null,this.attachDomPortal=xe=>(this._portalOutlet.hasAttached(),this._portalOutlet.attachDomPortal(xe)),this._ariaLabelledBy=te.ariaLabelledBy||null,this._document=N}_initializeWithAttachedContent(){this._setupFocusTrap(),this._capturePreviouslyFocusedElement(),this._focusDialogContainer()}attachComponentPortal(s){return this._portalOutlet.hasAttached(),this._portalOutlet.attachComponentPortal(s)}attachTemplatePortal(s){return this._portalOutlet.hasAttached(),this._portalOutlet.attachTemplatePortal(s)}_recaptureFocus(){this._containsFocus()||(!this._config.autoFocus||!this._focusTrap.focusInitialElement())&&this._elementRef.nativeElement.focus()}_trapFocus(){this._config.autoFocus?this._focusTrap.focusInitialElementWhenReady():this._containsFocus()||this._elementRef.nativeElement.focus()}_restoreFocus(){const s=this._elementFocusedBeforeDialogWasOpened;if(this._config.restoreFocus&&s&&"function"==typeof s.focus){const d=this._getActiveElement(),w=this._elementRef.nativeElement;(!d||d===this._document.body||d===w||w.contains(d))&&(this._focusMonitor?(this._focusMonitor.focusVia(s,this._closeInteractionType),this._closeInteractionType=null):s.focus())}this._focusTrap&&this._focusTrap.destroy()}_setupFocusTrap(){this._focusTrap=this._focusTrapFactory.create(this._elementRef.nativeElement)}_capturePreviouslyFocusedElement(){this._document&&(this._elementFocusedBeforeDialogWasOpened=this._getActiveElement())}_focusDialogContainer(){this._elementRef.nativeElement.focus&&this._elementRef.nativeElement.focus()}_containsFocus(){const s=this._elementRef.nativeElement,d=this._getActiveElement();return s===d||s.contains(d)}_getActiveElement(){var s;const d=this._document.activeElement;return(null===(s=null==d?void 0:d.shadowRoot)||void 0===s?void 0:s.activeElement)||d}}return m.\u0275fac=function(s){return new(s||m)(h.Y36(h.SBq),h.Y36(yo),h.Y36(h.sBO),h.Y36(me.K0,8),h.Y36(fs),h.Y36(sl))},m.\u0275dir=h.lG2({type:m,viewQuery:function(s,d){if(1&s&&h.Gf(Lr,7),2&s){let w;h.iGM(w=h.CRH())&&(d._portalOutlet=w.first)}},features:[h.qOj]}),m})(),Aa=(()=>{class m extends Hc{constructor(){super(...arguments),this._state="enter"}_onAnimationDone({toState:s,totalTime:d}){"enter"===s?(this._trapFocus(),this._animationStateChanged.next({state:"opened",totalTime:d})):"exit"===s&&(this._restoreFocus(),this._animationStateChanged.next({state:"closed",totalTime:d}))}_onAnimationStart({toState:s,totalTime:d}){"enter"===s?this._animationStateChanged.next({state:"opening",totalTime:d}):("exit"===s||"void"===s)&&this._animationStateChanged.next({state:"closing",totalTime:d})}_startExitAnimation(){this._state="exit",this._changeDetectorRef.markForCheck()}}return m.\u0275fac=function(){let a;return function(d){return(a||(a=h.n5z(m)))(d||m)}}(),m.\u0275cmp=h.Xpm({type:m,selectors:[["mat-dialog-container"]],hostAttrs:["tabindex","-1","aria-modal","true",1,"mat-dialog-container"],hostVars:6,hostBindings:function(s,d){1&s&&h.WFA("@dialogContainer.start",function(N){return d._onAnimationStart(N)})("@dialogContainer.done",function(N){return d._onAnimationDone(N)}),2&s&&(h.Ikx("id",d._id),h.uIk("role",d._config.role)("aria-labelledby",d._config.ariaLabel?null:d._ariaLabelledBy)("aria-label",d._config.ariaLabel)("aria-describedby",d._config.ariaDescribedBy||null),h.d8E("@dialogContainer",d._state))},features:[h.qOj],decls:1,vars:0,consts:[["cdkPortalOutlet",""]],template:function(s,d){1&s&&h.YNc(0,gh,0,0,"ng-template",0)},directives:[Lr],styles:[".mat-dialog-container{display:block;padding:24px;border-radius:4px;box-sizing:border-box;overflow:auto;outline:0;width:100%;height:100%;min-height:inherit;max-height:inherit}.cdk-high-contrast-active .mat-dialog-container{outline:solid 1px}.mat-dialog-content{display:block;margin:0 -24px;padding:0 24px;max-height:65vh;overflow:auto;-webkit-overflow-scrolling:touch}.mat-dialog-title{margin:0 0 20px;display:block}.mat-dialog-actions{padding:8px 0;display:flex;flex-wrap:wrap;min-height:52px;align-items:center;box-sizing:content-box;margin-bottom:-24px}.mat-dialog-actions[align=end]{justify-content:flex-end}.mat-dialog-actions[align=center]{justify-content:center}.mat-dialog-actions .mat-button-base+.mat-button-base,.mat-dialog-actions .mat-mdc-button-base+.mat-mdc-button-base{margin-left:8px}[dir=rtl] .mat-dialog-actions .mat-button-base+.mat-button-base,[dir=rtl] .mat-dialog-actions .mat-mdc-button-base+.mat-mdc-button-base{margin-left:0;margin-right:8px}\n"],encapsulation:2,data:{animation:[Ta.dialogContainer]}}),m})(),$c=0;
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Ia{constructor(a,s,d="mat-dialog-"+$c++){this._overlayRef=a,this._containerInstance=s,this.id=d,this.disableClose=this._containerInstance._config.disableClose,this._afterOpened=new j.xQ,this._afterClosed=new j.xQ,this._beforeClosed=new j.xQ,this._state=0,s._id=d,s._animationStateChanged.pipe((0,fr.h)(w=>"opened"===w.state),(0,_n.q)(1)).subscribe(()=>{this._afterOpened.next(),this._afterOpened.complete()}),s._animationStateChanged.pipe((0,fr.h)(w=>"closed"===w.state),(0,_n.q)(1)).subscribe(()=>{clearTimeout(this._closeFallbackTimeout),this._finishDialogClose()}),a.detachments().subscribe(()=>{this._beforeClosed.next(this._result),this._beforeClosed.complete(),this._afterClosed.next(this._result),this._afterClosed.complete(),this.componentInstance=null,this._overlayRef.dispose()}),a.keydownEvents().pipe((0,fr.h)(w=>27===w.keyCode&&!this.disableClose&&!
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function br(m,...a){return a.length?a.some(s=>m[s]):m.altKey||m.shiftKey||m.ctrlKey||m.metaKey}(w))).subscribe(w=>{w.preventDefault(),Oa(this,"keyboard")}),a.backdropClick().subscribe(()=>{this.disableClose?this._containerInstance._recaptureFocus():Oa(this,"mouse")})}close(a){this._result=a,this._containerInstance._animationStateChanged.pipe((0,fr.h)(s=>"closing"===s.state),(0,_n.q)(1)).subscribe(s=>{this._beforeClosed.next(a),this._beforeClosed.complete(),this._overlayRef.detachBackdrop(),this._closeFallbackTimeout=setTimeout(()=>this._finishDialogClose(),s.totalTime+100)}),this._state=1,this._containerInstance._startExitAnimation()}afterOpened(){return this._afterOpened}afterClosed(){return this._afterClosed}beforeClosed(){return this._beforeClosed}backdropClick(){return this._overlayRef.backdropClick()}keydownEvents(){return this._overlayRef.keydownEvents()}updatePosition(a){let s=this._getPositionStrategy();return a&&(a.left||a.right)?a.left?s.left(a.left):s.right(a.right):s.centerHorizontally(),a&&(a.top||a.bottom)?a.top?s.top(a.top):s.bottom(a.bottom):s.centerVertically(),this._overlayRef.updatePosition(),this}updateSize(a="",s=""){return this._overlayRef.updateSize({width:a,height:s}),this._overlayRef.updatePosition(),this}addPanelClass(a){return this._overlayRef.addPanelClass(a),this}removePanelClass(a){return this._overlayRef.removePanelClass(a),this}getState(){return this._state}_finishDialogClose(){this._state=2,this._overlayRef.dispose()}_getPositionStrategy(){return this._overlayRef.getConfig().positionStrategy}}function Oa(m,a,s){return void 0!==m._containerInstance&&(m._containerInstance._closeInteractionType=a),m.close(s)
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}const zc=new h.OlP("MatDialogData"),Gc=new h.OlP("mat-dialog-default-options"),Sl=new h.OlP("mat-dialog-scroll-strategy"),Ml={provide:Sl,deps:[Ns],useFactory:function Pa(m){return()=>m.scrollStrategies.block()}};let Ra=(()=>{class m{constructor(s,d,w,N,te,Se,xe,ze,gt){this._overlay=s,this._injector=d,this._defaultOptions=w,this._parentDialog=N,this._overlayContainer=te,this._dialogRefConstructor=xe,this._dialogContainerType=ze,this._dialogDataToken=gt,this._openDialogsAtThisLevel=[],this._afterAllClosedAtThisLevel=new j.xQ,this._afterOpenedAtThisLevel=new j.xQ,this._ariaHiddenElements=new Map,this.afterAllClosed=(0,Ma.P)(()=>this.openDialogs.length?this._getAfterAllClosed():this._getAfterAllClosed().pipe((0,Yr.O)(void 0))),this._scrollStrategy=Se}get openDialogs(){return this._parentDialog?this._parentDialog.openDialogs:this._openDialogsAtThisLevel}get afterOpened(){return this._parentDialog?this._parentDialog.afterOpened:this._afterOpenedAtThisLevel}_getAfterAllClosed(){const s=this._parentDialog;return s?s._getAfterAllClosed():this._afterAllClosedAtThisLevel}open(s,d){d=function Yc(m,a){return Object.assign(Object.assign({},a),m)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(d,this._defaultOptions||new fs),d.id&&this.getDialogById(d.id);const w=this._createOverlay(d),N=this._attachDialogContainer(w,d),te=this._attachDialogContent(s,N,w,d);return this.openDialogs.length||this._hideNonDialogContentFromAssistiveTechnology(),this.openDialogs.push(te),te.afterClosed().subscribe(()=>this._removeOpenDialog(te)),this.afterOpened.next(te),N._initializeWithAttachedContent(),te}closeAll(){this._closeDialogs(this.openDialogs)}getDialogById(s){return this.openDialogs.find(d=>d.id===s)}ngOnDestroy(){this._closeDialogs(this._openDialogsAtThisLevel),this._afterAllClosedAtThisLevel.complete(),this._afterOpenedAtThisLevel.complete()}_createOverlay(s){const d=this._getOverlayConfig(s);return this._overlay.create(d)}_getOverlayConfig(s){const d=new R({positionStrategy:this._overlay.position().global(),scrollStrategy:s.scrollStrategy||this._scrollStrategy(),panelClass:s.panelClass,hasBackdrop:s.hasBackdrop,direction:s.direction,minWidth:s.minWidth,minHeight:s.minHeight,maxWidth:s.maxWidth,maxHeight:s.maxHeight,disposeOnNavigation:s.closeOnNavigation});return s.backdropClass&&(d.backdropClass=s.backdropClass),d}_attachDialogContainer(s,d){const N=h.zs3.create({parent:d&&d.viewContainerRef&&d.viewContainerRef.injector||this._injector,providers:[{provide:fs,useValue:d}]}),te=new Fn(this._dialogContainerType,d.viewContainerRef,N,d.componentFactoryResolver);return s.attach(te).instance}_attachDialogContent(s,d,w,N){const te=new this._dialogRefConstructor(w,d,N.id);if(s instanceof h.Rgc)d.attachTemplatePortal(new on(s,null,{$implicit:N.data,dialogRef:te}));else{const Se=this._createInjector(N,te,d),xe=d.attachComponentPortal(new Fn(s,N.viewContainerRef,Se));te.componentInstance=xe.instance}return te.updateSize(N.width,N.height).updatePosition(N.position),te}_createInjector(s,d,w){const N=s&&s.viewContainerRef&&s.viewContainerRef.injector,te=[{provide:this._dialogContainerType,useValue:w},{provide:this._dialogDataToken,useValue:s.data},{provide:this._dialogRefConstructor,useValue:d}];return s.direction&&(!N||!N.get(Ct.Is,null))&&te.push({provide:Ct.Is,useValue:{value:s.direction,change:(0,Q.of)()}}),h.zs3.create({parent:N||this._injector,providers:te})}_removeOpenDialog(s){const d=this.openDialogs.indexOf(s);d>-1&&(this.openDialogs.splice(d,1),this.openDialogs.length||(this._ariaHiddenElements.forEach((w,N)=>{w?N.setAttribute("aria-hidden",w):N.removeAttribute("aria-hidden")}),this._ariaHiddenElements.clear(),this._getAfterAllClosed().next()))}_hideNonDialogContentFromAssistiveTechnology(){const s=this._overlayContainer.getContainerElement();if(s.parentElement){const d=s.parentElement.children;for(let w=d.length-1;w>-1;w--){let N=d[w];N!==s&&"SCRIPT"!==N.nodeName&&"STYLE"!==N.nodeName&&!N.hasAttribute("aria-live")&&(this._ariaHiddenElements.set(N,N.getAttribute("aria-hidden")),N.setAttribute("aria-hidden","true"))}}}_closeDialogs(s){let d=s.length;for(;d--;)s[d].close()}}return m.\u0275fac=function(s){return new(s||m)(h.Y36(Ns),h.Y36(h.zs3),h.Y36(void 0),h.Y36(void 0),h.Y36(Gt),h.Y36(void 0),h.Y36(h.DyG),h.Y36(h.DyG),h.Y36(h.OlP))},m.\u0275dir=h.lG2({type:m}),m})(),Wo=(()=>{class m extends Ra{constructor(s,d,w,N,te,Se,xe){super(s,d,N,Se,xe,te,Ia,Aa,zc)}}return m.\u0275fac=function(s){return new(s||m)(h.LFG(Ns),h.LFG(h.zs3),h.LFG(me.Ye,8),h.LFG(Gc,8),h.LFG(Sl),h.LFG(m,12),h.LFG(Gt))},m.\u0275prov=h.Yz7({token:m,factory:m.\u0275fac}),m})(),Tl=0,Al=(()=>{class m{constructor(s,d,w){this.dialogRef=s,this._elementRef=d,this._dialog=w,this.type="button"}ngOnInit(){this.dialogRef||(this.dialogRef=Pl(this._elementRef,this._dialog.openDialogs))}ngOnChanges(s){const d=s._matDialogClose||s._matDialogCloseResult;d&&(this.dialogResult=d.currentValue)}_onButtonClick(s){Oa(this.dialogRef,0===s.screenX&&0===s.screenY?"keyboard":"mouse",this.dialogResult)}}return m.\u0275fac=function(s){return new(s||m)(h.Y36(Ia,8),h.Y36(h.SBq),h.Y36(Wo))},m.\u0275dir=h.lG2({type:m,selectors:[["","mat-dialog-close",""],["","matDialogClose",""]],hostVars:2,hostBindings:function(s,d){1&s&&h.NdJ("click",function(N){return d._onButtonClick(N)}),2&s&&h.uIk("aria-label",d.ariaLabel||null)("type",d.type)},inputs:{type:"type",dialogResult:["mat-dialog-close","dialogResult"],ariaLabel:["aria-label","ariaLabel"],_matDialogClose:["matDialogClose","_matDialogClose"]},exportAs:["matDialogClose"],features:[h.TTD]}),m})(),Us=(()=>{class m{constructor(s,d,w){this._dialogRef=s,this._elementRef=d,this._dialog=w,this.id="mat-dialog-title-"+Tl++}ngOnInit(){this._dialogRef||(this._dialogRef=Pl(this._elementRef,this._dialog.openDialogs)),this._dialogRef&&Promise.resolve().then(()=>{const s=this._dialogRef._containerInstance;s&&!s._ariaLabelledBy&&(s._ariaLabelledBy=this.id)})}}return m.\u0275fac=function(s){return new(s||m)(h.Y36(Ia,8),h.Y36(h.SBq),h.Y36(Wo))},m.\u0275dir=h.lG2({type:m,selectors:[["","mat-dialog-title",""],["","matDialogTitle",""]],hostAttrs:[1,"mat-dialog-title"],hostVars:1,hostBindings:function(s,d){2&s&&h.Ikx("id",d.id)},inputs:{id:"id"},exportAs:["matDialogTitle"]}),m})(),Il=(()=>{class m{}return m.\u0275fac=function(s){return new(s||m)},m.\u0275dir=h.lG2({type:m,selectors:[["","mat-dialog-content",""],["mat-dialog-content"],["","matDialogContent",""]],hostAttrs:[1,"mat-dialog-content"]}),m})(),Ol=(()=>{class m{}return m.\u0275fac=function(s){return new(s||m)},m.\u0275dir=h.lG2({type:m,selectors:[["","mat-dialog-actions",""],["mat-dialog-actions"],["","matDialogActions",""]],hostAttrs:[1,"mat-dialog-actions"]}),m})();function Pl(m,a){let s=m.nativeElement.parentElement;for(;s&&!s.classList.contains("mat-dialog-container");)s=s.parentElement;return s?a.find(d=>d.id===s.id):null}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let Yo=(()=>{class m{}return m.\u0275fac=function(s){return new(s||m)},m.\u0275mod=h.oAB({type:m}),m.\u0275inj=h.cJS({providers:[Wo,Ml],imports:[[go,mn,Ai],Ai]}),m})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */},6252:(Le,he,S)=>{S.d(he,{Q:()=>Q});var D=S(4850),h=S(6435),j=S(7055);let Q=(()=>{class G{constructor($){this.api=$}list(){return this.api.get("/cache/list").pipe((0,D.U)($=>$.ok()?$.data:null)).toPromise()}get($){return this.api.get("/cache/get?key="+$).pipe((0,D.U)(U=>U.ok()?U.data:null)).toPromise()}remove($){return this.api.delete("/cache/remove?key="+$).pipe((0,D.U)(U=>U.ok()?U.data:null)).toPromise()}create($,U,z,L,k){return this.api.post("/cache/create",{key:$,content:U,duration:z,expirationWarning:L,tags:k}).pipe((0,D.U)(ie=>ie.ok()?null!=ie.data&&ie.data.ok:null)).toPromise()}}return G.\u0275fac=function($){return new($||G)(h.LFG(j.S))},G.\u0275prov=h.Yz7({token:G,factory:G.\u0275fac,providedIn:"root"}),G})()},6072:(Le,he,S)=>{S.d(he,{T:()=>U});var D=S(4850),h=S(1709),j=S(1086),Q=S(5145),G=S(6435),H=S(7055),$=S(5608);let U=(()=>{class z{constructor(k,X){this.api=k,this.socket=X}list(){return this.api.get("/channel/list").pipe((0,D.U)(k=>k.ok()?k.data:null)).toPromise()}get(k){return this.api.get("/channel/get?name="+k).pipe((0,D.U)(X=>X.ok()?X.data:null)).toPromise()}create(k){return this.api.post("/channel/create",k).pipe((0,D.U)(X=>X.ok()?X.data:null)).toPromise()}remove(k){return this.api.delete("/channel/delete?name="+k).toPromise()}getInitialMessage(k){return this.api.get("/channel/initial-message?name="+k).pipe((0,D.U)(X=>X.ok()?X.data:null)).toPromise()}getGraph(k,X){let ie="/channel/graph?resolution="+X;return null!=k&&k.length>0&&(ie+="&name="+k),(0,j.of)(this).pipe((0,h.zg)(()=>this.api.get(ie)),(0,D.U)(ye=>{if(!ye.success)return null;let De=ye.data;return De.labels=Q.O.createLabels(De.d.map(pe=>pe.u)),De})).toPromise()}setOption(k,X,ie){return this.api.put("/channel/option",{target:k,name:X,value:ie}).pipe((0,D.U)(De=>De.ok()?De.data:null)).toPromise()}}return z.\u0275fac=function(k){return new(k||z)(G.LFG(H.S),G.LFG($.i))},z.\u0275prov=G.Yz7({token:z,factory:z.\u0275fac,providedIn:"root"}),z})()},1887:(Le,he,S)=>{S.d(he,{D:()=>j});var D=S(9808),h=S(6435);let j=(()=>{class Q{}return Q.\u0275fac=function(H){return new(H||Q)},Q.\u0275mod=h.oAB({type:Q}),Q.\u0275inj=h.cJS({providers:[D.uU],imports:[[D.ez]]}),Q})()},3349:(Le,he,S)=>{S.d(he,{g:()=>z});var D=S(8929),h=S(1086),j=S(4850),Q=S(1709),G=S(5145),H=S(6435),$=S(7055),U=S(5608);let z=(()=>{class L{constructor(X,ie){this.api=X,this.socket=ie,this._queues=[],this._oncreated=new D.xQ,this._onremoved=new D.xQ,this._onupdated=new D.xQ}get queues(){return this._queues}get oncreated(){return this._oncreated}get onremoved(){return this._onremoved}get onupdated(){return this._onupdated}list(){return this.api.get("/queue/list").pipe((0,j.U)(X=>X.ok()?X.data:null)).toPromise()}listSummary(){return this.api.get("/queue/list-names").pipe((0,j.U)(X=>X.ok()?X.data:null)).toPromise()}getManagers(){return this.api.get("/queue/managers").pipe((0,j.U)(X=>X.ok()?X.data:null)).toPromise()}get(X){return this.api.get("/queue/get?name="+X).pipe((0,j.U)(ie=>ie.ok()?ie.data:null)).toPromise()}getGraph(X,ie){let ye="/queue/graph?resolution="+ie;return null!=X&&X.length>0&&(ye+="&name="+X),(0,h.of)(this).pipe((0,Q.zg)(()=>this.api.get(ye)),(0,j.U)(De=>{if(!De.success)return null;let pe={store:{n:De.data.name,r:De.data.resolution,d:De.data.store},stream:{n:De.data.name,r:De.data.resolution,d:De.data.stream}};return pe.store.labels=G.O.createLabels(pe.store.d.map(fe=>fe.u)),pe.stream.labels=G.O.createLabels(pe.stream.d.map(fe=>fe.u)),pe})).toPromise()}create(X){return this.api.post("/queue/create",X).pipe((0,j.U)(ie=>ie.ok()?ie.data:null)).toPromise()}setOption(X,ie,ye){return this.api.put("/queue/option",{target:X,name:ie,value:ye}).pipe((0,j.U)(pe=>pe.ok()?pe.data:null)).toPromise()}push(X){return this.api.post("/queue/push",X).pipe((0,j.U)(ie=>ie.ok()?ie.data:null)).toPromise()}read(X){return this.api.get("/queue/read?name="+X).pipe((0,j.U)(ie=>ie.ok()?ie.data:null)).toPromise()}consume(X){return this.api.get("/queue/consume?name="+X).pipe((0,j.U)(ie=>ie.ok()?ie.data:null)).toPromise()}status(X,ie){let ye=new FormData;return ye.append("name",X),ye.append("status",ie),this.api.putForm("/queue/status",ye).pipe((0,j.U)(De=>De.ok()?De.data:null)).toPromise()}clear(X){let ie=new FormData;return ie.append("name",X),this.api.putForm("/queue/clear",ie).pipe((0,j.U)(ye=>ye.ok()?ye.data:null)).toPromise()}delete(X){return this.api.delete("/queue/delete?name="+X).pipe((0,j.U)(ie=>ie.ok()?ie.data:null)).toPromise()}move(X,ie){let ye=new FormData;return ye.append("name",X),ye.append("target",ie),this.api.postForm("/queue/move-messages",ye).pipe((0,j.U)(De=>De.ok()?De.data:null)).toPromise()}resetStats(X){return this.api.putForm("/queue/reset-stats",null).pipe((0,j.U)(ie=>ie.ok()?ie.data:null)).toPromise()}}return L.\u0275fac=function(X){return new(X||L)(H.LFG($.S),H.LFG(U.i))},L.\u0275prov=H.Yz7({token:L,factory:L.\u0275fac,providedIn:"root"}),L})()},2340:(Le,he,S)=>{S.d(he,{N:()=>D});const D={production:!0,version:"6.7.1",api:{url:"/api",websocket:"/"},storage:{token:"token"}}},7055:(Le,he,S)=>{S.d(he,{S:()=>ie});var D=S(520),h=S(2986),j=S(1709),Q=S(4850),G=S(7221),H=S(4290),$=S(2198),U=S(1086),z=S(2340);class L{ok(){return this.success&&this.data}getErrorMessage(){return this.statusMessage?this.statusMessage:null}}var k=S(6435),X=S(5420);let ie=(()=>{class ye{constructor(pe,fe){this.http=pe,this.session=fe}getOptions(pe){let fe=this.session.get(),Be=new D.WM;return Be=Be.set("Access-Control-Allow-Origin","*"),null!=pe&&(Be=Be.set("Content-Type",pe)),null!=fe&&null!=fe.token&&fe.token.length>0&&(Be=Be.set("Authorization","Bearer "+fe.token)),{headers:Be,withCredentials:!0}}get(pe,fe){return fe?this.requestProgress(!0,"GET",pe,null,fe):this.request(!0,"GET",pe,null)}delete(pe,fe,Be){return Be?this.requestProgress(!0,"DELETE",pe,JSON.stringify(fe),Be):this.request(!0,"DELETE",pe,JSON.stringify(fe))}post(pe,fe,Be){return Be?this.requestProgress(!0,"POST",pe,JSON.stringify(fe),Be):this.request(!0,"POST",pe,JSON.stringify(fe))}put(pe,fe,Be){return Be?this.requestProgress(!0,"PUT",pe,JSON.stringify(fe),Be):this.request(!0,"PUT",pe,JSON.stringify(fe))}patch(pe,fe,Be){return Be?this.requestProgress(!0,"PATCH",pe,JSON.stringify(fe),Be):this.request(!0,"PATCH",pe,JSON.stringify(fe))}postForm(pe,fe,Be){return Be?this.requestProgress(!1,"POST",pe,fe,Be):this.request(!1,"POST",pe,fe)}putForm(pe,fe,Be){return Be?this.requestProgress(!1,"PUT",pe,fe,Be):this.request(!1,"PUT",pe,fe)}patchForm(pe,fe,Be){return Be?this.requestProgress(!1,"PATCH",pe,fe,Be):this.request(!1,"PATCH",pe,fe)}request(pe,fe,Be,Ye){return(0,U.of)({json:pe,method:fe,url:Be,body:Ye}).pipe((0,h.q)(1),(0,j.zg)(Ue=>{let $e=this.getOptions(Ue.json?"application/json":null),ae=Ue.url;if(ae.indexOf("//")<0){let Pe="";ae.startsWith("/")||(Pe="/"),ae=z.N.api.url+Pe+ae}switch(fe){case"GET":return this.http.get(ae,$e);case"DELETE":return this.http.delete(ae,$e);case"POST":return this.http.post(ae,Ye,$e);case"PUT":return this.http.put(ae,Ye,$e);case"PATCH":return this.http.patch(ae,Ye,$e)}return(0,U.of)(null)}),(0,Q.U)(Ue=>{var $e=Ue;let ae=new L;return ae.statusCode=200,ae.statusMessage="OK",ae.data=$e,ae.success=!0,ae}),(0,G.K)(Ue=>{let $e=Ue,ae=new L;return ae.statusCode=$e.status,ae.statusMessage=$e.message,ae.error=$e.error,ae.success=!1,401==ae.statusCode&&(this.session.clear(),window.location.href="/"),(0,U.of)(ae)}))}requestProgress(pe,fe,Be,Ye,Ue){let $e=!1;return(0,U.of)({json:pe,method:fe,url:Be,body:Ye}).pipe((0,H.o)(()=>!$e&&!Ue.canceled),(0,j.zg)(ae=>{let Pe=this.getOptions(ae.json?"application/json":null);Pe.reportProgress=!0,Pe.observe="events";let rt=ae.url;if(rt.indexOf("//")<0){let cn="";rt.startsWith("/")||(cn="/"),rt=z.N.api.url+cn+rt}switch(fe){case"GET":return this.http.get(rt,Pe);case"DELETE":return this.http.delete(rt,Pe);case"POST":return this.http.post(rt,Ye,Pe);case"PUT":return this.http.put(rt,Ye,Pe);case"PATCH":return this.http.patch(rt,Ye,Pe)}return(0,U.of)(null)}),(0,Q.U)(ae=>{if(Ue.canceled)throw new Error("file upload canceled");if(ae.type==D.dt.UploadProgress){if(Ue){let Pe=Math.round(100*ae.loaded/ae.total);Ue.progress(Pe)}return null}return ae.type==D.dt.Response?($e=!0,ae):null}),(0,$.h)(ae=>null!=ae),(0,Q.U)(ae=>{var Pe=ae;let rt=new L;return rt.statusCode=200,rt.statusMessage="OK",rt.data=Pe.body,rt.success=!0,rt}),(0,G.K)(ae=>{let Pe=ae,rt=new L;return rt.statusCode=Pe.status,rt.statusMessage=Pe.message,rt.error=Pe.error,rt.success=!1,401==rt.statusCode&&this.session.clear(),(0,U.of)(rt)}))}toTransaction(pe){return pe.pipe((0,j.zg)(fe=>(0,U.of)(null!=fe.data?fe.data:null!=fe.error?fe.error:null))).toPromise()}toObject(pe){return pe.pipe((0,j.zg)(fe=>fe.ok()?(0,U.of)(fe.data):(0,U.of)(null))).toPromise()}}return ye.\u0275fac=function(pe){return new(pe||ye)(k.LFG(D.eN),k.LFG(X.m))},ye.\u0275prov=k.Yz7({token:ye,factory:ye.\u0275fac,providedIn:"root"}),ye})()},2962:(Le,he,S)=>{S.d(he,{H:()=>j});var D=S(4290),h=S(6435);let j=(()=>{class Q{constructor(){this._destroyed=!1}on(H){return H.pipe((0,D.o)(()=>!this._destroyed))}ngOnDestroy(){this._destroyed=!0}}return Q.\u0275fac=function(H){return new(H||Q)},Q.\u0275dir=h.lG2({type:Q}),Q})()},5145:(Le,he,S)=>{S.d(he,{O:()=>h});var D=S(9808);class h{static createTimeLabels(Q,G,H){let $=[],U=(new Date).getTime()/1e3;H||(U-=G*Q);for(let z=0;z<Q;z++)$.push(this.findTimeFromUnixSeconds(U)),H?U-=G:U+=G;return $}static createLabels(Q){let G=[];for(let H=0;H<Q.length;H++)G.push(this.findTimeFromUnixSeconds(Q[H]));return G}static findTimeFromUnixSeconds(Q){let G=new Date(1e3*Q);return this._pipe.transform(G,"HH:mm:ss")}}h._pipe=new D.uU("en-US")},1746:(Le,he,S)=>{var D=S(2313),h=S(6435),j=S(823),Q=S(5420);let G=(()=>{class _e{constructor(mt,un){this.session=mt,this.router=un}canActivate(mt,un){let Ln=this.session.get();if(null==Ln)return this.router.navigateByUrl("/login"),!1;let fr=(new Date).getTime();return!(Ln.expiration<fr&&(this.router.navigateByUrl("/login"),1))}}return _e.\u0275fac=function(mt){return new(mt||_e)(h.LFG(Q.m),h.LFG(j.F0))},_e.\u0275prov=h.Yz7({token:_e,factory:_e.\u0275fac,providedIn:"root"}),_e})();var H=S(2962);let $=(()=>{class _e extends H.H{constructor(){super()}ngOnInit(){}}return _e.\u0275fac=function(mt){return new(mt||_e)},_e.\u0275cmp=h.Xpm({type:_e,selectors:[["app-guest-layout"]],features:[h.qOj],decls:11,vars:0,consts:[[1,"gbody"],[1,"gframe",2,"min-width","340px"],[1,"glogo"],["src","/assets/horse.svg","alt","Horse Messaging"],[1,"gcontent"]],template:function(mt,un){1&mt&&(h.TgZ(0,"div",0)(1,"div",1)(2,"div",2),h._UZ(3,"img",3),h.TgZ(4,"div")(5,"h2"),h._uU(6,"Jockey"),h.qZA(),h.TgZ(7,"h1"),h._uU(8,"Horse Messaging Server"),h.qZA()()(),h.TgZ(9,"div",4),h._UZ(10,"router-outlet"),h.qZA()()())},directives:[j.lC],styles:[".gbody[_ngcontent-%COMP%]{margin:0;padding:0;display:flex;flex-direction:column;align-items:center;align-content:center;justify-content:center;justify-items:center;height:100vh;box-sizing:border-box;background-color:#222;text-align:center}.gframe[_ngcontent-%COMP%]{padding:32px;box-sizing:border-box;flex:0 1 auto;text-align:center;display:flex;flex-direction:column;align-content:stretch;align-items:stretch;background-color:#111;border-radius:3px;border:1px solid #040404;box-shadow:0 0 12px #00000047}.glogo[_ngcontent-%COMP%]{display:flex;flex-direction:row;flex:0 0 auto;text-align:center;align-items:center;align-content:center;justify-items:center;justify-content:center;padding:8px 8px 32px}.glogo[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:48px;flex:0 0 auto}.glogo[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]{flex:0 1 auto;display:flex;flex-direction:column;align-items:flex-start;align-content:flex-start;padding:0 18px}.glogo[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%]{margin:0;padding:0;font-size:12px;line-height:20px;font-weight:400;color:#aaa}.glogo[_ngcontent-%COMP%]   div[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%]{margin:0;padding:0;font-size:20px;line-height:20px;font-weight:500;color:#ccc}.gcontent[_ngcontent-%COMP%]{flex:1 1 auto}@media screen and (min-height:700px){.gframe[_ngcontent-%COMP%]{margin-bottom:150px}}"]}),_e})();var U=S(2340),z=S(9808);function L(_e,Re){if(1&_e){const mt=h.EpF();h.TgZ(0,"div",14)(1,"span",15),h._uU(2),h.qZA(),h.TgZ(3,"button",16),h.NdJ("click",function(){return h.CHM(mt),h.oxw().logout()}),h._uU(4,"Logout"),h.qZA()()}if(2&_e){const mt=h.oxw();h.xp6(2),h.Oqu(mt.user.name)}}let k=(()=>{class _e extends H.H{constructor(mt,un){super(),this.session=mt,this.router=un}ngOnInit(){this.user=this.session.get(),this.version=U.N.version}logout(){this.session.clear(),this.router.navigateByUrl("/login")}}return _e.\u0275fac=function(mt){return new(mt||_e)(h.Y36(Q.m),h.Y36(j.F0))},_e.\u0275cmp=h.Xpm({type:_e,selectors:[["app-portal-layout"]],features:[h.qOj],decls:36,vars:2,consts:[[1,"headline"],[1,"logo"],["src","/assets/horse.svg","alt","Horse Messaging"],[1,"menu"],["routerLinkActive","active","routerLink","/dashboard"],["routerLinkActive","active","routerLink","/channels"],["routerLinkActive","active","routerLink","/queues"],["routerLinkActive","active","routerLink","/routers"],["routerLinkActive","active","routerLink","/cache"],["routerLinkActive","active","routerLink","/clients"],["routerLinkActive","active","routerLink","/console"],["class","user",4,"ngIf"],[1,"after-header"],[1,"portal-content"],[1,"user"],[1,"user-name"],[1,"logout",3,"click"]],template:function(mt,un){1&mt&&(h.TgZ(0,"header")(1,"div",0)(2,"div",1),h._UZ(3,"img",2),h.TgZ(4,"div")(5,"h1"),h._uU(6,"Horse Messaging Jockey"),h.qZA(),h.TgZ(7,"em"),h._uU(8),h.qZA()()(),h.TgZ(9,"div",3)(10,"ul")(11,"li")(12,"a",4),h._uU(13,"Dashboard"),h.qZA()(),h.TgZ(14,"li")(15,"a",5),h._uU(16,"Channels"),h.qZA()(),h.TgZ(17,"li")(18,"a",6),h._uU(19,"Queues"),h.qZA()(),h.TgZ(20,"li")(21,"a",7),h._uU(22,"Routers"),h.qZA()(),h.TgZ(23,"li")(24,"a",8),h._uU(25,"Cache"),h.qZA()(),h.TgZ(26,"li")(27,"a",9),h._uU(28,"Clients"),h.qZA()(),h.TgZ(29,"li")(30,"a",10),h._uU(31,"Console"),h.qZA()()()(),h.YNc(32,L,5,1,"div",11),h.qZA()(),h._UZ(33,"div",12),h.TgZ(34,"div",13),h._UZ(35,"router-outlet"),h.qZA()),2&mt&&(h.xp6(8),h.hij("Version ",un.version,""),h.xp6(24),h.Q6J("ngIf",un.user))},directives:[j.yS,j.Od,z.O5,j.lC],styles:["header[_ngcontent-%COMP%]{display:block;height:60px;box-sizing:border-box;background-color:#111;position:fixed;width:100%}.after-header[_ngcontent-%COMP%]{display:block;height:80px}.headline[_ngcontent-%COMP%]{display:flex;flex-direction:row;align-items:stretch;align-content:stretch}.headline[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]{flex:0 1 auto;display:flex;flex-direction:row;align-items:stretch;align-content:stretch;margin-right:100px}.headline[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{height:30px;margin:15px;flex:0 1 auto}.headline[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   h1[_ngcontent-%COMP%]{flex:1 2 auto;margin:14px 0 0;padding:0;font-size:16px;line-height:16px;font-weight:500;color:#e0e0e0}.headline[_ngcontent-%COMP%]   .logo[_ngcontent-%COMP%]   em[_ngcontent-%COMP%]{padding:0 0 0 1px;font-size:10px;font-weight:300;color:#aaa;font-style:normal}.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]{flex:1 2 auto}.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]{margin:13px 20px 0;padding:0;display:flex;flex-direction:row;align-items:flex-start;align-content:flex-start}.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]{display:flex;align-items:stretch;align-content:stretch;margin:0 4px}.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]{text-decoration:none;padding:10px 14px;background-color:transparent;color:#999;border-radius:2px;font-size:13px;line-height:13px;font-weight:500;cursor:pointer}.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]:hover{background-color:#222;color:#eee}.headline[_ngcontent-%COMP%]   .menu[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   a.active[_ngcontent-%COMP%]{background-color:#108030;color:#fff}.headline[_ngcontent-%COMP%]   .user[_ngcontent-%COMP%]{flex:0 3 auto;padding:12px}.headline[_ngcontent-%COMP%]   .user-name[_ngcontent-%COMP%]{font-size:14px;font-weight:400;color:#ccc;margin:0;padding:2px 10px 0}.headline[_ngcontent-%COMP%]   .logout[_ngcontent-%COMP%]{border:none;background-color:#c01010;color:#e0e0e0;font-style:13px;font-weight:500;border-radius:2px;line-height:13px;padding:10px 14px;margin:0 45px 0 20px}"]}),_e})();const X=[{path:"queue",component:k,loadChildren:()=>Promise.all([S.e(182),S.e(415),S.e(592),S.e(297)]).then(S.bind(S,297)).then(_e=>_e.QueueModule),canActivate:[G]},{path:"queues",component:k,loadChildren:()=>Promise.all([S.e(182),S.e(592),S.e(817)]).then(S.bind(S,1817)).then(_e=>_e.QueuesModule),canActivate:[G]},{path:"router",component:k,loadChildren:()=>Promise.all([S.e(182),S.e(592),S.e(333)]).then(S.bind(S,4333)).then(_e=>_e.HorseRouterModule),canActivate:[G]},{path:"routers",component:k,loadChildren:()=>Promise.all([S.e(182),S.e(632)]).then(S.bind(S,8632)).then(_e=>_e.RoutersModule),canActivate:[G]},{path:"cache",component:k,loadChildren:()=>Promise.all([S.e(182),S.e(928)]).then(S.bind(S,3928)).then(_e=>_e.CacheModule),canActivate:[G]},{path:"channel",component:k,loadChildren:()=>Promise.all([S.e(182),S.e(415),S.e(592),S.e(367)]).then(S.bind(S,7367)).then(_e=>_e.ChannelDetailModule),canActivate:[G]},{path:"channels",component:k,loadChildren:()=>Promise.all([S.e(182),S.e(592),S.e(102)]).then(S.bind(S,2102)).then(_e=>_e.ChannelsModule),canActivate:[G]},{path:"client",component:k,loadChildren:()=>Promise.all([S.e(182),S.e(415),S.e(220)]).then(S.bind(S,2220)).then(_e=>_e.ClientDetailModule),canActivate:[G]},{path:"clients",component:k,loadChildren:()=>S.e(380).then(S.bind(S,7380)).then(_e=>_e.ClientsModule),canActivate:[G]},{path:"nodes",component:k,loadChildren:()=>S.e(636).then(S.bind(S,6125)).then(_e=>_e.NodesModule),canActivate:[G]},{path:"handlers",component:k,loadChildren:()=>S.e(789).then(S.bind(S,789)).then(_e=>_e.HandlersModule),canActivate:[G]},{path:"console",component:k,loadChildren:()=>Promise.all([S.e(182),S.e(592),S.e(198)]).then(S.bind(S,1198)).then(_e=>_e.ConsoleModule),canActivate:[G]},{path:"login",component:$,loadChildren:()=>Promise.all([S.e(182),S.e(845)]).then(S.bind(S,7845)).then(_e=>_e.LoginModule)},{path:"dashboard",component:k,loadChildren:()=>Promise.all([S.e(415),S.e(592),S.e(113)]).then(S.bind(S,9113)).then(_e=>_e.DashboardModule),canActivate:[G]},{path:"",redirectTo:"dashboard",pathMatch:"full"}];let ie=(()=>{class _e{}return _e.\u0275fac=function(mt){return new(mt||_e)},_e.\u0275mod=h.oAB({type:_e}),_e.\u0275inj=h.cJS({imports:[[j.Bz.forRoot(X,{relativeLinkResolution:"legacy"})],j.Bz]}),_e})();var ye=S(5608);let De=(()=>{class _e extends H.H{constructor(mt,un){super(),this.session=mt,this.websocketService=un,this.session.onchanged.subscribe(Ln=>{Ln?this.websocketService.connect(Ln.token):this.websocketService.disconnect()}),this.session.run()}ngOnInit(){}}return _e.\u0275fac=function(mt){return new(mt||_e)(h.Y36(Q.m),h.Y36(ye.i))},_e.\u0275cmp=h.Xpm({type:_e,selectors:[["app-root"]],features:[h.qOj],decls:1,vars:0,template:function(mt,un){1&mt&&h._UZ(0,"router-outlet")},directives:[j.lC],styles:[""]}),_e})();var pe=S(3349),fe=S(4461),Be=S(7334);let Ye=(()=>{class _e{}return _e.\u0275fac=function(mt){return new(mt||_e)},_e.\u0275mod=h.oAB({type:_e}),_e.\u0275inj=h.cJS({imports:[[z.ez,j.Bz]]}),_e})();var Ue=S(6663);let $e=(()=>{class _e{}return _e.\u0275fac=function(mt){return new(mt||_e)},_e.\u0275mod=h.oAB({type:_e}),_e.\u0275inj=h.cJS({imports:[[z.ez,j.Bz,Ue.Is]]}),_e})();var ae=S(7055),Pe=S(520),rt=S(5037),cn=S(1632),Nt=S(1887),Tt=S(6252),lt=S(6360),Ut=S(6072);let ft=(()=>{class _e{}return _e.\u0275fac=function(mt){return new(mt||_e)},_e.\u0275mod=h.oAB({type:_e,bootstrap:[De]}),_e.\u0275inj=h.cJS({providers:[ae.S,ye.i,rt.s,Q.m,cn.n,pe.g,fe.r,Be.y,Ut.T,Tt.Q],imports:[[D.b2,ie,Ye,$e,Pe.JF,Nt.D,lt.PW,Ue.Is]]}),_e})();U.N.production&&(0,h.G48)(),D.q6().bootstrapModule(ft).catch(_e=>console.error(_e))},7334:(Le,he,S)=>{S.d(he,{y:()=>z});var D=S(8929),h=S(1086),j=S(4850),Q=S(1709),G=S(5145),H=S(6435),$=S(7055),U=S(5608);let z=(()=>{class L{constructor(X,ie){this.api=X,this.socket=ie,this._clients=[],this._onconnected=new D.xQ,this._ondisconnected=new D.xQ}get clients(){return this._clients}get onconnected(){return this._onconnected}get ondisconnected(){return this._ondisconnected}list(){return this.api.get("/client/list").pipe((0,j.U)(X=>X.ok()?(this._clients=X.data,X.data):null)).toPromise()}get(X){return this.api.get("/client/get?id="+X).pipe((0,j.U)(ie=>ie.ok()?(this._clients=ie.data,ie.data):null)).toPromise()}refresh(){return null}remove(X){return null}getGraph(X,ie){let ye="/client/graph?resolution="+ie;return null!=X&&X.length>0&&(ye+="&name="+X),(0,h.of)(this).pipe((0,Q.zg)(()=>this.api.get(ye)),(0,j.U)(De=>{if(!De.success)return null;let pe=De.data;return pe.labels=G.O.createLabels(pe.d.map(fe=>fe.u)),pe})).toPromise()}}return L.\u0275fac=function(X){return new(X||L)(H.LFG($.S),H.LFG(U.i))},L.\u0275prov=H.Yz7({token:L,factory:L.\u0275fac,providedIn:"root"}),L})()},5037:(Le,he,S)=>{S.d(he,{s:()=>Q});var D=S(4850),h=S(6435),j=S(7055);let Q=(()=>{class G{constructor($){this.api=$}load(){return this.api.get("/dashboard/stats").pipe((0,D.U)($=>$.ok()?$.data:null)).toPromise()}}return G.\u0275fac=function($){return new($||G)(h.LFG(j.S))},G.\u0275prov=h.Yz7({token:G,factory:G.\u0275fac,providedIn:"root"}),G})()},1632:(Le,he,S)=>{S.d(he,{n:()=>$});var D=S(1086),h=S(4850),j=S(1709),Q=S(5145),G=S(6435),H=S(7055);let $=(()=>{class U{constructor(L){this.api=L}list(){return this.api.get("/router/list").pipe((0,h.U)(L=>L.ok()?(this._routers=L.data,L.data):null)).toPromise()}create(L){return this.api.post("/router/create",L).pipe((0,h.U)(k=>k.ok()?k.data:null)).toPromise()}get(L){return this.api.get("/router/get?name="+L).pipe((0,h.U)(k=>k.ok()?k.data:null)).toPromise()}getGraph(L,k){let X="/router/graph?resolution="+k;return null!=L&&L.length>0&&(X+="&name="+L),(0,D.of)(this).pipe((0,j.zg)(()=>this.api.get(X)),(0,h.U)(ie=>{if(!ie.success)return null;let ye=ie.data;return ye.labels=Q.O.createLabels(ye.d.map(De=>De.u)),ye})).toPromise()}remove(L){return this.api.delete("/router/remove?name="+L).pipe((0,h.U)(k=>k.ok()?k.data:null)).toPromise()}addBinding(L){return this.api.post("/router/binding",L).pipe((0,h.U)(k=>k.ok()?k.data:null)).toPromise()}removeBinding(L,k){return this.api.delete("/router/binding?routerName="+L+"&bindingName="+k).pipe((0,h.U)(X=>X.ok()?X.data:null)).toPromise()}}return U.\u0275fac=function(L){return new(L||U)(G.LFG(H.S))},U.\u0275prov=G.Yz7({token:U,factory:U.\u0275fac,providedIn:"root"}),U})()},4461:(Le,he,S)=>{S.d(he,{r:()=>G});var D=S(4850),h=S(6435),j=S(7055),Q=S(5420);let G=(()=>{class H{constructor(U,z){this.api=U,this.session=z}login(U,z){return this.api.post("/user/login",{username:U,password:z}).pipe((0,D.U)(k=>(this.session.clear(),k.ok()&&k.data.ok?(this.session.set(k.data),this.session.get()):this.session.get()))).toPromise()}}return H.\u0275fac=function(U){return new(U||H)(h.LFG(j.S),h.LFG(Q.m))},H.\u0275prov=h.Yz7({token:H,factory:H.\u0275fac,providedIn:"root"}),H})()},5420:(Le,he,S)=>{S.d(he,{m:()=>$});var D=S(8929),h=S(1715),j=S(2340);let Q=(()=>{class U{static encode(L){return btoa(encodeURIComponent(L).replace(/%([0-9A-F]{2})/g,function(k,X){return String.fromCharCode(parseInt(X,16))}))}static decode(L){return decodeURIComponent(atob(L).split("").map(function(k){return"%"+("00"+k.charCodeAt(0).toString(16)).slice(-2)}).join(""))}static readBearer(L){let k=L.split(".");return 3!=k.length?null:this.decode(k[1])}static encryptx(L,k=!1){let Be,X=this.randomizeInteger(10,40),ie=this.randomizeInteger(10,99),ye=this._keyStr.substr(X,1),De=this.randomizeInteger(10,40),pe=this.randomizeInteger(10,99),fe=this._keyStr.substr(De,1);return Be=k?L:L.length>15?L.substr(0,15):L,ye+ie+this.encode(Be).replace("=","")+fe+pe}static decryptx(L){if(L.length<7)return null;let k=L.substr(3,L.length-6);return k.length%2==1&&(k+="="),this.decode(k)}static randomizeInteger(L,k){if(null==k&&(k=null==L?Number.MAX_SAFE_INTEGER:L,L=0),(L=Math.ceil(L))>(k=Math.floor(k))-1)throw new Error("Incorrect arguments.");return L+Math.floor((k-L)*Math.random())}}return U._keyStr="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",U})();class G{}var H=S(6435);let $=(()=>{class U{constructor(){this._current=null,this._changed=new D.xQ}get onchanged(){return this._changed.pipe()}run(){this._current=this.read(),this._changed=new D.xQ,(0,h.F)(1e3).subscribe(()=>{this._current=this.read()})}set(L){localStorage.setItem(j.N.storage.token,L.token);let k=this.deserialize(L.token);return this._current=k,this._changed.next(k),k}refresh(L){!localStorage.getItem(j.N.storage.token)||localStorage.setItem(j.N.storage.token,L)}clear(){let L=this._current;localStorage.removeItem(j.N.storage.token),this._current=null,this._changed&&null!=L&&this._changed.next(null)}get(){return this._current||(this._current=this.read()),this._current}read(){try{let L=localStorage.getItem(j.N.storage.token);if(null==L)return this._current&&this._changed&&this._changed.next(null),null;let k=this.deserialize(L);return!this._current&&this._changed&&k&&this._changed.next(k),this._current=k,k}catch(L){return localStorage.removeItem(j.N.storage.token),null}}deserialize(L){let k=JSON.parse(Q.readBearer(L)),X=new G;return X.token=L,X.id=k.sub,X.name=k.name,X.expiration=1e3*parseInt(k.exp),X}}return U.\u0275fac=function(L){return new(L||U)},U.\u0275prov=H.Yz7({token:U,factory:U.\u0275fac,providedIn:"root"}),U})()},5608:(Le,he,S)=>{S.d(he,{i:()=>Q});var D=S(8929),h=S(6435),j=(()=>{return(G=j||(j={}))[G.Disconnected=0]="Disconnected",G[G.Connecting=1]="Connecting",G[G.Connected=2]="Connected",j;var G})();let Q=(()=>{class G{constructor(){this._subscriptions=[],this._onconnected=new D.xQ,this._ondisconnected=new D.xQ,this._onmessage=new D.xQ}get onconnected(){return this._onconnected}get ondisconnected(){return this._ondisconnected}get onmessage(){return this._onmessage}get status(){return this._status}connect($){const U="ws://"+location.host+"?token="+$;this._socket=new WebSocket(U),this._socket.onopen=z=>{this._status=j.Connected,this._onconnected.next(this),this._subscriptions.forEach(L=>this.subscribe(L.channel,L.resolution))},this._socket.onclose=z=>{this._status=j.Disconnected,this._ondisconnected.next(this)},this._socket.onmessage=this.messageReceived.bind(this)}send($,U){if(!this._socket||this._status!==j.Connected)return!1;const L=JSON.stringify({type:$,payload:U});return this._socket.send(L),!0}disconnect(){if(null!=this._socket){try{this._socket.close()}catch($){}this._status=j.Disconnected,this._socket=null}}messageReceived($){const U=JSON.parse($.data);null==U||null==U.type||null==U.payload||this._onmessage.next(U)}subscribe($,U){this._subscriptions.push({channel:$,resolution:U}),this.send("subscribe",{channel:$,join:!0,resolution:U})}unsubscribe($){this._subscriptions=this._subscriptions.filter(U=>U.channel!=$),this.send("subscribe",{channel:$,join:!1})}}return G.\u0275fac=function($){return new($||G)},G.\u0275prov=h.Yz7({token:G,factory:G.\u0275fac,providedIn:"root"}),G})()},591:(Le,he,S)=>{S.d(he,{X:()=>j});var D=S(8929),h=S(5279);class j extends D.xQ{constructor(G){super(),this._value=G}get value(){return this.getValue()}_subscribe(G){const H=super._subscribe(G);return H&&!H.closed&&G.next(this._value),H}getValue(){if(this.hasError)throw this.thrownError;if(this.closed)throw new h.N;return this._value}next(G){super.next(this._value=G)}}},9312:(Le,he,S)=>{S.d(he,{P:()=>G});var D=S(8896),h=S(1086),j=S(1737);class G{constructor($,U,z){this.kind=$,this.value=U,this.error=z,this.hasValue="N"===$}observe($){switch(this.kind){case"N":return $.next&&$.next(this.value);case"E":return $.error&&$.error(this.error);case"C":return $.complete&&$.complete()}}do($,U,z){switch(this.kind){case"N":return $&&$(this.value);case"E":return U&&U(this.error);case"C":return z&&z()}}accept($,U,z){return $&&"function"==typeof $.next?this.observe($):this.do($,U,z)}toObservable(){switch(this.kind){case"N":return(0,h.of)(this.value);case"E":return(0,j._)(this.error);case"C":return(0,D.c)()}throw new Error("unexpected notification kind value")}static createNext($){return void 0!==$?new G("N",$):G.undefinedValueNotification}static createError($){return new G("E",void 0,$)}static createComplete(){return G.completeNotification}}G.completeNotification=new G("C"),G.undefinedValueNotification=new G("N",void 0)},2916:(Le,he,S)=>{S.d(he,{y:()=>k});var D=S(3489),j=S(7668),Q=S(3292),H=S(3821),$=S(5379);var L=S(2830);let k=(()=>{class ie{constructor(De){this._isScalar=!1,De&&(this._subscribe=De)}lift(De){const pe=new ie;return pe.source=this,pe.operator=De,pe}subscribe(De,pe,fe){const{operator:Be}=this,Ye=function G(ie,ye,De){if(ie){if(ie instanceof D.L)return ie;if(ie[j.b])return ie[j.b]()}return ie||ye||De?new D.L(ie,ye,De):new D.L(Q.c)}(De,pe,fe);if(Ye.add(Be?Be.call(Ye,this.source):this.source||L.v.useDeprecatedSynchronousErrorHandling&&!Ye.syncErrorThrowable?this._subscribe(Ye):this._trySubscribe(Ye)),L.v.useDeprecatedSynchronousErrorHandling&&Ye.syncErrorThrowable&&(Ye.syncErrorThrowable=!1,Ye.syncErrorThrown))throw Ye.syncErrorValue;return Ye}_trySubscribe(De){try{return this._subscribe(De)}catch(pe){L.v.useDeprecatedSynchronousErrorHandling&&(De.syncErrorThrown=!0,De.syncErrorValue=pe),function h(ie){for(;ie;){const{closed:ye,destination:De,isStopped:pe}=ie;if(ye||pe)return!1;ie=De&&De instanceof D.L?De:null}return!0}(De)?De.error(pe):console.warn(pe)}}forEach(De,pe){return new(pe=X(pe))((fe,Be)=>{let Ye;Ye=this.subscribe(Ue=>{try{De(Ue)}catch($e){Be($e),Ye&&Ye.unsubscribe()}},Be,fe)})}_subscribe(De){const{source:pe}=this;return pe&&pe.subscribe(De)}[H.L](){return this}pipe(...De){return 0===De.length?this:function z(ie){return 0===ie.length?$.y:1===ie.length?ie[0]:function(De){return ie.reduce((pe,fe)=>fe(pe),De)}}(De)(this)}toPromise(De){return new(De=X(De))((pe,fe)=>{let Be;this.subscribe(Ye=>Be=Ye,Ye=>fe(Ye),()=>pe(Be))})}}return ie.create=ye=>new ie(ye),ie})();function X(ie){if(ie||(ie=L.v.Promise||Promise),!ie)throw new Error("no Promise impl found");return ie}},3292:(Le,he,S)=>{S.d(he,{c:()=>j});var D=S(2830),h=S(2782);const j={closed:!0,next(Q){},error(Q){if(D.v.useDeprecatedSynchronousErrorHandling)throw Q;(0,h.z)(Q)},complete(){}}},826:(Le,he,S)=>{S.d(he,{L:()=>h});var D=S(3489);class h extends D.L{notifyNext(Q,G,H,$,U){this.destination.next(G)}notifyError(Q,G){this.destination.error(Q)}notifyComplete(Q){this.destination.complete()}}},8929:(Le,he,S)=>{S.d(he,{Yc:()=>$,xQ:()=>U});var D=S(2916),h=S(3489),j=S(2654),Q=S(5279),G=S(5283),H=S(7668);class $ extends h.L{constructor(k){super(k),this.destination=k}}let U=(()=>{class L extends D.y{constructor(){super(),this.observers=[],this.closed=!1,this.isStopped=!1,this.hasError=!1,this.thrownError=null}[H.b](){return new $(this)}lift(X){const ie=new z(this,this);return ie.operator=X,ie}next(X){if(this.closed)throw new Q.N;if(!this.isStopped){const{observers:ie}=this,ye=ie.length,De=ie.slice();for(let pe=0;pe<ye;pe++)De[pe].next(X)}}error(X){if(this.closed)throw new Q.N;this.hasError=!0,this.thrownError=X,this.isStopped=!0;const{observers:ie}=this,ye=ie.length,De=ie.slice();for(let pe=0;pe<ye;pe++)De[pe].error(X);this.observers.length=0}complete(){if(this.closed)throw new Q.N;this.isStopped=!0;const{observers:X}=this,ie=X.length,ye=X.slice();for(let De=0;De<ie;De++)ye[De].complete();this.observers.length=0}unsubscribe(){this.isStopped=!0,this.closed=!0,this.observers=null}_trySubscribe(X){if(this.closed)throw new Q.N;return super._trySubscribe(X)}_subscribe(X){if(this.closed)throw new Q.N;return this.hasError?(X.error(this.thrownError),j.w.EMPTY):this.isStopped?(X.complete(),j.w.EMPTY):(this.observers.push(X),new G.W(this,X))}asObservable(){const X=new D.y;return X.source=this,X}}return L.create=(k,X)=>new z(k,X),L})();class z extends U{constructor(k,X){super(),this.destination=k,this.source=X}next(k){const{destination:X}=this;X&&X.next&&X.next(k)}error(k){const{destination:X}=this;X&&X.error&&this.destination.error(k)}complete(){const{destination:k}=this;k&&k.complete&&this.destination.complete()}_subscribe(k){const{source:X}=this;return X?this.source.subscribe(k):j.w.EMPTY}}},5283:(Le,he,S)=>{S.d(he,{W:()=>h});var D=S(2654);class h extends D.w{constructor(Q,G){super(),this.subject=Q,this.subscriber=G,this.closed=!1}unsubscribe(){if(this.closed)return;this.closed=!0;const Q=this.subject,G=Q.observers;if(this.subject=null,!G||0===G.length||Q.isStopped||Q.closed)return;const H=G.indexOf(this.subscriber);-1!==H&&G.splice(H,1)}}},3489:(Le,he,S)=>{S.d(he,{L:()=>$});var D=S(7043),h=S(3292),j=S(2654),Q=S(7668),G=S(2830),H=S(2782);class $ extends j.w{constructor(L,k,X){switch(super(),this.syncErrorValue=null,this.syncErrorThrown=!1,this.syncErrorThrowable=!1,this.isStopped=!1,arguments.length){case 0:this.destination=h.c;break;case 1:if(!L){this.destination=h.c;break}if("object"==typeof L){L instanceof $?(this.syncErrorThrowable=L.syncErrorThrowable,this.destination=L,L.add(this)):(this.syncErrorThrowable=!0,this.destination=new U(this,L));break}default:this.syncErrorThrowable=!0,this.destination=new U(this,L,k,X)}}[Q.b](){return this}static create(L,k,X){const ie=new $(L,k,X);return ie.syncErrorThrowable=!1,ie}next(L){this.isStopped||this._next(L)}error(L){this.isStopped||(this.isStopped=!0,this._error(L))}complete(){this.isStopped||(this.isStopped=!0,this._complete())}unsubscribe(){this.closed||(this.isStopped=!0,super.unsubscribe())}_next(L){this.destination.next(L)}_error(L){this.destination.error(L),this.unsubscribe()}_complete(){this.destination.complete(),this.unsubscribe()}_unsubscribeAndRecycle(){const{_parentOrParents:L}=this;return this._parentOrParents=null,this.unsubscribe(),this.closed=!1,this.isStopped=!1,this._parentOrParents=L,this}}class U extends ${constructor(L,k,X,ie){super(),this._parentSubscriber=L;let ye,De=this;(0,D.m)(k)?ye=k:k&&(ye=k.next,X=k.error,ie=k.complete,k!==h.c&&(De=Object.create(k),(0,D.m)(De.unsubscribe)&&this.add(De.unsubscribe.bind(De)),De.unsubscribe=this.unsubscribe.bind(this))),this._context=De,this._next=ye,this._error=X,this._complete=ie}next(L){if(!this.isStopped&&this._next){const{_parentSubscriber:k}=this;G.v.useDeprecatedSynchronousErrorHandling&&k.syncErrorThrowable?this.__tryOrSetError(k,this._next,L)&&this.unsubscribe():this.__tryOrUnsub(this._next,L)}}error(L){if(!this.isStopped){const{_parentSubscriber:k}=this,{useDeprecatedSynchronousErrorHandling:X}=G.v;if(this._error)X&&k.syncErrorThrowable?(this.__tryOrSetError(k,this._error,L),this.unsubscribe()):(this.__tryOrUnsub(this._error,L),this.unsubscribe());else if(k.syncErrorThrowable)X?(k.syncErrorValue=L,k.syncErrorThrown=!0):(0,H.z)(L),this.unsubscribe();else{if(this.unsubscribe(),X)throw L;(0,H.z)(L)}}}complete(){if(!this.isStopped){const{_parentSubscriber:L}=this;if(this._complete){const k=()=>this._complete.call(this._context);G.v.useDeprecatedSynchronousErrorHandling&&L.syncErrorThrowable?(this.__tryOrSetError(L,k),this.unsubscribe()):(this.__tryOrUnsub(k),this.unsubscribe())}else this.unsubscribe()}}__tryOrUnsub(L,k){try{L.call(this._context,k)}catch(X){if(this.unsubscribe(),G.v.useDeprecatedSynchronousErrorHandling)throw X;(0,H.z)(X)}}__tryOrSetError(L,k,X){if(!G.v.useDeprecatedSynchronousErrorHandling)throw new Error("bad call");try{k.call(this._context,X)}catch(ie){return G.v.useDeprecatedSynchronousErrorHandling?(L.syncErrorValue=ie,L.syncErrorThrown=!0,!0):((0,H.z)(ie),!0)}return!1}_unsubscribe(){const{_parentSubscriber:L}=this;this._context=null,this._parentSubscriber=null,L.unsubscribe()}}},2654:(Le,he,S)=>{S.d(he,{w:()=>H});var D=S(6688),h=S(7830),j=S(7043);const G=(()=>{function U(z){return Error.call(this),this.message=z?`${z.length} errors occurred during unsubscription:\n${z.map((L,k)=>`${k+1}) ${L.toString()}`).join("\n  ")}`:"",this.name="UnsubscriptionError",this.errors=z,this}return U.prototype=Object.create(Error.prototype),U})();class H{constructor(z){this.closed=!1,this._parentOrParents=null,this._subscriptions=null,z&&(this._ctorUnsubscribe=!0,this._unsubscribe=z)}unsubscribe(){let z;if(this.closed)return;let{_parentOrParents:L,_ctorUnsubscribe:k,_unsubscribe:X,_subscriptions:ie}=this;if(this.closed=!0,this._parentOrParents=null,this._subscriptions=null,L instanceof H)L.remove(this);else if(null!==L)for(let ye=0;ye<L.length;++ye)L[ye].remove(this);if((0,j.m)(X)){k&&(this._unsubscribe=void 0);try{X.call(this)}catch(ye){z=ye instanceof G?$(ye.errors):[ye]}}if((0,D.k)(ie)){let ye=-1,De=ie.length;for(;++ye<De;){const pe=ie[ye];if((0,h.K)(pe))try{pe.unsubscribe()}catch(fe){z=z||[],fe instanceof G?z=z.concat($(fe.errors)):z.push(fe)}}}if(z)throw new G(z)}add(z){let L=z;if(!z)return H.EMPTY;switch(typeof z){case"function":L=new H(z);case"object":if(L===this||L.closed||"function"!=typeof L.unsubscribe)return L;if(this.closed)return L.unsubscribe(),L;if(!(L instanceof H)){const ie=L;L=new H,L._subscriptions=[ie]}break;default:throw new Error("unrecognized teardown "+z+" added to Subscription.")}let{_parentOrParents:k}=L;if(null===k)L._parentOrParents=this;else if(k instanceof H){if(k===this)return L;L._parentOrParents=[k,this]}else{if(-1!==k.indexOf(this))return L;k.push(this)}const X=this._subscriptions;return null===X?this._subscriptions=[L]:X.push(L),L}remove(z){const L=this._subscriptions;if(L){const k=L.indexOf(z);-1!==k&&L.splice(k,1)}}}var U;function $(U){return U.reduce((z,L)=>z.concat(L instanceof G?L.errors:L),[])}H.EMPTY=((U=new H).closed=!0,U)},2830:(Le,he,S)=>{S.d(he,{v:()=>h});let D=!1;const h={Promise:void 0,set useDeprecatedSynchronousErrorHandling(j){if(j){const Q=new Error;console.warn("DEPRECATED! RxJS was set to use deprecated synchronous error handling behavior by code at: \n"+Q.stack)}else D&&console.log("RxJS: Back to a better error behavior. Thank you. <3");D=j},get useDeprecatedSynchronousErrorHandling(){return D}}},1177:(Le,he,S)=>{S.d(he,{Ds:()=>H,IY:()=>Q,ft:()=>U});var D=S(3489),h=S(2916),j=S(9249);class Q extends D.L{constructor(L){super(),this.parent=L}_next(L){this.parent.notifyNext(L)}_error(L){this.parent.notifyError(L),this.unsubscribe()}_complete(){this.parent.notifyComplete(),this.unsubscribe()}}class H extends D.L{notifyNext(L){this.destination.next(L)}notifyError(L){this.destination.error(L)}notifyComplete(){this.destination.complete()}}function U(z,L){if(!L.closed)return z instanceof h.y?z.subscribe(L):(0,j.s)(z)(L)}},1762:(Le,he,S)=>{S.d(he,{N:()=>H,c:()=>G});var D=S(8929),h=S(2916),j=S(2654),Q=S(4327);class G extends h.y{constructor(k,X){super(),this.source=k,this.subjectFactory=X,this._refCount=0,this._isComplete=!1}_subscribe(k){return this.getSubject().subscribe(k)}getSubject(){const k=this._subject;return(!k||k.isStopped)&&(this._subject=this.subjectFactory()),this._subject}connect(){let k=this._connection;return k||(this._isComplete=!1,k=this._connection=new j.w,k.add(this.source.subscribe(new $(this.getSubject(),this))),k.closed&&(this._connection=null,k=j.w.EMPTY)),k}refCount(){return(0,Q.x)()(this)}}const H=(()=>{const L=G.prototype;return{operator:{value:null},_refCount:{value:0,writable:!0},_subject:{value:null,writable:!0},_connection:{value:null,writable:!0},_subscribe:{value:L._subscribe},_isComplete:{value:L._isComplete,writable:!0},getSubject:{value:L.getSubject},connect:{value:L.connect},refCount:{value:L.refCount}}})();class $ extends D.Yc{constructor(k,X){super(k),this.connectable=X}_error(k){this._unsubscribe(),super._error(k)}_complete(){this.connectable._isComplete=!0,this._unsubscribe(),super._complete()}_unsubscribe(){const k=this.connectable;if(k){this.connectable=null;const X=k._connection;k._refCount=0,k._subject=null,k._connection=null,X&&X.unsubscribe()}}}},1221:(Le,he,S)=>{S.d(he,{z:()=>Q});var D=S(1086),h=S(9146);function Q(...G){return function j(){return(0,h.J)(1)}()((0,D.of)(...G))}},8514:(Le,he,S)=>{S.d(he,{P:()=>Q});var D=S(2916),h=S(5254),j=S(8896);function Q(G){return new D.y(H=>{let $;try{$=G()}catch(z){return void H.error(z)}return($?(0,h.D)($):(0,j.c)()).subscribe(H)})}},8896:(Le,he,S)=>{S.d(he,{E:()=>h,c:()=>j});var D=S(2916);const h=new D.y(G=>G.complete());function j(G){return G?function Q(G){return new D.y(H=>G.schedule(()=>H.complete()))}(G):h}},5254:(Le,he,S)=>{S.d(he,{D:()=>De});var D=S(2916),h=S(9249),j=S(2654),Q=S(3821),$=S(6454),U=S(5430),k=S(8955),X=S(8515);function De(pe,fe){return fe?function ye(pe,fe){if(null!=pe){if(function L(pe){return pe&&"function"==typeof pe[Q.L]}(pe))return function G(pe,fe){return new D.y(Be=>{const Ye=new j.w;return Ye.add(fe.schedule(()=>{const Ue=pe[Q.L]();Ye.add(Ue.subscribe({next($e){Ye.add(fe.schedule(()=>Be.next($e)))},error($e){Ye.add(fe.schedule(()=>Be.error($e)))},complete(){Ye.add(fe.schedule(()=>Be.complete()))}}))})),Ye})}(pe,fe);if((0,k.t)(pe))return function H(pe,fe){return new D.y(Be=>{const Ye=new j.w;return Ye.add(fe.schedule(()=>pe.then(Ue=>{Ye.add(fe.schedule(()=>{Be.next(Ue),Ye.add(fe.schedule(()=>Be.complete()))}))},Ue=>{Ye.add(fe.schedule(()=>Be.error(Ue)))}))),Ye})}(pe,fe);if((0,X.z)(pe))return(0,$.r)(pe,fe);if(function ie(pe){return pe&&"function"==typeof pe[U.hZ]}(pe)||"string"==typeof pe)return function z(pe,fe){if(!pe)throw new Error("Iterable cannot be null");return new D.y(Be=>{const Ye=new j.w;let Ue;return Ye.add(()=>{Ue&&"function"==typeof Ue.return&&Ue.return()}),Ye.add(fe.schedule(()=>{Ue=pe[U.hZ](),Ye.add(fe.schedule(function(){if(Be.closed)return;let $e,ae;try{const Pe=Ue.next();$e=Pe.value,ae=Pe.done}catch(Pe){return void Be.error(Pe)}ae?Be.complete():(Be.next($e),this.schedule())}))})),Ye})}(pe,fe)}throw new TypeError((null!==pe&&typeof pe||pe)+" is not observable")}(pe,fe):pe instanceof D.y?pe:new D.y((0,h.s)(pe))}},3009:(Le,he,S)=>{S.d(he,{n:()=>Q});var D=S(2916),h=S(3650),j=S(6454);function Q(G,H){return H?(0,j.r)(G,H):new D.y((0,h.V)(G))}},3753:(Le,he,S)=>{S.d(he,{R:()=>H});var D=S(2916),h=S(6688),j=S(7043),Q=S(4850);function H(k,X,ie,ye){return(0,j.m)(ie)&&(ye=ie,ie=void 0),ye?H(k,X,ie).pipe((0,Q.U)(De=>(0,h.k)(De)?ye(...De):ye(De))):new D.y(De=>{$(k,X,function pe(fe){De.next(arguments.length>1?Array.prototype.slice.call(arguments):fe)},De,ie)})}function $(k,X,ie,ye,De){let pe;if(function L(k){return k&&"function"==typeof k.addEventListener&&"function"==typeof k.removeEventListener}(k)){const fe=k;k.addEventListener(X,ie,De),pe=()=>fe.removeEventListener(X,ie,De)}else if(function z(k){return k&&"function"==typeof k.on&&"function"==typeof k.off}(k)){const fe=k;k.on(X,ie),pe=()=>fe.off(X,ie)}else if(function U(k){return k&&"function"==typeof k.addListener&&"function"==typeof k.removeListener}(k)){const fe=k;k.addListener(X,ie),pe=()=>fe.removeListener(X,ie)}else{if(!k||!k.length)throw new TypeError("Invalid event target");for(let fe=0,Be=k.length;fe<Be;fe++)$(k[fe],X,ie,ye,De)}ye.add(pe)}},1715:(Le,he,S)=>{S.d(he,{F:()=>Q});var D=S(2916),h=S(353),j=S(4241);function Q(H=0,$=h.P){return(!(0,j.k)(H)||H<0)&&(H=0),(!$||"function"!=typeof $.schedule)&&($=h.P),new D.y(U=>(U.add($.schedule(G,H,{subscriber:U,counter:0,period:H})),U))}function G(H){const{subscriber:$,counter:U,period:z}=H;$.next(U),this.schedule({subscriber:$,counter:U+1,period:z},z)}},6787:(Le,he,S)=>{S.d(he,{T:()=>G});var D=S(2916),h=S(2866),j=S(9146),Q=S(3009);function G(...H){let $=Number.POSITIVE_INFINITY,U=null,z=H[H.length-1];return(0,h.K)(z)?(U=H.pop(),H.length>1&&"number"==typeof H[H.length-1]&&($=H.pop())):"number"==typeof z&&($=H.pop()),null===U&&1===H.length&&H[0]instanceof D.y?H[0]:(0,j.J)($)((0,Q.n)(H,U))}},1086:(Le,he,S)=>{S.d(he,{of:()=>Q});var D=S(2866),h=S(3009),j=S(6454);function Q(...G){let H=G[G.length-1];return(0,D.K)(H)?(G.pop(),(0,j.r)(G,H)):(0,h.n)(G)}},1737:(Le,he,S)=>{S.d(he,{_:()=>h});var D=S(2916);function h(Q,G){return new D.y(G?H=>G.schedule(j,0,{error:Q,subscriber:H}):H=>H.error(Q))}function j({error:Q,subscriber:G}){G.error(Q)}},7221:(Le,he,S)=>{S.d(he,{K:()=>h});var D=S(1177);function h(G){return function($){const U=new j(G),z=$.lift(U);return U.caught=z}}class j{constructor(H){this.selector=H}call(H,$){return $.subscribe(new Q(H,this.selector,this.caught))}}class Q extends D.Ds{constructor(H,$,U){super(H),this.selector=$,this.caught=U}error(H){if(!this.isStopped){let $;try{$=this.selector(H,this.caught)}catch(L){return void super.error(L)}this._unsubscribeAndRecycle();const U=new D.IY(this);this.add(U);const z=(0,D.ft)($,U);z!==U&&this.add(z)}}}},1406:(Le,he,S)=>{S.d(he,{b:()=>h});var D=S(1709);function h(j,Q){return(0,D.zg)(j,Q,1)}},13:(Le,he,S)=>{S.d(he,{b:()=>j});var D=S(3489),h=S(353);function j($,U=h.P){return z=>z.lift(new Q($,U))}class Q{constructor(U,z){this.dueTime=U,this.scheduler=z}call(U,z){return z.subscribe(new G(U,this.dueTime,this.scheduler))}}class G extends D.L{constructor(U,z,L){super(U),this.dueTime=z,this.scheduler=L,this.debouncedSubscription=null,this.lastValue=null,this.hasValue=!1}_next(U){this.clearDebounce(),this.lastValue=U,this.hasValue=!0,this.add(this.debouncedSubscription=this.scheduler.schedule(H,this.dueTime,this))}_complete(){this.debouncedNext(),this.destination.complete()}debouncedNext(){if(this.clearDebounce(),this.hasValue){const{lastValue:U}=this;this.lastValue=null,this.hasValue=!1,this.destination.next(U)}}clearDebounce(){const U=this.debouncedSubscription;null!==U&&(this.remove(U),U.unsubscribe(),this.debouncedSubscription=null)}}function H($){$.debouncedNext()}},5778:(Le,he,S)=>{S.d(he,{x:()=>h});var D=S(3489);function h(G,H){return $=>$.lift(new j(G,H))}class j{constructor(H,$){this.compare=H,this.keySelector=$}call(H,$){return $.subscribe(new Q(H,this.compare,this.keySelector))}}class Q extends D.L{constructor(H,$,U){super(H),this.keySelector=U,this.hasKey=!1,"function"==typeof $&&(this.compare=$)}compare(H,$){return H===$}_next(H){let $;try{const{keySelector:z}=this;$=z?z(H):H}catch(z){return this.destination.error(z)}let U=!1;if(this.hasKey)try{const{compare:z}=this;U=z(this.key,$)}catch(z){return this.destination.error(z)}else this.hasKey=!0;U||(this.key=$,this.destination.next(H))}}},2198:(Le,he,S)=>{S.d(he,{h:()=>h});var D=S(3489);function h(G,H){return function(U){return U.lift(new j(G,H))}}class j{constructor(H,$){this.predicate=H,this.thisArg=$}call(H,$){return $.subscribe(new Q(H,this.predicate,this.thisArg))}}class Q extends D.L{constructor(H,$,U){super(H),this.predicate=$,this.thisArg=U,this.count=0}_next(H){let $;try{$=this.predicate.call(this.thisArg,H,this.count++)}catch(U){return void this.destination.error(U)}$&&this.destination.next(H)}}},4850:(Le,he,S)=>{S.d(he,{U:()=>h});var D=S(3489);function h(G,H){return function(U){if("function"!=typeof G)throw new TypeError("argument is not a function. Are you looking for `mapTo()`?");return U.lift(new j(G,H))}}class j{constructor(H,$){this.project=H,this.thisArg=$}call(H,$){return $.subscribe(new Q(H,this.project,this.thisArg))}}class Q extends D.L{constructor(H,$,U){super(H),this.project=$,this.count=0,this.thisArg=U||this}_next(H){let $;try{$=this.project.call(this.thisArg,H,this.count++)}catch(U){return void this.destination.error(U)}this.destination.next($)}}},9146:(Le,he,S)=>{S.d(he,{J:()=>j});var D=S(1709),h=S(5379);function j(Q=Number.POSITIVE_INFINITY){return(0,D.zg)(h.y,Q)}},1709:(Le,he,S)=>{S.d(he,{zg:()=>Q});var D=S(4850),h=S(5254),j=S(1177);function Q(U,z,L=Number.POSITIVE_INFINITY){return"function"==typeof z?k=>k.pipe(Q((X,ie)=>(0,h.D)(U(X,ie)).pipe((0,D.U)((ye,De)=>z(X,ye,ie,De))),L)):("number"==typeof z&&(L=z),k=>k.lift(new G(U,L)))}class G{constructor(z,L=Number.POSITIVE_INFINITY){this.project=z,this.concurrent=L}call(z,L){return L.subscribe(new H(z,this.project,this.concurrent))}}class H extends j.Ds{constructor(z,L,k=Number.POSITIVE_INFINITY){super(z),this.project=L,this.concurrent=k,this.hasCompleted=!1,this.buffer=[],this.active=0,this.index=0}_next(z){this.active<this.concurrent?this._tryNext(z):this.buffer.push(z)}_tryNext(z){let L;const k=this.index++;try{L=this.project(z,k)}catch(X){return void this.destination.error(X)}this.active++,this._innerSub(L)}_innerSub(z){const L=new j.IY(this),k=this.destination;k.add(L);const X=(0,j.ft)(z,L);X!==L&&k.add(X)}_complete(){this.hasCompleted=!0,0===this.active&&0===this.buffer.length&&this.destination.complete(),this.unsubscribe()}notifyNext(z){this.destination.next(z)}notifyComplete(){const z=this.buffer;this.active--,z.length>0?this._next(z.shift()):0===this.active&&this.hasCompleted&&this.destination.complete()}}},4327:(Le,he,S)=>{S.d(he,{x:()=>h});var D=S(3489);function h(){return function(H){return H.lift(new j(H))}}class j{constructor(H){this.connectable=H}call(H,$){const{connectable:U}=this;U._refCount++;const z=new Q(H,U),L=$.subscribe(z);return z.closed||(z.connection=U.connect()),L}}class Q extends D.L{constructor(H,$){super(H),this.connectable=$}_unsubscribe(){const{connectable:H}=this;if(!H)return void(this.connection=null);this.connectable=null;const $=H._refCount;if($<=0)return void(this.connection=null);if(H._refCount=$-1,$>1)return void(this.connection=null);const{connection:U}=this,z=H._connection;this.connection=null,z&&(!U||z===U)&&z.unsubscribe()}}},1059:(Le,he,S)=>{S.d(he,{O:()=>j});var D=S(1221),h=S(2866);function j(...Q){const G=Q[Q.length-1];return(0,h.K)(G)?(Q.pop(),H=>(0,D.z)(Q,H,G)):H=>(0,D.z)(Q,H)}},7545:(Le,he,S)=>{S.d(he,{w:()=>Q});var D=S(4850),h=S(5254),j=S(1177);function Q($,U){return"function"==typeof U?z=>z.pipe(Q((L,k)=>(0,h.D)($(L,k)).pipe((0,D.U)((X,ie)=>U(L,X,k,ie))))):z=>z.lift(new G($))}class G{constructor(U){this.project=U}call(U,z){return z.subscribe(new H(U,this.project))}}class H extends j.Ds{constructor(U,z){super(U),this.project=z,this.index=0}_next(U){let z;const L=this.index++;try{z=this.project(U,L)}catch(k){return void this.destination.error(k)}this._innerSub(z)}_innerSub(U){const z=this.innerSubscription;z&&z.unsubscribe();const L=new j.IY(this),k=this.destination;k.add(L),this.innerSubscription=(0,j.ft)(U,L),this.innerSubscription!==L&&k.add(this.innerSubscription)}_complete(){const{innerSubscription:U}=this;(!U||U.closed)&&super._complete(),this.unsubscribe()}_unsubscribe(){this.innerSubscription=void 0}notifyComplete(){this.innerSubscription=void 0,this.isStopped&&super._complete()}notifyNext(U){this.destination.next(U)}}},2986:(Le,he,S)=>{S.d(he,{q:()=>Q});var D=S(3489),h=S(4231),j=S(8896);function Q($){return U=>0===$?(0,j.c)():U.lift(new G($))}class G{constructor(U){if(this.total=U,this.total<0)throw new h.W}call(U,z){return z.subscribe(new H(U,this.total))}}class H extends D.L{constructor(U,z){super(U),this.total=z,this.count=0}_next(U){const z=this.total,L=++this.count;L<=z&&(this.destination.next(U),L===z&&(this.destination.complete(),this.unsubscribe()))}}},2821:(Le,he,S)=>{S.d(he,{h:()=>Q});var D=S(3489),h=S(4231),j=S(8896);function Q($){return function(z){return 0===$?(0,j.c)():z.lift(new G($))}}class G{constructor(U){if(this.total=U,this.total<0)throw new h.W}call(U,z){return z.subscribe(new H(U,this.total))}}class H extends D.L{constructor(U,z){super(U),this.total=z,this.ring=new Array,this.count=0}_next(U){const z=this.ring,L=this.total,k=this.count++;z.length<L?z.push(U):z[k%L]=U}_complete(){const U=this.destination;let z=this.count;if(z>0){const L=this.count>=this.total?this.total:this.count,k=this.ring;for(let X=0;X<L;X++){const ie=z++%L;U.next(k[ie])}}U.complete()}}},7625:(Le,he,S)=>{S.d(he,{R:()=>h});var D=S(1177);function h(G){return H=>H.lift(new j(G))}class j{constructor(H){this.notifier=H}call(H,$){const U=new Q(H),z=(0,D.ft)(this.notifier,new D.IY(U));return z&&!U.seenValue?(U.add(z),$.subscribe(U)):U}}class Q extends D.Ds{constructor(H){super(H),this.seenValue=!1}notifyNext(){this.seenValue=!0,this.complete()}notifyComplete(){}}},4290:(Le,he,S)=>{S.d(he,{o:()=>h});var D=S(3489);function h(G,H=!1){return $=>$.lift(new j(G,H))}class j{constructor(H,$){this.predicate=H,this.inclusive=$}call(H,$){return $.subscribe(new Q(H,this.predicate,this.inclusive))}}class Q extends D.L{constructor(H,$,U){super(H),this.predicate=$,this.inclusive=U,this.index=0}_next(H){const $=this.destination;let U;try{U=this.predicate(H,this.index++)}catch(z){return void $.error(z)}this.nextOrComplete(H,U)}nextOrComplete(H,$){const U=this.destination;Boolean($)?U.next(H):(this.inclusive&&U.next(H),U.complete())}}},2868:(Le,he,S)=>{S.d(he,{b:()=>Q});var D=S(3489);function h(){}var j=S(7043);function Q($,U,z){return function(k){return k.lift(new G($,U,z))}}class G{constructor(U,z,L){this.nextOrObserver=U,this.error=z,this.complete=L}call(U,z){return z.subscribe(new H(U,this.nextOrObserver,this.error,this.complete))}}class H extends D.L{constructor(U,z,L,k){super(U),this._tapNext=h,this._tapError=h,this._tapComplete=h,this._tapError=L||h,this._tapComplete=k||h,(0,j.m)(z)?(this._context=this,this._tapNext=z):z&&(this._context=z,this._tapNext=z.next||h,this._tapError=z.error||h,this._tapComplete=z.complete||h)}_next(U){try{this._tapNext.call(this._context,U)}catch(z){return void this.destination.error(z)}this.destination.next(U)}_error(U){try{this._tapError.call(this._context,U)}catch(z){return void this.destination.error(z)}this.destination.error(U)}_complete(){try{this._tapComplete.call(this._context)}catch(U){return void this.destination.error(U)}return this.destination.complete()}}},6454:(Le,he,S)=>{S.d(he,{r:()=>j});var D=S(2916),h=S(2654);function j(Q,G){return new D.y(H=>{const $=new h.w;let U=0;return $.add(G.schedule(function(){U!==Q.length?(H.next(Q[U++]),H.closed||$.add(this.schedule())):H.complete()})),$})}},6686:(Le,he,S)=>{S.d(he,{o:()=>j});var D=S(2654);class h extends D.w{constructor(G,H){super()}schedule(G,H=0){return this}}class j extends h{constructor(G,H){super(G,H),this.scheduler=G,this.work=H,this.pending=!1}schedule(G,H=0){if(this.closed)return this;this.state=G;const $=this.id,U=this.scheduler;return null!=$&&(this.id=this.recycleAsyncId(U,$,H)),this.pending=!0,this.delay=H,this.id=this.id||this.requestAsyncId(U,this.id,H),this}requestAsyncId(G,H,$=0){return setInterval(G.flush.bind(G,this),$)}recycleAsyncId(G,H,$=0){if(null!==$&&this.delay===$&&!1===this.pending)return H;clearInterval(H)}execute(G,H){if(this.closed)return new Error("executing a cancelled action");this.pending=!1;const $=this._execute(G,H);if($)return $;!1===this.pending&&null!=this.id&&(this.id=this.recycleAsyncId(this.scheduler,this.id,null))}_execute(G,H){let U,$=!1;try{this.work(G)}catch(z){$=!0,U=!!z&&z||new Error(z)}if($)return this.unsubscribe(),U}_unsubscribe(){const G=this.id,H=this.scheduler,$=H.actions,U=$.indexOf(this);this.work=null,this.state=null,this.pending=!1,this.scheduler=null,-1!==U&&$.splice(U,1),null!=G&&(this.id=this.recycleAsyncId(H,G,null)),this.delay=null}}},2268:(Le,he,S)=>{S.d(he,{v:()=>h});let D=(()=>{class j{constructor(G,H=j.now){this.SchedulerAction=G,this.now=H}schedule(G,H=0,$){return new this.SchedulerAction(this,G).schedule($,H)}}return j.now=()=>Date.now(),j})();class h extends D{constructor(Q,G=D.now){super(Q,()=>h.delegate&&h.delegate!==this?h.delegate.now():G()),this.actions=[],this.active=!1,this.scheduled=void 0}schedule(Q,G=0,H){return h.delegate&&h.delegate!==this?h.delegate.schedule(Q,G,H):super.schedule(Q,G,H)}flush(Q){const{actions:G}=this;if(this.active)return void G.push(Q);let H;this.active=!0;do{if(H=Q.execute(Q.state,Q.delay))break}while(Q=G.shift());if(this.active=!1,H){for(;Q=G.shift();)Q.unsubscribe();throw H}}}},353:(Le,he,S)=>{S.d(he,{P:()=>Q});var D=S(6686);const Q=new(S(2268).v)(D.o)},5430:(Le,he,S)=>{S.d(he,{hZ:()=>h});const h=function D(){return"function"==typeof Symbol&&Symbol.iterator?Symbol.iterator:"@@iterator"}()},3821:(Le,he,S)=>{S.d(he,{L:()=>D});const D="function"==typeof Symbol&&Symbol.observable||"@@observable"},7668:(Le,he,S)=>{S.d(he,{b:()=>D});const D="function"==typeof Symbol?Symbol("rxSubscriber"):"@@rxSubscriber_"+Math.random()},4231:(Le,he,S)=>{S.d(he,{W:()=>h});const h=(()=>{function j(){return Error.call(this),this.message="argument out of range",this.name="ArgumentOutOfRangeError",this}return j.prototype=Object.create(Error.prototype),j})()},5279:(Le,he,S)=>{S.d(he,{N:()=>h});const h=(()=>{function j(){return Error.call(this),this.message="object unsubscribed",this.name="ObjectUnsubscribedError",this}return j.prototype=Object.create(Error.prototype),j})()},2782:(Le,he,S)=>{function D(h){setTimeout(()=>{throw h},0)}S.d(he,{z:()=>D})},5379:(Le,he,S)=>{function D(h){return h}S.d(he,{y:()=>D})},6688:(Le,he,S)=>{S.d(he,{k:()=>D});const D=Array.isArray||(h=>h&&"number"==typeof h.length)},8515:(Le,he,S)=>{S.d(he,{z:()=>D});const D=h=>h&&"number"==typeof h.length&&"function"!=typeof h},7043:(Le,he,S)=>{function D(h){return"function"==typeof h}S.d(he,{m:()=>D})},4241:(Le,he,S)=>{S.d(he,{k:()=>h});var D=S(6688);function h(j){return!(0,D.k)(j)&&j-parseFloat(j)+1>=0}},7830:(Le,he,S)=>{function D(h){return null!==h&&"object"==typeof h}S.d(he,{K:()=>D})},8955:(Le,he,S)=>{function D(h){return!!h&&"function"!=typeof h.subscribe&&"function"==typeof h.then}S.d(he,{t:()=>D})},2866:(Le,he,S)=>{function D(h){return h&&"function"==typeof h.schedule}S.d(he,{K:()=>D})},9249:(Le,he,S)=>{S.d(he,{s:()=>k});var D=S(3650),h=S(2782),Q=S(5430),H=S(3821),U=S(8515),z=S(8955),L=S(7830);const k=X=>{if(X&&"function"==typeof X[H.L])return(X=>ie=>{const ye=X[H.L]();if("function"!=typeof ye.subscribe)throw new TypeError("Provided object does not correctly implement Symbol.observable");return ye.subscribe(ie)})(X);if((0,U.z)(X))return(0,D.V)(X);if((0,z.t)(X))return(X=>ie=>(X.then(ye=>{ie.closed||(ie.next(ye),ie.complete())},ye=>ie.error(ye)).then(null,h.z),ie))(X);if(X&&"function"==typeof X[Q.hZ])return(X=>ie=>{const ye=X[Q.hZ]();for(;;){let De;try{De=ye.next()}catch(pe){return ie.error(pe),ie}if(De.done){ie.complete();break}if(ie.next(De.value),ie.closed)break}return"function"==typeof ye.return&&ie.add(()=>{ye.return&&ye.return()}),ie})(X);{const ye=`You provided ${(0,L.K)(X)?"an invalid object":`'${X}'`} where a stream was expected. You can provide an Observable, Promise, Array, or Iterable.`;throw new TypeError(ye)}}},3650:(Le,he,S)=>{S.d(he,{V:()=>D});const D=h=>j=>{for(let Q=0,G=h.length;Q<G&&!j.closed;Q++)j.next(h[Q]);j.complete()}},448:(Le,he,S)=>{S.d(he,{D:()=>G});var D=S(3489);class h extends D.L{constructor($,U,z){super(),this.parent=$,this.outerValue=U,this.outerIndex=z,this.index=0}_next($){this.parent.notifyNext(this.outerValue,$,this.outerIndex,this.index++,this)}_error($){this.parent.notifyError($,this),this.unsubscribe()}_complete(){this.parent.notifyComplete(this),this.unsubscribe()}}var j=S(9249),Q=S(2916);function G(H,$,U,z,L=new h(H,U,z)){if(!L.closed)return $ instanceof Q.y?$.subscribe(L):(0,j.s)($)(L)}},1777:(Le,he,S)=>{S.d(he,{LC:()=>h,SB:()=>z,X$:()=>Q,ZE:()=>Ye,ZN:()=>Be,_j:()=>D,eR:()=>k,jt:()=>G,k1:()=>Ue,l3:()=>j,oB:()=>U,vP:()=>$});
+/**
+       * @license Angular v13.4.0
+       * (c) 2010-2022 Google LLC. https://angular.io/
+       * License: MIT
+       */
+class D{}class h{}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const j="*";function Q($e,ae){return{type:7,name:$e,definitions:ae,options:{}}}function G($e,ae=null){return{type:4,styles:ae,timings:$e}}function $($e,ae=null){return{type:2,steps:$e,options:ae}}function U($e){return{type:6,styles:$e,offset:null}}function z($e,ae,Pe){return{type:0,name:$e,styles:ae,options:Pe}}function k($e,ae,Pe=null){return{type:1,expr:$e,animation:ae,options:Pe}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function fe($e){Promise.resolve(null).then($e)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Be{constructor(ae=0,Pe=0){this._onDoneFns=[],this._onStartFns=[],this._onDestroyFns=[],this._started=!1,this._destroyed=!1,this._finished=!1,this._position=0,this.parentPlayer=null,this.totalTime=ae+Pe}_onFinish(){this._finished||(this._finished=!0,this._onDoneFns.forEach(ae=>ae()),this._onDoneFns=[])}onStart(ae){this._onStartFns.push(ae)}onDone(ae){this._onDoneFns.push(ae)}onDestroy(ae){this._onDestroyFns.push(ae)}hasStarted(){return this._started}init(){}play(){this.hasStarted()||(this._onStart(),this.triggerMicrotask()),this._started=!0}triggerMicrotask(){fe(()=>this._onFinish())}_onStart(){this._onStartFns.forEach(ae=>ae()),this._onStartFns=[]}pause(){}restart(){}finish(){this._onFinish()}destroy(){this._destroyed||(this._destroyed=!0,this.hasStarted()||this._onStart(),this.finish(),this._onDestroyFns.forEach(ae=>ae()),this._onDestroyFns=[])}reset(){this._started=!1}setPosition(ae){this._position=this.totalTime?ae*this.totalTime:1}getPosition(){return this.totalTime?this._position/this.totalTime:1}triggerCallback(ae){const Pe="start"==ae?this._onStartFns:this._onDoneFns;Pe.forEach(rt=>rt()),Pe.length=0}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Ye{constructor(ae){this._onDoneFns=[],this._onStartFns=[],this._finished=!1,this._started=!1,this._destroyed=!1,this._onDestroyFns=[],this.parentPlayer=null,this.totalTime=0,this.players=ae;let Pe=0,rt=0,cn=0;const Nt=this.players.length;0==Nt?fe(()=>this._onFinish()):this.players.forEach(Tt=>{Tt.onDone(()=>{++Pe==Nt&&this._onFinish()}),Tt.onDestroy(()=>{++rt==Nt&&this._onDestroy()}),Tt.onStart(()=>{++cn==Nt&&this._onStart()})}),this.totalTime=this.players.reduce((Tt,lt)=>Math.max(Tt,lt.totalTime),0)}_onFinish(){this._finished||(this._finished=!0,this._onDoneFns.forEach(ae=>ae()),this._onDoneFns=[])}init(){this.players.forEach(ae=>ae.init())}onStart(ae){this._onStartFns.push(ae)}_onStart(){this.hasStarted()||(this._started=!0,this._onStartFns.forEach(ae=>ae()),this._onStartFns=[])}onDone(ae){this._onDoneFns.push(ae)}onDestroy(ae){this._onDestroyFns.push(ae)}hasStarted(){return this._started}play(){this.parentPlayer||this.init(),this._onStart(),this.players.forEach(ae=>ae.play())}pause(){this.players.forEach(ae=>ae.pause())}restart(){this.players.forEach(ae=>ae.restart())}finish(){this._onFinish(),this.players.forEach(ae=>ae.finish())}destroy(){this._onDestroy()}_onDestroy(){this._destroyed||(this._destroyed=!0,this._onFinish(),this.players.forEach(ae=>ae.destroy()),this._onDestroyFns.forEach(ae=>ae()),this._onDestroyFns=[])}reset(){this.players.forEach(ae=>ae.reset()),this._destroyed=!1,this._finished=!1,this._started=!1}setPosition(ae){const Pe=ae*this.totalTime;this.players.forEach(rt=>{const cn=rt.totalTime?Math.min(1,Pe/rt.totalTime):1;rt.setPosition(cn)})}getPosition(){const ae=this.players.reduce((Pe,rt)=>null===Pe||rt.totalTime>Pe.totalTime?rt:Pe,null);return null!=ae?ae.getPosition():0}beforeDestroy(){this.players.forEach(ae=>{ae.beforeDestroy&&ae.beforeDestroy()})}triggerCallback(ae){const Pe="start"==ae?this._onStartFns:this._onDoneFns;Pe.forEach(rt=>rt()),Pe.length=0}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Ue="!";
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */},9808:(Le,he,S)=>{S.d(he,{Do:()=>$e,EM:()=>zt,HT:()=>G,JF:()=>qe,K0:()=>$,Mx:()=>mr,NF:()=>wr,O5:()=>Lr,PC:()=>Ur,PM:()=>Cs,S$:()=>fe,V_:()=>L,Ye:()=>ae,b0:()=>Ue,bD:()=>qr,ez:()=>rn,lw:()=>U,mk:()=>Xt,mr:()=>Ye,q:()=>j,sg:()=>ut,uU:()=>Ke,w_:()=>H});var D=S(6435);
+/**
+       * @license Angular v13.4.0
+       * (c) 2010-2022 Google LLC. https://angular.io/
+       * License: MIT
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let h=null;function j(){return h}function G(y){h||(h=y)}class H{}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const $=new D.OlP("DocumentToken");
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let U=(()=>{class y{historyGo(E){throw new Error("Not implemented")}}return y.\u0275fac=function(E){return new(E||y)},y.\u0275prov=D.Yz7({token:y,factory:function(){return function z(){return(0,D.LFG)(k)}()},providedIn:"platform"}),y})();const L=new D.OlP("Location Initialized");let k=(()=>{class y extends U{constructor(E){super(),this._doc=E,this._init()}_init(){this.location=window.location,this._history=window.history}getBaseHrefFromDOM(){return j().getBaseHref(this._doc)}onPopState(E){const R=j().getGlobalEventTarget(this._doc,"window");return R.addEventListener("popstate",E,!1),()=>R.removeEventListener("popstate",E)}onHashChange(E){const R=j().getGlobalEventTarget(this._doc,"window");return R.addEventListener("hashchange",E,!1),()=>R.removeEventListener("hashchange",E)}get href(){return this.location.href}get protocol(){return this.location.protocol}get hostname(){return this.location.hostname}get port(){return this.location.port}get pathname(){return this.location.pathname}get search(){return this.location.search}get hash(){return this.location.hash}set pathname(E){this.location.pathname=E}pushState(E,R,W){X()?this._history.pushState(E,R,W):this.location.hash=W}replaceState(E,R,W){X()?this._history.replaceState(E,R,W):this.location.hash=W}forward(){this._history.forward()}back(){this._history.back()}historyGo(E=0){this._history.go(E)}getState(){return this._history.state}}return y.\u0275fac=function(E){return new(E||y)(D.LFG($))},y.\u0275prov=D.Yz7({token:y,factory:function(){return function ie(){return new k((0,D.LFG)($))}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */()},providedIn:"platform"}),y})();function X(){return!!window.history.pushState}function ye(y,M){if(0==y.length)return M;if(0==M.length)return y;let E=0;return y.endsWith("/")&&E++,M.startsWith("/")&&E++,2==E?y+M.substring(1):1==E?y+M:y+"/"+M}function De(y){const M=y.match(/#|\?|$/),E=M&&M.index||y.length;return y.slice(0,E-("/"===y[E-1]?1:0))+y.slice(E)}function pe(y){return y&&"?"!==y[0]?"?"+y:y}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let fe=(()=>{class y{historyGo(E){throw new Error("Not implemented")}}return y.\u0275fac=function(E){return new(E||y)},y.\u0275prov=D.Yz7({token:y,factory:function(){return function Be(y){const M=(0,D.LFG)($).location;return new Ue((0,D.LFG)(U),M&&M.origin||"")}()},providedIn:"root"}),y})();const Ye=new D.OlP("appBaseHref");let Ue=(()=>{class y extends fe{constructor(E,R){if(super(),this._platformLocation=E,this._removeListenerFns=[],null==R&&(R=this._platformLocation.getBaseHrefFromDOM()),null==R)throw new Error("No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.");this._baseHref=R}ngOnDestroy(){for(;this._removeListenerFns.length;)this._removeListenerFns.pop()()}onPopState(E){this._removeListenerFns.push(this._platformLocation.onPopState(E),this._platformLocation.onHashChange(E))}getBaseHref(){return this._baseHref}prepareExternalUrl(E){return ye(this._baseHref,E)}path(E=!1){const R=this._platformLocation.pathname+pe(this._platformLocation.search),W=this._platformLocation.hash;return W&&E?`${R}${W}`:R}pushState(E,R,W,de){const we=this.prepareExternalUrl(W+pe(de));this._platformLocation.pushState(E,R,we)}replaceState(E,R,W,de){const we=this.prepareExternalUrl(W+pe(de));this._platformLocation.replaceState(E,R,we)}forward(){this._platformLocation.forward()}back(){this._platformLocation.back()}historyGo(E=0){var R,W;null===(W=(R=this._platformLocation).historyGo)||void 0===W||W.call(R,E)}}return y.\u0275fac=function(E){return new(E||y)(D.LFG(U),D.LFG(Ye,8))},y.\u0275prov=D.Yz7({token:y,factory:y.\u0275fac}),y})(),$e=(()=>{class y extends fe{constructor(E,R){super(),this._platformLocation=E,this._baseHref="",this._removeListenerFns=[],null!=R&&(this._baseHref=R)}ngOnDestroy(){for(;this._removeListenerFns.length;)this._removeListenerFns.pop()()}onPopState(E){this._removeListenerFns.push(this._platformLocation.onPopState(E),this._platformLocation.onHashChange(E))}getBaseHref(){return this._baseHref}path(E=!1){let R=this._platformLocation.hash;return null==R&&(R="#"),R.length>0?R.substring(1):R}prepareExternalUrl(E){const R=ye(this._baseHref,E);return R.length>0?"#"+R:R}pushState(E,R,W,de){let we=this.prepareExternalUrl(W+pe(de));0==we.length&&(we=this._platformLocation.pathname),this._platformLocation.pushState(E,R,we)}replaceState(E,R,W,de){let we=this.prepareExternalUrl(W+pe(de));0==we.length&&(we=this._platformLocation.pathname),this._platformLocation.replaceState(E,R,we)}forward(){this._platformLocation.forward()}back(){this._platformLocation.back()}historyGo(E=0){var R,W;null===(W=(R=this._platformLocation).historyGo)||void 0===W||W.call(R,E)}}return y.\u0275fac=function(E){return new(E||y)(D.LFG(U),D.LFG(Ye,8))},y.\u0275prov=D.Yz7({token:y,factory:y.\u0275fac}),y})(),ae=(()=>{class y{constructor(E,R){this._subject=new D.vpe,this._urlChangeListeners=[],this._platformStrategy=E;const W=this._platformStrategy.getBaseHref();this._platformLocation=R,this._baseHref=De(cn(W)),this._platformStrategy.onPopState(de=>{this._subject.emit({url:this.path(!0),pop:!0,state:de.state,type:de.type})})}path(E=!1){return this.normalize(this._platformStrategy.path(E))}getState(){return this._platformLocation.getState()}isCurrentPathEqualTo(E,R=""){return this.path()==this.normalize(E+pe(R))}normalize(E){return y.stripTrailingSlash(function rt(y,M){return y&&M.startsWith(y)?M.substring(y.length):M}(this._baseHref,cn(E)))}prepareExternalUrl(E){return E&&"/"!==E[0]&&(E="/"+E),this._platformStrategy.prepareExternalUrl(E)}go(E,R="",W=null){this._platformStrategy.pushState(W,"",E,R),this._notifyUrlChangeListeners(this.prepareExternalUrl(E+pe(R)),W)}replaceState(E,R="",W=null){this._platformStrategy.replaceState(W,"",E,R),this._notifyUrlChangeListeners(this.prepareExternalUrl(E+pe(R)),W)}forward(){this._platformStrategy.forward()}back(){this._platformStrategy.back()}historyGo(E=0){var R,W;null===(W=(R=this._platformStrategy).historyGo)||void 0===W||W.call(R,E)}onUrlChange(E){this._urlChangeListeners.push(E),this._urlChangeSubscription||(this._urlChangeSubscription=this.subscribe(R=>{this._notifyUrlChangeListeners(R.url,R.state)}))}_notifyUrlChangeListeners(E="",R){this._urlChangeListeners.forEach(W=>W(E,R))}subscribe(E,R,W){return this._subject.subscribe({next:E,error:R,complete:W})}}return y.normalizeQueryParams=pe,y.joinWithSlash=ye,y.stripTrailingSlash=De,y.\u0275fac=function(E){return new(E||y)(D.LFG(fe),D.LFG(U))},y.\u0275prov=D.Yz7({token:y,factory:function(){return function Pe(){return new ae((0,D.LFG)(fe),(0,D.LFG)(U))}()},providedIn:"root"}),y})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function cn(y){return y.replace(/\/index.html$/,"")}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+var Ut=(()=>((Ut=Ut||{})[Ut.Format=0]="Format",Ut[Ut.Standalone=1]="Standalone",Ut))(),ft=(()=>((ft=ft||{})[ft.Narrow=0]="Narrow",ft[ft.Abbreviated=1]="Abbreviated",ft[ft.Wide=2]="Wide",ft[ft.Short=3]="Short",ft))(),_e=(()=>((_e=_e||{})[_e.Short=0]="Short",_e[_e.Medium=1]="Medium",_e[_e.Long=2]="Long",_e[_e.Full=3]="Full",_e))(),Re=(()=>((Re=Re||{})[Re.Decimal=0]="Decimal",Re[Re.Group=1]="Group",Re[Re.List=2]="List",Re[Re.PercentSign=3]="PercentSign",Re[Re.PlusSign=4]="PlusSign",Re[Re.MinusSign=5]="MinusSign",Re[Re.Exponential=6]="Exponential",Re[Re.SuperscriptingExponent=7]="SuperscriptingExponent",Re[Re.PerMille=8]="PerMille",Re[Re.Infinity=9]="Infinity",Re[Re.NaN=10]="NaN",Re[Re.TimeSeparator=11]="TimeSeparator",Re[Re.CurrencyDecimal=12]="CurrencyDecimal",Re[Re.CurrencyGroup=13]="CurrencyGroup",Re))();function fn(y,M){return En((0,D.cg1)(y)[D.wAp.DateFormat],M)}function At(y,M){return En((0,D.cg1)(y)[D.wAp.TimeFormat],M)}function Cr(y,M){return En((0,D.cg1)(y)[D.wAp.DateTimeFormat],M)}function Yt(y,M){const E=(0,D.cg1)(y),R=E[D.wAp.NumberSymbols][M];if(void 0===R){if(M===Re.CurrencyDecimal)return E[D.wAp.NumberSymbols][Re.Decimal];if(M===Re.CurrencyGroup)return E[D.wAp.NumberSymbols][Re.Group]}return R}function $n(y){if(!y[D.wAp.ExtraData])throw new Error(`Missing extra locale data for the locale "${y[D.wAp.LocaleId]}". Use "registerLocaleData" to load new data. See the "I18n guide" on angular.io to know more.`)}function En(y,M){for(let E=M;E>-1;E--)if(void 0!==y[E])return y[E];throw new Error("Locale data API: locale data undefined")}function Yn(y){const[M,E]=y.split(":");return{hours:+M,minutes:+E}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const oe=/^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/,ee={},Ie=/((?:[^BEGHLMOSWYZabcdhmswyz']+)|(?:'(?:[^']|'')*')|(?:G{1,5}|y{1,4}|Y{1,4}|M{1,5}|L{1,5}|w{1,2}|W{1}|d{1,2}|E{1,6}|c{1,6}|a{1,5}|b{1,5}|B{1,5}|h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3}|z{1,4}|Z{1,5}|O{1,4}))([\s\S]*)/;var Ce=(()=>((Ce=Ce||{})[Ce.Short=0]="Short",Ce[Ce.ShortGMT=1]="ShortGMT",Ce[Ce.Long=2]="Long",Ce[Ce.Extended=3]="Extended",Ce))(),Me=(()=>((Me=Me||{})[Me.FullYear=0]="FullYear",Me[Me.Month=1]="Month",Me[Me.Date=2]="Date",Me[Me.Hours=3]="Hours",Me[Me.Minutes=4]="Minutes",Me[Me.Seconds=5]="Seconds",Me[Me.FractionalSeconds=6]="FractionalSeconds",Me[Me.Day=7]="Day",Me))(),Fe=(()=>((Fe=Fe||{})[Fe.DayPeriods=0]="DayPeriods",Fe[Fe.Days=1]="Days",Fe[Fe.Months=2]="Months",Fe[Fe.Eras=3]="Eras",Fe))();function Kt(y,M,E,R){let W=function se(y){if(le(y))return y;if("number"==typeof y&&!isNaN(y))return new Date(y);if("string"==typeof y){if(y=y.trim(),/^(\d{4}(-\d{1,2}(-\d{1,2})?)?)$/.test(y)){const[W,de=1,we=1]=y.split("-").map(ke=>+ke);return bt(W,de-1,we)}const E=parseFloat(y);if(!isNaN(y-E))return new Date(E);let R;if(R=y.match(oe))return function K(y){const M=new Date(0);let E=0,R=0;const W=y[8]?M.setUTCFullYear:M.setFullYear,de=y[8]?M.setUTCHours:M.setHours;y[9]&&(E=Number(y[9]+y[10]),R=Number(y[9]+y[11])),W.call(M,Number(y[1]),Number(y[2])-1,Number(y[3]));const we=Number(y[4]||0)-E,ke=Number(y[5]||0)-R,Dt=Number(y[6]||0),ct=Math.floor(1e3*parseFloat("0."+(y[7]||0)));return de.call(M,we,ke,Dt,ct),M}(R)}const M=new Date(y);if(!le(M))throw new Error(`Unable to convert "${y}" into a date`);return M}(y);M=xt(E,M)||M;let ke,we=[];for(;M;){if(ke=Ie.exec(M),!ke){we.push(M);break}{we=we.concat(ke.slice(1));const Et=we.pop();if(!Et)break;M=Et}}let Dt=W.getTimezoneOffset();R&&(Dt=en(R,Dt),W=function ge(y,M,E){const R=E?-1:1,W=y.getTimezoneOffset();return function Qr(y,M){return(y=new Date(y.getTime())).setMinutes(y.getMinutes()+M),y}(y,R*(en(M,W)-W))}(W,R,!0));let ct="";return we.forEach(Et=>{const Mt=function Qt(y){if(pr[y])return pr[y];let M;switch(y){case"G":case"GG":case"GGG":M=It(Fe.Eras,ft.Abbreviated);break;case"GGGG":M=It(Fe.Eras,ft.Wide);break;case"GGGGG":M=It(Fe.Eras,ft.Narrow);break;case"y":M=Ze(Me.FullYear,1,0,!1,!0);break;case"yy":M=Ze(Me.FullYear,2,0,!0,!0);break;case"yyy":M=Ze(Me.FullYear,3,0,!1,!0);break;case"yyyy":M=Ze(Me.FullYear,4,0,!1,!0);break;case"Y":M=kn(1);break;case"YY":M=kn(2,!0);break;case"YYY":M=kn(3);break;case"YYYY":M=kn(4);break;case"M":case"L":M=Ze(Me.Month,1,1);break;case"MM":case"LL":M=Ze(Me.Month,2,1);break;case"MMM":M=It(Fe.Months,ft.Abbreviated);break;case"MMMM":M=It(Fe.Months,ft.Wide);break;case"MMMMM":M=It(Fe.Months,ft.Narrow);break;case"LLL":M=It(Fe.Months,ft.Abbreviated,Ut.Standalone);break;case"LLLL":M=It(Fe.Months,ft.Wide,Ut.Standalone);break;case"LLLLL":M=It(Fe.Months,ft.Narrow,Ut.Standalone);break;case"w":M=zn(1);break;case"ww":M=zn(2);break;case"W":M=zn(1,!0);break;case"d":M=Ze(Me.Date,1);break;case"dd":M=Ze(Me.Date,2);break;case"c":case"cc":M=Ze(Me.Day,1);break;case"ccc":M=It(Fe.Days,ft.Abbreviated,Ut.Standalone);break;case"cccc":M=It(Fe.Days,ft.Wide,Ut.Standalone);break;case"ccccc":M=It(Fe.Days,ft.Narrow,Ut.Standalone);break;case"cccccc":M=It(Fe.Days,ft.Short,Ut.Standalone);break;case"E":case"EE":case"EEE":M=It(Fe.Days,ft.Abbreviated);break;case"EEEE":M=It(Fe.Days,ft.Wide);break;case"EEEEE":M=It(Fe.Days,ft.Narrow);break;case"EEEEEE":M=It(Fe.Days,ft.Short);break;case"a":case"aa":case"aaa":M=It(Fe.DayPeriods,ft.Abbreviated);break;case"aaaa":M=It(Fe.DayPeriods,ft.Wide);break;case"aaaaa":M=It(Fe.DayPeriods,ft.Narrow);break;case"b":case"bb":case"bbb":M=It(Fe.DayPeriods,ft.Abbreviated,Ut.Standalone,!0);break;case"bbbb":M=It(Fe.DayPeriods,ft.Wide,Ut.Standalone,!0);break;case"bbbbb":M=It(Fe.DayPeriods,ft.Narrow,Ut.Standalone,!0);break;case"B":case"BB":case"BBB":M=It(Fe.DayPeriods,ft.Abbreviated,Ut.Format,!0);break;case"BBBB":M=It(Fe.DayPeriods,ft.Wide,Ut.Format,!0);break;case"BBBBB":M=It(Fe.DayPeriods,ft.Narrow,Ut.Format,!0);break;case"h":M=Ze(Me.Hours,1,-12);break;case"hh":M=Ze(Me.Hours,2,-12);break;case"H":M=Ze(Me.Hours,1);break;case"HH":M=Ze(Me.Hours,2);break;case"m":M=Ze(Me.Minutes,1);break;case"mm":M=Ze(Me.Minutes,2);break;case"s":M=Ze(Me.Seconds,1);break;case"ss":M=Ze(Me.Seconds,2);break;case"S":M=Ze(Me.FractionalSeconds,1);break;case"SS":M=Ze(Me.FractionalSeconds,2);break;case"SSS":M=Ze(Me.FractionalSeconds,3);break;case"Z":case"ZZ":case"ZZZ":M=Ct(Ce.Short);break;case"ZZZZZ":M=Ct(Ce.Extended);break;case"O":case"OO":case"OOO":case"z":case"zz":case"zzz":M=Ct(Ce.ShortGMT);break;case"OOOO":case"ZZZZ":case"zzzz":M=Ct(Ce.Long);break;default:return null}return pr[y]=M,M}(Et);ct+=Mt?Mt(W,E,Dt):"''"===Et?"'":Et.replace(/(^'|'$)/g,"").replace(/''/g,"'")}),ct}function bt(y,M,E){const R=new Date(0);return R.setFullYear(y,M,E),R.setHours(0,0,0),R}function xt(y,M){const E=function un(y){return(0,D.cg1)(y)[D.wAp.LocaleId]}(y);if(ee[E]=ee[E]||{},ee[E][M])return ee[E][M];let R="";switch(M){case"shortDate":R=fn(y,_e.Short);break;case"mediumDate":R=fn(y,_e.Medium);break;case"longDate":R=fn(y,_e.Long);break;case"fullDate":R=fn(y,_e.Full);break;case"shortTime":R=At(y,_e.Short);break;case"mediumTime":R=At(y,_e.Medium);break;case"longTime":R=At(y,_e.Long);break;case"fullTime":R=At(y,_e.Full);break;case"short":const W=xt(y,"shortTime"),de=xt(y,"shortDate");R=Dn(Cr(y,_e.Short),[W,de]);break;case"medium":const we=xt(y,"mediumTime"),ke=xt(y,"mediumDate");R=Dn(Cr(y,_e.Medium),[we,ke]);break;case"long":const Dt=xt(y,"longTime"),ct=xt(y,"longDate");R=Dn(Cr(y,_e.Long),[Dt,ct]);break;case"full":const Et=xt(y,"fullTime"),Mt=xt(y,"fullDate");R=Dn(Cr(y,_e.Full),[Et,Mt])}return R&&(ee[E][M]=R),R}function Dn(y,M){return M&&(y=y.replace(/\{([^}]+)}/g,function(E,R){return null!=M&&R in M?M[R]:E})),y}function jt(y,M,E="-",R,W){let de="";(y<0||W&&y<=0)&&(W?y=1-y:(y=-y,de=E));let we=String(y);for(;we.length<M;)we="0"+we;return R&&(we=we.substr(we.length-M)),de+we}function Ze(y,M,E=0,R=!1,W=!1){return function(de,we){let ke=function tt(y,M){switch(y){case Me.FullYear:return M.getFullYear();case Me.Month:return M.getMonth();case Me.Date:return M.getDate();case Me.Hours:return M.getHours();case Me.Minutes:return M.getMinutes();case Me.Seconds:return M.getSeconds();case Me.FractionalSeconds:return M.getMilliseconds();case Me.Day:return M.getDay();default:throw new Error(`Unknown DateType value "${y}".`)}}(y,de);if((E>0||ke>-E)&&(ke+=E),y===Me.Hours)0===ke&&-12===E&&(ke=12);else if(y===Me.FractionalSeconds)return function et(y,M){return jt(y,3).substr(0,M)}(ke,M);const Dt=Yt(we,Re.MinusSign);return jt(ke,M,Dt,R,W)}}function It(y,M,E=Ut.Format,R=!1){return function(W,de){return function Kn(y,M,E,R,W,de){switch(E){case Fe.Months:return function Or(y,M,E){const R=(0,D.cg1)(y),de=En([R[D.wAp.MonthsFormat],R[D.wAp.MonthsStandalone]],M);return En(de,E)}(M,W,R)[y.getMonth()];case Fe.Days:return function fr(y,M,E){const R=(0,D.cg1)(y),de=En([R[D.wAp.DaysFormat],R[D.wAp.DaysStandalone]],M);return En(de,E)}(M,W,R)[y.getDay()];case Fe.DayPeriods:const we=y.getHours(),ke=y.getMinutes();if(de){const ct=function xr(y){const M=(0,D.cg1)(y);return $n(M),(M[D.wAp.ExtraData][2]||[]).map(R=>"string"==typeof R?Yn(R):[Yn(R[0]),Yn(R[1])])}(M),Et=function Pn(y,M,E){const R=(0,D.cg1)(y);$n(R);const de=En([R[D.wAp.ExtraData][0],R[D.wAp.ExtraData][1]],M)||[];return En(de,E)||[]}(M,W,R),Mt=ct.findIndex(Tn=>{if(Array.isArray(Tn)){const[Gt,Un]=Tn,or=we>=Gt.hours&&ke>=Gt.minutes,ar=we<Un.hours||we===Un.hours&&ke<Un.minutes;if(Gt.hours<Un.hours){if(or&&ar)return!0}else if(or||ar)return!0}else if(Tn.hours===we&&Tn.minutes===ke)return!0;return!1});if(-1!==Mt)return Et[Mt]}return function Ln(y,M,E){const R=(0,D.cg1)(y),de=En([R[D.wAp.DayPeriodsFormat],R[D.wAp.DayPeriodsStandalone]],M);return En(de,E)}(M,W,R)[we<12?0:1];case Fe.Eras:return function Yr(y,M){return En((0,D.cg1)(y)[D.wAp.Eras],M)}(M,R)[y.getFullYear()<=0?0:1];default:throw new Error(`unexpected translation type ${E}`)}}(W,de,y,M,E,R)}}function Ct(y){return function(M,E,R){const W=-1*R,de=Yt(E,Re.MinusSign),we=W>0?Math.floor(W/60):Math.ceil(W/60);switch(y){case Ce.Short:return(W>=0?"+":"")+jt(we,2,de)+jt(Math.abs(W%60),2,de);case Ce.ShortGMT:return"GMT"+(W>=0?"+":"")+jt(we,1,de);case Ce.Long:return"GMT"+(W>=0?"+":"")+jt(we,2,de)+":"+jt(Math.abs(W%60),2,de);case Ce.Extended:return 0===R?"Z":(W>=0?"+":"")+jt(we,2,de)+":"+jt(Math.abs(W%60),2,de);default:throw new Error(`Unknown zone width "${y}"`)}}}function Kr(y){return bt(y.getFullYear(),y.getMonth(),y.getDate()+(4-y.getDay()))}function zn(y,M=!1){return function(E,R){let W;if(M){const de=new Date(E.getFullYear(),E.getMonth(),1).getDay()-1,we=E.getDate();W=1+Math.floor((we+de)/7)}else{const de=Kr(E),we=function gn(y){const M=bt(y,0,1).getDay();return bt(y,0,1+(M<=4?4:11)-M)}(de.getFullYear()),ke=de.getTime()-we.getTime();W=1+Math.round(ke/6048e5)}return jt(W,y,Yt(R,Re.MinusSign))}}function kn(y,M=!1){return function(E,R){return jt(Kr(E).getFullYear(),y,Yt(R,Re.MinusSign),M)}}const pr={};function en(y,M){y=y.replace(/:/g,"");const E=Date.parse("Jan 01, 1970 00:00:00 "+y)/6e4;return isNaN(E)?M:E}function le(y){return y instanceof Date&&!isNaN(y.valueOf())}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function mr(y,M){M=encodeURIComponent(M);for(const E of y.split(";")){const R=E.indexOf("="),[W,de]=-1==R?[E,""]:[E.slice(0,R),E.slice(R+1)];if(W.trim()===M)return decodeURIComponent(de)}return null}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let Xt=(()=>{class y{constructor(E,R,W,de){this._iterableDiffers=E,this._keyValueDiffers=R,this._ngEl=W,this._renderer=de,this._iterableDiffer=null,this._keyValueDiffer=null,this._initialClasses=[],this._rawClass=null}set klass(E){this._removeClasses(this._initialClasses),this._initialClasses="string"==typeof E?E.split(/\s+/):[],this._applyClasses(this._initialClasses),this._applyClasses(this._rawClass)}set ngClass(E){this._removeClasses(this._rawClass),this._applyClasses(this._initialClasses),this._iterableDiffer=null,this._keyValueDiffer=null,this._rawClass="string"==typeof E?E.split(/\s+/):E,this._rawClass&&((0,D.sIi)(this._rawClass)?this._iterableDiffer=this._iterableDiffers.find(this._rawClass).create():this._keyValueDiffer=this._keyValueDiffers.find(this._rawClass).create())}ngDoCheck(){if(this._iterableDiffer){const E=this._iterableDiffer.diff(this._rawClass);E&&this._applyIterableChanges(E)}else if(this._keyValueDiffer){const E=this._keyValueDiffer.diff(this._rawClass);E&&this._applyKeyValueChanges(E)}}_applyKeyValueChanges(E){E.forEachAddedItem(R=>this._toggleClass(R.key,R.currentValue)),E.forEachChangedItem(R=>this._toggleClass(R.key,R.currentValue)),E.forEachRemovedItem(R=>{R.previousValue&&this._toggleClass(R.key,!1)})}_applyIterableChanges(E){E.forEachAddedItem(R=>{if("string"!=typeof R.item)throw new Error(`NgClass can only toggle CSS classes expressed as strings, got ${(0,D.AaK)(R.item)}`);this._toggleClass(R.item,!0)}),E.forEachRemovedItem(R=>this._toggleClass(R.item,!1))}_applyClasses(E){E&&(Array.isArray(E)||E instanceof Set?E.forEach(R=>this._toggleClass(R,!0)):Object.keys(E).forEach(R=>this._toggleClass(R,!!E[R])))}_removeClasses(E){E&&(Array.isArray(E)||E instanceof Set?E.forEach(R=>this._toggleClass(R,!1)):Object.keys(E).forEach(R=>this._toggleClass(R,!1)))}_toggleClass(E,R){(E=E.trim())&&E.split(/\s+/g).forEach(W=>{R?this._renderer.addClass(this._ngEl.nativeElement,W):this._renderer.removeClass(this._ngEl.nativeElement,W)})}}return y.\u0275fac=function(E){return new(E||y)(D.Y36(D.ZZ4),D.Y36(D.aQg),D.Y36(D.SBq),D.Y36(D.Qsj))},y.\u0275dir=D.lG2({type:y,selectors:[["","ngClass",""]],inputs:{klass:["class","klass"],ngClass:"ngClass"}}),y})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class Nr{constructor(M,E,R,W){this.$implicit=M,this.ngForOf=E,this.index=R,this.count=W}get first(){return 0===this.index}get last(){return this.index===this.count-1}get even(){return this.index%2==0}get odd(){return!this.even}}let ut=(()=>{class y{constructor(E,R,W){this._viewContainer=E,this._template=R,this._differs=W,this._ngForOf=null,this._ngForOfDirty=!0,this._differ=null}set ngForOf(E){this._ngForOf=E,this._ngForOfDirty=!0}set ngForTrackBy(E){this._trackByFn=E}get ngForTrackBy(){return this._trackByFn}set ngForTemplate(E){E&&(this._template=E)}ngDoCheck(){if(this._ngForOfDirty){this._ngForOfDirty=!1;const E=this._ngForOf;!this._differ&&E&&(this._differ=this._differs.find(E).create(this.ngForTrackBy))}if(this._differ){const E=this._differ.diff(this._ngForOf);E&&this._applyChanges(E)}}_applyChanges(E){const R=this._viewContainer;E.forEachOperation((W,de,we)=>{if(null==W.previousIndex)R.createEmbeddedView(this._template,new Nr(W.item,this._ngForOf,-1,-1),null===we?void 0:we);else if(null==we)R.remove(null===de?void 0:de);else if(null!==de){const ke=R.get(de);R.move(ke,we),Xr(ke,W)}});for(let W=0,de=R.length;W<de;W++){const ke=R.get(W).context;ke.index=W,ke.count=de,ke.ngForOf=this._ngForOf}E.forEachIdentityChange(W=>{Xr(R.get(W.currentIndex),W)})}static ngTemplateContextGuard(E,R){return!0}}return y.\u0275fac=function(E){return new(E||y)(D.Y36(D.s_b),D.Y36(D.Rgc),D.Y36(D.ZZ4))},y.\u0275dir=D.lG2({type:y,selectors:[["","ngFor","","ngForOf",""]],inputs:{ngForOf:"ngForOf",ngForTrackBy:"ngForTrackBy",ngForTemplate:"ngForTemplate"}}),y})();function Xr(y,M){y.context.$implicit=M.item}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let Lr=(()=>{class y{constructor(E,R){this._viewContainer=E,this._context=new ai,this._thenTemplateRef=null,this._elseTemplateRef=null,this._thenViewRef=null,this._elseViewRef=null,this._thenTemplateRef=R}set ngIf(E){this._context.$implicit=this._context.ngIf=E,this._updateView()}set ngIfThen(E){mn("ngIfThen",E),this._thenTemplateRef=E,this._thenViewRef=null,this._updateView()}set ngIfElse(E){mn("ngIfElse",E),this._elseTemplateRef=E,this._elseViewRef=null,this._updateView()}_updateView(){this._context.$implicit?this._thenViewRef||(this._viewContainer.clear(),this._elseViewRef=null,this._thenTemplateRef&&(this._thenViewRef=this._viewContainer.createEmbeddedView(this._thenTemplateRef,this._context))):this._elseViewRef||(this._viewContainer.clear(),this._thenViewRef=null,this._elseTemplateRef&&(this._elseViewRef=this._viewContainer.createEmbeddedView(this._elseTemplateRef,this._context)))}static ngTemplateContextGuard(E,R){return!0}}return y.\u0275fac=function(E){return new(E||y)(D.Y36(D.s_b),D.Y36(D.Rgc))},y.\u0275dir=D.lG2({type:y,selectors:[["","ngIf",""]],inputs:{ngIf:"ngIf",ngIfThen:"ngIfThen",ngIfElse:"ngIfElse"}}),y})();class ai{constructor(){this.$implicit=null,this.ngIf=null}}function mn(y,M){if(M&&!M.createEmbeddedView)throw new Error(`${y} must be a TemplateRef, but received '${(0,D.AaK)(M)}'.`)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const qr="browser";function wr(y){return y===qr}function Cs(y){return"server"===y}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let Ur=(()=>{class y{constructor(E,R,W){this._ngEl=E,this._differs=R,this._renderer=W,this._ngStyle=null,this._differ=null}set ngStyle(E){this._ngStyle=E,!this._differ&&E&&(this._differ=this._differs.find(E).create())}ngDoCheck(){if(this._differ){const E=this._differ.diff(this._ngStyle);E&&this._applyChanges(E)}}_setStyle(E,R){const[W,de]=E.split(".");null!=(R=null!=R&&de?`${R}${de}`:R)?this._renderer.setStyle(this._ngEl.nativeElement,W,R):this._renderer.removeStyle(this._ngEl.nativeElement,W)}_applyChanges(E){E.forEachRemovedItem(R=>this._setStyle(R.key,null)),E.forEachAddedItem(R=>this._setStyle(R.key,R.currentValue)),E.forEachChangedItem(R=>this._setStyle(R.key,R.currentValue))}}return y.\u0275fac=function(E){return new(E||y)(D.Y36(D.SBq),D.Y36(D.aQg),D.Y36(D.Qsj))},y.\u0275dir=D.lG2({type:y,selectors:[["","ngStyle",""]],inputs:{ngStyle:"ngStyle"}}),y})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const He=new D.OlP("DATE_PIPE_DEFAULT_TIMEZONE");let Ke=(()=>{class y{constructor(E,R){this.locale=E,this.defaultTimezone=R}transform(E,R="mediumDate",W,de){var we;if(null==E||""===E||E!=E)return null;try{return Kt(E,R,de||this.locale,null!==(we=null!=W?W:this.defaultTimezone)&&void 0!==we?we:void 0)}catch(ke){
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+throw function O(y,M){return new D.vHH(2100,"")}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */()}}}return y.\u0275fac=function(E){return new(E||y)(D.Y36(D.soG,16),D.Y36(He,24))},y.\u0275pipe=D.Yjl({name:"date",type:y,pure:!0}),y})(),rn=(()=>{class y{}return y.\u0275fac=function(E){return new(E||y)},y.\u0275mod=D.oAB({type:y}),y.\u0275inj=D.cJS({}),y})(),zt=(()=>{class y{}return y.\u0275prov=(0,D.Yz7)({token:y,providedIn:"root",factory:()=>new br((0,D.LFG)($),window)}),y})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class br{constructor(M,E){this.document=M,this.window=E,this.offset=()=>[0,0]}setOffset(M){this.offset=Array.isArray(M)?()=>M:M}getScrollPosition(){return this.supportsScrolling()?[this.window.pageXOffset,this.window.pageYOffset]:[0,0]}scrollToPosition(M){this.supportsScrolling()&&this.window.scrollTo(M[0],M[1])}scrollToAnchor(M){if(!this.supportsScrolling())return;const E=function cs(y,M){const E=y.getElementById(M)||y.getElementsByName(M)[0];if(E)return E;if("function"==typeof y.createTreeWalker&&y.body&&(y.body.createShadowRoot||y.body.attachShadow)){const R=y.createTreeWalker(y.body,NodeFilter.SHOW_ELEMENT);let W=R.currentNode;for(;W;){const de=W.shadowRoot;if(de){const we=de.getElementById(M)||de.querySelector(`[name="${M}"]`);if(we)return we}W=R.nextNode()}}return null}(this.document,M);E&&(this.scrollToElement(E),E.focus())}setHistoryScrollRestoration(M){if(this.supportScrollRestoration()){const E=this.window.history;E&&E.scrollRestoration&&(E.scrollRestoration=M)}}scrollToElement(M){const E=M.getBoundingClientRect(),R=E.left+this.window.pageXOffset,W=E.top+this.window.pageYOffset,de=this.offset();this.window.scrollTo(R-de[0],W-de[1])}supportScrollRestoration(){try{if(!this.supportsScrolling())return!1;const M=wi(this.window.history)||wi(Object.getPrototypeOf(this.window.history));return!(!M||!M.writable&&!M.set)}catch(M){return!1}}supportsScrolling(){try{return!!this.window&&!!this.window.scrollTo&&"pageXOffset"in this.window}catch(M){return!1}}}function wi(y){return Object.getOwnPropertyDescriptor(y,"scrollRestoration")}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class qe{}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */,520:(Le,he,S)=>{S.d(he,{JF:()=>Yn,WM:()=>L,dt:()=>Nt,eN:()=>Re});var D=S(9808),h=S(6435),j=S(1086),Q=S(2916),G=S(1406),H=S(2198),$=S(4850);
+/**
+       * @license Angular v13.4.0
+       * (c) 2010-2022 Google LLC. https://angular.io/
+       * License: MIT
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class U{}class z{}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class L{constructor(oe){this.normalizedNames=new Map,this.lazyUpdate=null,oe?this.lazyInit="string"==typeof oe?()=>{this.headers=new Map,oe.split("\n").forEach(ee=>{const Ie=ee.indexOf(":");if(Ie>0){const Ce=ee.slice(0,Ie),Me=Ce.toLowerCase(),Fe=ee.slice(Ie+1).trim();this.maybeSetNormalizedName(Ce,Me),this.headers.has(Me)?this.headers.get(Me).push(Fe):this.headers.set(Me,[Fe])}})}:()=>{this.headers=new Map,Object.keys(oe).forEach(ee=>{let Ie=oe[ee];const Ce=ee.toLowerCase();"string"==typeof Ie&&(Ie=[Ie]),Ie.length>0&&(this.headers.set(Ce,Ie),this.maybeSetNormalizedName(ee,Ce))})}:this.headers=new Map}has(oe){return this.init(),this.headers.has(oe.toLowerCase())}get(oe){this.init();const ee=this.headers.get(oe.toLowerCase());return ee&&ee.length>0?ee[0]:null}keys(){return this.init(),Array.from(this.normalizedNames.values())}getAll(oe){return this.init(),this.headers.get(oe.toLowerCase())||null}append(oe,ee){return this.clone({name:oe,value:ee,op:"a"})}set(oe,ee){return this.clone({name:oe,value:ee,op:"s"})}delete(oe,ee){return this.clone({name:oe,value:ee,op:"d"})}maybeSetNormalizedName(oe,ee){this.normalizedNames.has(ee)||this.normalizedNames.set(ee,oe)}init(){this.lazyInit&&(this.lazyInit instanceof L?this.copyFrom(this.lazyInit):this.lazyInit(),this.lazyInit=null,this.lazyUpdate&&(this.lazyUpdate.forEach(oe=>this.applyUpdate(oe)),this.lazyUpdate=null))}copyFrom(oe){oe.init(),Array.from(oe.headers.keys()).forEach(ee=>{this.headers.set(ee,oe.headers.get(ee)),this.normalizedNames.set(ee,oe.normalizedNames.get(ee))})}clone(oe){const ee=new L;return ee.lazyInit=this.lazyInit&&this.lazyInit instanceof L?this.lazyInit:this,ee.lazyUpdate=(this.lazyUpdate||[]).concat([oe]),ee}applyUpdate(oe){const ee=oe.name.toLowerCase();switch(oe.op){case"a":case"s":let Ie=oe.value;if("string"==typeof Ie&&(Ie=[Ie]),0===Ie.length)return;this.maybeSetNormalizedName(oe.name,ee);const Ce=("a"===oe.op?this.headers.get(ee):void 0)||[];Ce.push(...Ie),this.headers.set(ee,Ce);break;case"d":const Me=oe.value;if(Me){let Fe=this.headers.get(ee);if(!Fe)return;Fe=Fe.filter(Kt=>-1===Me.indexOf(Kt)),0===Fe.length?(this.headers.delete(ee),this.normalizedNames.delete(ee)):this.headers.set(ee,Fe)}else this.headers.delete(ee),this.normalizedNames.delete(ee)}}forEach(oe){this.init(),Array.from(this.normalizedNames.keys()).forEach(ee=>oe(this.normalizedNames.get(ee),this.headers.get(ee)))}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class k{encodeKey(oe){return De(oe)}encodeValue(oe){return De(oe)}decodeKey(oe){return decodeURIComponent(oe)}decodeValue(oe){return decodeURIComponent(oe)}}const ie=/%(\d[a-f0-9])/gi,ye={40:"@","3A":":",24:"$","2C":",","3B":";","2B":"+","3D":"=","3F":"?","2F":"/"};function De(me){return encodeURIComponent(me).replace(ie,(oe,ee)=>{var Ie;return null!==(Ie=ye[ee])&&void 0!==Ie?Ie:oe})}function pe(me){return`${me}`}class fe{constructor(oe={}){if(this.updates=null,this.cloneFrom=null,this.encoder=oe.encoder||new k,oe.fromString){if(oe.fromObject)throw new Error("Cannot specify both fromString and fromObject.");this.map=function X(me,oe){const ee=new Map;return me.length>0&&me.replace(/^\?/,"").split("&").forEach(Ce=>{const Me=Ce.indexOf("="),[Fe,Kt]=-1==Me?[oe.decodeKey(Ce),""]:[oe.decodeKey(Ce.slice(0,Me)),oe.decodeValue(Ce.slice(Me+1))],bt=ee.get(Fe)||[];bt.push(Kt),ee.set(Fe,bt)}),ee}(oe.fromString,this.encoder)}else oe.fromObject?(this.map=new Map,Object.keys(oe.fromObject).forEach(ee=>{const Ie=oe.fromObject[ee];this.map.set(ee,Array.isArray(Ie)?Ie:[Ie])})):this.map=null}has(oe){return this.init(),this.map.has(oe)}get(oe){this.init();const ee=this.map.get(oe);return ee?ee[0]:null}getAll(oe){return this.init(),this.map.get(oe)||null}keys(){return this.init(),Array.from(this.map.keys())}append(oe,ee){return this.clone({param:oe,value:ee,op:"a"})}appendAll(oe){const ee=[];return Object.keys(oe).forEach(Ie=>{const Ce=oe[Ie];Array.isArray(Ce)?Ce.forEach(Me=>{ee.push({param:Ie,value:Me,op:"a"})}):ee.push({param:Ie,value:Ce,op:"a"})}),this.clone(ee)}set(oe,ee){return this.clone({param:oe,value:ee,op:"s"})}delete(oe,ee){return this.clone({param:oe,value:ee,op:"d"})}toString(){return this.init(),this.keys().map(oe=>{const ee=this.encoder.encodeKey(oe);return this.map.get(oe).map(Ie=>ee+"="+this.encoder.encodeValue(Ie)).join("&")}).filter(oe=>""!==oe).join("&")}clone(oe){const ee=new fe({encoder:this.encoder});return ee.cloneFrom=this.cloneFrom||this,ee.updates=(this.updates||[]).concat(oe),ee}init(){null===this.map&&(this.map=new Map),null!==this.cloneFrom&&(this.cloneFrom.init(),this.cloneFrom.keys().forEach(oe=>this.map.set(oe,this.cloneFrom.map.get(oe))),this.updates.forEach(oe=>{switch(oe.op){case"a":case"s":const ee=("a"===oe.op?this.map.get(oe.param):void 0)||[];ee.push(pe(oe.value)),this.map.set(oe.param,ee);break;case"d":if(void 0===oe.value){this.map.delete(oe.param);break}{let Ie=this.map.get(oe.param)||[];const Ce=Ie.indexOf(pe(oe.value));-1!==Ce&&Ie.splice(Ce,1),Ie.length>0?this.map.set(oe.param,Ie):this.map.delete(oe.param)}}}),this.cloneFrom=this.updates=null)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Ye{constructor(){this.map=new Map}set(oe,ee){return this.map.set(oe,ee),this}get(oe){return this.map.has(oe)||this.map.set(oe,oe.defaultValue()),this.map.get(oe)}delete(oe){return this.map.delete(oe),this}has(oe){return this.map.has(oe)}keys(){return this.map.keys()}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function $e(me){return"undefined"!=typeof ArrayBuffer&&me instanceof ArrayBuffer}function ae(me){return"undefined"!=typeof Blob&&me instanceof Blob}function Pe(me){return"undefined"!=typeof FormData&&me instanceof FormData}class cn{constructor(oe,ee,Ie,Ce){let Me;if(this.url=ee,this.body=null,this.reportProgress=!1,this.withCredentials=!1,this.responseType="json",this.method=oe.toUpperCase(),function Ue(me){switch(me){case"DELETE":case"GET":case"HEAD":case"OPTIONS":case"JSONP":return!1;default:return!0}}(this.method)||Ce?(this.body=void 0!==Ie?Ie:null,Me=Ce):Me=Ie,Me&&(this.reportProgress=!!Me.reportProgress,this.withCredentials=!!Me.withCredentials,Me.responseType&&(this.responseType=Me.responseType),Me.headers&&(this.headers=Me.headers),Me.context&&(this.context=Me.context),Me.params&&(this.params=Me.params)),this.headers||(this.headers=new L),this.context||(this.context=new Ye),this.params){const Fe=this.params.toString();if(0===Fe.length)this.urlWithParams=ee;else{const Kt=ee.indexOf("?");this.urlWithParams=ee+(-1===Kt?"?":Kt<ee.length-1?"&":"")+Fe}}else this.params=new fe,this.urlWithParams=ee}serializeBody(){return null===this.body?null:$e(this.body)||ae(this.body)||Pe(this.body)||function rt(me){return"undefined"!=typeof URLSearchParams&&me instanceof URLSearchParams}(this.body)||"string"==typeof this.body?this.body:this.body instanceof fe?this.body.toString():"object"==typeof this.body||"boolean"==typeof this.body||Array.isArray(this.body)?JSON.stringify(this.body):this.body.toString()}detectContentTypeHeader(){return null===this.body||Pe(this.body)?null:ae(this.body)?this.body.type||null:$e(this.body)?null:"string"==typeof this.body?"text/plain":this.body instanceof fe?"application/x-www-form-urlencoded;charset=UTF-8":"object"==typeof this.body||"number"==typeof this.body||"boolean"==typeof this.body?"application/json":null}clone(oe={}){var ee;const Ie=oe.method||this.method,Ce=oe.url||this.url,Me=oe.responseType||this.responseType,Fe=void 0!==oe.body?oe.body:this.body,Kt=void 0!==oe.withCredentials?oe.withCredentials:this.withCredentials,bt=void 0!==oe.reportProgress?oe.reportProgress:this.reportProgress;let xt=oe.headers||this.headers,Dn=oe.params||this.params;const jt=null!==(ee=oe.context)&&void 0!==ee?ee:this.context;return void 0!==oe.setHeaders&&(xt=Object.keys(oe.setHeaders).reduce((et,Ze)=>et.set(Ze,oe.setHeaders[Ze]),xt)),oe.setParams&&(Dn=Object.keys(oe.setParams).reduce((et,Ze)=>et.set(Ze,oe.setParams[Ze]),Dn)),new cn(Ie,Ce,Fe,{params:Dn,headers:xt,context:jt,reportProgress:bt,responseType:Me,withCredentials:Kt})}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */var Nt=(()=>((Nt=Nt||{})[Nt.Sent=0]="Sent",Nt[Nt.UploadProgress=1]="UploadProgress",Nt[Nt.ResponseHeader=2]="ResponseHeader",Nt[Nt.DownloadProgress=3]="DownloadProgress",Nt[Nt.Response=4]="Response",Nt[Nt.User=5]="User",Nt))();class Tt{constructor(oe,ee=200,Ie="OK"){this.headers=oe.headers||new L,this.status=void 0!==oe.status?oe.status:ee,this.statusText=oe.statusText||Ie,this.url=oe.url||null,this.ok=this.status>=200&&this.status<300}}class lt extends Tt{constructor(oe={}){super(oe),this.type=Nt.ResponseHeader}clone(oe={}){return new lt({headers:oe.headers||this.headers,status:void 0!==oe.status?oe.status:this.status,statusText:oe.statusText||this.statusText,url:oe.url||this.url||void 0})}}class Ut extends Tt{constructor(oe={}){super(oe),this.type=Nt.Response,this.body=void 0!==oe.body?oe.body:null}clone(oe={}){return new Ut({body:void 0!==oe.body?oe.body:this.body,headers:oe.headers||this.headers,status:void 0!==oe.status?oe.status:this.status,statusText:oe.statusText||this.statusText,url:oe.url||this.url||void 0})}}class ft extends Tt{constructor(oe){super(oe,0,"Unknown Error"),this.name="HttpErrorResponse",this.ok=!1,this.message=this.status>=200&&this.status<300?`Http failure during parsing for ${oe.url||"(unknown url)"}`:`Http failure response for ${oe.url||"(unknown url)"}: ${oe.status} ${oe.statusText}`,this.error=oe.error||null}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function _e(me,oe){return{body:oe,headers:me.headers,context:me.context,observe:me.observe,params:me.params,reportProgress:me.reportProgress,responseType:me.responseType,withCredentials:me.withCredentials}}let Re=(()=>{class me{constructor(ee){this.handler=ee}request(ee,Ie,Ce={}){let Me;if(ee instanceof cn)Me=ee;else{let bt,xt;bt=Ce.headers instanceof L?Ce.headers:new L(Ce.headers),Ce.params&&(xt=Ce.params instanceof fe?Ce.params:new fe({fromObject:Ce.params})),Me=new cn(ee,Ie,void 0!==Ce.body?Ce.body:null,{headers:bt,context:Ce.context,params:xt,reportProgress:Ce.reportProgress,responseType:Ce.responseType||"json",withCredentials:Ce.withCredentials})}const Fe=(0,j.of)(Me).pipe((0,G.b)(bt=>this.handler.handle(bt)));if(ee instanceof cn||"events"===Ce.observe)return Fe;const Kt=Fe.pipe((0,H.h)(bt=>bt instanceof Ut));switch(Ce.observe||"body"){case"body":switch(Me.responseType){case"arraybuffer":return Kt.pipe((0,$.U)(bt=>{if(null!==bt.body&&!(bt.body instanceof ArrayBuffer))throw new Error("Response is not an ArrayBuffer.");return bt.body}));case"blob":return Kt.pipe((0,$.U)(bt=>{if(null!==bt.body&&!(bt.body instanceof Blob))throw new Error("Response is not a Blob.");return bt.body}));case"text":return Kt.pipe((0,$.U)(bt=>{if(null!==bt.body&&"string"!=typeof bt.body)throw new Error("Response is not a string.");return bt.body}));default:return Kt.pipe((0,$.U)(bt=>bt.body))}case"response":return Kt;default:throw new Error(`Unreachable: unhandled observe type ${Ce.observe}}`)}}delete(ee,Ie={}){return this.request("DELETE",ee,Ie)}get(ee,Ie={}){return this.request("GET",ee,Ie)}head(ee,Ie={}){return this.request("HEAD",ee,Ie)}jsonp(ee,Ie){return this.request("JSONP",ee,{params:(new fe).append(Ie,"JSONP_CALLBACK"),observe:"body",responseType:"json"})}options(ee,Ie={}){return this.request("OPTIONS",ee,Ie)}patch(ee,Ie,Ce={}){return this.request("PATCH",ee,_e(Ce,Ie))}post(ee,Ie,Ce={}){return this.request("POST",ee,_e(Ce,Ie))}put(ee,Ie,Ce={}){return this.request("PUT",ee,_e(Ce,Ie))}}return me.\u0275fac=function(ee){return new(ee||me)(h.LFG(U))},me.\u0275prov=h.Yz7({token:me,factory:me.\u0275fac}),me})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class mt{constructor(oe,ee){this.next=oe,this.interceptor=ee}handle(oe){return this.interceptor.intercept(oe,this.next)}}const un=new h.OlP("HTTP_INTERCEPTORS");let Ln=(()=>{class me{intercept(ee,Ie){return Ie.handle(ee)}}return me.\u0275fac=function(ee){return new(ee||me)},me.\u0275prov=h.Yz7({token:me,factory:me.\u0275fac}),me})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Yt=/^\)\]\}',?\n/;let kt=(()=>{class me{constructor(ee){this.xhrFactory=ee}handle(ee){if("JSONP"===ee.method)throw new Error("Attempted to construct Jsonp request without HttpClientJsonpModule installed.");return new Q.y(Ie=>{const Ce=this.xhrFactory.build();if(Ce.open(ee.method,ee.urlWithParams),ee.withCredentials&&(Ce.withCredentials=!0),ee.headers.forEach((Ze,tt)=>Ce.setRequestHeader(Ze,tt.join(","))),ee.headers.has("Accept")||Ce.setRequestHeader("Accept","application/json, text/plain, */*"),!ee.headers.has("Content-Type")){const Ze=ee.detectContentTypeHeader();null!==Ze&&Ce.setRequestHeader("Content-Type",Ze)}if(ee.responseType){const Ze=ee.responseType.toLowerCase();Ce.responseType="json"!==Ze?Ze:"text"}const Me=ee.serializeBody();let Fe=null;const Kt=()=>{if(null!==Fe)return Fe;const Ze=Ce.statusText||"OK",tt=new L(Ce.getAllResponseHeaders()),It=function pn(me){return"responseURL"in me&&me.responseURL?me.responseURL:/^X-Request-URL:/m.test(me.getAllResponseHeaders())?me.getResponseHeader("X-Request-URL"):null}(Ce)||ee.url;return Fe=new lt({headers:tt,status:Ce.status,statusText:Ze,url:It}),Fe},bt=()=>{let{headers:Ze,status:tt,statusText:It,url:Kn}=Kt(),Ct=null;204!==tt&&(Ct=void 0===Ce.response?Ce.responseText:Ce.response),0===tt&&(tt=Ct?200:0);let Ft=tt>=200&&tt<300;if("json"===ee.responseType&&"string"==typeof Ct){const rr=Ct;Ct=Ct.replace(Yt,"");try{Ct=""!==Ct?JSON.parse(Ct):null}catch(gn){Ct=rr,Ft&&(Ft=!1,Ct={error:gn,text:Ct})}}Ft?(Ie.next(new Ut({body:Ct,headers:Ze,status:tt,statusText:It,url:Kn||void 0})),Ie.complete()):Ie.error(new ft({error:Ct,headers:Ze,status:tt,statusText:It,url:Kn||void 0}))},xt=Ze=>{const{url:tt}=Kt(),It=new ft({error:Ze,status:Ce.status||0,statusText:Ce.statusText||"Unknown Error",url:tt||void 0});Ie.error(It)};let Dn=!1;const jt=Ze=>{Dn||(Ie.next(Kt()),Dn=!0);let tt={type:Nt.DownloadProgress,loaded:Ze.loaded};Ze.lengthComputable&&(tt.total=Ze.total),"text"===ee.responseType&&!!Ce.responseText&&(tt.partialText=Ce.responseText),Ie.next(tt)},et=Ze=>{let tt={type:Nt.UploadProgress,loaded:Ze.loaded};Ze.lengthComputable&&(tt.total=Ze.total),Ie.next(tt)};return Ce.addEventListener("load",bt),Ce.addEventListener("error",xt),Ce.addEventListener("timeout",xt),Ce.addEventListener("abort",xt),ee.reportProgress&&(Ce.addEventListener("progress",jt),null!==Me&&Ce.upload&&Ce.upload.addEventListener("progress",et)),Ce.send(Me),Ie.next({type:Nt.Sent}),()=>{Ce.removeEventListener("error",xt),Ce.removeEventListener("abort",xt),Ce.removeEventListener("load",bt),Ce.removeEventListener("timeout",xt),ee.reportProgress&&(Ce.removeEventListener("progress",jt),null!==Me&&Ce.upload&&Ce.upload.removeEventListener("progress",et)),Ce.readyState!==Ce.DONE&&Ce.abort()}})}}return me.\u0275fac=function(ee){return new(ee||me)(h.LFG(D.JF))},me.\u0275prov=h.Yz7({token:me,factory:me.\u0275fac}),me})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Pr=new h.OlP("XSRF_COOKIE_NAME"),Hn=new h.OlP("XSRF_HEADER_NAME");class yn{}let Rr=(()=>{class me{constructor(ee,Ie,Ce){this.doc=ee,this.platform=Ie,this.cookieName=Ce,this.lastCookieString="",this.lastToken=null,this.parseCount=0}getToken(){if("server"===this.platform)return null;const ee=this.doc.cookie||"";return ee!==this.lastCookieString&&(this.parseCount++,this.lastToken=(0,D.Mx)(ee,this.cookieName),this.lastCookieString=ee),this.lastToken}}return me.\u0275fac=function(ee){return new(ee||me)(h.LFG(D.K0),h.LFG(h.Lbi),h.LFG(Pr))},me.\u0275prov=h.Yz7({token:me,factory:me.\u0275fac}),me})(),$n=(()=>{class me{constructor(ee,Ie){this.tokenService=ee,this.headerName=Ie}intercept(ee,Ie){const Ce=ee.url.toLowerCase();if("GET"===ee.method||"HEAD"===ee.method||Ce.startsWith("http://")||Ce.startsWith("https://"))return Ie.handle(ee);const Me=this.tokenService.getToken();return null!==Me&&!ee.headers.has(this.headerName)&&(ee=ee.clone({headers:ee.headers.set(this.headerName,Me)})),Ie.handle(ee)}}return me.\u0275fac=function(ee){return new(ee||me)(h.LFG(yn),h.LFG(Hn))},me.\u0275prov=h.Yz7({token:me,factory:me.\u0275fac}),me})(),xr=(()=>{class me{constructor(ee,Ie){this.backend=ee,this.injector=Ie,this.chain=null}handle(ee){if(null===this.chain){const Ie=this.injector.get(un,[]);this.chain=Ie.reduceRight((Ce,Me)=>new mt(Ce,Me),this.backend)}return this.chain.handle(ee)}}return me.\u0275fac=function(ee){return new(ee||me)(h.LFG(z),h.LFG(h.zs3))},me.\u0275prov=h.Yz7({token:me,factory:me.\u0275fac}),me})(),En=(()=>{class me{static disable(){return{ngModule:me,providers:[{provide:$n,useClass:Ln}]}}static withOptions(ee={}){return{ngModule:me,providers:[ee.cookieName?{provide:Pr,useValue:ee.cookieName}:[],ee.headerName?{provide:Hn,useValue:ee.headerName}:[]]}}}return me.\u0275fac=function(ee){return new(ee||me)},me.\u0275mod=h.oAB({type:me}),me.\u0275inj=h.cJS({providers:[$n,{provide:un,useExisting:$n,multi:!0},{provide:yn,useClass:Rr},{provide:Pr,useValue:"XSRF-TOKEN"},{provide:Hn,useValue:"X-XSRF-TOKEN"}]}),me})(),Yn=(()=>{class me{}return me.\u0275fac=function(ee){return new(ee||me)},me.\u0275mod=h.oAB({type:me}),me.\u0275inj=h.cJS({providers:[Re,{provide:U,useClass:xr},kt,{provide:z,useExisting:kt}],imports:[[En.withOptions({cookieName:"XSRF-TOKEN",headerName:"X-XSRF-TOKEN"})]]}),me})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */,6435:(Le,he,S)=>{S.d(he,{deG:()=>gc,tb:()=>Em,AFp:()=>ym,ip1:()=>mm,CZH:()=>Sd,hGG:()=>oC,z2F:()=>xd,sBO:()=>zb,Sil:()=>bb,_Vd:()=>sc,EJc:()=>Eb,SBq:()=>Ya,qLn:()=>kl,vpe:()=>Ds,tBr:()=>Ca,XFs:()=>st,OlP:()=>On,zs3:()=>ys,ZZ4:()=>Ud,aQg:()=>jd,soG:()=>Td,YKP:()=>Tg,h0i:()=>ma,PXZ:()=>Nb,R0b:()=>Ki,FiY:()=>jo,Lbi:()=>yb,g9A:()=>vm,Qsj:()=>mD,FYo:()=>Cg,JOm:()=>Vi,q3G:()=>Wn,tp0:()=>Eo,Rgc:()=>Ja,dDg:()=>Cm,DyG:()=>yo,GfV:()=>wg,s_b:()=>lc,ifc:()=>xt,eFA:()=>Mm,G48:()=>$b,Gpc:()=>pe,f3M:()=>ll,X6Q:()=>Hb,_c5:()=>sC,VLi:()=>Rb,c2e:()=>_b,zSh:()=>Mu,wAp:()=>ht,vHH:()=>Ue,EiD:()=>Ah,mCW:()=>xa,qzn:()=>Ko,JVY:()=>Jm,pB0:()=>ty,eBb:()=>qm,L6k:()=>Xm,LAX:()=>ey,cg1:()=>nd,kL8:()=>Yp,yhl:()=>Eh,dqk:()=>tt,sIi:()=>Ua,CqO:()=>ip,QGY:()=>$u,F4k:()=>rp,RDi:()=>Mr,AaK:()=>ie,z3N:()=>Vs,qOj:()=>Pu,TTD:()=>gi,_Bn:()=>Eg,xp6:()=>kh,uIk:()=>Fu,ekj:()=>Qu,Suo:()=>Kg,Xpm:()=>en,lG2:()=>yt,Yz7:()=>kt,cJS:()=>Hn,oAB:()=>le,Yjl:()=>sn,Y36:()=>Va,_UZ:()=>Vu,GkF:()=>Hu,BQk:()=>Zl,ynx:()=>Ql,qZA:()=>Kl,TgZ:()=>Yl,EpF:()=>np,n5z:()=>qt,Ikx:()=>ed,LFG:()=>qn,$8M:()=>$r,$Z:()=>tp,NdJ:()=>zu,CRH:()=>Qg,oxw:()=>ap,ALo:()=>Bg,lcZ:()=>Ug,xi3:()=>jg,Hsn:()=>cp,F$t:()=>lp,Q6J:()=>Uu,s9C:()=>Yu,MGl:()=>Jl,VKq:()=>Pg,WLB:()=>Rg,iGM:()=>Wg,CHM:()=>Ci,oJD:()=>Ih,LSH:()=>tu,kYT:()=>Te,Udp:()=>Ku,WFA:()=>Gu,d8E:()=>td,YNc:()=>zf,W1O:()=>qg,_uU:()=>Pp,Oqu:()=>Ju,hij:()=>ql,AsE:()=>Xu,lnq:()=>qu,Gf:()=>Yg});var D=S(8929),h=S(2654),j=S(2916),Q=S(6787),G=S(1762);class ${constructor(t,n){this.subjectFactory=t,this.selector=n}call(t,n){const{selector:r}=this,i=this.subjectFactory(),o=r(i).subscribe(t);return o.add(n.subscribe(i)),o}}var U=S(4327);function z(){return new D.xQ}
+/**
+       * @license Angular v13.4.0
+       * (c) 2010-2022 Google LLC. https://angular.io/
+       * License: MIT
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function k(e){for(let t in e)if(e[t]===k)return t;throw Error("Could not find renamed property on target object.")}function X(e,t){for(const n in t)t.hasOwnProperty(n)&&!e.hasOwnProperty(n)&&(e[n]=t[n])}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function ie(e){if("string"==typeof e)return e;if(Array.isArray(e))return"["+e.map(ie).join(", ")+"]";if(null==e)return""+e;if(e.overriddenName)return`${e.overriddenName}`;if(e.name)return`${e.name}`;const t=e.toString();if(null==t)return""+t;const n=t.indexOf("\n");return-1===n?t:t.substring(0,n)}function ye(e,t){return null==e||""===e?null===t?"":t:null==t||""===t?e:e+" "+t}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const De=k({__forward_ref__:k});function pe(e){return e.__forward_ref__=pe,e.toString=function(){return ie(this())},e}function fe(e){return Be(e)?e():e}function Be(e){return"function"==typeof e&&e.hasOwnProperty(De)&&e.__forward_ref__===pe}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class Ue extends Error{constructor(t,n){super(function $e(e,t){return`NG0${Math.abs(e)}${t?": "+t:""}`}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(t,n)),this.code=t}}function ae(e){return"string"==typeof e?e:null==e?"":String(e)}function Pe(e){return"function"==typeof e?e.name||e.toString():"object"==typeof e&&null!=e&&"function"==typeof e.type?e.type.name||e.type.toString():ae(e)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Tt(e,t){const n=t?` in ${t}`:"";throw new Ue(-201,`No provider for ${Pe(e)} found${n}`)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function fn(e,t){null==e&&function At(e,t,n,r){throw new Error(`ASSERTION ERROR: ${e}`+(null==r?"":` [Expected=> ${n} ${r} ${t} <=Actual]`))}(t,e,null,"!=")}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function kt(e){return{token:e.token,providedIn:e.providedIn||null,factory:e.factory,value:void 0}}function Hn(e){return{providers:e.providers||[],imports:e.imports||[]}}function yn(e){return Rr(e,Rn)||Rr(e,Yn)}function Rr(e,t){return e.hasOwnProperty(t)?e[t]:null}function Pn(e){return e&&(e.hasOwnProperty(En)||e.hasOwnProperty(er))?e[En]:null}const Rn=k({\u0275prov:k}),En=k({\u0275inj:k}),Yn=k({ngInjectableDef:k}),er=k({ngInjectorDef:k});
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */var st=(()=>((st=st||{})[st.Default=0]="Default",st[st.Host=1]="Host",st[st.Self=2]="Self",st[st.SkipSelf=4]="SkipSelf",st[st.Optional=8]="Optional",st))();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let me;function ee(e){const t=me;return me=e,t}function Ie(e,t,n){const r=yn(e);return r&&"root"==r.providedIn?void 0===r.value?r.value=r.factory():r.value:n&st.Optional?null:void 0!==t?t:void Tt(ie(e),"Injector")}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Me(e){return{toString:e}.toString()}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */var Fe=(()=>((Fe=Fe||{})[Fe.OnPush=0]="OnPush",Fe[Fe.Default=1]="Default",Fe))(),xt=(()=>{return(e=xt||(xt={}))[e.Emulated=0]="Emulated",e[e.None=2]="None",e[e.ShadowDom=3]="ShadowDom",xt;var e})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const Dn="undefined"!=typeof globalThis&&globalThis,jt="undefined"!=typeof window&&window,et="undefined"!=typeof self&&"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope&&self,tt=Dn||"undefined"!=typeof global&&global||jt||et,Ct={},Ft=[],rr=k({\u0275cmp:k}),gn=k({\u0275dir:k}),Kr=k({\u0275pipe:k}),zn=k({\u0275mod:k}),kn=k({\u0275fac:k}),pr=k({__NG_ELEMENT_ID__:k});
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let Qt=0;function en(e){return Me(()=>{const n={},r={type:e.type,providersResolver:null,decls:e.decls,vars:e.vars,factory:null,template:e.template||null,consts:e.consts||null,ngContentSelectors:e.ngContentSelectors,hostBindings:e.hostBindings||null,hostVars:e.hostVars||0,hostAttrs:e.hostAttrs||null,contentQueries:e.contentQueries||null,declaredInputs:n,inputs:null,outputs:null,exportAs:e.exportAs||null,onPush:e.changeDetection===Fe.OnPush,directiveDefs:null,pipeDefs:null,selectors:e.selectors||Ft,viewQuery:e.viewQuery||null,features:e.features||null,data:e.data||{},encapsulation:e.encapsulation||xt.Emulated,id:"c",styles:e.styles||Ft,_:null,setInput:null,schemas:e.schemas||null,tView:null},i=e.directives,o=e.features,l=e.pipes;return r.id+=Qt++,r.inputs=it(e.inputs,n),r.outputs=it(e.outputs),o&&o.forEach(g=>g(r)),r.directiveDefs=i?()=>("function"==typeof i?i():i).map(ge):null,r.pipeDefs=l?()=>("function"==typeof l?l():l).map(se):null,r})}function ge(e){return Bt(e)||function dn(e){return e[gn]||null}(e)}function se(e){return function Xe(e){return e[Kr]||null}(e)}const K={};function le(e){return Me(()=>{const t={type:e.type,bootstrap:e.bootstrap||Ft,declarations:e.declarations||Ft,imports:e.imports||Ft,exports:e.exports||Ft,transitiveCompileScopes:null,schemas:e.schemas||null,id:e.id||null};return null!=e.id&&(K[e.id]=e.type),t})}function Te(e,t){return Me(()=>{const n=bn(e,!0);n.declarations=t.declarations||Ft,n.imports=t.imports||Ft,n.exports=t.exports||Ft})}function it(e,t){if(null==e)return Ct;const n={};for(const r in e)if(e.hasOwnProperty(r)){let i=e[r],o=i;Array.isArray(i)&&(o=i[1],i=i[0]),n[i]=r,t&&(t[i]=o)}return n}const yt=en;function sn(e){return{type:e.type,name:e.name,factory:null,pure:!1!==e.pure,onDestroy:e.type.prototype.ngOnDestroy||null}}function Bt(e){return e[rr]||null}function bn(e,t){const n=e[zn]||null;if(!n&&!0===t)throw new Error(`Type ${ie(e)} does not have '\u0275mod' property.`);return n}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function yr(e){return Array.isArray(e)&&"object"==typeof e[1]}function _r(e){return Array.isArray(e)&&!0===e[1]}function Vt(e){return 0!=(8&e.flags)}function Oi(e){return 2==(2&e.flags)}function kr(e){return 1==(1&e.flags)}function Qn(e){return null!==e.template}function pi(e){return 0!=(512&e[2])}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Sr(e,t){return e.hasOwnProperty(kn)?e[kn]:null}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class io{constructor(t,n,r){this.previousValue=t,this.currentValue=n,this.firstChange=r}isFirstChange(){return this.firstChange}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function gi(){return Is}function Is(e){return e.type.prototype.ngOnChanges&&(e.setInput=oo),so}function so(){const e=Ri(this),t=null==e?void 0:e.current;if(t){const n=e.previous;if(n===Ct)e.previous=t;else for(let r in t)n[r]=t[r];e.current=null,this.ngOnChanges(t)}}function oo(e,t,n,r){const i=Ri(e)||function ni(e,t){return e[Os]=t}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(e,{previous:Ct,current:null}),o=i.current||(i.current={}),l=i.previous,g=this.declaredInputs[n],v=l[g];o[g]=new io(v&&v.currentValue,t,l===Ct),e[r]=t}gi.ngInherit=!0;const Os="__ngSimpleChanges__";function Ri(e){return e[Os]||null}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let Fi;function Mr(e){Fi=e}function Ni(){return void 0!==Fi?Fi:"undefined"!=typeof document?document:void 0}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function tn(e){return!!e.listen}const yi={createRenderer:(e,t)=>Ni()};
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function nn(e){for(;Array.isArray(e);)e=e[0];return e}function _i(e,t){return nn(t[e])}function Jn(e,t){return nn(t[e.index])}function Br(e,t){return e.data[t]}function vi(e,t){return e[t]}function tr(e,t){const n=t[e];return yr(n)?n:n[0]}function ki(e){return 4==(4&e[2])}function Rs(e){return 128==(128&e[2])}function Tr(e,t){return null==t?null:e[t]}function ss(e){e[18]=0}function Di(e,t){e[5]+=t;let n=e,r=e[3];for(;null!==r&&(1===t&&1===n[5]||-1===t&&0===n[5]);)r[5]+=t,n=r,r=r[3]
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}const pt={lFrame:Mn(null),bindingsEnabled:!0};function xs(){return pt.bindingsEnabled}function Ae(){return pt.lFrame.lView}function Pt(){return pt.lFrame.tView}function Ci(e){return pt.lFrame.contextLView=e,e[8]}function wn(){let e=as();for(;null!==e&&64===e.type;)e=e.parent;return e}function as(){return pt.lFrame.currentTNode}function sr(e,t){const n=pt.lFrame;n.currentTNode=e,n.isParent=t}function Ur(){return pt.lFrame.isParent}function ls(){pt.lFrame.isParent=!1}function b(){const e=pt.lFrame;let t=e.bindingRootIndex;return-1===t&&(t=e.bindingRootIndex=e.tView.bindingStartIndex),t}function P(){return pt.lFrame.bindingIndex}function J(){return pt.lFrame.bindingIndex++}function q(e){const t=pt.lFrame,n=t.bindingIndex;return t.bindingIndex=t.bindingIndex+e,n}function He(e,t){const n=pt.lFrame;n.bindingIndex=n.bindingRootIndex=e,dt(t)}function dt(e){pt.lFrame.currentDirectiveIndex=e}function wt(e){const t=pt.lFrame.currentDirectiveIndex;return-1===t?null:e[t]}function nt(){return pt.lFrame.currentQueryIndex}function vt(e){pt.lFrame.currentQueryIndex=e}function $t(e){const t=e[1];return 2===t.type?t.declTNode:1===t.type?e[6]:null}function Sn(e,t,n){if(n&st.SkipSelf){let i=t,o=e;for(;!(i=i.parent,null!==i||n&st.Host||(i=$t(o),null===i||(o=o[15],10&i.type))););if(null===i)return!1;t=i,e=o}const r=pt.lFrame=In();return r.currentTNode=t,r.lView=e,!0}function an(e){const t=In(),n=e[1];pt.lFrame=t,t.currentTNode=n.firstChild,t.lView=e,t.tView=n,t.contextLView=e,t.bindingIndex=n.bindingStartIndex,t.inI18n=!1}function In(){const e=pt.lFrame,t=null===e?null:e.child;return null===t?Mn(e):t}function Mn(e){const t={currentTNode:null,isParent:!0,lView:null,tView:null,selectedIndex:-1,contextLView:null,elementDepthCount:0,currentNamespace:null,currentDirectiveIndex:-1,bindingRootIndex:-1,bindingIndex:-1,currentQueryIndex:0,parent:e,child:null,inI18n:!1};return null!==e&&(e.child=t),t}function jr(){const e=pt.lFrame;return pt.lFrame=e.parent,e.currentTNode=null,e.lView=null,e}const Xn=jr;function vn(){const e=jr();e.isParent=!0,e.tView=null,e.selectedIndex=-1,e.contextLView=null,e.elementDepthCount=0,e.currentDirectiveIndex=-1,e.currentNamespace=null,e.bindingRootIndex=-1,e.bindingIndex=-1,e.currentQueryIndex=0}function rn(){return pt.lFrame.selectedIndex}function Hr(e){pt.lFrame.selectedIndex=e}function zt(){const e=pt.lFrame;return Br(e.tView,e.selectedIndex)}function St(e,t){for(let n=t.directiveStart,r=t.directiveEnd;n<r;n++){const o=e.data[n].type.prototype,{ngAfterContentInit:l,ngAfterContentChecked:g,ngAfterViewInit:v,ngAfterViewChecked:I,ngOnDestroy:x}=o;l&&(e.contentHooks||(e.contentHooks=[])).push(-n,l),g&&((e.contentHooks||(e.contentHooks=[])).push(n,g),(e.contentCheckHooks||(e.contentCheckHooks=[])).push(n,g)),v&&(e.viewHooks||(e.viewHooks=[])).push(-n,v),I&&((e.viewHooks||(e.viewHooks=[])).push(n,I),(e.viewCheckHooks||(e.viewCheckHooks=[])).push(n,I)),null!=x&&(e.destroyHooks||(e.destroyHooks=[])).push(n,x)}}function y(e,t,n){R(e,t,3,n)}function M(e,t,n,r){(3&e[2])===n&&R(e,t,n,r)}function E(e,t){let n=e[2];(3&n)===t&&(n&=2047,n+=1,e[2]=n)}function R(e,t,n,r){const o=null!=r?r:-1,l=t.length-1;let g=0;for(let v=void 0!==r?65535&e[18]:0;v<l;v++)if("number"==typeof t[v+1]){if(g=t[v],null!=r&&g>=r)break}else t[v]<0&&(e[18]+=65536),(g<o||-1==o)&&(W(e,n,t,v),e[18]=(4294901760&e[18])+v+2),v++}function W(e,t,n,r){const i=n[r]<0,o=n[r+1],g=e[i?-n[r]:n[r]];if(i){if(e[2]>>11<e[18]>>16&&(3&e[2])===t){e[2]+=2048;try{o.call(g)}finally{}}}else try{o.call(g)}finally{}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class we{constructor(t,n,r){this.factory=t,this.resolving=!1,this.canSeeViewProviders=n,this.injectImpl=r}}function or(e,t,n){const r=tn(e);let i=0;for(;i<n.length;){const o=n[i];if("number"==typeof o){if(0!==o)break;i++;const l=n[i++],g=n[i++],v=n[i++];r?e.setAttribute(t,g,v,l):t.setAttributeNS(l,g,v)}else{const l=o,g=n[++i];lr(l)?r&&e.setProperty(t,l,g):r?e.setAttribute(t,l,g):t.setAttribute(l,g),i++}}return i}function ar(e){return 3===e||4===e||6===e}function lr(e){return 64===e.charCodeAt(0)}function jn(e,t){if(null!==t&&0!==t.length)if(null===e||0===e.length)e=t.slice();else{let n=-1;for(let r=0;r<t.length;r++){const i=t[r];"number"==typeof i?n=i:0===n||cr(e,n,i,null,-1===n||2===n?t[++r]:null)}}return e}function cr(e,t,n,r,i){let o=0,l=e.length;if(-1===t)l=-1;else for(;o<e.length;){const g=e[o++];if("number"==typeof g){if(g===t){l=-1;break}if(g>t){l=o-1;break}}}for(;o<e.length;){const g=e[o];if("number"==typeof g)break;if(g===n){if(null===r)return void(null!==i&&(e[o+1]=i));if(r===e[o+1])return void(e[o+2]=i)}o++,null!==r&&o++,null!==i&&o++}-1!==l&&(e.splice(l,0,t),o=l+1),e.splice(o++,0,n),null!==r&&e.splice(o++,0,r),null!==i&&e.splice(o++,0,i)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Si(e){return-1!==e}function ci(e){return 32767&e}function us(e,t){let n=function Oo(e){return e>>16}(e),r=t;for(;n>0;)r=r[15],n--;return r}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let uo=!0;function Ys(e){const t=uo;return uo=e,t}let qa=0;function Bi(e,t){const n=go(e,t);if(-1!==n)return n;const r=t[1];r.firstCreatePass&&(e.injectorIndex=t.length,po(r.data,e),po(t,null),po(r.blueprint,null));const i=Ks(e,t),o=e.injectorIndex;if(Si(i)){const l=ci(i),g=us(i,t),v=g[1].data;for(let I=0;I<8;I++)t[o+I]=g[l+I]|v[l+I]}return t[o+8]=i,o}function po(e,t){e.push(0,0,0,0,0,0,0,0,t)}function go(e,t){return-1===e.injectorIndex||e.parent&&e.parent.injectorIndex===e.injectorIndex||null===t[e.injectorIndex+8]?-1:e.injectorIndex}function Ks(e,t){if(e.parent&&-1!==e.parent.injectorIndex)return e.parent.injectorIndex;let n=0,r=null,i=t;for(;null!==i;){const o=i[1],l=o.type;if(r=2===l?o.declTNode:1===l?i[6]:null,null===r)return-1;if(n++,i=i[15],-1!==r.injectorIndex)return r.injectorIndex|n<<16}return-1}function Qs(e,t,n){!function el(e,t,n){let r;"string"==typeof n?r=n.charCodeAt(0)||0:n.hasOwnProperty(pr)&&(r=n[pr]),null==r&&(r=n[pr]=qa++);const i=255&r;t.data[e+(i>>5)]|=1<<i}(e,t,n)}function _(e,t,n){if(n&st.Optional)return e;Tt(t,"NodeInjector")}function p(e,t,n,r){if(n&st.Optional&&void 0===r&&(r=null),0==(n&(st.Self|st.Host))){const i=e[9],o=ee(void 0);try{return i?i.get(t,r,n&st.Optional):Ie(t,r,n&st.Optional)}finally{ee(o)}}return _(r,t,n)}function u(e,t,n,r=st.Default,i){if(null!==e){const o=function Ee(e){if("string"==typeof e)return e.charCodeAt(0)||0;const t=e.hasOwnProperty(pr)?e[pr]:void 0;return"number"==typeof t?t>=0?255&t:T:t}(n);if("function"==typeof o){if(!Sn(t,e,r))return r&st.Host?_(i,n,r):p(t,n,r,i);try{const l=o(r);if(null!=l||r&st.Optional)return l;Tt(n)}finally{Xn()}}else if("number"==typeof o){let l=null,g=go(e,t),v=-1,I=r&st.Host?t[16][6]:null;for((-1===g||r&st.SkipSelf)&&(v=-1===g?Ks(e,t):t[g+8],-1!==v&&Lt(r,!1)?(l=t[1],g=ci(v),t=us(v,t)):g=-1);-1!==g;){const x=t[1];if(We(o,g,x.data)){const V=F(g,t,n,l,r,I);if(V!==C)return V}v=t[g+8],-1!==v&&Lt(r,t[1].data[g+8]===I)&&We(o,g,t)?(l=x,g=ci(v),t=us(v,t)):g=-1}}}return p(t,n,r,i)}const C={};function T(){return new Je(wn(),Ae())}function F(e,t,n,r,i,o){const l=t[1],g=l.data[e+8],x=Y(g,l,n,null==r?Oi(g)&&uo:r!=l&&0!=(3&g.type),i&st.Host&&o===g);return null!==x?ne(t,l,x,g):C}function Y(e,t,n,r,i){const o=e.providerIndexes,l=t.data,g=1048575&o,v=e.directiveStart,x=o>>20,re=i?g+x:e.directiveEnd;for(let ce=r?g:g+x;ce<re;ce++){const be=l[ce];if(ce<v&&n===be||ce>=v&&be.type===n)return ce}if(i){const ce=l[v];if(ce&&Qn(ce)&&ce.type===n)return v}return null}function ne(e,t,n,r){let i=e[n];const o=t.data;if(function ke(e){return e instanceof we}(i)){const l=i;l.resolving&&function rt(e,t){const n=t?`. Dependency path: ${t.join(" > ")} > ${e}`:"";throw new Ue(-200,`Circular dependency in DI detected for ${e}${n}`)}(Pe(o[n]));const g=Ys(l.canSeeViewProviders);l.resolving=!0;const v=l.injectImpl?ee(l.injectImpl):null;Sn(e,r,st.Default);try{i=e[n]=l.factory(void 0,o,e,r),t.firstCreatePass&&n>=r.directiveStart&&
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function ot(e,t,n){const{ngOnChanges:r,ngOnInit:i,ngDoCheck:o}=t.type.prototype;if(r){const l=Is(t);(n.preOrderHooks||(n.preOrderHooks=[])).push(e,l),(n.preOrderCheckHooks||(n.preOrderCheckHooks=[])).push(e,l)}i&&(n.preOrderHooks||(n.preOrderHooks=[])).push(0-e,i),o&&((n.preOrderHooks||(n.preOrderHooks=[])).push(e,o),(n.preOrderCheckHooks||(n.preOrderCheckHooks=[])).push(e,o))}(n,o[n],t)}finally{null!==v&&ee(v),Ys(g),l.resolving=!1,Xn()}}return i}function We(e,t,n){return!!(n[t+(e>>5)]&1<<e)}function Lt(e,t){return!(e&st.Self||e&st.Host&&t)}class Je{constructor(t,n){this._tNode=t,this._lView=n}get(t,n,r){return u(this._tNode,this._lView,t,r,n)}}function qt(e){return Me(()=>{const t=e.prototype.constructor,n=t[kn]||Zt(t),r=Object.prototype;let i=Object.getPrototypeOf(e.prototype).constructor;for(;i&&i!==r;){const o=i[kn]||Zt(i);if(o&&o!==n)return o;i=Object.getPrototypeOf(i)}return o=>new o})}function Zt(e){return Be(e)?()=>{const t=Zt(fe(e));return t&&t()}:Sr(e)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function $r(e){return function Po(e,t){if("class"===t)return e.classes;if("style"===t)return e.styles;const n=e.attrs;if(n){const r=n.length;let i=0;for(;i<r;){const o=n[i];if(ar(o))break;if(0===o)i+=2;else if("number"==typeof o)for(i++;i<r&&"string"==typeof n[i];)i++;else{if(o===t)return n[i+1];i+=2}}}return null}(wn(),e)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Ui="__parameters__";function ks(e,t,n){return Me(()=>{const r=function Ro(e){return function(...n){if(e){const r=e(...n);for(const i in r)this[i]=r[i]}}}(t);function i(...o){if(this instanceof i)return r.apply(this,o),this;const l=new i(...o);return g.annotation=l,g;function g(v,I,x){const V=v.hasOwnProperty(Ui)?v[Ui]:Object.defineProperty(v,Ui,{value:[]})[Ui];for(;V.length<=x;)V.push(null);return(V[x]=V[x]||[]).push(l),v}}return n&&(i.prototype=Object.create(n.prototype)),i.prototype.ngMetadataName=e,i.annotationCls=i,i})}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class On{constructor(t,n){this._desc=t,this.ngMetadataName="InjectionToken",this.\u0275prov=void 0,"number"==typeof n?this.__NG_ELEMENT_ID__=n:void 0!==n&&(this.\u0275prov=kt({token:this,providedIn:n.providedIn||"root",factory:n.factory}))}toString(){return`InjectionToken ${this._desc}`}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const gc=new On("AnalyzeForEntryComponents"),yo=Function;function ii(e,t){void 0===t&&(t=e);for(let n=0;n<e.length;n++){let r=e[n];Array.isArray(r)?(t===e&&(t=e.slice(0,n)),ii(r,t)):t!==e&&t.push(r)}return t}function Mi(e,t){e.forEach(n=>Array.isArray(n)?Mi(n,t):t(n))}function tl(e,t,n){t>=e.length?e.push(n):e.splice(t,0,n)}function Ea(e,t){return t>=e.length-1?e.pop():e.splice(t,1)[0]}function Fo(e,t){const n=[];for(let r=0;r<e;r++)n.push(t);return n}function Gr(e,t,n){let r=Bs(e,t);return r>=0?e[1|r]=n:(r=~r,function rh(e,t,n,r){let i=e.length;if(i==t)e.push(n,r);else if(1===i)e.push(r,e[0]),e[0]=n;else{for(i--,e.push(e[i-1],e[i]);i>t;)e[i]=e[i-2],i--;e[t]=n,e[t+1]=r}}(e,r,t,n)),r}function nl(e,t){const n=Bs(e,t);if(n>=0)return e[1|n]}function Bs(e,t){return function rl(e,t,n){let r=0,i=e.length>>n;for(;i!==r;){const o=r+(i-r>>1),l=e[o<<n];if(t===l)return o<<n;l>t?i=o:r=o+1}return~(i<<n)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(e,t,1)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const ko={},Bo="__NG_DI_FLAG__",_o="ngTempTokenPath",wc=/\n/gm,ol="__source",Mc=k({provide:String,useValue:k});let Uo;function Tc(e){const t=Uo;return Uo=e,t}function oh(e,t=st.Default){if(void 0===Uo)throw new Ue(203,"");return null===Uo?Ie(e,void 0,t):Uo.get(e,t&st.Optional?null:void 0,t)}function qn(e,t=st.Default){return(function oe(){return me}()||oh)(fe(e),t)}const ll=qn;function Ai(e){const t=[];for(let n=0;n<e.length;n++){const r=fe(e[n]);if(Array.isArray(r)){if(0===r.length)throw new Ue(900,"");let i,o=st.Default;for(let l=0;l<r.length;l++){const g=r[l],v=ah(g);"number"==typeof v?-1===v?i=g.token:o|=v:i=g}t.push(qn(i,o))}else t.push(qn(r))}return t}function vo(e,t){return e[Bo]=t,e.prototype[Bo]=t,e}function ah(e){return e[Bo]}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const Ca=vo(ks("Inject",e=>({token:e})),-1),jo=vo(ks("Optional"),8),Eo=vo(ks("SkipSelf"),4);
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+var Vi=(()=>((Vi=Vi||{})[Vi.Important=1]="Important",Vi[Vi.DashCase=2]="DashCase",Vi))();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const gl="__ngContext__";function dr(e,t){e[gl]=t}function wa(e){const t=function Do(e){return e[gl]||null}(e);return t?Array.isArray(t)?t:t.lView:null}function Sa(e,t){return undefined(e,t)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Go(e){const t=e[3];return _r(t)?t[3]:t}function wl(e){return si(e[13])}function Ma(e){return si(e[4])}function si(e){for(;null!==e&&!_r(e);)e=e[4];return e}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function fs(e,t,n,r,i){if(null!=r){let o,l=!1;_r(r)?o=r:yr(r)&&(l=!0,r=r[0]);const g=nn(r);0===e&&null!==n?null==i?Il(t,n,g):Us(t,n,g,i||null,!0):1===e&&null!==n?Us(t,n,g,i||null,!0):2===e?function gt(e,t,n){const r=Yo(e,t);r&&function Pl(e,t,n,r){tn(e)?e.removeChild(t,n,r):t.removeChild(n)}(e,r,t,n)}(t,g,l):3===e&&t.destroyNode(g),null!=o&&function Rl(e,t,n,r,i){const o=n[7];o!==nn(n)&&fs(t,e,r,o,i);for(let g=10;g<n.length;g++){const v=n[g];hr(v[1],v,e,t,r,o)}}(t,e,o,n,i)}}function Aa(e,t,n){if(tn(e))return e.createElement(t,n);{const r=null!==n?function xi(e){const t=e.toLowerCase();return"svg"===t?"http://www.w3.org/2000/svg":"math"===t?"http://www.w3.org/1998/MathML/":null}(n):null;return null===r?e.createElement(t):e.createElementNS(r,t)}}function Wc(e,t){const n=e[9],r=n.indexOf(t),i=t[3];1024&t[2]&&(t[2]&=-1025,Di(i,-1)),n.splice(r,1)}function Pa(e,t){if(e.length<=10)return;const n=10+t,r=e[n];if(r){const i=r[17];null!==i&&i!==e&&Wc(i,r),t>0&&(e[n-1][4]=r[4]);const o=Ea(e,10+t);!function $c(e,t){hr(e,t,t[11],2,null,null),t[0]=null,t[6]=null}(r[1],r);const l=o[19];null!==l&&l.detachView(o[1]),r[3]=null,r[4]=null,r[2]&=-129}return r}function Ml(e,t){if(!(256&t[2])){const n=t[11];tn(n)&&n.destroyNode&&hr(e,t,n,3,null,null),function zc(e){let t=e[13];if(!t)return Ra(e[1],e);for(;t;){let n=null;if(yr(t))n=t[13];else{const r=t[10];r&&(n=r)}if(!n){for(;t&&!t[4]&&t!==e;)yr(t)&&Ra(t[1],t),t=t[3];null===t&&(t=e),yr(t)&&Ra(t[1],t),n=t&&t[4]}t=n}}(t)}}function Ra(e,t){if(!(256&t[2])){t[2]&=-129,t[2]|=256,function Yc(e,t){let n;if(null!=e&&null!=(n=e.destroyHooks))for(let r=0;r<n.length;r+=2){const i=t[n[r]];if(!(i instanceof we)){const o=n[r+1];if(Array.isArray(o))for(let l=0;l<o.length;l+=2){const g=i[o[l]],v=o[l+1];try{v.call(g)}finally{}}else try{o.call(i)}finally{}}}}(e,t),function Wo(e,t){const n=e.cleanup,r=t[7];let i=-1;if(null!==n)for(let o=0;o<n.length-1;o+=2)if("string"==typeof n[o]){const l=n[o+1],g="function"==typeof l?l(t):nn(t[l]),v=r[i=n[o+2]],I=n[o+3];"boolean"==typeof I?g.removeEventListener(n[o],v,I):I>=0?r[i=I]():r[i=-I].unsubscribe(),o+=2}else{const l=r[i=n[o+1]];n[o].call(l)}if(null!==r){for(let o=i+1;o<r.length;o++)r[o]();t[7]=null}}(e,t),1===t[1].type&&tn(t[11])&&t[11].destroy();const n=t[17];if(null!==n&&_r(t[3])){n!==t[3]&&Wc(n,t);const r=t[19];null!==r&&r.detachView(e)}}}function Tl(e,t,n){return function Al(e,t,n){let r=t;for(;null!==r&&40&r.type;)r=(t=r).parent;if(null===r)return n[0];if(2&r.flags){const i=e.data[r.directiveStart].encapsulation;if(i===xt.None||i===xt.Emulated)return null}return Jn(r,n)}(e,t.parent,n)}function Us(e,t,n,r,i){tn(e)?e.insertBefore(t,n,r,i):t.insertBefore(n,r,i)}function Il(e,t,n){tn(e)?e.appendChild(t,n):t.appendChild(n)}function Ol(e,t,n,r,i){null!==r?Us(e,t,n,r,i):Il(e,t,n)}function Yo(e,t){return tn(e)?e.parentNode(t):t.parentNode}function a(e,t,n){return d(e,t,n)}let Fl,Nl,d=function s(e,t,n){return 40&e.type?Jn(e,n):null};function te(e,t,n,r){const i=Tl(e,r,t),o=t[11],g=a(r.parent||t[6],r,t);if(null!=i)if(Array.isArray(n))for(let v=0;v<n.length;v++)Ol(o,i,n[v],g,!1);else Ol(o,i,n,g,!1)}function Se(e,t){if(null!==t){const n=t.type;if(3&n)return Jn(t,e);if(4&n)return ze(-1,e[t.index]);if(8&n){const r=t.child;if(null!==r)return Se(e,r);{const i=e[t.index];return _r(i)?ze(-1,i):nn(i)}}if(32&n)return Sa(t,e)()||nn(e[t.index]);{const r=xe(e,t);return null!==r?Array.isArray(r)?r[0]:Se(Go(e[16]),r):Se(e,t.next)}}return null}function xe(e,t){return null!==t?e[16][6].projection[t.projection]:null}function ze(e,t){const n=10+e+1;if(n<t.length){const r=t[n],i=r[1].firstChild;if(null!==i)return Se(r,i)}return t[7]}function Wt(e,t,n,r,i,o,l){for(;null!=n;){const g=r[n.index],v=n.type;if(l&&0===t&&(g&&dr(nn(g),r),n.flags|=4),64!=(64&n.flags))if(8&v)Wt(e,t,n.child,r,i,o,!1),fs(t,e,i,g,o);else if(32&v){const I=Sa(n,r);let x;for(;x=I();)fs(t,e,i,x,o);fs(t,e,i,g,o)}else 16&v?Hi(e,t,r,n,i,o):fs(t,e,i,g,o);n=l?n.projectionNext:n.next}}function hr(e,t,n,r,i,o){Wt(n,r,e.firstChild,t,i,o,!1)}function Hi(e,t,n,r,i,o){const l=n[16],v=l[6].projection[r.projection];if(Array.isArray(v))for(let I=0;I<v.length;I++)fs(t,e,i,v[I],o);else Wt(e,t,v,l[3],i,o,!0)}function mh(e,t,n){tn(e)?e.setAttribute(t,"style",n):t.style.cssText=n}function Kc(e,t,n){tn(e)?""===n?e.removeAttribute(t,"class"):e.setAttribute(t,"class",n):t.className=n}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function bo(e){var t;return(null===(t=function Qc(){if(void 0===Fl&&(Fl=null,tt.trustedTypes))try{Fl=tt.trustedTypes.createPolicy("angular",{createHTML:e=>e,createScript:e=>e,createScriptURL:e=>e})}catch(e){}return Fl}())||void 0===t?void 0:t.createHTML(e))||e}function yh(e){var t;return(null===(t=function Zc(){if(void 0===Nl&&(Nl=null,tt.trustedTypes))try{Nl=tt.trustedTypes.createPolicy("angular#unsafe-bypass",{createHTML:e=>e,createScript:e=>e,createScriptURL:e=>e})}catch(e){}return Nl}())||void 0===t?void 0:t.createHTML(e))||e}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class Co{constructor(t){this.changingThisBreaksApplicationSecurity=t}toString(){return`SafeValue must use [property]=binding: ${this.changingThisBreaksApplicationSecurity} (see https://g.co/ng/security#xss)`}}class Wm extends Co{getTypeName(){return"HTML"}}class Ym extends Co{getTypeName(){return"Style"}}class Km extends Co{getTypeName(){return"Script"}}class Qm extends Co{getTypeName(){return"URL"}}class Zm extends Co{getTypeName(){return"ResourceURL"}}function Vs(e){return e instanceof Co?e.changingThisBreaksApplicationSecurity:e}function Ko(e,t){const n=Eh(e);if(null!=n&&n!==t){if("ResourceURL"===n&&"URL"===t)return!0;throw new Error(`Required a safe ${t}, got a ${n} (see https://g.co/ng/security#xss)`)}return n===t}function Eh(e){return e instanceof Co&&e.getTypeName()||null}function Jm(e){return new Wm(e)}function Xm(e){return new Ym(e)}function qm(e){return new Km(e)}function ey(e){return new Qm(e)}function ty(e){return new Zm(e)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class ny{constructor(t){this.inertDocumentHelper=t}getInertBodyElement(t){t="<body><remove></remove>"+t;try{const n=(new window.DOMParser).parseFromString(bo(t),"text/html").body;return null===n?this.inertDocumentHelper.getInertBodyElement(t):(n.removeChild(n.firstChild),n)}catch(n){return null}}}class ry{constructor(t){if(this.defaultDoc=t,this.inertDocument=this.defaultDoc.implementation.createHTMLDocument("sanitization-inert"),null==this.inertDocument.body){const n=this.inertDocument.createElement("html");this.inertDocument.appendChild(n);const r=this.inertDocument.createElement("body");n.appendChild(r)}}getInertBodyElement(t){const n=this.inertDocument.createElement("template");if("content"in n)return n.innerHTML=bo(t),n;const r=this.inertDocument.createElement("body");return r.innerHTML=bo(t),this.defaultDoc.documentMode&&this.stripCustomNsAttrs(r),r}stripCustomNsAttrs(t){const n=t.attributes;for(let i=n.length-1;0<i;i--){const l=n.item(i).name;("xmlns:ns1"===l||0===l.indexOf("ns1:"))&&t.removeAttribute(l)}let r=t.firstChild;for(;r;)r.nodeType===Node.ELEMENT_NODE&&this.stripCustomNsAttrs(r),r=r.nextSibling}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const sy=/^(?:(?:https?|mailto|ftp|tel|file|sms):|[^&:/?#]*(?:[/?#]|$))/gi,oy=/^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[a-z0-9+\/]+=*$/i;function xa(e){return(e=String(e)).match(sy)||e.match(oy)?e:"unsafe:"+e}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function ps(e){const t={};for(const n of e.split(","))t[n]=!0;return t}function Fa(...e){const t={};for(const n of e)for(const r in n)n.hasOwnProperty(r)&&(t[r]=!0);return t}const Ch=ps("area,br,col,hr,img,wbr"),wh=ps("colgroup,dd,dt,li,p,tbody,td,tfoot,th,thead,tr"),Sh=ps("rp,rt"),Jc=Fa(Ch,Fa(wh,ps("address,article,aside,blockquote,caption,center,del,details,dialog,dir,div,dl,figure,figcaption,footer,h1,h2,h3,h4,h5,h6,header,hgroup,hr,ins,main,map,menu,nav,ol,pre,section,summary,table,ul")),Fa(Sh,ps("a,abbr,acronym,audio,b,bdi,bdo,big,br,cite,code,del,dfn,em,font,i,img,ins,kbd,label,map,mark,picture,q,ruby,rp,rt,s,samp,small,source,span,strike,strong,sub,sup,time,track,tt,u,var,video")),Fa(Sh,wh)),Xc=ps("background,cite,href,itemtype,longdesc,poster,src,xlink:href"),qc=ps("srcset"),Mh=Fa(Xc,qc,ps("abbr,accesskey,align,alt,autoplay,axis,bgcolor,border,cellpadding,cellspacing,class,clear,color,cols,colspan,compact,controls,coords,datetime,default,dir,download,face,headers,height,hidden,hreflang,hspace,ismap,itemscope,itemprop,kind,label,lang,language,loop,media,muted,nohref,nowrap,open,preload,rel,rev,role,rows,rowspan,rules,scope,scrolling,shape,size,sizes,span,srclang,start,summary,tabindex,target,title,translate,type,usemap,valign,value,vspace,width"),ps("aria-activedescendant,aria-atomic,aria-autocomplete,aria-busy,aria-checked,aria-colcount,aria-colindex,aria-colspan,aria-controls,aria-current,aria-describedby,aria-details,aria-disabled,aria-dropeffect,aria-errormessage,aria-expanded,aria-flowto,aria-grabbed,aria-haspopup,aria-hidden,aria-invalid,aria-keyshortcuts,aria-label,aria-labelledby,aria-level,aria-live,aria-modal,aria-multiline,aria-multiselectable,aria-orientation,aria-owns,aria-placeholder,aria-posinset,aria-pressed,aria-readonly,aria-relevant,aria-required,aria-roledescription,aria-rowcount,aria-rowindex,aria-rowspan,aria-selected,aria-setsize,aria-sort,aria-valuemax,aria-valuemin,aria-valuenow,aria-valuetext")),ay=ps("script,style,template");class ly{constructor(){this.sanitizedSomething=!1,this.buf=[]}sanitizeChildren(t){let n=t.firstChild,r=!0;for(;n;)if(n.nodeType===Node.ELEMENT_NODE?r=this.startElement(n):n.nodeType===Node.TEXT_NODE?this.chars(n.nodeValue):this.sanitizedSomething=!0,r&&n.firstChild)n=n.firstChild;else for(;n;){n.nodeType===Node.ELEMENT_NODE&&this.endElement(n);let i=this.checkClobberedElement(n,n.nextSibling);if(i){n=i;break}n=this.checkClobberedElement(n,n.parentNode)}return this.buf.join("")}startElement(t){const n=t.nodeName.toLowerCase();if(!Jc.hasOwnProperty(n))return this.sanitizedSomething=!0,!ay.hasOwnProperty(n);this.buf.push("<"),this.buf.push(n);const r=t.attributes;for(let i=0;i<r.length;i++){const o=r.item(i),l=o.name,g=l.toLowerCase();if(!Mh.hasOwnProperty(g)){this.sanitizedSomething=!0;continue}let v=o.value;Xc[g]&&(v=xa(v)),qc[g]&&(e=v,v=(e=String(e)).split(",").map(t=>xa(t.trim())).join(", ")),this.buf.push(" ",l,'="',Th(v),'"')}var e;return this.buf.push(">"),!0}endElement(t){const n=t.nodeName.toLowerCase();Jc.hasOwnProperty(n)&&!Ch.hasOwnProperty(n)&&(this.buf.push("</"),this.buf.push(n),this.buf.push(">"))}chars(t){this.buf.push(Th(t))}checkClobberedElement(t,n){if(n&&(t.compareDocumentPosition(n)&Node.DOCUMENT_POSITION_CONTAINED_BY)===Node.DOCUMENT_POSITION_CONTAINED_BY)throw new Error(`Failed to sanitize html because the element is clobbered: ${t.outerHTML}`);return n}}const cy=/[\uD800-\uDBFF][\uDC00-\uDFFF]/g,uy=/([^\#-~ |!])/g;function Th(e){return e.replace(/&/g,"&amp;").replace(cy,function(t){return"&#"+(1024*(t.charCodeAt(0)-55296)+(t.charCodeAt(1)-56320)+65536)+";"}).replace(uy,function(t){return"&#"+t.charCodeAt(0)+";"}).replace(/</g,"&lt;").replace(/>/g,"&gt;")}let Ll;function Ah(e,t){let n=null;try{Ll=Ll||function Dh(e){const t=new ry(e);return function iy(){try{return!!(new window.DOMParser).parseFromString(bo(""),"text/html")}catch(e){return!1}}()?new ny(t):t}(e);let r=t?String(t):"";n=Ll.getInertBodyElement(r);let i=5,o=r;do{if(0===i)throw new Error("Failed to sanitize html because the input is unstable");i--,r=o,o=n.innerHTML,n=Ll.getInertBodyElement(r)}while(r!==o);return bo((new ly).sanitizeChildren(eu(n)||n))}finally{if(n){const r=eu(n)||n;for(;r.firstChild;)r.removeChild(r.firstChild)}}}function eu(e){return"content"in e&&function dy(e){return e.nodeType===Node.ELEMENT_NODE&&"TEMPLATE"===e.nodeName}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(e)?e.content:null}var Wn=(()=>((Wn=Wn||{})[Wn.NONE=0]="NONE",Wn[Wn.HTML=1]="HTML",Wn[Wn.STYLE=2]="STYLE",Wn[Wn.SCRIPT=3]="SCRIPT",Wn[Wn.URL=4]="URL",Wn[Wn.RESOURCE_URL=5]="RESOURCE_URL",Wn))();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Ih(e){const t=Na();return t?yh(t.sanitize(Wn.HTML,e)||""):Ko(e,"HTML")?yh(Vs(e)):Ah(Ni(),ae(e))}function tu(e){const t=Na();return t?t.sanitize(Wn.URL,e)||"":Ko(e,"URL")?Vs(e):xa(ae(e))}function Na(){const e=Ae();return e&&e[12]}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function ru(e){return e.ngOriginalError}function Dy(e,...t){e.error(...t)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class kl{constructor(){this._console=console}handleError(t){const n=this._findOriginalError(t),r=function Ey(e){return e&&e.ngErrorLogger||Dy}(t);r(this._console,"ERROR",t),n&&r(this._console,"ORIGINAL ERROR",n)}_findOriginalError(t){let n=t&&ru(t);for(;n&&ru(n);)n=ru(n);return n||null}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const Ay=(()=>("undefined"!=typeof requestAnimationFrame&&requestAnimationFrame||setTimeout).bind(tt))();function gs(e){return e instanceof Function?e():e}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Rh(e,t,n){let r=e.length;for(;;){const i=e.indexOf(t,n);if(-1===i)return i;if(0===i||e.charCodeAt(i-1)<=32){const o=t.length;if(i+o===r||e.charCodeAt(i+o)<=32)return i}n=i+1}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const xh="ng-template";function Ry(e,t,n){let r=0;for(;r<e.length;){let i=e[r++];if(n&&"class"===i){if(i=e[r],-1!==Rh(i.toLowerCase(),t,0))return!0}else if(1===i){for(;r<e.length&&"string"==typeof(i=e[r++]);)if(i.toLowerCase()===t)return!0;return!1}}return!1}function Fh(e){return 4===e.type&&e.value!==xh}function xy(e,t,n){return t===(4!==e.type||n?e.value:xh)}function Fy(e,t,n){let r=4;const i=e.attrs||[],o=function ky(e){for(let t=0;t<e.length;t++)if(ar(e[t]))return t;return e.length}(i);let l=!1;for(let g=0;g<t.length;g++){const v=t[g];if("number"!=typeof v){if(!l)if(4&r){if(r=2|1&r,""!==v&&!xy(e,v,n)||""===v&&1===t.length){if($i(r))return!1;l=!0}}else{const I=8&r?v:t[++g];if(8&r&&null!==e.attrs){if(!Ry(e.attrs,I,n)){if($i(r))return!1;l=!0}continue}const V=Ny(8&r?"class":v,i,Fh(e),n);if(-1===V){if($i(r))return!1;l=!0;continue}if(""!==I){let re;re=V>o?"":i[V+1].toLowerCase();const ce=8&r?re:null;if(ce&&-1!==Rh(ce,I,0)||2&r&&I!==re){if($i(r))return!1;l=!0}}}}else{if(!l&&!$i(r)&&!$i(v))return!1;if(l&&$i(v))continue;l=!1,r=v|1&r}}return $i(r)||l}function $i(e){return 0==(1&e)}function Ny(e,t,n,r){if(null===t)return-1;let i=0;if(r||!n){let o=!1;for(;i<t.length;){const l=t[i];if(l===e)return i;if(3===l||6===l)o=!0;else{if(1===l||2===l){let g=t[++i];for(;"string"==typeof g;)g=t[++i];continue}if(4===l)break;if(0===l){i+=4;continue}}i+=o?1:2}return-1}return function By(e,t){let n=e.indexOf(4);if(n>-1)for(n++;n<e.length;){const r=e[n];if("number"==typeof r)return-1;if(r===t)return n;n++}return-1}(t,e)}function Nh(e,t,n=!1){for(let r=0;r<t.length;r++)if(Fy(e,t[r],n))return!0;return!1}function Uy(e,t){e:for(let n=0;n<t.length;n++){const r=t[n];if(e.length===r.length){for(let i=0;i<e.length;i++)if(e[i]!==r[i])continue e;return!0}}return!1}function Lh(e,t){return e?":not("+t.trim()+")":t}function jy(e){let t=e[0],n=1,r=2,i="",o=!1;for(;n<e.length;){let l=e[n];if("string"==typeof l)if(2&r){const g=e[++n];i+="["+l+(g.length>0?'="'+g+'"':"")+"]"}else 8&r?i+="."+l:4&r&&(i+=" "+l);else""!==i&&!$i(l)&&(t+=Lh(o,i),i=""),r=l,o=o||!$i(r);n++}return""!==i&&(t+=Lh(o,i)),t}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const Rt={};
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function kh(e){Bh(Pt(),Ae(),rn()+e,!1)}function Bh(e,t,n,r){if(!r)if(3==(3&t[2])){const o=e.preOrderCheckHooks;null!==o&&y(t,o,n)}else{const o=e.preOrderHooks;null!==o&&M(t,o,0,n)}Hr(n)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Bl(e,t){return e<<17|t<<2}function zi(e){return e>>17&32767}function iu(e){return 2|e}function Hs(e){return(131068&e)>>2}function su(e,t){return-131069&e|t<<2}function ou(e){return 1|e}function Qh(e,t){const n=e.contentQueries;if(null!==n)for(let r=0;r<n.length;r+=2){const i=n[r],o=n[r+1];if(-1!==o){const l=e.data[o];vt(i),l.contentQueries(2,t[o],o)}}}function La(e,t,n,r,i,o,l,g,v,I){const x=t.blueprint.slice();return x[0]=i,x[2]=140|r,ss(x),x[3]=x[15]=e,x[8]=n,x[10]=l||e&&e[10],x[11]=g||e&&e[11],x[12]=v||e&&e[12]||null,x[9]=I||e&&e[9]||null,x[6]=o,x[16]=2==t.type?e[16]:x,x}function Zo(e,t,n,r,i){let o=e.data[t];if(null===o)o=function gu(e,t,n,r,i){const o=as(),l=Ur(),v=e.data[t]=function i_(e,t,n,r,i,o){return{type:n,index:r,insertBeforeIndex:null,injectorIndex:t?t.injectorIndex:-1,directiveStart:-1,directiveEnd:-1,directiveStylingLast:-1,propertyBindings:null,flags:0,providerIndexes:0,value:i,attrs:o,mergedAttrs:null,localNames:null,initialInputs:void 0,inputs:null,outputs:null,tViews:null,next:null,projectionNext:null,child:null,parent:t,projection:null,styles:null,stylesWithoutHost:null,residualStyles:void 0,classes:null,classesWithoutHost:null,residualClasses:void 0,classBindings:0,styleBindings:0}}(0,l?o:o&&o.parent,n,t,r,i);return null===e.firstChild&&(e.firstChild=v),null!==o&&(l?null==o.child&&null!==v.parent&&(o.child=v):null===o.next&&(o.next=v)),v}(e,t,n,r,i),function ue(){return pt.lFrame.inI18n}()&&(o.flags|=64);else if(64&o.type){o.type=n,o.value=r,o.attrs=i;const l=function Dr(){const e=pt.lFrame,t=e.currentTNode;return e.isParent?t:t.parent}();o.injectorIndex=null===l?-1:l.injectorIndex}return sr(o,!0),o}function Jo(e,t,n,r){if(0===n)return-1;const i=t.length;for(let o=0;o<n;o++)t.push(r),e.blueprint.push(r),e.data.push(null);return i}function ka(e,t,n){an(t);try{const r=e.viewQuery;null!==r&&wu(1,r,n);const i=e.template;null!==i&&Zh(e,t,i,1,n),e.firstCreatePass&&(e.firstCreatePass=!1),e.staticContentQueries&&Qh(e,t),e.staticViewQueries&&wu(2,e.viewQuery,n);const o=e.components;null!==o&&function t_(e,t){for(let n=0;n<t.length;n++)b_(e,t[n])}(t,o)}catch(r){throw e.firstCreatePass&&(e.incompleteFirstPass=!0,e.firstCreatePass=!1),r}finally{t[2]&=-5,vn()}}function Xo(e,t,n,r){const i=t[2];if(256!=(256&i)){an(t);try{ss(t),function B(e){return pt.lFrame.bindingIndex=e}(e.bindingStartIndex),null!==n&&Zh(e,t,n,2,r);const l=3==(3&i);if(l){const I=e.preOrderCheckHooks;null!==I&&y(t,I,null)}else{const I=e.preOrderHooks;null!==I&&M(t,I,0,null),E(t,0)}if(function E_(e){for(let t=wl(e);null!==t;t=Ma(t)){if(!t[2])continue;const n=t[9];for(let r=0;r<n.length;r++){const i=n[r],o=i[3];0==(1024&i[2])&&Di(o,1),i[2]|=1024}}}(t),function v_(e){for(let t=wl(e);null!==t;t=Ma(t))for(let n=10;n<t.length;n++){const r=t[n],i=r[1];Rs(r)&&Xo(i,r,i.template,r[8])}}(t),null!==e.contentQueries&&Qh(e,t),l){const I=e.contentCheckHooks;null!==I&&y(t,I)}else{const I=e.contentHooks;null!==I&&M(t,I,1),E(t,1)}!function qy(e,t){const n=e.hostBindingOpCodes;if(null!==n)try{for(let r=0;r<n.length;r++){const i=n[r];if(i<0)Hr(~i);else{const o=i,l=n[++r],g=n[++r];He(l,o),g(2,t[o])}}}finally{Hr(-1)}}(e,t);const g=e.components;null!==g&&function e_(e,t){for(let n=0;n<t.length;n++)D_(e,t[n])}(t,g);const v=e.viewQuery;if(null!==v&&wu(2,v,r),l){const I=e.viewCheckHooks;null!==I&&y(t,I)}else{const I=e.viewHooks;null!==I&&M(t,I,2),E(t,2)}!0===e.firstUpdatePass&&(e.firstUpdatePass=!1),t[2]&=-73,1024&t[2]&&(t[2]&=-1025,Di(t[3],-1))}finally{vn()}}}function n_(e,t,n,r){const i=t[10],l=ki(t);try{!l&&i.begin&&i.begin(),l&&ka(e,t,r),Xo(e,t,n,r)}finally{!l&&i.end&&i.end()}}function Zh(e,t,n,r,i){const o=rn(),l=2&r;try{Hr(-1),l&&t.length>20&&Bh(e,t,20,!1),n(r,i)}finally{Hr(o)}}function Jh(e,t,n){if(Vt(t)){const i=t.directiveEnd;for(let o=t.directiveStart;o<i;o++){const l=e.data[o];l.contentQueries&&l.contentQueries(1,n[o],o)}}}function mu(e,t,n){!xs()||(function d_(e,t,n,r){const i=n.directiveStart,o=n.directiveEnd;e.firstCreatePass||Bi(n,t),dr(r,t);const l=n.initialInputs;for(let g=i;g<o;g++){const v=e.data[g],I=Qn(v);I&&m_(t,n,v);const x=ne(t,e,g,n);dr(x,t),null!==l&&y_(0,g-i,x,v,0,l),I&&(tr(n.index,t)[8]=x)}}(e,t,n,Jn(n,t)),128==(128&n.flags)&&function h_(e,t,n){const r=n.directiveStart,i=n.directiveEnd,l=n.index,g=function Ke(){return pt.lFrame.currentDirectiveIndex}();try{Hr(l);for(let v=r;v<i;v++){const I=e.data[v],x=t[v];dt(v),(null!==I.hostBindings||0!==I.hostVars||null!==I.hostAttrs)&&of(I,x)}}finally{Hr(-1),dt(g)}}(e,t,n))}function yu(e,t,n=Jn){const r=t.localNames;if(null!==r){let i=t.index+1;for(let o=0;o<r.length;o+=2){const l=r[o+1],g=-1===l?n(t,e):e[l];e[i++]=g}}}function Xh(e){const t=e.tView;return null===t||t.incompleteFirstPass?e.tView=Vl(1,null,e.template,e.decls,e.vars,e.directiveDefs,e.pipeDefs,e.viewQuery,e.schemas,e.consts):t}function Vl(e,t,n,r,i,o,l,g,v,I){const x=20+r,V=x+i,re=function r_(e,t){const n=[];for(let r=0;r<t;r++)n.push(r<e?null:Rt);return n}(x,V),ce="function"==typeof I?I():I;return re[1]={type:e,blueprint:re,template:n,queries:null,viewQuery:g,declTNode:t,data:re.slice().fill(null,x),bindingStartIndex:x,expandoStartIndex:V,hostBindingOpCodes:null,firstCreatePass:!0,firstUpdatePass:!0,staticViewQueries:!1,staticContentQueries:!1,preOrderHooks:null,preOrderCheckHooks:null,contentHooks:null,contentCheckHooks:null,viewHooks:null,viewCheckHooks:null,destroyHooks:null,cleanup:null,contentQueries:null,components:null,directiveRegistry:"function"==typeof o?o():o,pipeRegistry:"function"==typeof l?l():l,firstChild:null,schemas:v,consts:ce,incompleteFirstPass:!1}}function tf(e,t,n,r){const i=hf(t);null===n?i.push(r):(i.push(n),e.firstCreatePass&&ff(e).push(r,i.length-1))}function nf(e,t,n){for(let r in e)if(e.hasOwnProperty(r)){const i=e[r];(n=null===n?{}:n).hasOwnProperty(r)?n[r].push(t,i):n[r]=[t,i]}return n}function ui(e,t,n,r,i,o,l,g){const v=Jn(t,n);let x,I=t.inputs;!g&&null!=I&&(x=I[r])?(mf(e,n,x,r,i),Oi(t)&&function a_(e,t){const n=tr(t,e);16&n[2]||(n[2]|=64)}(n,t.index)):3&t.type&&(r=function o_(e){return"class"===e?"className":"for"===e?"htmlFor":"formaction"===e?"formAction":"innerHtml"===e?"innerHTML":"readonly"===e?"readOnly":"tabindex"===e?"tabIndex":e}(r),i=null!=l?l(i,t.value||"",r):i,tn(o)?o.setProperty(v,r,i):lr(r)||(v.setProperty?v.setProperty(r,i):v[r]=i))}function _u(e,t,n,r){let i=!1;if(xs()){const o=function f_(e,t,n){const r=e.directiveRegistry;let i=null;if(r)for(let o=0;o<r.length;o++){const l=r[o];Nh(n,l.selectors,!1)&&(i||(i=[]),Qs(Bi(n,t),e,l.type),Qn(l)?(af(e,n),i.unshift(l)):i.push(l))}return i}(e,t,n),l=null===r?null:{"":-1};if(null!==o){i=!0,lf(n,e.data.length,o.length);for(let x=0;x<o.length;x++){const V=o[x];V.providersResolver&&V.providersResolver(V)}let g=!1,v=!1,I=Jo(e,t,o.length,null);for(let x=0;x<o.length;x++){const V=o[x];n.mergedAttrs=jn(n.mergedAttrs,V.hostAttrs),cf(e,n,t,I,V),g_(I,V,l),null!==V.contentQueries&&(n.flags|=8),(null!==V.hostBindings||null!==V.hostAttrs||0!==V.hostVars)&&(n.flags|=128);const re=V.type.prototype;!g&&(re.ngOnChanges||re.ngOnInit||re.ngDoCheck)&&((e.preOrderHooks||(e.preOrderHooks=[])).push(n.index),g=!0),!v&&(re.ngOnChanges||re.ngDoCheck)&&((e.preOrderCheckHooks||(e.preOrderCheckHooks=[])).push(n.index),v=!0),I++}!function s_(e,t){const r=t.directiveEnd,i=e.data,o=t.attrs,l=[];let g=null,v=null;for(let I=t.directiveStart;I<r;I++){const x=i[I],V=x.inputs,re=null===o||Fh(t)?null:__(V,o);l.push(re),g=nf(V,I,g),v=nf(x.outputs,I,v)}null!==g&&(g.hasOwnProperty("class")&&(t.flags|=16),g.hasOwnProperty("style")&&(t.flags|=32)),t.initialInputs=l,t.inputs=g,t.outputs=v}(e,n)}l&&function p_(e,t,n){if(t){const r=e.localNames=[];for(let i=0;i<t.length;i+=2){const o=n[t[i+1]];if(null==o)throw new Ue(-301,!1);r.push(t[i],o)}}}(n,r,l)}return n.mergedAttrs=jn(n.mergedAttrs,n.attrs),i}function sf(e,t,n,r,i,o){const l=o.hostBindings;if(l){let g=e.hostBindingOpCodes;null===g&&(g=e.hostBindingOpCodes=[]);const v=~t.index;(function u_(e){let t=e.length;for(;t>0;){const n=e[--t];if("number"==typeof n&&n<0)return n}return 0})(g)!=v&&g.push(v),g.push(r,i,l)}}function of(e,t){null!==e.hostBindings&&e.hostBindings(1,t)}function af(e,t){t.flags|=2,(e.components||(e.components=[])).push(t.index)}function g_(e,t,n){if(n){if(t.exportAs)for(let r=0;r<t.exportAs.length;r++)n[t.exportAs[r]]=e;Qn(t)&&(n[""]=e)}}function lf(e,t,n){e.flags|=1,e.directiveStart=t,e.directiveEnd=t+n,e.providerIndexes=t}function cf(e,t,n,r,i){e.data[r]=i;const o=i.factory||(i.factory=Sr(i.type)),l=new we(o,Qn(i),null);e.blueprint[r]=l,n[r]=l,sf(e,t,0,r,Jo(e,n,i.hostVars,Rt),i)}function m_(e,t,n){const r=Jn(t,e),i=Xh(n),o=e[10],l=Hl(e,La(e,i,null,n.onPush?64:16,r,t,o,o.createRenderer(r,n),null,null));e[t.index]=l}function ms(e,t,n,r,i,o){const l=Jn(e,t);!function vu(e,t,n,r,i,o,l){if(null==o)tn(e)?e.removeAttribute(t,i,n):t.removeAttribute(i);else{const g=null==l?ae(o):l(o,r||"",i);tn(e)?e.setAttribute(t,i,g,n):n?t.setAttributeNS(n,i,g):t.setAttribute(i,g)}}(t[11],l,o,e.value,n,r,i)}function y_(e,t,n,r,i,o){const l=o[t];if(null!==l){const g=r.setInput;for(let v=0;v<l.length;){const I=l[v++],x=l[v++],V=l[v++];null!==g?r.setInput(n,V,I,x):n[x]=V}}}function __(e,t){let n=null,r=0;for(;r<t.length;){const i=t[r];if(0!==i)if(5!==i){if("number"==typeof i)break;e.hasOwnProperty(i)&&(null===n&&(n=[]),n.push(i,e[i],t[r+1])),r+=2}else r+=2;else r+=4}return n}function uf(e,t,n,r){return new Array(e,!0,!1,t,null,0,r,n,null,null)}function D_(e,t){const n=tr(t,e);if(Rs(n)){const r=n[1];80&n[2]?Xo(r,n,r.template,n[8]):n[5]>0&&Eu(n)}}function Eu(e){for(let r=wl(e);null!==r;r=Ma(r))for(let i=10;i<r.length;i++){const o=r[i];if(1024&o[2]){const l=o[1];Xo(l,o,l.template,o[8])}else o[5]>0&&Eu(o)}const n=e[1].components;if(null!==n)for(let r=0;r<n.length;r++){const i=tr(n[r],e);Rs(i)&&i[5]>0&&Eu(i)}}function b_(e,t){const n=tr(t,e),r=n[1];(function C_(e,t){for(let n=t.length;n<e.blueprint.length;n++)t.push(e.blueprint[n])})(r,n),ka(r,n,n[8])}function Hl(e,t){return e[13]?e[14][4]=t:e[13]=t,e[14]=t,t}function Du(e){for(;e;){e[2]|=64;const t=Go(e);if(pi(e)&&!t)return e;e=t}return null}function df(e){!function bu(e){for(let t=0;t<e.components.length;t++){const n=e.components[t],r=wa(n),i=r[1];n_(i,r,i.template,n)}}(e[8])}function wu(e,t,n){vt(0),t(e,n)}const S_=(()=>Promise.resolve(null))();function hf(e){return e[7]||(e[7]=[])}function ff(e){return e.cleanup||(e.cleanup=[])}function pf(e,t,n){return(null===e||Qn(e))&&(n=function Ps(e){for(;Array.isArray(e);){if("object"==typeof e[1])return e;e=e[0]}return null}(n[t.index])),n[11]}function gf(e,t){const n=e[9],r=n?n.get(kl,null):null;r&&r.handleError(t)}function mf(e,t,n,r,i){for(let o=0;o<n.length;){const l=n[o++],g=n[o++],v=t[l],I=e.data[l];null!==I.setInput?I.setInput(v,i,r,g):v[g]=i}}function $s(e,t,n){const r=_i(t,e);!function Vc(e,t,n){tn(e)?e.setValue(t,n):t.textContent=n}(e[11],r,n)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function $l(e,t,n){let r=n?e.styles:null,i=n?e.classes:null,o=0;if(null!==t)for(let l=0;l<t.length;l++){const g=t[l];"number"==typeof g?o=g:1==o?i=ye(i,g):2==o&&(r=ye(r,g+": "+t[++l]+";"))}n?e.styles=r:e.stylesWithoutHost=r,n?e.classes=i:e.classesWithoutHost=i}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const Su=new On("INJECTOR",-1);
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class yf{get(t,n=ko){if(n===ko){const r=new Error(`NullInjectorError: No provider for ${ie(t)}!`);throw r.name="NullInjectorError",r}return n}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Mu=new On("Set Injector scope."),Ba={},A_={};
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let Tu;function _f(){return void 0===Tu&&(Tu=new yf),Tu}function vf(e,t=null,n=null,r){const i=Ef(e,t,n,r);return i._resolveInjectorDefTypes(),i}function Ef(e,t=null,n=null,r){return new I_(e,n,t||_f(),r)}class I_{constructor(t,n,r,i=null){this.parent=r,this.records=new Map,this.injectorDefTypes=new Set,this.onDestroy=new Set,this._destroyed=!1;const o=[];n&&Mi(n,g=>this.processProvider(g,t,n)),Mi([t],g=>this.processInjectorType(g,[],o)),this.records.set(Su,qo(void 0,this));const l=this.records.get(Mu);this.scope=null!=l?l.value:null,this.source=i||("object"==typeof t?null:ie(t))}get destroyed(){return this._destroyed}destroy(){this.assertNotDestroyed(),this._destroyed=!0;try{this.onDestroy.forEach(t=>t.ngOnDestroy())}finally{this.records.clear(),this.onDestroy.clear(),this.injectorDefTypes.clear()}}get(t,n=ko,r=st.Default){this.assertNotDestroyed();const i=Tc(this),o=ee(void 0);try{if(!(r&st.SkipSelf)){let g=this.records.get(t);if(void 0===g){const v=function k_(e){return"function"==typeof e||"object"==typeof e&&e instanceof On}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(t)&&yn(t);g=v&&this.injectableDefInScope(v)?qo(Au(t),Ba):null,this.records.set(t,g)}if(null!=g)return this.hydrate(t,g)}return(r&st.Self?_f():this.parent).get(t,n=r&st.Optional&&n===ko?null:n)}catch(l){if("NullInjectorError"===l.name){if((l[_o]=l[_o]||[]).unshift(ie(t)),i)throw l;return function lh(e,t,n,r){const i=e[_o];throw t[ol]&&i.unshift(t[ol]),e.message=function ch(e,t,n,r=null){e=e&&"\n"===e.charAt(0)&&"\u0275"==e.charAt(1)?e.substr(2):e;let i=ie(t);if(Array.isArray(t))i=t.map(ie).join(" -> ");else if("object"==typeof t){let o=[];for(let l in t)if(t.hasOwnProperty(l)){let g=t[l];o.push(l+":"+("string"==typeof g?JSON.stringify(g):ie(g)))}i=`{${o.join(", ")}}`}return`${n}${r?"("+r+")":""}[${i}]: ${e.replace(wc,"\n  ")}`}("\n"+e.message,i,n,r),e.ngTokenPath=i,e[_o]=null,e}(l,t,"R3InjectorError",this.source)}throw l}finally{ee(o),Tc(i)}}_resolveInjectorDefTypes(){this.injectorDefTypes.forEach(t=>this.get(t))}toString(){const t=[];return this.records.forEach((r,i)=>t.push(ie(i))),`R3Injector[${t.join(", ")}]`}assertNotDestroyed(){if(this._destroyed)throw new Ue(205,!1)}processInjectorType(t,n,r){if(!(t=fe(t)))return!1;let i=Pn(t);const o=null==i&&t.ngModule||void 0,l=void 0===o?t:o,g=-1!==r.indexOf(l);if(void 0!==o&&(i=Pn(o)),null==i)return!1;if(null!=i.imports&&!g){let x;r.push(l);try{Mi(i.imports,V=>{this.processInjectorType(V,n,r)&&(void 0===x&&(x=[]),x.push(V))})}finally{}if(void 0!==x)for(let V=0;V<x.length;V++){const{ngModule:re,providers:ce}=x[V];Mi(ce,be=>this.processProvider(be,re,ce||Ft))}}this.injectorDefTypes.add(l);const v=Sr(l)||(()=>new l);this.records.set(l,qo(v,Ba));const I=i.providers;if(null!=I&&!g){const x=t;Mi(I,V=>this.processProvider(V,x,I))}return void 0!==o&&void 0!==t.providers}processProvider(t,n,r){let i=ea(t=fe(t))?t:fe(t&&t.provide);const o=function P_(e,t,n){return bf(e)?qo(void 0,e.useValue):qo(Df(e),Ba)}(t);if(ea(t)||!0!==t.multi)this.records.get(i);else{let l=this.records.get(i);l||(l=qo(void 0,Ba,!0),l.factory=()=>Ai(l.multi),this.records.set(i,l)),i=t,l.multi.push(t)}this.records.set(i,o)}hydrate(t,n){return n.value===Ba&&(n.value=A_,n.value=n.factory()),"object"==typeof n.value&&n.value&&function L_(e){return null!==e&&"object"==typeof e&&"function"==typeof e.ngOnDestroy}(n.value)&&this.onDestroy.add(n.value),n.value}injectableDefInScope(t){if(!t.providedIn)return!1;const n=fe(t.providedIn);return"string"==typeof n?"any"===n||n===this.scope:this.injectorDefTypes.has(n)}}function Au(e){const t=yn(e),n=null!==t?t.factory:Sr(e);if(null!==n)return n;if(e instanceof On)throw new Ue(204,!1);if(e instanceof Function)return function O_(e){const t=e.length;if(t>0)throw Fo(t,"?"),new Ue(204,!1);const n=function $n(e){const t=e&&(e[Rn]||e[Yn]);if(t){const n=function xr(e){if(e.hasOwnProperty("name"))return e.name;const t=(""+e).match(/^function\s*([^\s(]+)/);return null===t?"":t[1]}(e);return console.warn(`DEPRECATED: DI is instantiating a token "${n}" that inherits its @Injectable decorator but does not provide one itself.\nThis will become an error in a future version of Angular. Please add @Injectable() to the "${n}" class.`),t}return null}(e);return null!==n?()=>n.factory(e):()=>new e}(e);throw new Ue(204,!1)}function Df(e,t,n){let r;if(ea(e)){const i=fe(e);return Sr(i)||Au(i)}if(bf(e))r=()=>fe(e.useValue);else if(function x_(e){return!(!e||!e.useFactory)}(e))r=()=>e.useFactory(...Ai(e.deps||[]));else if(function R_(e){return!(!e||!e.useExisting)}(e))r=()=>qn(fe(e.useExisting));else{const i=fe(e&&(e.useClass||e.provide));if(!function N_(e){return!!e.deps}(e))return Sr(i)||Au(i);r=()=>new i(...Ai(e.deps))}return r}function qo(e,t,n=!1){return{factory:e,value:t,multi:n?[]:void 0}}function bf(e){return null!==e&&"object"==typeof e&&Mc in e}function ea(e){return"function"==typeof e}let ys=(()=>{class e{static create(n,r){var i;if(Array.isArray(n))return vf({name:""},r,n,"");{const o=null!==(i=n.name)&&void 0!==i?i:"";return vf({name:o},n.parent,n.providers,o)}}}
+/**
+         * @license
+         * Copyright Google LLC All Rights Reserved.
+         *
+         * Use of this source code is governed by an MIT-style license that can be
+         * found in the LICENSE file at https://angular.io/license
+         */
+return e.THROW_IF_NOT_FOUND=ko,e.NULL=new yf,e.\u0275prov=kt({token:e,providedIn:"any",factory:()=>qn(Su)}),e.__NG_ELEMENT_ID__=-1,e})();function G_(e,t){St(wa(e)[1],wn())}function Pu(e){let t=
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Ff(e){return Object.getPrototypeOf(e.prototype).constructor}(e.type),n=!0;const r=[e];for(;t;){let i;if(Qn(e))i=t.\u0275cmp||t.\u0275dir;else{if(t.\u0275cmp)throw new Ue(903,"");i=t.\u0275dir}if(i){if(n){r.push(i);const l=e;l.inputs=Ru(e.inputs),l.declaredInputs=Ru(e.declaredInputs),l.outputs=Ru(e.outputs);const g=i.hostBindings;g&&Q_(e,g);const v=i.viewQuery,I=i.contentQueries;if(v&&Y_(e,v),I&&K_(e,I),X(e.inputs,i.inputs),X(e.declaredInputs,i.declaredInputs),X(e.outputs,i.outputs),Qn(i)&&i.data.animation){const x=e.data;x.animation=(x.animation||[]).concat(i.data.animation)}}const o=i.features;if(o)for(let l=0;l<o.length;l++){const g=o[l];g&&g.ngInherit&&g(e),g===Pu&&(n=!1)}}t=Object.getPrototypeOf(t)}!function W_(e){let t=0,n=null;for(let r=e.length-1;r>=0;r--){const i=e[r];i.hostVars=t+=i.hostVars,i.hostAttrs=jn(i.hostAttrs,n=jn(n,i.hostAttrs))}}(r)}function Ru(e){return e===Ct?{}:e===Ft?[]:e}function Y_(e,t){const n=e.viewQuery;e.viewQuery=n?(r,i)=>{t(r,i),n(r,i)}:t}function K_(e,t){const n=e.contentQueries;e.contentQueries=n?(r,i,o)=>{t(r,i,o),n(r,i,o)}:t}function Q_(e,t){const n=e.hostBindings;e.hostBindings=n?(r,i)=>{t(r,i),n(r,i)}:t}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let zl=null;function ta(){if(!zl){const e=tt.Symbol;if(e&&e.iterator)zl=e.iterator;else{const t=Object.getOwnPropertyNames(Map.prototype);for(let n=0;n<t.length;++n){const r=t[n];"entries"!==r&&"size"!==r&&Map.prototype[r]===Map.prototype.entries&&(zl=r)}}}return zl}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Ua(e){return!!xu(e)&&(Array.isArray(e)||!(e instanceof Map)&&ta()in e)}function xu(e){return null!==e&&("function"==typeof e||"object"==typeof e)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function _s(e,t,n){return e[t]=n}function Ir(e,t,n){return!Object.is(e[t],n)&&(e[t]=n,!0)}function wo(e,t,n,r){const i=Ir(e,t,n);return Ir(e,t+1,r)||i}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Fu(e,t,n,r){const i=Ae();return Ir(i,J(),t)&&(Pt(),ms(zt(),i,e,t,n,r)),Fu}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function ra(e,t,n,r){return Ir(e,J(),n)?t+ae(n)+r:Rt}function sa(e,t,n,r,i,o,l,g){const I=function Gl(e,t,n,r,i){const o=wo(e,t,n,r);return Ir(e,t+2,i)||o}(e,P(),n,i,l);return q(3),I?t+ae(n)+r+ae(i)+o+ae(l)+g:Rt}function zf(e,t,n,r,i,o,l,g){const v=Ae(),I=Pt(),x=e+20,V=I.firstCreatePass?
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function nv(e,t,n,r,i,o,l,g,v){const I=t.consts,x=Zo(t,e,4,l||null,Tr(I,g));_u(t,n,x,Tr(I,v)),St(t,x);const V=x.tViews=Vl(2,x,r,i,o,t.directiveRegistry,t.pipeRegistry,null,t.schemas,I);return null!==t.queries&&(t.queries.template(t,x),V.queries=t.queries.embeddedTView(x)),x}(x,I,v,t,n,r,i,o,l):I.data[x];sr(V,!1);const re=v[11].createComment("");te(I,v,re,V),dr(re,v),Hl(v,v[x]=uf(re,v,re,V)),kr(V)&&mu(I,v,V),null!=l&&yu(v,V,g)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Va(e,t=st.Default){const n=Ae();return null===n?qn(e,t):u(wn(),n,fe(e),t)}function tp(){throw new Error("invalid")}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Uu(e,t,n){const r=Ae();return Ir(r,J(),t)&&ui(Pt(),zt(),r,e,t,r[11],n,!1),Uu}function ju(e,t,n,r,i){const l=i?"class":"style";mf(e,n,t.inputs[l],l,r)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Yl(e,t,n,r){const i=Ae(),o=Pt(),l=20+e,g=i[11],v=i[l]=Aa(g,t,function qe(){return pt.lFrame.currentNamespace}()),I=o.firstCreatePass?function wv(e,t,n,r,i,o,l){const g=t.consts,I=Zo(t,e,2,i,Tr(g,o));return _u(t,n,I,Tr(g,l)),null!==I.attrs&&$l(I,I.attrs,!1),null!==I.mergedAttrs&&$l(I,I.mergedAttrs,!0),null!==t.queries&&t.queries.elementStart(t,I),I}(l,o,i,0,t,n,r):o.data[l];sr(I,!0);const x=I.mergedAttrs;null!==x&&or(g,v,x);const V=I.classes;null!==V&&Kc(g,v,V);const re=I.styles;return null!==re&&mh(g,v,re),64!=(64&I.flags)&&te(o,i,v,I),0===function os(){return pt.lFrame.elementDepthCount}()&&dr(v,i),function Ws(){pt.lFrame.elementDepthCount++}(),kr(I)&&(mu(o,i,I),Jh(o,I,i)),null!==r&&yu(i,I),Yl}function Kl(){let e=wn();Ur()?ls():(e=e.parent,sr(e,!1));const t=e;!function lo(){pt.lFrame.elementDepthCount--}();const n=Pt();return n.firstCreatePass&&(St(n,e),Vt(e)&&n.queries.elementEnd(e)),null!=t.classesWithoutHost&&function Mt(e){return 0!=(16&e.flags)}(t)&&ju(n,t,Ae(),t.classesWithoutHost,!0),null!=t.stylesWithoutHost&&function Tn(e){return 0!=(32&e.flags)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(t)&&ju(n,t,Ae(),t.stylesWithoutHost,!1),Kl}function Vu(e,t,n,r){return Yl(e,t,n,r),Kl(),Vu}function Ql(e,t,n){const r=Ae(),i=Pt(),o=e+20,l=i.firstCreatePass?
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Sv(e,t,n,r,i){const o=t.consts,l=Tr(o,r),g=Zo(t,e,8,"ng-container",l);return null!==l&&$l(g,l,!0),_u(t,n,g,Tr(o,i)),null!==t.queries&&t.queries.elementStart(t,g),g}(o,i,r,t,n):i.data[o];sr(l,!0);const g=r[o]=r[11].createComment("");return te(i,r,g,l),dr(g,r),kr(l)&&(mu(i,r,l),Jh(i,l,r)),null!=n&&yu(r,l),Ql}function Zl(){let e=wn();const t=Pt();return Ur()?ls():(e=e.parent,sr(e,!1)),t.firstCreatePass&&(St(t,e),Vt(e)&&t.queries.elementEnd(e)),Zl}function Hu(e,t,n){return Ql(e,t,n),Zl(),Hu}function np(){return Ae()}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function $u(e){return!!e&&"function"==typeof e.then}function rp(e){return!!e&&"function"==typeof e.subscribe}const ip=rp;
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function zu(e,t,n,r){const i=Ae(),o=Pt(),l=wn();return sp(o,i,i[11],l,e,t,!!n,r),zu}function Gu(e,t){const n=wn(),r=Ae(),i=Pt();return sp(i,r,pf(wt(i.data),n,r),n,e,t,!1),Gu}function sp(e,t,n,r,i,o,l,g){const v=kr(r),x=e.firstCreatePass&&ff(e),V=t[8],re=hf(t);let ce=!0;if(3&r.type||g){const Ve=Jn(r,t),Qe=g?g(Ve):Ve,Oe=re.length,at=g?Ht=>g(nn(Ht[r.index])):r.index;if(tn(n)){let Ht=null;if(!g&&v&&(Ht=function Mv(e,t,n,r){const i=e.cleanup;if(null!=i)for(let o=0;o<i.length-1;o+=2){const l=i[o];if(l===n&&i[o+1]===r){const g=t[7],v=i[o+2];return g.length>v?g[v]:null}"string"==typeof l&&(o+=2)}return null}(e,t,i,r.index)),null!==Ht)(Ht.__ngLastListenerFn__||Ht).__ngNextListenerFn__=o,Ht.__ngLastListenerFn__=o,ce=!1;else{o=Wu(r,t,V,o,!1);const ln=n.listen(Qe,i,o);re.push(o,ln),x&&x.push(i,at,Oe,Oe+1)}}else o=Wu(r,t,V,o,!0),Qe.addEventListener(i,o,l),re.push(o),x&&x.push(i,at,Oe,l)}else o=Wu(r,t,V,o,!1);const be=r.outputs;let Ne;if(ce&&null!==be&&(Ne=be[i])){const Ve=Ne.length;if(Ve)for(let Qe=0;Qe<Ve;Qe+=2){const di=t[Ne[Qe]][Ne[Qe+1]].subscribe(o),Ao=re.length;re.push(o,di),x&&x.push(i,r.index,Ao,-(Ao+1))}}}function op(e,t,n,r){try{return!1!==n(r)}catch(i){return gf(e,i),!1}}function Wu(e,t,n,r,i){return function o(l){if(l===Function)return r;const g=2&e.flags?tr(e.index,t):t;0==(32&t[2])&&Du(g);let v=op(t,0,r,l),I=o.__ngNextListenerFn__;for(;I;)v=op(t,0,I,l)&&v,I=I.__ngNextListenerFn__;return i&&!1===v&&(l.preventDefault(),l.returnValue=!1),v}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function ap(e=1){return function Ar(e){return(pt.lFrame.contextLView=function Vr(e,t){for(;e>0;)t=t[15],e--;return t}(e,pt.lFrame.contextLView))[8]}(e)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Tv(e,t){let n=null;const r=function Ly(e){const t=e.attrs;if(null!=t){const n=t.indexOf(5);if(0==(1&n))return t[n+1]}return null}(e);for(let i=0;i<t.length;i++){const o=t[i];if("*"!==o){if(null===r?Nh(e,o,!0):Uy(r,o))return i}else n=i}return n}function lp(e){const t=Ae()[16][6];if(!t.projection){const r=t.projection=Fo(e?e.length:1,null),i=r.slice();let o=t.child;for(;null!==o;){const l=e?Tv(o,e):0;null!==l&&(i[l]?i[l].projectionNext=o:r[l]=o,i[l]=o),o=o.next}}}function cp(e,t=0,n){const r=Ae(),i=Pt(),o=Zo(i,20+e,16,null,n||null);null===o.projection&&(o.projection=t),ls(),64!=(64&o.flags)&&function js(e,t,n){Hi(t[11],0,t,n,Tl(e,n,t),a(n.parent||t[6],n,t))}(i,r,o)}function Yu(e,t,n){return Jl(e,"",t,"",n),Yu}function Jl(e,t,n,r,i){const o=Ae(),l=ra(o,t,n,r);return l!==Rt&&ui(Pt(),zt(),o,e,l,o[11],i,!1),Jl}function _p(e,t,n,r,i){const o=e[n+1],l=null===t;let g=r?zi(o):Hs(o),v=!1;for(;0!==g&&(!1===v||l);){const x=e[g+1];Ov(e[g],t)&&(v=!0,e[g+1]=r?ou(x):iu(x)),g=r?zi(x):Hs(x)}v&&(e[n+1]=r?iu(o):ou(o))}function Ov(e,t){return null===e||null==t||(Array.isArray(e)?e[1]:e)===t||!(!Array.isArray(e)||"string"!=typeof t)&&Bs(e,t)>=0}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Ku(e,t,n){return Wi(e,t,n,!1),Ku}function Qu(e,t){return Wi(e,t,null,!0),Qu}function Wi(e,t,n,r){const i=Ae(),o=Pt(),l=q(2);o.firstUpdatePass&&function Mp(e,t,n,r){const i=e.data;if(null===i[n+1]){const o=i[rn()],l=function Sp(e,t){return t>=e.expandoStartIndex}(e,n);(function Op(e,t){return 0!=(e.flags&(t?16:32))}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */)(o,r)&&null===t&&!l&&(t=!1),t=function Uv(e,t,n,r){const i=wt(e);let o=r?t.residualClasses:t.residualStyles;if(null===i)0===(r?t.classBindings:t.styleBindings)&&(n=Ha(n=Zu(null,e,t,n,r),t.attrs,r),o=null);else{const l=t.directiveStylingLast;if(-1===l||e[l]!==i)if(n=Zu(i,e,t,n,r),null===o){let v=function jv(e,t,n){const r=n?t.classBindings:t.styleBindings;if(0!==Hs(r))return e[zi(r)]}(e,t,r);void 0!==v&&Array.isArray(v)&&(v=Zu(null,e,t,v[1],r),v=Ha(v,t.attrs,r),function Vv(e,t,n,r){e[zi(n?t.classBindings:t.styleBindings)]=r}(e,t,r,v))}else o=function Hv(e,t,n){let r;const i=t.directiveEnd;for(let o=1+t.directiveStylingLast;o<i;o++)r=Ha(r,e[o].hostAttrs,n);return Ha(r,t.attrs,n)}(e,t,r)}return void 0!==o&&(r?t.residualClasses=o:t.residualStyles=o),n}(i,o,t,r),function Av(e,t,n,r,i,o){let l=o?t.classBindings:t.styleBindings,g=zi(l),v=Hs(l);e[r]=n;let x,I=!1;if(Array.isArray(n)){const V=n;x=V[1],(null===x||Bs(V,x)>0)&&(I=!0)}else x=n;if(i)if(0!==v){const re=zi(e[g+1]);e[r+1]=Bl(re,g),0!==re&&(e[re+1]=su(e[re+1],r)),e[g+1]=function $y(e,t){return 131071&e|t<<17}(e[g+1],r)}else e[r+1]=Bl(g,0),0!==g&&(e[g+1]=su(e[g+1],r)),g=r;else e[r+1]=Bl(v,0),0===g?g=r:e[v+1]=su(e[v+1],r),v=r;I&&(e[r+1]=iu(e[r+1])),_p(e,x,r,!0),_p(e,x,r,!1),function Iv(e,t,n,r,i){const o=i?e.residualClasses:e.residualStyles;null!=o&&"string"==typeof t&&Bs(o,t)>=0&&(n[r+1]=ou(n[r+1]))}(t,x,e,r,o),l=Bl(g,v),o?t.classBindings=l:t.styleBindings=l}(i,o,t,n,l,r)}}(o,e,l,r),t!==Rt&&Ir(i,l,t)&&function Ap(e,t,n,r,i,o,l,g){if(!(3&t.type))return;const v=e.data,I=v[g+1];Xl(function Vh(e){return 1==(1&e)}(I)?Ip(v,t,n,i,Hs(I),l):void 0)||(Xl(o)||function jh(e){return 2==(2&e)}(I)&&(o=Ip(v,null,n,i,g,l)),function xl(e,t,n,r,i){const o=tn(e);if(t)i?o?e.addClass(n,r):n.classList.add(r):o?e.removeClass(n,r):n.classList.remove(r);else{let l=-1===r.indexOf("-")?void 0:Vi.DashCase;if(null==i)o?e.removeStyle(n,r,l):n.style.removeProperty(r);else{const g="string"==typeof i&&i.endsWith("!important");g&&(i=i.slice(0,-10),l|=Vi.Important),o?e.setStyle(n,r,i,l):n.style.setProperty(r,i,g?"important":"")}}}(r,l,_i(rn(),n),i,o))}(o,o.data[rn()],i,i[11],e,i[l+1]=function Gv(e,t){return null==e||("string"==typeof t?e+=t:"object"==typeof e&&(e=ie(Vs(e)))),e}(t,n),r,l)}function Zu(e,t,n,r,i){let o=null;const l=n.directiveEnd;let g=n.directiveStylingLast;for(-1===g?g=n.directiveStart:g++;g<l&&(o=t[g],r=Ha(r,o.hostAttrs,i),o!==e);)g++;return null!==e&&(n.directiveStylingLast=g),r}function Ha(e,t,n){const r=n?1:2;let i=-1;if(null!==t)for(let o=0;o<t.length;o++){const l=t[o];"number"==typeof l?i=l:i===r&&(Array.isArray(e)||(e=void 0===e?[]:["",e]),Gr(e,l,!!n||t[++o]))}return void 0===e?null:e}function Ip(e,t,n,r,i,o){const l=null===t;let g;for(;i>0;){const v=e[i],I=Array.isArray(v),x=I?v[1]:v,V=null===x;let re=n[i+1];re===Rt&&(re=V?Ft:void 0);let ce=V?nl(re,r):x===r?re:void 0;if(I&&!Xl(ce)&&(ce=nl(v,r)),Xl(ce)&&(g=ce,l))return g;const be=e[i+1];i=l?zi(be):Hs(be)}if(null!==t){let v=o?t.residualClasses:t.residualStyles;null!=v&&(g=nl(v,r))}return g}function Xl(e){return void 0!==e}function Pp(e,t=""){const n=Ae(),r=Pt(),i=e+20,o=r.firstCreatePass?Zo(r,i,1,t,null):r.data[i],l=n[i]=function Ta(e,t){return tn(e)?e.createText(t):e.createTextNode(t)}(n[11],t);te(r,n,l,o),sr(o,!1)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Ju(e){return ql("",e,""),Ju}function ql(e,t,n){const r=Ae(),i=ra(r,e,t,n);return i!==Rt&&$s(r,rn(),i),ql}function Xu(e,t,n,r,i){const o=Ae(),l=function ia(e,t,n,r,i,o){const g=wo(e,P(),n,i);return q(2),g?t+ae(n)+r+ae(i)+o:Rt}(o,e,t,n,r,i);return l!==Rt&&$s(o,rn(),l),Xu}function qu(e,t,n,r,i,o,l){const g=Ae(),v=sa(g,e,t,n,r,i,o,l);return v!==Rt&&$s(g,rn(),v),qu}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function ed(e,t,n){const r=Ae();return Ir(r,J(),t)&&ui(Pt(),zt(),r,e,t,r[11],n,!0),ed}function td(e,t,n){const r=Ae();if(Ir(r,J(),t)){const o=Pt(),l=zt();ui(o,l,r,e,t,pf(wt(o.data),l,r),n,!0)}return td}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const So=void 0;var dE=["en",[["a","p"],["AM","PM"],So],[["AM","PM"],So,So],[["S","M","T","W","T","F","S"],["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],["Su","Mo","Tu","We","Th","Fr","Sa"]],So,[["J","F","M","A","M","J","J","A","S","O","N","D"],["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],["January","February","March","April","May","June","July","August","September","October","November","December"]],So,[["B","A"],["BC","AD"],["Before Christ","Anno Domini"]],0,[6,0],["M/d/yy","MMM d, y","MMMM d, y","EEEE, MMMM d, y"],["h:mm a","h:mm:ss a","h:mm:ss a z","h:mm:ss a zzzz"],["{1}, {0}",So,"{1} 'at' {0}",So],[".",",",";","%","+","-","E","\xd7","\u2030","\u221e","NaN",":"],["#,##0.###","#,##0%","\xa4#,##0.00","#E0"],"USD","$","US Dollar",{},"ltr",function uE(e){const n=Math.floor(Math.abs(e)),r=e.toString().replace(/^[^.]*\.?/,"").length;return 1===n&&0===r?1:5}];
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let fa={};function nd(e){const t=function hE(e){return e.toLowerCase().replace(/_/g,"-")}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(e);let n=Kp(t);if(n)return n;const r=t.split("-")[0];if(n=Kp(r),n)return n;if("en"===r)return dE;throw new Error(`Missing locale data for the locale "${e}".`)}function Yp(e){return nd(e)[ht.PluralCase]}function Kp(e){return e in fa||(fa[e]=tt.ng&&tt.ng.common&&tt.ng.common.locales&&tt.ng.common.locales[e]),fa[e]}var ht=(()=>((ht=ht||{})[ht.LocaleId=0]="LocaleId",ht[ht.DayPeriodsFormat=1]="DayPeriodsFormat",ht[ht.DayPeriodsStandalone=2]="DayPeriodsStandalone",ht[ht.DaysFormat=3]="DaysFormat",ht[ht.DaysStandalone=4]="DaysStandalone",ht[ht.MonthsFormat=5]="MonthsFormat",ht[ht.MonthsStandalone=6]="MonthsStandalone",ht[ht.Eras=7]="Eras",ht[ht.FirstDayOfWeek=8]="FirstDayOfWeek",ht[ht.WeekendRange=9]="WeekendRange",ht[ht.DateFormat=10]="DateFormat",ht[ht.TimeFormat=11]="TimeFormat",ht[ht.DateTimeFormat=12]="DateTimeFormat",ht[ht.NumberSymbols=13]="NumberSymbols",ht[ht.NumberFormats=14]="NumberFormats",ht[ht.CurrencyCode=15]="CurrencyCode",ht[ht.CurrencySymbol=16]="CurrencySymbol",ht[ht.CurrencyName=17]="CurrencyName",ht[ht.Currencies=18]="Currencies",ht[ht.Directionality=19]="Directionality",ht[ht.PluralCase=20]="PluralCase",ht[ht.ExtraData=21]="ExtraData",ht))();const ec="en-US";
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let Qp=ec;function sd(e,t,n,r,i){if(e=fe(e),Array.isArray(e))for(let o=0;o<e.length;o++)sd(e[o],t,n,r,i);else{const o=Pt(),l=Ae();let g=ea(e)?e:fe(e.provide),v=Df(e);const I=wn(),x=1048575&I.providerIndexes,V=I.directiveStart,re=I.providerIndexes>>20;if(ea(e)||!e.multi){const ce=new we(v,i,Va),be=ad(g,t,i?x:x+re,V);-1===be?(Qs(Bi(I,l),o,g),od(o,e,t.length),t.push(g),I.directiveStart++,I.directiveEnd++,i&&(I.providerIndexes+=1048576),n.push(ce),l.push(ce)):(n[be]=ce,l[be]=ce)}else{const ce=ad(g,t,x+re,V),be=ad(g,t,x,x+re),Ne=ce>=0&&n[ce],Ve=be>=0&&n[be];if(i&&!Ve||!i&&!Ne){Qs(Bi(I,l),o,g);const Qe=function uD(e,t,n,r,i){const o=new we(e,n,Va);return o.multi=[],o.index=t,o.componentProviders=0,vg(o,i,r&&!n),o}(i?cD:lD,n.length,i,r,v);!i&&Ve&&(n[be].providerFactory=Qe),od(o,e,t.length,0),t.push(g),I.directiveStart++,I.directiveEnd++,i&&(I.providerIndexes+=1048576),n.push(Qe),l.push(Qe)}else od(o,e,ce>-1?ce:be,vg(n[i?be:ce],v,!i&&r));!i&&r&&Ve&&n[be].componentProviders++}}}function od(e,t,n,r){const i=ea(t),o=function F_(e){return!!e.useClass}(t);if(i||o){const v=(o?fe(t.useClass):t).prototype.ngOnDestroy;if(v){const I=e.destroyHooks||(e.destroyHooks=[]);if(!i&&t.multi){const x=I.indexOf(n);-1===x?I.push(n,[r,v]):I[x+1].push(r,v)}else I.push(n,v)}}}function vg(e,t,n){return n&&e.componentProviders++,e.multi.push(t)-1}function ad(e,t,n,r){for(let i=n;i<r;i++)if(t[i]===e)return i;return-1}function lD(e,t,n,r){return ld(this.multi,[])}function cD(e,t,n,r){const i=this.multi;let o;if(this.providerFactory){const l=this.providerFactory.componentProviders,g=ne(n,n[1],this.providerFactory.index,r);o=g.slice(0,l),ld(i,o);for(let v=l;v<g.length;v++)o.push(g[v])}else o=[],ld(i,o);return o}function ld(e,t){for(let n=0;n<e.length;n++)t.push((0,e[n])());return t}function Eg(e,t=[]){return n=>{n.providersResolver=(r,i)=>
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function aD(e,t,n){const r=Pt();if(r.firstCreatePass){const i=Qn(e);sd(n,r.data,r.blueprint,i,!0),sd(t,r.data,r.blueprint,i,!1)}}(r,i?i(e):e,t)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Dg{}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class fD{resolveComponentFactory(t){throw function hD(e){const t=Error(`No component factory found for ${ie(e)}. Did you add it to @NgModule.entryComponents?`);return t.ngComponent=e,t}(t)}}let sc=(()=>{class e{}
+/**
+         * @license
+         * Copyright Google LLC All Rights Reserved.
+         *
+         * Use of this source code is governed by an MIT-style license that can be
+         * found in the LICENSE file at https://angular.io/license
+         */
+return e.NULL=new fD,e})();function pD(){return ga(wn(),Ae())}function ga(e,t){return new Ya(Jn(e,t))}let Ya=(()=>{class e{constructor(n){this.nativeElement=n}}return e.__NG_ELEMENT_ID__=pD,e})();function gD(e){return e instanceof Ya?e.nativeElement:e}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Cg{}let mD=(()=>{class e{}return e.__NG_ELEMENT_ID__=()=>function _D(){const e=Ae(),n=tr(wn().index,e);return function yD(e){return e[11]}(yr(n)?n:e)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(),e})(),vD=(()=>{class e{}
+/**
+         * @license
+         * Copyright Google LLC All Rights Reserved.
+         *
+         * Use of this source code is governed by an MIT-style license that can be
+         * found in the LICENSE file at https://angular.io/license
+         */
+return e.\u0275prov=kt({token:e,providedIn:"root",factory:()=>null}),e})();class wg{constructor(t){this.full=t,this.major=t.split(".")[0],this.minor=t.split(".")[1],this.patch=t.split(".").slice(2).join(".")}}const ED=new wg("13.4.0"),cd={};
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function oc(e,t,n,r,i=!1){for(;null!==n;){const o=t[n.index];if(null!==o&&r.push(nn(o)),_r(o))for(let g=10;g<o.length;g++){const v=o[g],I=v[1].firstChild;null!==I&&oc(v[1],v,I,r)}const l=n.type;if(8&l)oc(e,t,n.child,r);else if(32&l){const g=Sa(n,t);let v;for(;v=g();)r.push(v)}else if(16&l){const g=xe(t,n);if(Array.isArray(g))r.push(...g);else{const v=Go(t[16]);oc(v[1],v,g,r,!0)}}n=i?n.projectionNext:n.next}return r}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Ka{constructor(t,n){this._lView=t,this._cdRefInjectingView=n,this._appRef=null,this._attachedToViewContainer=!1}get rootNodes(){const t=this._lView,n=t[1];return oc(n,t,n.firstChild,[])}get context(){return this._lView[8]}set context(t){this._lView[8]=t}get destroyed(){return 256==(256&this._lView[2])}destroy(){if(this._appRef)this._appRef.detachView(this);else if(this._attachedToViewContainer){const t=this._lView[3];if(_r(t)){const n=t[8],r=n?n.indexOf(this):-1;r>-1&&(Pa(t,r),Ea(n,r))}this._attachedToViewContainer=!1}Ml(this._lView[1],this._lView)}onDestroy(t){tf(this._lView[1],this._lView,null,t)}markForCheck(){Du(this._cdRefInjectingView||this._lView)}detach(){this._lView[2]&=-129}reattach(){this._lView[2]|=128}detectChanges(){!function Cu(e,t,n){const r=t[10];r.begin&&r.begin();try{Xo(e,t,e.template,n)}catch(i){throw gf(t,i),i}finally{r.end&&r.end()}}(this._lView[1],this._lView,this.context)}checkNoChanges(){}attachToViewContainerRef(){if(this._appRef)throw new Ue(902,"");this._attachedToViewContainer=!0}detachFromAppRef(){this._appRef=null,function Oa(e,t){hr(e,t,t[11],2,null,null)}(this._lView[1],this._lView)}attachToAppRef(t){if(this._attachedToViewContainer)throw new Ue(902,"");this._appRef=t}}class DD extends Ka{constructor(t){super(t),this._view=t}detectChanges(){df(this._view)}checkNoChanges(){}get context(){return null}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Sg extends sc{constructor(t){super(),this.ngModule=t}resolveComponentFactory(t){const n=Bt(t);return new ud(n,this.ngModule)}}function Mg(e){const t=[];for(let n in e)e.hasOwnProperty(n)&&t.push({propName:e[n],templateName:n});return t}class ud extends Dg{constructor(t,n){super(),this.componentDef=t,this.ngModule=n,this.componentType=t.type,this.selector=function Vy(e){return e.map(jy).join(",")}(t.selectors),this.ngContentSelectors=t.ngContentSelectors?t.ngContentSelectors:[],this.isBoundToModule=!!n}get inputs(){return Mg(this.componentDef.inputs)}get outputs(){return Mg(this.componentDef.outputs)}create(t,n,r,i){const o=(i=i||this.ngModule)?function CD(e,t){return{get:(n,r,i)=>{const o=e.get(n,cd,i);return o!==cd||r===cd?o:t.get(n,r,i)}}}(t,i.injector):t,l=o.get(Cg,yi),g=o.get(vD,null),v=l.createRenderer(null,this.componentDef),I=this.componentDef.selectors[0][0]||"div",x=r?function ef(e,t,n){if(tn(e))return e.selectRootElement(t,n===xt.ShadowDom);let r="string"==typeof t?e.querySelector(t):t;return r.textContent="",r}(v,r,this.componentDef.encapsulation):Aa(l.createRenderer(null,this.componentDef),I,function bD(e){const t=e.toLowerCase();return"svg"===t?"svg":"math"===t?"math":null}(I)),V=this.componentDef.onPush?576:528,re=function xf(e,t){return{components:[],scheduler:e||Ay,clean:S_,playerHandler:t||null,flags:0}}(),ce=Vl(0,null,null,1,0,null,null,null,null,null),be=La(null,ce,re,V,null,null,l,v,g,o);let Ne,Ve;an(be);try{const Qe=function Pf(e,t,n,r,i,o){const l=n[1];n[20]=e;const v=Zo(l,20,2,"#host",null),I=v.mergedAttrs=t.hostAttrs;null!==I&&($l(v,I,!0),null!==e&&(or(i,e,I),null!==v.classes&&Kc(i,e,v.classes),null!==v.styles&&mh(i,e,v.styles)));const x=r.createRenderer(e,t),V=La(n,Xh(t),null,t.onPush?64:16,n[20],v,r,x,o||null,null);return l.firstCreatePass&&(Qs(Bi(v,n),l,t.type),af(l,v),lf(v,n.length,1)),Hl(n,V),n[20]=V}(x,this.componentDef,be,l,v);if(x)if(r)or(v,x,["ng-version",ED.full]);else{const{attrs:Oe,classes:at}=function Hy(e){const t=[],n=[];let r=1,i=2;for(;r<e.length;){let o=e[r];if("string"==typeof o)2===i?""!==o&&t.push(o,e[++r]):8===i&&n.push(o);else{if(!$i(i))break;i=o}r++}return{attrs:t,classes:n}}(this.componentDef.selectors[0]);Oe&&or(v,x,Oe),at&&at.length>0&&Kc(v,x,at.join(" "))}if(Ve=Br(ce,20),void 0!==n){const Oe=Ve.projection=[];for(let at=0;at<this.ngContentSelectors.length;at++){const Ht=n[at];Oe.push(null!=Ht?Array.from(Ht):null)}}Ne=function Rf(e,t,n,r,i){const o=n[1],l=function c_(e,t,n){const r=wn();e.firstCreatePass&&(n.providersResolver&&n.providersResolver(n),cf(e,r,t,Jo(e,t,1,null),n));const i=ne(t,e,r.directiveStart,r);dr(i,t);const o=Jn(r,t);return o&&dr(o,t),i}(o,n,t);if(r.components.push(l),e[8]=l,i&&i.forEach(v=>v(l,t)),t.contentQueries){const v=wn();t.contentQueries(1,l,v.directiveStart)}const g=wn();return!o.firstCreatePass||null===t.hostBindings&&null===t.hostAttrs||(Hr(g.index),sf(n[1],g,0,g.directiveStart,g.directiveEnd,t),of(t,l)),l}(Qe,this.componentDef,be,re,[G_]),ka(ce,be,null)}finally{vn()}return new SD(this.componentType,Ne,ga(Ve,be),be,Ve)}}class SD extends class dD{}{constructor(t,n,r,i,o){super(),this.location=r,this._rootLView=i,this._tNode=o,this.instance=n,this.hostView=this.changeDetectorRef=new DD(i),this.componentType=t}get injector(){return new Je(this._tNode,this._rootLView)}destroy(){this.hostView.destroy()}onDestroy(t){this.hostView.onDestroy(t)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class ma{}class Tg{}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const ya=new Map;class Og extends ma{constructor(t,n){super(),this._parent=n,this._bootstrapComponents=[],this.injector=this,this.destroyCbs=[],this.componentFactoryResolver=new Sg(this);const r=bn(t);this._bootstrapComponents=gs(r.bootstrap),this._r3Injector=Ef(t,n,[{provide:ma,useValue:this},{provide:sc,useValue:this.componentFactoryResolver}],ie(t)),this._r3Injector._resolveInjectorDefTypes(),this.instance=this.get(t)}get(t,n=ys.THROW_IF_NOT_FOUND,r=st.Default){return t===ys||t===ma||t===Su?this:this._r3Injector.get(t,n,r)}destroy(){const t=this._r3Injector;!t.destroyed&&t.destroy(),this.destroyCbs.forEach(n=>n()),this.destroyCbs=null}onDestroy(t){this.destroyCbs.push(t)}}class dd extends Tg{constructor(t){super(),this.moduleType=t,null!==bn(t)&&function TD(e){const t=new Set;!function n(r){const i=bn(r,!0),o=i.id;null!==o&&(function Ag(e,t,n){if(t&&t!==n)throw new Error(`Duplicate module registered for ${e} - ${ie(t)} vs ${ie(t.name)}`)}(o,ya.get(o),r),ya.set(o,r));const l=gs(i.imports);for(const g of l)t.has(g)||(t.add(g),n(g))}(e)}(t)}create(t){return new Og(this.moduleType,t)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Pg(e,t,n,r){return xg(Ae(),b(),e,t,n,r)}function Rg(e,t,n,r,i){return Fg(Ae(),b(),e,t,n,r,i)}function Qa(e,t){const n=e[t];return n===Rt?void 0:n}function xg(e,t,n,r,i,o){const l=t+n;return Ir(e,l,i)?_s(e,l+1,o?r.call(o,i):r(i)):Qa(e,l+1)}function Fg(e,t,n,r,i,o,l){const g=t+n;return wo(e,g,i,o)?_s(e,g+2,l?r.call(l,i,o):r(i,o)):Qa(e,g+2)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function Bg(e,t){const n=Pt();let r;const i=e+20;n.firstCreatePass?(r=function LD(e,t){if(t)for(let n=t.length-1;n>=0;n--){const r=t[n];if(e===r.name)return r}}(t,n.pipeRegistry),n.data[i]=r,r.onDestroy&&(n.destroyHooks||(n.destroyHooks=[])).push(i,r.onDestroy)):r=n.data[i];const o=r.factory||(r.factory=Sr(r.type)),l=ee(Va);try{const g=Ys(!1),v=o();return Ys(g),function rv(e,t,n,r){n>=e.data.length&&(e.data[n]=null,e.blueprint[n]=null),t[n]=r}(n,Ae(),i,v),v}finally{ee(l)}}function Ug(e,t,n){const r=e+20,i=Ae(),o=vi(i,r);return Za(i,r)?xg(i,b(),t,o.transform,n,o):o.transform(n)}function jg(e,t,n,r){const i=e+20,o=Ae(),l=vi(o,i);return Za(o,i)?Fg(o,b(),t,l.transform,n,r,l):l.transform(n,r)}function Za(e,t){return e[1].data[t].pure}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function hd(e){return t=>{setTimeout(e,void 0,t)}}const Ds=class jD extends D.xQ{constructor(t=!1){super(),this.__isAsync=t}emit(t){super.next(t)}subscribe(t,n,r){var i,o,l;let g=t,v=n||(()=>null),I=r;if(t&&"object"==typeof t){const V=t;g=null===(i=V.next)||void 0===i?void 0:i.bind(V),v=null===(o=V.error)||void 0===o?void 0:o.bind(V),I=null===(l=V.complete)||void 0===l?void 0:l.bind(V)}this.__isAsync&&(v=hd(v),g&&(g=hd(g)),I&&(I=hd(I)));const x=super.subscribe({next:g,error:v,complete:I});return t instanceof h.w&&t.add(x),x}};
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function VD(){return this._results[ta()]()}class fd{constructor(t=!1){this._emitDistinctChangesOnly=t,this.dirty=!0,this._results=[],this._changesDetected=!1,this._changes=null,this.length=0,this.first=void 0,this.last=void 0;const n=ta(),r=fd.prototype;r[n]||(r[n]=VD)}get changes(){return this._changes||(this._changes=new Ds)}get(t){return this._results[t]}map(t){return this._results.map(t)}filter(t){return this._results.filter(t)}find(t){return this._results.find(t)}reduce(t,n){return this._results.reduce(t,n)}forEach(t){this._results.forEach(t)}some(t){return this._results.some(t)}toArray(){return this._results.slice()}toString(){return this._results.toString()}reset(t,n){const r=this;r.dirty=!1;const i=ii(t);(this._changesDetected=!function _c(e,t,n){if(e.length!==t.length)return!1;for(let r=0;r<e.length;r++){let i=e[r],o=t[r];if(n&&(i=n(i),o=n(o)),o!==i)return!1}return!0}(r._results,i,n))&&(r._results=i,r.length=i.length,r.last=i[this.length-1],r.first=i[0])}notifyOnChanges(){this._changes&&(this._changesDetected||!this._emitDistinctChangesOnly)&&this._changes.emit(this)}setDirty(){this.dirty=!0}destroy(){this.changes.complete(),this.changes.unsubscribe()}}Symbol;
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let Ja=(()=>{class e{}return e.__NG_ELEMENT_ID__=zD,e})();const HD=Ja,$D=class extends HD{constructor(t,n,r){super(),this._declarationLView=t,this._declarationTContainer=n,this.elementRef=r}createEmbeddedView(t){const n=this._declarationTContainer.tViews,r=La(this._declarationLView,n,t,16,null,n.declTNode,null,null,null,null);r[17]=this._declarationLView[this._declarationTContainer.index];const o=this._declarationLView[19];return null!==o&&(r[19]=o.createEmbeddedView(n)),ka(n,r,t),new Ka(r)}};function zD(){return ac(wn(),Ae())}function ac(e,t){return 4&e.type?new $D(t,e,ga(e,t)):null}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let lc=(()=>{class e{}return e.__NG_ELEMENT_ID__=GD,e})();function GD(){return $g(wn(),Ae())}const WD=lc,Vg=class extends WD{constructor(t,n,r){super(),this._lContainer=t,this._hostTNode=n,this._hostLView=r}get element(){return ga(this._hostTNode,this._hostLView)}get injector(){return new Je(this._hostTNode,this._hostLView)}get parentInjector(){const t=Ks(this._hostTNode,this._hostLView);if(Si(t)){const n=us(t,this._hostLView),r=ci(t);return new Je(n[1].data[r+8],n)}return new Je(null,this._hostLView)}clear(){for(;this.length>0;)this.remove(this.length-1)}get(t){const n=Hg(this._lContainer);return null!==n&&n[t]||null}get length(){return this._lContainer.length-10}createEmbeddedView(t,n,r){const i=t.createEmbeddedView(n||{});return this.insert(i,r),i}createComponent(t,n,r,i,o){const l=t&&!function xo(e){return"function"==typeof e}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(t);let g;if(l)g=n;else{const V=n||{};g=V.index,r=V.injector,i=V.projectableNodes,o=V.ngModuleRef}const v=l?t:new ud(Bt(t)),I=r||this.parentInjector;if(!o&&null==v.ngModule){const re=(l?I:this.parentInjector).get(ma,null);re&&(o=re)}const x=v.create(I,i,void 0,o);return this.insert(x.hostView,g),x}insert(t,n){const r=t._lView,i=r[1];if(function Ei(e){return _r(e[3])}(r)){const x=this.indexOf(t);if(-1!==x)this.detach(x);else{const V=r[3],re=new Vg(V,V[6],V[3]);re.detach(re.indexOf(t))}}const o=this._adjustIndex(n),l=this._lContainer;!function Gc(e,t,n,r){const i=10+r,o=n.length;r>0&&(n[i-1][4]=t),r<o-10?(t[4]=n[i],tl(n,10+r,t)):(n.push(t),t[4]=null),t[3]=n;const l=t[17];null!==l&&n!==l&&function Sl(e,t){const n=e[9];t[16]!==t[3][3][16]&&(e[2]=!0),null===n?e[9]=[t]:n.push(t)}(l,t);const g=t[19];null!==g&&g.insertView(e),t[2]|=128}(i,r,l,o);const g=ze(o,l),v=r[11],I=Yo(v,l[7]);return null!==I&&function Ia(e,t,n,r,i,o){r[0]=i,r[6]=t,hr(e,r,n,1,i,o)}(i,l[6],v,r,I,g),t.attachToViewContainerRef(),tl(pd(l),o,t),t}move(t,n){return this.insert(t,n)}indexOf(t){const n=Hg(this._lContainer);return null!==n?n.indexOf(t):-1}remove(t){const n=this._adjustIndex(t,-1),r=Pa(this._lContainer,n);r&&(Ea(pd(this._lContainer),n),Ml(r[1],r))}detach(t){const n=this._adjustIndex(t,-1),r=Pa(this._lContainer,n);return r&&null!=Ea(pd(this._lContainer),n)?new Ka(r):null}_adjustIndex(t,n=0){return null==t?this.length+n:t}};function Hg(e){return e[8]}function pd(e){return e[8]||(e[8]=[])}function $g(e,t){let n;const r=t[e.index];if(_r(r))n=r;else{let i;if(8&e.type)i=nn(r);else{const o=t[11];i=o.createComment("");const l=Jn(e,t);Us(o,Yo(o,l),i,function m(e,t){return tn(e)?e.nextSibling(t):t.nextSibling}(o,l),!1)}t[e.index]=n=uf(r,t,i,e),Hl(t,n)}return new Vg(n,e,t)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class gd{constructor(t){this.queryList=t,this.matches=null}clone(){return new gd(this.queryList)}setDirty(){this.queryList.setDirty()}}class md{constructor(t=[]){this.queries=t}createEmbeddedView(t){const n=t.queries;if(null!==n){const r=null!==t.contentQueries?t.contentQueries[0]:n.length,i=[];for(let o=0;o<r;o++){const l=n.getByIndex(o);i.push(this.queries[l.indexInDeclarationView].clone())}return new md(i)}return null}insertView(t){this.dirtyQueriesWithMatches(t)}detachView(t){this.dirtyQueriesWithMatches(t)}dirtyQueriesWithMatches(t){for(let n=0;n<this.queries.length;n++)null!==Xg(t,n).matches&&this.queries[n].setDirty()}}class zg{constructor(t,n,r=null){this.predicate=t,this.flags=n,this.read=r}}class yd{constructor(t=[]){this.queries=t}elementStart(t,n){for(let r=0;r<this.queries.length;r++)this.queries[r].elementStart(t,n)}elementEnd(t){for(let n=0;n<this.queries.length;n++)this.queries[n].elementEnd(t)}embeddedTView(t){let n=null;for(let r=0;r<this.length;r++){const i=null!==n?n.length:0,o=this.getByIndex(r).embeddedTView(t,i);o&&(o.indexInDeclarationView=r,null!==n?n.push(o):n=[o])}return null!==n?new yd(n):null}template(t,n){for(let r=0;r<this.queries.length;r++)this.queries[r].template(t,n)}getByIndex(t){return this.queries[t]}get length(){return this.queries.length}track(t){this.queries.push(t)}}class _d{constructor(t,n=-1){this.metadata=t,this.matches=null,this.indexInDeclarationView=-1,this.crossesNgTemplate=!1,this._appliesToNextNode=!0,this._declarationNodeIndex=n}elementStart(t,n){this.isApplyingToNode(n)&&this.matchTNode(t,n)}elementEnd(t){this._declarationNodeIndex===t.index&&(this._appliesToNextNode=!1)}template(t,n){this.elementStart(t,n)}embeddedTView(t,n){return this.isApplyingToNode(t)?(this.crossesNgTemplate=!0,this.addMatch(-t.index,n),new _d(this.metadata)):null}isApplyingToNode(t){if(this._appliesToNextNode&&1!=(1&this.metadata.flags)){const n=this._declarationNodeIndex;let r=t.parent;for(;null!==r&&8&r.type&&r.index!==n;)r=r.parent;return n===(null!==r?r.index:-1)}return this._appliesToNextNode}matchTNode(t,n){const r=this.metadata.predicate;if(Array.isArray(r))for(let i=0;i<r.length;i++){const o=r[i];this.matchTNodeWithReadOption(t,n,QD(n,o)),this.matchTNodeWithReadOption(t,n,Y(n,t,o,!1,!1))}else r===Ja?4&n.type&&this.matchTNodeWithReadOption(t,n,-1):this.matchTNodeWithReadOption(t,n,Y(n,t,r,!1,!1))}matchTNodeWithReadOption(t,n,r){if(null!==r){const i=this.metadata.read;if(null!==i)if(i===Ya||i===lc||i===Ja&&4&n.type)this.addMatch(n.index,-2);else{const o=Y(n,t,i,!1,!1);null!==o&&this.addMatch(n.index,o)}else this.addMatch(n.index,r)}}addMatch(t,n){null===this.matches?this.matches=[t,n]:this.matches.push(t,n)}}function QD(e,t){const n=e.localNames;if(null!==n)for(let r=0;r<n.length;r+=2)if(n[r]===t)return n[r+1];return null}function JD(e,t,n,r){return-1===n?function ZD(e,t){return 11&e.type?ga(e,t):4&e.type?ac(e,t):null}(t,e):-2===n?function XD(e,t,n){return n===Ya?ga(t,e):n===Ja?ac(t,e):n===lc?$g(t,e):void 0}(e,t,r):ne(e,e[1],n,t)}function Gg(e,t,n,r){const i=t[19].queries[r];if(null===i.matches){const o=e.data,l=n.matches,g=[];for(let v=0;v<l.length;v+=2){const I=l[v];g.push(I<0?null:JD(t,o[I],l[v+1],n.metadata.read))}i.matches=g}return i.matches}function vd(e,t,n,r){const i=e.queries.getByIndex(n),o=i.matches;if(null!==o){const l=Gg(e,t,i,n);for(let g=0;g<o.length;g+=2){const v=o[g];if(v>0)r.push(l[g/2]);else{const I=o[g+1],x=t[-v];for(let V=10;V<x.length;V++){const re=x[V];re[17]===re[3]&&vd(re[1],re,I,r)}if(null!==x[9]){const V=x[9];for(let re=0;re<V.length;re++){const ce=V[re];vd(ce[1],ce,I,r)}}}}}return r}function Wg(e){const t=Ae(),n=Pt(),r=nt();vt(r+1);const i=Xg(n,r);if(e.dirty&&ki(t)===(2==(2&i.metadata.flags))){if(null===i.matches)e.reset([]);else{const o=i.crossesNgTemplate?vd(n,t,r,[]):Gg(n,t,i,r);e.reset(o,gD),e.notifyOnChanges()}return!0}return!1}function Yg(e,t,n){const r=Pt();r.firstCreatePass&&(Jg(r,new zg(e,t,n),-1),2==(2&t)&&(r.staticViewQueries=!0)),Zg(r,Ae(),t)}function Kg(e,t,n,r){const i=Pt();if(i.firstCreatePass){const o=wn();Jg(i,new zg(t,n,r),o.index),function eb(e,t){const n=e.contentQueries||(e.contentQueries=[]);t!==(n.length?n[n.length-1]:-1)&&n.push(e.queries.length-1,t)}(i,e),2==(2&n)&&(i.staticContentQueries=!0)}Zg(i,Ae(),n)}function Qg(){return function qD(e,t){return e[19].queries[t].queryList}(Ae(),nt())}function Zg(e,t,n){const r=new fd(4==(4&n));tf(e,t,r,r.destroy),null===t[19]&&(t[19]=new md),t[19].queries.push(new gd(r))}function Jg(e,t,n){null===e.queries&&(e.queries=new yd),e.queries.track(new _d(t,n))}function Xg(e,t){return e.queries.getByIndex(t)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function qg(e,t){return ac(e,t)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function dc(...e){}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const mm=new On("Application Initializer");let Sd=(()=>{class e{constructor(n){this.appInits=n,this.resolve=dc,this.reject=dc,this.initialized=!1,this.done=!1,this.donePromise=new Promise((r,i)=>{this.resolve=r,this.reject=i})}runInitializers(){if(this.initialized)return;const n=[],r=()=>{this.done=!0,this.resolve()};if(this.appInits)for(let i=0;i<this.appInits.length;i++){const o=this.appInits[i]();if($u(o))n.push(o);else if(ip(o)){const l=new Promise((g,v)=>{o.subscribe({complete:g,error:v})});n.push(l)}}Promise.all(n).then(()=>{r()}).catch(i=>{this.reject(i)}),0===n.length&&r(),this.initialized=!0}}return e.\u0275fac=function(n){return new(n||e)(qn(mm,8))},e.\u0275prov=kt({token:e,factory:e.\u0275fac,providedIn:"root"}),e})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const ym=new On("AppId",{providedIn:"root",factory:function _m(){return`${Md()}${Md()}${Md()}`}});function Md(){return String.fromCharCode(97+Math.floor(25*Math.random()))}const vm=new On("Platform Initializer"),yb=new On("Platform ID",{providedIn:"platform",factory:()=>"unknown"}),Em=new On("appBootstrapListener");
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let _b=(()=>{class e{log(n){console.log(n)}warn(n){console.warn(n)}}return e.\u0275fac=function(n){return new(n||e)},e.\u0275prov=kt({token:e,factory:e.\u0275fac,providedIn:"platform"}),e})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Td=new On("LocaleId",{providedIn:"root",factory:()=>ll(Td,st.Optional|st.SkipSelf)||function vb(){return"undefined"!=typeof $localize&&$localize.locale||ec}()}),Eb=new On("DefaultCurrencyCode",{providedIn:"root",factory:()=>"USD"});
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class Db{constructor(t,n){this.ngModuleFactory=t,this.componentFactories=n}}let bb=(()=>{class e{compileModuleSync(n){return new dd(n)}compileModuleAsync(n){return Promise.resolve(this.compileModuleSync(n))}compileModuleAndAllComponentsSync(n){const r=this.compileModuleSync(n),o=gs(bn(n).declarations).reduce((l,g)=>{const v=Bt(g);return v&&l.push(new ud(v)),l},[]);return new Db(r,o)}compileModuleAndAllComponentsAsync(n){return Promise.resolve(this.compileModuleAndAllComponentsSync(n))}clearCache(){}clearCacheFor(n){}getModuleId(n){}}return e.\u0275fac=function(n){return new(n||e)},e.\u0275prov=kt({token:e,factory:e.\u0275fac,providedIn:"root"}),e})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const wb=(()=>Promise.resolve(0))();function Ad(e){"undefined"==typeof Zone?wb.then(()=>{e&&e.apply(null,null)}):Zone.current.scheduleMicroTask("scheduleMicrotask",e)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class Ki{constructor({enableLongStackTrace:t=!1,shouldCoalesceEventChangeDetection:n=!1,shouldCoalesceRunChangeDetection:r=!1}){if(this.hasPendingMacrotasks=!1,this.hasPendingMicrotasks=!1,this.isStable=!0,this.onUnstable=new Ds(!1),this.onMicrotaskEmpty=new Ds(!1),this.onStable=new Ds(!1),this.onError=new Ds(!1),"undefined"==typeof Zone)throw new Error("In this configuration Angular requires Zone.js");Zone.assertZonePatched();const i=this;i._nesting=0,i._outer=i._inner=Zone.current,Zone.TaskTrackingZoneSpec&&(i._inner=i._inner.fork(new Zone.TaskTrackingZoneSpec)),t&&Zone.longStackTraceZoneSpec&&(i._inner=i._inner.fork(Zone.longStackTraceZoneSpec)),i.shouldCoalesceEventChangeDetection=!r&&n,i.shouldCoalesceRunChangeDetection=r,i.lastRequestAnimationFrameId=-1,i.nativeRequestAnimationFrame=function Sb(){let e=tt.requestAnimationFrame,t=tt.cancelAnimationFrame;if("undefined"!=typeof Zone&&e&&t){const n=e[Zone.__symbol__("OriginalDelegate")];n&&(e=n);const r=t[Zone.__symbol__("OriginalDelegate")];r&&(t=r)}return{nativeRequestAnimationFrame:e,nativeCancelAnimationFrame:t}}().nativeRequestAnimationFrame,function Ab(e){const t=()=>{!function Tb(e){e.isCheckStableRunning||-1!==e.lastRequestAnimationFrameId||(e.lastRequestAnimationFrameId=e.nativeRequestAnimationFrame.call(tt,()=>{e.fakeTopEventTask||(e.fakeTopEventTask=Zone.root.scheduleEventTask("fakeTopEventTask",()=>{e.lastRequestAnimationFrameId=-1,Od(e),e.isCheckStableRunning=!0,Id(e),e.isCheckStableRunning=!1},void 0,()=>{},()=>{})),e.fakeTopEventTask.invoke()}),Od(e))}(e)};e._inner=e._inner.fork({name:"angular",properties:{isAngularZone:!0},onInvokeTask:(n,r,i,o,l,g)=>{try{return Dm(e),n.invokeTask(i,o,l,g)}finally{(e.shouldCoalesceEventChangeDetection&&"eventTask"===o.type||e.shouldCoalesceRunChangeDetection)&&t(),bm(e)}},onInvoke:(n,r,i,o,l,g,v)=>{try{return Dm(e),n.invoke(i,o,l,g,v)}finally{e.shouldCoalesceRunChangeDetection&&t(),bm(e)}},onHasTask:(n,r,i,o)=>{n.hasTask(i,o),r===i&&("microTask"==o.change?(e._hasPendingMicrotasks=o.microTask,Od(e),Id(e)):"macroTask"==o.change&&(e.hasPendingMacrotasks=o.macroTask))},onHandleError:(n,r,i,o)=>(n.handleError(i,o),e.runOutsideAngular(()=>e.onError.emit(o)),!1)})}(i)}static isInAngularZone(){return"undefined"!=typeof Zone&&!0===Zone.current.get("isAngularZone")}static assertInAngularZone(){if(!Ki.isInAngularZone())throw new Error("Expected to be in Angular Zone, but it is not!")}static assertNotInAngularZone(){if(Ki.isInAngularZone())throw new Error("Expected to not be in Angular Zone, but it is!")}run(t,n,r){return this._inner.run(t,n,r)}runTask(t,n,r,i){const o=this._inner,l=o.scheduleEventTask("NgZoneEvent: "+i,t,Mb,dc,dc);try{return o.runTask(l,n,r)}finally{o.cancelTask(l)}}runGuarded(t,n,r){return this._inner.runGuarded(t,n,r)}runOutsideAngular(t){return this._outer.run(t)}}const Mb={};function Id(e){if(0==e._nesting&&!e.hasPendingMicrotasks&&!e.isStable)try{e._nesting++,e.onMicrotaskEmpty.emit(null)}finally{if(e._nesting--,!e.hasPendingMicrotasks)try{e.runOutsideAngular(()=>e.onStable.emit(null))}finally{e.isStable=!0}}}function Od(e){e.hasPendingMicrotasks=!!(e._hasPendingMicrotasks||(e.shouldCoalesceEventChangeDetection||e.shouldCoalesceRunChangeDetection)&&-1!==e.lastRequestAnimationFrameId)}function Dm(e){e._nesting++,e.isStable&&(e.isStable=!1,e.onUnstable.emit(null))}function bm(e){e._nesting--,Id(e)}class Ib{constructor(){this.hasPendingMicrotasks=!1,this.hasPendingMacrotasks=!1,this.isStable=!0,this.onUnstable=new Ds,this.onMicrotaskEmpty=new Ds,this.onStable=new Ds,this.onError=new Ds}run(t,n,r){return t.apply(n,r)}runGuarded(t,n,r){return t.apply(n,r)}runOutsideAngular(t){return t()}runTask(t,n,r,i){return t.apply(n,r)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let Cm=(()=>{class e{constructor(n){this._ngZone=n,this._pendingCount=0,this._isZoneStable=!0,this._didWork=!1,this._callbacks=[],this.taskTrackingZone=null,this._watchAngularEvents(),n.run(()=>{this.taskTrackingZone="undefined"==typeof Zone?null:Zone.current.get("TaskTrackingZone")})}_watchAngularEvents(){this._ngZone.onUnstable.subscribe({next:()=>{this._didWork=!0,this._isZoneStable=!1}}),this._ngZone.runOutsideAngular(()=>{this._ngZone.onStable.subscribe({next:()=>{Ki.assertNotInAngularZone(),Ad(()=>{this._isZoneStable=!0,this._runCallbacksIfReady()})}})})}increasePendingRequestCount(){return this._pendingCount+=1,this._didWork=!0,this._pendingCount}decreasePendingRequestCount(){if(this._pendingCount-=1,this._pendingCount<0)throw new Error("pending async requests below zero");return this._runCallbacksIfReady(),this._pendingCount}isStable(){return this._isZoneStable&&0===this._pendingCount&&!this._ngZone.hasPendingMacrotasks}_runCallbacksIfReady(){if(this.isStable())Ad(()=>{for(;0!==this._callbacks.length;){let n=this._callbacks.pop();clearTimeout(n.timeoutId),n.doneCb(this._didWork)}this._didWork=!1});else{let n=this.getPendingTasks();this._callbacks=this._callbacks.filter(r=>!r.updateCb||!r.updateCb(n)||(clearTimeout(r.timeoutId),!1)),this._didWork=!0}}getPendingTasks(){return this.taskTrackingZone?this.taskTrackingZone.macroTasks.map(n=>({source:n.source,creationLocation:n.creationLocation,data:n.data})):[]}addCallback(n,r,i){let o=-1;r&&r>0&&(o=setTimeout(()=>{this._callbacks=this._callbacks.filter(l=>l.timeoutId!==o),n(this._didWork,this.getPendingTasks())},r)),this._callbacks.push({doneCb:n,timeoutId:o,updateCb:i})}whenStable(n,r,i){if(i&&!this.taskTrackingZone)throw new Error('Task tracking zone is required when passing an update callback to whenStable(). Is "zone.js/plugins/task-tracking" loaded?');this.addCallback(n,r,i),this._runCallbacksIfReady()}getPendingRequestCount(){return this._pendingCount}findProviders(n,r,i){return[]}}return e.\u0275fac=function(n){return new(n||e)(qn(Ki))},e.\u0275prov=kt({token:e,factory:e.\u0275fac}),e})(),Ob=(()=>{class e{constructor(){this._applications=new Map,Pd.addToWindow(this)}registerApplication(n,r){this._applications.set(n,r)}unregisterApplication(n){this._applications.delete(n)}unregisterAllApplications(){this._applications.clear()}getTestability(n){return this._applications.get(n)||null}getAllTestabilities(){return Array.from(this._applications.values())}getAllRootElements(){return Array.from(this._applications.keys())}findTestabilityInTree(n,r=!0){return Pd.findTestabilityInTree(this,n,r)}}return e.\u0275fac=function(n){return new(n||e)},e.\u0275prov=kt({token:e,factory:e.\u0275fac,providedIn:"platform"}),e})();class Pb{addToWindow(t){}findTestabilityInTree(t,n,r){return null}}function Rb(e){Pd=e}let Pd=new Pb,Mo=null;
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const wm=new On("AllowMultipleToken"),Sm=new On("PlatformOnDestroy");class Nb{constructor(t,n){this.name=t,this.token=n}}function Mm(e,t,n=[]){const r=`Platform: ${t}`,i=new On(r);return(o=[])=>{let l=Rd();if(!l||l.injector.get(wm,!1)){const g=[...n,...o,{provide:i,useValue:!0}];e?e(g):function Lb(e){if(Mo&&!Mo.get(wm,!1))throw new Ue(400,"");Mo=e;const t=e.get(Tm),n=e.get(vm,null);n&&n.forEach(r=>r())}(function Bb(e=[],t){return ys.create({name:t,providers:[{provide:Mu,useValue:"platform"},{provide:Sm,useValue:()=>Mo=null},...e]})}(g,r))}return function kb(e){const t=Rd();if(!t)throw new Ue(401,"");return t}()}}function Rd(){var e;return null!==(e=null==Mo?void 0:Mo.get(Tm))&&void 0!==e?e:null}let Tm=(()=>{class e{constructor(n){this._injector=n,this._modules=[],this._destroyListeners=[],this._destroyed=!1}bootstrapModuleFactory(n,r){const g=function Ub(e,t){let n;return n="noop"===e?new Ib:("zone.js"===e?void 0:e)||new Ki({enableLongStackTrace:!1,shouldCoalesceEventChangeDetection:!!(null==t?void 0:t.ngZoneEventCoalescing),shouldCoalesceRunChangeDetection:!!(null==t?void 0:t.ngZoneRunCoalescing)}),n}(r?r.ngZone:void 0,{ngZoneEventCoalescing:r&&r.ngZoneEventCoalescing||!1,ngZoneRunCoalescing:r&&r.ngZoneRunCoalescing||!1}),v=[{provide:Ki,useValue:g}];return g.run(()=>{const I=ys.create({providers:v,parent:this.injector,name:n.moduleType.name}),x=n.create(I),V=x.injector.get(kl,null);if(!V)throw new Ue(402,"");return g.runOutsideAngular(()=>{const re=g.onError.subscribe({next:ce=>{V.handleError(ce)}});x.onDestroy(()=>{Fd(this._modules,x),re.unsubscribe()})}),function jb(e,t,n){try{const r=n();return $u(r)?r.catch(i=>{throw t.runOutsideAngular(()=>e.handleError(i)),i}):r}catch(r){throw t.runOutsideAngular(()=>e.handleError(r)),r}}(V,g,()=>{const re=x.injector.get(Sd);return re.runInitializers(),re.donePromise.then(()=>(function mE(e){fn(e,"Expected localeId to be defined"),"string"==typeof e&&(Qp=e.toLowerCase().replace(/_/g,"-"))}(x.injector.get(Td,ec)||ec),this._moduleDoBootstrap(x),x))})})}bootstrapModule(n,r=[]){const i=Am({},r);return function xb(e,t,n){const r=new dd(n);return Promise.resolve(r)}(0,0,n).then(o=>this.bootstrapModuleFactory(o,i))}_moduleDoBootstrap(n){const r=n.injector.get(xd);if(n._bootstrapComponents.length>0)n._bootstrapComponents.forEach(i=>r.bootstrap(i));else{if(!n.instance.ngDoBootstrap)throw new Ue(403,"");n.instance.ngDoBootstrap(r)}this._modules.push(n)}onDestroy(n){this._destroyListeners.push(n)}get injector(){return this._injector}destroy(){if(this._destroyed)throw new Ue(404,"");this._modules.slice().forEach(r=>r.destroy()),this._destroyListeners.forEach(r=>r());const n=this._injector.get(Sm,null);null==n||n(),this._destroyed=!0}get destroyed(){return this._destroyed}}return e.\u0275fac=function(n){return new(n||e)(qn(ys))},e.\u0275prov=kt({token:e,factory:e.\u0275fac,providedIn:"platform"}),e})();function Am(e,t){return Array.isArray(t)?t.reduce(Am,e):Object.assign(Object.assign({},e),t)}let xd=(()=>{class e{constructor(n,r,i,o){this._zone=n,this._injector=r,this._exceptionHandler=i,this._initStatus=o,this._bootstrapListeners=[],this._views=[],this._runningTick=!1,this._stable=!0,this.componentTypes=[],this.components=[],this._onMicrotaskEmptySubscription=this._zone.onMicrotaskEmpty.subscribe({next:()=>{this._zone.run(()=>{this.tick()})}});const l=new j.y(v=>{this._stable=this._zone.isStable&&!this._zone.hasPendingMacrotasks&&!this._zone.hasPendingMicrotasks,this._zone.runOutsideAngular(()=>{v.next(this._stable),v.complete()})}),g=new j.y(v=>{let I;this._zone.runOutsideAngular(()=>{I=this._zone.onStable.subscribe(()=>{Ki.assertNotInAngularZone(),Ad(()=>{!this._stable&&!this._zone.hasPendingMacrotasks&&!this._zone.hasPendingMicrotasks&&(this._stable=!0,v.next(!0))})})});const x=this._zone.onUnstable.subscribe(()=>{Ki.assertInAngularZone(),this._stable&&(this._stable=!1,this._zone.runOutsideAngular(()=>{v.next(!1)}))});return()=>{I.unsubscribe(),x.unsubscribe()}});this.isStable=(0,Q.T)(l,g.pipe(function L(){return e=>(0,U.x)()(function H(e,t){return function(r){let i;if(i="function"==typeof e?e:function(){return e},"function"==typeof t)return r.lift(new $(i,t));const o=Object.create(r,G.N);return o.source=r,o.subjectFactory=i,o}}(z)(e))}()))}bootstrap(n,r){if(!this._initStatus.done)throw new Ue(405,"");let i;i=n instanceof Dg?n:this._injector.get(sc).resolveComponentFactory(n),this.componentTypes.push(i.componentType);const o=function Fb(e){return e.isBoundToModule}(i)?void 0:this._injector.get(ma),g=i.create(ys.NULL,[],r||i.selector,o),v=g.location.nativeElement,I=g.injector.get(Cm,null),x=I&&g.injector.get(Ob);return I&&x&&x.registerApplication(v,I),g.onDestroy(()=>{this.detachView(g.hostView),Fd(this.components,g),x&&x.unregisterApplication(v)}),this._loadComponent(g),g}tick(){if(this._runningTick)throw new Ue(101,"");try{this._runningTick=!0;for(let n of this._views)n.detectChanges()}catch(n){this._zone.runOutsideAngular(()=>this._exceptionHandler.handleError(n))}finally{this._runningTick=!1}}attachView(n){const r=n;this._views.push(r),r.attachToAppRef(this)}detachView(n){const r=n;Fd(this._views,r),r.detachFromAppRef()}_loadComponent(n){this.attachView(n.hostView),this.tick(),this.components.push(n),this._injector.get(Em,[]).concat(this._bootstrapListeners).forEach(i=>i(n))}ngOnDestroy(){this._views.slice().forEach(n=>n.destroy()),this._onMicrotaskEmptySubscription.unsubscribe()}get viewCount(){return this._views.length}}return e.\u0275fac=function(n){return new(n||e)(qn(Ki),qn(ys),qn(kl),qn(Sd))},e.\u0275prov=kt({token:e,factory:e.\u0275fac,providedIn:"root"}),e})();function Fd(e,t){const n=e.indexOf(t);n>-1&&e.splice(n,1)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let Om=!0,Pm=!1;function Hb(){return Pm=!0,Om}function $b(){if(Pm)throw new Error("Cannot enable prod mode after platform setup.");Om=!1}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let zb=(()=>{class e{}return e.__NG_ELEMENT_ID__=Gb,e})();function Gb(e){return function Wb(e,t,n){if(Oi(e)&&!n){const r=tr(e.index,t);return new Ka(r,r)}return 47&e.type?new Ka(t[16],t):null}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(wn(),Ae(),16==(16&e))}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class Nm{constructor(){}supports(t){return Ua(t)}create(t){return new Xb(t)}}const Jb=(e,t)=>t;class Xb{constructor(t){this.length=0,this._linkedRecords=null,this._unlinkedRecords=null,this._previousItHead=null,this._itHead=null,this._itTail=null,this._additionsHead=null,this._additionsTail=null,this._movesHead=null,this._movesTail=null,this._removalsHead=null,this._removalsTail=null,this._identityChangesHead=null,this._identityChangesTail=null,this._trackByFn=t||Jb}forEachItem(t){let n;for(n=this._itHead;null!==n;n=n._next)t(n)}forEachOperation(t){let n=this._itHead,r=this._removalsHead,i=0,o=null;for(;n||r;){const l=!r||n&&n.currentIndex<km(r,i,o)?n:r,g=km(l,i,o),v=l.currentIndex;if(l===r)i--,r=r._nextRemoved;else if(n=n._next,null==l.previousIndex)i++;else{o||(o=[]);const I=g-i,x=v-i;if(I!=x){for(let re=0;re<I;re++){const ce=re<o.length?o[re]:o[re]=0,be=ce+re;x<=be&&be<I&&(o[re]=ce+1)}o[l.previousIndex]=x-I}}g!==v&&t(l,g,v)}}forEachPreviousItem(t){let n;for(n=this._previousItHead;null!==n;n=n._nextPrevious)t(n)}forEachAddedItem(t){let n;for(n=this._additionsHead;null!==n;n=n._nextAdded)t(n)}forEachMovedItem(t){let n;for(n=this._movesHead;null!==n;n=n._nextMoved)t(n)}forEachRemovedItem(t){let n;for(n=this._removalsHead;null!==n;n=n._nextRemoved)t(n)}forEachIdentityChange(t){let n;for(n=this._identityChangesHead;null!==n;n=n._nextIdentityChange)t(n)}diff(t){if(null==t&&(t=[]),!Ua(t))throw new Ue(900,"");return this.check(t)?this:null}onDestroy(){}check(t){this._reset();let i,o,l,n=this._itHead,r=!1;if(Array.isArray(t)){this.length=t.length;for(let g=0;g<this.length;g++)o=t[g],l=this._trackByFn(g,o),null!==n&&Object.is(n.trackById,l)?(r&&(n=this._verifyReinsertion(n,o,l,g)),Object.is(n.item,o)||this._addIdentityChange(n,o)):(n=this._mismatch(n,o,l,g),r=!0),n=n._next}else i=0,function tv(e,t){if(Array.isArray(e))for(let n=0;n<e.length;n++)t(e[n]);else{const n=e[ta()]();let r;for(;!(r=n.next()).done;)t(r.value)}}(t,g=>{l=this._trackByFn(i,g),null!==n&&Object.is(n.trackById,l)?(r&&(n=this._verifyReinsertion(n,g,l,i)),Object.is(n.item,g)||this._addIdentityChange(n,g)):(n=this._mismatch(n,g,l,i),r=!0),n=n._next,i++}),this.length=i;return this._truncate(n),this.collection=t,this.isDirty}get isDirty(){return null!==this._additionsHead||null!==this._movesHead||null!==this._removalsHead||null!==this._identityChangesHead}_reset(){if(this.isDirty){let t;for(t=this._previousItHead=this._itHead;null!==t;t=t._next)t._nextPrevious=t._next;for(t=this._additionsHead;null!==t;t=t._nextAdded)t.previousIndex=t.currentIndex;for(this._additionsHead=this._additionsTail=null,t=this._movesHead;null!==t;t=t._nextMoved)t.previousIndex=t.currentIndex;this._movesHead=this._movesTail=null,this._removalsHead=this._removalsTail=null,this._identityChangesHead=this._identityChangesTail=null}}_mismatch(t,n,r,i){let o;return null===t?o=this._itTail:(o=t._prev,this._remove(t)),null!==(t=null===this._unlinkedRecords?null:this._unlinkedRecords.get(r,null))?(Object.is(t.item,n)||this._addIdentityChange(t,n),this._reinsertAfter(t,o,i)):null!==(t=null===this._linkedRecords?null:this._linkedRecords.get(r,i))?(Object.is(t.item,n)||this._addIdentityChange(t,n),this._moveAfter(t,o,i)):t=this._addAfter(new qb(n,r),o,i),t}_verifyReinsertion(t,n,r,i){let o=null===this._unlinkedRecords?null:this._unlinkedRecords.get(r,null);return null!==o?t=this._reinsertAfter(o,t._prev,i):t.currentIndex!=i&&(t.currentIndex=i,this._addToMoves(t,i)),t}_truncate(t){for(;null!==t;){const n=t._next;this._addToRemovals(this._unlink(t)),t=n}null!==this._unlinkedRecords&&this._unlinkedRecords.clear(),null!==this._additionsTail&&(this._additionsTail._nextAdded=null),null!==this._movesTail&&(this._movesTail._nextMoved=null),null!==this._itTail&&(this._itTail._next=null),null!==this._removalsTail&&(this._removalsTail._nextRemoved=null),null!==this._identityChangesTail&&(this._identityChangesTail._nextIdentityChange=null)}_reinsertAfter(t,n,r){null!==this._unlinkedRecords&&this._unlinkedRecords.remove(t);const i=t._prevRemoved,o=t._nextRemoved;return null===i?this._removalsHead=o:i._nextRemoved=o,null===o?this._removalsTail=i:o._prevRemoved=i,this._insertAfter(t,n,r),this._addToMoves(t,r),t}_moveAfter(t,n,r){return this._unlink(t),this._insertAfter(t,n,r),this._addToMoves(t,r),t}_addAfter(t,n,r){return this._insertAfter(t,n,r),this._additionsTail=null===this._additionsTail?this._additionsHead=t:this._additionsTail._nextAdded=t,t}_insertAfter(t,n,r){const i=null===n?this._itHead:n._next;return t._next=i,t._prev=n,null===i?this._itTail=t:i._prev=t,null===n?this._itHead=t:n._next=t,null===this._linkedRecords&&(this._linkedRecords=new Lm),this._linkedRecords.put(t),t.currentIndex=r,t}_remove(t){return this._addToRemovals(this._unlink(t))}_unlink(t){null!==this._linkedRecords&&this._linkedRecords.remove(t);const n=t._prev,r=t._next;return null===n?this._itHead=r:n._next=r,null===r?this._itTail=n:r._prev=n,t}_addToMoves(t,n){return t.previousIndex===n||(this._movesTail=null===this._movesTail?this._movesHead=t:this._movesTail._nextMoved=t),t}_addToRemovals(t){return null===this._unlinkedRecords&&(this._unlinkedRecords=new Lm),this._unlinkedRecords.put(t),t.currentIndex=null,t._nextRemoved=null,null===this._removalsTail?(this._removalsTail=this._removalsHead=t,t._prevRemoved=null):(t._prevRemoved=this._removalsTail,this._removalsTail=this._removalsTail._nextRemoved=t),t}_addIdentityChange(t,n){return t.item=n,this._identityChangesTail=null===this._identityChangesTail?this._identityChangesHead=t:this._identityChangesTail._nextIdentityChange=t,t}}class qb{constructor(t,n){this.item=t,this.trackById=n,this.currentIndex=null,this.previousIndex=null,this._nextPrevious=null,this._prev=null,this._next=null,this._prevDup=null,this._nextDup=null,this._prevRemoved=null,this._nextRemoved=null,this._nextAdded=null,this._nextMoved=null,this._nextIdentityChange=null}}class eC{constructor(){this._head=null,this._tail=null}add(t){null===this._head?(this._head=this._tail=t,t._nextDup=null,t._prevDup=null):(this._tail._nextDup=t,t._prevDup=this._tail,t._nextDup=null,this._tail=t)}get(t,n){let r;for(r=this._head;null!==r;r=r._nextDup)if((null===n||n<=r.currentIndex)&&Object.is(r.trackById,t))return r;return null}remove(t){const n=t._prevDup,r=t._nextDup;return null===n?this._head=r:n._nextDup=r,null===r?this._tail=n:r._prevDup=n,null===this._head}}class Lm{constructor(){this.map=new Map}put(t){const n=t.trackById;let r=this.map.get(n);r||(r=new eC,this.map.set(n,r)),r.add(t)}get(t,n){const i=this.map.get(t);return i?i.get(t,n):null}remove(t){const n=t.trackById;return this.map.get(n).remove(t)&&this.map.delete(n),t}get isEmpty(){return 0===this.map.size}clear(){this.map.clear()}}function km(e,t,n){const r=e.previousIndex;if(null===r)return r;let i=0;return n&&r<n.length&&(i=n[r]),r+t+i
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}class Bm{constructor(){}supports(t){return t instanceof Map||xu(t)}create(){return new tC}}class tC{constructor(){this._records=new Map,this._mapHead=null,this._appendAfter=null,this._previousMapHead=null,this._changesHead=null,this._changesTail=null,this._additionsHead=null,this._additionsTail=null,this._removalsHead=null,this._removalsTail=null}get isDirty(){return null!==this._additionsHead||null!==this._changesHead||null!==this._removalsHead}forEachItem(t){let n;for(n=this._mapHead;null!==n;n=n._next)t(n)}forEachPreviousItem(t){let n;for(n=this._previousMapHead;null!==n;n=n._nextPrevious)t(n)}forEachChangedItem(t){let n;for(n=this._changesHead;null!==n;n=n._nextChanged)t(n)}forEachAddedItem(t){let n;for(n=this._additionsHead;null!==n;n=n._nextAdded)t(n)}forEachRemovedItem(t){let n;for(n=this._removalsHead;null!==n;n=n._nextRemoved)t(n)}diff(t){if(t){if(!(t instanceof Map||xu(t)))throw new Ue(900,"")}else t=new Map;return this.check(t)?this:null}onDestroy(){}check(t){this._reset();let n=this._mapHead;if(this._appendAfter=null,this._forEach(t,(r,i)=>{if(n&&n.key===i)this._maybeAddToChanges(n,r),this._appendAfter=n,n=n._next;else{const o=this._getOrCreateRecordForKey(i,r);n=this._insertBeforeOrAppend(n,o)}}),n){n._prev&&(n._prev._next=null),this._removalsHead=n;for(let r=n;null!==r;r=r._nextRemoved)r===this._mapHead&&(this._mapHead=null),this._records.delete(r.key),r._nextRemoved=r._next,r.previousValue=r.currentValue,r.currentValue=null,r._prev=null,r._next=null}return this._changesTail&&(this._changesTail._nextChanged=null),this._additionsTail&&(this._additionsTail._nextAdded=null),this.isDirty}_insertBeforeOrAppend(t,n){if(t){const r=t._prev;return n._next=t,n._prev=r,t._prev=n,r&&(r._next=n),t===this._mapHead&&(this._mapHead=n),this._appendAfter=t,t}return this._appendAfter?(this._appendAfter._next=n,n._prev=this._appendAfter):this._mapHead=n,this._appendAfter=n,null}_getOrCreateRecordForKey(t,n){if(this._records.has(t)){const i=this._records.get(t);this._maybeAddToChanges(i,n);const o=i._prev,l=i._next;return o&&(o._next=l),l&&(l._prev=o),i._next=null,i._prev=null,i}const r=new nC(t);return this._records.set(t,r),r.currentValue=n,this._addToAdditions(r),r}_reset(){if(this.isDirty){let t;for(this._previousMapHead=this._mapHead,t=this._previousMapHead;null!==t;t=t._next)t._nextPrevious=t._next;for(t=this._changesHead;null!==t;t=t._nextChanged)t.previousValue=t.currentValue;for(t=this._additionsHead;null!=t;t=t._nextAdded)t.previousValue=t.currentValue;this._changesHead=this._changesTail=null,this._additionsHead=this._additionsTail=null,this._removalsHead=null}}_maybeAddToChanges(t,n){Object.is(n,t.currentValue)||(t.previousValue=t.currentValue,t.currentValue=n,this._addToChanges(t))}_addToAdditions(t){null===this._additionsHead?this._additionsHead=this._additionsTail=t:(this._additionsTail._nextAdded=t,this._additionsTail=t)}_addToChanges(t){null===this._changesHead?this._changesHead=this._changesTail=t:(this._changesTail._nextChanged=t,this._changesTail=t)}_forEach(t,n){t instanceof Map?t.forEach(n):Object.keys(t).forEach(r=>n(t[r],r))}}class nC{constructor(t){this.key=t,this.previousValue=null,this.currentValue=null,this._nextPrevious=null,this._next=null,this._prev=null,this._nextAdded=null,this._nextRemoved=null,this._nextChanged=null}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Um(){return new Ud([new Nm])}let Ud=(()=>{class e{constructor(n){this.factories=n}static create(n,r){if(null!=r){const i=r.factories.slice();n=n.concat(i)}return new e(n)}static extend(n){return{provide:e,useFactory:r=>e.create(n,r||Um()),deps:[[e,new Eo,new jo]]}}find(n){const r=this.factories.find(i=>i.supports(n));if(null!=r)return r;throw new Ue(901,"")}}return e.\u0275prov=kt({token:e,providedIn:"root",factory:Um}),e})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function jm(){return new jd([new Bm])}let jd=(()=>{class e{constructor(n){this.factories=n}static create(n,r){if(r){const i=r.factories.slice();n=n.concat(i)}return new e(n)}static extend(n){return{provide:e,useFactory:r=>e.create(n,r||jm()),deps:[[e,new Eo,new jo]]}}find(n){const r=this.factories.find(o=>o.supports(n));if(r)return r;throw new Ue(901,"")}}
+/**
+         * @license
+         * Copyright Google LLC All Rights Reserved.
+         *
+         * Use of this source code is governed by an MIT-style license that can be
+         * found in the LICENSE file at https://angular.io/license
+         */
+return e.\u0275prov=kt({token:e,providedIn:"root",factory:jm}),e})();const sC=Mm(null,"core",[]);
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let oC=(()=>{class e{constructor(n){}}return e.\u0275fac=function(n){return new(n||e)(qn(xd))},e.\u0275mod=le({type:e}),e.\u0275inj=Hn({}),e})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */,6360:(Le,he,S)=>{S.d(he,{Qb:()=>as,PW:()=>ls});var D=S(6435),h=S(2313),j=S(1777);
+/**
+       * @license Angular v13.4.0
+       * (c) 2010-2022 Google LLC. https://angular.io/
+       * License: MIT
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Q=!1;function H(O){return new D.vHH(3e3,Q)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function At(){return"undefined"!=typeof window&&void 0!==window.document}function Cr(){return"undefined"!=typeof process&&"[object process]"==={}.toString.call(process)}function Yt(O){switch(O.length){case 0:return new j.ZN;case 1:return O[0];default:return new j.ZE(O)}}function pn(O,c,f,b,P={},B={}){const J=[],q=[];let ue=-1,ve=null;if(b.forEach(He=>{const Ke=He.offset,dt=Ke==ue,wt=dt&&ve||{};Object.keys(He).forEach(nt=>{let vt=nt,$t=He[nt];if("offset"!==nt)switch(vt=c.normalizePropertyName(vt,J),$t){case j.k1:$t=P[nt];break;case j.l3:$t=B[nt];break;default:$t=c.normalizeStyleValue(nt,vt,$t,J)}wt[vt]=$t}),dt||q.push(wt),ve=wt,ue=Ke}),J.length)throw function ft(O){return new D.vHH(3502,Q)}();return q}function kt(O,c,f,b){switch(c){case"start":O.onStart(()=>b(f&&Pr(f,"start",O)));break;case"done":O.onDone(()=>b(f&&Pr(f,"done",O)));break;case"destroy":O.onDestroy(()=>b(f&&Pr(f,"destroy",O)))}}function Pr(O,c,f){const b=f.totalTime,B=Hn(O.element,O.triggerName,O.fromState,O.toState,c||O.phaseName,null==b?O.totalTime:b,!!f.disabled),J=O._data;return null!=J&&(B._data=J),B}function Hn(O,c,f,b,P="",B=0,J){return{element:O,triggerName:c,fromState:f,toState:b,phaseName:P,totalTime:B,disabled:!!J}}function yn(O,c,f){let b;return O instanceof Map?(b=O.get(c),b||O.set(c,b=f)):(b=O[c],b||(b=O[c]=f)),b}function Rr(O){const c=O.indexOf(":");return[O.substring(1,c),O.substr(c+1)]}let $n=(O,c)=>!1,xr=(O,c,f)=>[],Pn=null;function Rn(O){const c=O.parentNode||O.host;return c===Pn?null:c}(Cr()||"undefined"!=typeof Element)&&(At()?(Pn=(()=>document.documentElement)(),$n=(O,c)=>{for(;c;){if(c===O)return!0;c=Rn(c)}return!1}):$n=(O,c)=>O.contains(c),xr=(O,c,f)=>{if(f)return Array.from(O.querySelectorAll(c));const b=O.querySelector(c);return b?[b]:[]});let er=null,st=!1;function me(O){er||(er=function oe(){return"undefined"!=typeof document?document.body:null}()||{},st=!!er.style&&"WebkitAppearance"in er.style);let c=!0;return er.style&&!function Yn(O){return"ebkit"==O.substring(1,6)}(O)&&(c=O in er.style,!c&&st&&(c="Webkit"+O.charAt(0).toUpperCase()+O.substr(1)in er.style)),c}const ee=$n,Ie=xr;
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+let Me=(()=>{class O{validateStyleProperty(f){return me(f)}matchesElement(f,b){return!1}containsElement(f,b){return ee(f,b)}getParentElement(f){return Rn(f)}query(f,b,P){return Ie(f,b,P)}computeStyle(f,b,P){return P||""}animate(f,b,P,B,J,q=[],ue){return new j.ZN(P,B)}}return O.\u0275fac=function(f){return new(f||O)},O.\u0275prov=D.Yz7({token:O,factory:O.\u0275fac}),O})(),Fe=(()=>{class O{}
+/**
+         * @license
+         * Copyright Google LLC All Rights Reserved.
+         *
+         * Use of this source code is governed by an MIT-style license that can be
+         * found in the LICENSE file at https://angular.io/license
+         */
+return O.NOOP=new Me,O})();const Dn="ng-enter",jt="ng-leave",et="ng-trigger",Ze=".ng-trigger",tt="ng-animating",It=".ng-animating";function Kn(O){if("number"==typeof O)return O;const c=O.match(/^(-?[\.\d]+)(m?s)/);return!c||c.length<2?0:Ct(parseFloat(c[1]),c[2])}function Ct(O,c){return"s"===c?1e3*O:O}function Ft(O,c,f){return O.hasOwnProperty("duration")?O:function rr(O,c,f){let P,B=0,J="";if("string"==typeof O){const q=O.match(/^(-?[\.\d]+)(m?s)(?:\s+(-?[\.\d]+)(m?s))?(?:\s+([-a-z]+(?:\(.+?\))?))?$/i);if(null===q)return c.push(H()),{duration:0,delay:0,easing:""};P=Ct(parseFloat(q[1]),q[2]);const ue=q[3];null!=ue&&(B=Ct(parseFloat(ue),q[4]));const ve=q[5];ve&&(J=ve)}else P=O;if(!f){let q=!1,ue=c.length;P<0&&(c.push(function $(){return new D.vHH(3100,Q)}()),q=!0),B<0&&(c.push(function U(){return new D.vHH(3101,Q)}()),q=!0),q&&c.splice(ue,0,H())}return{duration:P,delay:B,easing:J}}(O,c,f)}function gn(O,c={}){return Object.keys(O).forEach(f=>{c[f]=O[f]}),c}function zn(O,c,f={}){if(c)for(let b in O)f[b]=O[b];else gn(O,f);return f}function kn(O,c,f){return f?c+":"+f+";":""}function pr(O){let c="";for(let f=0;f<O.style.length;f++){const b=O.style.item(f);c+=kn(0,b,O.style.getPropertyValue(b))}for(const f in O.style)O.style.hasOwnProperty(f)&&!f.startsWith("_")&&(c+=kn(0,sn(f),O.style[f]));O.setAttribute("style",c)}function Qt(O,c,f){O.style&&(Object.keys(c).forEach(b=>{const P=yt(b);f&&!f.hasOwnProperty(b)&&(f[b]=O.style[P]),O.style[P]=c[b]}),Cr()&&pr(O))}function en(O,c){O.style&&(Object.keys(c).forEach(f=>{const b=yt(f);O.style[b]=""}),Cr()&&pr(O))}function Qr(O){return Array.isArray(O)?1==O.length?O[0]:(0,j.vP)(O):O}const se=new RegExp("{{\\s*(.+?)\\s*}}","g");function K(O){let c=[];if("string"==typeof O){let f;for(;f=se.exec(O);)c.push(f[1]);se.lastIndex=0}return c}function le(O,c,f){const b=O.toString(),P=b.replace(se,(B,J)=>{let q=c[J];return c.hasOwnProperty(J)||(f.push(function L(O){return new D.vHH(3003,Q)}()),q=""),q.toString()});return P==b?O:P}function Te(O){const c=[];let f=O.next();for(;!f.done;)c.push(f.value),f=O.next();return c}const it=/-+([a-z0-9])/g;function yt(O){return O.replace(it,(...c)=>c[1].toUpperCase())}function sn(O){return O.replace(/([a-z])([A-Z])/g,"$1-$2").toLowerCase()}function Xe(O,c,f){switch(c.type){case 7:return O.visitTrigger(c,f);case 0:return O.visitState(c,f);case 1:return O.visitTransition(c,f);case 2:return O.visitSequence(c,f);case 3:return O.visitGroup(c,f);case 4:return O.visitAnimate(c,f);case 5:return O.visitKeyframes(c,f);case 6:return O.visitStyle(c,f);case 8:return O.visitReference(c,f);case 9:return O.visitAnimateChild(c,f);case 10:return O.visitAnimateRef(c,f);case 11:return O.visitQuery(c,f);case 12:return O.visitStagger(c,f);default:throw function k(O){return new D.vHH(3004,Q)}()}}function bn(O,c){return window.getComputedStyle(O)[c]}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function je(O,c){const f=[];return"string"==typeof O?O.split(/\s*,\s*/).forEach(b=>function _t(O,c,f){if(":"==O[0]){const ue=function Jt(O,c){switch(O){case":enter":return"void => *";case":leave":return"* => void";case":increment":return(f,b)=>parseFloat(b)>parseFloat(f);case":decrement":return(f,b)=>parseFloat(b)<parseFloat(f);default:return c.push(function Nt(O){return new D.vHH(3016,Q)}()),"* => *"}}(O,f);if("function"==typeof ue)return void c.push(ue);O=ue}const b=O.match(/^(\*|[-\w]+)\s*(<?[=-]>)\s*(\*|[-\w]+)$/);if(null==b||b.length<4)return f.push(function cn(O){return new D.vHH(3015,Q)}()),c;const P=b[1],B=b[2],J=b[3];c.push(on(P,J));"<"==B[0]&&!("*"==P&&"*"==J)&&c.push(on(J,P))}(b,f,c)):f.push(O),f}const hn=new Set(["true","1"]),Fn=new Set(["false","0"]);function on(O,c){const f=hn.has(O)||Fn.has(O),b=hn.has(c)||Fn.has(c);return(P,B)=>{let J="*"==O||O==P,q="*"==c||c==B;return!J&&f&&"boolean"==typeof P&&(J=P?hn.has(O):Fn.has(O)),!q&&b&&"boolean"==typeof B&&(q=B?hn.has(c):Fn.has(c)),J&&q}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Xt=new RegExp("s*:selfs*,?","g");function Jr(O,c,f,b){return new ut(O).build(c,f,b)}class ut{constructor(c){this._driver=c}build(c,f,b){const P=new Lr(f);this._resetContextStyleTimingState(P);const B=Xe(this,Qr(c),P);return P.unsupportedCSSPropertiesFound.size&&P.unsupportedCSSPropertiesFound.keys(),B}_resetContextStyleTimingState(c){c.currentQuerySelector="",c.collectedStyles={},c.collectedStyles[""]={},c.currentTime=0}visitTrigger(c,f){let b=f.queryCount=0,P=f.depCount=0;const B=[],J=[];return"@"==c.name.charAt(0)&&f.errors.push(function ie(){return new D.vHH(3006,Q)}()),c.definitions.forEach(q=>{if(this._resetContextStyleTimingState(f),0==q.type){const ue=q,ve=ue.name;ve.toString().split(/\s*,\s*/).forEach(He=>{ue.name=He,B.push(this.visitState(ue,f))}),ue.name=ve}else if(1==q.type){const ue=this.visitTransition(q,f);b+=ue.queryCount,P+=ue.depCount,J.push(ue)}else f.errors.push(function ye(){return new D.vHH(3007,Q)}())}),{type:7,name:c.name,states:B,transitions:J,queryCount:b,depCount:P,options:null}}visitState(c,f){const b=this.visitStyle(c.styles,f),P=c.options&&c.options.params||null;if(b.containsDynamicStyles){const B=new Set,J=P||{};b.styles.forEach(q=>{if(mn(q)){const ue=q;Object.keys(ue).forEach(ve=>{K(ue[ve]).forEach(He=>{J.hasOwnProperty(He)||B.add(He)})})}}),B.size&&(Te(B.values()),f.errors.push(function De(O,c){return new D.vHH(3008,Q)}()))}return{type:0,name:c.name,style:b,options:P?{params:P}:null}}visitTransition(c,f){f.queryCount=0,f.depCount=0;const b=Xe(this,Qr(c.animation),f);return{type:1,matchers:je(c.expr,f.errors),animation:b,queryCount:f.queryCount,depCount:f.depCount,options:Bn(c.options)}}visitSequence(c,f){return{type:2,steps:c.steps.map(b=>Xe(this,b,f)),options:Bn(c.options)}}visitGroup(c,f){const b=f.currentTime;let P=0;const B=c.steps.map(J=>{f.currentTime=b;const q=Xe(this,J,f);return P=Math.max(P,f.currentTime),q});return f.currentTime=P,{type:3,steps:B,options:Bn(c.options)}}visitAnimate(c,f){const b=function qr(O,c){if(O.hasOwnProperty("duration"))return O;if("number"==typeof O)return _n(Ft(O,c).duration,0,"");const f=O;if(f.split(/\s+/).some(B=>"{"==B.charAt(0)&&"{"==B.charAt(1))){const B=_n(0,0,"");return B.dynamic=!0,B.strValue=f,B}const P=Ft(f,c);return _n(P.duration,P.delay,P.easing)}(c.timings,f.errors);f.currentAnimateTimings=b;let P,B=c.styles?c.styles:(0,j.oB)({});if(5==B.type)P=this.visitKeyframes(B,f);else{let J=c.styles,q=!1;if(!J){q=!0;const ve={};b.easing&&(ve.easing=b.easing),J=(0,j.oB)(ve)}f.currentTime+=b.duration+b.delay;const ue=this.visitStyle(J,f);ue.isEmptyStep=q,P=ue}return f.currentAnimateTimings=null,{type:4,timings:b,style:P,options:null}}visitStyle(c,f){const b=this._makeStyleAst(c,f);return this._validateStyleAst(b,f),b}_makeStyleAst(c,f){const b=[];Array.isArray(c.styles)?c.styles.forEach(J=>{"string"==typeof J?J==j.l3?b.push(J):f.errors.push(function pe(O){return new D.vHH(3002,Q)}()):b.push(J)}):b.push(c.styles);let P=!1,B=null;return b.forEach(J=>{if(mn(J)){const q=J,ue=q.easing;if(ue&&(B=ue,delete q.easing),!P)for(let ve in q)if(q[ve].toString().indexOf("{{")>=0){P=!0;break}}}),{type:6,styles:b,easing:B,offset:c.offset,containsDynamicStyles:P,options:null}}_validateStyleAst(c,f){const b=f.currentAnimateTimings;let P=f.currentTime,B=f.currentTime;b&&B>0&&(B-=b.duration+b.delay),c.styles.forEach(J=>{"string"!=typeof J&&Object.keys(J).forEach(q=>{if(!this._driver.validateStyleProperty(q))return delete J[q],void f.unsupportedCSSPropertiesFound.add(q);const ue=f.collectedStyles[f.currentQuerySelector],ve=ue[q];let He=!0;ve&&(B!=P&&B>=ve.startTime&&P<=ve.endTime&&(f.errors.push(function Be(O,c,f,b,P){return new D.vHH(3010,Q)}()),He=!1),B=ve.startTime),He&&(ue[q]={startTime:B,endTime:P}),f.options&&function ge(O,c,f){const b=c.params||{},P=K(O);P.length&&P.forEach(B=>{b.hasOwnProperty(B)||f.push(function z(O){return new D.vHH(3001,Q)}())})}(J[q],f.options,f.errors)})})}visitKeyframes(c,f){const b={type:5,styles:[],options:null};if(!f.currentAnimateTimings)return f.errors.push(function Ye(){return new D.vHH(3011,Q)}()),b;let B=0;const J=[];let q=!1,ue=!1,ve=0;const He=c.steps.map(Sn=>{const an=this._makeStyleAst(Sn,f);let In=null!=an.offset?an.offset:function ai(O){if("string"==typeof O)return null;let c=null;if(Array.isArray(O))O.forEach(f=>{if(mn(f)&&f.hasOwnProperty("offset")){const b=f;c=parseFloat(b.offset),delete b.offset}});else if(mn(O)&&O.hasOwnProperty("offset")){const f=O;c=parseFloat(f.offset),delete f.offset}return c}(an.styles),Mn=0;return null!=In&&(B++,Mn=an.offset=In),ue=ue||Mn<0||Mn>1,q=q||Mn<ve,ve=Mn,J.push(Mn),an});ue&&f.errors.push(function Ue(){return new D.vHH(3012,Q)}()),q&&f.errors.push(function $e(){return new D.vHH(3200,Q)}());const Ke=c.steps.length;let dt=0;B>0&&B<Ke?f.errors.push(function ae(){return new D.vHH(3202,Q)}()):0==B&&(dt=1/(Ke-1));const wt=Ke-1,nt=f.currentTime,vt=f.currentAnimateTimings,$t=vt.duration;return He.forEach((Sn,an)=>{const In=dt>0?an==wt?1:dt*an:J[an],Mn=In*$t;f.currentTime=nt+vt.delay+Mn,vt.duration=Mn,this._validateStyleAst(Sn,f),Sn.offset=In,b.styles.push(Sn)}),b}visitReference(c,f){return{type:8,animation:Xe(this,Qr(c.animation),f),options:Bn(c.options)}}visitAnimateChild(c,f){return f.depCount++,{type:9,options:Bn(c.options)}}visitAnimateRef(c,f){return{type:10,animation:this.visitReference(c.animation,f),options:Bn(c.options)}}visitQuery(c,f){const b=f.currentQuerySelector,P=c.options||{};f.queryCount++,f.currentQuery=c;const[B,J]=function Xr(O){const c=!!O.split(/\s*,\s*/).find(f=>":self"==f);return c&&(O=O.replace(Xt,"")),O=O.replace(/@\*/g,Ze).replace(/@\w+/g,f=>Ze+"-"+f.substr(1)).replace(/:animating/g,It),[O,c]}(c.selector);f.currentQuerySelector=b.length?b+" "+B:B,yn(f.collectedStyles,f.currentQuerySelector,{});const q=Xe(this,Qr(c.animation),f);return f.currentQuery=null,f.currentQuerySelector=b,{type:11,selector:B,limit:P.limit||0,optional:!!P.optional,includeSelf:J,animation:q,originalSelector:c.selector,options:Bn(c.options)}}visitStagger(c,f){f.currentQuery||f.errors.push(function Pe(){return new D.vHH(3013,Q)}());const b="full"===c.timings?{duration:0,delay:0,easing:"full"}:Ft(c.timings,f.errors,!0);return{type:12,animation:Xe(this,Qr(c.animation),f),timings:b,options:null}}}class Lr{constructor(c){this.errors=c,this.queryCount=0,this.depCount=0,this.currentTransition=null,this.currentQuery=null,this.currentQuerySelector=null,this.currentAnimateTimings=null,this.currentTime=0,this.collectedStyles={},this.options=null,this.unsupportedCSSPropertiesFound=new Set}}function mn(O){return!Array.isArray(O)&&"object"==typeof O}function Bn(O){return O?(O=gn(O)).params&&(O.params=function fi(O){return O?gn(O):null}(O.params)):O={},O}function _n(O,c,f){return{duration:O,delay:c,easing:f}}function Ot(O,c,f,b,P,B,J=null,q=!1){return{type:1,element:O,keyframes:c,preStyleProps:f,postStyleProps:b,duration:P,delay:B,totalTime:P+B,easing:J,subTimeline:q}}class wr{constructor(){this._map=new Map}get(c){return this._map.get(c)||[]}append(c,f){let b=this._map.get(c);b||this._map.set(c,b=[]),b.push(...f)}has(c){return this._map.has(c)}clear(){this._map.clear()}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const _r=new RegExp(":enter","g"),Oi=new RegExp(":leave","g");function kr(O,c,f,b,P,B={},J={},q,ue,ve=[]){return(new Qn).buildKeyframes(O,c,f,b,P,B,J,q,ue,ve)}class Qn{buildKeyframes(c,f,b,P,B,J,q,ue,ve,He=[]){ve=ve||new wr;const Ke=new Pi(c,f,ve,P,B,He,[]);Ke.options=ue,Ke.currentTimeline.setStyles([J],null,Ke.errors,ue),Xe(this,b,Ke);const dt=Ke.timelines.filter(wt=>wt.containsAnimation());if(Object.keys(q).length){let wt;for(let nt=dt.length-1;nt>=0;nt--){const vt=dt[nt];if(vt.element===f){wt=vt;break}}wt&&!wt.allowOnlyTimelineStyles()&&wt.setStyles([q],null,Ke.errors,ue)}return dt.length?dt.map(wt=>wt.buildKeyframes()):[Ot(f,[],[],[],0,0,"",!1)]}visitTrigger(c,f){}visitState(c,f){}visitTransition(c,f){}visitAnimateChild(c,f){const b=f.subInstructions.get(f.element);if(b){const P=f.createSubContext(c.options),B=f.currentTimeline.currentTime,J=this._visitSubInstructions(b,P,P.options);B!=J&&f.transformIntoNewTimeline(J)}f.previousNode=c}visitAnimateRef(c,f){const b=f.createSubContext(c.options);b.transformIntoNewTimeline(),this.visitReference(c.animation,b),f.transformIntoNewTimeline(b.currentTimeline.currentTime),f.previousNode=c}_visitSubInstructions(c,f,b){let B=f.currentTimeline.currentTime;const J=null!=b.duration?Kn(b.duration):null,q=null!=b.delay?Kn(b.delay):null;return 0!==J&&c.forEach(ue=>{const ve=f.appendInstructionToTimeline(ue,J,q);B=Math.max(B,ve.duration+ve.delay)}),B}visitReference(c,f){f.updateOptions(c.options,!0),Xe(this,c.animation,f),f.previousNode=c}visitSequence(c,f){const b=f.subContextCount;let P=f;const B=c.options;if(B&&(B.params||B.delay)&&(P=f.createSubContext(B),P.transformIntoNewTimeline(),null!=B.delay)){6==P.previousNode.type&&(P.currentTimeline.snapshotCurrentStyles(),P.previousNode=pi);const J=Kn(B.delay);P.delayNextStep(J)}c.steps.length&&(c.steps.forEach(J=>Xe(this,J,P)),P.currentTimeline.applyStylesToKeyframe(),P.subContextCount>b&&P.transformIntoNewTimeline()),f.previousNode=c}visitGroup(c,f){const b=[];let P=f.currentTimeline.currentTime;const B=c.options&&c.options.delay?Kn(c.options.delay):0;c.steps.forEach(J=>{const q=f.createSubContext(c.options);B&&q.delayNextStep(B),Xe(this,J,q),P=Math.max(P,q.currentTimeline.currentTime),b.push(q.currentTimeline)}),b.forEach(J=>f.currentTimeline.mergeTimelineCollectedStyles(J)),f.transformIntoNewTimeline(P),f.previousNode=c}_visitTiming(c,f){if(c.dynamic){const b=c.strValue;return Ft(f.params?le(b,f.params,f.errors):b,f.errors)}return{duration:c.duration,delay:c.delay,easing:c.easing}}visitAnimate(c,f){const b=f.currentAnimateTimings=this._visitTiming(c.timings,f),P=f.currentTimeline;b.delay&&(f.incrementTime(b.delay),P.snapshotCurrentStyles());const B=c.style;5==B.type?this.visitKeyframes(B,f):(f.incrementTime(b.duration),this.visitStyle(B,f),P.applyStylesToKeyframe()),f.currentAnimateTimings=null,f.previousNode=c}visitStyle(c,f){const b=f.currentTimeline,P=f.currentAnimateTimings;!P&&b.getCurrentStyleProperties().length&&b.forwardFrame();const B=P&&P.easing||c.easing;c.isEmptyStep?b.applyEmptyStep(B):b.setStyles(c.styles,B,f.errors,f.options),f.previousNode=c}visitKeyframes(c,f){const b=f.currentAnimateTimings,P=f.currentTimeline.duration,B=b.duration,q=f.createSubContext().currentTimeline;q.easing=b.easing,c.styles.forEach(ue=>{q.forwardTime((ue.offset||0)*B),q.setStyles(ue.styles,ue.easing,f.errors,f.options),q.applyStylesToKeyframe()}),f.currentTimeline.mergeTimelineCollectedStyles(q),f.transformIntoNewTimeline(P+B),f.previousNode=c}visitQuery(c,f){const b=f.currentTimeline.currentTime,P=c.options||{},B=P.delay?Kn(P.delay):0;B&&(6===f.previousNode.type||0==b&&f.currentTimeline.getCurrentStyleProperties().length)&&(f.currentTimeline.snapshotCurrentStyles(),f.previousNode=pi);let J=b;const q=f.invokeQuery(c.selector,c.originalSelector,c.limit,c.includeSelf,!!P.optional,f.errors);f.currentQueryTotal=q.length;let ue=null;q.forEach((ve,He)=>{f.currentQueryIndex=He;const Ke=f.createSubContext(c.options,ve);B&&Ke.delayNextStep(B),ve===f.element&&(ue=Ke.currentTimeline),Xe(this,c.animation,Ke),Ke.currentTimeline.applyStylesToKeyframe(),J=Math.max(J,Ke.currentTimeline.currentTime)}),f.currentQueryIndex=0,f.currentQueryTotal=0,f.transformIntoNewTimeline(J),ue&&(f.currentTimeline.mergeTimelineCollectedStyles(ue),f.currentTimeline.snapshotCurrentStyles()),f.previousNode=c}visitStagger(c,f){const b=f.parentContext,P=f.currentTimeline,B=c.timings,J=Math.abs(B.duration),q=J*(f.currentQueryTotal-1);let ue=J*f.currentQueryIndex;switch(B.duration<0?"reverse":B.easing){case"reverse":ue=q-ue;break;case"full":ue=b.currentStaggerTime}const He=f.currentTimeline;ue&&He.delayNextStep(ue);const Ke=He.currentTime;Xe(this,c.animation,f),f.previousNode=c,b.currentStaggerTime=P.currentTime-Ke+(P.startTime-b.currentTimeline.startTime)}}const pi={};class Pi{constructor(c,f,b,P,B,J,q,ue){this._driver=c,this.element=f,this.subInstructions=b,this._enterClassName=P,this._leaveClassName=B,this.errors=J,this.timelines=q,this.parentContext=null,this.currentAnimateTimings=null,this.previousNode=pi,this.subContextCount=0,this.options={},this.currentQueryIndex=0,this.currentQueryTotal=0,this.currentStaggerTime=0,this.currentTimeline=ue||new ei(this._driver,f,0),q.push(this.currentTimeline)}get params(){return this.options.params}updateOptions(c,f){if(!c)return;const b=c;let P=this.options;null!=b.duration&&(P.duration=Kn(b.duration)),null!=b.delay&&(P.delay=Kn(b.delay));const B=b.params;if(B){let J=P.params;J||(J=this.options.params={}),Object.keys(B).forEach(q=>{(!f||!J.hasOwnProperty(q))&&(J[q]=le(B[q],J,this.errors))})}}_copyOptions(){const c={};if(this.options){const f=this.options.params;if(f){const b=c.params={};Object.keys(f).forEach(P=>{b[P]=f[P]})}}return c}createSubContext(c=null,f,b){const P=f||this.element,B=new Pi(this._driver,P,this.subInstructions,this._enterClassName,this._leaveClassName,this.errors,this.timelines,this.currentTimeline.fork(P,b||0));return B.previousNode=this.previousNode,B.currentAnimateTimings=this.currentAnimateTimings,B.options=this._copyOptions(),B.updateOptions(c),B.currentQueryIndex=this.currentQueryIndex,B.currentQueryTotal=this.currentQueryTotal,B.parentContext=this,this.subContextCount++,B}transformIntoNewTimeline(c){return this.previousNode=pi,this.currentTimeline=this.currentTimeline.fork(this.element,c),this.timelines.push(this.currentTimeline),this.currentTimeline}appendInstructionToTimeline(c,f,b){const P={duration:null!=f?f:c.duration,delay:this.currentTimeline.currentTime+(null!=b?b:0)+c.delay,easing:""},B=new ti(this._driver,c.element,c.keyframes,c.preStyleProps,c.postStyleProps,P,c.stretchStartingKeyframe);return this.timelines.push(B),P}incrementTime(c){this.currentTimeline.forwardTime(this.currentTimeline.duration+c)}delayNextStep(c){c>0&&this.currentTimeline.delayNextStep(c)}invokeQuery(c,f,b,P,B,J){let q=[];if(P&&q.push(this.element),c.length>0){c=(c=c.replace(_r,"."+this._enterClassName)).replace(Oi,"."+this._leaveClassName);let ve=this._driver.query(this.element,c,1!=b);0!==b&&(ve=b<0?ve.slice(ve.length+b,ve.length):ve.slice(0,b)),q.push(...ve)}return!B&&0==q.length&&J.push(function rt(O){return new D.vHH(3014,Q)}()),q}}class ei{constructor(c,f,b,P){this._driver=c,this.element=f,this.startTime=b,this._elementTimelineStylesLookup=P,this.duration=0,this._previousKeyframe={},this._currentKeyframe={},this._keyframes=new Map,this._styleSummary={},this._pendingStyles={},this._backFill={},this._currentEmptyStepKeyframe=null,this._elementTimelineStylesLookup||(this._elementTimelineStylesLookup=new Map),this._localTimelineStyles=Object.create(this._backFill,{}),this._globalTimelineStyles=this._elementTimelineStylesLookup.get(f),this._globalTimelineStyles||(this._globalTimelineStyles=this._localTimelineStyles,this._elementTimelineStylesLookup.set(f,this._localTimelineStyles)),this._loadKeyframe()}containsAnimation(){switch(this._keyframes.size){case 0:return!1;case 1:return this.getCurrentStyleProperties().length>0;default:return!0}}getCurrentStyleProperties(){return Object.keys(this._currentKeyframe)}get currentTime(){return this.startTime+this.duration}delayNextStep(c){const f=1==this._keyframes.size&&Object.keys(this._pendingStyles).length;this.duration||f?(this.forwardTime(this.currentTime+c),f&&this.snapshotCurrentStyles()):this.startTime+=c}fork(c,f){return this.applyStylesToKeyframe(),new ei(this._driver,c,f||this.currentTime,this._elementTimelineStylesLookup)}_loadKeyframe(){this._currentKeyframe&&(this._previousKeyframe=this._currentKeyframe),this._currentKeyframe=this._keyframes.get(this.duration),this._currentKeyframe||(this._currentKeyframe=Object.create(this._backFill,{}),this._keyframes.set(this.duration,this._currentKeyframe))}forwardFrame(){this.duration+=1,this._loadKeyframe()}forwardTime(c){this.applyStylesToKeyframe(),this.duration=c,this._loadKeyframe()}_updateStyle(c,f){this._localTimelineStyles[c]=f,this._globalTimelineStyles[c]=f,this._styleSummary[c]={time:this.currentTime,value:f}}allowOnlyTimelineStyles(){return this._currentEmptyStepKeyframe!==this._currentKeyframe}applyEmptyStep(c){c&&(this._previousKeyframe.easing=c),Object.keys(this._globalTimelineStyles).forEach(f=>{this._backFill[f]=this._globalTimelineStyles[f]||j.l3,this._currentKeyframe[f]=j.l3}),this._currentEmptyStepKeyframe=this._currentKeyframe}setStyles(c,f,b,P){f&&(this._previousKeyframe.easing=f);const B=P&&P.params||{},J=function Ji(O,c){const f={};let b;return O.forEach(P=>{"*"===P?(b=b||Object.keys(c),b.forEach(B=>{f[B]=j.l3})):zn(P,!1,f)}),f}(c,this._globalTimelineStyles);Object.keys(J).forEach(q=>{const ue=le(J[q],B,b);this._pendingStyles[q]=ue,this._localTimelineStyles.hasOwnProperty(q)||(this._backFill[q]=this._globalTimelineStyles.hasOwnProperty(q)?this._globalTimelineStyles[q]:j.l3),this._updateStyle(q,ue)})}applyStylesToKeyframe(){const c=this._pendingStyles,f=Object.keys(c);0!=f.length&&(this._pendingStyles={},f.forEach(b=>{this._currentKeyframe[b]=c[b]}),Object.keys(this._localTimelineStyles).forEach(b=>{this._currentKeyframe.hasOwnProperty(b)||(this._currentKeyframe[b]=this._localTimelineStyles[b])}))}snapshotCurrentStyles(){Object.keys(this._localTimelineStyles).forEach(c=>{const f=this._localTimelineStyles[c];this._pendingStyles[c]=f,this._updateStyle(c,f)})}getFinalKeyframe(){return this._keyframes.get(this.duration)}get properties(){const c=[];for(let f in this._currentKeyframe)c.push(f);return c}mergeTimelineCollectedStyles(c){Object.keys(c._styleSummary).forEach(f=>{const b=this._styleSummary[f],P=c._styleSummary[f];(!b||P.time>b.time)&&this._updateStyle(f,P.value)})}buildKeyframes(){this.applyStylesToKeyframe();const c=new Set,f=new Set,b=1===this._keyframes.size&&0===this.duration;let P=[];this._keyframes.forEach((q,ue)=>{const ve=zn(q,!0);Object.keys(ve).forEach(He=>{const Ke=ve[He];Ke==j.k1?c.add(He):Ke==j.l3&&f.add(He)}),b||(ve.offset=ue/this.duration),P.push(ve)});const B=c.size?Te(c.values()):[],J=f.size?Te(f.values()):[];if(b){const q=P[0],ue=gn(q);q.offset=0,ue.offset=1,P=[q,ue]}return Ot(this.element,P,B,J,this.duration,this.startTime,this.easing,!1)}}class ti extends ei{constructor(c,f,b,P,B,J,q=!1){super(c,f,J.delay),this.keyframes=b,this.preStyleProps=P,this.postStyleProps=B,this._stretchStartingKeyframe=q,this.timings={duration:J.duration,delay:J.delay,easing:J.easing}}containsAnimation(){return this.keyframes.length>1}buildKeyframes(){let c=this.keyframes,{delay:f,duration:b,easing:P}=this.timings;if(this._stretchStartingKeyframe&&f){const B=[],J=b+f,q=f/J,ue=zn(c[0],!1);ue.offset=0,B.push(ue);const ve=zn(c[0],!1);ve.offset=Zi(q),B.push(ve);const He=c.length-1;for(let Ke=1;Ke<=He;Ke++){let dt=zn(c[Ke],!1);dt.offset=Zi((f+dt.offset*b)/J),B.push(dt)}b=J,f=0,P="",c=B}return Ot(this.element,c,this.preStyleProps,this.postStyleProps,b,f,P,!0)}}function Zi(O,c=3){const f=Math.pow(10,c-1);return Math.round(O*f)/f}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class ws{}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class eo extends ws{normalizePropertyName(c,f){return yt(c)}normalizeStyleValue(c,f,b,P){let B="";const J=b.toString().trim();if(qi[f]&&0!==b&&"0"!==b)if("number"==typeof b)B="px";else{const q=b.match(/^[+-]?[\d\.]+([a-z]*)$/);q&&0==q[1].length&&P.push(function X(O,c){return new D.vHH(3005,Q)}())}return J+B}}const qi=(()=>function es(O){const c={};return O.forEach(f=>c[f]=!0),c}("width,height,minWidth,minHeight,maxWidth,maxHeight,left,top,bottom,right,fontSize,outlineWidth,outlineOffset,paddingTop,paddingLeft,paddingBottom,paddingRight,marginTop,marginLeft,marginBottom,marginRight,borderRadius,borderWidth,borderTopWidth,borderLeftWidth,borderRightWidth,borderBottomWidth,textIndent,perspective".split(",")))();function ts(O,c,f,b,P,B,J,q,ue,ve,He,Ke,dt){return{type:0,element:O,triggerName:c,isRemovalTransition:P,fromState:f,fromStyles:B,toState:b,toStyles:J,timelines:q,queriedElements:ue,preStyleProps:ve,postStyleProps:He,totalTime:Ke,errors:dt}}const ns={};class Ss{constructor(c,f,b){this._triggerName=c,this.ast=f,this._stateStyles=b}match(c,f,b,P){return function to(O,c,f,b,P){return O.some(B=>B(c,f,b,P))}(this.ast.matchers,c,f,b,P)}buildStyles(c,f,b){const P=this._stateStyles["*"],B=this._stateStyles[c],J=P?P.buildStyles(f,b):{};return B?B.buildStyles(f,b):J}build(c,f,b,P,B,J,q,ue,ve,He){const Ke=[],dt=this.ast.options&&this.ast.options.params||ns,nt=this.buildStyles(b,q&&q.params||ns,Ke),vt=ue&&ue.params||ns,$t=this.buildStyles(P,vt,Ke),Sn=new Set,an=new Map,In=new Map,Mn="void"===P,jr={params:Object.assign(Object.assign({},dt),vt)},Xn=He?[]:kr(c,f,this.ast.animation,B,J,nt,$t,jr,ve,Ke);let vn=0;if(Xn.forEach(Vr=>{vn=Math.max(Vr.duration+Vr.delay,vn)}),Ke.length)return ts(f,this._triggerName,b,P,Mn,nt,$t,[],[],an,In,vn,Ke);Xn.forEach(Vr=>{const rn=Vr.element,Hr=yn(an,rn,{});Vr.preStyleProps.forEach(br=>Hr[br]=!0);const zt=yn(In,rn,{});Vr.postStyleProps.forEach(br=>zt[br]=!0),rn!==f&&Sn.add(rn)});const Ar=Te(Sn.values());return ts(f,this._triggerName,b,P,Mn,nt,$t,Xn,Ar,an,In,vn)}}class zs{constructor(c,f,b){this.styles=c,this.defaultParams=f,this.normalizer=b}buildStyles(c,f){const b={},P=gn(this.defaultParams);return Object.keys(c).forEach(B=>{const J=c[B];null!=J&&(P[B]=J)}),this.styles.styles.forEach(B=>{if("string"!=typeof B){const J=B;Object.keys(J).forEach(q=>{let ue=J[q];ue.length>1&&(ue=le(ue,P,f));const ve=this.normalizer.normalizePropertyName(q,f);ue=this.normalizer.normalizeStyleValue(q,ve,ue,f),b[ve]=ue})}}),b}}class Ms{constructor(c,f,b){this.name=c,this.ast=f,this._normalizer=b,this.transitionFactories=[],this.states={},f.states.forEach(P=>{this.states[P.name]=new zs(P.style,P.options&&P.options.params||{},b)}),Ts(this.states,"true","1"),Ts(this.states,"false","0"),f.transitions.forEach(P=>{this.transitionFactories.push(new Ss(c,P,this.states))}),this.fallbackTransition=function rs(O,c,f){return new Ss(O,{type:1,animation:{type:2,steps:[],options:null},matchers:[(J,q)=>!0],options:null,queryCount:0,depCount:0},c)}(c,this.states)}get containsQueries(){return this.ast.queryCount>0}matchTransition(c,f,b,P){return this.transitionFactories.find(J=>J.match(c,f,b,P))||null}matchStyles(c,f,b){return this.fallbackTransition.buildStyles(c,f,b)}}function Ts(O,c,f){O.hasOwnProperty(c)?O.hasOwnProperty(f)||(O[f]=O[c]):O.hasOwnProperty(f)&&(O[c]=O[f])}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const As=new wr;class ro{constructor(c,f,b){this.bodyNode=c,this._driver=f,this._normalizer=b,this._animations={},this._playersById={},this.players=[]}register(c,f){const b=[],B=Jr(this._driver,f,b,[]);if(b.length)throw function _e(O){return new D.vHH(3503,Q)}();this._animations[c]=B}_buildPlayer(c,f,b){const P=c.element,B=pn(0,this._normalizer,0,c.keyframes,f,b);return this._driver.animate(P,B,c.duration,c.delay,c.easing,[],!0)}create(c,f,b={}){const P=[],B=this._animations[c];let J;const q=new Map;if(B?(J=kr(this._driver,f,B,Dn,jt,{},{},b,As,P),J.forEach(He=>{const Ke=yn(q,He.element,{});He.postStyleProps.forEach(dt=>Ke[dt]=null)})):(P.push(function Re(){return new D.vHH(3300,Q)}()),J=[]),P.length)throw function mt(O){return new D.vHH(3504,Q)}();q.forEach((He,Ke)=>{Object.keys(He).forEach(dt=>{He[dt]=this._driver.computeStyle(Ke,dt,j.l3)})});const ve=Yt(J.map(He=>{const Ke=q.get(He.element);return this._buildPlayer(He,{},Ke)}));return this._playersById[c]=ve,ve.onDestroy(()=>this.destroy(c)),this.players.push(ve),ve}destroy(c){const f=this._getPlayer(c);f.destroy(),delete this._playersById[c];const b=this.players.indexOf(f);b>=0&&this.players.splice(b,1)}_getPlayer(c){const f=this._playersById[c];if(!f)throw function un(O){return new D.vHH(3301,Q)}();return f}listen(c,f,b,P){const B=Hn(f,"","","");return kt(this._getPlayer(c),b,B,P),()=>{}}command(c,f,b,P){if("register"==b)return void this.register(c,P[0]);if("create"==b)return void this.create(c,f,P[0]||{});const B=this._getPlayer(c);switch(b){case"play":B.play();break;case"pause":B.pause();break;case"reset":B.reset();break;case"restart":B.restart();break;case"finish":B.finish();break;case"init":B.init();break;case"setPosition":B.setPosition(parseFloat(P[0]));break;case"destroy":this.destroy(c)}}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Sr="ng-animate-queued",gi="ng-animate-disabled",Os=[],Ri={namespaceId:"",setForRemoval:!1,setForMove:!1,hasAnimation:!1,removedBeforeQueried:!1},ni={namespaceId:"",setForMove:!1,setForRemoval:!1,hasAnimation:!1,removedBeforeQueried:!0},Zn="__ng_removed";class vr{constructor(c,f=""){this.namespaceId=f;const b=c&&c.hasOwnProperty("value");if(this.value=function Fi(O){return null!=O?O:null}(b?c.value:c),b){const B=gn(c);delete B.value,this.options=B}else this.options={};this.options.params||(this.options.params={})}get params(){return this.options.params}absorbOptions(c){const f=c.params;if(f){const b=this.options.params;Object.keys(f).forEach(P=>{null==b[P]&&(b[P]=f[P])})}}}const Nn="void",mi=new vr(Nn);class is{constructor(c,f,b){this.id=c,this.hostElement=f,this._engine=b,this.players=[],this._triggers={},this._queue=[],this._elementListeners=new Map,this._hostClassName="ng-tns-"+c,ir(f,this._hostClassName)}listen(c,f,b,P){if(!this._triggers.hasOwnProperty(f))throw function Ln(O,c){return new D.vHH(3302,Q)}();if(null==b||0==b.length)throw function fr(O){return new D.vHH(3303,Q)}();if(!function Ni(O){return"start"==O||"done"==O}(b))throw function Or(O,c){return new D.vHH(3400,Q)}();const B=yn(this._elementListeners,c,[]),J={name:f,phase:b,callback:P};B.push(J);const q=yn(this._engine.statesByElement,c,{});return q.hasOwnProperty(f)||(ir(c,et),ir(c,et+"-"+f),q[f]=mi),()=>{this._engine.afterFlush(()=>{const ue=B.indexOf(J);ue>=0&&B.splice(ue,1),this._triggers[f]||delete q[f]})}}register(c,f){return!this._triggers[c]&&(this._triggers[c]=f,!0)}_getTrigger(c){const f=this._triggers[c];if(!f)throw function Yr(O){return new D.vHH(3401,Q)}();return f}trigger(c,f,b,P=!0){const B=this._getTrigger(f),J=new li(this.id,f,c);let q=this._engine.statesByElement.get(c);q||(ir(c,et),ir(c,et+"-"+f),this._engine.statesByElement.set(c,q={}));let ue=q[f];const ve=new vr(b,this.id);if(!(b&&b.hasOwnProperty("value"))&&ue&&ve.absorbOptions(ue.options),q[f]=ve,ue||(ue=mi),ve.value!==Nn&&ue.value===ve.value){if(!function Jn(O,c){const f=Object.keys(O),b=Object.keys(c);if(f.length!=b.length)return!1;for(let P=0;P<f.length;P++){const B=f[P];if(!c.hasOwnProperty(B)||O[B]!==c[B])return!1}return!0}(ue.params,ve.params)){const vt=[],$t=B.matchStyles(ue.value,ue.params,vt),Sn=B.matchStyles(ve.value,ve.params,vt);vt.length?this._engine.reportError(vt):this._engine.afterFlush(()=>{en(c,$t),Qt(c,Sn)})}return}const dt=yn(this._engine.playersByElement,c,[]);dt.forEach(vt=>{vt.namespaceId==this.id&&vt.triggerName==f&&vt.queued&&vt.destroy()});let wt=B.matchTransition(ue.value,ve.value,c,ve.params),nt=!1;if(!wt){if(!P)return;wt=B.fallbackTransition,nt=!0}return this._engine.totalQueuedPlayers++,this._queue.push({element:c,triggerName:f,transition:wt,fromState:ue,toState:ve,player:J,isFallbackTransition:nt}),nt||(ir(c,Sr),J.onStart(()=>{nn(c,Sr)})),J.onDone(()=>{let vt=this.players.indexOf(J);vt>=0&&this.players.splice(vt,1);const $t=this._engine.playersByElement.get(c);if($t){let Sn=$t.indexOf(J);Sn>=0&&$t.splice(Sn,1)}}),this.players.push(J),dt.push(J),J}deregister(c){delete this._triggers[c],this._engine.statesByElement.forEach((f,b)=>{delete f[c]}),this._elementListeners.forEach((f,b)=>{this._elementListeners.set(b,f.filter(P=>P.name!=c))})}clearElementCache(c){this._engine.statesByElement.delete(c),this._elementListeners.delete(c);const f=this._engine.playersByElement.get(c);f&&(f.forEach(b=>b.destroy()),this._engine.playersByElement.delete(c))}_signalRemovalForInnerTriggers(c,f){const b=this._engine.driver.query(c,Ze,!0);b.forEach(P=>{if(P[Zn])return;const B=this._engine.fetchNamespacesByElement(P);B.size?B.forEach(J=>J.triggerLeaveAnimation(P,f,!1,!0)):this.clearElementCache(P)}),this._engine.afterFlushAnimationsDone(()=>b.forEach(P=>this.clearElementCache(P)))}triggerLeaveAnimation(c,f,b,P){const B=this._engine.statesByElement.get(c),J=new Map;if(B){const q=[];if(Object.keys(B).forEach(ue=>{if(J.set(ue,B[ue].value),this._triggers[ue]){const ve=this.trigger(c,ue,Nn,P);ve&&q.push(ve)}}),q.length)return this._engine.markElementAsRemoved(this.id,c,!0,f,J),b&&Yt(q).onDone(()=>this._engine.processLeaveNode(c)),!0}return!1}prepareLeaveAnimationListeners(c){const f=this._elementListeners.get(c),b=this._engine.statesByElement.get(c);if(f&&b){const P=new Set;f.forEach(B=>{const J=B.name;if(P.has(J))return;P.add(J);const ue=this._triggers[J].fallbackTransition,ve=b[J]||mi,He=new vr(Nn),Ke=new li(this.id,J,c);this._engine.totalQueuedPlayers++,this._queue.push({element:c,triggerName:J,transition:ue,fromState:ve,toState:He,player:Ke,isFallbackTransition:!0})})}}removeNode(c,f){const b=this._engine;if(c.childElementCount&&this._signalRemovalForInnerTriggers(c,f),this.triggerLeaveAnimation(c,f,!0))return;let P=!1;if(b.totalAnimations){const B=b.players.length?b.playersByQueriedElement.get(c):[];if(B&&B.length)P=!0;else{let J=c;for(;J=J.parentNode;)if(b.statesByElement.get(J)){P=!0;break}}}if(this.prepareLeaveAnimationListeners(c),P)b.markElementAsRemoved(this.id,c,!1,f);else{const B=c[Zn];(!B||B===Ri)&&(b.afterFlush(()=>this.clearElementCache(c)),b.destroyInnerAnimations(c),b._onRemovalComplete(c,f))}}insertNode(c,f){ir(c,this._hostClassName)}drainQueuedTransitions(c){const f=[];return this._queue.forEach(b=>{const P=b.player;if(P.destroyed)return;const B=b.element,J=this._elementListeners.get(B);J&&J.forEach(q=>{if(q.name==b.triggerName){const ue=Hn(B,b.triggerName,b.fromState.value,b.toState.value);ue._data=c,kt(b.player,q.phase,ue,q.callback)}}),P.markedForDestroy?this._engine.afterFlush(()=>{P.destroy()}):f.push(b)}),this._queue=[],f.sort((b,P)=>{const B=b.transition.ast.depCount,J=P.transition.ast.depCount;return 0==B||0==J?B-J:this._engine.driver.containsElement(b.element,P.element)?1:-1})}destroy(c){this.players.forEach(f=>f.destroy()),this._signalRemovalForInnerTriggers(this.hostElement,c)}elementContainsData(c){let f=!1;return this._elementListeners.has(c)&&(f=!0),f=!!this._queue.find(b=>b.element===c)||f,f}}class ri{constructor(c,f,b){this.bodyNode=c,this.driver=f,this._normalizer=b,this.players=[],this.newHostElements=new Map,this.playersByElement=new Map,this.playersByQueriedElement=new Map,this.statesByElement=new Map,this.disabledNodes=new Set,this.totalAnimations=0,this.totalQueuedPlayers=0,this._namespaceLookup={},this._namespaceList=[],this._flushFns=[],this._whenQuietFns=[],this.namespacesByHostElement=new Map,this.collectedEnterElements=[],this.collectedLeaveElements=[],this.onRemovalComplete=(P,B)=>{}}_onRemovalComplete(c,f){this.onRemovalComplete(c,f)}get queuedPlayers(){const c=[];return this._namespaceList.forEach(f=>{f.players.forEach(b=>{b.queued&&c.push(b)})}),c}createNamespace(c,f){const b=new is(c,f,this);return this.bodyNode&&this.driver.containsElement(this.bodyNode,f)?this._balanceNamespaceList(b,f):(this.newHostElements.set(f,b),this.collectEnterElement(f)),this._namespaceLookup[c]=b}_balanceNamespaceList(c,f){const b=this._namespaceList,P=this.namespacesByHostElement,B=b.length-1;if(B>=0){let J=!1;if(void 0!==this.driver.getParentElement){let q=this.driver.getParentElement(f);for(;q;){const ue=P.get(q);if(ue){const ve=b.indexOf(ue);b.splice(ve+1,0,c),J=!0;break}q=this.driver.getParentElement(q)}}else for(let q=B;q>=0;q--)if(this.driver.containsElement(b[q].hostElement,f)){b.splice(q+1,0,c),J=!0;break}J||b.unshift(c)}else b.push(c);return P.set(f,c),c}register(c,f){let b=this._namespaceLookup[c];return b||(b=this.createNamespace(c,f)),b}registerTrigger(c,f,b){let P=this._namespaceLookup[c];P&&P.register(f,b)&&this.totalAnimations++}destroy(c,f){if(!c)return;const b=this._fetchNamespace(c);this.afterFlush(()=>{this.namespacesByHostElement.delete(b.hostElement),delete this._namespaceLookup[c];const P=this._namespaceList.indexOf(b);P>=0&&this._namespaceList.splice(P,1)}),this.afterFlushAnimationsDone(()=>b.destroy(f))}_fetchNamespace(c){return this._namespaceLookup[c]}fetchNamespacesByElement(c){const f=new Set,b=this.statesByElement.get(c);if(b){const P=Object.keys(b);for(let B=0;B<P.length;B++){const J=b[P[B]].namespaceId;if(J){const q=this._fetchNamespace(J);q&&f.add(q)}}}return f}trigger(c,f,b,P){if(Mr(f)){const B=this._fetchNamespace(c);if(B)return B.trigger(f,b,P),!0}return!1}insertNode(c,f,b,P){if(!Mr(f))return;const B=f[Zn];if(B&&B.setForRemoval){B.setForRemoval=!1,B.setForMove=!0;const J=this.collectedLeaveElements.indexOf(f);J>=0&&this.collectedLeaveElements.splice(J,1)}if(c){const J=this._fetchNamespace(c);J&&J.insertNode(f,b)}P&&this.collectEnterElement(f)}collectEnterElement(c){this.collectedEnterElements.push(c)}markElementAsDisabled(c,f){f?this.disabledNodes.has(c)||(this.disabledNodes.add(c),ir(c,gi)):this.disabledNodes.has(c)&&(this.disabledNodes.delete(c),nn(c,gi))}removeNode(c,f,b,P){if(Mr(f)){const B=c?this._fetchNamespace(c):null;if(B?B.removeNode(f,P):this.markElementAsRemoved(c,f,!1,P),b){const J=this.namespacesByHostElement.get(f);J&&J.id!==c&&J.removeNode(f,P)}}else this._onRemovalComplete(f,P)}markElementAsRemoved(c,f,b,P,B){this.collectedLeaveElements.push(f),f[Zn]={namespaceId:c,setForRemoval:P,hasAnimation:b,removedBeforeQueried:!1,previousTriggersValues:B}}listen(c,f,b,P,B){return Mr(f)?this._fetchNamespace(c).listen(f,b,P,B):()=>{}}_buildInstruction(c,f,b,P,B){return c.transition.build(this.driver,c.element,c.fromState.value,c.toState.value,b,P,c.fromState.options,c.toState.options,f,B)}destroyInnerAnimations(c){let f=this.driver.query(c,Ze,!0);f.forEach(b=>this.destroyActiveAnimationsForElement(b)),0!=this.playersByQueriedElement.size&&(f=this.driver.query(c,It,!0),f.forEach(b=>this.finishActiveQueriedAnimationOnElement(b)))}destroyActiveAnimationsForElement(c){const f=this.playersByElement.get(c);f&&f.forEach(b=>{b.queued?b.markedForDestroy=!0:b.destroy()})}finishActiveQueriedAnimationOnElement(c){const f=this.playersByQueriedElement.get(c);f&&f.forEach(b=>b.finish())}whenRenderingDone(){return new Promise(c=>{if(this.players.length)return Yt(this.players).onDone(()=>c());c()})}processLeaveNode(c){var f;const b=c[Zn];if(b&&b.setForRemoval){if(c[Zn]=Ri,b.namespaceId){this.destroyInnerAnimations(c);const P=this._fetchNamespace(b.namespaceId);P&&P.clearElementCache(c)}this._onRemovalComplete(c,b.setForRemoval)}(null===(f=c.classList)||void 0===f?void 0:f.contains(gi))&&this.markElementAsDisabled(c,!1),this.driver.query(c,".ng-animate-disabled",!0).forEach(P=>{this.markElementAsDisabled(P,!1)})}flush(c=-1){let f=[];if(this.newHostElements.size&&(this.newHostElements.forEach((b,P)=>this._balanceNamespaceList(b,P)),this.newHostElements.clear()),this.totalAnimations&&this.collectedEnterElements.length)for(let b=0;b<this.collectedEnterElements.length;b++)ir(this.collectedEnterElements[b],"ng-star-inserted");if(this._namespaceList.length&&(this.totalQueuedPlayers||this.collectedLeaveElements.length)){const b=[];try{f=this._flushAnimations(b,c)}finally{for(let P=0;P<b.length;P++)b[P]()}}else for(let b=0;b<this.collectedLeaveElements.length;b++)this.processLeaveNode(this.collectedLeaveElements[b]);if(this.totalQueuedPlayers=0,this.collectedEnterElements.length=0,this.collectedLeaveElements.length=0,this._flushFns.forEach(b=>b()),this._flushFns=[],this._whenQuietFns.length){const b=this._whenQuietFns;this._whenQuietFns=[],f.length?Yt(f).onDone(()=>{b.forEach(P=>P())}):b.forEach(P=>P())}}reportError(c){throw function oi(O){return new D.vHH(3402,Q)}()}_flushAnimations(c,f){const b=new wr,P=[],B=new Map,J=[],q=new Map,ue=new Map,ve=new Map,He=new Set;this.disabledNodes.forEach(Ge=>{He.add(Ge);const qe=this.driver.query(Ge,".ng-animate-queued",!0);for(let ot=0;ot<qe.length;ot++)He.add(qe[ot])});const Ke=this.bodyNode,dt=Array.from(this.statesByElement.keys()),wt=yi(dt,this.collectedEnterElements),nt=new Map;let vt=0;wt.forEach((Ge,qe)=>{const ot=Dn+vt++;nt.set(qe,ot),Ge.forEach(St=>ir(St,ot))});const $t=[],Sn=new Set,an=new Set;for(let Ge=0;Ge<this.collectedLeaveElements.length;Ge++){const qe=this.collectedLeaveElements[Ge],ot=qe[Zn];ot&&ot.setForRemoval&&($t.push(qe),Sn.add(qe),ot.hasAnimation?this.driver.query(qe,".ng-star-inserted",!0).forEach(St=>Sn.add(St)):an.add(qe))}const In=new Map,Mn=yi(dt,Array.from(Sn));Mn.forEach((Ge,qe)=>{const ot=jt+vt++;In.set(qe,ot),Ge.forEach(St=>ir(St,ot))}),c.push(()=>{wt.forEach((Ge,qe)=>{const ot=nt.get(qe);Ge.forEach(St=>nn(St,ot))}),Mn.forEach((Ge,qe)=>{const ot=In.get(qe);Ge.forEach(St=>nn(St,ot))}),$t.forEach(Ge=>{this.processLeaveNode(Ge)})});const jr=[],Xn=[];for(let Ge=this._namespaceList.length-1;Ge>=0;Ge--)this._namespaceList[Ge].drainQueuedTransitions(f).forEach(ot=>{const St=ot.player,y=ot.element;if(jr.push(St),this.collectedEnterElements.length){const ke=y[Zn];if(ke&&ke.setForMove){if(ke.previousTriggersValues&&ke.previousTriggersValues.has(ot.triggerName)){const Dt=ke.previousTriggersValues.get(ot.triggerName),ct=this.statesByElement.get(ot.element);ct&&ct[ot.triggerName]&&(ct[ot.triggerName].value=Dt)}return void St.destroy()}}const M=!Ke||!this.driver.containsElement(Ke,y),E=In.get(y),R=nt.get(y),W=this._buildInstruction(ot,b,R,E,M);if(W.errors&&W.errors.length)return void Xn.push(W);if(M)return St.onStart(()=>en(y,W.fromStyles)),St.onDestroy(()=>Qt(y,W.toStyles)),void P.push(St);if(ot.isFallbackTransition)return St.onStart(()=>en(y,W.fromStyles)),St.onDestroy(()=>Qt(y,W.toStyles)),void P.push(St);const de=[];W.timelines.forEach(ke=>{ke.stretchStartingKeyframe=!0,this.disabledNodes.has(ke.element)||de.push(ke)}),W.timelines=de,b.append(y,W.timelines),J.push({instruction:W,player:St,element:y}),W.queriedElements.forEach(ke=>yn(q,ke,[]).push(St)),W.preStyleProps.forEach((ke,Dt)=>{const ct=Object.keys(ke);if(ct.length){let Et=ue.get(Dt);Et||ue.set(Dt,Et=new Set),ct.forEach(Mt=>Et.add(Mt))}}),W.postStyleProps.forEach((ke,Dt)=>{const ct=Object.keys(ke);let Et=ve.get(Dt);Et||ve.set(Dt,Et=new Set),ct.forEach(Mt=>Et.add(Mt))})});if(Xn.length){const Ge=[];Xn.forEach(qe=>{Ge.push(function fn(O,c){return new D.vHH(3505,Q)}())}),jr.forEach(qe=>qe.destroy()),this.reportError(Ge)}const vn=new Map,Ar=new Map;J.forEach(Ge=>{const qe=Ge.element;b.has(qe)&&(Ar.set(qe,qe),this._beforeAnimationBuild(Ge.player.namespaceId,Ge.instruction,vn))}),P.forEach(Ge=>{const qe=Ge.element;this._getPreviousPlayers(qe,!1,Ge.namespaceId,Ge.triggerName,null).forEach(St=>{yn(vn,qe,[]).push(St),St.destroy()})});const Vr=$t.filter(Ge=>Li(Ge,ue,ve)),rn=new Map;tn(rn,this.driver,an,ve,j.l3).forEach(Ge=>{Li(Ge,ue,ve)&&Vr.push(Ge)});const zt=new Map;wt.forEach((Ge,qe)=>{tn(zt,this.driver,new Set(Ge),ue,j.k1)}),Vr.forEach(Ge=>{const qe=rn.get(Ge),ot=zt.get(Ge);rn.set(Ge,Object.assign(Object.assign({},qe),ot))});const br=[],wi=[],cs={};J.forEach(Ge=>{const{element:qe,player:ot,instruction:St}=Ge;if(b.has(qe)){if(He.has(qe))return ot.onDestroy(()=>Qt(qe,St.toStyles)),ot.disabled=!0,ot.overrideTotalTime(St.totalTime),void P.push(ot);let y=cs;if(Ar.size>1){let E=qe;const R=[];for(;E=E.parentNode;){const W=Ar.get(E);if(W){y=W;break}R.push(E)}R.forEach(W=>Ar.set(W,y))}const M=this._buildAnimation(ot.namespaceId,St,vn,B,zt,rn);if(ot.setRealPlayer(M),y===cs)br.push(ot);else{const E=this.playersByElement.get(y);E&&E.length&&(ot.parentPlayer=Yt(E)),P.push(ot)}}else en(qe,St.fromStyles),ot.onDestroy(()=>Qt(qe,St.toStyles)),wi.push(ot),He.has(qe)&&P.push(ot)}),wi.forEach(Ge=>{const qe=B.get(Ge.element);if(qe&&qe.length){const ot=Yt(qe);Ge.setRealPlayer(ot)}}),P.forEach(Ge=>{Ge.parentPlayer?Ge.syncPlayerEvents(Ge.parentPlayer):Ge.destroy()});for(let Ge=0;Ge<$t.length;Ge++){const qe=$t[Ge],ot=qe[Zn];if(nn(qe,jt),ot&&ot.hasAnimation)continue;let St=[];if(q.size){let M=q.get(qe);M&&M.length&&St.push(...M);let E=this.driver.query(qe,It,!0);for(let R=0;R<E.length;R++){let W=q.get(E[R]);W&&W.length&&St.push(...W)}}const y=St.filter(M=>!M.destroyed);y.length?Ps(this,qe,y):this.processLeaveNode(qe)}return $t.length=0,br.forEach(Ge=>{this.players.push(Ge),Ge.onDone(()=>{Ge.destroy();const qe=this.players.indexOf(Ge);this.players.splice(qe,1)}),Ge.play()}),br}elementContainsData(c,f){let b=!1;const P=f[Zn];return P&&P.setForRemoval&&(b=!0),this.playersByElement.has(f)&&(b=!0),this.playersByQueriedElement.has(f)&&(b=!0),this.statesByElement.has(f)&&(b=!0),this._fetchNamespace(c).elementContainsData(f)||b}afterFlush(c){this._flushFns.push(c)}afterFlushAnimationsDone(c){this._whenQuietFns.push(c)}_getPreviousPlayers(c,f,b,P,B){let J=[];if(f){const q=this.playersByQueriedElement.get(c);q&&(J=q)}else{const q=this.playersByElement.get(c);if(q){const ue=!B||B==Nn;q.forEach(ve=>{ve.queued||!ue&&ve.triggerName!=P||J.push(ve)})}}return(b||P)&&(J=J.filter(q=>!(b&&b!=q.namespaceId||P&&P!=q.triggerName))),J}_beforeAnimationBuild(c,f,b){const B=f.element,J=f.isRemovalTransition?void 0:c,q=f.isRemovalTransition?void 0:f.triggerName;for(const ue of f.timelines){const ve=ue.element,He=ve!==B,Ke=yn(b,ve,[]);this._getPreviousPlayers(ve,He,J,q,f.toState).forEach(wt=>{const nt=wt.getRealPlayer();nt.beforeDestroy&&nt.beforeDestroy(),wt.destroy(),Ke.push(wt)})}en(B,f.fromStyles)}_buildAnimation(c,f,b,P,B,J){const q=f.triggerName,ue=f.element,ve=[],He=new Set,Ke=new Set,dt=f.timelines.map(nt=>{const vt=nt.element;He.add(vt);const $t=vt[Zn];if($t&&$t.removedBeforeQueried)return new j.ZN(nt.duration,nt.delay);const Sn=vt!==ue,an=function Er(O){const c=[];return _i(O,c),c}((b.get(vt)||Os).map(vn=>vn.getRealPlayer())).filter(vn=>!!vn.element&&vn.element===vt),In=B.get(vt),Mn=J.get(vt),jr=pn(0,this._normalizer,0,nt.keyframes,In,Mn),Xn=this._buildPlayer(nt,jr,an);if(nt.subTimeline&&P&&Ke.add(vt),Sn){const vn=new li(c,q,vt);vn.setRealPlayer(Xn),ve.push(vn)}return Xn});ve.forEach(nt=>{yn(this.playersByQueriedElement,nt.element,[]).push(nt),nt.onDone(()=>function xi(O,c,f){let b;if(O instanceof Map){if(b=O.get(c),b){if(b.length){const P=b.indexOf(f);b.splice(P,1)}0==b.length&&O.delete(c)}}else if(b=O[c],b){if(b.length){const P=b.indexOf(f);b.splice(P,1)}0==b.length&&delete O[c]}return b}(this.playersByQueriedElement,nt.element,nt))}),He.forEach(nt=>ir(nt,tt));const wt=Yt(dt);return wt.onDestroy(()=>{He.forEach(nt=>nn(nt,tt)),Qt(ue,f.toStyles)}),Ke.forEach(nt=>{yn(P,nt,[]).push(wt)}),wt}_buildPlayer(c,f,b){return f.length>0?this.driver.animate(c.element,f,c.duration,c.delay,c.easing,b):new j.ZN(c.duration,c.delay)}}class li{constructor(c,f,b){this.namespaceId=c,this.triggerName=f,this.element=b,this._player=new j.ZN,this._containsRealPlayer=!1,this._queuedCallbacks={},this.destroyed=!1,this.markedForDestroy=!1,this.disabled=!1,this.queued=!0,this.totalTime=0}setRealPlayer(c){this._containsRealPlayer||(this._player=c,Object.keys(this._queuedCallbacks).forEach(f=>{this._queuedCallbacks[f].forEach(b=>kt(c,f,void 0,b))}),this._queuedCallbacks={},this._containsRealPlayer=!0,this.overrideTotalTime(c.totalTime),this.queued=!1)}getRealPlayer(){return this._player}overrideTotalTime(c){this.totalTime=c}syncPlayerEvents(c){const f=this._player;f.triggerCallback&&c.onStart(()=>f.triggerCallback("start")),c.onDone(()=>this.finish()),c.onDestroy(()=>this.destroy())}_queueEvent(c,f){yn(this._queuedCallbacks,c,[]).push(f)}onDone(c){this.queued&&this._queueEvent("done",c),this._player.onDone(c)}onStart(c){this.queued&&this._queueEvent("start",c),this._player.onStart(c)}onDestroy(c){this.queued&&this._queueEvent("destroy",c),this._player.onDestroy(c)}init(){this._player.init()}hasStarted(){return!this.queued&&this._player.hasStarted()}play(){!this.queued&&this._player.play()}pause(){!this.queued&&this._player.pause()}restart(){!this.queued&&this._player.restart()}finish(){this._player.finish()}destroy(){this.destroyed=!0,this._player.destroy()}reset(){!this.queued&&this._player.reset()}setPosition(c){this.queued||this._player.setPosition(c)}getPosition(){return this.queued?0:this._player.getPosition()}triggerCallback(c){const f=this._player;f.triggerCallback&&f.triggerCallback(c)}}function Mr(O){return O&&1===O.nodeType}function ao(O,c){const f=O.style.display;return O.style.display=null!=c?c:"none",f}function tn(O,c,f,b,P){const B=[];f.forEach(ue=>B.push(ao(ue)));const J=[];b.forEach((ue,ve)=>{const He={};ue.forEach(Ke=>{const dt=He[Ke]=c.computeStyle(ve,Ke,P);(!dt||0==dt.length)&&(ve[Zn]=ni,J.push(ve))}),O.set(ve,He)});let q=0;return f.forEach(ue=>ao(ue,B[q++])),J}function yi(O,c){const f=new Map;if(O.forEach(q=>f.set(q,[])),0==c.length)return f;const P=new Set(c),B=new Map;function J(q){if(!q)return 1;let ue=B.get(q);if(ue)return ue;const ve=q.parentNode;return ue=f.has(ve)?ve:P.has(ve)?1:J(ve),B.set(q,ue),ue}return c.forEach(q=>{const ue=J(q);1!==ue&&f.get(ue).push(q)}),f}function ir(O,c){var f;null===(f=O.classList)||void 0===f||f.add(c)}function nn(O,c){var f;null===(f=O.classList)||void 0===f||f.remove(c)}function Ps(O,c,f){Yt(f).onDone(()=>O.processLeaveNode(c))}function _i(O,c){for(let f=0;f<O.length;f++){const b=O[f];b instanceof j.ZE?_i(b.players,c):c.push(b)}}function Li(O,c,f){const b=f.get(O);if(!b)return!1;let P=c.get(O);return P?b.forEach(B=>P.add(B)):c.set(O,b),f.delete(O),!0}class Br{constructor(c,f,b){this.bodyNode=c,this._driver=f,this._normalizer=b,this._triggerCache={},this.onRemovalComplete=(P,B)=>{},this._transitionEngine=new ri(c,f,b),this._timelineEngine=new ro(c,f,b),this._transitionEngine.onRemovalComplete=(P,B)=>this.onRemovalComplete(P,B)}registerTrigger(c,f,b,P,B){const J=c+"-"+P;let q=this._triggerCache[J];if(!q){const ue=[],He=Jr(this._driver,B,ue,[]);if(ue.length)throw function Ut(O,c){return new D.vHH(3404,Q)}();q=function no(O,c,f){return new Ms(O,c,f)}(P,He,this._normalizer),this._triggerCache[J]=q}this._transitionEngine.registerTrigger(f,P,q)}register(c,f){this._transitionEngine.register(c,f)}destroy(c,f){this._transitionEngine.destroy(c,f)}onInsert(c,f,b,P){this._transitionEngine.insertNode(c,f,b,P)}onRemove(c,f,b,P){this._transitionEngine.removeNode(c,f,P||!1,b)}disableAnimations(c,f){this._transitionEngine.markElementAsDisabled(c,f)}process(c,f,b,P){if("@"==b.charAt(0)){const[B,J]=Rr(b);this._timelineEngine.command(B,f,J,P)}else this._transitionEngine.trigger(c,f,b,P)}listen(c,f,b,P,B){if("@"==b.charAt(0)){const[J,q]=Rr(b);return this._timelineEngine.listen(J,f,q,B)}return this._transitionEngine.listen(c,f,b,P,B)}flush(c=-1){this._transitionEngine.flush(c)}get players(){return this._transitionEngine.players.concat(this._timelineEngine.players)}whenRenderingDone(){return this._transitionEngine.whenRenderingDone()}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let tr=(()=>{class O{constructor(f,b,P){this._element=f,this._startStyles=b,this._endStyles=P,this._state=0;let B=O.initialStylesByElement.get(f);B||O.initialStylesByElement.set(f,B={}),this._initialStyles=B}start(){this._state<1&&(this._startStyles&&Qt(this._element,this._startStyles,this._initialStyles),this._state=1)}finish(){this.start(),this._state<2&&(Qt(this._element,this._initialStyles),this._endStyles&&(Qt(this._element,this._endStyles),this._endStyles=null),this._state=1)}destroy(){this.finish(),this._state<3&&(O.initialStylesByElement.delete(this._element),this._startStyles&&(en(this._element,this._startStyles),this._endStyles=null),this._endStyles&&(en(this._element,this._endStyles),this._endStyles=null),Qt(this._element,this._initialStyles),this._state=3)}}return O.initialStylesByElement=new WeakMap,O})();function ki(O){let c=null;const f=Object.keys(O);for(let b=0;b<f.length;b++){const P=f[b];Rs(P)&&(c=c||{},c[P]=O[P])}return c}function Rs(O){return"display"===O||"position"===O}class Ei{constructor(c,f,b,P){this.element=c,this.keyframes=f,this.options=b,this._specialStyles=P,this._onDoneFns=[],this._onStartFns=[],this._onDestroyFns=[],this._initialized=!1,this._finished=!1,this._started=!1,this._destroyed=!1,this.time=0,this.parentPlayer=null,this.currentSnapshot={},this._duration=b.duration,this._delay=b.delay||0,this.time=this._duration+this._delay}_onFinish(){this._finished||(this._finished=!0,this._onDoneFns.forEach(c=>c()),this._onDoneFns=[])}init(){this._buildPlayer(),this._preparePlayerBeforeStart()}_buildPlayer(){if(this._initialized)return;this._initialized=!0;const c=this.keyframes;this.domPlayer=this._triggerWebAnimation(this.element,c,this.options),this._finalKeyframe=c.length?c[c.length-1]:{},this.domPlayer.addEventListener("finish",()=>this._onFinish())}_preparePlayerBeforeStart(){this._delay?this._resetDomPlayerState():this.domPlayer.pause()}_triggerWebAnimation(c,f,b){return c.animate(f,b)}onStart(c){this._onStartFns.push(c)}onDone(c){this._onDoneFns.push(c)}onDestroy(c){this._onDestroyFns.push(c)}play(){this._buildPlayer(),this.hasStarted()||(this._onStartFns.forEach(c=>c()),this._onStartFns=[],this._started=!0,this._specialStyles&&this._specialStyles.start()),this.domPlayer.play()}pause(){this.init(),this.domPlayer.pause()}finish(){this.init(),this._specialStyles&&this._specialStyles.finish(),this._onFinish(),this.domPlayer.finish()}reset(){this._resetDomPlayerState(),this._destroyed=!1,this._finished=!1,this._started=!1}_resetDomPlayerState(){this.domPlayer&&this.domPlayer.cancel()}restart(){this.reset(),this.play()}hasStarted(){return this._started}destroy(){this._destroyed||(this._destroyed=!0,this._resetDomPlayerState(),this._onFinish(),this._specialStyles&&this._specialStyles.destroy(),this._onDestroyFns.forEach(c=>c()),this._onDestroyFns=[])}setPosition(c){void 0===this.domPlayer&&this.init(),this.domPlayer.currentTime=c*this.time}getPosition(){return this.domPlayer.currentTime/this.time}get totalTime(){return this._delay+this._duration}beforeDestroy(){const c={};if(this.hasStarted()){const f=this._finalKeyframe;Object.keys(f).forEach(b=>{"offset"!=b&&(c[b]=this._finished?f[b]:bn(this.element,b))})}this.currentSnapshot=c}triggerCallback(c){const f="start"==c?this._onStartFns:this._onDoneFns;f.forEach(b=>b()),f.length=0}}class Tr{validateStyleProperty(c){return me(c)}matchesElement(c,f){return!1}containsElement(c,f){return ee(c,f)}getParentElement(c){return Rn(c)}query(c,f,b){return Ie(c,f,b)}computeStyle(c,f,b){return window.getComputedStyle(c)[f]}animate(c,f,b,P,B,J=[]){const ue={duration:b,delay:P,fill:0==P?"both":"forwards"};B&&(ue.easing=B);const ve={},He=J.filter(dt=>dt instanceof Ei);(function Bt(O,c){return 0===O||0===c})(b,P)&&He.forEach(dt=>{let wt=dt.currentSnapshot;Object.keys(wt).forEach(nt=>ve[nt]=wt[nt])}),f=function dn(O,c,f){const b=Object.keys(f);if(b.length&&c.length){let B=c[0],J=[];if(b.forEach(q=>{B.hasOwnProperty(q)||J.push(q),B[q]=f[q]}),J.length)for(var P=1;P<c.length;P++){let q=c[P];J.forEach(function(ue){q[ue]=bn(O,ue)})}}return c}(c,f=f.map(dt=>zn(dt,!1)),ve);const Ke=function vi(O,c){let f=null,b=null;return Array.isArray(c)&&c.length?(f=ki(c[0]),c.length>1&&(b=ki(c[c.length-1]))):c&&(f=ki(c)),f||b?new tr(O,f,b):null}(c,f);return new Ei(c,f,ue,Ke)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */var ss=S(9808);
+/**
+       * @license Angular v13.4.0
+       * (c) 2010-2022 Google LLC. https://angular.io/
+       * License: MIT
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let Di=(()=>{class O extends j._j{constructor(f,b){super(),this._nextAnimationId=0,this._renderer=f.createRenderer(b.body,{id:"0",encapsulation:D.ifc.None,styles:[],data:{animation:[]}})}build(f){const b=this._nextAnimationId.toString();this._nextAnimationId++;const P=Array.isArray(f)?(0,j.vP)(f):f;return Gs(this._renderer,null,b,"register",[P]),new pt(b,this._renderer)}}return O.\u0275fac=function(f){return new(f||O)(D.LFG(D.FYo),D.LFG(ss.K0))},O.\u0275prov=D.Yz7({token:O,factory:O.\u0275fac}),O})();class pt extends j.LC{constructor(c,f){super(),this._id=c,this._renderer=f}create(c,f){return new bi(this._id,c,f||{},this._renderer)}}class bi{constructor(c,f,b,P){this.id=c,this.element=f,this._renderer=P,this.parentPlayer=null,this._started=!1,this.totalTime=0,this._command("create",b)}_listen(c,f){return this._renderer.listen(this.element,`@@${this.id}:${c}`,f)}_command(c,...f){return Gs(this._renderer,this.element,this.id,c,f)}onDone(c){this._listen("done",c)}onStart(c){this._listen("start",c)}onDestroy(c){this._listen("destroy",c)}init(){this._command("init")}hasStarted(){return this._started}play(){this._command("play"),this._started=!0}pause(){this._command("pause")}restart(){this._command("restart")}finish(){this._command("finish")}destroy(){this._command("destroy")}reset(){this._command("reset"),this._started=!1}setPosition(c){this._command("setPosition",c)}getPosition(){var c,f;return null!==(f=null===(c=this._renderer.engine.players[+this.id])||void 0===c?void 0:c.getPosition())&&void 0!==f?f:0}}function Gs(O,c,f,b,P){return O.setProperty(c,`@@${f}:${b}`,P)}const Ws="@.disabled";let lo=(()=>{class O{constructor(f,b,P){this.delegate=f,this.engine=b,this._zone=P,this._currentId=0,this._microtaskId=1,this._animationCallbacksBuffer=[],this._rendererCache=new Map,this._cdRecurDepth=0,this.promise=Promise.resolve(0),b.onRemovalComplete=(B,J)=>{const q=null==J?void 0:J.parentNode(B);q&&J.removeChild(q,B)}}createRenderer(f,b){const B=this.delegate.createRenderer(f,b);if(!(f&&b&&b.data&&b.data.animation)){let He=this._rendererCache.get(B);return He||(He=new xs("",B,this.engine),this._rendererCache.set(B,He)),He}const J=b.id,q=b.id+"-"+this._currentId;this._currentId++,this.engine.register(q,f);const ue=He=>{Array.isArray(He)?He.forEach(ue):this.engine.registerTrigger(J,q,f,He.name,He)};return b.data.animation.forEach(ue),new co(this,q,B,this.engine)}begin(){this._cdRecurDepth++,this.delegate.begin&&this.delegate.begin()}_scheduleCountTask(){this.promise.then(()=>{this._microtaskId++})}scheduleListenerCallback(f,b,P){f>=0&&f<this._microtaskId?this._zone.run(()=>b(P)):(0==this._animationCallbacksBuffer.length&&Promise.resolve(null).then(()=>{this._zone.run(()=>{this._animationCallbacksBuffer.forEach(B=>{const[J,q]=B;J(q)}),this._animationCallbacksBuffer=[]})}),this._animationCallbacksBuffer.push([b,P]))}end(){this._cdRecurDepth--,0==this._cdRecurDepth&&this._zone.runOutsideAngular(()=>{this._scheduleCountTask(),this.engine.flush(this._microtaskId)}),this.delegate.end&&this.delegate.end()}whenRenderingDone(){return this.engine.whenRenderingDone()}}return O.\u0275fac=function(f){return new(f||O)(D.LFG(D.FYo),D.LFG(Br),D.LFG(D.R0b))},O.\u0275prov=D.Yz7({token:O,factory:O.\u0275fac}),O})();class xs{constructor(c,f,b){this.namespaceId=c,this.delegate=f,this.engine=b,this.destroyNode=this.delegate.destroyNode?P=>f.destroyNode(P):null}get data(){return this.delegate.data}destroy(){this.engine.destroy(this.namespaceId,this.delegate),this.delegate.destroy()}createElement(c,f){return this.delegate.createElement(c,f)}createComment(c){return this.delegate.createComment(c)}createText(c){return this.delegate.createText(c)}appendChild(c,f){this.delegate.appendChild(c,f),this.engine.onInsert(this.namespaceId,f,c,!1)}insertBefore(c,f,b,P=!0){this.delegate.insertBefore(c,f,b),this.engine.onInsert(this.namespaceId,f,c,P)}removeChild(c,f,b){this.engine.onRemove(this.namespaceId,f,this.delegate,b)}selectRootElement(c,f){return this.delegate.selectRootElement(c,f)}parentNode(c){return this.delegate.parentNode(c)}nextSibling(c){return this.delegate.nextSibling(c)}setAttribute(c,f,b,P){this.delegate.setAttribute(c,f,b,P)}removeAttribute(c,f,b){this.delegate.removeAttribute(c,f,b)}addClass(c,f){this.delegate.addClass(c,f)}removeClass(c,f){this.delegate.removeClass(c,f)}setStyle(c,f,b,P){this.delegate.setStyle(c,f,b,P)}removeStyle(c,f,b){this.delegate.removeStyle(c,f,b)}setProperty(c,f,b){"@"==f.charAt(0)&&f==Ws?this.disableAnimations(c,!!b):this.delegate.setProperty(c,f,b)}setValue(c,f){this.delegate.setValue(c,f)}listen(c,f,b){return this.delegate.listen(c,f,b)}disableAnimations(c,f){this.engine.disableAnimations(c,f)}}class co extends xs{constructor(c,f,b,P){super(f,b,P),this.factory=c,this.namespaceId=f}setProperty(c,f,b){"@"==f.charAt(0)?"."==f.charAt(1)&&f==Ws?this.disableAnimations(c,b=void 0===b||!!b):this.engine.process(this.namespaceId,c,f.substr(1),b):this.delegate.setProperty(c,f,b)}listen(c,f,b){if("@"==f.charAt(0)){const P=function Fs(O){switch(O){case"body":return document.body;case"document":return document;case"window":return window;default:return O}}(c);let B=f.substr(1),J="";return"@"!=B.charAt(0)&&([B,J]=function Ae(O){const c=O.indexOf(".");return[O.substring(0,c),O.substr(c+1)]}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(B)),this.engine.listen(this.namespaceId,P,B,J,q=>{this.factory.scheduleListenerCallback(q._data||-1,b,q)})}return this.delegate.listen(c,f,b)}}let Pt=(()=>{class O extends Br{constructor(f,b,P){super(f.body,b,P)}ngOnDestroy(){this.flush()}}return O.\u0275fac=function(f){return new(f||O)(D.LFG(ss.K0),D.LFG(Fe),D.LFG(ws))},O.\u0275prov=D.Yz7({token:O,factory:O.\u0275fac}),O})();const as=new D.OlP("AnimationModuleType"),Dr=[{provide:j._j,useClass:Di},{provide:ws,useFactory:function Ci(){return new eo}},{provide:Br,useClass:Pt},{provide:D.FYo,useFactory:function wn(O,c,f){return new lo(O,c,f)},deps:[h.se,Br,D.R0b]}],sr=[{provide:Fe,useFactory:()=>new Tr},{provide:as,useValue:"BrowserAnimations"},...Dr],Ur=[{provide:Fe,useClass:Me},{provide:as,useValue:"NoopAnimations"},...Dr];
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let ls=(()=>{class O{static withConfig(f){return{ngModule:O,providers:f.disableAnimations?Ur:sr}}}return O.\u0275fac=function(f){return new(f||O)},O.\u0275mod=D.oAB({type:O}),O.\u0275inj=D.cJS({providers:sr,imports:[h.b2]}),O})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */},2313:(Le,he,S)=>{S.d(he,{H7:()=>pr,b2:()=>$n,q6:()=>yn,se:()=>_e});var D=S(9808),h=S(6435);
+/**
+       * @license Angular v13.4.0
+       * (c) 2010-2022 Google LLC. https://angular.io/
+       * License: MIT
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class j extends D.w_{constructor(){super(...arguments),this.supportsDOMEvents=!0}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Q extends j{static makeCurrent(){(0,D.HT)(new Q)}onAndCancel(se,K,le){return se.addEventListener(K,le,!1),()=>{se.removeEventListener(K,le,!1)}}dispatchEvent(se,K){se.dispatchEvent(K)}remove(se){se.parentNode&&se.parentNode.removeChild(se)}createElement(se,K){return(K=K||this.getDefaultDocument()).createElement(se)}createHtmlDocument(){return document.implementation.createHTMLDocument("fakeTitle")}getDefaultDocument(){return document}isElementNode(se){return se.nodeType===Node.ELEMENT_NODE}isShadowRoot(se){return se instanceof DocumentFragment}getGlobalEventTarget(se,K){return"window"===K?window:"document"===K?se:"body"===K?se.body:null}getBaseHref(se){const K=function H(){return G=G||document.querySelector("base"),G?G.getAttribute("href"):null}();return null==K?null:function U(ge){$=$||document.createElement("a"),$.setAttribute("href",ge);const se=$.pathname;return"/"===se.charAt(0)?se:`/${se}`}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(K)}resetBaseElement(){G=null}getUserAgent(){return window.navigator.userAgent}getCookie(se){return(0,D.Mx)(document.cookie,se)}}let $,G=null;const z=new h.OlP("TRANSITION_ID"),k=[{provide:h.ip1,useFactory:function L(ge,se,K){return()=>{K.get(h.CZH).donePromise.then(()=>{const le=(0,D.q)(),Te=se.querySelectorAll(`style[ng-transition="${ge}"]`);for(let it=0;it<Te.length;it++)le.remove(Te[it])})}},deps:[z,D.K0,h.zs3],multi:!0}];
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class X{static init(){(0,h.VLi)(new X)}addToWindow(se){h.dqk.getAngularTestability=(le,Te=!0)=>{const it=se.findTestabilityInTree(le,Te);if(null==it)throw new Error("Could not find testability for element.");return it},h.dqk.getAllAngularTestabilities=()=>se.getAllTestabilities(),h.dqk.getAllAngularRootElements=()=>se.getAllRootElements(),h.dqk.frameworkStabilizers||(h.dqk.frameworkStabilizers=[]),h.dqk.frameworkStabilizers.push(le=>{const Te=h.dqk.getAllAngularTestabilities();let it=Te.length,yt=!1;const sn=function(Bt){yt=yt||Bt,it--,0==it&&le(yt)};Te.forEach(function(Bt){Bt.whenStable(sn)})})}findTestabilityInTree(se,K,le){if(null==K)return null;const Te=se.getTestability(K);return null!=Te?Te:le?(0,D.q)().isShadowRoot(K)?this.findTestabilityInTree(se,K.host,!0):this.findTestabilityInTree(se,K.parentElement,!0):null}}let ie=(()=>{class ge{build(){return new XMLHttpRequest}}return ge.\u0275fac=function(K){return new(K||ge)},ge.\u0275prov=h.Yz7({token:ge,factory:ge.\u0275fac}),ge})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const ye=new h.OlP("EventManagerPlugins");let De=(()=>{class ge{constructor(K,le){this._zone=le,this._eventNameToPlugin=new Map,K.forEach(Te=>Te.manager=this),this._plugins=K.slice().reverse()}addEventListener(K,le,Te){return this._findPluginFor(le).addEventListener(K,le,Te)}addGlobalEventListener(K,le,Te){return this._findPluginFor(le).addGlobalEventListener(K,le,Te)}getZone(){return this._zone}_findPluginFor(K){const le=this._eventNameToPlugin.get(K);if(le)return le;const Te=this._plugins;for(let it=0;it<Te.length;it++){const yt=Te[it];if(yt.supports(K))return this._eventNameToPlugin.set(K,yt),yt}throw new Error(`No event manager plugin found for event ${K}`)}}return ge.\u0275fac=function(K){return new(K||ge)(h.LFG(ye),h.LFG(h.R0b))},ge.\u0275prov=h.Yz7({token:ge,factory:ge.\u0275fac}),ge})();class pe{constructor(se){this._doc=se}addGlobalEventListener(se,K,le){const Te=(0,D.q)().getGlobalEventTarget(this._doc,se);if(!Te)throw new Error(`Unsupported event target ${Te} for event ${K}`);return this.addEventListener(Te,K,le)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let fe=(()=>{class ge{constructor(){this._stylesSet=new Set}addStyles(K){const le=new Set;K.forEach(Te=>{this._stylesSet.has(Te)||(this._stylesSet.add(Te),le.add(Te))}),this.onStylesAdded(le)}onStylesAdded(K){}getAllStyles(){return Array.from(this._stylesSet)}}return ge.\u0275fac=function(K){return new(K||ge)},ge.\u0275prov=h.Yz7({token:ge,factory:ge.\u0275fac}),ge})(),Be=(()=>{class ge extends fe{constructor(K){super(),this._doc=K,this._hostNodes=new Map,this._hostNodes.set(K.head,[])}_addStylesToHost(K,le,Te){K.forEach(it=>{const yt=this._doc.createElement("style");yt.textContent=it,Te.push(le.appendChild(yt))})}addHost(K){const le=[];this._addStylesToHost(this._stylesSet,K,le),this._hostNodes.set(K,le)}removeHost(K){const le=this._hostNodes.get(K);le&&le.forEach(Ye),this._hostNodes.delete(K)}onStylesAdded(K){this._hostNodes.forEach((le,Te)=>{this._addStylesToHost(K,Te,le)})}ngOnDestroy(){this._hostNodes.forEach(K=>K.forEach(Ye))}}return ge.\u0275fac=function(K){return new(K||ge)(h.LFG(D.K0))},ge.\u0275prov=h.Yz7({token:ge,factory:ge.\u0275fac}),ge})();function Ye(ge){(0,D.q)().remove(ge)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Ue={svg:"http://www.w3.org/2000/svg",xhtml:"http://www.w3.org/1999/xhtml",xlink:"http://www.w3.org/1999/xlink",xml:"http://www.w3.org/XML/1998/namespace",xmlns:"http://www.w3.org/2000/xmlns/",math:"http://www.w3.org/1998/MathML/"},$e=/%COMP%/g;function lt(ge,se,K){for(let le=0;le<se.length;le++){let Te=se[le];Array.isArray(Te)?lt(ge,Te,K):(Te=Te.replace($e,ge),K.push(Te))}return K}function Ut(ge){return se=>{if("__ngUnwrap__"===se)return ge;!1===ge(se)&&(se.preventDefault(),se.returnValue=!1)}}let _e=(()=>{class ge{constructor(K,le,Te){this.eventManager=K,this.sharedStylesHost=le,this.appId=Te,this.rendererByCompId=new Map,this.defaultRenderer=new Re(K)}createRenderer(K,le){if(!K||!le)return this.defaultRenderer;switch(le.encapsulation){case h.ifc.Emulated:{let Te=this.rendererByCompId.get(le.id);return Te||(Te=new Ln(this.eventManager,this.sharedStylesHost,le,this.appId),this.rendererByCompId.set(le.id,Te)),Te.applyToHost(K),Te}case 1:case h.ifc.ShadowDom:return new fr(this.eventManager,this.sharedStylesHost,K,le);default:if(!this.rendererByCompId.has(le.id)){const Te=lt(le.id,le.styles,[]);this.sharedStylesHost.addStyles(Te),this.rendererByCompId.set(le.id,this.defaultRenderer)}return this.defaultRenderer}}begin(){}end(){}}return ge.\u0275fac=function(K){return new(K||ge)(h.LFG(De),h.LFG(Be),h.LFG(h.AFp))},ge.\u0275prov=h.Yz7({token:ge,factory:ge.\u0275fac}),ge})();class Re{constructor(se){this.eventManager=se,this.data=Object.create(null),this.destroyNode=null}destroy(){}createElement(se,K){return K?document.createElementNS(Ue[K]||K,se):document.createElement(se)}createComment(se){return document.createComment(se)}createText(se){return document.createTextNode(se)}appendChild(se,K){se.appendChild(K)}insertBefore(se,K,le){se&&se.insertBefore(K,le)}removeChild(se,K){se&&se.removeChild(K)}selectRootElement(se,K){let le="string"==typeof se?document.querySelector(se):se;if(!le)throw new Error(`The selector "${se}" did not match any elements`);return K||(le.textContent=""),le}parentNode(se){return se.parentNode}nextSibling(se){return se.nextSibling}setAttribute(se,K,le,Te){if(Te){K=Te+":"+K;const it=Ue[Te];it?se.setAttributeNS(it,K,le):se.setAttribute(K,le)}else se.setAttribute(K,le)}removeAttribute(se,K,le){if(le){const Te=Ue[le];Te?se.removeAttributeNS(Te,K):se.removeAttribute(`${le}:${K}`)}else se.removeAttribute(K)}addClass(se,K){se.classList.add(K)}removeClass(se,K){se.classList.remove(K)}setStyle(se,K,le,Te){Te&(h.JOm.DashCase|h.JOm.Important)?se.style.setProperty(K,le,Te&h.JOm.Important?"important":""):se.style[K]=le}removeStyle(se,K,le){le&h.JOm.DashCase?se.style.removeProperty(K):se.style[K]=""}setProperty(se,K,le){se[K]=le}setValue(se,K){se.nodeValue=K}listen(se,K,le){return"string"==typeof se?this.eventManager.addGlobalEventListener(se,K,Ut(le)):this.eventManager.addEventListener(se,K,Ut(le))}}class Ln extends Re{constructor(se,K,le,Te){super(se),this.component=le;const it=lt(Te+"-"+le.id,le.styles,[]);K.addStyles(it),this.contentAttr=function Nt(ge){return"_ngcontent-%COMP%".replace($e,ge)}(Te+"-"+le.id),this.hostAttr=function Tt(ge){return"_nghost-%COMP%".replace($e,ge)}(Te+"-"+le.id)}applyToHost(se){super.setAttribute(se,this.hostAttr,"")}createElement(se,K){const le=super.createElement(se,K);return super.setAttribute(le,this.contentAttr,""),le}}class fr extends Re{constructor(se,K,le,Te){super(se),this.sharedStylesHost=K,this.hostEl=le,this.shadowRoot=le.attachShadow({mode:"open"}),this.sharedStylesHost.addHost(this.shadowRoot);const it=lt(Te.id,Te.styles,[]);for(let yt=0;yt<it.length;yt++){const sn=document.createElement("style");sn.textContent=it[yt],this.shadowRoot.appendChild(sn)}}nodeOrShadowRoot(se){return se===this.hostEl?this.shadowRoot:se}destroy(){this.sharedStylesHost.removeHost(this.shadowRoot)}appendChild(se,K){return super.appendChild(this.nodeOrShadowRoot(se),K)}insertBefore(se,K,le){return super.insertBefore(this.nodeOrShadowRoot(se),K,le)}removeChild(se,K){return super.removeChild(this.nodeOrShadowRoot(se),K)}parentNode(se){return this.nodeOrShadowRoot(super.parentNode(this.nodeOrShadowRoot(se)))}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let Or=(()=>{class ge extends pe{constructor(K){super(K)}supports(K){return!0}addEventListener(K,le,Te){return K.addEventListener(le,Te,!1),()=>this.removeEventListener(K,le,Te)}removeEventListener(K,le,Te){return K.removeEventListener(le,Te)}}return ge.\u0275fac=function(K){return new(K||ge)(h.LFG(D.K0))},ge.\u0275prov=h.Yz7({token:ge,factory:ge.\u0275fac}),ge})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Yr=["alt","control","meta","shift"],bs={"\b":"Backspace","\t":"Tab","\x7f":"Delete","\x1b":"Escape",Del:"Delete",Esc:"Escape",Left:"ArrowLeft",Right:"ArrowRight",Up:"ArrowUp",Down:"ArrowDown",Menu:"ContextMenu",Scroll:"ScrollLock",Win:"OS"},fn={A:"1",B:"2",C:"3",D:"4",E:"5",F:"6",G:"7",H:"8",I:"9",J:"*",K:"+",M:"-",N:".",O:"/","`":"0","\x90":"NumLock"},At={alt:ge=>ge.altKey,control:ge=>ge.ctrlKey,meta:ge=>ge.metaKey,shift:ge=>ge.shiftKey};let Cr=(()=>{class ge extends pe{constructor(K){super(K)}supports(K){return null!=ge.parseEventName(K)}addEventListener(K,le,Te){const it=ge.parseEventName(le),yt=ge.eventCallback(it.fullKey,Te,this.manager.getZone());return this.manager.getZone().runOutsideAngular(()=>(0,D.q)().onAndCancel(K,it.domEventName,yt))}static parseEventName(K){const le=K.toLowerCase().split("."),Te=le.shift();if(0===le.length||"keydown"!==Te&&"keyup"!==Te)return null;const it=ge._normalizeKey(le.pop());let yt="";if(Yr.forEach(Bt=>{const dn=le.indexOf(Bt);dn>-1&&(le.splice(dn,1),yt+=Bt+".")}),yt+=it,0!=le.length||0===it.length)return null;const sn={};return sn.domEventName=Te,sn.fullKey=yt,sn}static getEventFullKey(K){let le="",Te=function Yt(ge){let se=ge.key;if(null==se){if(se=ge.keyIdentifier,null==se)return"Unidentified";se.startsWith("U+")&&(se=String.fromCharCode(parseInt(se.substring(2),16)),3===ge.location&&fn.hasOwnProperty(se)&&(se=fn[se]))}return bs[se]||se}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(K);return Te=Te.toLowerCase()," "===Te?Te="space":"."===Te&&(Te="dot"),Yr.forEach(it=>{it!=Te&&At[it](K)&&(le+=it+".")}),le+=Te,le}static eventCallback(K,le,Te){return it=>{ge.getEventFullKey(it)===K&&Te.runGuarded(()=>le(it))}}static _normalizeKey(K){return"esc"===K?"escape":K}}return ge.\u0275fac=function(K){return new(K||ge)(h.LFG(D.K0))},ge.\u0275prov=h.Yz7({token:ge,factory:ge.\u0275fac}),ge})();const yn=(0,h.eFA)(h._c5,"browser",[{provide:h.Lbi,useValue:D.bD},{provide:h.g9A,useValue:function pn(){Q.makeCurrent(),X.init()},multi:!0},{provide:D.K0,useFactory:function Pr(){return(0,h.RDi)(document),document},deps:[]}]),Rr=[{provide:h.zSh,useValue:"root"},{provide:h.qLn,useFactory:function kt(){return new h.qLn},deps:[]},{provide:ye,useClass:Or,multi:!0,deps:[D.K0,h.R0b,h.Lbi]},{provide:ye,useClass:Cr,multi:!0,deps:[D.K0]},{provide:_e,useClass:_e,deps:[De,Be,h.AFp]},{provide:h.FYo,useExisting:_e},{provide:fe,useExisting:Be},{provide:Be,useClass:Be,deps:[D.K0]},{provide:h.dDg,useClass:h.dDg,deps:[h.R0b]},{provide:De,useClass:De,deps:[ye,h.R0b]},{provide:D.JF,useClass:ie,deps:[]}];let $n=(()=>{class ge{constructor(K){if(K)throw new Error("BrowserModule has already been loaded. If you need access to common directives such as NgIf and NgFor from a lazy loaded module, import CommonModule instead.")}static withServerTransition(K){return{ngModule:ge,providers:[{provide:h.AFp,useValue:K.appId},{provide:z,useExisting:h.AFp},k]}}}return ge.\u0275fac=function(K){return new(K||ge)(h.LFG(ge,12))},ge.\u0275mod=h.oAB({type:ge}),ge.\u0275inj=h.cJS({providers:Rr,imports:[D.ez,h.hGG]}),ge})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */"undefined"!=typeof window&&window;let pr=(()=>{class ge{}return ge.\u0275fac=function(K){return new(K||ge)},ge.\u0275prov=h.Yz7({token:ge,factory:function(K){let le=null;return le=K?new(K||ge):h.LFG(en),le},providedIn:"root"}),ge})(),en=(()=>{class ge extends pr{constructor(K){super(),this._doc=K}sanitize(K,le){if(null==le)return null;switch(K){case h.q3G.NONE:return le;case h.q3G.HTML:return(0,h.qzn)(le,"HTML")?(0,h.z3N)(le):(0,h.EiD)(this._doc,String(le)).toString();case h.q3G.STYLE:return(0,h.qzn)(le,"Style")?(0,h.z3N)(le):le;case h.q3G.SCRIPT:if((0,h.qzn)(le,"Script"))return(0,h.z3N)(le);throw new Error("unsafe value used in a script context");case h.q3G.URL:return(0,h.yhl)(le),(0,h.qzn)(le,"URL")?(0,h.z3N)(le):(0,h.mCW)(String(le));case h.q3G.RESOURCE_URL:if((0,h.qzn)(le,"ResourceURL"))return(0,h.z3N)(le);throw new Error("unsafe value used in a resource URL context (see https://g.co/ng/security#xss)");default:throw new Error(`Unexpected SecurityContext ${K} (see https://g.co/ng/security#xss)`)}}bypassSecurityTrustHtml(K){return(0,h.JVY)(K)}bypassSecurityTrustStyle(K){return(0,h.L6k)(K)}bypassSecurityTrustScript(K){return(0,h.eBb)(K)}bypassSecurityTrustUrl(K){return(0,h.LAX)(K)}bypassSecurityTrustResourceUrl(K){return(0,h.pB0)(K)}}return ge.\u0275fac=function(K){return new(K||ge)(h.LFG(D.K0))},ge.\u0275prov=h.Yz7({token:ge,factory:function(K){let le=null;return le=K?new K:function Qt(ge){return new en(ge.get(D.K0))}(h.LFG(h.zs3)),le},providedIn:"root"}),ge})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */,823:(Le,he,S)=>{S.d(he,{gz:()=>Vt,F0:()=>de,Od:()=>Mt,yS:()=>ct,Bz:()=>us,lC:()=>Ni});var D=S(6435),h=S(5254),j=S(1086),Q=S(591),G=S(2866),H=S(6688),$=S(826),U=S(448),z=S(3009);const L={};class X{constructor(p){this.resultSelector=p}call(p,u){return u.subscribe(new ie(p,this.resultSelector))}}class ie extends $.L{constructor(p,u){super(p),this.resultSelector=u,this.active=0,this.values=[],this.observables=[]}_next(p){this.values.push(L),this.observables.push(p)}_complete(){const p=this.observables,u=p.length;if(0===u)this.destination.complete();else{this.active=u,this.toRespond=u;for(let C=0;C<u;C++)this.add((0,U.D)(this,p[C],void 0,C))}}notifyComplete(p){0==(this.active-=1)&&this.destination.complete()}notifyNext(p,u,C){const T=this.values,Y=this.toRespond?T[C]===L?--this.toRespond:this.toRespond:0;T[C]=u,0===Y&&(this.resultSelector?this._tryResultSelector(T):this.destination.next(T.slice()))}_tryResultSelector(p){let u;try{u=this.resultSelector.apply(this,p)}catch(C){return void this.destination.error(C)}this.destination.next(u)}}var ye=S(1737);const pe=(()=>{function _(){return Error.call(this),this.message="no elements in sequence",this.name="EmptyError",this}return _.prototype=Object.create(Error.prototype),_})();var fe=S(1221),Be=S(8514),Ye=S(2916),Ue=S(8896),$e=S(1762),ae=S(8929),Pe=S(4850),rt=S(7545),cn=S(2986),Nt=S(1059),Tt=S(3489);function lt(_,p){let u=!1;return arguments.length>=2&&(u=!0),function(T){return T.lift(new Ut(_,p,u))}}class Ut{constructor(p,u,C=!1){this.accumulator=p,this.seed=u,this.hasSeed=C}call(p,u){return u.subscribe(new ft(p,this.accumulator,this.seed,this.hasSeed))}}class ft extends Tt.L{constructor(p,u,C,T){super(p),this.accumulator=u,this._seed=C,this.hasSeed=T,this.index=0}get seed(){return this._seed}set seed(p){this.hasSeed=!0,this._seed=p}_next(p){if(this.hasSeed)return this._tryNext(p);this.seed=p,this.destination.next(p)}_tryNext(p){const u=this.index++;let C;try{C=this.accumulator(this.seed,p,u)}catch(T){this.destination.error(T)}this.seed=C,this.destination.next(C)}}var _e=S(2198),Re=S(7221),mt=S(1406),un=S(2821);function Ln(_=Yr){return p=>p.lift(new fr(_))}class fr{constructor(p){this.errorFactory=p}call(p,u){return u.subscribe(new Or(p,this.errorFactory))}}class Or extends Tt.L{constructor(p,u){super(p),this.errorFactory=u,this.hasValue=!1}_next(p){this.hasValue=!0,this.destination.next(p)}_complete(){if(this.hasValue)return this.destination.complete();{let p;try{p=this.errorFactory()}catch(u){p=u}this.destination.error(p)}}}function Yr(){return new pe}function oi(_=null){return p=>p.lift(new bs(_))}class bs{constructor(p){this.defaultValue=p}call(p,u){return u.subscribe(new fn(p,this.defaultValue))}}class fn extends Tt.L{constructor(p,u){super(p),this.defaultValue=u,this.isEmpty=!0}_next(p){this.isEmpty=!1,this.destination.next(p)}_complete(){this.isEmpty&&this.destination.next(this.defaultValue),this.destination.complete()}}var At=S(5379);function Yt(_,p){const u=arguments.length>=2;return C=>C.pipe(_?(0,_e.h)((T,F)=>_(T,F,C)):At.y,(0,cn.q)(1),u?oi(p):Ln(()=>new pe))}var pn=S(1709),kt=S(2868),Pr=S(4327),Hn=S(2654);class Rr{constructor(p){this.callback=p}call(p,u){return u.subscribe(new $n(p,this.callback))}}class $n extends Tt.L{constructor(p,u){super(p),this.add(new Hn.w(u))}}var xr=S(9146),Pn=S(9808);
+/**
+       * @license Angular v13.4.0
+       * (c) 2010-2022 Google LLC. https://angular.io/
+       * License: MIT
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Rn{constructor(p,u){this.id=p,this.url=u}}class En extends Rn{constructor(p,u,C="imperative",T=null){super(p,u),this.navigationTrigger=C,this.restoredState=T}toString(){return`NavigationStart(id: ${this.id}, url: '${this.url}')`}}class Yn extends Rn{constructor(p,u,C){super(p,u),this.urlAfterRedirects=C}toString(){return`NavigationEnd(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}')`}}class er extends Rn{constructor(p,u,C){super(p,u),this.reason=C}toString(){return`NavigationCancel(id: ${this.id}, url: '${this.url}')`}}class st extends Rn{constructor(p,u,C){super(p,u),this.error=C}toString(){return`NavigationError(id: ${this.id}, url: '${this.url}', error: ${this.error})`}}class me extends Rn{constructor(p,u,C,T){super(p,u),this.urlAfterRedirects=C,this.state=T}toString(){return`RoutesRecognized(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}', state: ${this.state})`}}class oe extends Rn{constructor(p,u,C,T){super(p,u),this.urlAfterRedirects=C,this.state=T}toString(){return`GuardsCheckStart(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}', state: ${this.state})`}}class ee extends Rn{constructor(p,u,C,T,F){super(p,u),this.urlAfterRedirects=C,this.state=T,this.shouldActivate=F}toString(){return`GuardsCheckEnd(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}', state: ${this.state}, shouldActivate: ${this.shouldActivate})`}}class Ie extends Rn{constructor(p,u,C,T){super(p,u),this.urlAfterRedirects=C,this.state=T}toString(){return`ResolveStart(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}', state: ${this.state})`}}class Ce extends Rn{constructor(p,u,C,T){super(p,u),this.urlAfterRedirects=C,this.state=T}toString(){return`ResolveEnd(id: ${this.id}, url: '${this.url}', urlAfterRedirects: '${this.urlAfterRedirects}', state: ${this.state})`}}class Me{constructor(p){this.route=p}toString(){return`RouteConfigLoadStart(path: ${this.route.path})`}}class Fe{constructor(p){this.route=p}toString(){return`RouteConfigLoadEnd(path: ${this.route.path})`}}class Kt{constructor(p){this.snapshot=p}toString(){return`ChildActivationStart(path: '${this.snapshot.routeConfig&&this.snapshot.routeConfig.path||""}')`}}class bt{constructor(p){this.snapshot=p}toString(){return`ChildActivationEnd(path: '${this.snapshot.routeConfig&&this.snapshot.routeConfig.path||""}')`}}class xt{constructor(p){this.snapshot=p}toString(){return`ActivationStart(path: '${this.snapshot.routeConfig&&this.snapshot.routeConfig.path||""}')`}}class Dn{constructor(p){this.snapshot=p}toString(){return`ActivationEnd(path: '${this.snapshot.routeConfig&&this.snapshot.routeConfig.path||""}')`}}class jt{constructor(p,u,C){this.routerEvent=p,this.position=u,this.anchor=C}toString(){return`Scroll(anchor: '${this.anchor}', position: '${this.position?`${this.position[0]}, ${this.position[1]}`:null}')`}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const et="primary";class Ze{constructor(p){this.params=p||{}}has(p){return Object.prototype.hasOwnProperty.call(this.params,p)}get(p){if(this.has(p)){const u=this.params[p];return Array.isArray(u)?u[0]:u}return null}getAll(p){if(this.has(p)){const u=this.params[p];return Array.isArray(u)?u:[u]}return[]}get keys(){return Object.keys(this.params)}}function tt(_){return new Ze(_)}const It="ngNavigationCancelingError";function Kn(_){const p=Error("NavigationCancelingError: "+_);return p[It]=!0,p}function Ft(_,p,u){const C=u.path.split("/");if(C.length>_.length||"full"===u.pathMatch&&(p.hasChildren()||C.length<_.length))return null;const T={};for(let F=0;F<C.length;F++){const Y=C[F],ne=_[F];if(Y.startsWith(":"))T[Y.substring(1)]=ne;else if(Y!==ne.path)return null}return{consumed:_.slice(0,C.length),posParams:T}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function gn(_,p){const u=_?Object.keys(_):void 0,C=p?Object.keys(p):void 0;if(!u||!C||u.length!=C.length)return!1;let T;for(let F=0;F<u.length;F++)if(T=u[F],!Kr(_[T],p[T]))return!1;return!0}function Kr(_,p){if(Array.isArray(_)&&Array.isArray(p)){if(_.length!==p.length)return!1;const u=[..._].sort(),C=[...p].sort();return u.every((T,F)=>C[F]===T)}return _===p}function zn(_){return Array.prototype.concat.apply([],_)}function kn(_){return _.length>0?_[_.length-1]:null}function Qt(_,p){for(const u in _)_.hasOwnProperty(u)&&p(_[u],u)}function en(_){return(0,D.CqO)(_)?_:(0,D.QGY)(_)?(0,h.D)(Promise.resolve(_)):(0,j.of)(_)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const ge={exact:function Te(_,p,u){if(!xn(_.segments,p.segments)||!Bt(_.segments,p.segments,u)||_.numberOfChildren!==p.numberOfChildren)return!1;for(const C in p.children)if(!_.children[C]||!Te(_.children[C],p.children[C],u))return!1;return!0},subset:yt},se={exact:function le(_,p){return gn(_,p)},subset:function it(_,p){return Object.keys(p).length<=Object.keys(_).length&&Object.keys(p).every(u=>Kr(_[u],p[u]))},ignored:()=>!0};function K(_,p,u){return ge[u.paths](_.root,p.root,u.matrixParams)&&se[u.queryParams](_.queryParams,p.queryParams)&&!("exact"===u.fragment&&_.fragment!==p.fragment)}function yt(_,p,u){return sn(_,p,p.segments,u)}function sn(_,p,u,C){if(_.segments.length>u.length){const T=_.segments.slice(0,u.length);return!(!xn(T,u)||p.hasChildren()||!Bt(T,u,C))}if(_.segments.length===u.length){if(!xn(_.segments,u)||!Bt(_.segments,u,C))return!1;for(const T in p.children)if(!_.children[T]||!yt(_.children[T],p.children[T],C))return!1;return!0}{const T=u.slice(0,_.segments.length),F=u.slice(_.segments.length);return!!(xn(_.segments,T)&&Bt(_.segments,T,C)&&_.children[et])&&sn(_.children[et],p,F,C)}}function Bt(_,p,u){return p.every((C,T)=>se[u](_[T].parameters,C.parameters))}class dn{constructor(p,u,C){this.root=p,this.queryParams=u,this.fragment=C}get queryParamMap(){return this._queryParamMap||(this._queryParamMap=tt(this.queryParams)),this._queryParamMap}toString(){return An.serialize(this)}}class Xe{constructor(p,u){this.segments=p,this.children=u,this.parent=null,Qt(u,(C,T)=>C.parent=this)}hasChildren(){return this.numberOfChildren>0}get numberOfChildren(){return Object.keys(this.children).length}toString(){return Qi(this)}}class bn{constructor(p,u){this.path=p,this.parameters=u}get parameterMap(){return this._parameterMap||(this._parameterMap=tt(this.parameters)),this._parameterMap}toString(){return mr(this)}}function xn(_,p){return _.length===p.length&&_.every((u,C)=>u.path===p[C].path)}class Zr{}class gr{parse(p){const u=new mn(p);return new dn(u.parseRootSegment(),u.parseQueryParams(),u.parseFragment())}serialize(p){const u=`/${Cn(p.root,!0)}`,C=function Jr(_){const p=Object.keys(_).map(u=>{const C=_[u];return Array.isArray(C)?C.map(T=>`${_t(u)}=${_t(T)}`).join("&"):`${_t(u)}=${_t(C)}`}).filter(u=>!!u);return p.length?`?${p.join("&")}`:""}(p.queryParams);return`${u}${C}${"string"==typeof p.fragment?`#${function Jt(_){return encodeURI(_)}(p.fragment)}`:""}`}}const An=new gr;function Qi(_){return _.segments.map(p=>mr(p)).join("/")}function Cn(_,p){if(!_.hasChildren())return Qi(_);if(p){const u=_.children[et]?Cn(_.children[et],!1):"",C=[];return Qt(_.children,(T,F)=>{F!==et&&C.push(`${F}:${Cn(T,!1)}`)}),C.length>0?`${u}(${C.join("//")})`:u}{const u=function hi(_,p){let u=[];return Qt(_.children,(C,T)=>{T===et&&(u=u.concat(p(C,T)))}),Qt(_.children,(C,T)=>{T!==et&&(u=u.concat(p(C,T)))}),u}(_,(C,T)=>T===et?[Cn(_.children[et],!1)]:[`${T}:${Cn(C,!1)}`]);return 1===Object.keys(_.children).length&&null!=_.children[et]?`${Qi(_)}/${u[0]}`:`${Qi(_)}/(${u.join("//")})`}}function je(_){return encodeURIComponent(_).replace(/%40/g,"@").replace(/%3A/gi,":").replace(/%24/g,"$").replace(/%2C/gi,",")}function _t(_){return je(_).replace(/%3B/gi,";")}function hn(_){return je(_).replace(/\(/g,"%28").replace(/\)/g,"%29").replace(/%26/gi,"&")}function Fn(_){return decodeURIComponent(_)}function on(_){return Fn(_.replace(/\+/g,"%20"))}function mr(_){return`${hn(_.path)}${function Xt(_){return Object.keys(_).map(p=>`;${hn(p)}=${hn(_[p])}`).join("")}(_.parameters)}`}const Nr=/^[^\/()?;=#]+/;function ut(_){const p=_.match(Nr);return p?p[0]:""}const Xr=/^[^=?&#]+/,Lr=/^[^&#]+/;class mn{constructor(p){this.url=p,this.remaining=p}parseRootSegment(){return this.consumeOptional("/"),""===this.remaining||this.peekStartsWith("?")||this.peekStartsWith("#")?new Xe([],{}):new Xe([],this.parseChildren())}parseQueryParams(){const p={};if(this.consumeOptional("?"))do{this.parseQueryParam(p)}while(this.consumeOptional("&"));return p}parseFragment(){return this.consumeOptional("#")?decodeURIComponent(this.remaining):null}parseChildren(){if(""===this.remaining)return{};this.consumeOptional("/");const p=[];for(this.peekStartsWith("(")||p.push(this.parseSegment());this.peekStartsWith("/")&&!this.peekStartsWith("//")&&!this.peekStartsWith("/(");)this.capture("/"),p.push(this.parseSegment());let u={};this.peekStartsWith("/(")&&(this.capture("/"),u=this.parseParens(!0));let C={};return this.peekStartsWith("(")&&(C=this.parseParens(!1)),(p.length>0||Object.keys(u).length>0)&&(C[et]=new Xe(p,u)),C}parseSegment(){const p=ut(this.remaining);if(""===p&&this.peekStartsWith(";"))throw new Error(`Empty path url segment cannot have parameters: '${this.remaining}'.`);return this.capture(p),new bn(Fn(p),this.parseMatrixParams())}parseMatrixParams(){const p={};for(;this.consumeOptional(";");)this.parseParam(p);return p}parseParam(p){const u=ut(this.remaining);if(!u)return;this.capture(u);let C="";if(this.consumeOptional("=")){const T=ut(this.remaining);T&&(C=T,this.capture(C))}p[Fn(u)]=Fn(C)}parseQueryParam(p){const u=function fi(_){const p=_.match(Xr);return p?p[0]:""}(this.remaining);if(!u)return;this.capture(u);let C="";if(this.consumeOptional("=")){const Y=function ai(_){const p=_.match(Lr);return p?p[0]:""}(this.remaining);Y&&(C=Y,this.capture(C))}const T=on(u),F=on(C);if(p.hasOwnProperty(T)){let Y=p[T];Array.isArray(Y)||(Y=[Y],p[T]=Y),Y.push(F)}else p[T]=F}parseParens(p){const u={};for(this.capture("(");!this.consumeOptional(")")&&this.remaining.length>0;){const C=ut(this.remaining),T=this.remaining[C.length];if("/"!==T&&")"!==T&&";"!==T)throw new Error(`Cannot parse url '${this.url}'`);let F;C.indexOf(":")>-1?(F=C.substr(0,C.indexOf(":")),this.capture(F),this.capture(":")):p&&(F=et);const Y=this.parseChildren();u[F]=1===Object.keys(Y).length?Y[et]:new Xe([],Y),this.consumeOptional("//")}return u}peekStartsWith(p){return this.remaining.startsWith(p)}consumeOptional(p){return!!this.peekStartsWith(p)&&(this.remaining=this.remaining.substring(p.length),!0)}capture(p){if(!this.consumeOptional(p))throw new Error(`Expected "${p}".`)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class qr{constructor(p){this._root=p}get root(){return this._root.value}parent(p){const u=this.pathFromRoot(p);return u.length>1?u[u.length-2]:null}children(p){const u=Bn(p,this._root);return u?u.children.map(C=>C.value):[]}firstChild(p){const u=Bn(p,this._root);return u&&u.children.length>0?u.children[0].value:null}siblings(p){const u=_n(p,this._root);return u.length<2?[]:u[u.length-2].children.map(T=>T.value).filter(T=>T!==p)}pathFromRoot(p){return _n(p,this._root).map(u=>u.value)}}function Bn(_,p){if(_===p.value)return p;for(const u of p.children){const C=Bn(_,u);if(C)return C}return null}function _n(_,p){if(_===p.value)return[p];for(const u of p.children){const C=_n(_,u);if(C.length)return C.unshift(p),C}return[]}class Ot{constructor(p,u){this.value=p,this.children=u}toString(){return`TreeNode(${this.value})`}}function wr(_){const p={};return _&&_.children.forEach(u=>p[u.value.outlet]=u),p
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}class Cs extends qr{constructor(p,u){super(p),this.snapshot=u,Pi(this,p)}toString(){return this.snapshot.toString()}}function yr(_,p){const u=function _r(_,p){const Y=new Qn([],{},{},"",{},et,p,null,_.root,-1,{});return new pi("",new Ot(Y,[]))}(_,p),C=new Q.X([new bn("",{})]),T=new Q.X({}),F=new Q.X({}),Y=new Q.X({}),ne=new Q.X(""),Ee=new Vt(C,T,Y,ne,F,et,p,u.root);return Ee.snapshot=u.root,new Cs(new Ot(Ee,[]),u)}class Vt{constructor(p,u,C,T,F,Y,ne,Ee){this.url=p,this.params=u,this.queryParams=C,this.fragment=T,this.data=F,this.outlet=Y,this.component=ne,this._futureSnapshot=Ee}get routeConfig(){return this._futureSnapshot.routeConfig}get root(){return this._routerState.root}get parent(){return this._routerState.parent(this)}get firstChild(){return this._routerState.firstChild(this)}get children(){return this._routerState.children(this)}get pathFromRoot(){return this._routerState.pathFromRoot(this)}get paramMap(){return this._paramMap||(this._paramMap=this.params.pipe((0,Pe.U)(p=>tt(p)))),this._paramMap}get queryParamMap(){return this._queryParamMap||(this._queryParamMap=this.queryParams.pipe((0,Pe.U)(p=>tt(p)))),this._queryParamMap}toString(){return this.snapshot?this.snapshot.toString():`Future(${this._futureSnapshot})`}}function Oi(_,p="emptyOnly"){const u=_.pathFromRoot;let C=0;if("always"!==p)for(C=u.length-1;C>=1;){const T=u[C],F=u[C-1];if(T.routeConfig&&""===T.routeConfig.path)C--;else{if(F.component)break;C--}}return function kr(_){return _.reduce((p,u)=>({params:Object.assign(Object.assign({},p.params),u.params),data:Object.assign(Object.assign({},p.data),u.data),resolve:Object.assign(Object.assign({},p.resolve),u._resolvedData)}),{params:{},data:{},resolve:{}})}(u.slice(C))}class Qn{constructor(p,u,C,T,F,Y,ne,Ee,We,Lt,Je){this.url=p,this.params=u,this.queryParams=C,this.fragment=T,this.data=F,this.outlet=Y,this.component=ne,this.routeConfig=Ee,this._urlSegment=We,this._lastPathIndex=Lt,this._resolve=Je}get root(){return this._routerState.root}get parent(){return this._routerState.parent(this)}get firstChild(){return this._routerState.firstChild(this)}get children(){return this._routerState.children(this)}get pathFromRoot(){return this._routerState.pathFromRoot(this)}get paramMap(){return this._paramMap||(this._paramMap=tt(this.params)),this._paramMap}get queryParamMap(){return this._queryParamMap||(this._queryParamMap=tt(this.queryParams)),this._queryParamMap}toString(){return`Route(url:'${this.url.map(C=>C.toString()).join("/")}', path:'${this.routeConfig?this.routeConfig.path:""}')`}}class pi extends qr{constructor(p,u){super(u),this.url=p,Pi(this,u)}toString(){return ei(this._root)}}function Pi(_,p){p.value._routerState=_,p.children.forEach(u=>Pi(_,u))}function ei(_){const p=_.children.length>0?` { ${_.children.map(ei).join(", ")} } `:"";return`${_.value}${p}`}function ti(_){if(_.snapshot){const p=_.snapshot,u=_._futureSnapshot;_.snapshot=u,gn(p.queryParams,u.queryParams)||_.queryParams.next(u.queryParams),p.fragment!==u.fragment&&_.fragment.next(u.fragment),gn(p.params,u.params)||_.params.next(u.params),function rr(_,p){if(_.length!==p.length)return!1;for(let u=0;u<_.length;++u)if(!gn(_[u],p[u]))return!1;return!0}(p.url,u.url)||_.url.next(u.url),gn(p.data,u.data)||_.data.next(u.data)}else _.snapshot=_._futureSnapshot,_.data.next(_._futureSnapshot.data)}function Zi(_,p){const u=gn(_.params,p.params)&&function Fr(_,p){return xn(_,p)&&_.every((u,C)=>gn(u.parameters,p[C].parameters))}(_.url,p.url);return u&&!(!_.parent!=!p.parent)&&(!_.parent||Zi(_.parent,p.parent))}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function Xi(_,p,u){if(u&&_.shouldReuseRoute(p.value,u.value.snapshot)){const C=u.value;C._futureSnapshot=p.value;const T=function ws(_,p,u){return p.children.map(C=>{for(const T of u.children)if(_.shouldReuseRoute(C.value,T.value.snapshot))return Xi(_,C,T);return Xi(_,C)})}(_,p,u);return new Ot(C,T)}{if(_.shouldAttach(p.value)){const F=_.retrieve(p.value);if(null!==F){const Y=F.route;return Y.value._futureSnapshot=p.value,Y.children=p.children.map(ne=>Xi(_,ne)),Y}}const C=function Io(_){return new Vt(new Q.X(_.url),new Q.X(_.params),new Q.X(_.queryParams),new Q.X(_.fragment),new Q.X(_.data),_.outlet,_.component,_)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(p.value),T=p.children.map(F=>Xi(_,F));return new Ot(C,T)}}function qi(_){return"object"==typeof _&&null!=_&&!_.outlets&&!_.segmentPath}function es(_){return"object"==typeof _&&null!=_&&_.outlets}function ts(_,p,u,C,T){let F={};if(C&&Qt(C,(ne,Ee)=>{F[Ee]=Array.isArray(ne)?ne.map(We=>`${We}`):`${ne}`}),_===p)return new dn(u,F,T);const Y=ns(_,p,u);return new dn(Y,F,T)}function ns(_,p,u){const C={};return Qt(_.children,(T,F)=>{C[F]=T===p?u:ns(T,p,u)}),new Xe(_.segments,C)}class Ss{constructor(p,u,C){if(this.isAbsolute=p,this.numberOfDoubleDots=u,this.commands=C,p&&C.length>0&&qi(C[0]))throw new Error("Root segment cannot have matrix parameters");const T=C.find(es);if(T&&T!==kn(C))throw new Error("{outlets:{}} has to be the last command")}toRoot(){return this.isAbsolute&&1===this.commands.length&&"/"==this.commands[0]}}class zs{constructor(p,u,C){this.segmentGroup=p,this.processChildren=u,this.index=C}}function Ts(_,p,u){if(_||(_=new Xe([],{})),0===_.segments.length&&_.hasChildren())return As(_,p,u);const C=function ro(_,p,u){let C=0,T=p;const F={match:!1,pathIndex:0,commandIndex:0};for(;T<_.segments.length;){if(C>=u.length)return F;const Y=_.segments[T],ne=u[C];if(es(ne))break;const Ee=`${ne}`,We=C<u.length-1?u[C+1]:null;if(T>0&&void 0===Ee)break;if(Ee&&We&&"object"==typeof We&&void 0===We.outlets){if(!Is(Ee,We,Y))return F;C+=2}else{if(!Is(Ee,{},Y))return F;C++}T++}return{match:!0,pathIndex:T,commandIndex:C}}(_,p,u),T=u.slice(C.commandIndex);if(C.match&&C.pathIndex<_.segments.length){const F=new Xe(_.segments.slice(0,C.pathIndex),{});return F.children[et]=new Xe(_.segments.slice(C.pathIndex),_.children),As(F,0,T)}return C.match&&0===T.length?new Xe(_.segments,{}):C.match&&!_.hasChildren()?Sr(_,p,u):C.match?As(_,0,T):Sr(_,p,u)}function As(_,p,u){if(0===u.length)return new Xe(_.segments,{});{const C=function rs(_){return es(_[0])?_[0].outlets:{[et]:_}}(u),T={};return Qt(C,(F,Y)=>{"string"==typeof F&&(F=[F]),null!==F&&(T[Y]=Ts(_.children[Y],p,F))}),Qt(_.children,(F,Y)=>{void 0===C[Y]&&(T[Y]=F)}),new Xe(_.segments,T)}}function Sr(_,p,u){const C=_.segments.slice(0,p);let T=0;for(;T<u.length;){const F=u[T];if(es(F)){const Ee=io(F.outlets);return new Xe(C,Ee)}if(0===T&&qi(u[0])){C.push(new bn(_.segments[p].path,gi(u[0]))),T++;continue}const Y=es(F)?F.outlets[et]:`${F}`,ne=T<u.length-1?u[T+1]:null;Y&&ne&&qi(ne)?(C.push(new bn(Y,gi(ne))),T+=2):(C.push(new bn(Y,{})),T++)}return new Xe(C,{})}function io(_){const p={};return Qt(_,(u,C)=>{"string"==typeof u&&(u=[u]),null!==u&&(p[C]=Sr(new Xe([],{}),0,u))}),p}function gi(_){const p={};return Qt(_,(u,C)=>p[C]=`${u}`),p}function Is(_,p,u){return _==u.path&&gn(p,u.parameters)}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class oo{constructor(p,u,C,T){this.routeReuseStrategy=p,this.futureState=u,this.currState=C,this.forwardEvent=T}activate(p){const u=this.futureState._root,C=this.currState?this.currState._root:null;this.deactivateChildRoutes(u,C,p),ti(this.futureState.root),this.activateChildRoutes(u,C,p)}deactivateChildRoutes(p,u,C){const T=wr(u);p.children.forEach(F=>{const Y=F.value.outlet;this.deactivateRoutes(F,T[Y],C),delete T[Y]}),Qt(T,(F,Y)=>{this.deactivateRouteAndItsChildren(F,C)})}deactivateRoutes(p,u,C){const T=p.value,F=u?u.value:null;if(T===F)if(T.component){const Y=C.getContext(T.outlet);Y&&this.deactivateChildRoutes(p,u,Y.children)}else this.deactivateChildRoutes(p,u,C);else F&&this.deactivateRouteAndItsChildren(u,C)}deactivateRouteAndItsChildren(p,u){p.value.component&&this.routeReuseStrategy.shouldDetach(p.value.snapshot)?this.detachAndStoreRouteSubtree(p,u):this.deactivateRouteAndOutlet(p,u)}detachAndStoreRouteSubtree(p,u){const C=u.getContext(p.value.outlet),T=C&&p.value.component?C.children:u,F=wr(p);for(const Y of Object.keys(F))this.deactivateRouteAndItsChildren(F[Y],T);if(C&&C.outlet){const Y=C.outlet.detach(),ne=C.children.onOutletDeactivated();this.routeReuseStrategy.store(p.value.snapshot,{componentRef:Y,route:p,contexts:ne})}}deactivateRouteAndOutlet(p,u){const C=u.getContext(p.value.outlet),T=C&&p.value.component?C.children:u,F=wr(p);for(const Y of Object.keys(F))this.deactivateRouteAndItsChildren(F[Y],T);C&&C.outlet&&(C.outlet.deactivate(),C.children.onOutletDeactivated(),C.attachRef=null,C.resolver=null,C.route=null)}activateChildRoutes(p,u,C){const T=wr(u);p.children.forEach(F=>{this.activateRoutes(F,T[F.value.outlet],C),this.forwardEvent(new Dn(F.value.snapshot))}),p.children.length&&this.forwardEvent(new bt(p.value.snapshot))}activateRoutes(p,u,C){const T=p.value,F=u?u.value:null;if(ti(T),T===F)if(T.component){const Y=C.getOrCreateContext(T.outlet);this.activateChildRoutes(p,u,Y.children)}else this.activateChildRoutes(p,u,C);else if(T.component){const Y=C.getOrCreateContext(T.outlet);if(this.routeReuseStrategy.shouldAttach(T.snapshot)){const ne=this.routeReuseStrategy.retrieve(T.snapshot);this.routeReuseStrategy.store(T.snapshot,null),Y.children.onOutletReAttached(ne.contexts),Y.attachRef=ne.componentRef,Y.route=ne.route.value,Y.outlet&&Y.outlet.attach(ne.componentRef,ne.route.value),ti(ne.route.value),this.activateChildRoutes(p,null,Y.children)}else{const ne=function Os(_){for(let p=_.parent;p;p=p.parent){const u=p.routeConfig;if(u&&u._loadedConfig)return u._loadedConfig;if(u&&u.component)return null}return null}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(T.snapshot),Ee=ne?ne.module.componentFactoryResolver:null;Y.attachRef=null,Y.route=T,Y.resolver=Ee,Y.outlet&&Y.outlet.activateWith(T,Ee),this.activateChildRoutes(p,null,Y.children)}}else this.activateChildRoutes(p,null,C)}}class Ri{constructor(p,u){this.routes=p,this.module=u}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function ni(_){return"function"==typeof _}function vr(_){return _ instanceof dn}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+const li=Symbol("INITIAL_VALUE");function xi(){return(0,rt.w)(_=>function k(..._){let p,u;return(0,G.K)(_[_.length-1])&&(u=_.pop()),"function"==typeof _[_.length-1]&&(p=_.pop()),1===_.length&&(0,H.k)(_[0])&&(_=_[0]),(0,z.n)(_,u).lift(new X(p))}(_.map(p=>p.pipe((0,cn.q)(1),(0,Nt.O)(li)))).pipe(lt((p,u)=>{let C=!1;return u.reduce((T,F,Y)=>T!==li?T:(F===li&&(C=!0),C||!1!==F&&Y!==u.length-1&&!vr(F)?T:F),p)},li),(0,_e.h)(p=>p!==li),(0,Pe.U)(p=>vr(p)?p:!0===p),(0,cn.q)(1)))}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Fi{constructor(){this.outlet=null,this.route=null,this.resolver=null,this.children=new Mr,this.attachRef=null}}class Mr{constructor(){this.contexts=new Map}onChildOutletCreated(p,u){const C=this.getOrCreateContext(p);C.outlet=u,this.contexts.set(p,C)}onChildOutletDestroyed(p){const u=this.getContext(p);u&&(u.outlet=null,u.attachRef=null)}onOutletDeactivated(){const p=this.contexts;return this.contexts=new Map,p}onOutletReAttached(p){this.contexts=p}getOrCreateContext(p){let u=this.getContext(p);return u||(u=new Fi,this.contexts.set(p,u)),u}getContext(p){return this.contexts.get(p)||null}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let Ni=(()=>{class _{constructor(u,C,T,F,Y){this.parentContexts=u,this.location=C,this.resolver=T,this.changeDetector=Y,this.activated=null,this._activatedRoute=null,this.activateEvents=new D.vpe,this.deactivateEvents=new D.vpe,this.attachEvents=new D.vpe,this.detachEvents=new D.vpe,this.name=F||et,u.onChildOutletCreated(this.name,this)}ngOnDestroy(){this.parentContexts.onChildOutletDestroyed(this.name)}ngOnInit(){if(!this.activated){const u=this.parentContexts.getContext(this.name);u&&u.route&&(u.attachRef?this.attach(u.attachRef,u.route):this.activateWith(u.route,u.resolver||null))}}get isActivated(){return!!this.activated}get component(){if(!this.activated)throw new Error("Outlet is not activated");return this.activated.instance}get activatedRoute(){if(!this.activated)throw new Error("Outlet is not activated");return this._activatedRoute}get activatedRouteData(){return this._activatedRoute?this._activatedRoute.snapshot.data:{}}detach(){if(!this.activated)throw new Error("Outlet is not activated");this.location.detach();const u=this.activated;return this.activated=null,this._activatedRoute=null,this.detachEvents.emit(u.instance),u}attach(u,C){this.activated=u,this._activatedRoute=C,this.location.insert(u.hostView),this.attachEvents.emit(u.instance)}deactivate(){if(this.activated){const u=this.component;this.activated.destroy(),this.activated=null,this._activatedRoute=null,this.deactivateEvents.emit(u)}}activateWith(u,C){if(this.isActivated)throw new Error("Cannot activate an already activated outlet");this._activatedRoute=u;const Y=(C=C||this.resolver).resolveComponentFactory(u._futureSnapshot.routeConfig.component),ne=this.parentContexts.getOrCreateContext(this.name).children,Ee=new ao(u,ne,this.location.injector);this.activated=this.location.createComponent(Y,this.location.length,Ee),this.changeDetector.markForCheck(),this.activateEvents.emit(this.activated.instance)}}return _.\u0275fac=function(u){return new(u||_)(D.Y36(Mr),D.Y36(D.s_b),D.Y36(D._Vd),D.$8M("name"),D.Y36(D.sBO))},_.\u0275dir=D.lG2({type:_,selectors:[["router-outlet"]],outputs:{activateEvents:"activate",deactivateEvents:"deactivate",attachEvents:"attach",detachEvents:"detach"},exportAs:["outlet"]}),_})();class ao{constructor(p,u,C){this.route=p,this.childContexts=u,this.parent=C}get(p,u){return p===Vt?this.route:p===Mr?this.childContexts:this.parent.get(p,u)}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let tn=(()=>{class _{}return _.\u0275fac=function(u){return new(u||_)},_.\u0275cmp=D.Xpm({type:_,selectors:[["ng-component"]],decls:1,vars:0,template:function(u,C){1&u&&D._UZ(0,"router-outlet")},directives:[Ni],encapsulation:2}),_})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function yi(_,p=""){for(let u=0;u<_.length;u++){const C=_[u];ir(C,nn(p,C))}}function ir(_,p){_.children&&yi(_.children,p)}function nn(_,p){return p?_||p.path?_&&!p.path?`${_}/`:!_&&p.path?p.path:`${_}/${p.path}`:"":_}function Ps(_){const p=_.children&&_.children.map(Ps),u=p?Object.assign(Object.assign({},_),{children:p}):Object.assign({},_);return!u.component&&(p||u.loadChildren)&&u.outlet&&u.outlet!==et&&(u.component=tn),u}function Er(_){return _.outlet||et}function _i(_,p){const u=_.filter(C=>Er(C)===p);return u.push(..._.filter(C=>Er(C)!==p)),u
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */}const Jn={matched:!1,consumedSegments:[],remainingSegments:[],parameters:{},positionalParamSegments:{}};function Li(_,p,u){var C;if(""===p.path)return"full"===p.pathMatch&&(_.hasChildren()||u.length>0)?Object.assign({},Jn):{matched:!0,consumedSegments:[],remainingSegments:u,parameters:{},positionalParamSegments:{}};const F=(p.matcher||Ft)(u,_,p);if(!F)return Object.assign({},Jn);const Y={};Qt(F.posParams,(Ee,We)=>{Y[We]=Ee.path});const ne=F.consumed.length>0?Object.assign(Object.assign({},Y),F.consumed[F.consumed.length-1].parameters):Y;return{matched:!0,consumedSegments:F.consumed,remainingSegments:u.slice(F.consumed.length),parameters:ne,positionalParamSegments:null!==(C=F.posParams)&&void 0!==C?C:{}}}function Br(_,p,u,C,T="corrected"){if(u.length>0&&function ki(_,p,u){return u.some(C=>Ei(_,p,C)&&Er(C)!==et)}(_,u,C)){const Y=new Xe(p,function tr(_,p,u,C){const T={};T[et]=C,C._sourceSegment=_,C._segmentIndexShift=p.length;for(const F of u)if(""===F.path&&Er(F)!==et){const Y=new Xe([],{});Y._sourceSegment=_,Y._segmentIndexShift=p.length,T[Er(F)]=Y}return T}(_,p,C,new Xe(u,_.children)));return Y._sourceSegment=_,Y._segmentIndexShift=p.length,{segmentGroup:Y,slicedSegments:[]}}if(0===u.length&&function Rs(_,p,u){return u.some(C=>Ei(_,p,C))}(_,u,C)){const Y=new Xe(_.segments,function vi(_,p,u,C,T,F){const Y={};for(const ne of C)if(Ei(_,u,ne)&&!T[Er(ne)]){const Ee=new Xe([],{});Ee._sourceSegment=_,Ee._segmentIndexShift="legacy"===F?_.segments.length:p.length,Y[Er(ne)]=Ee}return Object.assign(Object.assign({},T),Y)}(_,p,u,C,_.children,T));return Y._sourceSegment=_,Y._segmentIndexShift=p.length,{segmentGroup:Y,slicedSegments:u}}const F=new Xe(_.segments,_.children);return F._sourceSegment=_,F._segmentIndexShift=p.length,{segmentGroup:F,slicedSegments:u}}function Ei(_,p,u){return(!(_.hasChildren()||p.length>0)||"full"!==u.pathMatch)&&""===u.path}function Tr(_,p,u,C){return!!(Er(_)===C||C!==et&&Ei(p,u,_))&&("**"===_.path||Li(p,_,u).matched)}function ss(_,p,u){return 0===p.length&&!_.children[u]}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class Di{constructor(p){this.segmentGroup=p||null}}class pt{constructor(p){this.urlTree=p}}function bi(_){return(0,ye._)(new Di(_))}function Gs(_){return(0,ye._)(new pt(_))}class xs{constructor(p,u,C,T,F){this.configLoader=u,this.urlSerializer=C,this.urlTree=T,this.config=F,this.allowRedirects=!0,this.ngModule=p.get(D.h0i)}apply(){const p=Br(this.urlTree.root,[],[],this.config).segmentGroup,u=new Xe(p.segments,p.children);return this.expandSegmentGroup(this.ngModule,this.config,u,et).pipe((0,Pe.U)(F=>this.createUrlTree(Fs(F),this.urlTree.queryParams,this.urlTree.fragment))).pipe((0,Re.K)(F=>{if(F instanceof pt)return this.allowRedirects=!1,this.match(F.urlTree);throw F instanceof Di?this.noMatchError(F):F}))}match(p){return this.expandSegmentGroup(this.ngModule,this.config,p.root,et).pipe((0,Pe.U)(T=>this.createUrlTree(Fs(T),p.queryParams,p.fragment))).pipe((0,Re.K)(T=>{throw T instanceof Di?this.noMatchError(T):T}))}noMatchError(p){return new Error(`Cannot match any routes. URL Segment: '${p.segmentGroup}'`)}createUrlTree(p,u,C){const T=p.segments.length>0?new Xe([],{[et]:p}):p;return new dn(T,u,C)}expandSegmentGroup(p,u,C,T){return 0===C.segments.length&&C.hasChildren()?this.expandChildren(p,u,C).pipe((0,Pe.U)(F=>new Xe([],F))):this.expandSegment(p,C,u,C.segments,T,!0)}expandChildren(p,u,C){const T=[];for(const F of Object.keys(C.children))"primary"===F?T.unshift(F):T.push(F);return(0,h.D)(T).pipe((0,mt.b)(F=>{const Y=C.children[F],ne=_i(u,F);return this.expandSegmentGroup(p,ne,Y,F).pipe((0,Pe.U)(Ee=>({segment:Ee,outlet:F})))}),lt((F,Y)=>(F[Y.outlet]=Y.segment,F),{}),function Cr(_,p){const u=arguments.length>=2;return C=>C.pipe(_?(0,_e.h)((T,F)=>_(T,F,C)):At.y,(0,un.h)(1),u?oi(p):Ln(()=>new pe))}())}expandSegment(p,u,C,T,F,Y){return(0,h.D)(C).pipe((0,mt.b)(ne=>this.expandSegmentAgainstRoute(p,u,C,ne,T,F,Y).pipe((0,Re.K)(We=>{if(We instanceof Di)return(0,j.of)(null);throw We}))),Yt(ne=>!!ne),(0,Re.K)((ne,Ee)=>{if(ne instanceof pe||"EmptyError"===ne.name)return ss(u,T,F)?(0,j.of)(new Xe([],{})):bi(u);throw ne}))}expandSegmentAgainstRoute(p,u,C,T,F,Y,ne){return Tr(T,u,F,Y)?void 0===T.redirectTo?this.matchSegmentAgainstRoute(p,u,T,F,Y):ne&&this.allowRedirects?this.expandSegmentAgainstRouteUsingRedirect(p,u,C,T,F,Y):bi(u):bi(u)}expandSegmentAgainstRouteUsingRedirect(p,u,C,T,F,Y){return"**"===T.path?this.expandWildCardWithParamsAgainstRouteUsingRedirect(p,C,T,Y):this.expandRegularSegmentAgainstRouteUsingRedirect(p,u,C,T,F,Y)}expandWildCardWithParamsAgainstRouteUsingRedirect(p,u,C,T){const F=this.applyRedirectCommands([],C.redirectTo,{});return C.redirectTo.startsWith("/")?Gs(F):this.lineralizeSegments(C,F).pipe((0,pn.zg)(Y=>{const ne=new Xe(Y,{});return this.expandSegment(p,ne,u,Y,T,!1)}))}expandRegularSegmentAgainstRouteUsingRedirect(p,u,C,T,F,Y){const{matched:ne,consumedSegments:Ee,remainingSegments:We,positionalParamSegments:Lt}=Li(u,T,F);if(!ne)return bi(u);const Je=this.applyRedirectCommands(Ee,T.redirectTo,Lt);return T.redirectTo.startsWith("/")?Gs(Je):this.lineralizeSegments(T,Je).pipe((0,pn.zg)(qt=>this.expandSegment(p,u,C,qt.concat(We),Y,!1)))}matchSegmentAgainstRoute(p,u,C,T,F){if("**"===C.path)return C.loadChildren?(C._loadedConfig?(0,j.of)(C._loadedConfig):this.configLoader.load(p.injector,C)).pipe((0,Pe.U)(Je=>(C._loadedConfig=Je,new Xe(T,{})))):(0,j.of)(new Xe(T,{}));const{matched:Y,consumedSegments:ne,remainingSegments:Ee}=Li(u,C,T);return Y?this.getChildConfig(p,C,T).pipe((0,pn.zg)(Lt=>{const Je=Lt.module,qt=Lt.routes,{segmentGroup:Zt,slicedSegments:$r}=Br(u,ne,Ee,qt),zr=new Xe(Zt.segments,Zt.children);if(0===$r.length&&zr.hasChildren())return this.expandChildren(Je,qt,zr).pipe((0,Pe.U)(Ro=>new Xe(ne,Ro)));if(0===qt.length&&0===$r.length)return(0,j.of)(new Xe(ne,{}));const Ui=Er(C)===F;return this.expandSegment(Je,zr,qt,$r,Ui?et:F,!0).pipe((0,Pe.U)(Ls=>new Xe(ne.concat(Ls.segments),Ls.children)))})):bi(u)}getChildConfig(p,u,C){return u.children?(0,j.of)(new Ri(u.children,p)):u.loadChildren?void 0!==u._loadedConfig?(0,j.of)(u._loadedConfig):this.runCanLoadGuards(p.injector,u,C).pipe((0,pn.zg)(T=>T?this.configLoader.load(p.injector,u).pipe((0,Pe.U)(F=>(u._loadedConfig=F,F))):function Ws(_){return(0,ye._)(Kn(`Cannot load children because the guard of the route "path: '${_.path}'" returned false`))}(u))):(0,j.of)(new Ri([],p))}runCanLoadGuards(p,u,C){const T=u.canLoad;if(!T||0===T.length)return(0,j.of)(!0);const F=T.map(Y=>{const ne=p.get(Y);let Ee;if(function Nn(_){return _&&ni(_.canLoad)}(ne))Ee=ne.canLoad(u,C);else{if(!ni(ne))throw new Error("Invalid CanLoad guard");Ee=ne(u,C)}return en(Ee)});return(0,j.of)(F).pipe(xi(),(0,kt.b)(Y=>{if(!vr(Y))return;const ne=Kn(`Redirecting to "${this.urlSerializer.serialize(Y)}"`);throw ne.url=Y,ne}),(0,Pe.U)(Y=>!0===Y))}lineralizeSegments(p,u){let C=[],T=u.root;for(;;){if(C=C.concat(T.segments),0===T.numberOfChildren)return(0,j.of)(C);if(T.numberOfChildren>1||!T.children[et])return(0,ye._)(new Error(`Only absolute redirects can have named outlets. redirectTo: '${p.redirectTo}'`));T=T.children[et]}}applyRedirectCommands(p,u,C){return this.applyRedirectCreatreUrlTree(u,this.urlSerializer.parse(u),p,C)}applyRedirectCreatreUrlTree(p,u,C,T){const F=this.createSegmentGroup(p,u.root,C,T);return new dn(F,this.createQueryParams(u.queryParams,this.urlTree.queryParams),u.fragment)}createQueryParams(p,u){const C={};return Qt(p,(T,F)=>{if("string"==typeof T&&T.startsWith(":")){const ne=T.substring(1);C[F]=u[ne]}else C[F]=T}),C}createSegmentGroup(p,u,C,T){const F=this.createSegments(p,u.segments,C,T);let Y={};return Qt(u.children,(ne,Ee)=>{Y[Ee]=this.createSegmentGroup(p,ne,C,T)}),new Xe(F,Y)}createSegments(p,u,C,T){return u.map(F=>F.path.startsWith(":")?this.findPosParam(p,F,T):this.findOrReturn(F,C))}findPosParam(p,u,C){const T=C[u.path.substring(1)];if(!T)throw new Error(`Cannot redirect to '${p}'. Cannot find '${u.path}'.`);return T}findOrReturn(p,u){let C=0;for(const T of u){if(T.path===p.path)return u.splice(C),T;C++}return p}}function Fs(_){const p={};for(const C of Object.keys(_.children)){const F=Fs(_.children[C]);(F.segments.length>0||F.hasChildren())&&(p[C]=F)}return function co(_){if(1===_.numberOfChildren&&_.children[et]){const p=_.children[et];return new Xe(_.segments.concat(p.segments),p.children)}return _}(new Xe(_.segments,p))}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class Pt{constructor(p){this.path=p,this.route=this.path[this.path.length-1]}}class Ci{constructor(p,u){this.component=p,this.route=u}}function wn(_,p,u){const C=_._root;return Ur(C,p?p._root:null,u,[C.value])}function Dr(_,p,u){const C=function sr(_){if(!_)return null;for(let p=_.parent;p;p=p.parent){const u=p.routeConfig;if(u&&u._loadedConfig)return u._loadedConfig}return null}(p);return(C?C.module.injector:u).get(_)}function Ur(_,p,u,C,T={canDeactivateChecks:[],canActivateChecks:[]}){const F=wr(p);return _.children.forEach(Y=>{(function ls(_,p,u,C,T={canDeactivateChecks:[],canActivateChecks:[]}){const F=_.value,Y=p?p.value:null,ne=u?u.getContext(_.value.outlet):null;if(Y&&F.routeConfig===Y.routeConfig){const Ee=function va(_,p,u){if("function"==typeof u)return u(_,p);switch(u){case"pathParamsChange":return!xn(_.url,p.url);case"pathParamsOrQueryParamsChange":return!xn(_.url,p.url)||!gn(_.queryParams,p.queryParams);case"always":return!0;case"paramsOrQueryParamsChange":return!Zi(_,p)||!gn(_.queryParams,p.queryParams);default:return!Zi(_,p)}}(Y,F,F.routeConfig.runGuardsAndResolvers);Ee?T.canActivateChecks.push(new Pt(C)):(F.data=Y.data,F._resolvedData=Y._resolvedData),Ur(_,p,F.component?ne?ne.children:null:u,C,T),Ee&&ne&&ne.outlet&&ne.outlet.isActivated&&T.canDeactivateChecks.push(new Ci(ne.outlet.component,Y))}else Y&&O(p,ne,T),T.canActivateChecks.push(new Pt(C)),Ur(_,null,F.component?ne?ne.children:null:u,C,T)})(Y,F[Y.value.outlet],u,C.concat([Y.value]),T),delete F[Y.value.outlet]}),Qt(F,(Y,ne)=>O(Y,u.getContext(ne),T)),T}function O(_,p,u){const C=wr(_),T=_.value;Qt(C,(F,Y)=>{O(F,T.component?p?p.children.getContext(Y):null:p,u)}),u.canDeactivateChecks.push(new Ci(T.component&&p&&p.outlet&&p.outlet.isActivated?p.outlet.component:null,T))}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+class ve{}function He(_){return new Ye.y(p=>p.error(_))}class dt{constructor(p,u,C,T,F,Y){this.rootComponentType=p,this.config=u,this.urlTree=C,this.url=T,this.paramsInheritanceStrategy=F,this.relativeLinkResolution=Y}recognize(){const p=Br(this.urlTree.root,[],[],this.config.filter(Y=>void 0===Y.redirectTo),this.relativeLinkResolution).segmentGroup,u=this.processSegmentGroup(this.config,p,et);if(null===u)return null;const C=new Qn([],Object.freeze({}),Object.freeze(Object.assign({},this.urlTree.queryParams)),this.urlTree.fragment,{},et,this.rootComponentType,null,this.urlTree.root,-1,{}),T=new Ot(C,u),F=new pi(this.url,T);return this.inheritParamsAndData(F._root),F}inheritParamsAndData(p){const u=p.value,C=Oi(u,this.paramsInheritanceStrategy);u.params=Object.freeze(C.params),u.data=Object.freeze(C.data),p.children.forEach(T=>this.inheritParamsAndData(T))}processSegmentGroup(p,u,C){return 0===u.segments.length&&u.hasChildren()?this.processChildren(p,u):this.processSegment(p,u,u.segments,C)}processChildren(p,u){const C=[];for(const F of Object.keys(u.children)){const Y=u.children[F],ne=_i(p,F),Ee=this.processSegmentGroup(ne,Y,F);if(null===Ee)return null;C.push(...Ee)}const T=$t(C);return function wt(_){_.sort((p,u)=>p.value.outlet===et?-1:u.value.outlet===et?1:p.value.outlet.localeCompare(u.value.outlet))}(T),T}processSegment(p,u,C,T){for(const F of p){const Y=this.processSegmentAgainstRoute(F,u,C,T);if(null!==Y)return Y}return ss(u,C,T)?[]:null}processSegmentAgainstRoute(p,u,C,T){if(p.redirectTo||!Tr(p,u,C,T))return null;let F,Y=[],ne=[];if("**"===p.path){const Zt=C.length>0?kn(C).parameters:{};F=new Qn(C,Zt,Object.freeze(Object.assign({},this.urlTree.queryParams)),this.urlTree.fragment,Mn(p),Er(p),p.component,p,an(u),In(u)+C.length,jr(p))}else{const Zt=Li(u,p,C);if(!Zt.matched)return null;Y=Zt.consumedSegments,ne=Zt.remainingSegments,F=new Qn(Y,Zt.parameters,Object.freeze(Object.assign({},this.urlTree.queryParams)),this.urlTree.fragment,Mn(p),Er(p),p.component,p,an(u),In(u)+Y.length,jr(p))}const Ee=function nt(_){return _.children?_.children:_.loadChildren?_._loadedConfig.routes:[]}(p),{segmentGroup:We,slicedSegments:Lt}=Br(u,Y,ne,Ee.filter(Zt=>void 0===Zt.redirectTo),this.relativeLinkResolution);if(0===Lt.length&&We.hasChildren()){const Zt=this.processChildren(Ee,We);return null===Zt?null:[new Ot(F,Zt)]}if(0===Ee.length&&0===Lt.length)return[new Ot(F,[])];const Je=Er(p)===T,qt=this.processSegment(Ee,We,Lt,Je?et:T);return null===qt?null:[new Ot(F,qt)]}}function vt(_){const p=_.value.routeConfig;return p&&""===p.path&&void 0===p.redirectTo}function $t(_){const p=[],u=new Set;for(const C of _){if(!vt(C)){p.push(C);continue}const T=p.find(F=>C.value.routeConfig===F.value.routeConfig);void 0!==T?(T.children.push(...C.children),u.add(T)):p.push(C)}for(const C of u){const T=$t(C.children);p.push(new Ot(C.value,T))}return p.filter(C=>!u.has(C))}function an(_){let p=_;for(;p._sourceSegment;)p=p._sourceSegment;return p}function In(_){let p=_,u=p._segmentIndexShift?p._segmentIndexShift:0;for(;p._sourceSegment;)p=p._sourceSegment,u+=p._segmentIndexShift?p._segmentIndexShift:0;return u-1}function Mn(_){return _.data||{}}function jr(_){return _.resolve||{}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */function rn(_){return[...Object.keys(_),...Object.getOwnPropertySymbols(_)]}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+function zt(_){return(0,rt.w)(p=>{const u=_(p);return u?(0,h.D)(u).pipe((0,Pe.U)(()=>p)):(0,j.of)(p)})}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class cs extends class wi{shouldDetach(p){return!1}store(p,u){}shouldAttach(p){return!1}retrieve(p){return null}shouldReuseRoute(p,u){return p.routeConfig===u.routeConfig}}{}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const Ge=new D.OlP("ROUTES");class qe{constructor(p,u,C,T){this.injector=p,this.compiler=u,this.onLoadStartListener=C,this.onLoadEndListener=T}load(p,u){if(u._loader$)return u._loader$;this.onLoadStartListener&&this.onLoadStartListener(u);const T=this.loadModuleFactory(u.loadChildren).pipe((0,Pe.U)(F=>{this.onLoadEndListener&&this.onLoadEndListener(u);const Y=F.create(p);return new Ri(zn(Y.injector.get(Ge,void 0,D.XFs.Self|D.XFs.Optional)).map(Ps),Y)}),(0,Re.K)(F=>{throw u._loader$=void 0,F}));return u._loader$=new $e.c(T,()=>new ae.xQ).pipe((0,Pr.x)()),u._loader$}loadModuleFactory(p){return en(p()).pipe((0,pn.zg)(u=>u instanceof D.YKP?(0,j.of)(u):(0,h.D)(this.compiler.compileModuleAsync(u))))}}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */class St{shouldProcessUrl(p){return!0}extract(p){return p}merge(p,u){return p}}function y(_){throw _}function M(_,p,u){return p.parse("/")}function E(_,p){return(0,j.of)(null)}const R={paths:"exact",fragment:"ignored",matrixParams:"ignored",queryParams:"exact"},W={paths:"subset",fragment:"ignored",matrixParams:"ignored",queryParams:"subset"};let de=(()=>{class _{constructor(u,C,T,F,Y,ne,Ee){this.rootComponentType=u,this.urlSerializer=C,this.rootContexts=T,this.location=F,this.config=Ee,this.lastSuccessfulNavigation=null,this.currentNavigation=null,this.disposed=!1,this.navigationId=0,this.currentPageId=0,this.isNgZoneEnabled=!1,this.events=new ae.xQ,this.errorHandler=y,this.malformedUriErrorHandler=M,this.navigated=!1,this.lastSuccessfulId=-1,this.hooks={beforePreactivation:E,afterPreactivation:E},this.urlHandlingStrategy=new St,this.routeReuseStrategy=new cs,this.onSameUrlNavigation="ignore",this.paramsInheritanceStrategy="emptyOnly",this.urlUpdateStrategy="deferred",this.relativeLinkResolution="corrected",this.canceledNavigationResolution="replace",this.ngModule=Y.get(D.h0i),this.console=Y.get(D.c2e);const Je=Y.get(D.R0b);this.isNgZoneEnabled=Je instanceof D.R0b&&D.R0b.isInAngularZone(),this.resetConfig(Ee),this.currentUrlTree=function Qr(){return new dn(new Xe([],{}),{},null)}(),this.rawUrlTree=this.currentUrlTree,this.browserUrlTree=this.currentUrlTree,this.configLoader=new qe(Y,ne,qt=>this.triggerEvent(new Me(qt)),qt=>this.triggerEvent(new Fe(qt))),this.routerState=yr(this.currentUrlTree,this.rootComponentType),this.transitions=new Q.X({id:0,targetPageId:0,currentUrlTree:this.currentUrlTree,currentRawUrl:this.currentUrlTree,extractedUrl:this.urlHandlingStrategy.extract(this.currentUrlTree),urlAfterRedirects:this.urlHandlingStrategy.extract(this.currentUrlTree),rawUrl:this.currentUrlTree,extras:{},resolve:null,reject:null,promise:Promise.resolve(!0),source:"imperative",restoredState:null,currentSnapshot:this.routerState.snapshot,targetSnapshot:null,currentRouterState:this.routerState,targetRouterState:null,guards:{canActivateChecks:[],canDeactivateChecks:[]},guardsResult:null}),this.navigations=this.setupNavigations(this.transitions),this.processNavigations()}get browserPageId(){var u;return null===(u=this.location.getState())||void 0===u?void 0:u.\u0275routerPageId}setupNavigations(u){const C=this.events;return u.pipe((0,_e.h)(T=>0!==T.id),(0,Pe.U)(T=>Object.assign(Object.assign({},T),{extractedUrl:this.urlHandlingStrategy.extract(T.rawUrl)})),(0,rt.w)(T=>{let F=!1,Y=!1;return(0,j.of)(T).pipe((0,kt.b)(ne=>{this.currentNavigation={id:ne.id,initialUrl:ne.currentRawUrl,extractedUrl:ne.extractedUrl,trigger:ne.source,extras:ne.extras,previousNavigation:this.lastSuccessfulNavigation?Object.assign(Object.assign({},this.lastSuccessfulNavigation),{previousNavigation:null}):null}}),(0,rt.w)(ne=>{const Ee=this.browserUrlTree.toString(),We=!this.navigated||ne.extractedUrl.toString()!==Ee||Ee!==this.currentUrlTree.toString();if(("reload"===this.onSameUrlNavigation||We)&&this.urlHandlingStrategy.shouldProcessUrl(ne.rawUrl))return ke(ne.source)&&(this.browserUrlTree=ne.extractedUrl),(0,j.of)(ne).pipe((0,rt.w)(Je=>{const qt=this.transitions.getValue();return C.next(new En(Je.id,this.serializeUrl(Je.extractedUrl),Je.source,Je.restoredState)),qt!==this.transitions.getValue()?Ue.E:Promise.resolve(Je)}),function Ae(_,p,u,C){return(0,rt.w)(T=>function lo(_,p,u,C,T){return new xs(_,p,u,C,T).apply()}(_,p,u,T.extractedUrl,C).pipe((0,Pe.U)(F=>Object.assign(Object.assign({},T),{urlAfterRedirects:F}))))}(this.ngModule.injector,this.configLoader,this.urlSerializer,this.config),(0,kt.b)(Je=>{this.currentNavigation=Object.assign(Object.assign({},this.currentNavigation),{finalUrl:Je.urlAfterRedirects})}),function Xn(_,p,u,C,T){return(0,pn.zg)(F=>function Ke(_,p,u,C,T="emptyOnly",F="legacy"){try{const Y=new dt(_,p,u,C,T,F).recognize();return null===Y?He(new ve):(0,j.of)(Y)}catch(Y){return He(Y)}}(_,p,F.urlAfterRedirects,u(F.urlAfterRedirects),C,T).pipe((0,Pe.U)(Y=>Object.assign(Object.assign({},F),{targetSnapshot:Y}))))}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(this.rootComponentType,this.config,Je=>this.serializeUrl(Je),this.paramsInheritanceStrategy,this.relativeLinkResolution),(0,kt.b)(Je=>{if("eager"===this.urlUpdateStrategy){if(!Je.extras.skipLocationChange){const Zt=this.urlHandlingStrategy.merge(Je.urlAfterRedirects,Je.rawUrl);this.setBrowserUrl(Zt,Je)}this.browserUrlTree=Je.urlAfterRedirects}const qt=new me(Je.id,this.serializeUrl(Je.extractedUrl),this.serializeUrl(Je.urlAfterRedirects),Je.targetSnapshot);C.next(qt)}));if(We&&this.rawUrlTree&&this.urlHandlingStrategy.shouldProcessUrl(this.rawUrlTree)){const{id:qt,extractedUrl:Zt,source:$r,restoredState:zr,extras:Ui}=ne,ds=new En(qt,this.serializeUrl(Zt),$r,zr);C.next(ds);const Ls=yr(Zt,this.rootComponentType).snapshot;return(0,j.of)(Object.assign(Object.assign({},ne),{targetSnapshot:Ls,urlAfterRedirects:Zt,extras:Object.assign(Object.assign({},Ui),{skipLocationChange:!1,replaceUrl:!1})}))}return this.rawUrlTree=ne.rawUrl,ne.resolve(null),Ue.E}),zt(ne=>{const{targetSnapshot:Ee,id:We,extractedUrl:Lt,rawUrl:Je,extras:{skipLocationChange:qt,replaceUrl:Zt}}=ne;return this.hooks.beforePreactivation(Ee,{navigationId:We,appliedUrlTree:Lt,rawUrlTree:Je,skipLocationChange:!!qt,replaceUrl:!!Zt})}),(0,kt.b)(ne=>{const Ee=new oe(ne.id,this.serializeUrl(ne.extractedUrl),this.serializeUrl(ne.urlAfterRedirects),ne.targetSnapshot);this.triggerEvent(Ee)}),(0,Pe.U)(ne=>Object.assign(Object.assign({},ne),{guards:wn(ne.targetSnapshot,ne.currentSnapshot,this.rootContexts)})),function c(_,p){return(0,pn.zg)(u=>{const{targetSnapshot:C,currentSnapshot:T,guards:{canActivateChecks:F,canDeactivateChecks:Y}}=u;return 0===Y.length&&0===F.length?(0,j.of)(Object.assign(Object.assign({},u),{guardsResult:!0})):function f(_,p,u,C){return(0,h.D)(_).pipe((0,pn.zg)(T=>function ue(_,p,u,C,T){const F=p&&p.routeConfig?p.routeConfig.canDeactivate:null;if(!F||0===F.length)return(0,j.of)(!0);const Y=F.map(ne=>{const Ee=Dr(ne,p,T);let We;if(function ri(_){return _&&ni(_.canDeactivate)}(Ee))We=en(Ee.canDeactivate(_,p,u,C));else{if(!ni(Ee))throw new Error("Invalid CanDeactivate guard");We=en(Ee(_,p,u,C))}return We.pipe(Yt())});return(0,j.of)(Y).pipe(xi())}(T.component,T.route,u,p,C)),Yt(T=>!0!==T,!0))}(Y,C,T,_).pipe((0,pn.zg)(ne=>ne&&function Zn(_){return"boolean"==typeof _}(ne)?function b(_,p,u,C){return(0,h.D)(p).pipe((0,mt.b)(T=>(0,fe.z)(function B(_,p){return null!==_&&p&&p(new Kt(_)),(0,j.of)(!0)}(T.route.parent,C),function P(_,p){return null!==_&&p&&p(new xt(_)),(0,j.of)(!0)}(T.route,C),function q(_,p,u){const C=p[p.length-1],F=p.slice(0,p.length-1).reverse().map(Y=>function as(_){const p=_.routeConfig?_.routeConfig.canActivateChild:null;return p&&0!==p.length?{node:_,guards:p}:null}(Y)).filter(Y=>null!==Y).map(Y=>(0,Be.P)(()=>{const ne=Y.guards.map(Ee=>{const We=Dr(Ee,Y.node,u);let Lt;if(function is(_){return _&&ni(_.canActivateChild)}(We))Lt=en(We.canActivateChild(C,_));else{if(!ni(We))throw new Error("Invalid CanActivateChild guard");Lt=en(We(C,_))}return Lt.pipe(Yt())});return(0,j.of)(ne).pipe(xi())}));return(0,j.of)(F).pipe(xi())}(_,T.path,u),function J(_,p,u){const C=p.routeConfig?p.routeConfig.canActivate:null;if(!C||0===C.length)return(0,j.of)(!0);const T=C.map(F=>(0,Be.P)(()=>{const Y=Dr(F,p,u);let ne;if(function mi(_){return _&&ni(_.canActivate)}(Y))ne=en(Y.canActivate(p,_));else{if(!ni(Y))throw new Error("Invalid CanActivate guard");ne=en(Y(p,_))}return ne.pipe(Yt())}));return(0,j.of)(T).pipe(xi())}(_,T.route,u))),Yt(T=>!0!==T,!0))}(C,F,_,p):(0,j.of)(ne)),(0,Pe.U)(ne=>Object.assign(Object.assign({},u),{guardsResult:ne})))})}(this.ngModule.injector,ne=>this.triggerEvent(ne)),(0,kt.b)(ne=>{if(vr(ne.guardsResult)){const We=Kn(`Redirecting to "${this.serializeUrl(ne.guardsResult)}"`);throw We.url=ne.guardsResult,We}const Ee=new ee(ne.id,this.serializeUrl(ne.extractedUrl),this.serializeUrl(ne.urlAfterRedirects),ne.targetSnapshot,!!ne.guardsResult);this.triggerEvent(Ee)}),(0,_e.h)(ne=>!!ne.guardsResult||(this.restoreHistory(ne),this.cancelNavigationTransition(ne,""),!1)),zt(ne=>{if(ne.guards.canActivateChecks.length)return(0,j.of)(ne).pipe((0,kt.b)(Ee=>{const We=new Ie(Ee.id,this.serializeUrl(Ee.extractedUrl),this.serializeUrl(Ee.urlAfterRedirects),Ee.targetSnapshot);this.triggerEvent(We)}),(0,rt.w)(Ee=>{let We=!1;return(0,j.of)(Ee).pipe(function vn(_,p){return(0,pn.zg)(u=>{const{targetSnapshot:C,guards:{canActivateChecks:T}}=u;if(!T.length)return(0,j.of)(u);let F=0;return(0,h.D)(T).pipe((0,mt.b)(Y=>function Ar(_,p,u,C){return function Vr(_,p,u,C){const T=rn(_);if(0===T.length)return(0,j.of)({});const F={};return(0,h.D)(T).pipe((0,pn.zg)(Y=>function Hr(_,p,u,C){const T=Dr(_,p,C);return en(T.resolve?T.resolve(p,u):T(p,u))}(_[Y],p,u,C).pipe((0,kt.b)(ne=>{F[Y]=ne}))),(0,un.h)(1),(0,pn.zg)(()=>rn(F).length===T.length?(0,j.of)(F):Ue.E))}(_._resolve,_,p,C).pipe((0,Pe.U)(F=>(_._resolvedData=F,_.data=Object.assign(Object.assign({},_.data),Oi(_,u).resolve),null)))}(Y.route,C,_,p)),(0,kt.b)(()=>F++),(0,un.h)(1),(0,pn.zg)(Y=>F===T.length?(0,j.of)(u):Ue.E))})}(this.paramsInheritanceStrategy,this.ngModule.injector),(0,kt.b)({next:()=>We=!0,complete:()=>{We||(this.restoreHistory(Ee),this.cancelNavigationTransition(Ee,"At least one route resolver didn't emit any value."))}}))}),(0,kt.b)(Ee=>{const We=new Ce(Ee.id,this.serializeUrl(Ee.extractedUrl),this.serializeUrl(Ee.urlAfterRedirects),Ee.targetSnapshot);this.triggerEvent(We)}))}),zt(ne=>{const{targetSnapshot:Ee,id:We,extractedUrl:Lt,rawUrl:Je,extras:{skipLocationChange:qt,replaceUrl:Zt}}=ne;return this.hooks.afterPreactivation(Ee,{navigationId:We,appliedUrlTree:Lt,rawUrlTree:Je,skipLocationChange:!!qt,replaceUrl:!!Zt})}),(0,Pe.U)(ne=>{const Ee=function Ji(_,p,u){const C=Xi(_,p._root,u?u._root:void 0);return new Cs(C,p)}(this.routeReuseStrategy,ne.targetSnapshot,ne.currentRouterState);return Object.assign(Object.assign({},ne),{targetRouterState:Ee})}),(0,kt.b)(ne=>{this.currentUrlTree=ne.urlAfterRedirects,this.rawUrlTree=this.urlHandlingStrategy.merge(ne.urlAfterRedirects,ne.rawUrl),this.routerState=ne.targetRouterState,"deferred"===this.urlUpdateStrategy&&(ne.extras.skipLocationChange||this.setBrowserUrl(this.rawUrlTree,ne),this.browserUrlTree=ne.urlAfterRedirects)}),((_,p,u)=>(0,Pe.U)(C=>(new oo(p,C.targetRouterState,C.currentRouterState,u).activate(_),C)))(this.rootContexts,this.routeReuseStrategy,ne=>this.triggerEvent(ne)),(0,kt.b)({next(){F=!0},complete(){F=!0}}),function yn(_){return p=>p.lift(new Rr(_))}(()=>{var ne;F||Y||this.cancelNavigationTransition(T,`Navigation ID ${T.id} is not equal to the current navigation id ${this.navigationId}`),(null===(ne=this.currentNavigation)||void 0===ne?void 0:ne.id)===T.id&&(this.currentNavigation=null)}),(0,Re.K)(ne=>{if(Y=!0,function Ct(_){return _&&_[It]}(ne)){const Ee=vr(ne.url);Ee||(this.navigated=!0,this.restoreHistory(T,!0));const We=new er(T.id,this.serializeUrl(T.extractedUrl),ne.message);C.next(We),Ee?setTimeout(()=>{const Lt=this.urlHandlingStrategy.merge(ne.url,this.rawUrlTree),Je={skipLocationChange:T.extras.skipLocationChange,replaceUrl:"eager"===this.urlUpdateStrategy||ke(T.source)};this.scheduleNavigation(Lt,"imperative",null,Je,{resolve:T.resolve,reject:T.reject,promise:T.promise})},0):T.resolve(!1)}else{this.restoreHistory(T,!0);const Ee=new st(T.id,this.serializeUrl(T.extractedUrl),ne);C.next(Ee);try{T.resolve(this.errorHandler(ne))}catch(We){T.reject(We)}}return Ue.E}))}))}resetRootComponentType(u){this.rootComponentType=u,this.routerState.root.component=this.rootComponentType}setTransition(u){this.transitions.next(Object.assign(Object.assign({},this.transitions.value),u))}initialNavigation(){this.setUpLocationChangeListener(),0===this.navigationId&&this.navigateByUrl(this.location.path(!0),{replaceUrl:!0})}setUpLocationChangeListener(){this.locationSubscription||(this.locationSubscription=this.location.subscribe(u=>{const C="popstate"===u.type?"popstate":"hashchange";"popstate"===C&&setTimeout(()=>{var T;const F={replaceUrl:!0},Y=(null===(T=u.state)||void 0===T?void 0:T.navigationId)?u.state:null;if(Y){const Ee=Object.assign({},Y);delete Ee.navigationId,delete Ee.\u0275routerPageId,0!==Object.keys(Ee).length&&(F.state=Ee)}const ne=this.parseUrl(u.url);this.scheduleNavigation(ne,C,Y,F)},0)}))}get url(){return this.serializeUrl(this.currentUrlTree)}getCurrentNavigation(){return this.currentNavigation}triggerEvent(u){this.events.next(u)}resetConfig(u){yi(u),this.config=u.map(Ps),this.navigated=!1,this.lastSuccessfulId=-1}ngOnDestroy(){this.dispose()}dispose(){this.transitions.complete(),this.locationSubscription&&(this.locationSubscription.unsubscribe(),this.locationSubscription=void 0),this.disposed=!0}createUrlTree(u,C={}){const{relativeTo:T,queryParams:F,fragment:Y,queryParamsHandling:ne,preserveFragment:Ee}=C,We=T||this.routerState.root,Lt=Ee?this.currentUrlTree.fragment:Y;let Je=null;switch(ne){case"merge":Je=Object.assign(Object.assign({},this.currentUrlTree.queryParams),F);break;case"preserve":Je=this.currentUrlTree.queryParams;break;default:Je=F||null}return null!==Je&&(Je=this.removeEmptyProps(Je)),function eo(_,p,u,C,T){if(0===u.length)return ts(p.root,p.root,p.root,C,T);const F=function to(_){if("string"==typeof _[0]&&1===_.length&&"/"===_[0])return new Ss(!0,0,_);let p=0,u=!1;const C=_.reduce((T,F,Y)=>{if("object"==typeof F&&null!=F){if(F.outlets){const ne={};return Qt(F.outlets,(Ee,We)=>{ne[We]="string"==typeof Ee?Ee.split("/"):Ee}),[...T,{outlets:ne}]}if(F.segmentPath)return[...T,F.segmentPath]}return"string"!=typeof F?[...T,F]:0===Y?(F.split("/").forEach((ne,Ee)=>{0==Ee&&"."===ne||(0==Ee&&""===ne?u=!0:".."===ne?p++:""!=ne&&T.push(ne))}),T):[...T,F]},[]);return new Ss(u,p,C)}(u);if(F.toRoot())return ts(p.root,p.root,new Xe([],{}),C,T);const Y=function no(_,p,u){if(_.isAbsolute)return new zs(p.root,!0,0);if(-1===u.snapshot._lastPathIndex){const F=u.snapshot._urlSegment;return new zs(F,F===p.root,0)}const C=qi(_.commands[0])?0:1;return function Ms(_,p,u){let C=_,T=p,F=u;for(;F>T;){if(F-=T,C=C.parent,!C)throw new Error("Invalid number of '../'");T=C.segments.length}return new zs(C,!1,T-F)}(u.snapshot._urlSegment,u.snapshot._lastPathIndex+C,_.numberOfDoubleDots)}(F,p,_),ne=Y.processChildren?As(Y.segmentGroup,Y.index,F.commands):Ts(Y.segmentGroup,Y.index,F.commands);return ts(p.root,Y.segmentGroup,ne,C,T)}(We,this.currentUrlTree,u,Je,null!=Lt?Lt:null)}navigateByUrl(u,C={skipLocationChange:!1}){const T=vr(u)?u:this.parseUrl(u),F=this.urlHandlingStrategy.merge(T,this.rawUrlTree);return this.scheduleNavigation(F,"imperative",null,C)}navigate(u,C={skipLocationChange:!1}){return function we(_){for(let p=0;p<_.length;p++){const u=_[p];if(null==u)throw new Error(`The requested path contains ${u} segment at index ${p}`)}}(u),this.navigateByUrl(this.createUrlTree(u,C),C)}serializeUrl(u){return this.urlSerializer.serialize(u)}parseUrl(u){let C;try{C=this.urlSerializer.parse(u)}catch(T){C=this.malformedUriErrorHandler(T,this.urlSerializer,u)}return C}isActive(u,C){let T;if(T=!0===C?Object.assign({},R):!1===C?Object.assign({},W):C,vr(u))return K(this.currentUrlTree,u,T);const F=this.parseUrl(u);return K(this.currentUrlTree,F,T)}removeEmptyProps(u){return Object.keys(u).reduce((C,T)=>{const F=u[T];return null!=F&&(C[T]=F),C},{})}processNavigations(){this.navigations.subscribe(u=>{this.navigated=!0,this.lastSuccessfulId=u.id,this.currentPageId=u.targetPageId,this.events.next(new Yn(u.id,this.serializeUrl(u.extractedUrl),this.serializeUrl(this.currentUrlTree))),this.lastSuccessfulNavigation=this.currentNavigation,u.resolve(!0)},u=>{this.console.warn(`Unhandled Navigation Error: ${u}`)})}scheduleNavigation(u,C,T,F,Y){var ne,Ee;if(this.disposed)return Promise.resolve(!1);let We,Lt,Je;Y?(We=Y.resolve,Lt=Y.reject,Je=Y.promise):Je=new Promise(($r,zr)=>{We=$r,Lt=zr});const qt=++this.navigationId;let Zt;return"computed"===this.canceledNavigationResolution?(0===this.currentPageId&&(T=this.location.getState()),Zt=T&&T.\u0275routerPageId?T.\u0275routerPageId:F.replaceUrl||F.skipLocationChange?null!==(ne=this.browserPageId)&&void 0!==ne?ne:0:(null!==(Ee=this.browserPageId)&&void 0!==Ee?Ee:0)+1):Zt=0,this.setTransition({id:qt,targetPageId:Zt,source:C,restoredState:T,currentUrlTree:this.currentUrlTree,currentRawUrl:this.rawUrlTree,rawUrl:u,extras:F,resolve:We,reject:Lt,promise:Je,currentSnapshot:this.routerState.snapshot,currentRouterState:this.routerState}),Je.catch($r=>Promise.reject($r))}setBrowserUrl(u,C){const T=this.urlSerializer.serialize(u),F=Object.assign(Object.assign({},C.extras.state),this.generateNgRouterState(C.id,C.targetPageId));this.location.isCurrentPathEqualTo(T)||C.extras.replaceUrl?this.location.replaceState(T,"",F):this.location.go(T,"",F)}restoreHistory(u,C=!1){var T,F;if("computed"===this.canceledNavigationResolution){const Y=this.currentPageId-u.targetPageId;"popstate"!==u.source&&"eager"!==this.urlUpdateStrategy&&this.currentUrlTree!==(null===(T=this.currentNavigation)||void 0===T?void 0:T.finalUrl)||0===Y?this.currentUrlTree===(null===(F=this.currentNavigation)||void 0===F?void 0:F.finalUrl)&&0===Y&&(this.resetState(u),this.browserUrlTree=u.currentUrlTree,this.resetUrlToCurrentUrlTree()):this.location.historyGo(Y)}else"replace"===this.canceledNavigationResolution&&(C&&this.resetState(u),this.resetUrlToCurrentUrlTree())}resetState(u){this.routerState=u.currentRouterState,this.currentUrlTree=u.currentUrlTree,this.rawUrlTree=this.urlHandlingStrategy.merge(this.currentUrlTree,u.rawUrl)}resetUrlToCurrentUrlTree(){this.location.replaceState(this.urlSerializer.serialize(this.rawUrlTree),"",this.generateNgRouterState(this.lastSuccessfulId,this.currentPageId))}cancelNavigationTransition(u,C){const T=new er(u.id,this.serializeUrl(u.extractedUrl),C);this.triggerEvent(T),u.resolve(!1)}generateNgRouterState(u,C){return"computed"===this.canceledNavigationResolution?{navigationId:u,\u0275routerPageId:C}:{navigationId:u}}}return _.\u0275fac=function(u){D.$Z()},_.\u0275prov=D.Yz7({token:_,factory:_.\u0275fac}),_})();function ke(_){return"imperative"!==_}let Dt=(()=>{class _{constructor(u,C,T,F,Y){this.router=u,this.route=C,this.tabIndexAttribute=T,this.renderer=F,this.el=Y,this.commands=null,this.onChanges=new ae.xQ,this.setTabIndexIfNotOnNativeEl("0")}setTabIndexIfNotOnNativeEl(u){if(null!=this.tabIndexAttribute)return;const C=this.renderer,T=this.el.nativeElement;null!==u?C.setAttribute(T,"tabindex",u):C.removeAttribute(T,"tabindex")}ngOnChanges(u){this.onChanges.next(this)}set routerLink(u){null!=u?(this.commands=Array.isArray(u)?u:[u],this.setTabIndexIfNotOnNativeEl("0")):(this.commands=null,this.setTabIndexIfNotOnNativeEl(null))}onClick(){if(null===this.urlTree)return!0;const u={skipLocationChange:Et(this.skipLocationChange),replaceUrl:Et(this.replaceUrl),state:this.state};return this.router.navigateByUrl(this.urlTree,u),!0}get urlTree(){return null===this.commands?null:this.router.createUrlTree(this.commands,{relativeTo:void 0!==this.relativeTo?this.relativeTo:this.route,queryParams:this.queryParams,fragment:this.fragment,queryParamsHandling:this.queryParamsHandling,preserveFragment:Et(this.preserveFragment)})}}return _.\u0275fac=function(u){return new(u||_)(D.Y36(de),D.Y36(Vt),D.$8M("tabindex"),D.Y36(D.Qsj),D.Y36(D.SBq))},_.\u0275dir=D.lG2({type:_,selectors:[["","routerLink","",5,"a",5,"area"]],hostBindings:function(u,C){1&u&&D.NdJ("click",function(){return C.onClick()})},inputs:{queryParams:"queryParams",fragment:"fragment",queryParamsHandling:"queryParamsHandling",preserveFragment:"preserveFragment",skipLocationChange:"skipLocationChange",replaceUrl:"replaceUrl",state:"state",relativeTo:"relativeTo",routerLink:"routerLink"},features:[D.TTD]}),_})(),ct=(()=>{class _{constructor(u,C,T){this.router=u,this.route=C,this.locationStrategy=T,this.commands=null,this.href=null,this.onChanges=new ae.xQ,this.subscription=u.events.subscribe(F=>{F instanceof Yn&&this.updateTargetUrlAndHref()})}set routerLink(u){this.commands=null!=u?Array.isArray(u)?u:[u]:null}ngOnChanges(u){this.updateTargetUrlAndHref(),this.onChanges.next(this)}ngOnDestroy(){this.subscription.unsubscribe()}onClick(u,C,T,F,Y){if(0!==u||C||T||F||Y||"string"==typeof this.target&&"_self"!=this.target||null===this.urlTree)return!0;const ne={skipLocationChange:Et(this.skipLocationChange),replaceUrl:Et(this.replaceUrl),state:this.state};return this.router.navigateByUrl(this.urlTree,ne),!1}updateTargetUrlAndHref(){this.href=null!==this.urlTree?this.locationStrategy.prepareExternalUrl(this.router.serializeUrl(this.urlTree)):null}get urlTree(){return null===this.commands?null:this.router.createUrlTree(this.commands,{relativeTo:void 0!==this.relativeTo?this.relativeTo:this.route,queryParams:this.queryParams,fragment:this.fragment,queryParamsHandling:this.queryParamsHandling,preserveFragment:Et(this.preserveFragment)})}}return _.\u0275fac=function(u){return new(u||_)(D.Y36(de),D.Y36(Vt),D.Y36(Pn.S$))},_.\u0275dir=D.lG2({type:_,selectors:[["a","routerLink",""],["area","routerLink",""]],hostVars:2,hostBindings:function(u,C){1&u&&D.NdJ("click",function(F){return C.onClick(F.button,F.ctrlKey,F.shiftKey,F.altKey,F.metaKey)}),2&u&&D.uIk("target",C.target)("href",C.href,D.LSH)},inputs:{target:"target",queryParams:"queryParams",fragment:"fragment",queryParamsHandling:"queryParamsHandling",preserveFragment:"preserveFragment",skipLocationChange:"skipLocationChange",replaceUrl:"replaceUrl",state:"state",relativeTo:"relativeTo",routerLink:"routerLink"},features:[D.TTD]}),_})();function Et(_){return""===_||!!_}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */let Mt=(()=>{class _{constructor(u,C,T,F,Y,ne){this.router=u,this.element=C,this.renderer=T,this.cdr=F,this.link=Y,this.linkWithHref=ne,this.classes=[],this.isActive=!1,this.routerLinkActiveOptions={exact:!1},this.isActiveChange=new D.vpe,this.routerEventsSubscription=u.events.subscribe(Ee=>{Ee instanceof Yn&&this.update()})}ngAfterContentInit(){(0,j.of)(this.links.changes,this.linksWithHrefs.changes,(0,j.of)(null)).pipe((0,xr.J)()).subscribe(u=>{this.update(),this.subscribeToEachLinkOnChanges()})}subscribeToEachLinkOnChanges(){var u;null===(u=this.linkInputChangesSubscription)||void 0===u||u.unsubscribe();const C=[...this.links.toArray(),...this.linksWithHrefs.toArray(),this.link,this.linkWithHref].filter(T=>!!T).map(T=>T.onChanges);this.linkInputChangesSubscription=(0,h.D)(C).pipe((0,xr.J)()).subscribe(T=>{this.isActive!==this.isLinkActive(this.router)(T)&&this.update()})}set routerLinkActive(u){const C=Array.isArray(u)?u:u.split(" ");this.classes=C.filter(T=>!!T)}ngOnChanges(u){this.update()}ngOnDestroy(){var u;this.routerEventsSubscription.unsubscribe(),null===(u=this.linkInputChangesSubscription)||void 0===u||u.unsubscribe()}update(){!this.links||!this.linksWithHrefs||!this.router.navigated||Promise.resolve().then(()=>{const u=this.hasActiveLinks();this.isActive!==u&&(this.isActive=u,this.cdr.markForCheck(),this.classes.forEach(C=>{u?this.renderer.addClass(this.element.nativeElement,C):this.renderer.removeClass(this.element.nativeElement,C)}),this.isActiveChange.emit(u))})}isLinkActive(u){const C=function Tn(_){return!!_.paths}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */(this.routerLinkActiveOptions)?this.routerLinkActiveOptions:this.routerLinkActiveOptions.exact||!1;return T=>!!T.urlTree&&u.isActive(T.urlTree,C)}hasActiveLinks(){const u=this.isLinkActive(this.router);return this.link&&u(this.link)||this.linkWithHref&&u(this.linkWithHref)||this.links.some(u)||this.linksWithHrefs.some(u)}}return _.\u0275fac=function(u){return new(u||_)(D.Y36(de),D.Y36(D.SBq),D.Y36(D.Qsj),D.Y36(D.sBO),D.Y36(Dt,8),D.Y36(ct,8))},_.\u0275dir=D.lG2({type:_,selectors:[["","routerLinkActive",""]],contentQueries:function(u,C,T){if(1&u&&(D.Suo(T,Dt,5),D.Suo(T,ct,5)),2&u){let F;D.iGM(F=D.CRH())&&(C.links=F),D.iGM(F=D.CRH())&&(C.linksWithHrefs=F)}},inputs:{routerLinkActiveOptions:"routerLinkActiveOptions",routerLinkActive:"routerLinkActive"},outputs:{isActiveChange:"isActiveChange"},exportAs:["routerLinkActive"],features:[D.TTD]}),_})();class Gt{}class or{preload(p,u){return(0,j.of)(null)}}let ar=(()=>{class _{constructor(u,C,T,F){this.router=u,this.injector=T,this.preloadingStrategy=F,this.loader=new qe(T,C,Ee=>u.triggerEvent(new Me(Ee)),Ee=>u.triggerEvent(new Fe(Ee)))}setUpPreloading(){this.subscription=this.router.events.pipe((0,_e.h)(u=>u instanceof Yn),(0,mt.b)(()=>this.preload())).subscribe(()=>{})}preload(){const u=this.injector.get(D.h0i);return this.processRoutes(u,this.router.config)}ngOnDestroy(){this.subscription&&this.subscription.unsubscribe()}processRoutes(u,C){const T=[];for(const F of C)if(F.loadChildren&&!F.canLoad&&F._loadedConfig){const Y=F._loadedConfig;T.push(this.processRoutes(Y.module,Y.routes))}else F.loadChildren&&!F.canLoad?T.push(this.preloadConfig(u,F)):F.children&&T.push(this.processRoutes(u,F.children));return(0,h.D)(T).pipe((0,xr.J)(),(0,Pe.U)(F=>{}))}preloadConfig(u,C){return this.preloadingStrategy.preload(C,()=>(C._loadedConfig?(0,j.of)(C._loadedConfig):this.loader.load(u.injector,C)).pipe((0,pn.zg)(F=>(C._loadedConfig=F,this.processRoutes(F.module,F.routes)))))}}return _.\u0275fac=function(u){return new(u||_)(D.LFG(de),D.LFG(D.Sil),D.LFG(D.zs3),D.LFG(Gt))},_.\u0275prov=D.Yz7({token:_,factory:_.\u0275fac}),_})(),lr=(()=>{class _{constructor(u,C,T={}){this.router=u,this.viewportScroller=C,this.options=T,this.lastId=0,this.lastSource="imperative",this.restoredId=0,this.store={},T.scrollPositionRestoration=T.scrollPositionRestoration||"disabled",T.anchorScrolling=T.anchorScrolling||"disabled"}init(){"disabled"!==this.options.scrollPositionRestoration&&this.viewportScroller.setHistoryScrollRestoration("manual"),this.routerEventsSubscription=this.createScrollEvents(),this.scrollEventsSubscription=this.consumeScrollEvents()}createScrollEvents(){return this.router.events.subscribe(u=>{u instanceof En?(this.store[this.lastId]=this.viewportScroller.getScrollPosition(),this.lastSource=u.navigationTrigger,this.restoredId=u.restoredState?u.restoredState.navigationId:0):u instanceof Yn&&(this.lastId=u.id,this.scheduleScrollEvent(u,this.router.parseUrl(u.urlAfterRedirects).fragment))})}consumeScrollEvents(){return this.router.events.subscribe(u=>{u instanceof jt&&(u.position?"top"===this.options.scrollPositionRestoration?this.viewportScroller.scrollToPosition([0,0]):"enabled"===this.options.scrollPositionRestoration&&this.viewportScroller.scrollToPosition(u.position):u.anchor&&"enabled"===this.options.anchorScrolling?this.viewportScroller.scrollToAnchor(u.anchor):"disabled"!==this.options.scrollPositionRestoration&&this.viewportScroller.scrollToPosition([0,0]))})}scheduleScrollEvent(u,C){this.router.triggerEvent(new jt(u,"popstate"===this.lastSource?this.store[this.restoredId]:null,C))}ngOnDestroy(){this.routerEventsSubscription&&this.routerEventsSubscription.unsubscribe(),this.scrollEventsSubscription&&this.scrollEventsSubscription.unsubscribe()}}return _.\u0275fac=function(u){D.$Z()},_.\u0275prov=D.Yz7({token:_,factory:_.\u0275fac}),_})();
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */const cr=new D.OlP("ROUTER_CONFIGURATION"),Si=new D.OlP("ROUTER_FORROOT_GUARD"),ci=[Pn.Ye,{provide:Zr,useClass:gr},{provide:de,useFactory:function fo(_,p,u,C,T,F,Y={},ne,Ee){const We=new de(null,_,p,u,C,T,zn(F));return ne&&(We.urlHandlingStrategy=ne),Ee&&(We.routeReuseStrategy=Ee),function qa(_,p){_.errorHandler&&(p.errorHandler=_.errorHandler),_.malformedUriErrorHandler&&(p.malformedUriErrorHandler=_.malformedUriErrorHandler),_.onSameUrlNavigation&&(p.onSameUrlNavigation=_.onSameUrlNavigation),_.paramsInheritanceStrategy&&(p.paramsInheritanceStrategy=_.paramsInheritanceStrategy),_.relativeLinkResolution&&(p.relativeLinkResolution=_.relativeLinkResolution),_.urlUpdateStrategy&&(p.urlUpdateStrategy=_.urlUpdateStrategy),_.canceledNavigationResolution&&(p.canceledNavigationResolution=_.canceledNavigationResolution)}(Y,We),Y.enableTracing&&We.events.subscribe(Lt=>{var Je,qt;null===(Je=console.group)||void 0===Je||Je.call(console,`Router Event: ${Lt.constructor.name}`),console.log(Lt.toString()),console.log(Lt),null===(qt=console.groupEnd)||void 0===qt||qt.call(console)}),We},deps:[Zr,Mr,Pn.Ye,D.zs3,D.Sil,Ge,cr,[class ot{},new D.FiY],[class br{},new D.FiY]]},Mr,{provide:Vt,useFactory:function el(_){return _.routerState.root},deps:[de]},ar,or,class Un{preload(p,u){return u().pipe((0,Re.K)(()=>(0,j.of)(null)))}},{provide:cr,useValue:{enableTracing:!1}}];function Oo(){return new D.PXZ("Router",de)}let us=(()=>{class _{constructor(u,C){}static forRoot(u,C){return{ngModule:_,providers:[ci,ho(u),{provide:Si,useFactory:Ns,deps:[[de,new D.FiY,new D.tp0]]},{provide:cr,useValue:C||{}},{provide:Pn.S$,useFactory:Ys,deps:[Pn.lw,[new D.tBr(Pn.mr),new D.FiY],cr]},{provide:lr,useFactory:uo,deps:[de,Pn.EM,cr]},{provide:Gt,useExisting:C&&C.preloadingStrategy?C.preloadingStrategy:or},{provide:D.PXZ,multi:!0,useFactory:Oo},[Bi,{provide:D.ip1,multi:!0,useFactory:po,deps:[Bi]},{provide:Ks,useFactory:go,deps:[Bi]},{provide:D.tb,multi:!0,useExisting:Ks}]]}}static forChild(u){return{ngModule:_,providers:[ho(u)]}}}return _.\u0275fac=function(u){return new(u||_)(D.LFG(Si,8),D.LFG(de,8))},_.\u0275mod=D.oAB({type:_}),_.\u0275inj=D.cJS({}),_})();function uo(_,p,u){return u.scrollOffset&&p.setOffset(u.scrollOffset),new lr(_,p,u)}function Ys(_,p,u={}){return u.useHash?new Pn.Do(_,p):new Pn.b0(_,p)}function Ns(_){return"guarded"}function ho(_){return[{provide:D.deG,multi:!0,useValue:_},{provide:Ge,multi:!0,useValue:_}]}let Bi=(()=>{class _{constructor(u){this.injector=u,this.initNavigation=!1,this.destroyed=!1,this.resultOfPreactivationDone=new ae.xQ}appInitializer(){return this.injector.get(Pn.V_,Promise.resolve(null)).then(()=>{if(this.destroyed)return Promise.resolve(!0);let C=null;const T=new Promise(ne=>C=ne),F=this.injector.get(de),Y=this.injector.get(cr);return"disabled"===Y.initialNavigation?(F.setUpLocationChangeListener(),C(!0)):"enabled"===Y.initialNavigation||"enabledBlocking"===Y.initialNavigation?(F.hooks.afterPreactivation=()=>this.initNavigation?(0,j.of)(null):(this.initNavigation=!0,C(!0),this.resultOfPreactivationDone),F.initialNavigation()):C(!0),T})}bootstrapListener(u){const C=this.injector.get(cr),T=this.injector.get(ar),F=this.injector.get(lr),Y=this.injector.get(de),ne=this.injector.get(D.z2F);u===ne.components[0]&&(("enabledNonBlocking"===C.initialNavigation||void 0===C.initialNavigation)&&Y.initialNavigation(),T.setUpPreloading(),F.init(),Y.resetRootComponentType(ne.componentTypes[0]),this.resultOfPreactivationDone.next(null),this.resultOfPreactivationDone.complete())}ngOnDestroy(){this.destroyed=!0}}return _.\u0275fac=function(u){return new(u||_)(D.LFG(D.zs3))},_.\u0275prov=D.Yz7({token:_,factory:_.\u0275fac}),_})();function po(_){return _.appInitializer.bind(_)}function go(_){return _.bootstrapListener.bind(_)}const Ks=new D.OlP("Router Initializer")}
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */
+/**
+       * @license
+       * Copyright Google LLC All Rights Reserved.
+       *
+       * Use of this source code is governed by an MIT-style license that can be
+       * found in the LICENSE file at https://angular.io/license
+       */},Le=>{Le(Le.s=1746)}]);
