@@ -46,6 +46,10 @@ namespace Horse.Jockey.Handlers.WebSockets
                     break;
 
                 case "client":
+                    if (model.Join)
+                        _subscriptionService.SubscribeClientDetail(socket, _rider.Client.Find(split[1]), model.Resolution);
+                    else
+                        _subscriptionService.UnsubscribeClientDetail(socket);
                     break;
 
                 case "router":

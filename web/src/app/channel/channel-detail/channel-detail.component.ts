@@ -47,7 +47,7 @@ export class ChannelDetailComponent extends BaseComponent implements OnInit, OnD
 
   private async load() {
     this.channel = await this.service.get(this.channelName);
-    let count = await this.service.getGraph(this.channelName, '10m')
+    let count = await this.service.getGraph(this.channelName, '1m')
 
     if (this.channelChart)
       this.channelChart.destroy();

@@ -36,7 +36,7 @@ export class ClientDetailComponent extends BaseComponent implements OnInit, OnDe
 
   private async load() {
     this.client = await this.service.get(this.id);
-    let count = await this.service.getGraph(this.id, '10m')
+    let count = await this.service.getGraph(this.id, '1m')
 
     if (this.clientChart)
       this.clientChart.destroy();

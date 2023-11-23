@@ -5,6 +5,7 @@ using Horse.Jockey.Helpers;
 using Horse.Jockey.Models.Subscriptions;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server.Channels;
+using Horse.Messaging.Server.Clients;
 using Horse.Messaging.Server.Queues;
 using Horse.Messaging.Server.Routing;
 using Horse.WebSocket.Protocol;
@@ -16,6 +17,7 @@ namespace Horse.Jockey.Core
         private readonly List<ConsoleSubscription> _console = new();
         private readonly List<ChannelDetailSubscription> _channels = new();
         private readonly List<QueueDetailSubscription> _queues = new();
+        private readonly List<ClientDetailSubscription> _clients = new();
         private readonly List<WsServerSocket> _dashboard = new();
 
         #region Console
@@ -283,6 +285,57 @@ namespace Horse.Jockey.Core
             List<ChannelDetailSubscription> list;
             lock (_channels)
                 list = new List<ChannelDetailSubscription>(_channels);
+
+            return list;
+        }
+
+        #endregion
+
+        #region Client
+
+        public void SubscribeClientDetail(WsServerSocket client, MessagingClient target, string resolution)
+        {
+            UnsubscribeClientDetail(client);
+
+            ClientDetailSubscription subscription = new()
+            {
+                Client = client,
+                TargetClient = target,
+                Resolution = resolution
+            };
+
+            lock (_clients)
+                _clients.Add(subscription);
+        }
+
+        public void UnsubscribeClientDetail(WsServerSocket client)
+        {
+            lock (_clients)
+            {
+                int index = _clients.FindIndex(x => x.Client == client);
+                if (index < 0)
+                    return;
+
+                _clients.RemoveAt(index);
+            }
+        }
+
+        public List<ClientDetailSubscription> FindClientDetailSubscribers(string clientId)
+        {
+            List<ClientDetailSubscription> list;
+            lock (_clients)
+            {
+                list = new List<ClientDetailSubscription>(_clients.Where(x => x.TargetClient.UniqueId.Equals(clientId)));
+            }
+
+            return list;
+        }
+
+        public List<ClientDetailSubscription> GetAllClientDetailSubscribers()
+        {
+            List<ClientDetailSubscription> list;
+            lock (_clients)
+                list = new List<ClientDetailSubscription>(_clients);
 
             return list;
         }

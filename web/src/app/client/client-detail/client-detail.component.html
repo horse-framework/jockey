@@ -30,6 +30,34 @@
                                 <div class="kvt-key">Coonected Time</div>
                                 <div class="kvt-value">{{(client.connectedDate*1000) | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
                             </div>
+                            <div class="kvt-row">
+                                <div class="kvt-key">Queue Publish</div>
+                                <div class="kvt-value">{{client.stats.queuePush}}</div>
+                            </div>
+                            <div class="kvt-row">
+                                <div class="kvt-key">Channel Publish</div>
+                                <div class="kvt-value">{{client.stats.channelPublish}}</div>
+                            </div>
+                            <div class="kvt-row">
+                                <div class="kvt-key">Router Publish</div>
+                                <div class="kvt-value">{{client.stats.routerPublish}}</div>
+                            </div>
+                            <div class="kvt-row">
+                                <div class="kvt-key">Direct Send</div>
+                                <div class="kvt-value">{{client.stats.directSend}}</div>
+                            </div>
+                            <div class="kvt-row">
+                                <div class="kvt-key">Direct Receive</div>
+                                <div class="kvt-value">{{client.stats.directReceive}}</div>
+                            </div>
+                            <div class="kvt-row">
+                                <div class="kvt-key">Cache Get</div>
+                                <div class="kvt-value">{{client.stats.cacheGet}}</div>
+                            </div>
+                            <div class="kvt-row">
+                                <div class="kvt-key">Cache Set</div>
+                                <div class="kvt-value">{{client.stats.cacheSet}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

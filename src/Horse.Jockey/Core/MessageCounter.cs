@@ -8,6 +8,7 @@ using Horse.Jockey.Models.WebSockets;
 using Horse.Messaging.Protocol.Models;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Channels;
+using Horse.Messaging.Server.Clients;
 using Horse.Messaging.Server.Queues;
 using Horse.Messaging.Server.Routing;
 using Horse.WebSocket.Protocol;
@@ -313,7 +314,7 @@ internal class MessageCounter
         {
             CountableObject countable = GetQueueCounter(sub.Queue.Name);
             MessageCount current = countable.GetCurrentByResolution(sub.Resolution);
-            
+
             if (current == null)
                 continue;
 
@@ -385,11 +386,11 @@ internal class MessageCounter
         {
             CountableObject countable = GetChannelCounter(sub.Channel.Name);
             MessageCount current = countable.GetCurrentByResolution(sub.Resolution);
-            
+
             if (current == null)
                 continue;
-            
-            QueueGraphModel model = new QueueGraphModel
+
+            ChannelGraphModel model = new ChannelGraphModel
             {
                 Name = sub.Channel.Name,
                 Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)},
@@ -444,6 +445,7 @@ internal class MessageCounter
         IWebSocketServerBus bus = GetBus();
         SubscriptionService subscriptionService = GetSubscriptionService();
         List<WsServerSocket> dashboardSubs = subscriptionService.GetDashboardSubscribers();
+        List<ClientDetailSubscription> clientSubs = _subscriptionService.GetAllClientDetailSubscribers();
 
         if (dashboardSubs.Count > 0)
         {
@@ -457,6 +459,23 @@ internal class MessageCounter
 
             foreach (WsServerSocket socket in dashboardSubs)
                 _ = bus.SendAsync(socket, model);
+        }
+
+        foreach (ClientDetailSubscription sub in clientSubs)
+        {
+            CountableObject countable = GetDirectCounter(sub.TargetClient.UniqueId);
+            MessageCount current = countable.GetCurrentByResolution(sub.Resolution);
+
+            if (current == null)
+                continue;
+
+            DirectGraphModel model = new DirectGraphModel
+            {
+                Name = sub.TargetClient.UniqueId,
+                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)},
+                Resolution = sub.Resolution
+            };
+            _ = _bus.SendAsync(sub.Client, model);
         }
 
         _directTotal.Tick(null);

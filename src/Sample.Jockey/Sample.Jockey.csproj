@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
-        <LangVersion>10</LangVersion>
+        <LangVersion>default</LangVersion>
+        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Horse.Messaging.Data" Version="6.7.0-beta.2" />
+      <PackageReference Include="Horse.Messaging.Data" Version="6.7.1" />
     </ItemGroup>
 
 </Project>
