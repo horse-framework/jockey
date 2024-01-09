@@ -18,7 +18,7 @@ using Timer = System.Timers.Timer;
 
 namespace Horse.Jockey.Core;
 
-internal class MessageCounter
+public class MessageCounter
 {
     #region Fields
 

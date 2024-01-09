@@ -4,7 +4,7 @@ using Horse.Jockey.Helpers;
 
 namespace Horse.Jockey.Core;
 
-internal class CountableObject
+public class CountableObject
 {
     internal string Name { get; }
 

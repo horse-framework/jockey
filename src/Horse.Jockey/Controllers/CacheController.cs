@@ -21,7 +21,7 @@ namespace Horse.Jockey.Controllers
 {
     [Authorize]
     [Route("api/cache")]
-    internal class CacheController : HorseController
+    public class CacheController : HorseController
     {
         private readonly HorseRider _rider;
 

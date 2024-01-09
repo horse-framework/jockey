@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    version: '6.8.0',
+    version: '6.8.6',
 
     api: {
         url: 'http://localhost:15400/api',

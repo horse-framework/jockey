@@ -3,7 +3,7 @@ using Horse.Jockey.Helpers;
 
 namespace Horse.Jockey.Core;
 
-internal class MessageCount
+public class MessageCount
 {
     public long UnixTime;
     public long Received;

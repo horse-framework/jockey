@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
+using Horse.Jockey.Handlers.Queues;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models.Subscriptions;
 using Horse.Jockey.Models.WebSockets;
@@ -12,7 +13,7 @@ using Horse.Messaging.Server.Clients;
 using Horse.WebSocket.Server;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Horse.Jockey.Handlers.Queues
+namespace Horse.Jockey.Handlers
 {
     internal class ChannelEventHandler : BaseHandler, IChannelEventHandler
     {

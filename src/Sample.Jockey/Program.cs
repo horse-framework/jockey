@@ -71,7 +71,7 @@ namespace Sample.Jockey
 
             Console.ReadLine();
             HorseClient client = new();
-            await client.ConnectAsync("horse://localhost:15400");
+            await client.ConnectAsync("horse://localhost:26222");
 
             var f = new {ok = true, id = Guid.NewGuid().ToString(), date = 312783621786, extra = new {a = 23, b = "foo"}};
             await client.Queue.PushJson("DemoQueue2", f, false);
@@ -80,13 +80,14 @@ namespace Sample.Jockey
             Console.ReadLine();
 
             HorseClient consumer = new();
-            await consumer.ConnectAsync("horse://localhost:15400");
+            await consumer.ConnectAsync("horse://localhost:26222");
             consumer.AutoAcknowledge = true;
             await consumer.Queue.Subscribe("DemoQueue2", true);
 
+            Random rnd = new Random();
             while (true)
             {
-                Console.ReadLine();
+                await Task.Delay(12000);
                 int i = 1;
                 while (true)
                 {
@@ -97,8 +98,8 @@ namespace Sample.Jockey
                     if (i >= 10000)
                         break;
 
-                    await Task.Delay(10);
-                    Console.ReadLine();
+                    await Task.Delay(rnd.Next(5, 120));
+                    //Console.ReadLine();
                 }
             }
         }

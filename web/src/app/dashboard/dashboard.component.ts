@@ -14,6 +14,7 @@ import { QueueService } from '../queue/services/queue.service';
 import { HorseRouterService } from 'src/services/horse-router.service';
 import { ClientService } from 'src/services/client.service';
 import { ChannelService } from '../channel/services/channel.service';
+import { SessionService } from 'src/services/session.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -34,6 +35,7 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
         private socket: WebsocketService,
         private chartService: ChartService,
         private queueService: QueueService,
+        private session: SessionService,
         private routerService: HorseRouterService,
         private channelService: ChannelService,
         private clientService: ClientService) {
@@ -47,7 +49,15 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
                 this.dashboard = d;
             });
         });
-        this.subscribeWebsockets();
+
+        let user = this.session.get();
+        if (user && !this.socket.isConnected()) {
+            this.socket.connect(user.token);
+            this.on(this.socket.onconnected).subscribe(() => this.subscribeWebsockets());
+        }
+        else {
+            this.subscribeWebsockets();
+        }
     }
 
     override ngOnDestroy(): void {

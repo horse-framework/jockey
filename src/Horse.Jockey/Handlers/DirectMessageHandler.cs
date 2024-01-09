@@ -12,7 +12,7 @@ using Horse.Messaging.Server.Direct;
 using Horse.WebSocket.Server;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Horse.Jockey.Handlers.Queues
+namespace Horse.Jockey.Handlers
 {
     internal class DirectMessageHandler : IDirectMessageHandler
     {

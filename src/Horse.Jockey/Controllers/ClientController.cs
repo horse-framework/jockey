@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text.Json.Nodes;
-using System.Xml.Linq;
 using Horse.Jockey.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
@@ -20,7 +18,7 @@ namespace Horse.Jockey.Controllers
 {
     [Authorize]
     [Route("api/client")]
-    internal class ClientController : HorseController
+    public class ClientController : HorseController
     {
         private readonly HorseRider _rider;
         private readonly MessageCounter _counter;

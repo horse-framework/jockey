@@ -11,7 +11,7 @@ using Horse.Mvc.Filters.Route;
 namespace Horse.Jockey.Controllers
 {
     [Route("api/user")]
-    internal class UserController : HorseController
+    public class UserController : HorseController
     {
         private readonly JockeyOptions _jockeyOptions;
         private readonly IJwtProvider _jwtProvider;

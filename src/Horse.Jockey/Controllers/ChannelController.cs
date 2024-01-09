@@ -11,7 +11,6 @@ using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Channels;
-using Horse.Messaging.Server.Queues;
 using Horse.Mvc;
 using Horse.Mvc.Auth;
 using Horse.Mvc.Controllers;
@@ -23,7 +22,7 @@ namespace Horse.Jockey.Controllers
 {
     [Authorize]
     [Route("api/channel")]
-    internal class ChannelController : HorseController
+    public class ChannelController : HorseController
     {
         private readonly HorseRider _rider;
         private readonly MessageCounter _counter;

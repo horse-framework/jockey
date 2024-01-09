@@ -13,7 +13,7 @@ namespace Horse.Jockey.Controllers
 {
     [Authorize]
     [Route("api/dashboard")]
-    internal class DashboardController : HorseController
+    public class DashboardController : HorseController
     {
         private readonly HorseRider _rider;
         private readonly JockeyOptions _jockeyOptions;
@@ -46,7 +46,7 @@ namespace Horse.Jockey.Controllers
             var ats = _counter.GetQueueStoreCounter().AllTimeTotal;
             var atd = _counter.GetDirectCounter().AllTimeTotal;
             var atr = _counter.GetRouterCounter().AllTimeTotal;
-
+            
             return Json(new
             {
                 server,

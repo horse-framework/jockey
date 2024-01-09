@@ -33,10 +33,15 @@ export class WebsocketService {
 
     constructor() { }
 
+    isConnected(): boolean {
+        return this._socket != null && this._socket.OPEN == 1;
+    }
+
     connect(token: string): void {
 
         //const host = environment.api.websocket + '?token=' + token;
-        const host = 'ws://' + location.host + '?token=' + token;
+        let protocol = location.protocol.toLowerCase().includes('https') ? 'wss' : +'ws';
+        const host = protocol + '://' + location.host + '?token=' + token;
         this._socket = new WebSocket(host);
 
         this._socket.onopen = (ev: Event) => {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Horse.Jockey.Handlers.Queues
+namespace Horse.Jockey.Handlers
 {
     internal class BaseHandler
     {

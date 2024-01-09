@@ -11,7 +11,7 @@ namespace Horse.Jockey.Controllers
 {
     [Authorize]
     [Route("api/cluster")]
-    internal class ClusterController : HorseController
+    public class ClusterController : HorseController
     {
         private readonly HorseRider _rider;
 
