@@ -108,9 +108,8 @@ namespace Horse.Jockey
 
                 Hub.Server.AddWebSockets(services, cfg => cfg
                     .UsePayloadModelProvider(new SystemJsonModelSerializer())
-                    .UseMSDI(services)
                     .AddSingletonHandlers(typeof(Hub))
-                    .OnClientConnected((services, info, data) =>
+                    .OnClientConnected((_, info, data) =>
                     {
                         Dictionary<string, string> pairs = data.Path.ParseQuerystring();
 

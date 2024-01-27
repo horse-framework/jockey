@@ -39,9 +39,9 @@ export class WebsocketService {
 
     connect(token: string): void {
 
-        //const host = environment.api.websocket + '?token=' + token;
-        let protocol = location.protocol.toLowerCase().includes('https') ? 'wss' : 'ws';
-        const host = protocol + '://' + location.host + '?token=' + token;
+        const host = environment.api.websocket + '?token=' + token;
+        //let protocol = location.protocol.toLowerCase().includes('https') ? 'wss' : 'ws';
+        //const host = protocol + '://' + location.host + '?token=' + token;
         this._socket = new WebSocket(host);
 
         this._socket.onopen = (ev: Event) => {

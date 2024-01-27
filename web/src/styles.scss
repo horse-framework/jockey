@@ -844,6 +844,9 @@ select:focus > option:checked {
   min-height: 240px;
   max-height: 500px;
 }
+.portlet-body.nowrap {
+  max-height: 50000px !important;
+}
 
 .dashboard-portlet .portlet-body canvas {
   max-width: calc(50vw - 400px);
@@ -865,7 +868,6 @@ select:focus > option:checked {
 .change-option:hover {
   color: #10f070;
 }
-
 
 .mat-mdc-dialog-surface {
   background-color: #111 !important;
