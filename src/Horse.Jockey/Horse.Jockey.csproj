@@ -3,9 +3,9 @@
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>6.8.6</AssemblyVersion>
-        <FileVersion>6.8.6</FileVersion>
-        <PackageVersion>6.8.6</PackageVersion>
+        <AssemblyVersion>6.8.7</AssemblyVersion>
+        <FileVersion>6.8.7</FileVersion>
+        <PackageVersion>6.8.7</PackageVersion>
         <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
         <Description>Administration Portal for Horse Messaging</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
@@ -31,8 +31,8 @@
         <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.6.1" />
         <PackageReference Include="Horse.Protocols.Http" Version="6.6.1" />
         <PackageReference Include="Horse.Server" Version="6.6.0"/>
-        <PackageReference Include="Horse.WebSocket.Protocol" Version="6.8.1" />
-        <PackageReference Include="Horse.WebSocket.Server" Version="6.8.1" />
+        <PackageReference Include="Horse.WebSocket.Protocol" Version="6.8.2" />
+        <PackageReference Include="Horse.WebSocket.Server" Version="6.8.2" />
     </ItemGroup>
 
     <ItemGroup>
