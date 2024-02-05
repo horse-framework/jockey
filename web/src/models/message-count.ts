@@ -32,9 +32,6 @@ export interface MessageCount {
     /** Name */
     n: string;
 
-    /** Resolution: 1m, 10m, 3h */
-    r: string;
-
     /** Count Record Data */
     d: CountRecord[];
 

@@ -38,6 +38,7 @@ export class ChannelDetailComponent extends BaseComponent implements OnInit, OnD
     this.channelName = this.activatedRoute.snapshot.params.name;
     await this.load();
     this.subscribeWebsockets()
+    this.subscribeToListRefresh().subscribe(() => this.service.get(this.channelName).then(ch => this.channel = ch));
   }
 
   override ngOnDestroy(): void {
@@ -47,7 +48,7 @@ export class ChannelDetailComponent extends BaseComponent implements OnInit, OnD
 
   private async load() {
     this.channel = await this.service.get(this.channelName);
-    let count = await this.service.getGraph(this.channelName, '1m')
+    let count = await this.service.getGraph(this.channelName)
 
     if (this.channelChart)
       this.channelChart.destroy();
@@ -103,7 +104,7 @@ export class ChannelDetailComponent extends BaseComponent implements OnInit, OnD
       )
       .subscribe((model: MessageCount) => this.chartService.updateChart(this.channelChart, model));
 
-    this.socket.subscribe('channel:' + this.channelName, '1m');
+    this.socket.subscribe('channel:' + this.channelName);
   }
 
   changeOption(title: string, name: string, value: any, type: string = 'text'): void {

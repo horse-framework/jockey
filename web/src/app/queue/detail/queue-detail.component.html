@@ -79,16 +79,16 @@
                   <p>Shows the first message information. Message will be <b>consumed.</b></p>
                 </div>
                 <div>
-                  <button (click)="move()" class="operation-button btn-purple">Move Messages</button>
-                  <p>Moves all messages to another queue and removes them <b>permanently.</b></p>
+                  <button (click)="move()" class="operation-button btn-purple">Move/Copy Messages</button>
+                  <p>Moves or copies all messages to another queue. If operation is movement messages will be removed <b>permanently.</b></p>
                 </div>
                 <div>
                   <button (click)="clear()" class="operation-button btn-orange">Clear All Messages</button>
-                  <p>Clears queue. Deletes all messages <b>permanently!</b></p>
+                  <p>Deletes all messages <b>permanently!</b></p>
                 </div>
                 <div>
                   <button (click)="remove()" class="operation-button btn-red">Delete Queue</button>
-                  <p>Deletes queue and <b>all messages</b> in it <b>permanently!</b></p>
+                  <p>Deletes queue <b>permanently!</b></p>
                 </div>
               </div>
               <div class="status-panel">

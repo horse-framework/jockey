@@ -58,9 +58,9 @@ export class ClientService {
         return null;
     }
 
-    getGraph(name: string, resolution: string): Promise<MessageCount> {
+    getGraph(name: string): Promise<MessageCount> {
 
-        let url = '/client/graph?resolution=' + resolution;
+        let url = '/client/graph';
         if (name != null && name.length > 0) {
             url += '&name=' + name;
         }

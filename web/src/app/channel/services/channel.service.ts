@@ -74,9 +74,9 @@ export class ChannelService {
       .toPromise();
   }
 
-  getGraph(name: string, resolution: string): Promise<MessageCount> {
+  getGraph(name: string): Promise<MessageCount> {
 
-    let url = '/channel/graph?resolution=' + resolution;
+    let url = '/channel/graph';
     if (name != null && name.length > 0) {
       url += '&name=' + name;
     }

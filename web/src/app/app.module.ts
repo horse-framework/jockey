@@ -18,6 +18,7 @@ import { CacheService } from 'src/app/cache/services/cache.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ChannelService } from './channel/services/channel.service';
+import { EventService } from 'src/services/event.service';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { ChannelService } from './channel/services/channel.service';
         LoginService,
         ClientService,
         ChannelService,
-        CacheService
+        CacheService,
+        EventService
     ],
     bootstrap: [AppComponent]
 })

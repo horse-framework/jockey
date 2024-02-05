@@ -12,10 +12,6 @@ public class QueueStoreGraphModel
     [JsonPropertyName("n")]
     public string Name { get; set; }
 
-    [JsonProperty("r")]
-    [JsonPropertyName("r")]
-    public string Resolution { get; set; }
-
     [JsonProperty("d")]
     [JsonPropertyName("d")]
     public IEnumerable<CountRecord> Counts { get; set; }

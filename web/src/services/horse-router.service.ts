@@ -56,9 +56,9 @@ export class HorseRouterService {
             .toPromise();
     }
 
-    getGraph(name: string, resolution: string): Promise<MessageCount> {
+    getGraph(name: string): Promise<MessageCount> {
 
-        let url = '/router/graph?resolution=' + resolution;
+        let url = '/router/graph';
         if (name != null && name.length > 0) {
             url += '&name=' + name;
         }

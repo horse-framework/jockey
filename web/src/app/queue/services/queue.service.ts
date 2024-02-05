@@ -78,9 +78,9 @@ export class QueueService {
             .toPromise();
     }
 
-    getGraph(name: string, resolution: string): Promise<QueueGraphData> {
+    getGraph(name: string): Promise<QueueGraphData> {
 
-        let url = '/queue/graph?resolution=' + resolution;
+        let url = '/queue/graph';
         if (name != null && name.length > 0) {
             url += '&name=' + name;
         }
@@ -96,12 +96,10 @@ export class QueueService {
                     let result: QueueGraphData = {
                         store: {
                             n: response.data.name,
-                            r: response.data.resolution,
                             d: response.data.store
                         },
                         stream: {
                             n: response.data.name,
-                            r: response.data.resolution,
                             d: response.data.stream
                         }
                     };
@@ -234,6 +232,23 @@ export class QueueService {
         form.append('target', target);
 
         return this.api.postForm('/queue/move-messages', form)
+            .pipe(
+                map(response => {
+                    if (response.ok()) {
+                        return response.data;
+                    }
+                    return null;
+                }))
+            .toPromise();
+    }
+
+    copy(name: string, target: string): Promise<any> {
+
+        let form = new FormData();
+        form.append('name', name);
+        form.append('target', target);
+
+        return this.api.postForm('/queue/copy-messages', form)
             .pipe(
                 map(response => {
                     if (response.ok()) {

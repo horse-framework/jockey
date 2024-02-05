@@ -39,15 +39,21 @@ export class WebsocketService {
 
     connect(token: string): void {
 
-        const host = environment.api.websocket + '?token=' + token;
-        //let protocol = location.protocol.toLowerCase().includes('https') ? 'wss' : 'ws';
-        //const host = protocol + '://' + location.host + '?token=' + token;
+        let host;
+        if (environment.production) {
+            let protocol = location.protocol.toLowerCase().includes('https') ? 'wss' : 'ws';
+            host = protocol + '://' + location.host + '?token=' + token;
+        }
+        else {
+            host = environment.api.websocket + '?token=' + token;
+        }
+
         this._socket = new WebSocket(host);
 
         this._socket.onopen = (ev: Event) => {
             this._status = WebClientStatus.Connected;
             this._onconnected.next(this);
-            this._subscriptions.forEach(s => this.subscribe(s.channel, s.resolution));
+            this._subscriptions.forEach(s => this.subscribe(s.channel));
         };
 
         this._socket.onclose = (ev: Event) => {
@@ -93,9 +99,9 @@ export class WebsocketService {
         this._onmessage.next(message);
     }
 
-    subscribe(channel: string, resolution: string): void {
-        this._subscriptions.push({ channel, resolution });
-        this.send('subscribe', { channel: channel, join: true, resolution });
+    subscribe(channel: string): void {
+        this._subscriptions.push({ channel });
+        this.send('subscribe', { channel: channel, join: true });
     }
 
     unsubscribe(channel: string): void {

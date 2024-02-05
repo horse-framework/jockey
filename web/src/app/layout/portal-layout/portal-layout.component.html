@@ -18,6 +18,14 @@
         <li><a routerLinkActive="active" routerLink="/console">Console</a></li>
       </ul>
     </div>
+    <div>
+      <div class="line-form-item" style="margin-top: 5px;">
+        <label>Refresh Lists</label>
+        <select [(ngModel)]="refreshItem" class="jockey-select" (ngModelChange)="refreshChanged()">
+          <option [ngValue]="i" *ngFor="let i of refreshItems">{{i.text}}</option>
+        </select>
+      </div>
+    </div>
     <div class="user" *ngIf="user">
       <span class="user-name">{{user.name}}</span>
       <button class="logout" (click)="logout()">Logout</button>

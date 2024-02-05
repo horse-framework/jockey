@@ -7,6 +7,5 @@ namespace Horse.Jockey.Models.Subscriptions
     {
         public WsServerSocket Client { get; init; }
         public HorseQueue Queue { get; init; }
-        public string Resolution { get; set; } = "1m";
     }
 }

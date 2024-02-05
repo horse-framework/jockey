@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
+export interface MoveCopyResult {
+  target: string;
+  moving: boolean;
+}
+
 @Component({
   selector: 'app-messsage-move-modal',
   templateUrl: './messsage-move-modal.component.html',
@@ -8,8 +13,8 @@ import { Observable, Subject } from 'rxjs';
 })
 export class MesssageMoveModalComponent implements OnInit, OnDestroy {
 
-  private _onconfirmed: Subject<string> = new Subject<string>();
-  get onconfirmed(): Observable<string> { return this._onconfirmed; }
+  private _onconfirmed: Subject<MoveCopyResult> = new Subject<MoveCopyResult>();
+  get onconfirmed(): Observable<MoveCopyResult> { return this._onconfirmed; }
 
   messageCount: number;
   target: string = '';
@@ -20,9 +25,9 @@ export class MesssageMoveModalComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  confirm(): void {
+  confirm(moving: boolean): void {
     this._confirmed = true;
-    this._onconfirmed.next(this.target);
+    this._onconfirmed.next({ target: this.target.trim(), moving: moving });
   }
 
   ngOnDestroy(): void {

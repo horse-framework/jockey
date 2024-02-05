@@ -9,7 +9,7 @@ import { WebsocketService } from 'src/services/websocket.service';
 import { ConfirmModalComponent } from '../../layout/portal-layout/confirm-modal/confirm-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, map, take } from 'rxjs/operators';
-import { MesssageMoveModalComponent } from './messsage-move-modal/messsage-move-modal.component';
+import { MesssageMoveModalComponent, MoveCopyResult } from './messsage-move-modal/messsage-move-modal.component';
 import { QueueMessageModalComponent } from './queue-message-modal/queue-message-modal.component';
 import { QueueMessage } from 'src/app/queue/models/queue-message';
 import { QueuePushModalComponent } from './queue-push-modal/queue-push-modal.component';
@@ -30,7 +30,6 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
     deliveryChart: any;
     storeChart: any;
     queueName: string;
-    resolution: string = '1m';
 
     constructor(private dialog: MatDialog,
         private chartService: ChartService,
@@ -43,11 +42,15 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
 
     async ngOnInit() {
 
-        this.queueName = this.activatedRoute.snapshot.params.name;
-        if (this.queueName == null || this.queueName.length === 0) return;
+        this.on(this.activatedRoute.params).subscribe(async p => {
 
-        await this.load();
-        this.subscribeWebsocket();
+            this.queueName = p.name;
+            if (this.queueName == null || this.queueName.length === 0) return;
+
+            await this.load();
+            this.subscribeWebsocket();
+            this.subscribeToListRefresh().subscribe(() => this.queueService.get(this.queueName).then(q => this.queue = q));
+        });
     }
 
     private subscribeWebsocket() {
@@ -68,13 +71,13 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
             )
             .subscribe((model: MessageCount) => this.chartService.updateChart(this.storeChart, model));
 
-        this.socket.subscribe('queue:' + this.queueName, '1m');
+        this.socket.subscribe('queue:' + this.queueName);
     }
 
     private async load() {
 
         this.queue = await this.queueService.get(this.queueName);
-        this.graph = await this.queueService.getGraph(this.queueName, this.resolution);
+        this.graph = await this.queueService.getGraph(this.queueName);
 
         if (this.deliveryChart)
             this.deliveryChart.destroy();
@@ -297,14 +300,18 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
         component.messageCount = 321;
         component.onconfirmed
             .pipe(take(1))
-            .subscribe(target => {
-                if (target == null || target.length < 1)
+            .subscribe((result: MoveCopyResult) => {
+                if (result == null || result.target == null || result.target.length < 1)
                     return;
 
-                target = target.trim();
-
-                this.queueService.move(this.queueName, target)
-                    .then(r => this.load());
+                if (result.moving) {
+                    this.queueService.move(this.queueName, result.target).then(r => this.load());
+                }
+                else {
+                    this.queueService.copy(this.queueName, result.target).then(r => {
+                        this.router.navigateByUrl('/queue/' + result.target);
+                    });
+                }
             });
     }
 

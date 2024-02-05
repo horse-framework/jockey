@@ -23,13 +23,6 @@ public class MessageCountModel
     [JsonPropertyName("n")]
     public string Name { get; set; }
 
-    /// <summary>
-    /// 1d, 10d, 3h
-    /// </summary>
-    [JsonProperty("r")]
-    [JsonPropertyName("r")]
-    public string Resolution { get; set; }
-
     [JsonProperty("d")]
     [JsonPropertyName("d")]
     public IEnumerable<CountRecord> Data { get; set; }

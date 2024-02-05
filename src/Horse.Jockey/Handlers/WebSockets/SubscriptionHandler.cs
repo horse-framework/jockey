@@ -48,8 +48,8 @@ namespace Horse.Jockey.Handlers.WebSockets
                 case "queue":
                     if (model.Join)
                     {
-                        _subscriptionService.SubscribeQueueDetail(socket, _rider.Queue.Find(split[1]), model.Resolution);
-                        SendQueueFullData(socket, split[1], model.Resolution);
+                        _subscriptionService.SubscribeQueueDetail(socket, _rider.Queue.Find(split[1]));
+                        SendQueueFullData(socket, split[1]);
                     }
                     else
                         _subscriptionService.UnsubscribeQueueDetail(socket);
@@ -59,8 +59,8 @@ namespace Horse.Jockey.Handlers.WebSockets
                 case "channel":
                     if (model.Join)
                     {
-                        _subscriptionService.SubscribeChannelDetail(socket, _rider.Channel.Find(split[1]), model.Resolution);
-                        SendChannelFullData(socket, split[1], model.Resolution);
+                        _subscriptionService.SubscribeChannelDetail(socket, _rider.Channel.Find(split[1]));
+                        SendChannelFullData(socket, split[1]);
                     }
                     else
                         _subscriptionService.UnsubscribeChannelDetail(socket);
@@ -70,8 +70,8 @@ namespace Horse.Jockey.Handlers.WebSockets
                 case "client":
                     if (model.Join)
                     {
-                        _subscriptionService.SubscribeClientDetail(socket, _rider.Client.Find(split[1]), model.Resolution);
-                        SendDirectFullData(socket, split[1], model.Resolution);
+                        _subscriptionService.SubscribeClientDetail(socket, _rider.Client.Find(split[1]));
+                        SendDirectFullData(socket, split[1]);
                     }
                     else
                         _subscriptionService.UnsubscribeClientDetail(socket);
@@ -85,57 +85,53 @@ namespace Horse.Jockey.Handlers.WebSockets
             return Task.CompletedTask;
         }
 
-        private void SendQueueFullData(IHorseWebSocket socket, string queueName = null, string resolution = "1m")
+        private void SendQueueFullData(IHorseWebSocket socket, string queueName = null)
         {
             var counter = _counter.GetQueueCounter(queueName);
-            var data = counter.GetDataByResolution(resolution);
+            var data = counter.GetData();
 
             QueueGraphModel model = new QueueGraphModel
             {
                 Name = queueName ?? "*",
-                Resolution = resolution,
                 Counts = data.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
             _ = _bus.SendAsync(socket, model);
         }
 
-        private void SendChannelFullData(IHorseWebSocket socket, string channelName = null, string resolution = "1m")
+        private void SendChannelFullData(IHorseWebSocket socket, string channelName = null)
         {
             var counter = _counter.GetChannelCounter(channelName);
-            var data = counter.GetDataByResolution(resolution);
+            var data = counter.GetData();
 
             ChannelGraphModel model = new ChannelGraphModel
             {
                 Name = channelName ?? "*",
-                Resolution = resolution,
                 Counts = data.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
             _ = _bus.SendAsync(socket, model);
         }
 
-        private void SendDirectFullData(IHorseWebSocket socket, string clientId = null, string resolution = "1m")
+        private void SendDirectFullData(IHorseWebSocket socket, string clientId = null)
         {
             var counter = _counter.GetDirectCounter(clientId);
-            var data = counter.GetDataByResolution(resolution);
+            var data = counter.GetData();
 
             DirectGraphModel model = new DirectGraphModel
             {
                 Name = clientId ?? "*",
-                Resolution = resolution,
                 Counts = data.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
             _ = _bus.SendAsync(socket, model);
         }
 
-        private void SendRouterFullData(IHorseWebSocket socket, string routerName = null, string resolution = "1m")
+        private void SendRouterFullData(IHorseWebSocket socket, string routerName = null)
         {
             var counter = _counter.GetRouterCounter(routerName);
-            var data = counter.GetDataByResolution(resolution);
+            var data = counter.GetData();
 
             RouterGraphModel model = new RouterGraphModel
             {
                 Name = routerName ?? "*",
-                Resolution = resolution,
                 Counts = data.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
             _ = _bus.SendAsync(socket, model);

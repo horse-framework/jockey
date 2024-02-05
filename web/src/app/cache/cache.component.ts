@@ -22,6 +22,7 @@ export class CacheComponent extends BaseComponent implements OnInit {
 
   async ngOnInit() {
     this.caches = await this.cacheService.list();
+    this.subscribeToListRefresh().subscribe(() => this.cacheService.list().then(caches => this.caches = caches));
   }
 
   remove(key: string) {

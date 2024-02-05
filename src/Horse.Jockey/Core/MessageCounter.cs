@@ -291,7 +291,6 @@ public class MessageCounter
             QueueGraphModel model = new QueueGraphModel
             {
                 Name = "*",
-                Resolution = "1m",
                 Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
 
@@ -299,7 +298,6 @@ public class MessageCounter
             QueueStoreGraphModel storeModel = new QueueStoreGraphModel
             {
                 Name = "*",
-                Resolution = "1m",
                 Counts = new[] {new CountRecord(currentStore.UnixTime, currentStore.Received, currentStore.Sent, currentStore.Respond, currentStore.Error, currentStore.Delivered, currentStore.NotRouted, currentStore.Timeout)}
             };
 
@@ -313,7 +311,7 @@ public class MessageCounter
         foreach (QueueDetailSubscription sub in queueSubs)
         {
             CountableObject countable = GetQueueCounter(sub.Queue.Name);
-            MessageCount current = countable.GetCurrentByResolution(sub.Resolution);
+            MessageCount current = countable.GetCurrent();
 
             if (current == null)
                 continue;
@@ -321,8 +319,7 @@ public class MessageCounter
             QueueGraphModel model = new QueueGraphModel
             {
                 Name = sub.Queue.Name,
-                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)},
-                Resolution = sub.Resolution
+                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
             _ = _bus.SendAsync(sub.Client, model);
         }
@@ -374,7 +371,6 @@ public class MessageCounter
             ChannelGraphModel model = new ChannelGraphModel
             {
                 Name = "*",
-                Resolution = "1m",
                 Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
 
@@ -385,7 +381,7 @@ public class MessageCounter
         foreach (ChannelDetailSubscription sub in chSubs)
         {
             CountableObject countable = GetChannelCounter(sub.Channel.Name);
-            MessageCount current = countable.GetCurrentByResolution(sub.Resolution);
+            MessageCount current = countable.GetCurrent();
 
             if (current == null)
                 continue;
@@ -393,8 +389,7 @@ public class MessageCounter
             ChannelGraphModel model = new ChannelGraphModel
             {
                 Name = sub.Channel.Name,
-                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)},
-                Resolution = sub.Resolution
+                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
             _ = _bus.SendAsync(sub.Client, model);
         }
@@ -412,7 +407,6 @@ public class MessageCounter
             RouterGraphModel model = new RouterGraphModel
             {
                 Name = "*",
-                Resolution = "1m",
                 Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
 
@@ -453,7 +447,6 @@ public class MessageCounter
             DirectGraphModel model = new DirectGraphModel
             {
                 Name = "*",
-                Resolution = "1m",
                 Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
 
@@ -464,7 +457,7 @@ public class MessageCounter
         foreach (ClientDetailSubscription sub in clientSubs)
         {
             CountableObject countable = GetDirectCounter(sub.TargetClient.UniqueId);
-            MessageCount current = countable.GetCurrentByResolution(sub.Resolution);
+            MessageCount current = countable.GetCurrent();
 
             if (current == null)
                 continue;
@@ -472,8 +465,7 @@ public class MessageCounter
             DirectGraphModel model = new DirectGraphModel
             {
                 Name = sub.TargetClient.UniqueId,
-                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)},
-                Resolution = sub.Resolution
+                Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
             _ = _bus.SendAsync(sub.Client, model);
         }

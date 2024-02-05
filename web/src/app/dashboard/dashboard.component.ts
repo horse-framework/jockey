@@ -107,7 +107,7 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
             )
             .subscribe((model: MessageCount) => this.chartService.updateChart(this.channelChart, model));
 
-        this.socket.subscribe('dashboard', '1m');
+        this.socket.subscribe('dashboard');
     }
 
     private async load() {
@@ -126,10 +126,10 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
 
     private async loadCharts(): Promise<any> {
 
-        let queue = await this.queueService.getGraph(null, '1m');
-        let channel = await this.channelService.getGraph(null, '1m');
-        let router = await this.routerService.getGraph(null, '1m');
-        let client = await this.clientService.getGraph(null, '1m');
+        let queue = await this.queueService.getGraph(null);
+        let channel = await this.channelService.getGraph(null);
+        let router = await this.routerService.getGraph(null);
+        let client = await this.clientService.getGraph(null);
 
         if (this.deliveryChart)
             this.deliveryChart.destroy();

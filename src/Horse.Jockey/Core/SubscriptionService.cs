@@ -190,15 +190,14 @@ namespace Horse.Jockey.Core
 
         #region Queue
 
-        public void SubscribeQueueDetail(WsServerSocket client, HorseQueue queue, string resolution)
+        public void SubscribeQueueDetail(WsServerSocket client, HorseQueue queue)
         {
             UnsubscribeQueueDetail(client);
 
             QueueDetailSubscription subscription = new()
             {
                 Client = client,
-                Queue = queue,
-                Resolution = resolution
+                Queue = queue
             };
             lock (_queues)
             {
@@ -242,15 +241,14 @@ namespace Horse.Jockey.Core
 
         #region Channel
 
-        public void SubscribeChannelDetail(WsServerSocket client, HorseChannel channel, string resolution)
+        public void SubscribeChannelDetail(WsServerSocket client, HorseChannel channel)
         {
             UnsubscribeChannelDetail(client);
 
             ChannelDetailSubscription subscription = new()
             {
                 Client = client,
-                Channel = channel,
-                Resolution = resolution
+                Channel = channel
             };
 
             lock (_channels)
@@ -293,15 +291,14 @@ namespace Horse.Jockey.Core
 
         #region Client
 
-        public void SubscribeClientDetail(WsServerSocket client, MessagingClient target, string resolution)
+        public void SubscribeClientDetail(WsServerSocket client, MessagingClient target)
         {
             UnsubscribeClientDetail(client);
 
             ClientDetailSubscription subscription = new()
             {
                 Client = client,
-                TargetClient = target,
-                Resolution = resolution
+                TargetClient = target
             };
 
             lock (_clients)

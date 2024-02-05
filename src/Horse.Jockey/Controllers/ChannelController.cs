@@ -93,15 +93,14 @@ namespace Horse.Jockey.Controllers
         }
 
         [HttpGet("graph")]
-        public IActionResult GetGraph([FromQuery] string name, [FromQuery] string resolution)
+        public IActionResult GetGraph([FromQuery] string name)
         {
             CountableObject countable = _counter.GetChannelCounter(name);
-            IEnumerable<MessageCount> counts = countable.GetDataByResolution(resolution);
+            IEnumerable<MessageCount> counts = countable.GetData();
 
             var model = new MessageCountModel
             {
                 Name = countable.Name,
-                Resolution = resolution,
                 Data = counts.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
 

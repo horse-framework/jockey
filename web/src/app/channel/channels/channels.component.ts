@@ -22,6 +22,7 @@ export class ChannelsComponent extends BaseComponent implements OnInit {
 
   async ngOnInit() {
     this.channels = await this.channelService.list();
+    this.subscribeToListRefresh().subscribe(() => this.channelService.list().then(channels => this.channels = channels));
   }
 
   create(): void {

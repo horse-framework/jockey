@@ -30,7 +30,11 @@ export class ClientsComponent extends BaseComponent implements OnInit {
     }
 
     async ngOnInit() {
+        this.refreshClients();
+        this.subscribeToListRefresh().subscribe(() => this.refreshClients());
+    }
 
+    private async refreshClients() {
         let clients = await this.clientService.list();
         let model: GroupedClient[] = [];
 

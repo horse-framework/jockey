@@ -21,6 +21,7 @@ export class QueuesComponent extends BaseComponent implements OnInit, OnDestroy 
 
     async ngOnInit() {
         this.queues = await this.queueService.list();
+        this.subscribeToListRefresh().subscribe(() => this.queueService.list().then(queues => this.queues = queues));
     }
 
     create(): void {

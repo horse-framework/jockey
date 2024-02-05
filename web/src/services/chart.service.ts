@@ -56,13 +56,12 @@ export class ChartService {
         }
       });
 
-      if (chart.data.labels.length > 24) {
+      if (chart.data.labels.length > 60) {
         chart.data.labels.shift();
         chart.data.datasets.forEach((dataset) => {
           dataset.data.shift();
         });
       }
-
     });
 
     chart.update();

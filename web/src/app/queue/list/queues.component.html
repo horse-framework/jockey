@@ -29,7 +29,10 @@
                     <span>{{queue.info.manager}}</span>
                 </div>
                 <div class="td fx10">
-                    <span><b>{{queue.stats.storedMsgs + queue.stats.storedPrioMsgs + queue.stats.processingMsgs}}</b> Messages</span>
+                    <span>
+                        <b>{{queue.stats.storedMsgs + queue.stats.storedPrioMsgs + queue.stats.processingMsgs}}</b> + <b>{{queue.stats.ackPendingMsgs}}</b>
+                        Messages
+                    </span>
                     <em>{{queue.stats.consumers}} Consumers</em>
                 </div>
                 <div class="td fx12">

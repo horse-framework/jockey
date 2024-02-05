@@ -7,5 +7,4 @@ internal class ClientDetailSubscription
 {
     public WsServerSocket Client { get; init; }
     public MessagingClient TargetClient { get; init; }
-    public string Resolution { get; set; } = "1m";
 }

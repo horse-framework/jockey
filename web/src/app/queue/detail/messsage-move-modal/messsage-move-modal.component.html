@@ -1,8 +1,8 @@
 <h2 class="title" mat-dialog-title>Confirmation</h2>
 <mat-dialog-content class="content">
     <p>
-        You are about to move <b class="imp">{{messageCount}}</b> messages.
-        Please type the target queue name.<br/>
+        You are about to move/copy <b class="imp">{{messageCount}}</b> messages.
+        Please type the target queue name.<br />
         If the target queue doesn't exist, it will be created with default queue options.
     </p>
     <div>
@@ -10,6 +10,7 @@
     </div>
 </mat-dialog-content>
 <mat-dialog-actions class="buttons">
-    <button (click)="confirm()" mat-button mat-dialog-close class="modal-btn btn-green">Confirm</button>
+    <button (click)="confirm(false)" mat-button mat-dialog-close class="modal-btn btn-green">Copy</button>
+    <button (click)="confirm(true)" mat-button mat-dialog-close class="modal-btn btn-yellow">Move</button>
     <button mat-button mat-dialog-close class="modal-btn btn-grey">Cancel</button>
 </mat-dialog-actions>

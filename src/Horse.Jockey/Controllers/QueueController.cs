@@ -102,17 +102,16 @@ namespace Horse.Jockey.Controllers
         }
 
         [HttpGet("graph")]
-        public IActionResult GetGraph([FromQuery] string name, [FromQuery] string resolution)
+        public IActionResult GetGraph([FromQuery] string name)
         {
             CountableObject countable = _counter.GetQueueCounter(name);
             CountableObject storeCountable = _counter.GetQueueStoreCounter(name);
-            IEnumerable<MessageCount> counts = countable.GetDataByResolution(resolution);
-            IEnumerable<MessageCount> storeCounts = storeCountable.GetDataByResolution(resolution);
+            IEnumerable<MessageCount> counts = countable.GetData();
+            IEnumerable<MessageCount> storeCounts = storeCountable.GetData();
 
             return Json(new
             {
                 name = countable.Name,
-                resolution = resolution,
                 stream = counts.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout)),
                 store = storeCounts.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             });
@@ -324,8 +323,11 @@ namespace Horse.Jockey.Controllers
             HorseQueue queue = _rider.Queue.Find(name);
             HorseQueue targetQueue = _rider.Queue.Find(target);
 
-            if (queue == null || targetQueue == null)
+            if (queue == null)
                 return await NotFound(null);
+
+            if (targetQueue == null)
+                targetQueue = await _rider.Queue.Create(target);
 
             int moveCount = 0;
 
@@ -365,6 +367,59 @@ namespace Horse.Jockey.Controllers
 
                 moveCount++;
                 await queue.Manager.RemoveMessage(message);
+            }
+
+            return await Ok(new {ok = true, completed = true, count = moveCount});
+        }
+
+        [HttpPost("copy-messages")]
+        public async Task<IActionResult> CopyMessages([FromForm] string name, [FromForm] string target)
+        {
+            HorseQueue queue = _rider.Queue.Find(name);
+            HorseQueue targetQueue = _rider.Queue.Find(target);
+
+            if (queue == null)
+                return await NotFound(null);
+
+            if (targetQueue == null)
+                targetQueue = await _rider.Queue.Create(target);
+
+            int moveCount = 0;
+
+            List<QueueMessage> puttingBackMessages = queue.GetPuttingBackMessages();
+            foreach (QueueMessage message in puttingBackMessages)
+            {
+                PushResult result = await targetQueue.Push(message.Message);
+                if (result != PushResult.Success)
+                    return await Ok(new {ok = true, completed = false, count = moveCount});
+
+                moveCount++;
+            }
+
+            while (true)
+            {
+                QueueMessage message = queue.Manager.PriorityMessageStore.ConsumeFirst();
+                if (message == null)
+                    break;
+
+                PushResult result = await targetQueue.Push(message.Message);
+                if (result != PushResult.Success)
+                    return await Ok(new {ok = true, completed = false, count = moveCount});
+
+                moveCount++;
+            }
+
+            while (true)
+            {
+                QueueMessage message = queue.Manager.MessageStore.ConsumeFirst();
+                if (message == null)
+                    break;
+
+                PushResult result = await targetQueue.Push(message.Message);
+                if (result != PushResult.Success)
+                    return await Ok(new {ok = true, completed = false, count = moveCount});
+
+                moveCount++;
             }
 
             return await Ok(new {ok = true, completed = true, count = moveCount});

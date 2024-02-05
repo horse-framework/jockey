@@ -103,14 +103,6 @@ namespace Horse.Jockey.Models.Queues
                 TotalTimedout = queue.Info.TimedOutMessages
             };
 
-            if (queue.ProcessingMessage != null)
-            {
-                if (queue.ProcessingMessage.Message.HighPriority)
-                    stats.StoredPrioMsgs++;
-                else
-                    stats.StoredMsgs++;
-            }
-
             return stats;
         }
     }

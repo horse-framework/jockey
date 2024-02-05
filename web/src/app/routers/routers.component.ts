@@ -32,6 +32,7 @@ export class RoutersComponent extends BaseComponent implements OnInit {
         });
 
         this.routers = routers;
+        this.subscribeToListRefresh().subscribe(() => this.routerService.list().then(routers => this.routers = routers));
     }
 
     create(): void {

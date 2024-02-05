@@ -36,7 +36,7 @@ export class ClientDetailComponent extends BaseComponent implements OnInit, OnDe
 
   private async load() {
     this.client = await this.service.get(this.id);
-    let count = await this.service.getGraph(this.id, '1m')
+    let count = await this.service.getGraph(this.id)
 
     if (this.clientChart)
       this.clientChart.destroy();
@@ -117,7 +117,7 @@ export class ClientDetailComponent extends BaseComponent implements OnInit, OnDe
       )
       .subscribe((model: MessageCount) => this.chartService.updateChart(this.clientChart, model));
 
-    this.socket.subscribe('client:' + this.id, '1m');
+    this.socket.subscribe('client:' + this.id);
   }
 
 }
