@@ -36,9 +36,6 @@ public class CountableObject
             _latest = recent;
             _curent = count;
             AllTimeTotal = recent;
-
-            if (_messages.Count > 60)
-                _messages.Dequeue();
         }
         else
         {
@@ -54,6 +51,9 @@ public class CountableObject
             _curent = new MessageCount();
             _messages.Enqueue(_curent);
         }
+
+        if (_messages.Count > 60)
+            _messages.Dequeue();
     }
 
     private static MessageCount FindDifference(MessageCount next, MessageCount previous)
