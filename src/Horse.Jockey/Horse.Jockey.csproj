@@ -39,6 +39,7 @@
         <EmbeddedResource Include="Web\295.js" />
         <EmbeddedResource Include="Web\317.js" />
         <EmbeddedResource Include="Web\321.js" />
+        <EmbeddedResource Include="Web\363.js" />
         <EmbeddedResource Include="Web\364.js" />
         <EmbeddedResource Include="Web\38.js" />
         <EmbeddedResource Include="Web\386.js" />
