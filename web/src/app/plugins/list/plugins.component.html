@@ -1,0 +1,47 @@
+<div class="plugins" *ngIf="model">
+    <div class="table">
+        <div class="thead">
+            <div class="th fx40px">
+                <a class="fa fa-solid fa-plus hreverse" (click)="load()" [attr.disabled]="processing ? 'disabled' : null" title="Upload New Assembly"></a>
+            </div>
+            <div class="th fx40">Assembly</div>
+            <div class="th fx24">Plugin</div>
+            <div class="th fx10">Enabled</div>
+            <div class="th fx10">Removed</div>
+            <div class="th fx14">Action</div>
+        </div>
+        <div class="tbody">
+            <ng-container *ngFor="let asm of model">
+                <ng-container *ngFor="let plugin of asm.plugins; index as i">
+                    <div style="height: 1px; background-color: #666;"></div>
+                    <div class="trow">
+                        <div class="td fx40px"></div>
+                        <div class="td fx40">
+                            <ng-container *ngIf="i == 0">
+                                <span>{{asm.fullname}} <em>({{asm.version}})</em></span>
+                                <em>{{asm.location}}</em>
+                            </ng-container>
+                        </div>
+                        <div class="td fx24">
+                            <span>{{plugin.name}}</span>
+                            <em>{{plugin.builder}}</em>
+                        </div>
+                        <div class="td fx10">
+                            <span>{{plugin.disabled ? 'Disabled' : 'Enabled'}}</span>
+                        </div>
+                        <div class="td fx10">
+                            <span>{{plugin.removed ? 'Removed' : 'No'}}</span>
+                        </div>
+                        <div class="td fx14 tright">
+                            <button *ngIf="!plugin.removed" (click)="remove(plugin)" class="plugin-button red" [attr.disabled]="processing ? 'disabled' : null">Remove</button>
+                            <button *ngIf="!plugin.disabled" (click)="disable(plugin)" class="plugin-button orange" [attr.disabled]="processing ? 'disabled' : null">Disable</button>
+                            <button *ngIf="plugin.disabled || plugin.removed" (click)="enable(plugin)" class="plugin-button green" [attr.disabled]="processing ? 'disabled' : null">Enable</button>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<input type="file" style="display: none;" (change)="onFileChanged($event)" #fileUpload />

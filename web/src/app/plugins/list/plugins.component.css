@@ -1,0 +1,48 @@
+.plugins {
+  margin: auto;
+  padding: 0px 60px;
+  text-align: center;
+}
+.plugins .table {
+  width: 100%;
+  text-align: left;
+}
+
+.plugin-button {
+  border: 2px solid transparent;
+  border-radius: 2px;
+  color: #f0f0f0;
+  padding: 6px 10px;
+  min-width: 90px;
+  max-height: 36px;
+  margin: 4px 0px 0px 14px;
+  background-color: transparent;
+}
+.plugin-button.red {
+  border-color: #c02020;
+}
+.plugin-button.red:hover {
+  border-color: #f02020;
+}
+.plugin-button.blue {
+  border-color: #1050a0;
+}
+.plugin-button.blue:hover {
+  border-color: #1070c0;
+}
+.plugin-button.green {
+  border-color: #10a050;
+}
+.plugin-button.green:hover {
+  border-color: #10c070;
+}
+.plugin-button.orange {
+  border-color: #ff6600;
+}
+.plugin-button.orange:hover {
+  border-color: #ffaa22;
+}
+
+.plugin-button[disabled="disabled"] {
+  border-color: #888 !important;
+}
