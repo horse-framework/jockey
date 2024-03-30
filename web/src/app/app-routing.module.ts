@@ -66,6 +66,12 @@ const routes: Routes = [
         canActivate: [SessionGuard]
     },
     {
+        path: 'plugins',
+        component: PortalLayoutComponent,
+        loadChildren: () => import('./plugins/list/plugins.module').then(m => m.PluginsModule),
+        canActivate: [SessionGuard]
+    },
+    {
         path: 'handlers',
         component: PortalLayoutComponent,
         loadChildren: () => import('./handlers/handlers.module').then(m => m.HandlersModule),

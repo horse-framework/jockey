@@ -4,8 +4,8 @@
 
 export const environment = {
     production: false,
-    version: '6.8.9',
-
+    version: '6.9.0',
+    
     api: {
         url: 'http://localhost:15400/api',
         websocket: 'ws://localhost:15400/'

@@ -3,9 +3,9 @@
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>6.8.10</AssemblyVersion>
-        <FileVersion>6.8.10</FileVersion>
-        <PackageVersion>6.8.10</PackageVersion>
+        <AssemblyVersion>6.9.0</AssemblyVersion>
+        <FileVersion>6.9.0</FileVersion>
+        <PackageVersion>6.9.0</PackageVersion>
         <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
         <Description>Administration Portal for Horse Messaging</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
@@ -26,13 +26,13 @@
     <ItemGroup>
         <PackageReference Include="Enums.NET" Version="4.0.2" />
         <PackageReference Include="Horse.Core" Version="6.6.0"/>
-        <PackageReference Include="Horse.Messaging.Server" Version="6.8.9" />
-        <PackageReference Include="Horse.Mvc" Version="6.6.1" />
-        <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.6.1" />
-        <PackageReference Include="Horse.Protocols.Http" Version="6.6.1" />
+        <PackageReference Include="Horse.Messaging.Server" Version="6.9.0" />
+        <PackageReference Include="Horse.Mvc" Version="6.6.2" />
+        <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.6.2" />
+        <PackageReference Include="Horse.Protocols.Http" Version="6.6.2" />
         <PackageReference Include="Horse.Server" Version="6.6.0"/>
-        <PackageReference Include="Horse.WebSocket.Protocol" Version="6.8.2" />
-        <PackageReference Include="Horse.WebSocket.Server" Version="6.8.2" />
+        <PackageReference Include="Horse.WebSocket.Protocol" Version="6.8.6" />
+        <PackageReference Include="Horse.WebSocket.Server" Version="6.8.6" />
     </ItemGroup>
 
     <ItemGroup>
