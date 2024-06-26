@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -66,10 +68,11 @@ public class PluginController : HorseController
         IFormFile file = Request.Files.FirstOrDefault();
 
         string dir = $"{_rider.Options.DataPath}/plugins";
+        string timestamp = DateTime.UtcNow.ToString("yyMMddHHmm");
         if (!Directory.Exists(dir))
             Directory.CreateDirectory(dir);
         
-        string fullpath = $"{_rider.Options.DataPath}/plugins/{file.Filename}";
+        string fullpath = $"{_rider.Options.DataPath}/plugins/{timestamp}_{file.Filename}";
         await using (FileStream stream = new FileStream(fullpath, FileMode.Create, FileAccess.Write, FileShare.Read))
         {
             file.Stream.Position = 0;
