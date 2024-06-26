@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -71,7 +72,7 @@ public class PluginController : HorseController
         string timestamp = DateTime.UtcNow.ToString("yyMMddHHmm");
         if (!Directory.Exists(dir))
             Directory.CreateDirectory(dir);
-        
+
         string fullpath = $"{_rider.Options.DataPath}/plugins/{timestamp}_{file.Filename}";
         await using (FileStream stream = new FileStream(fullpath, FileMode.Create, FileAccess.Write, FileShare.Read))
         {
@@ -79,6 +80,15 @@ public class PluginController : HorseController
             await file.Stream.CopyToAsync(stream);
             await stream.FlushAsync();
             stream.Close();
+        }
+
+        if (file.Filename.EndsWith(".zip", StringComparison.InvariantCultureIgnoreCase)
+            || file.Filename.EndsWith(".rar", StringComparison.InvariantCultureIgnoreCase)
+            || file.Filename.EndsWith(".hpg", StringComparison.InvariantCultureIgnoreCase))
+        {
+            string name = file.Filename[..^4];
+            ZipFile.ExtractToDirectory(fullpath, $"{_rider.Options.DataPath}/plugins/{timestamp}_{name}");
+            fullpath = $"{_rider.Options.DataPath}/plugins/{timestamp}_{name}/{name}.dll";
         }
 
         await Task.Delay(500);
