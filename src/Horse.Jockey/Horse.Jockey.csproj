@@ -3,16 +3,16 @@
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>6.9.5</AssemblyVersion>
-        <FileVersion>6.9.5</FileVersion>
-        <PackageVersion>6.9.5</PackageVersion>
+        <AssemblyVersion>6.9.9</AssemblyVersion>
+        <FileVersion>6.9.9</FileVersion>
+        <PackageVersion>6.9.9</PackageVersion>
         <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
         <Description>Administration Portal for Horse Messaging</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/horse-framework/jockey/blob/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/horse-framework/jockey</RepositoryUrl>
         <LangVersion>default</LangVersion>
-        <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+        <TargetFramework>net9.0</TargetFramework>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -26,13 +26,13 @@
     <ItemGroup>
         <PackageReference Include="Enums.NET" Version="5.0.0" />
         <PackageReference Include="Horse.Core" Version="6.6.0"/>
-        <PackageReference Include="Horse.Messaging.Server" Version="6.9.5" />
+        <PackageReference Include="Horse.Messaging.Server" Version="6.9.9" />
         <PackageReference Include="Horse.Mvc" Version="6.6.3" />
         <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.6.3" />
         <PackageReference Include="Horse.Protocols.Http" Version="6.6.3" />
         <PackageReference Include="Horse.Server" Version="6.6.0"/>
-        <PackageReference Include="Horse.WebSocket.Protocol" Version="6.8.8" />
-        <PackageReference Include="Horse.WebSocket.Server" Version="6.8.8" />
+        <PackageReference Include="Horse.WebSocket.Protocol" Version="6.10.4" />
+        <PackageReference Include="Horse.WebSocket.Server" Version="6.10.4" />
     </ItemGroup>
 
     <ItemGroup>
