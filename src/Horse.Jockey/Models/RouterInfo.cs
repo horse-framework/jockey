@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models
 {
-	[ModelType("router-info")]
+	[TextMessageType("router-info")]
 	internal class RouterInfo
 	{
 		[JsonProperty("name")]

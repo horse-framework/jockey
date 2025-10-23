@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
-using Horse.Jockey.Handlers.Queues;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models.Subscriptions;
 using Horse.Jockey.Models.WebSockets;
@@ -64,7 +63,7 @@ namespace Horse.Jockey.Handlers
             };
 
             foreach (ConsoleSubscription subscription in subscriptions)
-                _ = bus.SendAsync(subscription.Client, consoleMessage);
+                _ = bus.SendTextAsync(subscription.Client, consoleMessage);
 
             return Task.CompletedTask;
         }

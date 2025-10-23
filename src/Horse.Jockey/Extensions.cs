@@ -4,7 +4,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
 using Horse.Jockey.Handlers;
-using Horse.Jockey.Handlers.Queues;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Resource;
 using Horse.Messaging.Server;
@@ -109,7 +108,7 @@ namespace Horse.Jockey
                 Hub.Server.AddWebSockets(services, cfg => cfg
                     .UsePayloadModelProvider(new SystemJsonModelSerializer())
                     .AddSingletonHandlers(typeof(Hub))
-                    .OnClientConnected((_, info, data) =>
+                    .OnClientConnected((_, info, data, obs) =>
                     {
                         Dictionary<string, string> pairs = data.Path.ParseQuerystring();
 
@@ -125,7 +124,7 @@ namespace Horse.Jockey
                                 return null;
                         }
 
-                        WsServerSocket websocket = new(Hub.Server, info);
+                        WsServerSocket websocket = new(Hub.Server, info, obs);
                         return Task.FromResult(websocket);
                     })
                     .OnClientReady((services, client) =>

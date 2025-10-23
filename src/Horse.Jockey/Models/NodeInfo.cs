@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models
 {
-    [ModelType("node-info")]
+    [TextMessageType("node-info")]
     internal class NodeInfo
     {
         /// <summary>

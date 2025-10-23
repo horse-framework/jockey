@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models
 {
-    [ModelType("cluster-info")]
+    [TextMessageType("cluster-info")]
     internal class ClusterInfo
     {
         [JsonProperty("mode")]

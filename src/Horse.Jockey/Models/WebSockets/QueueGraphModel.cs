@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.WebSockets;
 
-[ModelType("queue-graph")]
+[TextMessageType("queue-graph")]
 public class QueueGraphModel
 {
     [JsonProperty("n")]

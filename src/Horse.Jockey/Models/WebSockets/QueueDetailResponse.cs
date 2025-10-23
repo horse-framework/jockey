@@ -7,7 +7,7 @@ namespace Horse.Jockey.Models.WebSockets
     /// <summary>
     /// Queue detailed page events subscription response model for websocket clients
     /// </summary>
-    [ModelType("queue-detail-response")]
+    [TextMessageType("queue-detail-response")]
     public class QueueDetailResponse
     {
         /// <summary>

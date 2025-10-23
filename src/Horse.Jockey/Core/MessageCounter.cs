@@ -303,8 +303,8 @@ public class MessageCounter
 
             foreach (WsServerSocket socket in dashboardSubs)
             {
-                _ = bus.SendAsync(socket, model);
-                _ = bus.SendAsync(socket, storeModel);
+                _ = bus.SendTextAsync(socket, model);
+                _ = bus.SendTextAsync(socket, storeModel);
             }
         }
 
@@ -321,7 +321,7 @@ public class MessageCounter
                 Name = sub.Queue.Name,
                 Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
-            _ = _bus.SendAsync(sub.Client, model);
+            _ = _bus.SendTextAsync(sub.Client, model);
         }
     }
 
@@ -375,7 +375,7 @@ public class MessageCounter
             };
 
             foreach (WsServerSocket socket in dashboardSubs)
-                _ = bus.SendAsync(socket, model);
+                _ = bus.SendTextAsync(socket, model);
         }
 
         foreach (ChannelDetailSubscription sub in chSubs)
@@ -391,7 +391,7 @@ public class MessageCounter
                 Name = sub.Channel.Name,
                 Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
-            _ = _bus.SendAsync(sub.Client, model);
+            _ = _bus.SendTextAsync(sub.Client, model);
         }
     }
 
@@ -411,7 +411,7 @@ public class MessageCounter
             };
 
             foreach (WsServerSocket socket in dashboardSubs)
-                _ = bus.SendAsync(socket, model);
+                _ = bus.SendTextAsync(socket, model);
         }
 
         _routerTotal.Tick(null);
@@ -451,7 +451,7 @@ public class MessageCounter
             };
 
             foreach (WsServerSocket socket in dashboardSubs)
-                _ = bus.SendAsync(socket, model);
+                _ = bus.SendTextAsync(socket, model);
         }
 
         foreach (ClientDetailSubscription sub in clientSubs)
@@ -467,7 +467,7 @@ public class MessageCounter
                 Name = sub.TargetClient.UniqueId,
                 Counts = new[] {new CountRecord(current.UnixTime, current.Received, current.Sent, current.Respond, current.Error, current.Delivered, current.NotRouted, current.Timeout)}
             };
-            _ = _bus.SendAsync(sub.Client, model);
+            _ = _bus.SendTextAsync(sub.Client, model);
         }
 
         _directTotal.Tick(null);

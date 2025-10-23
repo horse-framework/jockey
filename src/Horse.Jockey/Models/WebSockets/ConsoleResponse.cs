@@ -7,7 +7,7 @@ namespace Horse.Jockey.Models.WebSockets
     /// <summary>
     /// Console message subscription response model for websocket clients
     /// </summary>
-    [ModelType("console-response")]
+    [TextMessageType("console-response")]
     public class ConsoleResponse
     {
         /// <summary>

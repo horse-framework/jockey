@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models
 {
-    [ModelType("server-stats")]
+    [TextMessageType("server-stats")]
     internal class ServerStatistics
     {
         [JsonProperty("hosts")]

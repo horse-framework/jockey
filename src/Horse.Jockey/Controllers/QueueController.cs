@@ -84,7 +84,7 @@ namespace Horse.Jockey.Controllers
             detail.Info = HorseQueueInformation.Create(queue);
             detail.Stats = HorseQueueStatistics.Create(queue);
             detail.Options = QueueOptionsInfo.Create(queue);
-            detail.Consumers = queue.ClientsClone
+            detail.Consumers = queue.Clients
                 .Select(x => new QueueConsumerInfo
                 {
                     Id = x.Client?.UniqueId,

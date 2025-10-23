@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.Queues
 {
-    [ModelType("queue-detail")]
+    [TextMessageType("queue-detail")]
     internal class QueueDetail
     {
         [JsonProperty("info")]

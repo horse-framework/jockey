@@ -1,11 +1,14 @@
 using System;
-using Horse.Jockey.Handlers.Queues;
 using Horse.Messaging.Server;
+using Horse.Messaging.Server.Logging;
 
 namespace Horse.Jockey.Handlers
 {
 	internal class ErrorHandler : BaseHandler, IErrorHandler
 	{
-		public void Error(string hint, Exception exception, string payload) { }
-	}
+        public void Error(HorseLogLevel logLevel, int eventId, string message, Exception exception)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

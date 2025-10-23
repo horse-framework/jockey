@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.WebSockets;
 
-[ModelType("channel-graph")]
+[TextMessageType("channel-graph")]
 public class ChannelGraphModel
 {
     [JsonProperty("n")]

@@ -7,7 +7,7 @@ namespace Horse.Jockey.Models.User
     /// <summary>
     /// User login request model for Jockey
     /// </summary>
-    [ModelType("user-login")]
+    [TextMessageType("user-login")]
     public class UserLogin
     {
         /// <summary>

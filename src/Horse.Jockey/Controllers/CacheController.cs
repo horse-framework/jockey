@@ -57,19 +57,19 @@ namespace Horse.Jockey.Controllers
             var result = await _rider.Cache.Get(key);
             string value = null;
 
-            if (result.item != null)
-                value = Encoding.UTF8.GetString(result.item.Value.ToArray());
+            if (result.Item != null)
+                value = Encoding.UTF8.GetString(result.Item.Value.ToArray());
 
-            if (result.item == null)
+            if (result.Item == null)
                 return new StatusCodeResult(HttpStatusCode.NotFound);
 
             return Json(new CacheItemModel
             {
-                Expiration = result.item.Expiration.ToUnixSeconds(),
-                WarnCount = result.item.ExpirationWarnCount,
-                WarningDate = result.item.ExpirationWarning?.ToUnixSeconds() ?? 0,
-                Key = result.item.Key,
-                Tags = result.item.Tags,
+                Expiration = result.Item.Expiration.ToUnixSeconds(),
+                WarnCount = result.Item.ExpirationWarnCount,
+                WarningDate = result.Item.ExpirationWarning?.ToUnixSeconds() ?? 0,
+                Key = result.Item.Key,
+                Tags = result.Item.Tags,
                 Value = value
             });
         }

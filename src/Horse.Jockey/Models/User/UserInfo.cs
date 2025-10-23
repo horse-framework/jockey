@@ -8,7 +8,7 @@ namespace Horse.Jockey.Models.User
     /// User Informatio for Jockey.
     /// If authentication is successful, UserInfo keeps user data
     /// </summary>
-    [ModelType("user-info")]
+    [TextMessageType("user-info")]
     public class UserInfo
     {
         /// <summary>

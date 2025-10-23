@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.WebSockets
 {
-    [ModelType("subscribe")]
+    [TextMessageType("subscribe")]
     public class SubscriptionRequest
     {
         [JsonProperty("channel")]

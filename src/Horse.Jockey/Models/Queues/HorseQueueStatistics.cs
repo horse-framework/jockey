@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.Queues
 {
-    [ModelType("queue-stats")]
+    [TextMessageType("queue-stats")]
     internal class HorseQueueStatistics
     {
         [JsonProperty("name")]
@@ -79,7 +79,7 @@ namespace Horse.Jockey.Models.Queues
             int processingMessages = 0;
 
             if (queue.Type == QueueType.RoundRobin)
-                processingMessages = queue.ClientsClone.Count(x => x.CurrentlyProcessing != null);
+                processingMessages = queue.Clients.Count(x => x.CurrentlyProcessing != null);
             else if (queue.ProcessingMessage != null)
                 processingMessages++;
 

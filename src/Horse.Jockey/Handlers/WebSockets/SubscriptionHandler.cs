@@ -95,7 +95,7 @@ namespace Horse.Jockey.Handlers.WebSockets
                 Name = queueName ?? "*",
                 Counts = data.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
-            _ = _bus.SendAsync(socket, model);
+            _ = _bus.SendTextAsync(socket, model);
         }
 
         private void SendChannelFullData(IHorseWebSocket socket, string channelName = null)
@@ -108,7 +108,7 @@ namespace Horse.Jockey.Handlers.WebSockets
                 Name = channelName ?? "*",
                 Counts = data.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
-            _ = _bus.SendAsync(socket, model);
+            _ = _bus.SendTextAsync(socket, model);
         }
 
         private void SendDirectFullData(IHorseWebSocket socket, string clientId = null)
@@ -121,7 +121,7 @@ namespace Horse.Jockey.Handlers.WebSockets
                 Name = clientId ?? "*",
                 Counts = data.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
-            _ = _bus.SendAsync(socket, model);
+            _ = _bus.SendTextAsync(socket, model);
         }
 
         private void SendRouterFullData(IHorseWebSocket socket, string routerName = null)
@@ -134,7 +134,7 @@ namespace Horse.Jockey.Handlers.WebSockets
                 Name = routerName ?? "*",
                 Counts = data.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
-            _ = _bus.SendAsync(socket, model);
+            _ = _bus.SendTextAsync(socket, model);
         }
 
         public Task OnError(Exception exception, SubscriptionRequest model, WebSocketMessage message, IHorseWebSocket client)

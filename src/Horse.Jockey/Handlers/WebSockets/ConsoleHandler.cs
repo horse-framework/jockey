@@ -25,7 +25,7 @@ namespace Horse.Jockey.Handlers.WebSockets
             if (string.IsNullOrEmpty(model.Target))
             {
                 _subscriptionService.UnsubscribeConsole((WsServerSocket) client);
-                await _bus.SendAsync(client, new ConsoleResponse {RequestId = model.RequestId, Ok = true});
+                await _bus.SendTextAsync(client, new ConsoleResponse {RequestId = model.RequestId, Ok = true});
                 return;
             }
 
@@ -34,12 +34,12 @@ namespace Horse.Jockey.Handlers.WebSockets
 
             _subscriptionService.SubscribeConsole((WsServerSocket) client, source, targetType, model.Target);
 
-            await _bus.SendAsync(client, new ConsoleResponse {RequestId = model.RequestId, Ok = true});
+            await _bus.SendTextAsync(client, new ConsoleResponse {RequestId = model.RequestId, Ok = true});
         }
 
         public Task OnError(Exception exception, ConsoleRequest model, WebSocketMessage message, IHorseWebSocket client)
         {
-            return _bus.SendAsync(client, new ConsoleResponse {RequestId = model.RequestId, Ok = false});
+            return _bus.SendTextAsync(client, new ConsoleResponse {RequestId = model.RequestId, Ok = false});
         }
     }
 }

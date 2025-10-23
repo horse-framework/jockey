@@ -47,7 +47,7 @@ namespace Horse.Jockey.Handlers
             };
 
             foreach (ConsoleSubscription subscription in subscriptions)
-                _ = bus.SendAsync(subscription.Client, consoleMessage);
+                _ = bus.SendTextAsync(subscription.Client, consoleMessage);
 
             return Task.CompletedTask;
         }

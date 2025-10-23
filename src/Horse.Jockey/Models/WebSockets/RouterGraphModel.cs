@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.WebSockets;
 
-[ModelType("router-graph")]
+[TextMessageType("router-graph")]
 public class RouterGraphModel
 {
     [JsonProperty("n")]

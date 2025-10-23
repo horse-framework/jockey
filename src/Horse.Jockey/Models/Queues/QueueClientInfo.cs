@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.Queues
 {
-    [ModelType("queue-client")]
+    [TextMessageType("queue-client")]
     internal class QueueClientInfo : ClientInfo
     {
         [JsonProperty("subsDate")]

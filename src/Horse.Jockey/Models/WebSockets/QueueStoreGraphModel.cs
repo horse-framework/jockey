@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.WebSockets;
 
-[ModelType("qstore-graph")]
+[TextMessageType("qstore-graph")]
 public class QueueStoreGraphModel
 {
     [JsonProperty("n")]

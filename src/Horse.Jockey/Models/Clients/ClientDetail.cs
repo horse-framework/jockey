@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.Clients
 {
-    [ModelType("client-detail")]
+    [TextMessageType("client-detail")]
     internal class ClientDetail : ClientInfo
     {
         [JsonProperty("protocol")]

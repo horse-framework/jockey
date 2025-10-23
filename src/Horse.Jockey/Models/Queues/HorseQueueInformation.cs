@@ -9,7 +9,7 @@ namespace Horse.Jockey.Models.Queues
 {
     public record MessageTimeoutModel(int duration, string policy, string target);
 
-    [ModelType("queue-info")]
+    [TextMessageType("queue-info")]
     internal class HorseQueueInformation
     {
         [JsonProperty("name")]

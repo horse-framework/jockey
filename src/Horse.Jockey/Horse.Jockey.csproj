@@ -3,10 +3,10 @@
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>6.9.9</AssemblyVersion>
-        <FileVersion>6.9.9</FileVersion>
-        <PackageVersion>6.9.9</PackageVersion>
-        <Authors>Mehmet Helvacıköylü;Emre Hızlı</Authors>
+        <AssemblyVersion>7.1.3</AssemblyVersion>
+        <FileVersion>7.1.3</FileVersion>
+        <PackageVersion>7.1.3</PackageVersion>
+        <Authors>Mehmet Helvacıköylü</Authors>
         <Description>Administration Portal for Horse Messaging</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/horse-framework/jockey/blob/master/LICENSE</PackageLicenseUrl>
@@ -24,41 +24,41 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Enums.NET" Version="5.0.0" />
+        <PackageReference Include="Enums.NET" Version="5.0.0"/>
         <PackageReference Include="Horse.Core" Version="6.6.0"/>
-        <PackageReference Include="Horse.Messaging.Server" Version="6.9.9" />
-        <PackageReference Include="Horse.Mvc" Version="6.6.3" />
-        <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.6.3" />
-        <PackageReference Include="Horse.Protocols.Http" Version="6.6.3" />
+        <PackageReference Include="Horse.Messaging.Server" Version="7.1.3" />
+        <PackageReference Include="Horse.Mvc" Version="6.6.3"/>
+        <PackageReference Include="Horse.Mvc.Auth.Jwt" Version="6.6.3"/>
+        <PackageReference Include="Horse.Protocols.Http" Version="6.6.3"/>
         <PackageReference Include="Horse.Server" Version="6.6.0"/>
-        <PackageReference Include="Horse.WebSocket.Protocol" Version="6.10.4" />
-        <PackageReference Include="Horse.WebSocket.Server" Version="6.10.4" />
+        <PackageReference Include="Horse.WebSocket.Protocol" Version="7.0.1"/>
+        <PackageReference Include="Horse.WebSocket.Server" Version="7.0.1"/>
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Web\295.js" />
-        <EmbeddedResource Include="Web\317.js" />
-        <EmbeddedResource Include="Web\321.js" />
-        <EmbeddedResource Include="Web\363.js" />
-        <EmbeddedResource Include="Web\364.js" />
-        <EmbeddedResource Include="Web\38.js" />
-        <EmbeddedResource Include="Web\386.js" />
-        <EmbeddedResource Include="Web\394.js" />
-        <EmbeddedResource Include="Web\41.js" />
-        <EmbeddedResource Include="Web\428.js" />
-        <EmbeddedResource Include="Web\512.js" />
-        <EmbeddedResource Include="Web\54.js" />
-        <EmbeddedResource Include="Web\804.js" />
-        <EmbeddedResource Include="Web\909.js" />
-        <EmbeddedResource Include="Web\957.js" />
-        <EmbeddedResource Include="Web\989.js" />
-        <EmbeddedResource Include="Web\common.js" />
-        <EmbeddedResource Include="Web\favicon.ico" />
-        <EmbeddedResource Include="Web\index.html" />
-        <EmbeddedResource Include="Web\main.js" />
-        <EmbeddedResource Include="Web\polyfills.js" />
-        <EmbeddedResource Include="Web\runtime.js" />
-        <EmbeddedResource Include="Web\styles.css" />
-        <EmbeddedResource Include="Web/assets\horse.svg" />
+        <EmbeddedResource Include="Web\295.js"/>
+        <EmbeddedResource Include="Web\317.js"/>
+        <EmbeddedResource Include="Web\321.js"/>
+        <EmbeddedResource Include="Web\363.js"/>
+        <EmbeddedResource Include="Web\364.js"/>
+        <EmbeddedResource Include="Web\38.js"/>
+        <EmbeddedResource Include="Web\386.js"/>
+        <EmbeddedResource Include="Web\394.js"/>
+        <EmbeddedResource Include="Web\41.js"/>
+        <EmbeddedResource Include="Web\428.js"/>
+        <EmbeddedResource Include="Web\512.js"/>
+        <EmbeddedResource Include="Web\54.js"/>
+        <EmbeddedResource Include="Web\804.js"/>
+        <EmbeddedResource Include="Web\909.js"/>
+        <EmbeddedResource Include="Web\957.js"/>
+        <EmbeddedResource Include="Web\989.js"/>
+        <EmbeddedResource Include="Web\common.js"/>
+        <EmbeddedResource Include="Web\favicon.ico"/>
+        <EmbeddedResource Include="Web\index.html"/>
+        <EmbeddedResource Include="Web\main.js"/>
+        <EmbeddedResource Include="Web\polyfills.js"/>
+        <EmbeddedResource Include="Web\runtime.js"/>
+        <EmbeddedResource Include="Web\styles.css"/>
+        <EmbeddedResource Include="Web/assets\horse.svg"/>
     </ItemGroup>
 </Project>

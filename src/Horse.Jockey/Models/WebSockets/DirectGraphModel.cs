@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Horse.Jockey.Models.WebSockets;
 
-[ModelType("direct-graph")]
+[TextMessageType("direct-graph")]
 public class DirectGraphModel
 {
     [JsonProperty("n")]

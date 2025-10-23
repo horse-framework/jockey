@@ -7,7 +7,7 @@ namespace Horse.Jockey.Models.WebSockets
     /// <summary>
     /// Dashboard subscription request model for websocket clients
     /// </summary>
-    [ModelType("dashboard")]
+    [TextMessageType("dashboard")]
     public class DashboardRequest
     {
         /// <summary>

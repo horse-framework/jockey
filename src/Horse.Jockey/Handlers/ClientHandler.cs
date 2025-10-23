@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Horse.Jockey.Core;
-using Horse.Jockey.Handlers.Queues;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Clients;
 

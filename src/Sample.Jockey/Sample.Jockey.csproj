@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Horse.Messaging.Data" Version="6.9.9" />
+      <PackageReference Include="Horse.Messaging.Data" Version="7.1.3" />
     </ItemGroup>
 
 </Project>
