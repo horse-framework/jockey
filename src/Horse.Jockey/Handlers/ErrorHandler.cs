@@ -1,5 +1,4 @@
 using System;
-using Horse.Messaging.Server;
 using Horse.Messaging.Server.Logging;
 
 namespace Horse.Jockey.Handlers
@@ -8,7 +7,6 @@ namespace Horse.Jockey.Handlers
 	{
         public void Error(HorseLogLevel logLevel, int eventId, string message, Exception exception)
         {
-            throw new NotImplementedException();
         }
     }
 }
