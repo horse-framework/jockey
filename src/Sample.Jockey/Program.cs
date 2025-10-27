@@ -34,7 +34,7 @@ namespace Sample.Jockey
                 })
                 .AddJockey(o =>
                 {
-                    o.Port = 15400;
+                    o.Port = 2627;
                     o.AuthAsync = async login => { return new UserInfo {Name = "Admin", Id = "*"}; };
                 })
                 .Build();
@@ -67,7 +67,7 @@ namespace Sample.Jockey
 
             HorseServer server = new();
             server.UseRider(rider);
-            server.Start(26222);
+            server.Start(2626);
 
             Console.ReadLine();
             HorseClient client = new();

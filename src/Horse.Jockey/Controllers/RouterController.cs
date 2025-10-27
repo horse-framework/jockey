@@ -10,31 +10,20 @@ using Horse.Jockey.Models.Routers;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Routing;
-using Horse.Mvc;
-using Horse.Mvc.Auth;
-using Horse.Mvc.Controllers;
-using Horse.Mvc.Controllers.Parameters;
-using Horse.Mvc.Filters.Route;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Horse.Jockey.Controllers
 {
     [Authorize]
+    [ApiController]
     [Route("api/router")]
-    public class RouterController : HorseController
+    public class RouterController(HorseRider rider, MessageCounter counter) : ControllerBase
     {
-        private readonly HorseRider _rider;
-        private readonly MessageCounter _counter;
-
-        public RouterController(HorseRider rider, MessageCounter counter)
-        {
-            _rider = rider;
-            _counter = counter;
-        }
-
         [HttpGet("list")]
         public IActionResult List()
         {
-            return Json(_rider.Router.Routers.Select(x => new RouterInfo
+            return Ok(rider.Router.Routers.Select(x => new RouterInfo
                 {
                     Name = x.Name,
                     IsEnabled = x.IsEnabled,
@@ -56,8 +45,8 @@ namespace Horse.Jockey.Controllers
         [HttpGet("get")]
         public IActionResult Get([FromQuery] string name)
         {
-            Router router = _rider.Router.Find(name);
-            return Json(new RouterInfo
+            Router router = rider.Router.Find(name);
+            return Ok(new RouterInfo
             {
                 Name = router.Name,
                 IsEnabled = router.IsEnabled,
@@ -78,7 +67,7 @@ namespace Horse.Jockey.Controllers
         [HttpGet("graph")]
         public IActionResult GetGraph([FromQuery] string name)
         {
-            CountableObject countable = _counter.GetRouterCounter(name);
+            CountableObject countable = counter.GetRouterCounter(name);
             IEnumerable<MessageCount> counts = countable.GetData();
 
             var model = new MessageCountModel
@@ -87,36 +76,36 @@ namespace Horse.Jockey.Controllers
                 Data = counts.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
 
-            return Json(model);
+            return Ok(model);
         }
 
         [HttpPost("create")]
-        public Task<IActionResult> Create([FromBody] CreateRouterModel model)
+        public IActionResult Create([FromBody] CreateRouterModel model)
         {
             RouteMethod method = Enum.Parse<RouteMethod>(model.Method);
-            Router router = _rider.Router.Add(model.Name, method);
+            Router router = rider.Router.Add(model.Name, method);
 
             if (router == null)
                 return NotFound(null);
 
-            return JsonAsync(new {ok = true});
+            return Ok(new { ok = true });
         }
 
         [HttpDelete("remove")]
-        public Task<IActionResult> Remove([FromQuery] string name)
+        public IActionResult Remove([FromQuery] string name)
         {
-            Router router = _rider.Router.Find(name);
+            Router router = rider.Router.Find(name);
             if (router == null)
                 return NotFound(null);
 
-            _rider.Router.Remove(router);
-            return JsonAsync(new {ok = true});
+            rider.Router.Remove(router);
+            return Ok(new { ok = true });
         }
 
         [HttpPost("binding")]
-        public Task<IActionResult> AddBinding([FromBody] AddBindingModel model)
+        public IActionResult AddBinding([FromBody] AddBindingModel model)
         {
-            Router router = _rider.Router.Find(model.Router);
+            Router router = rider.Router.Find(model.Router);
 
             if (router == null)
                 return NotFound(null);
@@ -145,9 +134,9 @@ namespace Horse.Jockey.Controllers
             if (type == null)
                 type = Type.GetType($"{bindingType}, Horse.Messaging.Server");
 
-            Binding binding = (Binding) Activator.CreateInstance(type);
+            Binding binding = (Binding)Activator.CreateInstance(type);
             if (binding == null)
-                return BadRequest(new {error = "Invalid Binding Type"});
+                return BadRequest(new { error = "Invalid Binding Type" });
 
             binding.Name = model.Name;
             binding.Target = model.Target;
@@ -157,13 +146,13 @@ namespace Horse.Jockey.Controllers
 
             bool added = router.AddBinding(binding);
 
-            return JsonAsync(new {ok = added});
+            return Ok(new { ok = added });
         }
 
         [HttpDelete("binding")]
-        public Task<IActionResult> RemoveBinding([FromQuery] string routerName, [FromQuery] string bindingName)
+        public IActionResult RemoveBinding([FromQuery] string routerName, [FromQuery] string bindingName)
         {
-            Router router = _rider.Router.Find(routerName);
+            Router router = rider.Router.Find(routerName);
 
             if (router == null)
                 return NotFound(null);
@@ -174,16 +163,16 @@ namespace Horse.Jockey.Controllers
                 return NotFound(null);
 
             router.RemoveBinding(bindingName);
-            return JsonAsync(new {ok = true});
+            return Ok(new { ok = true });
         }
 
         [HttpPost("publish")]
         public async Task<IActionResult> Publish([FromBody] QueuePushModel model)
         {
-            Router router = _rider.Router.Find(model.Queue);
+            Router router = rider.Router.Find(model.Queue);
 
             if (router == null)
-                return await NotFound(new {result = "NotFound"});
+                return NotFound(new { result = "NotFound" });
 
             HorseMessage message = new HorseMessage(MessageType.Router, model.Queue, model.ContentType);
             message.HighPriority = model.Priority;
@@ -195,7 +184,7 @@ namespace Horse.Jockey.Controllers
             message.SetStringContent(model.Message);
 
             RouterPublishResult result = await router.Publish(null, message);
-            return Json(new {result = result.ToString()});
+            return Ok(new { result = result.ToString() });
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using EnumsNET;
 using Horse.Jockey.Core;
@@ -12,32 +11,20 @@ using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Queues;
 using Horse.Messaging.Server.Queues.Delivery;
-using Horse.Mvc;
-using Horse.Mvc.Auth;
-using Horse.Mvc.Controllers;
-using Horse.Mvc.Controllers.Parameters;
-using Horse.Mvc.Filters.Route;
-using Horse.Mvc.Results;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Horse.Jockey.Controllers
 {
     [Authorize]
+    [ApiController]
     [Route("api/queue")]
-    public class QueueController : HorseController
+    public class QueueController(HorseRider rider, MessageCounter counter) : ControllerBase
     {
-        private readonly HorseRider _rider;
-        private readonly MessageCounter _counter;
-
-        public QueueController(HorseRider rider, MessageCounter counter)
-        {
-            _rider = rider;
-            _counter = counter;
-        }
-
         [HttpGet("list")]
         public IActionResult List()
         {
-            List<QueueDetail> result = _rider.Queue
+            List<QueueDetail> result = rider.Queue
                 .Queues
                 .Select(queue => new QueueDetail
                 {
@@ -46,13 +33,13 @@ namespace Horse.Jockey.Controllers
                 })
                 .ToList();
 
-            return Json(result);
+            return Ok(result);
         }
 
         [HttpGet("list-names")]
         public IActionResult ListNames()
         {
-            var result = _rider.Queue
+            var result = rider.Queue
                 .Queues
                 .Select(queue => new
                 {
@@ -62,23 +49,23 @@ namespace Horse.Jockey.Controllers
                 })
                 .ToList();
 
-            return Json(result);
+            return Ok(result);
         }
 
         [HttpGet("managers")]
         public IActionResult GetManagers()
         {
-            string[] managers = _rider.Queue.GetQueueManagers();
-            return Json(managers);
+            string[] managers = rider.Queue.GetQueueManagers();
+            return Ok(managers);
         }
 
         [HttpGet("get")]
-        public Task<IActionResult> Get([FromQuery] string name)
+        public async Task<IActionResult> Get([FromQuery] string name)
         {
-            HorseQueue queue = _rider.Queue.Find(name);
+            HorseQueue queue = rider.Queue.Find(name);
 
             if (queue == null)
-                return NotFound(null);
+                return NotFound();
 
             QueueDetail detail = new QueueDetail();
             detail.Info = HorseQueueInformation.Create(queue);
@@ -98,18 +85,18 @@ namespace Horse.Jockey.Controllers
                     AckTimeoutCount = x.AckTimeoutCount
                 }).ToList();
 
-            return JsonAsync(detail);
+            return Ok(detail);
         }
 
         [HttpGet("graph")]
         public IActionResult GetGraph([FromQuery] string name)
         {
-            CountableObject countable = _counter.GetQueueCounter(name);
-            CountableObject storeCountable = _counter.GetQueueStoreCounter(name);
+            CountableObject countable = counter.GetQueueCounter(name);
+            CountableObject storeCountable = counter.GetQueueStoreCounter(name);
             IEnumerable<MessageCount> counts = countable.GetData();
             IEnumerable<MessageCount> storeCounts = storeCountable.GetData();
 
-            return Json(new
+            return Ok(new
             {
                 name = countable.Name,
                 stream = counts.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout)),
@@ -120,12 +107,12 @@ namespace Horse.Jockey.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] QueueCreateModel model)
         {
-            HorseQueue queue = _rider.Queue.Find(model.Name);
+            HorseQueue queue = rider.Queue.Find(model.Name);
 
             if (queue != null)
-                return await NotFound(new {ok = false, message = "There is already a queue with same name"});
+                return NotFound(new { ok = false, message = "There is already a queue with same name" });
 
-            queue = await _rider.Queue.Create(model.Name, o =>
+            queue = await rider.Queue.Create(model.Name, o =>
             {
                 if (!string.IsNullOrEmpty(model.CommitWhen))
                     o.CommitWhen = Enum.Parse<CommitWhen>(model.CommitWhen);
@@ -169,16 +156,16 @@ namespace Horse.Jockey.Controllers
                     o.MessageSizeLimit = model.MessageSizeLimit.Value;
             }, model.Manager);
 
-            return Json(new {ok = queue != null});
+            return Ok(new { ok = queue != null });
         }
 
         [HttpPut("option")]
         public async Task<IActionResult> ChangeOption([FromBody] OptionChange model)
         {
-            HorseQueue queue = _rider.Queue.Find(model.Target);
+            HorseQueue queue = rider.Queue.Find(model.Target);
 
             if (queue == null)
-                return await NotFound(new {ok = false, message = "Queue could not found"});
+                return NotFound(new { ok = false, message = "Queue could not found" });
 
             switch (model.Name)
             {
@@ -215,16 +202,16 @@ namespace Horse.Jockey.Controllers
                     break;
             }
 
-            return Json(new {ok = queue != null});
+            return Ok(new { ok = queue != null });
         }
 
         [HttpPost("push")]
         public async Task<IActionResult> Push([FromBody] QueuePushModel model)
         {
-            HorseQueue queue = _rider.Queue.Find(model.Queue);
+            HorseQueue queue = rider.Queue.Find(model.Queue);
 
             if (queue == null)
-                return await NotFound(new {result = "NotFound"});
+                return NotFound(new { result = "NotFound" });
 
             HorseMessage message = new HorseMessage(MessageType.QueueMessage, queue.Name, model.ContentType);
             message.HighPriority = model.Priority;
@@ -236,20 +223,20 @@ namespace Horse.Jockey.Controllers
             message.SetStringContent(model.Message);
 
             PushResult result = await queue.Push(message);
-            return Json(new {result = result.ToString()});
+            return Ok(new { result = result.ToString() });
         }
 
         [HttpGet("read")]
-        public Task<IActionResult> Read([FromQuery] string name)
+        public ActionResult Read([FromQuery] string name)
         {
             QueueMessage msg = GetQueueMessage(name);
             QueueMessageModel model = msg != null ? new QueueMessageModel(msg) : null;
-            return JsonAsync(model);
+            return Ok(model);
         }
 
         private QueueMessage GetQueueMessage(string name)
         {
-            HorseQueue queue = _rider.Queue.Find(name);
+            HorseQueue queue = rider.Queue.Find(name);
 
             if (queue == null)
                 return null;
@@ -266,68 +253,68 @@ namespace Horse.Jockey.Controllers
         }
 
         [HttpGet("consume")]
-        public Task<IActionResult> Consume([FromQuery] string name)
+        public IActionResult Consume([FromQuery] string name)
         {
-            HorseQueue queue = _rider.Queue.Find(name);
+            HorseQueue queue = rider.Queue.Find(name);
             QueueMessage msg = GetQueueMessage(name);
 
             if (msg != null)
                 queue.RemoveMessage(msg);
 
             QueueMessageModel model = msg != null ? new QueueMessageModel(msg) : null;
-            return JsonAsync(model);
+            return Ok(model);
         }
 
         [HttpPut("clear")]
-        public Task<IActionResult> Clear([FromForm] string name)
+        public IActionResult Clear([FromForm] string name)
         {
-            HorseQueue queue = _rider.Queue.Find(name);
+            HorseQueue queue = rider.Queue.Find(name);
 
             if (queue == null)
-                return NotFound(null);
+                return NotFound();
 
             queue.ClearMessages();
-            return Ok(new {name = name, clear = true});
+            return Ok(new { name = name, clear = true });
         }
 
         [HttpPut("status")]
-        public Task<IActionResult> SetStatus([FromForm] string name, [FromForm] string status)
+        public IActionResult SetStatus([FromForm] string name, [FromForm] string status)
         {
-            HorseQueue queue = _rider.Queue.Find(name);
+            HorseQueue queue = rider.Queue.Find(name);
             if (queue == null)
-                return NotFound(new {ok = false});
+                return NotFound(new { ok = false });
 
             QueueStatus queueStatus = Enum.Parse<QueueStatus>(status);
             if (queueStatus == QueueStatus.Syncing || queueStatus == QueueStatus.NotInitialized)
-                return NotAcceptable(new {ok = false});
+                return UnprocessableEntity(new { ok = false });
 
             queue.SetStatus(queueStatus);
-            return Ok(new {name = name, ok = true});
+            return Ok(new { name = name, ok = true });
         }
 
         [HttpDelete("delete")]
         public async Task<IActionResult> Delete([FromQuery] string name)
         {
-            HorseQueue queue = _rider.Queue.Find(name);
+            HorseQueue queue = rider.Queue.Find(name);
 
             if (queue == null)
-                return await NotFound(null);
+                return NotFound(null);
 
-            await _rider.Queue.Remove(queue);
-            return await Ok(new {name = name, ok = true});
+            await rider.Queue.Remove(queue);
+            return Ok(new { name = name, ok = true });
         }
 
         [HttpPost("move-messages")]
         public async Task<IActionResult> MoveMessages([FromForm] string name, [FromForm] string target)
         {
-            HorseQueue queue = _rider.Queue.Find(name);
-            HorseQueue targetQueue = _rider.Queue.Find(target);
+            HorseQueue queue = rider.Queue.Find(name);
+            HorseQueue targetQueue = rider.Queue.Find(target);
 
             if (queue == null)
-                return await NotFound(null);
+                return NotFound(null);
 
             if (targetQueue == null)
-                targetQueue = await _rider.Queue.Create(target);
+                targetQueue = await rider.Queue.Create(target);
 
             int moveCount = 0;
 
@@ -336,7 +323,7 @@ namespace Horse.Jockey.Controllers
             {
                 PushResult result = await targetQueue.Push(message.Message);
                 if (result != PushResult.Success)
-                    return await Ok(new {ok = true, completed = false, count = moveCount});
+                    return Ok(new { ok = true, completed = false, count = moveCount });
 
                 moveCount++;
             }
@@ -349,7 +336,7 @@ namespace Horse.Jockey.Controllers
 
                 PushResult result = await targetQueue.Push(message.Message);
                 if (result != PushResult.Success)
-                    return await Ok(new {ok = true, completed = false, count = moveCount});
+                    return Ok(new { ok = true, completed = false, count = moveCount });
 
                 moveCount++;
                 await queue.Manager.RemoveMessage(message);
@@ -363,26 +350,26 @@ namespace Horse.Jockey.Controllers
 
                 PushResult result = await targetQueue.Push(message.Message);
                 if (result != PushResult.Success)
-                    return await Ok(new {ok = true, completed = false, count = moveCount});
+                    return Ok(new { ok = true, completed = false, count = moveCount });
 
                 moveCount++;
                 await queue.Manager.RemoveMessage(message);
             }
 
-            return await Ok(new {ok = true, completed = true, count = moveCount});
+            return Ok(new { ok = true, completed = true, count = moveCount });
         }
 
         [HttpPost("copy-messages")]
         public async Task<IActionResult> CopyMessages([FromForm] string name, [FromForm] string target)
         {
-            HorseQueue queue = _rider.Queue.Find(name);
-            HorseQueue targetQueue = _rider.Queue.Find(target);
+            HorseQueue queue = rider.Queue.Find(name);
+            HorseQueue targetQueue = rider.Queue.Find(target);
 
             if (queue == null)
-                return await NotFound(null);
+                return NotFound(null);
 
             if (targetQueue == null)
-                targetQueue = await _rider.Queue.Create(target);
+                targetQueue = await rider.Queue.Create(target);
 
             int moveCount = 0;
 
@@ -391,7 +378,7 @@ namespace Horse.Jockey.Controllers
             {
                 PushResult result = await targetQueue.Push(message.Message);
                 if (result != PushResult.Success)
-                    return await Ok(new {ok = true, completed = false, count = moveCount});
+                    return Ok(new { ok = true, completed = false, count = moveCount });
 
                 moveCount++;
             }
@@ -404,7 +391,7 @@ namespace Horse.Jockey.Controllers
 
                 PushResult result = await targetQueue.Push(message.Message);
                 if (result != PushResult.Success)
-                    return await Ok(new {ok = true, completed = false, count = moveCount});
+                    return Ok(new { ok = true, completed = false, count = moveCount });
 
                 moveCount++;
             }
@@ -417,12 +404,12 @@ namespace Horse.Jockey.Controllers
 
                 PushResult result = await targetQueue.Push(message.Message);
                 if (result != PushResult.Success)
-                    return await Ok(new {ok = true, completed = false, count = moveCount});
+                    return Ok(new { ok = true, completed = false, count = moveCount });
 
                 moveCount++;
             }
 
-            return await Ok(new {ok = true, completed = true, count = moveCount});
+            return Ok(new { ok = true, completed = true, count = moveCount });
         }
 
         [HttpPut("reset-stats")]
@@ -430,16 +417,16 @@ namespace Horse.Jockey.Controllers
         {
             if (string.IsNullOrEmpty(queueName))
             {
-                foreach (HorseQueue queue in _rider.Queue.Queues)
+                foreach (HorseQueue queue in rider.Queue.Queues)
                     queue.Info.Reset();
             }
             else
             {
-                HorseQueue queue = _rider.Queue.Find(queueName);
+                HorseQueue queue = rider.Queue.Find(queueName);
                 queue?.Info.Reset();
             }
 
-            return new StatusCodeResult(HttpStatusCode.OK);
+            return Ok();
         }
     }
 }

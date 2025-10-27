@@ -1,40 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Horse.Jockey.Models.Plugins;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Plugins;
-using Horse.Mvc;
-using Horse.Mvc.Auth;
-using Horse.Mvc.Controllers;
-using Horse.Mvc.Controllers.Parameters;
-using Horse.Mvc.Filters.Route;
-using Horse.Mvc.Results;
-using Horse.Protocols.Http.Forms;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Horse.Jockey.Controllers;
 
 [Authorize]
+[ApiController]
 [Route("api/plugin")]
-public class PluginController : HorseController
+public class PluginController(HorseRider rider) : ControllerBase
 {
-    private readonly HorseRider _rider;
-
-    public PluginController(HorseRider rider)
-    {
-        _rider = rider;
-    }
-
     [HttpGet("list")]
     public IActionResult List()
     {
         List<PluginAssemblyModel> model = new List<PluginAssemblyModel>();
-        PluginAssemblyData[] dataList = _rider.Plugin.GetPluginData();
+        PluginAssemblyData[] dataList = rider.Plugin.GetPluginData();
 
         foreach (PluginAssemblyData data in dataList)
         {
@@ -60,81 +48,81 @@ public class PluginController : HorseController
             model.Add(assemblyModel);
         }
 
-        return Json(model);
+        return Ok(model);
     }
 
     [HttpPost("load")]
     public async Task<IActionResult> Load()
     {
-        IFormFile file = Request.Files.FirstOrDefault();
+        IFormFile file = Request.Form.Files.FirstOrDefault();
 
-        string dir = $"{_rider.Options.DataPath}/plugins";
+        string dir = $"{rider.Options.DataPath}/plugins";
         string timestamp = DateTime.UtcNow.ToString("yyMMddHHmm");
         if (!Directory.Exists(dir))
             Directory.CreateDirectory(dir);
 
-        string fullpath = $"{_rider.Options.DataPath}/plugins/{timestamp}_{file.Filename}";
+        string fullpath = $"{rider.Options.DataPath}/plugins/{timestamp}_{file.FileName}";
         await using (FileStream stream = new FileStream(fullpath, FileMode.Create, FileAccess.Write, FileShare.Read))
         {
-            file.Stream.Position = 0;
-            await file.Stream.CopyToAsync(stream);
+            var fileStream = file.OpenReadStream();
+            await fileStream.CopyToAsync(stream);
             await stream.FlushAsync();
             stream.Close();
         }
 
-        if (file.Filename.EndsWith(".zip", StringComparison.InvariantCultureIgnoreCase)
-            || file.Filename.EndsWith(".rar", StringComparison.InvariantCultureIgnoreCase)
-            || file.Filename.EndsWith(".hpg", StringComparison.InvariantCultureIgnoreCase))
+        if (file.FileName.EndsWith(".zip", StringComparison.InvariantCultureIgnoreCase)
+            || file.FileName.EndsWith(".rar", StringComparison.InvariantCultureIgnoreCase)
+            || file.FileName.EndsWith(".hpg", StringComparison.InvariantCultureIgnoreCase))
         {
-            string name = file.Filename[..^4];
-            ZipFile.ExtractToDirectory(fullpath, $"{_rider.Options.DataPath}/plugins/{timestamp}_{name}");
-            fullpath = $"{_rider.Options.DataPath}/plugins/{timestamp}_{name}/{name}.dll";
+            string name = file.FileName[..^4];
+            ZipFile.ExtractToDirectory(fullpath, $"{rider.Options.DataPath}/plugins/{timestamp}_{name}");
+            fullpath = $"{rider.Options.DataPath}/plugins/{timestamp}_{name}/{name}.dll";
         }
 
         await Task.Delay(500);
-        await _rider.Plugin.AddAssemblyPlugins(fullpath);
-        return await Ok(new {loaded = true});
+        await rider.Plugin.AddAssemblyPlugins(fullpath);
+        return Ok(new {loaded = true});
     }
 
     [HttpPut("enable")]
     public async Task<IActionResult> Enable([FromBody] PluginRequestModel model)
     {
         if (string.IsNullOrWhiteSpace(model.Name))
-            return new StatusCodeResult(HttpStatusCode.BadRequest);
+            return BadRequest();
 
-        bool enabled = await _rider.Plugin.EnablePlugin(model.Name);
+        bool enabled = await rider.Plugin.EnablePlugin(model.Name);
 
         if (!enabled)
-            return new StatusCodeResult(HttpStatusCode.NotFound);
+            return NotFound();
 
-        return new StatusCodeResult(HttpStatusCode.OK);
+        return Ok();
     }
 
     [HttpPut("disable")]
     public async Task<IActionResult> Disable([FromBody] PluginRequestModel model)
     {
         if (string.IsNullOrWhiteSpace(model.Name))
-            return new StatusCodeResult(HttpStatusCode.BadRequest);
+            return BadRequest();
 
-        bool enabled = await _rider.Plugin.DisablePlugin(model.Name, false);
+        bool enabled = await rider.Plugin.DisablePlugin(model.Name, false);
 
         if (!enabled)
-            return new StatusCodeResult(HttpStatusCode.NotFound);
+            return NotFound();
 
-        return new StatusCodeResult(HttpStatusCode.OK);
+        return Ok();
     }
 
     [HttpPut("remove")]
     public async Task<IActionResult> Remove([FromBody] PluginRequestModel model)
     {
         if (string.IsNullOrWhiteSpace(model.Name))
-            return new StatusCodeResult(HttpStatusCode.BadRequest);
+            return BadRequest();
 
-        bool enabled = await _rider.Plugin.DisablePlugin(model.Name, true);
+        bool enabled = await rider.Plugin.DisablePlugin(model.Name, true);
 
         if (!enabled)
-            return new StatusCodeResult(HttpStatusCode.NotFound);
+            return NotFound();
 
-        return new StatusCodeResult(HttpStatusCode.OK);
+        return Ok();
     }
 }

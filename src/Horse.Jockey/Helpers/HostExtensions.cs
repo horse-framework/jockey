@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 using Horse.Messaging.Server;
-using Horse.Server;
+using HostOptions = Horse.Server.HostOptions;
 
 namespace Horse.Jockey.Helpers
 {

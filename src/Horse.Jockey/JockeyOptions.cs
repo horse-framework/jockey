@@ -12,7 +12,7 @@ namespace Horse.Jockey
         /// <summary>
         /// Jockey Administration website port
         /// </summary>
-        public int Port { get; set; } = 26000;
+        public int Port { get; set; } = 2627;
 
         /// <summary>
         /// If true, Jockey supports websockets.

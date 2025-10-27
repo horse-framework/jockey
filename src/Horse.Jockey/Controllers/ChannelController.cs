@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Horse.Jockey.Core;
 using Horse.Jockey.Helpers;
@@ -11,34 +10,22 @@ using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Protocol;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Channels;
-using Horse.Mvc;
-using Horse.Mvc.Auth;
-using Horse.Mvc.Controllers;
-using Horse.Mvc.Controllers.Parameters;
-using Horse.Mvc.Filters.Route;
-using Horse.Mvc.Results;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Horse.Jockey.Controllers
 {
     [Authorize]
+    [ApiController]
     [Route("api/channel")]
-    public class ChannelController : HorseController
+    public class ChannelController(HorseRider rider, MessageCounter counter) : ControllerBase
     {
-        private readonly HorseRider _rider;
-        private readonly MessageCounter _counter;
-
-        public ChannelController(HorseRider rider, MessageCounter counter)
-        {
-            _rider = rider;
-            _counter = counter;
-        }
-
         [HttpGet("list")]
         public IActionResult List()
         {
             List<ChannelInfo> result = new List<ChannelInfo>();
 
-            foreach (HorseChannel channel in _rider.Channel.Channels)
+            foreach (HorseChannel channel in rider.Channel.Channels)
             {
                 result.Add(new ChannelInfo
                 {
@@ -53,15 +40,15 @@ namespace Horse.Jockey.Controllers
                 });
             }
 
-            return Json(result);
+            return Ok(result);
         }
 
         [HttpGet("get")]
         public IActionResult Get([FromQuery] string name)
         {
-            HorseChannel channel = _rider.Channel.Find(name);
+            HorseChannel channel = rider.Channel.Find(name);
             if (channel == null)
-                return new StatusCodeResult(HttpStatusCode.NotFound);
+                return NotFound();
 
             ChannelDetail detail = new ChannelDetail
             {
@@ -89,13 +76,13 @@ namespace Horse.Jockey.Controllers
                 })
             };
 
-            return Json(detail);
+            return Ok(detail);
         }
 
         [HttpGet("graph")]
         public IActionResult GetGraph([FromQuery] string name)
         {
-            CountableObject countable = _counter.GetChannelCounter(name);
+            CountableObject countable = counter.GetChannelCounter(name);
             IEnumerable<MessageCount> counts = countable.GetData();
 
             var model = new MessageCountModel
@@ -104,17 +91,17 @@ namespace Horse.Jockey.Controllers
                 Data = counts.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
 
-            return Json(model);
+            return Ok(model);
         }
 
         [HttpGet("initial-message")]
         public async Task<IActionResult> GetInitialMessage([FromQuery] string name)
         {
-            HorseChannel channel = _rider.Channel.Find(name);
+            HorseChannel channel = rider.Channel.Find(name);
             HorseMessage message = await channel.GetInitialMessage();
 
             if (message == null)
-                return new StatusCodeResult(HttpStatusCode.NotFound);
+                return NotFound();
 
             HorseMessageModel model = new HorseMessageModel
             {
@@ -129,13 +116,13 @@ namespace Horse.Jockey.Controllers
                 Content = message.GetStringContent()
             };
 
-            return Json(model);
+            return Ok(model);
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateChannelModel model)
         {
-            HorseChannel channel = await _rider.Channel.Create(model.Name, opt =>
+            HorseChannel channel = await rider.Channel.Create(model.Name, opt =>
             {
                 opt.AutoDestroy = model.AutoDestroy;
                 opt.ClientLimit = model.ClientLimit;
@@ -147,14 +134,14 @@ namespace Horse.Jockey.Controllers
             if (!string.IsNullOrEmpty(model.Topic))
                 channel.Topic = model.Topic;
 
-            return Json(new {created = channel != null});
+            return Ok(new { created = channel != null });
         }
 
         [HttpDelete("delete")]
         public IActionResult Delete([FromQuery] string name)
         {
-            _rider.Channel.Remove(name);
-            return new StatusCodeResult(HttpStatusCode.OK);
+            rider.Channel.Remove(name);
+            return Ok();
         }
 
         [HttpPut("reset-stats")]
@@ -162,7 +149,7 @@ namespace Horse.Jockey.Controllers
         {
             if (string.IsNullOrEmpty(channelName))
             {
-                foreach (HorseChannel channel in _rider.Channel.Channels)
+                foreach (HorseChannel channel in rider.Channel.Channels)
                 {
                     channel.Info.Published = 0;
                     channel.Info.Received = 0;
@@ -170,7 +157,7 @@ namespace Horse.Jockey.Controllers
             }
             else
             {
-                HorseChannel channel = _rider.Channel.Find(channelName);
+                HorseChannel channel = rider.Channel.Find(channelName);
                 if (channel != null)
                 {
                     channel.Info.Published = 0;
@@ -178,16 +165,16 @@ namespace Horse.Jockey.Controllers
                 }
             }
 
-            return new StatusCodeResult(HttpStatusCode.OK);
+            return Ok();
         }
 
         [HttpPut("option")]
         public async Task<IActionResult> ChangeOption([FromBody] OptionChange model)
         {
-            HorseChannel channel = _rider.Channel.Find(model.Target);
+            HorseChannel channel = rider.Channel.Find(model.Target);
 
             if (channel == null)
-                return await NotFound(new {ok = false, message = "Channel could not found"});
+                return NotFound(new { ok = false, message = "Channel could not found" });
 
             switch (model.Name)
             {
@@ -212,7 +199,7 @@ namespace Horse.Jockey.Controllers
                     break;
             }
 
-            return Json(new {ok = channel != null});
+            return Ok(new { ok = channel != null });
         }
     }
 }

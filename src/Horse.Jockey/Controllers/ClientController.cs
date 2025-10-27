@@ -1,38 +1,25 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using Horse.Jockey.Core;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Jockey.Models.Clients;
 using Horse.Messaging.Server;
 using Horse.Messaging.Server.Clients;
-using Horse.Mvc;
-using Horse.Mvc.Auth;
-using Horse.Mvc.Controllers;
-using Horse.Mvc.Controllers.Parameters;
-using Horse.Mvc.Filters.Route;
-using Horse.Mvc.Results;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Horse.Jockey.Controllers
 {
     [Authorize]
+    [ApiController]
     [Route("api/client")]
-    public class ClientController : HorseController
+    public class ClientController(HorseRider rider, MessageCounter counter) : ControllerBase
     {
-        private readonly HorseRider _rider;
-        private readonly MessageCounter _counter;
-
-        public ClientController(HorseRider rider, MessageCounter counter)
-        {
-            _rider = rider;
-            _counter = counter;
-        }
-
         [HttpGet("list")]
         public IActionResult List()
         {
-            return Json(_rider.Client.Clients.Select(x => new ClientInfo
+            return Ok(rider.Client.Clients.Select(x => new ClientInfo
                 {
                     Name = x.Name,
                     Type = x.Type,
@@ -51,11 +38,11 @@ namespace Horse.Jockey.Controllers
         [HttpGet("get")]
         public IActionResult Get([FromQuery] string id)
         {
-            MessagingClient client = _rider.Client.Find(id);
+            MessagingClient client = rider.Client.Find(id);
             if (client == null)
-                return new StatusCodeResult(HttpStatusCode.NotFound);
+                return NotFound();
 
-            return Json(new
+            return Ok(new
             {
                 id = client.UniqueId,
                 name = client.Name,
@@ -87,7 +74,7 @@ namespace Horse.Jockey.Controllers
         [HttpGet("graph")]
         public IActionResult GetGraph([FromQuery] string name)
         {
-            CountableObject countable = _counter.GetDirectCounter(name);
+            CountableObject countable = counter.GetDirectCounter(name);
             IEnumerable<MessageCount> counts = countable.GetData();
 
             var model = new MessageCountModel
@@ -96,7 +83,7 @@ namespace Horse.Jockey.Controllers
                 Data = counts.Select(x => new CountRecord(x.UnixTime, x.Received, x.Sent, x.Respond, x.Error, x.Delivered, x.NotRouted, x.Timeout))
             };
 
-            return Json(model);
+            return Ok(model);
         }
     }
 }

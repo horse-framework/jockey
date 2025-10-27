@@ -4,58 +4,47 @@ using Horse.Jockey.Core;
 using Horse.Jockey.Models;
 using Horse.Jockey.Models.Queues;
 using Horse.Messaging.Server;
-using Horse.Mvc;
-using Horse.Mvc.Auth;
-using Horse.Mvc.Controllers;
-using Horse.Mvc.Filters.Route;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Horse.Jockey.Controllers
 {
     [Authorize]
+    [ApiController]
     [Route("api/dashboard")]
-    public class DashboardController : HorseController
+    public class DashboardController(HorseRider rider, JockeyOptions jockeyOptions, MessageCounter counter) 
+        : ControllerBase
     {
-        private readonly HorseRider _rider;
-        private readonly JockeyOptions _jockeyOptions;
-        private readonly MessageCounter _counter;
-
-        public DashboardController(HorseRider rider, JockeyOptions jockeyOptions, MessageCounter counter)
-        {
-            _rider = rider;
-            _jockeyOptions = jockeyOptions;
-            _counter = counter;
-        }
-
         [HttpGet("stats")]
         public IActionResult Stats()
         {
-            ServerStatistics server = ServerStatistics.Create(_rider);
-            HorseServerOptions serverOptions = HorseServerOptions.Create(_rider);
-            QueueOptionsInfo queueOptions = QueueOptionsInfo.CreateDefault(_rider);
+            ServerStatistics server = ServerStatistics.Create(rider);
+            HorseServerOptions serverOptions = HorseServerOptions.Create(rider);
+            QueueOptionsInfo queueOptions = QueueOptionsInfo.CreateDefault(rider);
 
             string mainNodeHost = null;
-            if (_rider.Cluster.MainNode != null)
+            if (rider.Cluster.MainNode != null)
             {
                 DnsResolver resolver = new DnsResolver();
-                DnsInfo info = resolver.Resolve(_rider.Cluster.MainNode.PublicHost);
-                mainNodeHost = $"http://{info.Hostname}:{_jockeyOptions.Port}";
+                DnsInfo info = resolver.Resolve(rider.Cluster.MainNode.PublicHost);
+                mainNodeHost = $"http://{info.Hostname}:{jockeyOptions.Port}";
             }
 
-            var atc = _counter.GetChannelCounter().AllTimeTotal;
-            var atq = _counter.GetQueueCounter().AllTimeTotal;
-            var ats = _counter.GetQueueStoreCounter().AllTimeTotal;
-            var atd = _counter.GetDirectCounter().AllTimeTotal;
-            var atr = _counter.GetRouterCounter().AllTimeTotal;
+            var atc = counter.GetChannelCounter().AllTimeTotal;
+            var atq = counter.GetQueueCounter().AllTimeTotal;
+            var ats = counter.GetQueueStoreCounter().AllTimeTotal;
+            var atd = counter.GetDirectCounter().AllTimeTotal;
+            var atr = counter.GetRouterCounter().AllTimeTotal;
             
-            return Json(new
+            return Ok(new
             {
                 server,
                 serverOptions,
                 mainNodeHost,
                 queueOptions,
-                channelCount = _rider.Channel.Channels.Count(),
-                queueCount = _rider.Queue.Queues.Count(),
-                nodeState = _rider.Cluster.State.ToString(),
+                channelCount = rider.Channel.Channels.Count(),
+                queueCount = rider.Queue.Queues.Count(),
+                nodeState = rider.Cluster.State.ToString(),
                 channels = new CountRecord(atc.UnixTime, atc.Received, atc.Sent, atc.Respond, atc.Error, atc.Delivered, atc.NotRouted, atc.Timeout),
                 queues =  new CountRecord(atq.UnixTime, atq.Received, atq.Sent, atq.Respond, atq.Error, atq.Delivered, atq.NotRouted, atq.Timeout),
                 queueStore = new CountRecord(ats.UnixTime, ats.Received, ats.Sent, ats.Respond, ats.Error, ats.Delivered, ats.NotRouted, ats.Timeout),

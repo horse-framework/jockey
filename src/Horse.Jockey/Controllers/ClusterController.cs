@@ -2,31 +2,23 @@ using System.Linq;
 using Horse.Jockey.Helpers;
 using Horse.Jockey.Models;
 using Horse.Messaging.Server;
-using Horse.Mvc;
-using Horse.Mvc.Auth;
-using Horse.Mvc.Controllers;
-using Horse.Mvc.Filters.Route;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Horse.Jockey.Controllers
 {
     [Authorize]
+    [ApiController]
     [Route("api/cluster")]
-    public class ClusterController : HorseController
+    public class ClusterController(HorseRider rider) : ControllerBase
     {
-        private readonly HorseRider _rider;
-
-        public ClusterController(HorseRider rider)
-        {
-            _rider = rider;
-        }
-
         [HttpGet]
         public IActionResult Get()
         {
             ClusterInfo model = new ClusterInfo();
-            model.Mode = _rider.Cluster.Options.Mode.ToString();
+            model.Mode = rider.Cluster.Options.Mode.ToString();
 
-            model.Nodes = _rider.Cluster.Clients
+            model.Nodes = rider.Cluster.Clients
                 .Select(x =>
                 {
                     NodeInfo info = new NodeInfo
@@ -38,9 +30,9 @@ namespace Horse.Jockey.Controllers
                         ConnectedDate = x.ConnectedDate.ToUnixSeconds()
                     };
 
-                    if (_rider.Cluster.MainNode?.Id == x.Info.Id)
+                    if (rider.Cluster.MainNode?.Id == x.Info.Id)
                         info.State = "Main";
-                    else if (_rider.Cluster.SuccessorNode?.Id == x.Info.Id)
+                    else if (rider.Cluster.SuccessorNode?.Id == x.Info.Id)
                         info.State = "Main";
                     else
                         info.State = "Replica";
@@ -49,7 +41,7 @@ namespace Horse.Jockey.Controllers
                 })
                 .ToList();
 
-            return Json(model);
+            return Ok(model);
         }
     }
 }
