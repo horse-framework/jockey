@@ -19,7 +19,8 @@ interface GroupedClient {
 @Component({
     selector: 'app-clients',
     templateUrl: './clients.component.html',
-    styleUrls: ['./clients.component.css']
+    styleUrls: ['./clients.component.css'],
+    standalone: false
 })
 export class ClientsComponent extends BaseComponent implements OnInit {
 

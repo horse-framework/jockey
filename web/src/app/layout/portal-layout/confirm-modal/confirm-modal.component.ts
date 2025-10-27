@@ -2,9 +2,10 @@ import { Component, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-confirm-modal',
-  templateUrl: './confirm-modal.component.html',
-  styleUrls: ['./confirm-modal.component.css']
+    selector: 'app-confirm-modal',
+    templateUrl: './confirm-modal.component.html',
+    styleUrls: ['./confirm-modal.component.css'],
+    standalone: false
 })
 export class ConfirmModalComponent implements OnDestroy {
 

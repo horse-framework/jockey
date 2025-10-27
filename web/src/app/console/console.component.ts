@@ -11,12 +11,13 @@ import { DestroyService } from 'src/services/destroy.service';
 import { WebsocketService } from 'src/services/websocket.service';
 
 @Component({
-  selector: 'app-console',
-  templateUrl: './console.component.html',
-  styleUrls: ['./console.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DestroyService],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-console',
+    templateUrl: './console.component.html',
+    styleUrls: ['./console.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [DestroyService],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class ConsoleComponent implements OnInit, OnDestroy {
 

@@ -5,9 +5,10 @@ import { QueueCreateModel } from 'src/app/queue/models/queue-create-model';
 import { QueueService } from 'src/app/queue/services/queue.service';
 
 @Component({
-  selector: 'app-queue-create-modal',
-  templateUrl: './queue-create-modal.component.html',
-  styleUrls: ['./queue-create-modal.component.css']
+    selector: 'app-queue-create-modal',
+    templateUrl: './queue-create-modal.component.html',
+    styleUrls: ['./queue-create-modal.component.css'],
+    standalone: false
 })
 export class QueueCreateModalComponent implements OnInit, OnDestroy {
 

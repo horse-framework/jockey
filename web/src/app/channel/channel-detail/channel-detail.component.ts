@@ -15,9 +15,10 @@ import { ConfirmModalComponent } from 'src/app/layout/portal-layout/confirm-moda
 import { ChannelMessageModalComponent } from '../channel-message-modal/channel-message-modal.component';
 
 @Component({
-  selector: 'app-channel-detail',
-  templateUrl: './channel-detail.component.html',
-  styleUrls: ['./channel-detail.component.css']
+    selector: 'app-channel-detail',
+    templateUrl: './channel-detail.component.html',
+    styleUrls: ['./channel-detail.component.css'],
+    standalone: false
 })
 export class ChannelDetailComponent extends BaseComponent implements OnInit, OnDestroy {
 

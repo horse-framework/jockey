@@ -11,9 +11,10 @@ import { ChartService } from 'src/services/chart.service';
 import { MessageCount } from 'src/models/message-count';
 
 @Component({
-  selector: 'app-client-detail',
-  templateUrl: './client-detail.component.html',
-  styleUrls: ['./client-detail.component.css']
+    selector: 'app-client-detail',
+    templateUrl: './client-detail.component.html',
+    styleUrls: ['./client-detail.component.css'],
+    standalone: false
 })
 export class ClientDetailComponent extends BaseComponent implements OnInit, OnDestroy {
 

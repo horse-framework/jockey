@@ -3,9 +3,10 @@ import { Observable, Subject } from 'rxjs';
 import { CacheForm } from 'src/app/cache/models/cache-form';
 
 @Component({
-  selector: 'app-cache-create-modal',
-  templateUrl: './cache-create-modal.component.html',
-  styleUrls: ['./cache-create-modal.component.css']
+    selector: 'app-cache-create-modal',
+    templateUrl: './cache-create-modal.component.html',
+    styleUrls: ['./cache-create-modal.component.css'],
+    standalone: false
 })
 export class CacheCreateModalComponent implements OnInit, OnDestroy {
 

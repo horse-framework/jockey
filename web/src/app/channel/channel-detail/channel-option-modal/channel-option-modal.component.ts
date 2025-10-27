@@ -3,9 +3,10 @@ import { Observable, Subject } from 'rxjs';
 import { OptionValue } from 'src/app/queue/detail/queue-option-modal/queue-option-modal.component';
 
 @Component({
-  selector: 'app-channel-option-modal',
-  templateUrl: './channel-option-modal.component.html',
-  styleUrls: ['./channel-option-modal.component.css']
+    selector: 'app-channel-option-modal',
+    templateUrl: './channel-option-modal.component.html',
+    styleUrls: ['./channel-option-modal.component.css'],
+    standalone: false
 })
 export class ChannelOptionModalComponent implements OnInit, OnDestroy {
 

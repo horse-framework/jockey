@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { RouterBinding } from 'src/models/router-binding';
 
 @Pipe({
-    name: 'bindingType'
+    name: 'bindingType',
+    standalone: false
 })
 export class BindingTypePipe implements PipeTransform {
 

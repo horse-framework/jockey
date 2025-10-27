@@ -6,7 +6,8 @@ const HOUR = 60 * 60;
 const DAY = 60 * 60 * 24;
 
 @Pipe({
-    name: 'timespan'
+    name: 'timespan',
+    standalone: false
 })
 export class TimespanPipe implements PipeTransform {
 

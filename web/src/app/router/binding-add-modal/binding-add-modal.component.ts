@@ -5,9 +5,10 @@ import { HorseQueueSummary } from 'src/app/queue/models/horse-queue';
 import { QueueService } from 'src/app/queue/services/queue.service';
 
 @Component({
-  selector: 'app-binding-add-modal',
-  templateUrl: './binding-add-modal.component.html',
-  styleUrls: ['./binding-add-modal.component.css']
+    selector: 'app-binding-add-modal',
+    templateUrl: './binding-add-modal.component.html',
+    styleUrls: ['./binding-add-modal.component.css'],
+    standalone: false
 })
 export class BindingAddModalComponent implements OnInit, OnDestroy {
 

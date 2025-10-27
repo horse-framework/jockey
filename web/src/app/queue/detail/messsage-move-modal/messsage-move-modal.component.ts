@@ -7,9 +7,10 @@ export interface MoveCopyResult {
 }
 
 @Component({
-  selector: 'app-messsage-move-modal',
-  templateUrl: './messsage-move-modal.component.html',
-  styleUrls: ['./messsage-move-modal.component.css']
+    selector: 'app-messsage-move-modal',
+    templateUrl: './messsage-move-modal.component.html',
+    styleUrls: ['./messsage-move-modal.component.css'],
+    standalone: false
 })
 export class MesssageMoveModalComponent implements OnInit, OnDestroy {
 

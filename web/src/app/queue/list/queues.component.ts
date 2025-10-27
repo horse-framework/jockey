@@ -9,7 +9,8 @@ import { QueueCreateModalComponent } from './queue-create-modal/queue-create-mod
 @Component({
     selector: 'app-queues',
     templateUrl: './queues.component.html',
-    styleUrls: ['./queues.component.css']
+    styleUrls: ['./queues.component.css'],
+    standalone: false
 })
 export class QueuesComponent extends BaseComponent implements OnInit, OnDestroy {
 

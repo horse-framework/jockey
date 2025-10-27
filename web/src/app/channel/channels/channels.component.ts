@@ -8,9 +8,10 @@ import { ChannelInfo } from '../models/channel-info';
 import { ChannelService } from '../services/channel.service';
 
 @Component({
-  selector: 'app-channels',
-  templateUrl: './channels.component.html',
-  styleUrls: ['./channels.component.css']
+    selector: 'app-channels',
+    templateUrl: './channels.component.html',
+    styleUrls: ['./channels.component.css'],
+    standalone: false
 })
 export class ChannelsComponent extends BaseComponent implements OnInit {
 

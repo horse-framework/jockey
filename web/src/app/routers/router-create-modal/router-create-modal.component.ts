@@ -3,9 +3,10 @@ import { Observable, Subject } from 'rxjs';
 import { CreateRouterModel } from 'src/models/create-router-model';
 
 @Component({
-  selector: 'app-router-create-modal',
-  templateUrl: './router-create-modal.component.html',
-  styleUrls: ['./router-create-modal.component.css']
+    selector: 'app-router-create-modal',
+    templateUrl: './router-create-modal.component.html',
+    styleUrls: ['./router-create-modal.component.css'],
+    standalone: false
 })
 export class RouterCreateModalComponent implements OnInit, OnDestroy {
 

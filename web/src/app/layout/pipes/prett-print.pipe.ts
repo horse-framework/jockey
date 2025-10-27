@@ -9,7 +9,8 @@ type JsonType = 'key' | 'string' | 'number' | 'boolean' | 'null' | 'mark';
 const settings: FormatOptions = { indent: 3, linkUrls: true, quoteKeys: false };
 
 @Pipe({
-  name: 'prettyprint'
+    name: 'prettyprint',
+    standalone: false
 })
 export class PrettyPrintPipe implements PipeTransform {
 

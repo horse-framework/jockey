@@ -8,9 +8,10 @@ import { CacheCreateModalComponent } from './cache-create-modal/cache-create-mod
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-cache',
-  templateUrl: './cache.component.html',
-  styleUrls: ['./cache.component.css']
+    selector: 'app-cache',
+    templateUrl: './cache.component.html',
+    styleUrls: ['./cache.component.css'],
+    standalone: false
 })
 export class CacheComponent extends BaseComponent implements OnInit {
 

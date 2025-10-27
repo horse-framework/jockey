@@ -19,7 +19,8 @@ import { SessionService } from 'src/services/session.service';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css']
+    styleUrls: ['./dashboard.component.css'],
+    standalone: false
 })
 export class DashboardComponent extends BaseComponent implements OnInit, OnDestroy {
 

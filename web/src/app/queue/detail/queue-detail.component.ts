@@ -21,7 +21,8 @@ import { ChartService } from 'src/services/chart.service';
 @Component({
     selector: 'queue-detail',
     templateUrl: './queue-detail.component.html',
-    styleUrls: ['./queue-detail.component.css']
+    styleUrls: ['./queue-detail.component.css'],
+    standalone: false
 })
 export class QueueDetailComponent extends BaseComponent implements OnInit, OnDestroy {
 

@@ -6,7 +6,8 @@ import { WebsocketService } from 'src/services/websocket.service';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent extends BaseComponent implements OnInit {
 

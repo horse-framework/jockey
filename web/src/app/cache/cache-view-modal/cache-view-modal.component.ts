@@ -4,9 +4,10 @@ import { CacheInfo } from 'src/app/cache/models/cache-info';
 import { CacheService } from 'src/app/cache/services/cache.service';
 
 @Component({
-  selector: 'app-cache-view-modal',
-  templateUrl: './cache-view-modal.component.html',
-  styleUrls: ['./cache-view-modal.component.css']
+    selector: 'app-cache-view-modal',
+    templateUrl: './cache-view-modal.component.html',
+    styleUrls: ['./cache-view-modal.component.css'],
+    standalone: false
 })
 export class CacheViewModalComponent implements OnInit {
 

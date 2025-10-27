@@ -10,9 +10,10 @@ export interface OptionValue {
 }
 
 @Component({
-  selector: 'app-queue-option-modal',
-  templateUrl: './queue-option-modal.component.html',
-  styleUrls: ['./queue-option-modal.component.css']
+    selector: 'app-queue-option-modal',
+    templateUrl: './queue-option-modal.component.html',
+    styleUrls: ['./queue-option-modal.component.css'],
+    standalone: false
 })
 export class QueueOptionModalComponent implements OnInit, OnDestroy {
 

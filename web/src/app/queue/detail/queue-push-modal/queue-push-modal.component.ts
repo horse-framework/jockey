@@ -3,9 +3,10 @@ import { Observable, Subject } from 'rxjs';
 import { QueuePushMessage } from 'src/app/queue/models/queue-message';
 
 @Component({
-  selector: 'app-queue-push-modal',
-  templateUrl: './queue-push-modal.component.html',
-  styleUrls: ['./queue-push-modal.component.css']
+    selector: 'app-queue-push-modal',
+    templateUrl: './queue-push-modal.component.html',
+    styleUrls: ['./queue-push-modal.component.css'],
+    standalone: false
 })
 export class QueuePushModalComponent implements OnInit, OnDestroy {
 

@@ -1,7 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'jockeyTime' })
+@Pipe({
+    name: 'jockeyTime',
+    standalone: false
+})
 export class JockeyTimePipe implements PipeTransform {
 
   constructor(private _datePipe: DatePipe) { }

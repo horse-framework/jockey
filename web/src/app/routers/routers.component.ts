@@ -9,7 +9,8 @@ import { RouterCreateModalComponent } from './router-create-modal/router-create-
 @Component({
     selector: 'app-routes',
     templateUrl: './routers.component.html',
-    styleUrls: ['./routers.component.css']
+    styleUrls: ['./routers.component.css'],
+    standalone: false
 })
 export class RoutersComponent extends BaseComponent implements OnInit {
 

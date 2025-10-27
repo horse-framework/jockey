@@ -9,7 +9,8 @@ import { SessionService } from 'src/services/session.service';
 @Component({
     selector: 'app-portal-layout',
     templateUrl: './portal-layout.component.html',
-    styleUrls: ['./portal-layout.component.css']
+    styleUrls: ['./portal-layout.component.css'],
+    standalone: false
 })
 export class PortalLayoutComponent extends BaseComponent implements OnInit {
 

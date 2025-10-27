@@ -12,7 +12,8 @@ import { BindingAddModalComponent } from './binding-add-modal/binding-add-modal.
 @Component({
     selector: 'app-router',
     templateUrl: './router.component.html',
-    styleUrls: ['./router.component.css']
+    styleUrls: ['./router.component.css'],
+    standalone: false
 })
 export class RouterComponent extends BaseComponent implements OnInit {
 

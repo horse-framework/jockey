@@ -3,9 +3,10 @@ import { Observable, Subject } from 'rxjs';
 import { ChannelForm } from '../../models/channel-form';
 
 @Component({
-  selector: 'app-channel-create-modal',
-  templateUrl: './channel-create-modal.component.html',
-  styleUrls: ['./channel-create-modal.component.css']
+    selector: 'app-channel-create-modal',
+    templateUrl: './channel-create-modal.component.html',
+    styleUrls: ['./channel-create-modal.component.css'],
+    standalone: false
 })
 export class ChannelCreateModalComponent implements OnInit, OnDestroy {
 

@@ -4,9 +4,10 @@ import { PluginsService } from '../services/plugins.service';
 import { PluginInfo } from '../models/plugin-info';
 
 @Component({
-  selector: 'app-plugins',
-  templateUrl: './plugins.component.html',
-  styleUrl: './plugins.component.css'
+    selector: 'app-plugins',
+    templateUrl: './plugins.component.html',
+    styleUrl: './plugins.component.css',
+    standalone: false
 })
 export class PluginsComponent implements OnInit {
 
