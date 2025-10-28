@@ -35,7 +35,7 @@ namespace Sample.Jockey
                 .AddJockey(o =>
                 {
                     o.Port = 2627;
-                    o.AuthAsync = async login => { return new UserInfo {Name = "Admin", Id = "*"}; };
+                    o.AuthAsync = _ => Task.FromResult(new UserInfo { Name = "Admin", Id = "*" });
                 })
                 .Build();
 
@@ -59,10 +59,10 @@ namespace Sample.Jockey
 
             rider.Cache.Set("DemoCache1", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue1")), TimeSpan.FromMinutes(24));
             rider.Cache.Set("DemoCache2", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue2")), TimeSpan.FromMinutes(51), TimeSpan.FromMinutes(46));
-            rider.Cache.Set("DemoCache3", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue3")), TimeSpan.FromMinutes(76), null, new[] {"Exchange", "Music"});
+            rider.Cache.Set("DemoCache3", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue3")), TimeSpan.FromMinutes(76), null, new[] { "Exchange", "Music" });
             rider.Cache.Set("DemoCache4", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue4")), TimeSpan.FromMinutes(113));
-            rider.Cache.Set("DemoCache5", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue5")), TimeSpan.FromMinutes(131), TimeSpan.FromMinutes(120), new[] {"Games", "Movies", "Social Media"});
-            rider.Cache.Set("DemoCache6", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue6")), TimeSpan.FromMinutes(174), null, new[] {"Books"});
+            rider.Cache.Set("DemoCache5", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue5")), TimeSpan.FromMinutes(131), TimeSpan.FromMinutes(120), new[] { "Games", "Movies", "Social Media" });
+            rider.Cache.Set("DemoCache6", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue6")), TimeSpan.FromMinutes(174), null, new[] { "Books" });
             rider.Cache.Set("DemoCache7", new MemoryStream(Encoding.UTF8.GetBytes("CacheValue7")), TimeSpan.FromMinutes(200));
 
             HorseServer server = new();
@@ -73,9 +73,9 @@ namespace Sample.Jockey
             HorseClient client = new();
             await client.ConnectAsync("horse://localhost:26222");
 
-            var f = new {ok = true, id = Guid.NewGuid().ToString(), date = 312783621786, extra = new {a = 23, b = "foo"}};
+            var f = new { ok = true, id = Guid.NewGuid().ToString(), date = 312783621786, extra = new { a = 23, b = "foo" } };
             await client.Queue.PushJson("DemoQueue2", f, false);
-            await client.Channel.Publish("DemoChannel2", new {foo = "123"});
+            await client.Channel.Publish("DemoChannel2", new { foo = "123" });
             Console.WriteLine("ok");
             Console.ReadLine();
 
@@ -92,7 +92,7 @@ namespace Sample.Jockey
                 while (true)
                 {
                     await client.Queue.Push("DemoQueue2", "Hello World: " + i, false);
-                    await client.Channel.Publish("DemoChannel2", new {foo = "123"});
+                    await client.Channel.Publish("DemoChannel2", new { foo = "123" });
                     i++;
 
                     if (i >= 10000)
