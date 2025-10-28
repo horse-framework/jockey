@@ -223,7 +223,7 @@ namespace Horse.Jockey
             Hub.SocketServer.UseWebSockets(Hub.Provider);
             Hub.SocketServer.Start(options.Port + 1);
 
-            _ = app.RunAsync("http://localhost:" + options.Port);
+            _ = app.RunAsync("http://0.0.0.0:" + options.Port);
         }
     }
 }
