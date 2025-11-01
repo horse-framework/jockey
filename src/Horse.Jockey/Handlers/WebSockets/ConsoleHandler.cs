@@ -39,7 +39,7 @@ namespace Horse.Jockey.Handlers.WebSockets
 
         public Task OnError(Exception exception, ConsoleRequest model, WebSocketMessage message, IHorseWebSocket client)
         {
-            return _bus.SendTextAsync(client, new ConsoleResponse {RequestId = model.RequestId, Ok = false});
+            return _bus.SendTextAsync(client, new ConsoleResponse {RequestId = model.RequestId, Ok = false}).AsTask();
         }
     }
 }
