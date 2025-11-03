@@ -1,10 +1,10 @@
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/auto';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DashboardService } from '../../../src/services/dashboard.service';
 import { Dashboard } from '../../../src/models/dashboard';
 import { forkJoin, interval } from 'rxjs';
 import { TimespanPipe } from '../layout/pipes/timespan.pipe';
-import { MessageCount } from '../../../src/models/message-count';
+import { CountRecord, MessageCount } from '../../../src/models/message-count';
 import { WebsocketService } from '../../../src/services/websocket.service';
 import { filter, map } from 'rxjs/operators';
 import { ChartService } from '../../../src/services/chart.service';
@@ -15,6 +15,7 @@ import { ChannelService } from '../channel/services/channel.service';
 import { BaseFormComponent } from '../../lib/base-form.component';
 import { SessionStore } from '../stores/session-store';
 import { SocketModels } from '../../lib/websockets/socket-models';
+import { DateHelper } from '../../lib/helpers/date.helper';
 
 @Component({
     selector: 'app-dashboard',
@@ -44,6 +45,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
     }
 
     async ngOnInit() {
+
         await this.load();
         this.on(interval(5000)).subscribe(async () => {
             this.dashboardService.load().subscribe(r => {
@@ -140,7 +142,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
             this.deliveryChart = new Chart(<any>document.getElementById('delivery-chart'),
                 {
                     type: 'line',
-                    data: this.getDeliveryChartData(result.queue.stream),
+                    data: this.getDeliveryChartData(result.queue!.body!.stream!),
                     options: {
                         animation: { duration: 0 },
                         hover: { mode: 'nearest', intersect: true },
@@ -158,7 +160,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
             this.storeChart = new Chart(<any>document.getElementById('store-chart'),
                 {
                     type: 'line',
-                    data: this.getStoreChartData(result.queue.store),
+                    data: this.getStoreChartData(result.queue!.body!.store!),
                     options: {
                         animation: { duration: 0 },
                         hover: { mode: 'nearest', intersect: true },
@@ -176,7 +178,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
             this.msgChart = new Chart(<any>document.getElementById('msg-chart'),
                 {
                     type: 'line',
-                    data: this.getMessageChartData(result.client!),
+                    data: this.getMessageChartData(result.client?.d!),
                     options: {
                         animation: { duration: 0 },
                         hover: { mode: 'nearest', intersect: true },
@@ -194,7 +196,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
             this.routerChart = new Chart(<any>document.getElementById('router-chart'),
                 {
                     type: 'line',
-                    data: this.getRouterChartData(result.router!),
+                    data: this.getRouterChartData(result.router!.d),
                     options: {
                         animation: { duration: 0 },
                         hover: { mode: 'nearest', intersect: true },
@@ -212,7 +214,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
             this.channelChart = new Chart(<any>document.getElementById('channel-chart'),
                 {
                     type: 'line',
-                    data: this.getChannelChartData(result.channel!),
+                    data: this.getChannelChartData(result.channel!.d),
                     options: {
                         animation: { duration: 0 },
                         hover: { mode: 'nearest', intersect: true },
@@ -227,14 +229,14 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
         });
     }
 
-    private getDeliveryChartData(content: MessageCount) {
+    private getDeliveryChartData(counts: CountRecord[]) {
         return {
-            labels: content.labels,
+            labels: this.createLabels(counts),
             datasets: [
                 {
                     label: 'Produced',
                     borderColor: '#2070e0',
-                    data: content.d.map(x => x.r),
+                    data: counts.map(x => x.r),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -244,7 +246,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Ack',
                     borderColor: '#12bf4a',
-                    data: content.d.map(x => x.d),
+                    data: counts.map(x => x.d),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -254,7 +256,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Neg. Ack',
                     borderColor: '#c042ef',
-                    data: content.d.map(x => x.rs),
+                    data: counts.map(x => x.rs),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -264,7 +266,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Unack',
                     borderColor: '#eec236',
-                    data: content.d.map(x => x.nr),
+                    data: counts.map(x => x.nr),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -274,7 +276,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Error',
                     borderColor: '#ff3333',
-                    data: content.d.map(x => x.e),
+                    data: counts.map(x => x.e),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -285,14 +287,14 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
 
     }
 
-    private getStoreChartData(content: MessageCount) {
+    private getStoreChartData(counts: CountRecord[]) {
         return {
-            labels: content.labels,
+            labels: this.createLabels(counts),
             datasets: [
                 {
                     label: 'Msgs',
                     borderColor: '#2070e0',
-                    data: content.d.map(x => x.r),
+                    data: counts.map(x => x.r),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -302,7 +304,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'High Prio Msgs',
                     borderColor: '#ff9911',
-                    data: content.d.map(x => x.d),
+                    data: counts.map(x => x.d),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -312,7 +314,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Pending for Ack',
                     borderColor: '#10a0a0',
-                    data: content.d.map(x => x.nr),
+                    data: counts.map(x => x.nr),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -322,7 +324,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Processing',
                     borderColor: '#f02020',
-                    data: content.d.map(x => x.s),
+                    data: counts.map(x => x.s),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -332,14 +334,14 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
         }
     }
 
-    private getMessageChartData(content: MessageCount) {
+    private getMessageChartData(counts: CountRecord[]) {
         return {
-            labels: content.labels,
+            labels: this.createLabels(counts),
             datasets: [
                 {
                     label: 'Direct Sent',
                     borderColor: '#2070e0',
-                    data: content.d.map(x => x.s),
+                    data: counts.map(x => x.s),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -349,7 +351,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Direct Received',
                     borderColor: '#f0f010',
-                    data: content.d.map(x => x.r),
+                    data: counts.map(x => x.r),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -359,7 +361,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Direct Respond',
                     borderColor: '#10cf70',
-                    data: content.d.map(x => x.rs),
+                    data: counts.map(x => x.rs),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -369,7 +371,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Direct No Receiver',
                     borderColor: '#9a2ef0',
-                    data: content.d.map(x => x.nr),
+                    data: counts.map(x => x.nr),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -379,14 +381,14 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
         };
     }
 
-    private getRouterChartData(content: MessageCount) {
+    private getRouterChartData(counts: CountRecord[]) {
         return {
-            labels: content.labels,
+            labels: this.createLabels(counts),
             datasets: [
                 {
                     label: 'Router Publish',
                     borderColor: '#2070e0',
-                    data: content.d.map(x => x.s),
+                    data: counts.map(x => x.s),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -396,7 +398,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Router Received',
                     borderColor: '#10c070',
-                    data: content.d.map(x => x.r),
+                    data: counts.map(x => x.r),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -406,7 +408,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Router No Receiver',
                     borderColor: '#f06010',
-                    data: content.d.map(x => x.nr),
+                    data: counts.map(x => x.nr),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -416,14 +418,14 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
         };
     }
 
-    private getChannelChartData(content: MessageCount) {
+    private getChannelChartData(counts: CountRecord[]) {
         return {
-            labels: content.labels,
+            labels: this.createLabels(counts),
             datasets: [
                 {
                     label: 'Published',
                     borderColor: '#2070e0',
-                    data: content.d.map(x => x.s),
+                    data: counts.map(x => x.s),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -433,7 +435,7 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                 {
                     label: 'Received',
                     borderColor: '#10c070',
-                    data: content.d.map(x => x.r),
+                    data: counts.map(x => x.r),
                     fill: false,
                     pointRadius: 1,
                     pointHitRadius: 8,
@@ -443,4 +445,12 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
         };
     }
 
+    createLabels(data: CountRecord[]): string[] {
+        let labels = [];
+        for (let i = 0; i < data.length; i++) {
+            let item = data[i];
+            labels.push(DateHelper.findTimeFromUnixSeconds(item.u));
+        }
+        return labels;
+    }
 }

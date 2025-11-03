@@ -33,9 +33,9 @@
                             <span>{{plugin.removed ? 'Removed' : 'No'}}</span>
                         </div>
                         <div class="td fx14 tright">
-                            <button *ngIf="!plugin.removed" (click)="remove(plugin)" class="plugin-button red" [attr.disabled]="processing ? 'disabled' : null">Remove</button>
-                            <button *ngIf="!plugin.disabled" (click)="disable(plugin)" class="plugin-button orange" [attr.disabled]="processing ? 'disabled' : null">Disable</button>
-                            <button *ngIf="plugin.disabled || plugin.removed" (click)="enable(plugin)" class="plugin-button green" [attr.disabled]="processing ? 'disabled' : null">Enable</button>
+                            <button *ngIf="!plugin.removed" (click)="remove(asm,plugin)" class="plugin-button red" [attr.disabled]="processing ? 'disabled' : null">Remove</button>
+                            <button *ngIf="!plugin.disabled" (click)="disable(asm,plugin)" class="plugin-button orange" [attr.disabled]="processing ? 'disabled' : null">Disable</button>
+                            <button *ngIf="plugin.disabled || plugin.removed" (click)="enable(asm,plugin)" class="plugin-button green" [attr.disabled]="processing ? 'disabled' : null">Enable</button>
                         </div>
                     </div>
                 </ng-container>

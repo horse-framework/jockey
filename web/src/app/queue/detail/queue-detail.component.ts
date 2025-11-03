@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/auto';
 import { ConfirmModalComponent } from '../../layout/portal-layout/confirm-modal/confirm-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, map, take } from 'rxjs/operators';
@@ -17,6 +17,7 @@ import { QueueService } from '../services/queue.service';
 import { MessageCount } from '../../../models/message-count';
 import { SocketModels } from '../../../lib/websockets/socket-models';
 import { QueueMessage } from '../models/queue-message';
+import { DateHelper } from '../../../lib/helpers/date.helper';
 
 @Component({
     selector: 'queue-detail',
@@ -42,12 +43,9 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
     }
 
     async ngOnInit() {
-
         this.on(this.activatedRoute.params).subscribe(async p => {
-
             this.queueName = p['name'];
             if (this.queueName == null || this.queueName.length === 0) return;
-
             await this.load();
             this.subscribeWebsocket();
             this.subscribeToListRefresh().subscribe(() => this.queueService.get(this.queueName!).subscribe(r => this.queue = r.body!));
@@ -55,7 +53,6 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
     }
 
     private subscribeWebsocket() {
-
         this.on(this.socket.onmessage)
             .pipe(
                 filter(x => x.type == SocketModels.QueueGraph && x.payload.n == this.queueName),
@@ -81,7 +78,7 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
                 this.queue = qr.body!;
                 this.queueService.getGraph(this.queueName!)
                     .subscribe(response => {
-                        this.graph = response;
+                        this.graph = response.body;
 
                         if (this.deliveryChart)
                             this.deliveryChart.destroy();
@@ -90,12 +87,12 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
                             {
                                 type: 'line',
                                 data: {
-                                    labels: this.graph!.stream.labels,
+                                    labels: DateHelper.createLabels(this.graph!.stream!.map(x => x.u)),
                                     datasets: [
                                         {
                                             label: 'Produced',
                                             borderColor: '#2070e0',
-                                            data: this.graph!.stream.d.map(x => x.r),
+                                            data: this.graph!.stream.map(x => x.r),
                                             fill: false,
                                             pointRadius: 1,
                                             pointHitRadius: 8,
@@ -105,7 +102,7 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
                                         {
                                             label: 'Ack',
                                             borderColor: '#12bf4a',
-                                            data: this.graph!.stream.d.map(x => x.d),
+                                            data: this.graph!.stream.map(x => x.d),
                                             fill: false,
                                             pointRadius: 1,
                                             pointHitRadius: 8,
@@ -115,7 +112,7 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
                                         {
                                             label: 'Neg. Ack',
                                             borderColor: '#c042ef',
-                                            data: this.graph!.stream.d.map(x => x.rs),
+                                            data: this.graph!.stream.map(x => x.rs),
                                             fill: false,
                                             pointRadius: 1,
                                             pointHitRadius: 8,
@@ -125,7 +122,7 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
                                         {
                                             label: 'Unack',
                                             borderColor: '#eec236',
-                                            data: this.graph!.stream.d.map(x => x.nr),
+                                            data: this.graph!.stream.map(x => x.nr),
                                             fill: false,
                                             pointRadius: 1,
                                             pointHitRadius: 8,
@@ -135,7 +132,7 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
                                         {
                                             label: 'Error',
                                             borderColor: '#ff3333',
-                                            data: this.graph!.stream.d.map(x => x.e),
+                                            data: this.graph!.stream.map(x => x.e),
                                             fill: false,
                                             pointRadius: 1,
                                             pointHitRadius: 8,
@@ -161,12 +158,12 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
                             {
                                 type: 'line',
                                 data: {
-                                    labels: this.graph!.store.labels,
+                                    labels: DateHelper.createLabels(this.graph!.store!.map(x => x.u)),
                                     datasets: [
                                         {
                                             label: 'Msgs',
                                             borderColor: '#2070e0',
-                                            data: this.graph!.store.d.map(x => x.r),
+                                            data: this.graph!.store.map(x => x.r),
                                             fill: false,
                                             pointRadius: 1,
                                             pointHitRadius: 8,
@@ -176,7 +173,7 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
                                         {
                                             label: 'High Prio Msgs',
                                             borderColor: '#ff9911',
-                                            data: this.graph!.store.d.map(x => x.d),
+                                            data: this.graph!.store.map(x => x.d),
                                             fill: false,
                                             pointRadius: 1,
                                             pointHitRadius: 8,
@@ -186,7 +183,7 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
                                         {
                                             label: 'Pending for Ack',
                                             borderColor: '#10a0a0',
-                                            data: this.graph!.store.d.map(x => x.nr),
+                                            data: this.graph!.store.map(x => x.nr),
                                             fill: false,
                                             pointRadius: 1,
                                             pointHitRadius: 8,
@@ -196,7 +193,7 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
                                         {
                                             label: 'Processing',
                                             borderColor: '#f02020',
-                                            data: this.graph!.store.d.map(x => x.s),
+                                            data: this.graph!.store.map(x => x.s),
                                             fill: false,
                                             pointRadius: 1,
                                             pointHitRadius: 8,
@@ -281,7 +278,6 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
     }
 
     clear(): void {
-
         let dialogRef = this.dialog.open(ConfirmModalComponent, { width: '600px' });
         let component = <ConfirmModalComponent>dialogRef.componentInstance;
         component.message = 'All messages in queue will be deleted <b class="imp">permanently.</b>';
@@ -316,7 +312,6 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
     }
 
     remove(): void {
-
         let dialogRef = this.dialog.open(ConfirmModalComponent, { width: '600px' });
         let component = <ConfirmModalComponent>dialogRef.componentInstance;
         component.message = 'You are about to delete your queue. The queue and all messages in it will be deleted <b class="imp">permanently.</b>';
@@ -334,7 +329,6 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
     }
 
     setStatus(status: string): void {
-
         let dialogRef = this.dialog.open(ConfirmModalComponent, { width: '600px' });
         let component = <ConfirmModalComponent>dialogRef.componentInstance;
         component.message = 'You are about to change your queue status to <b class="imp">' + status + '.</b> That operation might affect your producers and consumers.';
@@ -348,14 +342,12 @@ export class QueueDetailComponent extends BaseFormComponent implements OnInit, O
     }
 
     changeOption(title: string, name: string, value: any): void {
-
         let dialogRef = this.dialog.open(QueueOptionModalComponent, { width: '500px' });
         let component = <QueueOptionModalComponent>dialogRef.componentInstance;
 
         component.model.title = title;
         component.model.property = name;
         component.model.value = value;
-
         component.onconfirmed
             .pipe(take(1))
             .subscribe(value => {

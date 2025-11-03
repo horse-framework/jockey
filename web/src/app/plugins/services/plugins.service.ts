@@ -20,16 +20,16 @@ export class PluginsService {
     return this.#http.post('/plugin/load', form, { observe: 'response' });
   }
 
-  enable(name: string): Observable<HttpResponse<any>> {
-    return this.#http.put('/plugin/enable', { name }, { observe: 'response' });
+  enable(name: string, version: string): Observable<HttpResponse<any>> {
+    return this.#http.put('/plugin/enable', { name, version }, { observe: 'response' });
   }
 
-  disable(name: string): Observable<HttpResponse<any>> {
-    return this.#http.put('/plugin/disable', { name }, { observe: 'response' });
+  disable(name: string, version: string): Observable<HttpResponse<any>> {
+    return this.#http.put('/plugin/disable', { name, version }, { observe: 'response' });
   }
 
-  remove(name: string): Observable<HttpResponse<any>> {
-    return this.#http.put('/plugin/remove', { name }, { observe: 'response' });
+  remove(name: string, version: string): Observable<HttpResponse<any>> {
+    return this.#http.put('/plugin/remove', { name, version }, { observe: 'response' });
   }
 }
 

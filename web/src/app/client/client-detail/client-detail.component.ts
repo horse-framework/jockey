@@ -1,4 +1,4 @@
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/auto';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HorseClientDetail } from '../models/horse-client-detail';

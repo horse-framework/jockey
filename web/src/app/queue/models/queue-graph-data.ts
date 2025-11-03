@@ -1,7 +1,7 @@
-import { MessageCount } from "../../../models/message-count";
+import { CountRecord } from "../../../models/message-count";
 
 export interface QueueGraphData {
-    stream: MessageCount;
-    store: MessageCount;
+    stream: CountRecord[];
+    store: CountRecord[];
     name: string;
 }

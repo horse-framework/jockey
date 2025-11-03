@@ -9,14 +9,18 @@ import { interval } from "rxjs";
 export class SessionStore extends ItemStore<SessionUser> {
 
     run() {
+
+        let json = localStorage.getItem('token');
+        if (json) {
+            this.setStateSilent(JSON.parse(json));
+        }
+
         interval(5000)
             .subscribe(() => {
                 let session = this.state();
                 if (session) {
-
                     let now = Math.floor(Date.now() / 1000);
                     let diff = now - session.expiration;
-
                     if (diff < 0) {
                         this.setState(null);
                     }

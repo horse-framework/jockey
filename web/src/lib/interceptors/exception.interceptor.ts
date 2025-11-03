@@ -3,10 +3,12 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { SessionStore } from '../../app/stores/session-store';
 
 export const exceptionInterceptor: HttpInterceptorFn = (req, next) => {
     const router = inject(Router);
     const toastr: ToastrService = inject(ToastrService);
+    let session: SessionStore = inject(SessionStore);
 
     return next(req).pipe(
         catchError(err => {
@@ -15,19 +17,24 @@ export const exceptionInterceptor: HttpInterceptorFn = (req, next) => {
 
             switch (err.status) {
                 case 0:
-                    toastr.error('Bağlantı hatası. Lütfen internet bağlantınızı kontrol edin.');
+                    toastr.error('Connection error!');
                     break;
 
                 case 400:
-                    toastr.warning('Lütfen girdiğiniz bilgileri kontrol edin.');
+                    toastr.warning('Invalid request!');
+                    break;
+
+                case 401:
+                    session.setState(null);
+                    router.navigateByUrl('/login');
                     break;
 
                 case 404:
-                    toastr.warning('Kayıt bulunamadı!');
+                    toastr.warning('Not found!');
                     break;
 
                 case 422:
-                    toastr.warning('İşleminiz Yapılamadı: ' + content.detail);
+                    toastr.warning('Transaction failed: ' + content.detail);
                     break;
 
                 case 500:

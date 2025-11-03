@@ -49,25 +49,25 @@ export class PluginsComponent implements OnInit {
     });
   }
 
-  enable(plugin: PluginInfo) {
+  enable(assembly: PluginAssembly, plugin: PluginInfo) {
     this.processing = true;
-    this.service.enable(plugin.name).subscribe(r => {
+    this.service.enable(plugin.name, assembly.version).subscribe(r => {
       this.processing = false;
       this.list();
     });
   }
 
-  disable(plugin: PluginInfo) {
+  disable(assembly: PluginAssembly, plugin: PluginInfo) {
     this.processing = true;
-    this.service.disable(plugin.name).subscribe(r => {
+    this.service.disable(plugin.name, assembly.version).subscribe(r => {
       this.processing = false;
       this.list();
     });
   }
 
-  remove(plugin: PluginInfo) {
+  remove(assembly: PluginAssembly, plugin: PluginInfo) {
     this.processing = true;
-    this.service.remove(plugin.name).subscribe(r => {
+    this.service.remove(plugin.name, assembly.version).subscribe(r => {
       this.processing = false;
       this.list();
     });

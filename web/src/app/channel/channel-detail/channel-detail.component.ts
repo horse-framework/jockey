@@ -1,4 +1,4 @@
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/auto';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChannelService } from '../services/channel.service';

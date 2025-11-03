@@ -6,6 +6,8 @@ import { HorseQueue, HorseQueueSummary } from '../models/horse-queue';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { QueueCreateModel } from '../models/queue-create-model';
 import { QueueMessage, QueuePushMessage } from '../models/queue-message';
+import { CountRecord } from '../../../models/message-count';
+import { DateHelper } from '../../../lib/helpers/date.helper';
 
 @Injectable({
     providedIn: 'root'
@@ -40,44 +42,13 @@ export class QueueService {
         return this.#http.get<HorseQueue>('/queue/get?name=' + name, { observe: 'response' });
     }
 
-    getGraph(name: string): Observable<QueueGraphData> {
+    getGraph(name: string): Observable<HttpResponse<QueueGraphData>> {
 
         let url = '/queue/graph';
         if (name != null && name.length > 0) {
-            url += '&name=' + name;
+            url += '?name=' + name;
         }
-
-        return of(this)
-            .pipe(
-                mergeMap(() => this.#http.get<QueueGraphData>(url, { observe: 'response' })),
-                map(response => {
-
-                    /* TODO:
-                    if (!response.ok)
-                        return null;
-
-                    let data = response.body!;
-
-                    let result: QueueGraphData = {
-                        store: {
-                            n: data.name,
-                            d: data.store!
-                        },
-                        stream: {
-                            n: data.name,
-                            d: data.stream!
-                        }
-                    };
-
-                    result.store.labels = DateHelper.createLabels(result.store.d.map(x => x.u));
-                    result.stream.labels = DateHelper.createLabels(result.stream.d.map(x => x.u));
-
-                    return result;
-                    */
-
-                    return response.body!;
-                })
-            );
+        return this.#http.get<QueueGraphData>(url, { observe: 'response' });
     }
 
     create(model: QueueCreateModel): Observable<HttpResponse<any>> {
@@ -139,4 +110,5 @@ export class QueueService {
     resetStats(name: string): Observable<HttpResponse<any>> {
         return this.#http.put('/queue/reset-stats', null, { observe: 'response' });
     }
+
 }

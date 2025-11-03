@@ -24,8 +24,9 @@
 .console-filter form {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: stretch;
   align-content: flex-start;
+  height: 42px;
 }
 
 .console-filter select {
@@ -42,25 +43,23 @@
 
 .console-filter input,
 .console-buttons input {
-  border-radius: 2px;
+  border-radius: 12px;
   border: 1px solid #333;
   background-color: #111;
   color: #eee;
-  box-sizing: border-box;
-  padding: 6px 8px;
   margin: 0px 10px 0px 0px;
   line-height: 32px;
   height: 32px;
 }
 
 .console-filter button {
-  border-radius: 2px;
+  border-radius: 12px;
   border: none;
   color: #eee;
   box-sizing: border-box;
   padding: 6px 12px;
   margin: 0px 10px 0px 0px;
-  height: 32px;
+  height: 35px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -97,7 +96,7 @@
 
 .toggle-button {
   margin: 0px 4px;
-  border-radius: 2px;
+  border-radius: 12px;
   background-color: #333;
   color: #ccc;
   padding: 8px 10px;
@@ -122,7 +121,7 @@
 
 .red-button {
   margin: 0px 0px 0px 4px;
-  border-radius: 2px;
+  border-radius: 12px;
   background-color: #d01010;
   color: #fff;
   padding: 8px 10px;
@@ -156,7 +155,7 @@
   background-color: #101010;
   border: 1px solid #333;
   flex: 1 1 auto;
-  border-radius: 2px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-content: stretch;

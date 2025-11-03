@@ -71,7 +71,7 @@ namespace Sample.Jockey
 
             Console.ReadLine();
             HorseClient client = new();
-            await client.ConnectAsync("horse://localhost:26222");
+            await client.ConnectAsync("horse://localhost:2626");
 
             var f = new { ok = true, id = Guid.NewGuid().ToString(), date = 312783621786, extra = new { a = 23, b = "foo" } };
             await client.Queue.PushJson("DemoQueue2", f, false);
@@ -80,7 +80,7 @@ namespace Sample.Jockey
             Console.ReadLine();
 
             HorseClient consumer = new();
-            await consumer.ConnectAsync("horse://localhost:26222");
+            await consumer.ConnectAsync("horse://localhost:2626");
             consumer.AutoAcknowledge = true;
             await consumer.Queue.Subscribe("DemoQueue2", true);
 

@@ -21,7 +21,7 @@
             <option value="type">Target by Type</option>
           </select>
 
-          <input type="text" [(ngModel)]="target" name="target" placeholder="Type target" />
+          <input type="text" [(ngModel)]="target" class="jockey-text" name="target" placeholder="Type target" />
           <button (click)="submit()" class="green">Apply Filter</button>
           <button (click)="subscribeAll()" class="yellow">Subscribe to all events</button>
         </ng-container>
@@ -33,7 +33,6 @@
     </div>
     <div class="console-buttons">
       <input type="text" #searchInput [(ngModel)]="search" name="search" placeholder="Search in messages" />
-
       <span class="toggle-button" [class.active]="showTime" (click)="toggleTime()">
         Time
       </span>

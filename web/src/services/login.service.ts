@@ -26,6 +26,7 @@ export class LoginService {
 
                     if (response.ok) {
                         this.#session.setState(response.body)
+                        localStorage.setItem('token', JSON.stringify(response.body));
                     }
                     return this.#session.state();
                 })

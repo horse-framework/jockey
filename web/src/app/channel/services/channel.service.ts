@@ -40,7 +40,7 @@ export class ChannelService {
 
     let url = '/channel/graph';
     if (name != null && name.length > 0) {
-      url += '&name=' + name;
+      url += '?name=' + name;
     }
 
     return of(this)
