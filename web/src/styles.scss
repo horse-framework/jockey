@@ -97,14 +97,14 @@ textarea {
 
 .portlet-title a {
   float: right;
-  color: #12a050;
+  color: #048cca;
   cursor: pointer;
   text-decoration: none;
   font-size: 13px;
 }
 
 .portlet-title a:hover {
-  color: #129244;
+  color: #04acfa;
 }
 
 .portlet-body {
@@ -287,12 +287,12 @@ textarea {
 .td a {
   text-decoration: none;
   cursor: pointer;
-  color: #12a050;
+  color: #048cca;
   font-weight: 500;
 }
 
 .td a:hover {
-  color: #129244;
+  color: #04acfa;
 }
 
 .td em {
@@ -309,7 +309,7 @@ textarea {
 .th .hreverse {
   text-decoration: none;
   cursor: pointer;
-  color: #12a050;
+  color: #048cca;
   font-weight: 600;
   text-transform: none;
   padding: 6px;
@@ -320,7 +320,7 @@ textarea {
 .th a {
   text-decoration: none;
   cursor: pointer;
-  color: #12a050;
+  color: #048cca;
   font-weight: 400;
   text-transform: none;
   margin-bottom: 1px;
@@ -331,11 +331,11 @@ textarea {
 }
 
 .th a:hover {
-  color: #129244;
+  color: #04acfa;
 }
 
 .th .hreverse:hover {
-  background-color: #129244;
+  background-color: #048cca;
   color: #fff;
 }
 
@@ -548,7 +548,7 @@ textarea {
   padding: 3px 6px;
   font-weight: 400;
   font-size: 12px;
-  background-color: #106030;
+  background-color: #048cca;
   border-radius: 12px;
   margin: 0px 8px 0px 0px;
   color: #fff;
@@ -566,7 +566,7 @@ textarea {
 }
 
 .td i.green {
-  background-color: #10a030;
+  background-color: #048cca;
 }
 
 .first-row {
@@ -690,14 +690,14 @@ input:-webkit-autofill:active {
 .jockey-select:active,
 .jockey-text:focus,
 .jockey-text:active {
-  border-color: #10a040;
+  border-color: #048cca;
 }
 
 .jockey-select option:checked,
 .jockey-select option:hover,
 select:focus>option:checked {
   box-shadow: 0 0 10px 100px #109040 inset;
-  background: #109040 important;
+  background: #04acfa important;
 }
 
 .scroll::-webkit-scrollbar {
@@ -734,11 +734,11 @@ select:focus>option:checked {
   padding: 12px 20px;
   font-weight: 500;
   background-color: transparent;
-  border-color: #109030;
+  border-color: #048cca;
 }
 
 .create-end button:hover {
-  border-color: #10f070;
+  border-color: #04acfa;
 }
 
 .modal-btn {
@@ -919,7 +919,7 @@ select:focus>option:checked {
 .change-option {
   font-size: 12px;
   font-weight: 500;
-  color: #109030;
+  color: #048cca;
   text-decoration: none;
   cursor: pointer;
   padding: 2px;
@@ -927,7 +927,7 @@ select:focus>option:checked {
 }
 
 .change-option:hover {
-  color: #10f070;
+  color: #04acfa;
 }
 
 .mat-mdc-dialog-surface {

@@ -69,6 +69,10 @@
   background-color: #108030;
 }
 
+.console-filter button.blue {
+  background-color: #048cca;
+}
+
 .console-filter button.green:hover {
   background-color: #129040;
 }

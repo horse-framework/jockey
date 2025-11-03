@@ -45,7 +45,7 @@
 .login-row button {
   border: none;
   border-radius: 2px;
-  background-color: #108030;
+  background-color: #048cca;
   color: #fff;
   font-size: 14px;
   font-weight: 500;
@@ -54,5 +54,5 @@
 }
 
 .login-row button:hover {
-  background-color: #129040;
+  background-color: #04acfa;
 }
