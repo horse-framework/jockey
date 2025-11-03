@@ -103,6 +103,7 @@
   height: 90px;
   resize: none;
   line-height: 22px;
+  border-radius: 12px;
   font-size: 13px;
   font-family: "Ubuntu Mono", monospace;
 }

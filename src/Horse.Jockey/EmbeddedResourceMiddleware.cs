@@ -24,7 +24,7 @@ public class EmbeddedResourceMiddleware(RequestDelegate next)
             string[] resourceNames = _embeddedResourceAssembly.GetManifestResourceNames();
 
             _resourcePathList = resourceNames
-                .Select(x => x.Replace("Horse.Jockey.Web.", ""))
+                .Select(x => x.Replace("Horse.Jockey.Web.", "", StringComparison.OrdinalIgnoreCase))
                 .ToArray();
         }
 
@@ -45,6 +45,7 @@ public class EmbeddedResourceMiddleware(RequestDelegate next)
             var contentType = path.EndsWith(".js") ? "application/javascript" :
                 path.EndsWith(".css") ? "text/css" :
                 path.EndsWith(".svg") ? "image/svg+xml" :
+                path.EndsWith(".png") ? "image/png" :
                 path.EndsWith(".html") ? "text/html" : "application/octet-stream";
 
             context.Response.ContentType = contentType;

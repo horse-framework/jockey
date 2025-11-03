@@ -57,7 +57,8 @@
                   "maximumError": "80kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "outputPath": "../src/Horse.Jockey/Web"
             },
             "development": {
               "optimization": false,

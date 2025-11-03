@@ -38,7 +38,7 @@ export class CacheComponent extends BaseFormComponent implements OnInit {
   async view(key: string) {
     this.cacheService.get(key).subscribe(response => {
       if (response.ok) {
-        let dialogRef = this.dialog.open(CacheViewModalComponent, { width: '600px' });
+        let dialogRef = this.dialog.open(CacheViewModalComponent, { width: '700px' });
         let component = <CacheViewModalComponent>dialogRef.componentInstance;
         component.model = response.body!;
       }
