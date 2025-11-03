@@ -151,8 +151,8 @@
               <div class="kvt-row">
                 <div class="kvt-key">Consumer Limit</div>
                 <div class="kvt-value">
-                  {{queue.options.clientLimit | unlimited}}
-                  <a class="change-option" (click)="changeOption('Consumer Limit', 'clientLimit', queue.options.clientLimit)">Change</a>
+                  {{queue.options!.clientLimit | unlimited}}
+                  <a class="change-option" (click)="changeOption('Consumer Limit', 'clientLimit', queue.options!.clientLimit)">Change</a>
                 </div>
               </div>
               <div class="kvt-row">
@@ -180,7 +180,7 @@
               <div class="kvt-row">
                 <div class="kvt-key">Commit When</div>
                 <div class="kvt-value">
-                  {{queue.options.commitWhen}}
+                  {{queue.options!.commitWhen}}
                 </div>
               </div>
               <div class="kvt-row kvt-seperator"></div>
@@ -195,8 +195,8 @@
               <div class="kvt-row">
                 <div class="kvt-key">Message Limit</div>
                 <div class="kvt-value">
-                  {{queue.info.msgLimit | unlimited}}
-                  <a class="change-option" (click)="changeOption('Message Timeout', 'msgLimit', queue.info.msgLimit)">Change</a>
+                  {{queue.info.messageLimit | unlimited}}
+                  <a class="change-option" (click)="changeOption('Message Timeout', 'msgLimit', queue.info.messageLimit)">Change</a>
                 </div>
               </div>
               <div class="kvt-row">

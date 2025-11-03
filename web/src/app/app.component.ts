@@ -1,34 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from 'src/lib/base-component';
-import { SessionService } from 'src/services/session.service';
-import { WebsocketService } from 'src/services/websocket.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { SessionStore } from './stores/session-store';
+import { WebsocketService } from '../services/websocket.service';
+import { BaseFormComponent } from '../lib/base-form.component';
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    standalone: false
+    template: '<router-outlet />',
+    imports: [RouterOutlet],
+    standalone: true
 })
-export class AppComponent extends BaseComponent implements OnInit {
+export class AppComponent extends BaseFormComponent implements OnInit {
 
-    constructor(private session: SessionService,
-        private websocketService: WebsocketService) {
-        super();
-
-        this.session.onchanged.subscribe(user => {
-
-            if (user) {
-                this.websocketService.connect(user.token);
-            }
-            else {
-                this.websocketService.disconnect();
-            }
-        });
-
-        this.session.run();
-    }
+    readonly #store: SessionStore = inject(SessionStore);
+    readonly #socket: WebsocketService = inject(WebsocketService);
 
     ngOnInit(): void {
+
+        this.#store.action$.subscribe(() => {
+            if (this.#store.state()) {
+                this.#socket.connect(this.#store.state()!.token);
+            }
+            else {
+                this.#socket.disconnect();
+            }
+        });
     }
 
 }

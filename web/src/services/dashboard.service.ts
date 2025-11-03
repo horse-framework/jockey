@@ -1,27 +1,16 @@
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { ApiClient } from 'src/lib/api-client';
-import { Dashboard } from 'src/models/dashboard';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Dashboard } from '../models/dashboard';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DashboardService {
 
-    constructor(private api: ApiClient) { }
+    readonly #http: HttpClient = inject(HttpClient);
 
-    /** Refreshes graph data */
-    load(): Promise<Dashboard> {
-
-        return this.api.get('/dashboard/stats')
-            .pipe(
-                map(response => {
-
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    load(): Observable<HttpResponse<Dashboard>> {
+        return this.#http.get<Dashboard>('/dashboard/stats', { observe: 'response' });
     }
 }

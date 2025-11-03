@@ -10,17 +10,17 @@ export interface OptionValue {
 }
 
 @Component({
-    selector: 'app-queue-option-modal',
-    templateUrl: './queue-option-modal.component.html',
-    styleUrls: ['./queue-option-modal.component.css'],
-    standalone: false
+  selector: 'app-queue-option-modal',
+  templateUrl: './queue-option-modal.component.html',
+  styleUrls: ['./queue-option-modal.component.css'],
+  standalone: false
 })
 export class QueueOptionModalComponent implements OnInit, OnDestroy {
 
   private _onconfirmed: Subject<OptionValue> = new Subject<OptionValue>();
   get onconfirmed(): Observable<OptionValue> { return this._onconfirmed; }
 
-  messageCount: number;
+  messageCount: number = 0;
   model: OptionValue = { confirmed: false, title: '', property: '', value: null, type: 'text' };
 
   private _confirmed = false;

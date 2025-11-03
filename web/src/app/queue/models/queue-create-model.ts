@@ -1,8 +1,8 @@
 
 export class QueueCreateModel {
 
-    name: string;
-    manager: string = null;
+    name: string | null = null;
+    manager: string | null = null;
     commit: null | 'None' | 'AfterReceived' | 'AfterSaved' | 'AfterSent' | 'AfterAcknowledge' = null;
     ack: null | 'None' | 'JustRequest' | 'WaitForAcknowledge' = null;
     type: null | 'Push' | 'RoundRobin' | 'Pull' = null;
@@ -10,18 +10,18 @@ export class QueueCreateModel {
     putBack: null | 'No' | 'Priority' | 'Regular' = null;
 
     /** In milliseconds */
-    ackTimeout: number = null;
+    ackTimeout: number | null = null;
 
     /** In seconds */
-    msgTimeout: number = null;
+    msgTimeout: number | null = null;
 
     /** In Milliseconds */
-    putBackDelay: number = null;
+    putBackDelay: number | null = null;
 
     /** In Milliseconds */
-    delay: number = null;
+    delay: number | null = null;
 
-    clientLimit: number = null;
-    msgLimit: number = null;
-    msgSizeLimit: number = null;
+    clientLimit: number | null = null;
+    msgLimit: number | null = null;
+    msgSizeLimit: number | null = null;
 }

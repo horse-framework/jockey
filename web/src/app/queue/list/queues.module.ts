@@ -5,8 +5,7 @@ import { RouterModule } from '@angular/router';
 import { QueueCreateModalComponent } from './queue-create-modal/queue-create-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { PipesModule } from 'src/app/layout/pipes/pipes.module';
-
+import { PipesModule } from '../../layout/pipes/pipes.module';
 
 @NgModule({
     declarations: [QueuesComponent, QueueCreateModalComponent],

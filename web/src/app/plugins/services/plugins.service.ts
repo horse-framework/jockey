@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ApiClient } from 'src/lib/api-client';
+import { inject, Injectable } from '@angular/core';
 import { PluginAssembly } from '../models/plugin-assembly';
-import { map } from 'rxjs/operators';
-import { IResponse } from 'src/models/api-response';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,61 +8,28 @@ import { Observable } from 'rxjs';
 })
 export class PluginsService {
 
-  constructor(private api: ApiClient) { }
+  readonly #http: HttpClient = inject(HttpClient);
 
-  async list(): Promise<PluginAssembly[]> {
-
-    return this.api.get('/plugin/list')
-      .pipe(
-        map(response => {
-          if (response.ok()) {
-            return response.data;
-          }
-          return null;
-        }))
-      .toPromise();
+  list(): Observable<HttpResponse<PluginAssembly[]>> {
+    return this.#http.get<PluginAssembly[]>('/plugin/list', { observe: 'response' });
   }
 
-  load(file: File): Promise<IResponse> {
+  load(file: File): Observable<HttpResponse<any>> {
     let form = new FormData();
     form.append('file', file, file.name);
-    return this.api.postForm('/plugin/load', form).toPromise();
+    return this.#http.post('/plugin/load', form, { observe: 'response' });
   }
 
-  async enable(name: string): Promise<IResponse> {
-    return this.api.put('/plugin/enable', { name })
-      .pipe(
-        map(response => {
-          if (response.ok()) {
-            return response.data;
-          }
-          return null;
-        }))
-      .toPromise();
+  enable(name: string): Observable<HttpResponse<any>> {
+    return this.#http.put('/plugin/enable', { name }, { observe: 'response' });
   }
 
-  async disable(name: string): Promise<IResponse> {
-    return this.api.put('/plugin/disable', { name })
-      .pipe(
-        map(response => {
-          if (response.ok()) {
-            return response.data;
-          }
-          return null;
-        }))
-      .toPromise();
+  disable(name: string): Observable<HttpResponse<any>> {
+    return this.#http.put('/plugin/disable', { name }, { observe: 'response' });
   }
 
-  async remove(name: string): Promise<IResponse> {
-    return this.api.put('/plugin/remove', { name })
-      .pipe(
-        map(response => {
-          if (response.ok()) {
-            return response.data;
-          }
-          return null;
-        }))
-      .toPromise();
+  remove(name: string): Observable<HttpResponse<any>> {
+    return this.#http.put('/plugin/remove', { name }, { observe: 'response' });
   }
 }
 

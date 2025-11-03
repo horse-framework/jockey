@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
-import { BaseComponent } from 'src/lib/base-component';
-import { SessionUser } from 'src/models/session-user';
-import { EventService } from 'src/services/event.service';
-import { SessionService } from 'src/services/session.service';
+import { SessionUser } from '../../../models/session-user';
+import { BaseFormComponent } from '../../../lib/base-form.component';
+import { EventService } from '../../../services/event.service';
+import { SessionStore } from '../../stores/session-store';
+import { ENVIRONMENT, Environment } from '../../../lib/environment.initializer';
 
 @Component({
     selector: 'app-portal-layout',
@@ -12,10 +12,10 @@ import { SessionService } from 'src/services/session.service';
     styleUrls: ['./portal-layout.component.css'],
     standalone: false
 })
-export class PortalLayoutComponent extends BaseComponent implements OnInit {
+export class PortalLayoutComponent extends BaseFormComponent implements OnInit {
 
-    user: SessionUser;
-    version: string;
+    user: SessionUser | null = null;
+    version: string = '';
 
     refreshItems = [
         { text: 'No Refresh', value: 0 },
@@ -25,9 +25,11 @@ export class PortalLayoutComponent extends BaseComponent implements OnInit {
         { text: 'Every 30 secs', value: 30000 },
         { text: 'Every min', value: 60000 }
     ];
-    refreshItem = null;
+    refreshItem: any = null;
 
-    constructor(private session: SessionService, private eventService: EventService, private router: Router) {
+    readonly #env: Environment = inject(ENVIRONMENT);
+
+    constructor(private session: SessionStore, private eventService: EventService, private router: Router) {
         super();
         this.refreshItem = this.refreshItems[1];
 
@@ -37,12 +39,12 @@ export class PortalLayoutComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.user = this.session.get();
-        this.version = environment.version;
+        this.user = this.session.state();
+        this.version = this.#env.version;
     }
 
     logout(): void {
-        this.session.clear();
+        this.session.setState(null);
         this.router.navigateByUrl('/login');
     }
 

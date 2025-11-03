@@ -1,22 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import Chart from 'chart.js';
-import { BaseComponent } from 'src/lib/base-component';
-import { SocketModels } from 'src/lib/socket-models';
-import { HorseQueue } from 'src/app/queue/models/horse-queue';
-import { QueueService } from 'src/app/queue/services/queue.service';
-import { WebsocketService } from 'src/services/websocket.service';
+import { Chart } from 'chart.js';
 import { ConfirmModalComponent } from '../../layout/portal-layout/confirm-modal/confirm-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, map, take } from 'rxjs/operators';
 import { MesssageMoveModalComponent, MoveCopyResult } from './messsage-move-modal/messsage-move-modal.component';
 import { QueueMessageModalComponent } from './queue-message-modal/queue-message-modal.component';
-import { QueueMessage } from 'src/app/queue/models/queue-message';
 import { QueuePushModalComponent } from './queue-push-modal/queue-push-modal.component';
 import { QueueOptionModalComponent } from './queue-option-modal/queue-option-modal.component';
-import { MessageCount } from 'src/models/message-count';
 import { QueueGraphData } from '../models/queue-graph-data';
-import { ChartService } from 'src/services/chart.service';
+import { BaseFormComponent } from '../../../lib/base-form.component';
+import { HorseQueue } from '../models/horse-queue';
+import { ChartService } from '../../../services/chart.service';
+import { WebsocketService } from '../../../services/websocket.service';
+import { QueueService } from '../services/queue.service';
+import { MessageCount } from '../../../models/message-count';
+import { SocketModels } from '../../../lib/websockets/socket-models';
+import { QueueMessage } from '../models/queue-message';
 
 @Component({
     selector: 'queue-detail',
@@ -24,13 +24,13 @@ import { ChartService } from 'src/services/chart.service';
     styleUrls: ['./queue-detail.component.css'],
     standalone: false
 })
-export class QueueDetailComponent extends BaseComponent implements OnInit, OnDestroy {
+export class QueueDetailComponent extends BaseFormComponent implements OnInit, OnDestroy {
 
-    queue: HorseQueue;
-    graph: QueueGraphData;
+    queue: HorseQueue | null = null;
+    graph: QueueGraphData | null = null;
     deliveryChart: any;
     storeChart: any;
-    queueName: string;
+    queueName: string | null = null;
 
     constructor(private dialog: MatDialog,
         private chartService: ChartService,
@@ -45,12 +45,12 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
 
         this.on(this.activatedRoute.params).subscribe(async p => {
 
-            this.queueName = p.name;
+            this.queueName = p['name'];
             if (this.queueName == null || this.queueName.length === 0) return;
 
             await this.load();
             this.subscribeWebsocket();
-            this.subscribeToListRefresh().subscribe(() => this.queueService.get(this.queueName).then(q => this.queue = q));
+            this.subscribeToListRefresh().subscribe(() => this.queueService.get(this.queueName!).subscribe(r => this.queue = r.body!));
         });
     }
 
@@ -76,149 +76,150 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
     }
 
     private async load() {
+        this.queueService.get(this.queueName!)
+            .subscribe(qr => {
+                this.queue = qr.body!;
+                this.queueService.getGraph(this.queueName!)
+                    .subscribe(response => {
+                        this.graph = response;
 
-        this.queue = await this.queueService.get(this.queueName);
-        this.graph = await this.queueService.getGraph(this.queueName);
+                        if (this.deliveryChart)
+                            this.deliveryChart.destroy();
 
-        if (this.deliveryChart)
-            this.deliveryChart.destroy();
+                        this.deliveryChart = new Chart(<any>document.getElementById('queue-delivery-chart'),
+                            {
+                                type: 'line',
+                                data: {
+                                    labels: this.graph!.stream.labels,
+                                    datasets: [
+                                        {
+                                            label: 'Produced',
+                                            borderColor: '#2070e0',
+                                            data: this.graph!.stream.d.map(x => x.r),
+                                            fill: false,
+                                            pointRadius: 1,
+                                            pointHitRadius: 8,
+                                            tension: 0.2,
+                                            borderWidth: 2
+                                        },
+                                        {
+                                            label: 'Ack',
+                                            borderColor: '#12bf4a',
+                                            data: this.graph!.stream.d.map(x => x.d),
+                                            fill: false,
+                                            pointRadius: 1,
+                                            pointHitRadius: 8,
+                                            tension: 0.2,
+                                            borderWidth: 2
+                                        },
+                                        {
+                                            label: 'Neg. Ack',
+                                            borderColor: '#c042ef',
+                                            data: this.graph!.stream.d.map(x => x.rs),
+                                            fill: false,
+                                            pointRadius: 1,
+                                            pointHitRadius: 8,
+                                            tension: 0.2,
+                                            borderWidth: 2
+                                        },
+                                        {
+                                            label: 'Unack',
+                                            borderColor: '#eec236',
+                                            data: this.graph!.stream.d.map(x => x.nr),
+                                            fill: false,
+                                            pointRadius: 1,
+                                            pointHitRadius: 8,
+                                            tension: 0.2,
+                                            borderWidth: 2
+                                        },
+                                        {
+                                            label: 'Error',
+                                            borderColor: '#ff3333',
+                                            data: this.graph!.stream.d.map(x => x.e),
+                                            fill: false,
+                                            pointRadius: 1,
+                                            pointHitRadius: 8,
+                                            tension: 0.2,
+                                            borderWidth: 2
+                                        }]
+                                },
+                                options: {
+                                    hover: { mode: 'nearest', intersect: true },
+                                    animation: { duration: 0 },
+                                    responsive: true,
+                                    scales: {
+                                        x: { display: false },
+                                        y: { display: true, ticks: { precision: 0 } }
+                                    }
+                                }
+                            });
 
-        this.deliveryChart = new Chart(document.getElementById('queue-delivery-chart'),
-            {
-                type: 'line',
-                hover: { mode: 'nearest', intersect: true },
-                data: {
-                    labels: this.graph.stream.labels,
-                    datasets: [
-                        {
-                            label: 'Produced',
-                            borderColor: '#2070e0',
-                            data: this.graph.stream.d.map(x => x.r),
-                            fill: false,
-                            pointRadius: 1,
-                            pointHitRadius: 8,
-                            lineTension: 0.2,
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Ack',
-                            borderColor: '#12bf4a',
-                            data: this.graph.stream.d.map(x => x.d),
-                            fill: false,
-                            pointRadius: 1,
-                            pointHitRadius: 8,
-                            lineTension: 0.2,
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Neg. Ack',
-                            borderColor: '#c042ef',
-                            data: this.graph.stream.d.map(x => x.rs),
-                            fill: false,
-                            pointRadius: 1,
-                            pointHitRadius: 8,
-                            lineTension: 0.2,
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Unack',
-                            borderColor: '#eec236',
-                            data: this.graph.stream.d.map(x => x.nr),
-                            fill: false,
-                            pointRadius: 1,
-                            pointHitRadius: 8,
-                            lineTension: 0.2,
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Error',
-                            borderColor: '#ff3333',
-                            data: this.graph.stream.d.map(x => x.e),
-                            fill: false,
-                            pointRadius: 1,
-                            pointHitRadius: 8,
-                            lineTension: 0.2,
-                            borderWidth: 2
-                        }]
-                },
-                options: {
-                    animation: {
-                        duration: 0
-                    },
-                    responsive: true,
-                    scales: {
-                        xAxes: [{ display: false }],
-                        yAxes: [{ display: true, ticks: { precision: 0 } }]
-                    }
-                }
+                        if (this.storeChart)
+                            this.storeChart.destroy();
+
+                        this.storeChart = new Chart(<any>document.getElementById('queue-store-chart'),
+                            {
+                                type: 'line',
+                                data: {
+                                    labels: this.graph!.store.labels,
+                                    datasets: [
+                                        {
+                                            label: 'Msgs',
+                                            borderColor: '#2070e0',
+                                            data: this.graph!.store.d.map(x => x.r),
+                                            fill: false,
+                                            pointRadius: 1,
+                                            pointHitRadius: 8,
+                                            tension: 0.2,
+                                            borderWidth: 2
+                                        },
+                                        {
+                                            label: 'High Prio Msgs',
+                                            borderColor: '#ff9911',
+                                            data: this.graph!.store.d.map(x => x.d),
+                                            fill: false,
+                                            pointRadius: 1,
+                                            pointHitRadius: 8,
+                                            tension: 0.2,
+                                            borderWidth: 2
+                                        },
+                                        {
+                                            label: 'Pending for Ack',
+                                            borderColor: '#10a0a0',
+                                            data: this.graph!.store.d.map(x => x.nr),
+                                            fill: false,
+                                            pointRadius: 1,
+                                            pointHitRadius: 8,
+                                            tension: 0.2,
+                                            borderWidth: 2
+                                        },
+                                        {
+                                            label: 'Processing',
+                                            borderColor: '#f02020',
+                                            data: this.graph!.store.d.map(x => x.s),
+                                            fill: false,
+                                            pointRadius: 1,
+                                            pointHitRadius: 8,
+                                            tension: 0.2,
+                                            borderWidth: 2
+                                        }]
+                                },
+                                options: {
+                                    hover: { mode: 'nearest', intersect: true },
+                                    animation: { duration: 0 },
+                                    responsive: true,
+                                    scales: {
+                                        x: { display: false },
+                                        y: { display: true, ticks: { precision: 0 } }
+                                    }
+                                }
+                            });
+                    });
             });
 
-        if (this.storeChart)
-            this.storeChart.destroy();
-
-        this.storeChart = new Chart(document.getElementById('queue-store-chart'),
-            {
-                type: 'line',
-                hover: { mode: 'nearest', intersect: true },
-                data: {
-                    labels: this.graph.store.labels,
-                    datasets: [
-                        {
-                            label: 'Msgs',
-                            borderColor: '#2070e0',
-                            data: this.graph.store.d.map(x => x.r),
-                            fill: false,
-                            pointRadius: 1,
-                            pointHitRadius: 8,
-                            lineTension: 0.2,
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'High Prio Msgs',
-                            borderColor: '#ff9911',
-                            data: this.graph.store.d.map(x => x.d),
-                            fill: false,
-                            pointRadius: 1,
-                            pointHitRadius: 8,
-                            lineTension: 0.2,
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Pending for Ack',
-                            borderColor: '#10a0a0',
-                            data: this.graph.store.d.map(x => x.nr),
-                            fill: false,
-                            pointRadius: 1,
-                            pointHitRadius: 8,
-                            lineTension: 0.2,
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Processing',
-                            borderColor: '#f02020',
-                            data: this.graph.store.d.map(x => x.s),
-                            fill: false,
-                            pointRadius: 1,
-                            pointHitRadius: 8,
-                            lineTension: 0.2,
-                            borderWidth: 2
-                        }]
-                },
-                options: {
-                    animation: {
-                        duration: 0
-                    },
-                    responsive: true,
-                    scales: {
-                        xAxes: [{ display: false }],
-                        yAxes: [{ display: true, ticks: { precision: 0 } }]
-                    }
-                }
-            });
     }
 
-    ngOnDestroy(): void {
-
+    override ngOnDestroy(): void {
         super.ngOnDestroy();
 
         const request = {
@@ -232,23 +233,21 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
     push(): void {
         let dialogRef = this.dialog.open(QueuePushModalComponent, { width: '550px' });
         let component = <QueuePushModalComponent>dialogRef.componentInstance;
-        component.message.queue = this.queueName;
+        component.message!.queue = this.queueName!;
         component.onconfirmed
             .pipe(take(1))
             .subscribe(msg => {
                 if (msg)
                     this.queueService
                         .push(msg)
-                        .then(result => {
-
-                        });
+                        .subscribe(result => { });
             });
     }
 
     read(): void {
         this.queueService
-            .read(this.queueName)
-            .then(msg => this.showQueueMessage(msg));
+            .read(this.queueName!)
+            .subscribe(r => this.showQueueMessage(r.body!));
     }
 
     consume(): void {
@@ -260,8 +259,8 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
             .subscribe(value => {
                 if (value)
                     this.queueService
-                        .consume(this.queueName)
-                        .then(msg => this.showQueueMessage(msg));
+                        .consume(this.queueName!)
+                        .subscribe(r => this.showQueueMessage(r.body!));
             });
     }
 
@@ -290,8 +289,8 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
             .pipe(take(1))
             .subscribe(value => {
                 if (value)
-                    this.queueService.clear(this.queueName)
-                        .then(r => this.load());
+                    this.queueService.clear(this.queueName!)
+                        .subscribe(r => this.load());
             });
     }
 
@@ -301,15 +300,15 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
         component.messageCount = 321;
         component.onconfirmed
             .pipe(take(1))
-            .subscribe((result: MoveCopyResult) => {
+            .subscribe((result: MoveCopyResult | null) => {
                 if (result == null || result.target == null || result.target.length < 1)
                     return;
 
                 if (result.moving) {
-                    this.queueService.move(this.queueName, result.target).then(r => this.load());
+                    this.queueService.move(this.queueName!, result.target).subscribe(r => this.load());
                 }
                 else {
-                    this.queueService.copy(this.queueName, result.target).then(r => {
+                    this.queueService.copy(this.queueName!, result.target).subscribe(r => {
                         this.router.navigateByUrl('/queue/' + result.target);
                     });
                 }
@@ -326,8 +325,8 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
             .subscribe(value => {
 
                 if (value)
-                    this.queueService.delete(this.queueName)
-                        .then(r => {
+                    this.queueService.delete(this.queueName!)
+                        .subscribe(r => {
                             this.router.navigateByUrl('/queues');
                         });
 
@@ -343,8 +342,8 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
             .pipe(take(1))
             .subscribe(value => {
                 if (value)
-                    this.queueService.status(this.queueName, status)
-                        .then(r => this.load());
+                    this.queueService.status(this.queueName!, status)
+                        .subscribe(r => this.load());
             });
     }
 
@@ -361,13 +360,12 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
             .pipe(take(1))
             .subscribe(value => {
                 if (value.confirmed) {
-                    this.queueService.setOption(this.queueName, value.property, value.value).then(() => this.load());
+                    this.queueService.setOption(this.queueName!, value.property, value.value).subscribe(() => this.load());
                 }
             });
     }
 
     resetStats(): void {
-
         let dialogRef = this.dialog.open(ConfirmModalComponent, { width: '450px' });
         let component = <ConfirmModalComponent>dialogRef.componentInstance;
         component.message = 'Queue statistics will be reset. Are you sure?';
@@ -376,8 +374,8 @@ export class QueueDetailComponent extends BaseComponent implements OnInit, OnDes
             .subscribe(value => {
                 if (value) {
                     this.queueService
-                        .resetStats(this.queue.info.name)
-                        .then(() => {
+                        .resetStats(this.queue!.info.name)
+                        .subscribe(() => {
                             this.load();
                         });
                 }

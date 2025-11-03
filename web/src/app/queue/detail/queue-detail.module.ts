@@ -10,7 +10,6 @@ import { QueuePushModalComponent } from './queue-push-modal/queue-push-modal.com
 import { QueueOptionModalComponent } from './queue-option-modal/queue-option-modal.component';
 import { QueueDetailComponent } from './queue-detail.component';
 
-
 @NgModule({
     declarations: [
         QueueDetailComponent,

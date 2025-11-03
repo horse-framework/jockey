@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CacheInfo } from 'src/app/cache/models/cache-info';
-import { CacheService } from 'src/app/cache/services/cache.service';
+import { CacheService } from '../services/cache.service';
+import { CacheInfo } from '../models/cache-info';
 
 @Component({
     selector: 'app-cache-view-modal',
@@ -11,7 +11,7 @@ import { CacheService } from 'src/app/cache/services/cache.service';
 })
 export class CacheViewModalComponent implements OnInit {
 
-  model: CacheInfo = null;
+  model: CacheInfo | null = null;
 
   constructor(private cacheService: CacheService, private dialog: MatDialog) { }
 
@@ -20,8 +20,8 @@ export class CacheViewModalComponent implements OnInit {
 
   remove() {
     this.cacheService
-      .remove(this.model.key)
-      .then(() => {
+      .remove(this.model!.key)
+      .subscribe(() => {
         this.dialog.closeAll(); //todo: state mgmt required for list
       });
   }

@@ -3,6 +3,25 @@ import { DatePipe } from "@angular/common";
 export class DateHelper {
 
     private static _pipe: DatePipe = new DatePipe('en-US');
+    
+    static findRangeDate(date: Date, rangeType: 'min' | 'hour' | 'day', value: number): Date {
+        let diff = this.findRangeInMilliseconds(rangeType, value);
+        let now = date.getTime();
+        let time = now + diff;
+        return new Date(time);
+    }
+
+    private static findRangeInMilliseconds(rangeType: 'min' | 'hour' | 'day', value: number): number {
+        let unit = 60 * 1000;
+
+        if (rangeType == 'hour')
+            unit *= 60;
+
+        else if (rangeType == 'day')
+            unit *= 60 * 24;
+
+        return unit * value;
+    }
 
     /** Create Time Labels */
     static createTimeLabels(count: number, scaleSeconds: number, reverse: boolean): string[] {
@@ -41,7 +60,6 @@ export class DateHelper {
     /** Returns HH:mm:ss string from unix time in seconds */
     static findTimeFromUnixSeconds(unix: number): string {
         let date = new Date(unix * 1000);
-        return this._pipe.transform(date, 'HH:mm:ss');
+        return this._pipe.transform(date, 'HH:mm:ss')!;
     }
-
 }

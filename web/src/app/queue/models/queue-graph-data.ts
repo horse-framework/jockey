@@ -1,6 +1,7 @@
-import { MessageCount } from "src/models/message-count";
+import { MessageCount } from "../../../models/message-count";
 
 export interface QueueGraphData {
     stream: MessageCount;
     store: MessageCount;
+    name: string;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BaseComponent } from 'src/lib/base-component';
-import { LoginService } from 'src/services/login.service';
+import { LoginService } from '../../../src/services/login.service';
+import { BaseFormComponent } from '../../lib/base-form.component';
 
 @Component({
     selector: 'app-login',
@@ -9,11 +9,11 @@ import { LoginService } from 'src/services/login.service';
     styleUrls: ['./login.component.css'],
     standalone: false
 })
-export class LoginComponent extends BaseComponent implements OnInit {
+export class LoginComponent extends BaseFormComponent implements OnInit {
 
     username: string = '';
     password: string = '';
-    message: string;
+    message: string = '';
 
     constructor(private loginService: LoginService, private router: Router) {
         super();
@@ -22,15 +22,16 @@ export class LoginComponent extends BaseComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    async submit() {
-
-        let user = await this.loginService.login(this.username, this.password);
-        if (user != null) {
-            this.router.navigateByUrl('/dashboard');
-        }
-        else {
-            this.message = 'Invalid username or password';
-        }
+    submit() {
+        this.loginService.login(this.username, this.password)
+            .subscribe(response => {
+                if (response != null) {
+                    this.router.navigateByUrl('/dashboard');
+                }
+                else {
+                    this.message = 'Invalid username or password';
+                }
+            });
     }
 
 }

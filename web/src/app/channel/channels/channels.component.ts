@@ -1,29 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from 'src/lib/base-component';
 import { ChannelCreateModalComponent } from './channel-create-modal/channel-create-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import { ChannelMessageModalComponent } from '../channel-message-modal/channel-message-modal.component';
 import { ChannelInfo } from '../models/channel-info';
 import { ChannelService } from '../services/channel.service';
+import { BaseFormComponent } from '../../../lib/base-form.component';
 
 @Component({
-    selector: 'app-channels',
-    templateUrl: './channels.component.html',
-    styleUrls: ['./channels.component.css'],
-    standalone: false
+  selector: 'app-channels',
+  templateUrl: './channels.component.html',
+  styleUrls: ['./channels.component.css'],
+  standalone: false
 })
-export class ChannelsComponent extends BaseComponent implements OnInit {
+export class ChannelsComponent extends BaseFormComponent implements OnInit {
 
-  channels: ChannelInfo[];
+  channels: ChannelInfo[] = [];
 
   constructor(private dialog: MatDialog, private channelService: ChannelService) {
     super();
   }
 
   async ngOnInit() {
-    this.channels = await this.channelService.list();
-    this.subscribeToListRefresh().subscribe(() => this.channelService.list().then(channels => this.channels = channels));
+    this.channelService.list().subscribe(r => this.channels = r.body!);
+    this.subscribeToListRefresh().subscribe(() => this.channelService.list().subscribe(r => this.channels = r.body!));
   }
 
   create(): void {
@@ -37,14 +37,13 @@ export class ChannelsComponent extends BaseComponent implements OnInit {
         if (value)
           this.channelService
             .create(value)
-            .then(msg => {
+            .subscribe(msg => {
               this.ngOnInit();
             });
       });
   }
 
   viewInitialMessage(channel: ChannelInfo): void {
-
     let dialogRef = this.dialog.open(ChannelMessageModalComponent, { width: '800px' });
     let component = <ChannelMessageModalComponent>dialogRef.componentInstance;
     component.load(channel.name);

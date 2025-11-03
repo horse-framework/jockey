@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { ENVIRONMENT, Environment } from '../lib/environment.initializer';
 
 export enum WebClientStatus {
     Disconnected,
@@ -18,9 +18,11 @@ export interface SocketMessage {
 })
 export class WebsocketService {
 
-    private _status: WebClientStatus;
-    private _socket: WebSocket;
+    private _status: WebClientStatus = WebClientStatus.Disconnected;
+    private _socket: WebSocket | null = null;
     private _subscriptions: any[] = [];
+
+    readonly env: Environment = inject(ENVIRONMENT);
 
     private _onconnected: Subject<WebsocketService> = new Subject<WebsocketService>();
     private _ondisconnected: Subject<WebsocketService> = new Subject<WebsocketService>();
@@ -39,15 +41,7 @@ export class WebsocketService {
 
     connect(token: string): void {
 
-        let host;
-        if (environment.production) {
-            let protocol = location.protocol.toLowerCase().includes('https') ? 'wss' : 'ws';
-            host = protocol + '://' + location.host + '?token=' + token;
-        }
-        else {
-            host = environment.api.websocket + '?token=' + token;
-        }
-
+        let host = this.env.websocketUrl + '?token=' + token;
         this._socket = new WebSocket(host);
 
         this._socket.onopen = (ev: Event) => {

@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { interval, Observable, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
-import { QueueCreateModel } from 'src/app/queue/models/queue-create-model';
-import { QueueService } from 'src/app/queue/services/queue.service';
+import { QueueCreateModel } from '../../models/queue-create-model';
+import { QueueService } from '../../services/queue.service';
 
 @Component({
     selector: 'app-queue-create-modal',
@@ -55,21 +55,21 @@ export class QueueCreateModalComponent implements OnInit, OnDestroy {
   managers: string[] = [];
 
   @ViewChild('queueForm')
-  queueForm: ElementRef;
+  queueForm: ElementRef | undefined;
 
-  private _onconfirmed: Subject<QueueCreateModel> = new Subject<QueueCreateModel>();
-  get onconfirmed(): Observable<QueueCreateModel> { return this._onconfirmed; }
+  private _onconfirmed: Subject<QueueCreateModel | null> = new Subject<QueueCreateModel | null>();
+  get onconfirmed(): Observable<QueueCreateModel | null> { return this._onconfirmed; }
   private _confirmed: boolean = false;
 
   constructor(private queueService: QueueService) { }
 
   ngOnInit(): void {
-    this.queueService.getManagers().then(m => this.managers = m);
+    this.queueService.getManagers().subscribe(m => this.managers = m.body!);
     interval(50)
       .pipe(filter(() => this.queueForm != null), take(1))
       .subscribe(() => {
 
-        let div = <HTMLDivElement>this.queueForm.nativeElement;
+        let div = <HTMLDivElement>this.queueForm!.nativeElement;
         div.querySelectorAll('select').forEach(element => {
           let option = element.getElementsByTagName('option')[0];
           option.selected = true;

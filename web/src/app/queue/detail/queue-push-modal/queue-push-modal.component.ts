@@ -1,28 +1,28 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { QueuePushMessage } from 'src/app/queue/models/queue-message';
+import { QueuePushMessage } from '../../models/queue-message';
 
 @Component({
-    selector: 'app-queue-push-modal',
-    templateUrl: './queue-push-modal.component.html',
-    styleUrls: ['./queue-push-modal.component.css'],
-    standalone: false
+  selector: 'app-queue-push-modal',
+  templateUrl: './queue-push-modal.component.html',
+  styleUrls: ['./queue-push-modal.component.css'],
+  standalone: false
 })
 export class QueuePushModalComponent implements OnInit, OnDestroy {
 
-  message: QueuePushMessage;
+  message: QueuePushMessage | null = null;
 
-  addingHeaderKey: string;
-  addingHeaderValue: string;
+  addingHeaderKey: string | undefined;
+  addingHeaderValue: string | undefined;
 
   @ViewChild('headerKeyInput')
-  headerKeyInput: ElementRef;
+  headerKeyInput: ElementRef | undefined;
 
   @ViewChild('headerValueInput')
-  headerValueInput: ElementRef;
+  headerValueInput: ElementRef | undefined;
 
-  private _onconfirmed: Subject<QueuePushMessage> = new Subject<QueuePushMessage>();
-  get onconfirmed(): Observable<QueuePushMessage> { return this._onconfirmed; }
+  private _onconfirmed: Subject<QueuePushMessage | null> = new Subject<QueuePushMessage | null>();
+  get onconfirmed(): Observable<QueuePushMessage | null> { return this._onconfirmed; }
   private _confirmed: boolean = false;
 
   constructor() {
@@ -46,32 +46,32 @@ export class QueuePushModalComponent implements OnInit, OnDestroy {
   headerKeyUp(key: boolean, event: KeyboardEvent) {
     if (event.key == 'Enter') {
       if (key)
-        this.headerValueInput.nativeElement.focus();
+        this.headerValueInput!.nativeElement.focus();
       else
         this.addHeader();
     }
   }
 
   removeHeader(key: string): void {
-    let index = this.message.headers.findIndex(x => x.name == key);
+    let index = this.message!.headers!.findIndex(x => x.name == key);
     if (index < 0)
       return;
 
-    this.message.headers.splice(index, 1);
+    this.message!.headers!.splice(index, 1);
   }
 
   addHeader(): void {
 
-    let key = this.addingHeaderKey.trim();
-    let value = this.addingHeaderValue.trim();
+    let key = this.addingHeaderKey!.trim();
+    let value = this.addingHeaderValue!.trim();
 
     if (key.length < 1 || value.length < 1)
       return;
 
-    this.message.headers.push({ name: key, value: value });
+    this.message!.headers!.push({ name: key, value: value });
     this.addingHeaderKey = '';
     this.addingHeaderValue = '';
-    this.headerKeyInput.nativeElement.focus();
+    this.headerKeyInput!.nativeElement.focus();
   }
 
   push(): void {

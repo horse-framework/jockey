@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { AddBindingModel } from 'src/models/add-binding-model';
-import { HorseQueueSummary } from 'src/app/queue/models/horse-queue';
-import { QueueService } from 'src/app/queue/services/queue.service';
+import { AddBindingModel } from '../../../models/add-binding-model';
+import { HorseQueueSummary } from '../../queue/models/horse-queue';
+import { QueueService } from '../../queue/services/queue.service';
 
 @Component({
-    selector: 'app-binding-add-modal',
-    templateUrl: './binding-add-modal.component.html',
-    styleUrls: ['./binding-add-modal.component.css'],
-    standalone: false
+  selector: 'app-binding-add-modal',
+  templateUrl: './binding-add-modal.component.html',
+  styleUrls: ['./binding-add-modal.component.css'],
+  standalone: false
 })
 export class BindingAddModalComponent implements OnInit, OnDestroy {
 
@@ -43,18 +43,18 @@ export class BindingAddModalComponent implements OnInit, OnDestroy {
     { value: 'Response', text: 'Router waits response from that binding' },
   ];
 
-  private _onconfirmed: Subject<AddBindingModel> = new Subject<AddBindingModel>();
-  get onconfirmed(): Observable<AddBindingModel> { return this._onconfirmed; }
+  private _onconfirmed: Subject<AddBindingModel | null> = new Subject<AddBindingModel | null>();
+  get onconfirmed(): Observable<AddBindingModel | null> { return this._onconfirmed; }
   private _confirmed: boolean = false;
 
-  queues: HorseQueueSummary[];
+  queues: HorseQueueSummary[] = [];
 
   constructor(private queueService: QueueService) {
   }
 
   ngOnInit(): void {
-    this.queueService.listSummary().then(items => {
-      this.queues = items;
+    this.queueService.listSummary().subscribe(items => {
+      this.queues = items.body!;
     });
   }
 

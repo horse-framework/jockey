@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { CacheForm } from 'src/app/cache/models/cache-form';
+import { CacheForm } from '../models/cache-form';
 
 @Component({
     selector: 'app-cache-create-modal',
@@ -12,8 +12,8 @@ export class CacheCreateModalComponent implements OnInit, OnDestroy {
 
   model: CacheForm;
 
-  private _onconfirmed: Subject<CacheForm> = new Subject<CacheForm>();
-  get onconfirmed(): Observable<CacheForm> { return this._onconfirmed; }
+  private _onconfirmed: Subject<CacheForm | null> = new Subject<CacheForm | null>();
+  get onconfirmed(): Observable<CacheForm | null> { return this._onconfirmed; }
   private _confirmed: boolean = false;
 
 

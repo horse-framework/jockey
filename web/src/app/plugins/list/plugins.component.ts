@@ -4,18 +4,18 @@ import { PluginsService } from '../services/plugins.service';
 import { PluginInfo } from '../models/plugin-info';
 
 @Component({
-    selector: 'app-plugins',
-    templateUrl: './plugins.component.html',
-    styleUrl: './plugins.component.css',
-    standalone: false
+  selector: 'app-plugins',
+  templateUrl: './plugins.component.html',
+  styleUrl: './plugins.component.css',
+  standalone: false
 })
 export class PluginsComponent implements OnInit {
 
-  model: PluginAssembly[];
+  model: PluginAssembly[] = [];
   processing: boolean = false;
 
   @ViewChild('fileUpload')
-  fileUpload: ElementRef<HTMLInputElement>;
+  fileUpload: ElementRef<HTMLInputElement> | undefined;
 
   constructor(private service: PluginsService) { }
 
@@ -23,18 +23,19 @@ export class PluginsComponent implements OnInit {
     this.list();
   }
 
-  async list() {
+  list() {
     this.processing = true;
-    this.model = await this.service.list();
-    this.processing = false;
+    this.service.list().subscribe(r => {
+      this.model = r.body!;
+      this.processing = false;
+    });
   }
 
-  async load() {
-    console.log(this.fileUpload.nativeElement);
-    this.fileUpload.nativeElement.click();
+  load() {
+    this.fileUpload!.nativeElement.click();
   }
 
-  async onFileChanged(event: any) {
+  onFileChanged(event: any) {
 
     if (event.target == null || event.target.files == null || event.target.files.length == 0) {
       return;
@@ -42,46 +43,33 @@ export class PluginsComponent implements OnInit {
 
     let file: File = event.target.files[0];
     this.processing = true;
-    try {
-      await this.service.load(file);
-    }
-    finally {
+    this.service.load(file).subscribe(r => {
       this.processing = false;
       this.list();
-    }
+    });
   }
 
-  async enable(plugin: PluginInfo) {
+  enable(plugin: PluginInfo) {
     this.processing = true;
-    try {
-      await this.service.enable(plugin.name);
-      this.list();
-    }
-    finally {
+    this.service.enable(plugin.name).subscribe(r => {
       this.processing = false;
-    }
+      this.list();
+    });
   }
 
-  async disable(plugin: PluginInfo) {
+  disable(plugin: PluginInfo) {
     this.processing = true;
-    try {
-      await this.service.disable(plugin.name);
-      this.list();
-    }
-    finally {
+    this.service.disable(plugin.name).subscribe(r => {
       this.processing = false;
-    }
+      this.list();
+    });
   }
 
-  async remove(plugin: PluginInfo) {
+  remove(plugin: PluginInfo) {
     this.processing = true;
-    try {
-      await this.service.remove(plugin.name);
-    }
-    finally {
+    this.service.remove(plugin.name).subscribe(r => {
       this.processing = false;
       this.list();
-    }
+    });
   }
-
 }

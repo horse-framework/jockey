@@ -4,20 +4,20 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, from, fromEvent, interval, merge, Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, delayWhen, distinctUntilChanged, filter, map, pluck, switchMap, take, takeLast, takeUntil, tap } from 'rxjs/operators';
-import { SocketModels } from 'src/lib/socket-models';
-import { ConsoleRequest } from 'src/models/console-request';
-import { ConsoleMessage } from 'src/models/console.message';
-import { DestroyService } from 'src/services/destroy.service';
-import { WebsocketService } from 'src/services/websocket.service';
+import { ConsoleRequest } from '../../../src/models/console-request';
+import { ConsoleMessage } from '../../../src/models/console.message';
+import { DestroyService } from '../../../src/services/destroy.service';
+import { WebsocketService } from '../../../src/services/websocket.service';
+import { SocketModels } from '../../lib/websockets/socket-models';
 
 @Component({
-    selector: 'app-console',
-    templateUrl: './console.component.html',
-    styleUrls: ['./console.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyService],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'app-console',
+  templateUrl: './console.component.html',
+  styleUrls: ['./console.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DestroyService],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false
 })
 export class ConsoleComponent implements OnInit, OnDestroy {
 
@@ -36,12 +36,12 @@ export class ConsoleComponent implements OnInit, OnDestroy {
   pause: boolean = false;
   allSubscribed: boolean = false;
 
-  @ViewChild('container', { static: true }) container: ElementRef<HTMLDivElement>;
-  @ViewChild('consoleContainer', { static: true, read: ViewContainerRef }) consoleContainer: ViewContainerRef;
-  @ViewChild('consoleTable', { static: true, read: ElementRef }) consoleTable: ElementRef<HTMLTableElement>;
-  @ViewChild('messageTemplate', { static: true, read: TemplateRef }) messageTemplate: TemplateRef<any>;
-  @ViewChild('searchInput', { static: true, read: ElementRef }) searchInput: ElementRef<HTMLInputElement>;
-  @ViewChild('applied', { static: true, read: ElementRef }) applied: ElementRef<HTMLSpanElement>;
+  @ViewChild('container', { static: true }) container: ElementRef<HTMLDivElement> | undefined;
+  @ViewChild('consoleContainer', { static: true, read: ViewContainerRef }) consoleContainer: ViewContainerRef | undefined;
+  @ViewChild('consoleTable', { static: true, read: ElementRef }) consoleTable: ElementRef<HTMLTableElement> | undefined;
+  @ViewChild('messageTemplate', { static: true, read: TemplateRef }) messageTemplate: TemplateRef<any> | undefined;
+  @ViewChild('searchInput', { static: true, read: ElementRef }) searchInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('applied', { static: true, read: ElementRef }) applied: ElementRef<HTMLSpanElement> | undefined;
 
   get colspan(): number {
     let span = 0;
@@ -67,13 +67,13 @@ export class ConsoleComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    fromEvent(this.searchInput.nativeElement, 'input')
+    fromEvent(this.searchInput!.nativeElement, 'input')
       .pipe(
         takeUntil(this._destroy$),
         debounceTime(750),
         distinctUntilChanged(),
         tap(() => {
-          this.consoleContainer.clear();
+          this.consoleContainer!.clear();
           this._renderedMessage = 0;
         }),
         switchMap(() => from(this._messages)
@@ -99,7 +99,7 @@ export class ConsoleComponent implements OnInit, OnDestroy {
           tap((message) => {
             if (this._messages.size >= this._messageLimit) {
               const first = this._messages.values().next();
-              this._messages.delete(first.value);
+              this._messages.delete(first.value!);
             }
             this._messages.add(message);
           }),
@@ -108,7 +108,7 @@ export class ConsoleComponent implements OnInit, OnDestroy {
           this.renderMessage()
         ),
         this.clearTrigger$.pipe(tap(() => {
-          this.consoleContainer.clear();
+          this.consoleContainer!.clear();
           this._messages.clear();
           this._renderedMessage = 0;
         }))
@@ -120,8 +120,8 @@ export class ConsoleComponent implements OnInit, OnDestroy {
       interval(10).pipe(
         takeUntil(this._destroy$),
         filter(() => this.autoScroll && !this.pause &&
-          this.consoleTable.nativeElement.scrollTop !== this.consoleTable.nativeElement.scrollHeight),
-        tap(() => (this.container.nativeElement.scrollTo({ top: this.container.nativeElement.scrollHeight })))
+          this.consoleTable!.nativeElement.scrollTop !== this.consoleTable!.nativeElement.scrollHeight),
+        tap(() => (this.container!.nativeElement.scrollTo({ top: this.container!.nativeElement.scrollHeight })))
       ).subscribe();
     });
 
@@ -163,14 +163,14 @@ export class ConsoleComponent implements OnInit, OnDestroy {
 
     this._socket$.send(SocketModels.ConsoleRequest, request);
 
-    this.applied.nativeElement.setAttribute('class', 'applied show');
+    this.applied!.nativeElement.setAttribute('class', 'applied show');
     of(this.applied)
       .pipe(delay(1000), take(1))
-      .subscribe(t => t.nativeElement.setAttribute('class', 'applied'));
+      .subscribe(t => t!.nativeElement.setAttribute('class', 'applied'));
   }
 
   clear(): void {
-    this.clearTrigger$.next();
+    this.clearTrigger$.next(null);
   }
 
   private isInFilter = () => (source: Observable<ConsoleMessage>) =>
@@ -187,10 +187,10 @@ export class ConsoleComponent implements OnInit, OnDestroy {
     source.pipe(
       tap((message) => {
         if (this._renderedMessage >= this._renderLimit) {
-          this.consoleTable.nativeElement.firstChild?.remove();
+          this.consoleTable!.nativeElement.firstChild?.remove();
           this._renderedMessage--;
         }
-        const template = this.consoleContainer.createEmbeddedView(this.messageTemplate, {
+        const template = this.consoleContainer!.createEmbeddedView(this.messageTemplate!, {
           $implicit: message
         });
         template.detectChanges();
@@ -210,10 +210,10 @@ export class ConsoleComponent implements OnInit, OnDestroy {
     this._socket$.send(SocketModels.ConsoleRequest, request);
     this.allSubscribed = true;
 
-    this.applied.nativeElement.setAttribute('class', 'applied show');
+    this.applied!.nativeElement.setAttribute('class', 'applied show');
     of(this.applied)
       .pipe(delay(1000), take(1))
-      .subscribe(t => t.nativeElement.setAttribute('class', 'applied'));
+      .subscribe(t => t!.nativeElement.setAttribute('class', 'applied'));
   }
 
   unsubscribeAll() {
@@ -221,7 +221,7 @@ export class ConsoleComponent implements OnInit, OnDestroy {
       requestId: new Date().getTime().toString(),
       source: 'all',
       targetType: 'name',
-      target: null
+      target: ''
     };
     this._socket$.send(SocketModels.ConsoleRequest, request);
     this.allSubscribed = false;

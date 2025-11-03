@@ -1,20 +1,20 @@
-import Chart from 'chart.js';
+import { Chart } from 'chart.js';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BaseComponent } from 'src/lib/base-component';
-import { DashboardService } from 'src/services/dashboard.service';
-import { Dashboard } from 'src/models/dashboard';
-import { interval } from 'rxjs';
+import { DashboardService } from '../../../src/services/dashboard.service';
+import { Dashboard } from '../../../src/models/dashboard';
+import { forkJoin, interval } from 'rxjs';
 import { TimespanPipe } from '../layout/pipes/timespan.pipe';
-import { MessageCount } from 'src/models/message-count';
-import { WebsocketService } from 'src/services/websocket.service';
-import { SocketModels } from 'src/lib/socket-models';
+import { MessageCount } from '../../../src/models/message-count';
+import { WebsocketService } from '../../../src/services/websocket.service';
 import { filter, map } from 'rxjs/operators';
-import { ChartService } from 'src/services/chart.service';
+import { ChartService } from '../../../src/services/chart.service';
 import { QueueService } from '../queue/services/queue.service';
-import { HorseRouterService } from 'src/services/horse-router.service';
-import { ClientService } from 'src/services/client.service';
+import { HorseRouterService } from '../../../src/services/horse-router.service';
+import { ClientService } from '../../../src/services/client.service';
 import { ChannelService } from '../channel/services/channel.service';
-import { SessionService } from 'src/services/session.service';
+import { BaseFormComponent } from '../../lib/base-form.component';
+import { SessionStore } from '../stores/session-store';
+import { SocketModels } from '../../lib/websockets/socket-models';
 
 @Component({
     selector: 'app-dashboard',
@@ -22,21 +22,21 @@ import { SessionService } from 'src/services/session.service';
     styleUrls: ['./dashboard.component.css'],
     standalone: false
 })
-export class DashboardComponent extends BaseComponent implements OnInit, OnDestroy {
+export class DashboardComponent extends BaseFormComponent implements OnInit, OnDestroy {
 
-    deliveryChart = null;
-    msgChart = null;
-    storeChart = null;
-    routerChart = null;
-    channelChart = null;
-    dashboard: Dashboard;
-    lifetime: string;
+    deliveryChart: any = null;
+    msgChart: any = null;
+    storeChart: any = null;
+    routerChart: any = null;
+    channelChart: any = null;
+    dashboard: Dashboard | null = null;
+    lifetime: string = '';
 
     constructor(private dashboardService: DashboardService,
         private socket: WebsocketService,
         private chartService: ChartService,
         private queueService: QueueService,
-        private session: SessionService,
+        private session: SessionStore,
         private routerService: HorseRouterService,
         private channelService: ChannelService,
         private clientService: ClientService) {
@@ -46,12 +46,12 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
     async ngOnInit() {
         await this.load();
         this.on(interval(5000)).subscribe(async () => {
-            this.dashboardService.load().then(d => {
-                this.dashboard = d;
+            this.dashboardService.load().subscribe(r => {
+                this.dashboard = r.body!;
             });
         });
 
-        let user = this.session.get();
+        let user = this.session.state();
         if (user && !this.socket.isConnected()) {
             this.socket.connect(user.token);
             this.on(this.socket.onconnected).subscribe(() => this.subscribeWebsockets());
@@ -112,8 +112,9 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
     }
 
     private async load() {
-        this.dashboard = await this.dashboardService.load();
-        await this.loadCharts();
+
+        this.dashboardService.load().subscribe(r => this.dashboard = r.body!);
+        this.loadCharts();
 
         let pipe = new TimespanPipe();
         this.on(interval(1000)).subscribe(() => {
@@ -125,112 +126,105 @@ export class DashboardComponent extends BaseComponent implements OnInit, OnDestr
         });
     }
 
-    private async loadCharts(): Promise<any> {
+    private loadCharts() {
+        forkJoin({
+            queue: this.queueService.getGraph(''),
+            channel: this.channelService.getGraph(''),
+            router: this.routerService.getGraph(''),
+            client: this.clientService.getGraph('')
+        }).subscribe(result => {
 
-        let queue = await this.queueService.getGraph(null);
-        let channel = await this.channelService.getGraph(null);
-        let router = await this.routerService.getGraph(null);
-        let client = await this.clientService.getGraph(null);
+            if (this.deliveryChart)
+                this.deliveryChart.destroy();
 
-        if (this.deliveryChart)
-            this.deliveryChart.destroy();
-
-        this.deliveryChart = new Chart(document.getElementById('delivery-chart'),
-            {
-                type: 'line',
-                hover: { mode: 'nearest', intersect: true },
-                data: this.getDeliveryChartData(queue.stream),
-                options: {
-                    animation: {
-                        duration: 0
-                    },
-                    responsive: true,
-                    scales: {
-                        xAxes: [{ display: false }],
-                        yAxes: [{ display: true, ticks: { precision: 0 } }]
+            this.deliveryChart = new Chart(<any>document.getElementById('delivery-chart'),
+                {
+                    type: 'line',
+                    data: this.getDeliveryChartData(result.queue.stream),
+                    options: {
+                        animation: { duration: 0 },
+                        hover: { mode: 'nearest', intersect: true },
+                        responsive: true,
+                        scales: {
+                            x: { display: false },
+                            y: { display: true, ticks: { precision: 0 } }
+                        }
                     }
-                }
-            });
+                });
 
-        if (this.storeChart)
-            this.storeChart.destroy();
+            if (this.storeChart)
+                this.storeChart.destroy();
 
-        this.storeChart = new Chart(document.getElementById('store-chart'),
-            {
-                type: 'line',
-                hover: { mode: 'nearest', intersect: true },
-                data: this.getStoreChartData(queue.store),
-                options: {
-                    animation: {
-                        duration: 0
-                    },
-                    responsive: true,
-                    scales: {
-                        xAxes: [{ display: false }],
-                        yAxes: [{ display: true, ticks: { precision: 0 } }]
+            this.storeChart = new Chart(<any>document.getElementById('store-chart'),
+                {
+                    type: 'line',
+                    data: this.getStoreChartData(result.queue.store),
+                    options: {
+                        animation: { duration: 0 },
+                        hover: { mode: 'nearest', intersect: true },
+                        responsive: true,
+                        scales: {
+                            x: { display: false },
+                            y: { display: true, ticks: { precision: 0 } }
+                        }
                     }
-                }
-            });
+                });
 
-        if (this.msgChart)
-            this.msgChart.destroy();
+            if (this.msgChart)
+                this.msgChart.destroy();
 
-        this.msgChart = new Chart(document.getElementById('msg-chart'),
-            {
-                type: 'line',
-                hover: { mode: 'nearest', intersect: true },
-                data: this.getMessageChartData(client),
-                options: {
-                    animation: {
-                        duration: 0
-                    },
-                    responsive: true,
-                    scales: {
-                        xAxes: [{ display: false }],
-                        yAxes: [{ display: true, ticks: { precision: 0 } }]
+            this.msgChart = new Chart(<any>document.getElementById('msg-chart'),
+                {
+                    type: 'line',
+                    data: this.getMessageChartData(result.client!),
+                    options: {
+                        animation: { duration: 0 },
+                        hover: { mode: 'nearest', intersect: true },
+                        responsive: true,
+                        scales: {
+                            x: { display: false },
+                            y: { display: true, ticks: { precision: 0 } }
+                        }
                     }
-                }
-            });
+                });
 
-        if (this.routerChart)
-            this.routerChart.destroy();
+            if (this.routerChart)
+                this.routerChart.destroy();
 
-        this.routerChart = new Chart(document.getElementById('router-chart'),
-            {
-                type: 'line',
-                hover: { mode: 'nearest', intersect: true },
-                data: this.getRouterChartData(router),
-                options: {
-                    animation: {
-                        duration: 0
-                    },
-                    responsive: true,
-                    scales: {
-                        xAxes: [{ display: false }],
-                        yAxes: [{ display: true, ticks: { precision: 0 } }]
+            this.routerChart = new Chart(<any>document.getElementById('router-chart'),
+                {
+                    type: 'line',
+                    data: this.getRouterChartData(result.router!),
+                    options: {
+                        animation: { duration: 0 },
+                        hover: { mode: 'nearest', intersect: true },
+                        responsive: true,
+                        scales: {
+                            x: { display: false },
+                            y: { display: true, ticks: { precision: 0 } }
+                        }
                     }
-                }
-            });
+                });
 
-        if (this.channelChart)
-            this.channelChart.destroy();
+            if (this.channelChart)
+                this.channelChart.destroy();
 
-        this.channelChart = new Chart(document.getElementById('channel-chart'),
-            {
-                type: 'line',
-                hover: { mode: 'nearest', intersect: true },
-                data: this.getChannelChartData(channel),
-                options: {
-                    animation: {
-                        duration: 0
-                    },
-                    responsive: true,
-                    scales: {
-                        xAxes: [{ display: false }],
-                        yAxes: [{ display: true, ticks: { precision: 0 } }]
+            this.channelChart = new Chart(<any>document.getElementById('channel-chart'),
+                {
+                    type: 'line',
+                    data: this.getChannelChartData(result.channel!),
+                    options: {
+                        animation: { duration: 0 },
+                        hover: { mode: 'nearest', intersect: true },
+                        responsive: true,
+                        scales: {
+                            x: { display: false },
+                            y: { display: true, ticks: { precision: 0 } }
+                        }
                     }
-                }
-            });
+                });
+
+        });
     }
 
     private getDeliveryChartData(content: MessageCount) {

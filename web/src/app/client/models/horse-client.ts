@@ -7,4 +7,5 @@ export interface HorseClient {
     ip: string;
     isAuthenticated: boolean;
     connectedDate: number;
+    protocol: string;
 }

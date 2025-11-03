@@ -1,18 +1,19 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
-import { ApiClient } from 'src/lib/api-client';
-import { HorseClient } from 'src/app/client/models/horse-client';
-import { TransactionResult } from 'src/models/transaction-result';
-import { WebsocketService } from './websocket.service';
-import { DateHelper } from 'src/lib/date-helper';
-import { HorseClientDetail } from 'src/app/client/models/horse-client-detail';
-import { MessageCount } from 'src/models/message-count';
+import { map, mergeMap, take } from 'rxjs/operators';
+import { HorseClient } from '../app/client/models/horse-client';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HorseClientDetail } from '../app/client/models/horse-client-detail';
+import { TransactionResult } from '../models/transaction-result';
+import { MessageCount } from '../models/message-count';
+import { DateHelper } from '../lib/helpers/date.helper';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ClientService {
+
+    readonly #http: HttpClient = inject(HttpClient);
 
     private _clients: HorseClient[] = [];
     private _onconnected: Subject<HorseClient> = new Subject<HorseClient>();
@@ -22,43 +23,23 @@ export class ClientService {
     get onconnected(): Observable<HorseClient> { return this._onconnected; }
     get ondisconnected(): Observable<HorseClient> { return this._ondisconnected; }
 
-    constructor(private api: ApiClient, private socket: WebsocketService) { }
-
-    list(): Promise<HorseClient[]> {
-        return this.api.get('/client/list')
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        this._clients = response.data;
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    list(): Observable<HttpResponse<HorseClient[]>> {
+        return this.#http.get<HorseClient[]>('/client/list', { observe: 'response' });
     }
 
-    get(id: string): Promise<HorseClientDetail> {
-        return this.api.get('/client/get?id=' + id)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        this._clients = response.data;
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    get(id: string): Observable<HttpResponse<HorseClientDetail>> {
+        return this.#http.get<HorseClientDetail>('/client/get?id=' + id, { observe: 'response' });
     }
 
-    refresh(): Promise<TransactionResult> {
+    refresh(): Observable<TransactionResult> | null {
         return null;
     }
 
-    remove(client: HorseClient): Promise<TransactionResult> {
+    remove(client: HorseClient): Observable<TransactionResult> | null {
         return null;
     }
 
-    getGraph(name: string): Promise<MessageCount> {
+    getGraph(name: string): Observable<MessageCount | null> {
 
         let url = '/client/graph';
         if (name != null && name.length > 0) {
@@ -67,19 +48,19 @@ export class ClientService {
 
         return of(this)
             .pipe(
-                mergeMap(() => this.api.get(url)),
+                take(1),
+                mergeMap(() => this.#http.get<MessageCount>(url, { observe: 'response' })),
                 map(response => {
 
-                    if (!response.success)
+                    if (!response.ok || !response.body)
                         return null;
 
-                    let result = <MessageCount>response.data;
+                    let result = response.body;
                     result.labels = DateHelper.createLabels(result.d.map(x => x.u));
 
                     return result;
                 })
-            )
-            .toPromise();
+            );
     }
 
 }

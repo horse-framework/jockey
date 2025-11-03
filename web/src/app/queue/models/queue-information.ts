@@ -9,7 +9,7 @@ export interface QueueInformation {
     acknowledge: string;
     ackTimeout: number;
     msgTimeout: number;
-    msgLimit: number;
+    messageLimit: number;
     msgSizeLimit: number;
     delayBetweenMsgs: number;
     putBackDelay: number;

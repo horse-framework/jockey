@@ -46,7 +46,7 @@
                 </div>
                 <div class="td fx10">
                     <span *ngIf="queue.info.messageLimit == 0">Unlimited</span>
-                    <span *ngIf="queue.info.messageLimit > 0">No Timeout</span>
+                    <span *ngIf="queue.info!.messageLimit > 0">No Timeout</span>
                     <em *ngIf="queue.info.msgTimeout > 0">{{queue.info.msgTimeout | timespan}} Timeout</em>
                 </div>
                 <div class="td fx16">

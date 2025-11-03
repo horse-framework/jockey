@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, Subject, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { ApiClient } from 'src/lib/api-client';
-import { HorseQueue, HorseQueueSummary } from 'src/app/queue/models/horse-queue';
-import { QueueCreateModel } from 'src/app/queue/models/queue-create-model';
-import { QueueMessage, QueuePushMessage } from 'src/app/queue/models/queue-message';
-import { WebsocketService } from '../../../services/websocket.service';
 import { QueueGraphData } from '../models/queue-graph-data';
-import { DateHelper } from 'src/lib/date-helper';
+import { HorseQueue, HorseQueueSummary } from '../models/horse-queue';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { QueueCreateModel } from '../models/queue-create-model';
+import { QueueMessage, QueuePushMessage } from '../models/queue-message';
 
 @Injectable({
     providedIn: 'root'
@@ -24,61 +22,25 @@ export class QueueService {
     get onremoved(): Observable<HorseQueue> { return this._onremoved; }
     get onupdated(): Observable<HorseQueue> { return this._onupdated; }
 
-    constructor(private api: ApiClient, private socket: WebsocketService) { }
+    readonly #http: HttpClient = inject(HttpClient);
 
-    list(): Promise<HorseQueue[]> {
-
-        return this.api.get('/queue/list')
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    list(): Observable<HttpResponse<HorseQueue[]>> {
+        return this.#http.get<HorseQueue[]>('/queue/list', { observe: 'response' });
     }
 
-    listSummary(): Promise<HorseQueueSummary[]> {
-
-        return this.api.get('/queue/list-names')
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    listSummary(): Observable<HttpResponse<HorseQueueSummary[]>> {
+        return this.#http.get<HorseQueueSummary[]>('/queue/list-names', { observe: 'response' });
     }
 
-    getManagers(): Promise<string[]> {
-
-        return this.api.get('/queue/managers')
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    getManagers(): Observable<HttpResponse<string[]>> {
+        return this.#http.get<string[]>('/queue/managers', { observe: 'response' });
     }
 
-    get(name: string): Promise<HorseQueue> {
-
-        return this.api.get('/queue/get?name=' + name)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    get(name: string): Observable<HttpResponse<HorseQueue>> {
+        return this.#http.get<HorseQueue>('/queue/get?name=' + name, { observe: 'response' });
     }
 
-    getGraph(name: string): Promise<QueueGraphData> {
+    getGraph(name: string): Observable<QueueGraphData> {
 
         let url = '/queue/graph';
         if (name != null && name.length > 0) {
@@ -87,20 +49,23 @@ export class QueueService {
 
         return of(this)
             .pipe(
-                mergeMap(() => this.api.get(url)),
+                mergeMap(() => this.#http.get<QueueGraphData>(url, { observe: 'response' })),
                 map(response => {
 
-                    if (!response.success)
+                    /* TODO:
+                    if (!response.ok)
                         return null;
+
+                    let data = response.body!;
 
                     let result: QueueGraphData = {
                         store: {
-                            n: response.data.name,
-                            d: response.data.store
+                            n: data.name,
+                            d: data.store!
                         },
                         stream: {
-                            n: response.data.name,
-                            d: response.data.stream
+                            n: data.name,
+                            d: data.stream!
                         }
                     };
 
@@ -108,166 +73,70 @@ export class QueueService {
                     result.stream.labels = DateHelper.createLabels(result.stream.d.map(x => x.u));
 
                     return result;
+                    */
+
+                    return response.body!;
                 })
-            )
-            .toPromise();
+            );
     }
 
-    create(model: QueueCreateModel): Promise<any> {
-
-        return this.api.post('/queue/create', model)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    create(model: QueueCreateModel): Observable<HttpResponse<any>> {
+        return this.#http.post('/queue/create', model, { observe: 'response' });
     }
 
-    setOption(queueName: string, optionName: string, value: any): Promise<any> {
-
-        let model = {
-            target: queueName,
-            name: optionName,
-            value: value
-        };
-
-        return this.api.put('/queue/option', model)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    setOption(queueName: string, optionName: string, value: any): Observable<HttpResponse<any>> {
+        let model = { target: queueName, name: optionName, value: value };
+        return this.#http.put('/queue/option', model, { observe: 'response' });
     }
 
-    push(message: QueuePushMessage): Promise<any> {
-
-        return this.api.post('/queue/push', message)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    push(message: QueuePushMessage): Observable<HttpResponse<any>> {
+        return this.#http.post('/queue/push', message, { observe: 'response' });
     }
 
-    read(name: string): Promise<QueueMessage> {
-
-        return this.api.get('/queue/read?name=' + name)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    read(name: string): Observable<HttpResponse<QueueMessage>> {
+        return this.#http.get<QueueMessage>('/queue/read?name=' + name, { observe: 'response' });
     }
 
-    consume(name: string): Promise<QueueMessage> {
-
-        return this.api.get('/queue/consume?name=' + name)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    consume(name: string): Observable<HttpResponse<QueueMessage>> {
+        return this.#http.get<QueueMessage>('/queue/consume?name=' + name, { observe: 'response' });
     }
 
-    status(name: string, status: string): Promise<any> {
+    status(name: string, status: string): Observable<HttpResponse<any>> {
         let form = new FormData();
         form.append('name', name);
         form.append('status', status);
-        return this.api.putForm('/queue/status', form)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+        return this.#http.put('/queue/status', form, { observe: 'response' });
     }
 
-    clear(name: string): Promise<any> {
+    clear(name: string): Observable<HttpResponse<any>> {
         let form = new FormData();
         form.append('name', name);
-        return this.api.putForm('/queue/clear', form)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+        return this.#http.put('/queue/clear', form, { observe: 'response' });
     }
 
-    delete(name: string): Promise<any> {
-        return this.api.delete('/queue/delete?name=' + name)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    delete(name: string): Observable<HttpResponse<any>> {
+        return this.#http.delete('/queue/delete?name=' + name, { observe: 'response' });
     }
 
-    move(name: string, target: string): Promise<any> {
+    move(name: string, target: string): Observable<HttpResponse<any>> {
 
         let form = new FormData();
         form.append('name', name);
         form.append('target', target);
 
-        return this.api.postForm('/queue/move-messages', form)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+        return this.#http.post('/queue/move-messages', form, { observe: 'response' });
     }
 
-    copy(name: string, target: string): Promise<any> {
+    copy(name: string, target: string): Observable<HttpResponse<any>> {
 
         let form = new FormData();
         form.append('name', name);
         form.append('target', target);
 
-        return this.api.postForm('/queue/copy-messages', form)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+        return this.#http.post('/queue/copy-messages', form, { observe: 'response' });
     }
 
-    resetStats(name: string): Promise<any> {
-        return this.api.putForm('/queue/reset-stats', null)
-            .pipe(
-                map(response => {
-                    if (response.ok()) {
-                        return response.data;
-                    }
-                    return null;
-                }))
-            .toPromise();
+    resetStats(name: string): Observable<HttpResponse<any>> {
+        return this.#http.put('/queue/reset-stats', null, { observe: 'response' });
     }
 }

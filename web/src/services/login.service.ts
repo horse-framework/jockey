@@ -1,39 +1,34 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { ApiClient } from 'src/lib/api-client';
-import { SessionUser } from 'src/models/session-user';
-import { SessionService } from './session.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { SessionUser } from '../models/session-user';
+import { SessionStore } from '../app/stores/session-store';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LoginService {
 
-    constructor(private api: ApiClient, private session: SessionService) {
-    }
+    readonly #http: HttpClient = inject(HttpClient);
+    readonly #session: SessionStore = inject(SessionStore);
 
-    login(username: string, password: string): Promise<SessionUser> {
+    login(username: string, password: string): Observable<SessionUser | null> {
 
         let model = {
             username: username,
             password: password
         };
 
-        return this.api.post('/user/login', model)
+        return this.#http.post<SessionUser>('/user/login', model, { observe: 'response' })
             .pipe(
                 map(response => {
-                    this.session.clear();
-                    
-                    if (response.ok()) {
-                        if (response.data.ok) {
-                            this.session.set(response.data);
-                            return this.session.get();
-                        }
-                    }
 
-                    return this.session.get();
+                    if (response.ok) {
+                        this.#session.setState(response.body)
+                    }
+                    return this.#session.state();
                 })
-            )
-            .toPromise();
+            );
     }
 }

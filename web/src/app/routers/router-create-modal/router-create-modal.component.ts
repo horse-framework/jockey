@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { CreateRouterModel } from 'src/models/create-router-model';
+import { CreateRouterModel } from '../../../models/create-router-model';
 
 @Component({
-    selector: 'app-router-create-modal',
-    templateUrl: './router-create-modal.component.html',
-    styleUrls: ['./router-create-modal.component.css'],
-    standalone: false
+  selector: 'app-router-create-modal',
+  templateUrl: './router-create-modal.component.html',
+  styleUrls: ['./router-create-modal.component.css'],
+  standalone: false
 })
 export class RouterCreateModalComponent implements OnInit, OnDestroy {
 
@@ -18,8 +18,8 @@ export class RouterCreateModalComponent implements OnInit, OnDestroy {
     { value: 'OnlyFirst', text: 'Only First: Each message is redirected to only first active binding' }
   ];
 
-  private _onconfirmed: Subject<CreateRouterModel> = new Subject<CreateRouterModel>();
-  get onconfirmed(): Observable<CreateRouterModel> { return this._onconfirmed; }
+  private _onconfirmed: Subject<CreateRouterModel | null> = new Subject<CreateRouterModel | null>();
+  get onconfirmed(): Observable<CreateRouterModel | null> { return this._onconfirmed; }
   private _confirmed: boolean = false;
 
   constructor() { }

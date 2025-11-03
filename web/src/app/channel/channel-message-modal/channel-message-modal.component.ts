@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HorseMessage } from 'src/models/horse-message';
 import { ChannelService } from '../services/channel.service';
+import { HorseMessage } from '../../../models/horse-message';
 
 @Component({
     selector: 'app-channel-message-modal',
@@ -10,15 +10,15 @@ import { ChannelService } from '../services/channel.service';
 })
 export class ChannelMessageModalComponent {
 
-  message: HorseMessage;
+  message: HorseMessage | null = null;
   isJson: boolean = false;
 
   constructor(private service: ChannelService) { }
 
   load(channelName: string): void {
     this.service.getInitialMessage(channelName)
-      .then(msg => {
-        this.message = msg;
+      .subscribe(response => {
+        this.message = response.body!;
         try {
           this.message.contentObj = JSON.parse(this.message.content);
         }

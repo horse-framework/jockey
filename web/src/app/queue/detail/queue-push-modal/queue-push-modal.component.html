@@ -6,20 +6,20 @@
             <div class="kvt-row">
                 <div class="kvt-key-narrow">Id</div>
                 <div class="kvt-value">
-                    <input class="jockey-text" type="text" style="width: 280px;" [(ngModel)]="message.id" />
+                    <input class="jockey-text" type="text" style="width: 280px;" [(ngModel)]="message!.id" />
                 </div>
             </div>
             <div class="kvt-row">
                 <div class="kvt-key-narrow">Content Type</div>
                 <div class="kvt-value">
                     <input class="jockey-text" type="number" style="width: 120px;" min="0" max="65535"
-                        [(ngModel)]="message.contentType" />
+                        [(ngModel)]="message!.contentType" />
                 </div>
             </div>
             <div class="kvt-row">
                 <div class="kvt-key-narrow">High Priority</div>
                 <div class="kvt-value">
-                    <input class="jockey-text" type="checkbox" [(ngModel)]="message.priority" />
+                    <input class="jockey-text" type="checkbox" [(ngModel)]="message!.priority" />
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="message-headers">
             <div class="header-scroll scroll">
                 <table class="message-header-table">
-                    <tr *ngFor="let h of message.headers">
+                    <tr *ngFor="let h of message!.headers">
                         <td class="header-key">{{h.name}}</td>
                         <td class="header-value">{{h.value}}</td>
                         <td class="header-action"><span (click)="removeHeader(h.name)">Remove</span></td>
@@ -49,7 +49,7 @@
         </div>
         <br>
         <h4>Message Content</h4>
-        <textarea class="jockey-text scroll" [(ngModel)]="message.message"></textarea>
+        <textarea class="jockey-text scroll" [(ngModel)]="message!.message"></textarea>
     </div>
 
 </mat-dialog-content>

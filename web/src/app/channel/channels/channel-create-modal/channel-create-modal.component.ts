@@ -3,17 +3,17 @@ import { Observable, Subject } from 'rxjs';
 import { ChannelForm } from '../../models/channel-form';
 
 @Component({
-    selector: 'app-channel-create-modal',
-    templateUrl: './channel-create-modal.component.html',
-    styleUrls: ['./channel-create-modal.component.css'],
-    standalone: false
+  selector: 'app-channel-create-modal',
+  templateUrl: './channel-create-modal.component.html',
+  styleUrls: ['./channel-create-modal.component.css'],
+  standalone: false
 })
 export class ChannelCreateModalComponent implements OnInit, OnDestroy {
 
   model: ChannelForm;
 
-  private _onconfirmed: Subject<ChannelForm> = new Subject<ChannelForm>();
-  get onconfirmed(): Observable<ChannelForm> { return this._onconfirmed; }
+  private _onconfirmed: Subject<ChannelForm | null> = new Subject<ChannelForm | null>();
+  get onconfirmed(): Observable<ChannelForm | null> { return this._onconfirmed; }
   private _confirmed: boolean = false;
 
 

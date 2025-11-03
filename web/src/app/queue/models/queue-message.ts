@@ -21,10 +21,10 @@ export interface QueueMessage {
 }
 
 export class QueuePushMessage {
-    queue: string;
-    id: string;
-    contentType: number;
-    priority: boolean;
-    headers: QueueMessageHeader[];
-    message: string;
+    queue: string | undefined;
+    id: string | undefined;
+    contentType: number | undefined;
+    priority: boolean | undefined;
+    headers: QueueMessageHeader[] | undefined;
+    message: string | undefined;
 }

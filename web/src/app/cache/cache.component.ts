@@ -1,44 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BaseComponent } from 'src/lib/base-component';
-import { CacheInfo } from 'src/app/cache/models/cache-info';
-import { CacheService } from 'src/app/cache/services/cache.service';
+import { CacheInfo } from '../../../src/app/cache/models/cache-info';
+import { CacheService } from '../../../src/app/cache/services/cache.service';
 import { CacheViewModalComponent } from './cache-view-modal/cache-view-modal.component';
 import { CacheCreateModalComponent } from './cache-create-modal/cache-create-modal.component';
 import { take } from 'rxjs/operators';
+import { BaseFormComponent } from '../../lib/base-form.component';
 
 @Component({
-    selector: 'app-cache',
-    templateUrl: './cache.component.html',
-    styleUrls: ['./cache.component.css'],
-    standalone: false
+  selector: 'app-cache',
+  templateUrl: './cache.component.html',
+  styleUrls: ['./cache.component.css'],
+  standalone: false
 })
-export class CacheComponent extends BaseComponent implements OnInit {
+export class CacheComponent extends BaseFormComponent implements OnInit {
 
-  caches: CacheInfo[]
+  caches: CacheInfo[] = [];
 
   constructor(private cacheService: CacheService, private dialog: MatDialog) {
     super();
   }
 
   async ngOnInit() {
-    this.caches = await this.cacheService.list();
-    this.subscribeToListRefresh().subscribe(() => this.cacheService.list().then(caches => this.caches = caches));
+    this.cacheService.list()
+      .subscribe(response => {
+        this.caches = response.body!;
+        this.subscribeToListRefresh().subscribe(() => this.cacheService.list().subscribe(r => this.caches = r.body!));
+      })
   }
 
   remove(key: string) {
-    this.cacheService.remove(key).then(async () => {
-      this.caches = await this.cacheService.list();
-    })
+    this.cacheService.remove(key).subscribe(response => {
+      this.cacheService.list().subscribe(r => this.caches = r.body!);
+    });
   }
 
   async view(key: string) {
-    var value = await this.cacheService.get(key);
-    if (value) {
-      let dialogRef = this.dialog.open(CacheViewModalComponent, { width: '600px' });
-      let component = <CacheViewModalComponent>dialogRef.componentInstance;
-      component.model = value;
-    }
+    this.cacheService.get(key).subscribe(response => {
+      if (response.ok) {
+        let dialogRef = this.dialog.open(CacheViewModalComponent, { width: '600px' });
+        let component = <CacheViewModalComponent>dialogRef.componentInstance;
+        component.model = response.body!;
+      }
+    });
   }
 
   create(): void {
@@ -50,8 +54,8 @@ export class CacheComponent extends BaseComponent implements OnInit {
       .pipe(take(1))
       .subscribe(value => {
         if (value) {
-          this.cacheService.create(value.key, value.content, value.duration, value.expirationWarning, value.tags).then(success => {
-            if (success) {
+          this.cacheService.create(value.key, value.content, value.duration, value.expirationWarning, value.tags).subscribe(response => {
+            if (response.ok) {
               this.ngOnInit();
             }
           })

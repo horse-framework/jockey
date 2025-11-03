@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { RouterBinding } from 'src/models/router-binding';
+import { RouterBinding } from '../../../models/router-binding';
 
 @Pipe({
     name: 'bindingType',

@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { DateHelper } from 'src/lib/date-helper';
-import { MessageCount } from 'src/models/message-count';
+import { MessageCount } from '../models/message-count';
+import { DateHelper } from '../lib/helpers/date.helper';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChartService {
-
-  constructor() { }
 
   updateChart(chart: any, data: MessageCount): void {
 
@@ -22,7 +20,7 @@ export class ChartService {
 
       chart.data.labels.push(label);
 
-      chart.data.datasets.forEach(dataset => {
+      chart.data.datasets.forEach((dataset: any) => {
         switch (dataset.label) {
 
           //queue
@@ -58,7 +56,7 @@ export class ChartService {
 
       if (chart.data.labels.length > 60) {
         chart.data.labels.shift();
-        chart.data.datasets.forEach((dataset) => {
+        chart.data.datasets.forEach((dataset: any) => {
           dataset.data.shift();
         });
       }

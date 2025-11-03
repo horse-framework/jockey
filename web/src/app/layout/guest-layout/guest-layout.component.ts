@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from 'src/lib/base-component';
+import { BaseFormComponent } from '../../../lib/base-form.component';
 
 @Component({
     selector: 'app-guest-layout',
@@ -7,7 +7,7 @@ import { BaseComponent } from 'src/lib/base-component';
     styleUrls: ['./guest-layout.component.css'],
     standalone: false
 })
-export class GuestLayoutComponent extends BaseComponent implements OnInit {
+export class GuestLayoutComponent extends BaseFormComponent implements OnInit {
 
     constructor() {
         super();

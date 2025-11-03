@@ -7,5 +7,5 @@ export interface ChannelInfo {
     publish: number;
     receive: number;
     subscriberCount: number;
-    hasInitialMessaage: boolean;
+    hasInitialMessage: boolean;
 }

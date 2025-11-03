@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { BaseComponent } from 'src/lib/base-component';
-import { HorseRouter } from 'src/models/horse-router';
-import { RouterBinding } from 'src/models/router-binding';
-import { HorseRouterService } from 'src/services/horse-router.service';
+import { HorseRouter } from '../../../src/models/horse-router';
+import { RouterBinding } from '../../../src/models/router-binding';
+import { HorseRouterService } from '../../../src/services/horse-router.service';
 import { ConfirmModalComponent } from '../layout/portal-layout/confirm-modal/confirm-modal.component';
 import { BindingAddModalComponent } from './binding-add-modal/binding-add-modal.component';
+import { BaseFormComponent } from '../../lib/base-form.component';
 
 @Component({
     selector: 'app-router',
@@ -15,11 +15,10 @@ import { BindingAddModalComponent } from './binding-add-modal/binding-add-modal.
     styleUrls: ['./router.component.css'],
     standalone: false
 })
-export class RouterComponent extends BaseComponent implements OnInit {
+export class RouterComponent extends BaseFormComponent implements OnInit {
 
-    routerName: string;
-
-    model: HorseRouter;
+    routerName: string | null = null;
+    model: HorseRouter | null = null;
 
     constructor(private routerService: HorseRouterService,
         private router: Router,
@@ -29,8 +28,8 @@ export class RouterComponent extends BaseComponent implements OnInit {
     }
 
     async ngOnInit() {
-        this.routerName = this.activatedRoute.snapshot.params.name;
-        this.model = await this.routerService.get(this.routerName);
+        this.routerName = this.activatedRoute.snapshot.params['name'];
+        this.routerService.get(this.routerName!).subscribe(r => this.model = r.body!);
     }
 
     remove(): void {
@@ -43,8 +42,8 @@ export class RouterComponent extends BaseComponent implements OnInit {
             .subscribe(value => {
                 if (value)
                     this.routerService
-                        .remove(this.routerName)
-                        .then(msg => {
+                        .remove(this.routerName!)
+                        .subscribe(msg => {
                             this.router.navigateByUrl('/routers');
                         });
             });
@@ -54,14 +53,14 @@ export class RouterComponent extends BaseComponent implements OnInit {
 
         let dialogRef = this.dialog.open(BindingAddModalComponent, { width: '600px' });
         let component = <BindingAddModalComponent>dialogRef.componentInstance;
-        component.model.router = this.routerName;
+        component.model.router = this.routerName!;
         component.onconfirmed
             .pipe(take(1))
             .subscribe(value => {
                 if (value)
                     this.routerService
                         .addBinding(value)
-                        .then(msg => {
+                        .subscribe(msg => {
                             this.ngOnInit();
                         });
             });
@@ -77,8 +76,8 @@ export class RouterComponent extends BaseComponent implements OnInit {
             .subscribe(value => {
                 if (value)
                     this.routerService
-                        .removeBinding(this.routerName, binding.name)
-                        .then(msg => this.ngOnInit());
+                        .removeBinding(this.routerName!, binding.name)
+                        .subscribe(msg => this.ngOnInit());
             });
     }
 }

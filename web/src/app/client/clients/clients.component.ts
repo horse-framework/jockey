@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from 'src/lib/base-component';
-import { HorseClient } from 'src/app/client/models/horse-client';
-import { ClientService } from 'src/services/client.service';
+import { HorseClient } from '../models/horse-client';
+import { BaseFormComponent } from '../../../lib/base-form.component';
+import { ClientService } from '../../../services/client.service';
 
 interface NameGroupedClients {
     name: string;
@@ -22,9 +22,9 @@ interface GroupedClient {
     styleUrls: ['./clients.component.css'],
     standalone: false
 })
-export class ClientsComponent extends BaseComponent implements OnInit {
+export class ClientsComponent extends BaseFormComponent implements OnInit {
 
-    model: GroupedClient[] = null;
+    model: GroupedClient[] = [];
 
     constructor(private clientService: ClientService) {
         super();
@@ -36,41 +36,46 @@ export class ClientsComponent extends BaseComponent implements OnInit {
     }
 
     private async refreshClients() {
-        let clients = await this.clientService.list();
-        let model: GroupedClient[] = [];
 
-        let latestType: string = '';
-        let latestName: string = '';
-        let counts = {};
+        this.clientService.list()
+            .subscribe(response => {
+                let clients = response.body!;
 
-        clients.forEach(c => {
+                let model: GroupedClient[] = [];
 
-            let typeKey = this.findTypeKey(c.type, c.name);
-            let nameKey = this.findNameKey(c.type, c.name);
-            if (counts[typeKey]) { counts[typeKey]++; }
-            else { counts[typeKey] = 1; }
-            if (counts[nameKey]) { counts[nameKey]++; }
-            else { counts[nameKey] = 1; }
+                let latestType: string = '';
+                let latestName: string = '';
+                let counts: any = {};
 
-            let item: GroupedClient = {
-                type: c.type == latestType ? '*' : c.type,
-                name: c.name == latestName ? '*' : c.name,
-                client: c
-            };
+                clients.forEach(c => {
 
-            latestType = c.type;
-            latestName = c.name;
-            model.push(item);
-        });
+                    let typeKey = this.findTypeKey(c.type, c.name);
+                    let nameKey = this.findNameKey(c.type, c.name);
+                    if (counts[typeKey]) { counts[typeKey]++; }
+                    else { counts[typeKey] = 1; }
+                    if (counts[nameKey]) { counts[nameKey]++; }
+                    else { counts[nameKey] = 1; }
 
-        model.forEach(c => {
-            let typeKey = this.findTypeKey(c.client.type, c.client.name);
-            let nameKey = this.findNameKey(c.client.type, c.client.name);
-            c.typeCount = counts[typeKey];
-            c.nameCount = counts[nameKey];
-        });
+                    let item: GroupedClient = {
+                        type: c.type == latestType ? '*' : c.type,
+                        name: c.name == latestName ? '*' : c.name,
+                        client: c
+                    };
 
-        this.model = model;
+                    latestType = c.type;
+                    latestName = c.name;
+                    model.push(item);
+                });
+
+                model.forEach(c => {
+                    let typeKey = this.findTypeKey(c.client.type, c.client.name);
+                    let nameKey = this.findNameKey(c.client.type, c.client.name);
+                    c.typeCount = counts[typeKey];
+                    c.nameCount = counts[nameKey];
+                });
+
+                this.model = model;
+            });
     }
 
     private findTypeKey(type: string, name: string): string {

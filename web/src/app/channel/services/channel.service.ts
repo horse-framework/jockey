@@ -1,80 +1,42 @@
-import { Injectable } from '@angular/core';
-import { map, mergeMap } from 'rxjs/operators';
-import { ApiClient } from 'src/lib/api-client';
-import { WebsocketService } from '../../../services/websocket.service';
-import { ApiResponse, IResponse } from 'src/models/api-response';
-import { HorseMessage } from 'src/models/horse-message';
-import { of } from 'rxjs';
-import { MessageCount } from 'src/models/message-count';
-import { DateHelper } from 'src/lib/date-helper';
+import { inject, Injectable } from '@angular/core';
+import { map, mergeMap, take } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { ChannelForm } from '../models/channel-form';
 import { ChannelInfo } from '../models/channel-info';
 import { HorseChannel } from '../models/horse-channel';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HorseMessage } from '../../../models/horse-message';
+import { MessageCount } from '../../../models/message-count';
+import { DateHelper } from '../../../lib/helpers/date.helper';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChannelService {
 
-  constructor(private api: ApiClient, private socket: WebsocketService) { }
+  readonly #http: HttpClient = inject(HttpClient);
 
-  list(): Promise<ChannelInfo[]> {
-
-    return this.api.get('/channel/list')
-      .pipe(
-        map(response => {
-          if (response.ok()) {
-            return response.data;
-          }
-          return null;
-        }))
-      .toPromise();
+  list(): Observable<HttpResponse<ChannelInfo[]>> {
+    return this.#http.get<ChannelInfo[]>('/channel/list', { observe: 'response' });
   }
 
-  get(name: string): Promise<HorseChannel> {
-
-    return this.api.get('/channel/get?name=' + name)
-      .pipe(
-        map(response => {
-          if (response.ok()) {
-            return response.data;
-          }
-          return null;
-        }))
-      .toPromise();
+  get(name: string): Observable<HttpResponse<HorseChannel>> {
+    return this.#http.get<HorseChannel>('/channel/get?name=' + name, { observe: 'response' });
   }
 
-  create(form: ChannelForm): Promise<ApiResponse> {
-    return this.api.post('/channel/create', form)
-      .pipe(
-        map(response => {
-          if (response.ok()) {
-            return response.data;
-          }
-          return null;
-        }))
-      .toPromise();
+  create(form: ChannelForm): Observable<HttpResponse<any>> {
+    return this.#http.post('/channel/create', form, { observe: 'response' });
   }
 
-  remove(name: string): Promise<IResponse> {
-    return this.api.delete('/channel/delete?name=' + name)
-      .toPromise();
+  remove(name: string): Observable<HttpResponse<any>> {
+    return this.#http.delete('/channel/delete?name=' + name, { observe: 'response' });
   }
 
-  getInitialMessage(channelName: string): Promise<HorseMessage> {
-
-    return this.api.get('/channel/initial-message?name=' + channelName)
-      .pipe(
-        map(response => {
-          if (response.ok()) {
-            return response.data;
-          }
-          return null;
-        }))
-      .toPromise();
+  getInitialMessage(channelName: string): Observable<HttpResponse<HorseMessage>> {
+    return this.#http.get<HorseMessage>('/channel/initial-message?name=' + channelName, { observe: 'response' });
   }
 
-  getGraph(name: string): Promise<MessageCount> {
+  getGraph(name: string): Observable<MessageCount | null> {
 
     let url = '/channel/graph';
     if (name != null && name.length > 0) {
@@ -83,22 +45,22 @@ export class ChannelService {
 
     return of(this)
       .pipe(
-        mergeMap(() => this.api.get(url)),
+        take(1),
+        mergeMap(() => this.#http.get<MessageCount>(url, { observe: 'response' })),
         map(response => {
 
-          if (!response.success)
+          if (!response.ok || !response.body)
             return null;
 
-          let result = <MessageCount>response.data;
+          let result = response.body;
           result.labels = DateHelper.createLabels(result.d.map(x => x.u));
 
           return result;
         })
-      )
-      .toPromise();
+      );
   }
 
-  setOption(channelName: string, optionName: string, value: any): Promise<any> {
+  setOption(channelName: string, optionName: string, value: any): Observable<HttpResponse<any>> {
 
     let model = {
       target: channelName,
@@ -106,14 +68,6 @@ export class ChannelService {
       value: value
     };
 
-    return this.api.put('/channel/option', model)
-      .pipe(
-        map(response => {
-          if (response.ok()) {
-            return response.data;
-          }
-          return null;
-        }))
-      .toPromise();
+    return this.#http.put('/channel/option', model, { observe: 'response' });
   }
 }

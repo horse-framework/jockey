@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { BaseComponent } from 'src/lib/base-component';
-import { HorseQueue } from 'src/app/queue/models/horse-queue';
-import { QueueService } from 'src/app/queue/services/queue.service';
 import { QueueCreateModalComponent } from './queue-create-modal/queue-create-modal.component';
+import { BaseFormComponent } from '../../../lib/base-form.component';
+import { HorseQueue } from '../models/horse-queue';
+import { QueueService } from '../services/queue.service';
 
 @Component({
     selector: 'app-queues',
@@ -12,17 +12,17 @@ import { QueueCreateModalComponent } from './queue-create-modal/queue-create-mod
     styleUrls: ['./queues.component.css'],
     standalone: false
 })
-export class QueuesComponent extends BaseComponent implements OnInit, OnDestroy {
+export class QueuesComponent extends BaseFormComponent implements OnInit, OnDestroy {
 
-    queues: HorseQueue[];
+    queues: HorseQueue[] = [];
 
     constructor(private queueService: QueueService, private dialog: MatDialog) {
         super();
     }
 
     async ngOnInit() {
-        this.queues = await this.queueService.list();
-        this.subscribeToListRefresh().subscribe(() => this.queueService.list().then(queues => this.queues = queues));
+        this.queueService.list().subscribe(r => this.queues = r.body!);
+        this.subscribeToListRefresh().subscribe(() => this.queueService.list().subscribe(r => this.queues = r.body!));
     }
 
     create(): void {
@@ -36,14 +36,15 @@ export class QueuesComponent extends BaseComponent implements OnInit, OnDestroy 
                 if (value)
                     this.queueService
                         .create(value)
-                        .then(msg => {
+                        .subscribe(msg => {
                             this.ngOnInit();
                         });
             });
     }
 
     viewManagers(): void {
-        this.queueService.getManagers().then(managers => {
+        this.queueService.getManagers().subscribe(response => {
+            let managers = response.body!;
             let str = 'Defined manager names are: ' + managers.join(', ');
             alert(str);
         });
