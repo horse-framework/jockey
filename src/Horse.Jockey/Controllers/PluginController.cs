@@ -81,7 +81,7 @@ public class PluginController(HorseRider rider) : ControllerBase
 
         await Task.Delay(500);
         await rider.Plugin.AddAssemblyPlugins(fullpath);
-        return Ok(new {loaded = true});
+        return Ok(new { loaded = true });
     }
 
     [HttpPut("enable")]
@@ -90,7 +90,7 @@ public class PluginController(HorseRider rider) : ControllerBase
         if (string.IsNullOrWhiteSpace(model.Name))
             return BadRequest();
 
-        bool enabled = await rider.Plugin.EnablePlugin(model.Name);
+        bool enabled = await rider.Plugin.EnablePlugin(model.Name, model.Version);
 
         if (!enabled)
             return NotFound();
@@ -104,7 +104,7 @@ public class PluginController(HorseRider rider) : ControllerBase
         if (string.IsNullOrWhiteSpace(model.Name))
             return BadRequest();
 
-        bool enabled = await rider.Plugin.DisablePlugin(model.Name, false);
+        bool enabled = await rider.Plugin.DisablePlugin(model.Name, model.Version, false);
 
         if (!enabled)
             return NotFound();
@@ -118,7 +118,7 @@ public class PluginController(HorseRider rider) : ControllerBase
         if (string.IsNullOrWhiteSpace(model.Name))
             return BadRequest();
 
-        bool enabled = await rider.Plugin.DisablePlugin(model.Name, true);
+        bool enabled = await rider.Plugin.DisablePlugin(model.Name, model.Version, true);
 
         if (!enabled)
             return NotFound();
