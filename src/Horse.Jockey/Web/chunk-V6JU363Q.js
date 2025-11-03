@@ -1,0 +1,1 @@
+import{xa as e}from"./chunk-I3ZBIMQN.js";var i=class t{transform(r){return r==0?"None":r<2014?r+" bytes":r<1048576?(r/1024).toFixed(2)+" KB":r>1073741824?(r/1073741824).toFixed(2)+" GB":(r/1048576).toFixed(2)+" MB"}static \u0275fac=function(n){return new(n||t)};static \u0275pipe=e({name:"filesize",type:t,pure:!0,standalone:!1})};export{i as a};

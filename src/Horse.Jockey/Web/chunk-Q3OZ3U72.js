@@ -1,0 +1,1 @@
+import{xa as t}from"./chunk-I3ZBIMQN.js";var i=class e{transform(r){return r==0?"Unlimited":r.toString()}static \u0275fac=function(n){return new(n||e)};static \u0275pipe=t({name:"unlimited",type:e,pure:!0,standalone:!1})};export{i as a};
