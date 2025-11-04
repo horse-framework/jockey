@@ -15,7 +15,7 @@ export async function initializeEnvironment(): Promise<Provider[]> {
     production: true,
     apiUrl: location.protocol.toLowerCase() + '//' + location.host + '/api',
     websocketUrl: location.protocol.toLowerCase().replace('http', 'ws') + '//' + location.host,
-    version: '7.2.5'
+    version: '7.2.7'
   };
 
 

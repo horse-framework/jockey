@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { BaseFormComponent } from '../../../lib/base-form.component';
+import { ENVIRONMENT, Environment } from '../../../lib/environment.initializer';
 
 @Component({
     selector: 'app-guest-layout',
@@ -9,11 +10,11 @@ import { BaseFormComponent } from '../../../lib/base-form.component';
 })
 export class GuestLayoutComponent extends BaseFormComponent implements OnInit {
 
-    constructor() {
-        super();
-    }
+    version: string = '';
+    readonly #env: Environment = inject(ENVIRONMENT);
 
     ngOnInit(): void {
+        this.version = this.#env.version;
     }
 
 }

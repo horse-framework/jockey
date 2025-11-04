@@ -24,8 +24,8 @@
   align-items: stretch;
   background-color: #111;
   border-radius: 3px;
-  border: 1px solid #040404;
-  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.28);
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.38);
+  border-radius: 12px;
 }
 
 .glogo {
@@ -57,8 +57,8 @@
 .glogo div h1 {
   margin: 0px;
   padding: 0px;
-  font-size: 12px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 32px;
   font-weight: 400;
   color: #aaa;
 }
@@ -66,10 +66,19 @@
 .glogo div h2 {
   margin: 0px;
   padding: 0px;
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 24px;
+  line-height: 30px;
   font-weight: 500;
   color: #ccc;
+}
+
+.gfoot {
+  margin-top: 10px;
+}
+
+.gfoot span {
+  color: #888;
+  font-size: 12px;
 }
 
 .gcontent {

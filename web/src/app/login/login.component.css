@@ -13,7 +13,7 @@
   justify-content: flex-start;
   justify-items: flex-start;
   box-sizing: border-box;
-  margin: 8px 0px;
+  margin: 14px 0px;
 }
 
 .login-row label {
@@ -39,7 +39,7 @@
 }
 
 .login-row input:focus {
-  border-color: #109040;
+  border-color: #048cca;
 }
 
 .login-row button {
@@ -49,7 +49,7 @@
   color: #fff;
   font-size: 14px;
   font-weight: 500;
-  margin: 8px 70px;
+  margin: 18px 70px 8px 70px;
   height: 42px;
 }
 
