@@ -10,7 +10,7 @@ export class SessionStore extends ItemStore<SessionUser> {
 
     run() {
 
-        let json = localStorage.getItem('token');
+        let json = localStorage.getItem('user');
         if (json) {
             this.setStateSilent(JSON.parse(json));
         }
