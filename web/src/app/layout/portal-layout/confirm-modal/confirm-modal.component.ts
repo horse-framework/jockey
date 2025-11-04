@@ -1,11 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-confirm-modal',
   templateUrl: './confirm-modal.component.html',
   styleUrls: ['./confirm-modal.component.css'],
-  standalone: false
+  standalone: true,
+  imports: [MatDialogModule]
 })
 export class ConfirmModalComponent implements OnDestroy {
 

@@ -25,7 +25,6 @@
 
 .message-content {
   flex: 1 1 auto;
-  border-left: 1px solid #333;
   padding-left: 20px;
 }
 
@@ -81,11 +80,11 @@
   width: 440px;
   clear: both;
   border: 1px solid #333;
-  border-radius: 2px;
+  border-radius: 12px;
   padding: 10px;
   margin: 0px;
   background-color: #000;
-  height: 222px;
+  height: 360px;
   box-sizing: border-box;
   color: #eee;
   line-height: 22px;

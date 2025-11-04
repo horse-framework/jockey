@@ -10,12 +10,12 @@
 
 .cache-value textarea {
   margin: 8px 0px;
-  border: 1px solid #999;
+  border: 1px solid #333;
   background-color: #000;
-  padding: 5px;
+  padding: 15px;
   border-radius: 12px;
-  width: 500px;
-  height: 140px;
+  width: 480px;
+  height: 220px;
   font-family: "Courier New", Courier, monospace;
   font-size: 13px;
   font-weight: 400;

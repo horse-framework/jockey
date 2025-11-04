@@ -17,6 +17,7 @@ import { PipesModule } from '../../layout/pipes/pipes.module';
     PipesModule,
     MatDialogModule,
     FormsModule,
+    
     RouterModule.forChild([{ path: ':name', component: ChannelDetailComponent }])
   ]
 })

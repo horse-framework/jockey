@@ -7,9 +7,9 @@
             <div class="th fx20">Key</div>
             <div class="th fx14">Expiration</div>
             <div class="th fx14">Warning Date</div>
-            <div class="th fx12">Warn Count</div>
+            <div class="th fx8">Warn Count</div>
             <div class="th fx26">Tags</div>
-            <div class="th fx12 tright" style="display: block;">Action</div>
+            <div class="th fx16 tright" style="display: block">Action</div>
         </div>
         <div class="tbody">
             <div class="trow" *ngFor="let cache of caches">
@@ -23,13 +23,13 @@
                 <div class="td fx14">
                     <span>{{(cache.warningDate * 1000) | date: 'yyyy-MM-dd HH:mm:ss'}} UTC</span>
                 </div>
-                <div class="td fx12">
+                <div class="td fx8">
                     <span>{{cache.warnCount}}</span>
                 </div>
                 <div class="td fx26">
                     <span>{{cache.tags.join(', ')}}</span>
                 </div>
-                <div class="td fx12 tright">
+                <div class="td fx16 tright">
                     <button (click)="remove(cache.key)" class="cache-button red">Remove</button>
                     <button (click)="view(cache.key)" class="cache-button blue">View</button>
                 </div>

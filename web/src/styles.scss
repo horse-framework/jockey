@@ -77,6 +77,7 @@ textarea {
   align-content: stretch;
   align-items: stretch;
   text-align: left;
+  border-radius: 12px;
 }
 
 .portlet.full {
@@ -184,7 +185,7 @@ textarea {
 .kvt-value {
   flex: 5 1 auto;
   box-sizing: border-box;
-  min-width: 70px;
+  
   padding: 8px;
   line-height: 25px;
   font-size: 14px;
@@ -772,6 +773,10 @@ select:focus>option:checked {
   border-color: #109030;
 }
 
+.btn-blue {
+  border-color: #048cca;
+}
+
 .btn-yellow {
   border-color: #b2b200;
 }
@@ -794,6 +799,10 @@ select:focus>option:checked {
 
 .btn-green:hover {
   border-color: #10f070;
+}
+
+.btn-blue:hover {
+  border-color: #04acfa;
 }
 
 .btn-purple:hover {
@@ -960,9 +969,14 @@ input {
   height: 26px !important;
 }
 
-select, option {
+select,
+option {
   border-radius: 12px !important;
   padding: 5px 10px !important;
   line-height: 32px !important;
   height: 38px !important;
+}
+
+.wide-modal {
+  min-width: 820px !important;
 }

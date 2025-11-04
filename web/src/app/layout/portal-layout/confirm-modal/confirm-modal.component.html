@@ -1,7 +1,9 @@
 <h2 class="title" mat-dialog-title>Confirmation</h2>
 <mat-dialog-content class="content">
-    <p [innerHTML]="message"></p>
-    <p>Please confirm your action.</p>
+    <div>
+        <p [innerHTML]="message"></p>
+        <p>Please confirm your action.</p>
+    </div>
 </mat-dialog-content>
 <mat-dialog-actions class="buttons">
     <button (click)="confirm(true)" mat-button mat-dialog-close class="modal-btn btn-red">Confirm</button>

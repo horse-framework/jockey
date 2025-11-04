@@ -18,8 +18,11 @@ export async function initializeEnvironment(): Promise<Provider[]> {
     version: '7.2.5'
   };
 
-  //environment.apiUrl = 'http://localhost:2627/api';
-  //environment.websocketUrl = 'ws://localhost:2627';
+
+  if (location.host == 'localhost:4200') {
+    environment.apiUrl = 'http://localhost:2627/api';
+    environment.websocketUrl = 'ws://localhost:2627';
+  }
 
   return [{ provide: ENVIRONMENT, useValue: environment }];
 }

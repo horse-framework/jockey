@@ -48,8 +48,9 @@
 }
 .form-item textarea {
   font-family: "Ubuntu", sans-serif;
-  height: 80px;
+  height: 120px;
   line-height: 20px;
   resize: none;
   border-radius: 12px;
+  border-color: #555;
 }

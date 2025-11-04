@@ -61,10 +61,10 @@
   padding: 12px 20px;
   font-weight: 500;
   background-color: transparent;
-  border-color: #109030;
+  border-color: #048cda;
 }
 .add-binding button:hover {
-  border-color: #10f070;
+  border-color: #04acfa;
 }
 
 .remove-binding {

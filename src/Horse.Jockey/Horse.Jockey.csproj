@@ -2,9 +2,9 @@
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Horse.Jockey</Title>
-        <AssemblyVersion>7.2.5</AssemblyVersion>
-        <FileVersion>7.2.5</FileVersion>
-        <PackageVersion>7.2.5</PackageVersion>
+        <AssemblyVersion>7.2.6</AssemblyVersion>
+        <FileVersion>7.2.6</FileVersion>
+        <PackageVersion>7.2.6</PackageVersion>
         <Authors>Mehmet Helvacıköylü</Authors>
         <Description>Administration Portal for Horse Messaging</Description>
         <PackageProjectUrl>https://github.com/horse-framework/jockey</PackageProjectUrl>
@@ -28,46 +28,46 @@
     </ItemGroup>
 
     <ItemGroup>
+        <EmbeddedResource Include="Web\chunk-22RSRA5L.js" />
         <EmbeddedResource Include="Web\chunk-2C4VCG6N.js" />
-        <EmbeddedResource Include="Web\chunk-3ULQE6PB.js" />
+        <EmbeddedResource Include="Web\chunk-5HFCID35.js" />
         <EmbeddedResource Include="Web\chunk-62BS6GGD.js" />
-        <EmbeddedResource Include="Web\chunk-6N2XZLSV.js" />
         <EmbeddedResource Include="Web\chunk-6PAO2QKS.js" />
         <EmbeddedResource Include="Web\chunk-6Y3EYF24.js" />
-        <EmbeddedResource Include="Web\chunk-A46F73WH.js" />
+        <EmbeddedResource Include="Web\chunk-74WLXBMD.js" />
+        <EmbeddedResource Include="Web\chunk-77IAIRUM.js" />
         <EmbeddedResource Include="Web\chunk-AALDHFM7.js" />
         <EmbeddedResource Include="Web\chunk-BQERTHYR.js" />
         <EmbeddedResource Include="Web\chunk-BXDPRKZC.js" />
         <EmbeddedResource Include="Web\chunk-C32MIXKR.js" />
         <EmbeddedResource Include="Web\chunk-DTICWRO3.js" />
-        <EmbeddedResource Include="Web\chunk-EL26N5KD.js" />
-        <EmbeddedResource Include="Web\chunk-G4Y6PG2I.js" />
         <EmbeddedResource Include="Web\chunk-H2JBVQRL.js" />
         <EmbeddedResource Include="Web\chunk-I3ZBIMQN.js" />
         <EmbeddedResource Include="Web\chunk-IARL6YQG.js" />
+        <EmbeddedResource Include="Web\chunk-IC62G35I.js" />
+        <EmbeddedResource Include="Web\chunk-JMRP3GNC.js" />
         <EmbeddedResource Include="Web\chunk-JSLFBEG5.js" />
         <EmbeddedResource Include="Web\chunk-NIIXPKXM.js" />
         <EmbeddedResource Include="Web\chunk-NJ67TIRQ.js" />
         <EmbeddedResource Include="Web\chunk-Q3OZ3U72.js" />
         <EmbeddedResource Include="Web\chunk-Q4TLX7S2.js" />
-        <EmbeddedResource Include="Web\chunk-QAOI5TFI.js" />
-        <EmbeddedResource Include="Web\chunk-RKTRZ4FS.js" />
+        <EmbeddedResource Include="Web\chunk-RM6L7AYH.js" />
         <EmbeddedResource Include="Web\chunk-T6NJB6RB.js" />
+        <EmbeddedResource Include="Web\chunk-TJQ22GCL.js" />
+        <EmbeddedResource Include="Web\chunk-U2CCVXRV.js" />
         <EmbeddedResource Include="Web\chunk-U2DSLRRK.js" />
-        <EmbeddedResource Include="Web\chunk-UPET6FOS.js" />
-        <EmbeddedResource Include="Web\chunk-UR2LHXBR.js" />
         <EmbeddedResource Include="Web\chunk-V6JU363Q.js" />
+        <EmbeddedResource Include="Web\chunk-VDQADRST.js" />
         <EmbeddedResource Include="Web\chunk-VHKLBTQQ.js" />
-        <EmbeddedResource Include="Web\chunk-VJ6KRI76.js" />
-        <EmbeddedResource Include="Web\chunk-VPM3C6LH.js" />
+        <EmbeddedResource Include="Web\chunk-VQBI6VIX.js" />
+        <EmbeddedResource Include="Web\chunk-WAFF3374.js" />
         <EmbeddedResource Include="Web\chunk-X7GHCXNM.js" />
-        <EmbeddedResource Include="Web\chunk-YEEMIZLI.js" />
-        <EmbeddedResource Include="Web\chunk-YYQUVVBX.js" />
+        <EmbeddedResource Include="Web\chunk-Y3AKXDE5.js" />
         <EmbeddedResource Include="Web\favicon.ico" />
         <EmbeddedResource Include="Web\index.html" />
-        <EmbeddedResource Include="Web\main-OIW5RJ34.js" />
+        <EmbeddedResource Include="Web\main-NRMH5RFR.js" />
         <EmbeddedResource Include="Web\polyfills-5CFQRCPP.js" />
-        <EmbeddedResource Include="Web\styles-5E7SKGD3.css" />
+        <EmbeddedResource Include="Web\styles-2ZLTBGI6.css" />
         <EmbeddedResource Include="Web\assets\logo.png" />
     </ItemGroup>
 </Project>

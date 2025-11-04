@@ -44,7 +44,7 @@ export class ChannelsComponent extends BaseFormComponent implements OnInit {
   }
 
   viewInitialMessage(channel: ChannelInfo): void {
-    let dialogRef = this.dialog.open(ChannelMessageModalComponent, { width: '800px' });
+    let dialogRef = this.dialog.open(ChannelMessageModalComponent, { panelClass: 'wide-modal' });
     let component = <ChannelMessageModalComponent>dialogRef.componentInstance;
     component.load(channel.name);
   }
