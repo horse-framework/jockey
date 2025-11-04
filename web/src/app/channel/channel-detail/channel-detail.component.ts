@@ -131,7 +131,7 @@ export class ChannelDetailComponent extends BaseFormComponent implements OnInit,
   }
 
   remove(): void {
-    let dialogRef = this.dialog.open(ConfirmModalComponent, { width: '600px' });
+    let dialogRef = this.dialog.open(ConfirmModalComponent);
     let component = <ConfirmModalComponent>dialogRef.componentInstance;
     component.message = 'You are about to delete <b class="imp">' + this.channelName + '</b> Channel. Are you sure?';
     component.onclosed
@@ -146,7 +146,7 @@ export class ChannelDetailComponent extends BaseFormComponent implements OnInit,
   }
 
   viewInitialMessage(): void {
-    let dialogRef = this.dialog.open(ChannelMessageModalComponent, { width: '800px' });
+    let dialogRef = this.dialog.open(ChannelMessageModalComponent, { panelClass: 'wide-modal' });
     let component = <ChannelMessageModalComponent>dialogRef.componentInstance;
     component.load(this.channelName);
   }
