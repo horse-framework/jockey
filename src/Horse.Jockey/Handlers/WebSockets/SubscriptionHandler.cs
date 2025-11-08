@@ -25,7 +25,7 @@ namespace Horse.Jockey.Handlers.WebSockets
             _bus = bus;
         }
 
-        public Task Handle(SubscriptionRequest model, WebSocketMessage message, IHorseWebSocket client)
+        public ValueTask Handle(SubscriptionRequest model, WebSocketMessage message, IHorseWebSocket client)
         {
             WsServerSocket socket = (WsServerSocket) client;
             string[] split = model.Channel.Split(':');
@@ -82,7 +82,7 @@ namespace Horse.Jockey.Handlers.WebSockets
                     break;
             }
 
-            return Task.CompletedTask;
+            return ValueTask.CompletedTask;
         }
 
         private void SendQueueFullData(IHorseWebSocket socket, string queueName = null)

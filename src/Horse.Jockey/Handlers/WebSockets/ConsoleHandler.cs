@@ -20,7 +20,7 @@ namespace Horse.Jockey.Handlers.WebSockets
             _subscriptionService = subscriptionService;
         }
 
-        public async Task Handle(ConsoleRequest model, WebSocketMessage message, IHorseWebSocket client)
+        public async ValueTask Handle(ConsoleRequest model, WebSocketMessage message, IHorseWebSocket client)
         {
             if (string.IsNullOrEmpty(model.Target))
             {
