@@ -6,7 +6,7 @@ import { forkJoin, interval } from 'rxjs';
 import { TimespanPipe } from '../layout/pipes/timespan.pipe';
 import { CountRecord, MessageCount } from '../../../src/models/message-count';
 import { WebsocketService } from '../../../src/services/websocket.service';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { ChartService } from '../../../src/services/chart.service';
 import { QueueService } from '../queue/services/queue.service';
 import { HorseRouterService } from '../../../src/services/horse-router.service';
@@ -20,7 +20,6 @@ import { DateHelper } from '../../lib/helpers/date.helper';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css'],
     standalone: false
 })
 export class DashboardComponent extends BaseFormComponent implements OnInit, OnDestroy {
@@ -32,6 +31,12 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
     channelChart: any = null;
     dashboard: Dashboard | null = null;
     lifetime: string = '';
+    initialized: boolean = false;
+
+    smallChartWidth: number = 500;
+    smallChartHeight: number = 300;
+    largeChartWidth: number = 1000;
+    largeChartHeight: number = 300;
 
     constructor(private dashboardService: DashboardService,
         private socket: WebsocketService,
@@ -45,6 +50,12 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
     }
 
     async ngOnInit() {
+
+        this.smallChartWidth = document.documentElement.clientWidth / 2 - 200;
+        this.smallChartHeight = Math.min(this.smallChartWidth * 0.35, 255);
+        this.largeChartWidth = document.documentElement.clientWidth - 400;
+        this.largeChartHeight = Math.min(this.largeChartWidth * 0.35, 380);
+        this.initialized = true;
 
         await this.load();
         this.on(interval(5000)).subscribe(async () => {
@@ -115,6 +126,10 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
 
     private async load() {
 
+        await interval(100)
+            .pipe(filter(() => document.getElementById('channel-chart') != undefined),
+                take(1));
+
         this.dashboardService.load().subscribe(r => this.dashboard = r.body!);
         this.loadCharts();
 
@@ -144,12 +159,12 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                     type: 'line',
                     data: this.getDeliveryChartData(result.queue!.body!.stream!),
                     options: {
+                        responsive: true,
                         animation: { duration: 0 },
                         hover: { mode: 'nearest', intersect: true },
-                        responsive: true,
                         scales: {
-                            x: { display: false },
-                            y: { display: true, ticks: { precision: 0 } }
+                            x: { display: false, beginAtZero: true },
+                            y: { display: true, ticks: { precision: 0 }, beginAtZero: true }
                         }
                     }
                 });
@@ -166,8 +181,8 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                         hover: { mode: 'nearest', intersect: true },
                         responsive: true,
                         scales: {
-                            x: { display: false },
-                            y: { display: true, ticks: { precision: 0 } }
+                            x: { display: false, beginAtZero: true },
+                            y: { display: true, ticks: { precision: 0 }, beginAtZero: true }
                         }
                     }
                 });
@@ -184,8 +199,8 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                         hover: { mode: 'nearest', intersect: true },
                         responsive: true,
                         scales: {
-                            x: { display: false },
-                            y: { display: true, ticks: { precision: 0 } }
+                            x: { display: false, beginAtZero: true },
+                            y: { display: true, ticks: { precision: 0 }, beginAtZero: true }
                         }
                     }
                 });
@@ -202,8 +217,8 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                         hover: { mode: 'nearest', intersect: true },
                         responsive: true,
                         scales: {
-                            x: { display: false },
-                            y: { display: true, ticks: { precision: 0 } }
+                            x: { display: false, beginAtZero: true },
+                            y: { display: true, ticks: { precision: 0 }, beginAtZero: true }
                         }
                     }
                 });
@@ -211,7 +226,8 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
             if (this.channelChart)
                 this.channelChart.destroy();
 
-            this.channelChart = new Chart(<any>document.getElementById('channel-chart'),
+            let channelCtx = <any>document.getElementById('channel-chart');
+            this.channelChart = new Chart(channelCtx,
                 {
                     type: 'line',
                     data: this.getChannelChartData(result.channel!.d),
@@ -220,8 +236,8 @@ export class DashboardComponent extends BaseFormComponent implements OnInit, OnD
                         hover: { mode: 'nearest', intersect: true },
                         responsive: true,
                         scales: {
-                            x: { display: false },
-                            y: { display: true, ticks: { precision: 0 } }
+                            x: { display: false, beginAtZero: true },
+                            y: { display: true, ticks: { precision: 0 }, beginAtZero: true }
                         }
                     }
                 });

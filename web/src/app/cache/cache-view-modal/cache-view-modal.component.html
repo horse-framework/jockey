@@ -1,7 +1,7 @@
 <h2 class="title" mat-dialog-title>{{model?.key}}</h2>
 <mat-dialog-content class="content">
-    <div *ngIf="model" class="cache-value">
-
+    <div class="cache-value">
+        @if (model){
         <div class="key-value-table">
             <div class="kvt-row">
                 <div class="kvt-key-narrow">Expiration</div>
@@ -20,8 +20,8 @@
                 <div class="kvt-value">{{model.tags.join(', ')}}</div>
             </div>
         </div>
-
         <textarea readonly style="cursor: text;">{{model.value}}</textarea>
+        }
     </div>
 </mat-dialog-content>
 <mat-dialog-actions class="buttons">

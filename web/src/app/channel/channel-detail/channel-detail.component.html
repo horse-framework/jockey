@@ -11,7 +11,8 @@
         <div class="dashboard-portlet">
             <div class="portlet">
                 <h3 class="portlet-title">Options &amp; Actions</h3>
-                <div class="portlet-body" *ngIf="channel">
+                <div class="portlet-body">
+                    @if (channel){
                     <div class="portlet-table grow canvas-info">
                         <div class="key-value-table">
                             <div class="kvt-row">
@@ -25,7 +26,8 @@
                                 <div class="kvt-key">Topic</div>
                                 <div class="kvt-value">
                                     {{channel.topic}}
-                                    <a class="change-option" (click)="changeOption('Topic', 'topic', channel.topic)">Change</a>
+                                    <a class="change-option"
+                                        (click)="changeOption('Topic', 'topic', channel.topic)">Change</a>
                                 </div>
                             </div>
                             <div class="kvt-row">
@@ -36,39 +38,46 @@
                                 <div class="kvt-key">Initial Message</div>
                                 <div class="kvt-value">
                                     {{channel.hasInitialMessage ? '' : 'None'}}
-                                    <a class="change-option" (click)="viewInitialMessage()" *ngIf="channel.hasInitialMessage">View</a>
+                                    @if (channel.hasInitialMessage){
+                                    <a class="change-option" (click)="viewInitialMessage()">View</a>
+                                    }
                                 </div>
                             </div>
                             <div class="kvt-row">
                                 <div class="kvt-key">Client Limit</div>
                                 <div class="kvt-value">
                                     {{channel.options!.clientLimit | unlimited}}
-                                    <a class="change-option" (click)="changeOption('Client Limit', 'clientLimit', channel.options!.clientLimit)">Change</a>
+                                    <a class="change-option"
+                                        (click)="changeOption('Client Limit', 'clientLimit', channel.options!.clientLimit)">Change</a>
                                 </div>
                             </div>
                             <div class="kvt-row">
                                 <div class="kvt-key">Message Size Limit</div>
                                 <div class="kvt-value">
                                     {{channel.options!.messageSizeLimit | unlimited}}
-                                    <a class="change-option" (click)="changeOption('Message Size Limit', 'messageSizeLimit', channel.options!.messageSizeLimit)">Change</a>
+                                    <a class="change-option"
+                                        (click)="changeOption('Message Size Limit', 'messageSizeLimit', channel.options!.messageSizeLimit)">Change</a>
                                 </div>
                             </div>
                             <div class="kvt-row">
                                 <div class="kvt-key">Auto Destroy</div>
                                 <div class="kvt-value">
                                     {{channel.options!.autoDestroy ? 'Yes' : 'No'}}
-                                    <a class="change-option" (click)="changeOption('Auto Destroy', 'autoDestroy', channel.options!.autoDestroy, 'checkbox')">Change</a>
+                                    <a class="change-option"
+                                        (click)="changeOption('Auto Destroy', 'autoDestroy', channel.options!.autoDestroy, 'checkbox')">Change</a>
                                 </div>
                             </div>
                             <div class="kvt-row">
                                 <div class="kvt-key">Auto Destroy Idle</div>
                                 <div class="kvt-value">
                                     {{channel.options!.autoDestroyIdleSeconds}} Seconds
-                                    <a class="change-option" (click)="changeOption('Auto Destroy Idle', 'autoDestroyIdleSeconds', channel.options!.autoDestroyIdleSeconds)">Change</a>
+                                    <a class="change-option"
+                                        (click)="changeOption('Auto Destroy Idle', 'autoDestroyIdleSeconds', channel.options!.autoDestroyIdleSeconds)">Change</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    }
                 </div>
             </div>
         </div>
@@ -85,13 +94,15 @@
                     <div class="th fx30">Id</div>
                     <div class="th fx22">Subscribed Date</div>
                 </div>
-                <div class="tbody" *ngIf="channel">
+                <div class="tbody">
+                    @if (channel) {
                     <div class="trow" *ngFor="let subscriber of channel.subscribers">
                         <div class="td fx24"><span>{{subscriber.type}}</span></div>
                         <div class="td fx24"><span>{{subscriber.name}}</span></div>
                         <div class="td fx30"><a routerLink="/client/{{subscriber.id}}">{{subscriber.id}}</a></div>
-                        <div class="td fx22"><span>{{(subscriber.subscriptionDate*1000)| date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
+                        <div class="td fx22"><span>{{(subscriber.subscriptionDate*1000)| date: 'yyyy-MM-ddHH:mm:ss'}}</span></div>
                     </div>
+                    }
                 </div>
             </div>
         </div>

@@ -1,7 +1,10 @@
-<div class="warning-bar" *ngIf="dashboard && (dashboard.nodeState == 'Replica' || dashboard.nodeState == 'Successor')">
-  <p>That node is a <b>{{dashboard.nodeState}}</b> Node. <a href="{{dashboard.mainNodeHost}}">Click here</a> to open main node jockey panel.</p>
+@if (dashboard && (dashboard.nodeState == 'Replica' || dashboard.nodeState == 'Successor')){
+<div class="warning-bar">
+  <p>That node is a <b>{{dashboard.nodeState}}</b> Node. <a href="{{dashboard.mainNodeHost}}">Click here</a> to open
+    main node jockey panel.</p>
 </div>
-
+}
+@if (initialized) {
 <div class="dashboard" [hidden]="dashboard == null">
   <div class="dashboard-row">
     <div class="dashboard-portlet">
@@ -11,7 +14,8 @@
           <div class="portlet-canvas">
             <canvas id="store-chart"></canvas>
           </div>
-          <div class="portlet-table canvas-info" *ngIf="dashboard">
+          <div class="portlet-table canvas-info">
+            @if (dashboard){
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Queue Count</div>
@@ -22,7 +26,7 @@
                 <div class="kvt-value">{{dashboard.queueStore.r}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Stored Priority Messages</div>
+                <div class="kvt-key">Stored Prio</div>
                 <div class="kvt-value">{{dashboard.queueStore.d}}</div>
               </div>
               <div class="kvt-row">
@@ -30,7 +34,7 @@
                 <div class="kvt-value">{{dashboard.queueStore.rs}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Waiting for Put Back</div>
+                <div class="kvt-key">Putback Waiting</div>
                 <div class="kvt-value">{{dashboard.queueStore.nr}}</div>
               </div>
               <div class="kvt-row">
@@ -38,10 +42,41 @@
                 <div class="kvt-value">{{dashboard.queueStore.s}}</div>
               </div>
             </div>
+            }
           </div>
         </div>
       </div>
     </div>
+    <div class="dashboard-portlet">
+      <div class="portlet">
+        <h3 class="portlet-title">Channel Messages</h3>
+        <div class="portlet-body">
+          <div class="portlet-canvas">
+            <canvas id="channel-chart"></canvas>
+          </div>
+          <div class="portlet-table canvas-info">
+            @if (dashboard){
+            <div class="key-value-table">
+              <div class="kvt-row">
+                <div class="kvt-key">Channels</div>
+                <div class="kvt-value">{{dashboard.channelCount}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Published</div>
+                <div class="kvt-value">{{dashboard.channels.s}}</div>
+              </div>
+              <div class="kvt-row">
+                <div class="kvt-key">Received</div>
+                <div class="kvt-value">{{dashboard.channels.r}}</div>
+              </div>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard-row">
     <div class="dashboard-portlet">
       <div class="portlet">
         <h3 class="portlet-title">Queue Messages and Deliveries</h3>
@@ -49,26 +84,27 @@
           <div class="portlet-canvas">
             <canvas id="delivery-chart"></canvas>
           </div>
-          <div class="portlet-table canvas-info" *ngIf="dashboard">
+          <div class="portlet-table canvas-info">
+            @if (dashboard){
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Produced</div>
                 <div class="kvt-value">{{dashboard.queues.r}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Acknowledged</div>
+                <div class="kvt-key">Ack'ed</div>
                 <div class="kvt-value">{{dashboard.queues.d}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Negative Acknowledged</div>
+                <div class="kvt-key">Negative Ack'ed</div>
                 <div class="kvt-value">{{dashboard.queues.rs}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Unacknowledge</div>
+                <div class="kvt-key">Unack</div>
                 <div class="kvt-value">{{dashboard.queues.nr}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Acknowledge Timed out</div>
+                <div class="kvt-key">Ack Timed out</div>
                 <div class="kvt-value">{{dashboard.queues.to}}</div>
               </div>
               <div class="kvt-row">
@@ -76,42 +112,16 @@
                 <div class="kvt-value">{{dashboard.queues.e}}</div>
               </div>
             </div>
+            }
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="dashboard-row">
-    <div class="dashboard-portlet dp-40">
-      <div class="portlet">
-        <h3 class="portlet-title">Channel Messages</h3>
-        <div class="portlet-body">
-          <div class="portlet-canvas" style="min-height: 255px;">
-            <canvas id="channel-chart"></canvas>
-          </div>
-          <div class="portlet-table" *ngIf="dashboard">
-            <div class="key-value-table">
-              <div class="kvt-row">
-                <div class="kvt-key">Channel Count</div>
-                <div class="kvt-value">{{dashboard.channelCount}}</div>
-              </div>
-              <div class="kvt-row">
-                <div class="kvt-key">Published Messages</div>
-                <div class="kvt-value">{{dashboard.channels.s}}</div>
-              </div>
-              <div class="kvt-row">
-                <div class="kvt-key">Received Messages</div>
-                <div class="kvt-value">{{dashboard.channels.r}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="dashboard-portlet dp-60">
+    <div class="dashboard-portlet">
       <div class="portlet">
         <h3 class="portlet-title">Server Information and Default Options</h3>
-        <div class="portlet-body" *ngIf="dashboard" style="min-height: 275px;">
+        <div class="portlet-body" style="min-height: 275px;">
+          @if (dashboard){
           <div class="portlet-table">
             <div class="key-value-table">
               <div class="kvt-row">
@@ -121,7 +131,9 @@
               <div class="kvt-row">
                 <div class="kvt-key">Hostname</div>
                 <div class="kvt-value">
-                  <span *ngFor="let host of dashboard.server.hosts">{{host}}</span>
+                  @for (host of dashboard.server.hosts; track host){
+                  <span>{{host}}</span>
+                  }
                 </div>
               </div>
               <div class="kvt-row">
@@ -144,7 +156,7 @@
               </div>
             </div>
           </div>
-          <div class="portlet-table">
+          <div class="portlet-table grow">
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Max Queue Limit</div>
@@ -172,7 +184,7 @@
               </div>
             </div>
           </div>
-          <div class="portlet-table">
+          <div class="portlet-table grow">
             <div class="key-value-table">
               <div class="kvt-row">
                 <div class="kvt-key">Default Queue Type</div>
@@ -189,10 +201,14 @@
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Queue Message Timeout</div>
-                <div class="kvt-value" *ngIf="dashboard.queueOptions.msgTimeout == 0">No Timeout</div>
-                <div class="kvt-value" *ngIf="dashboard.queueOptions.msgTimeout > 0">
+                @if (dashboard.queueOptions.msgTimeout == 0){
+                <div class="kvt-value">No Timeout</div>
+                }
+                @else {
+                <div class="kvt-value">
                   {{dashboard.queueOptions.msgTimeout}} milliseconds
                 </div>
+                }
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Message Limit</div>
@@ -203,14 +219,18 @@
               </div>
               <div class="kvt-row">
                 <div class="kvt-key">Delay Between Messages</div>
-                <div class="kvt-value" *ngIf="dashboard.queueOptions.delayBetweenMsgs == 0">No Delay</div>
-                <div class="kvt-value" *ngIf="dashboard.queueOptions.delayBetweenMsgs > 0">
+                @if (dashboard.queueOptions.delayBetweenMsgs == 0){
+                <div class="kvt-value">No Delay</div>
+                }
+                @else {
+                <div class="kvt-value">
                   {{dashboard.queueOptions.delayBetweenMsgs}} milliseconds
                 </div>
+                }
               </div>
             </div>
           </div>
-
+          }
         </div>
       </div>
     </div>
@@ -224,21 +244,23 @@
           <div class="portlet-canvas">
             <canvas id="router-chart"></canvas>
           </div>
-          <div class="portlet-table canvas-info" *ngIf="dashboard">
+          <div class="portlet-table canvas-info">
+            @if (dashboard){
             <div class="key-value-table">
               <div class="kvt-row">
-                <div class="kvt-key">Published Router Messages</div>
+                <div class="kvt-key">Published</div>
                 <div class="kvt-value">{{dashboard.router.r}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Delivered Router Messages</div>
+                <div class="kvt-key">Delivered</div>
                 <div class="kvt-value">{{dashboard.router.s}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Not Received Messages</div>
+                <div class="kvt-key">Not Received</div>
                 <div class="kvt-value">{{dashboard.router.nr}}</div>
               </div>
             </div>
+            }
           </div>
         </div>
       </div>
@@ -250,27 +272,31 @@
           <div class="portlet-canvas">
             <canvas id="msg-chart"></canvas>
           </div>
-          <div class="portlet-table canvas-info" *ngIf="dashboard">
+          <div class="portlet-table canvas-info">
+            @if (dashboard){
             <div class="key-value-table">
               <div class="kvt-row">
-                <div class="kvt-key">Sent Direct Messages</div>
+                <div class="kvt-key">Sent</div>
                 <div class="kvt-value">{{dashboard.direct.s}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Delivered Direct Messages</div>
+                <div class="kvt-key">Delivered</div>
                 <div class="kvt-value">{{dashboard.router.r}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Direct Responses</div>
+                <div class="kvt-key">Responses</div>
                 <div class="kvt-value">{{dashboard.direct.rs}}</div>
               </div>
               <div class="kvt-row">
-                <div class="kvt-key">Not Routed Messages</div>
+                <div class="kvt-key">Not Routed</div>
                 <div class="kvt-value">{{dashboard.router.nr}}</div>
               </div>
             </div>
+            }
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+}

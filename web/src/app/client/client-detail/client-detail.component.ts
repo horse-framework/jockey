@@ -98,8 +98,8 @@ export class ClientDetailComponent extends BaseFormComponent implements OnInit, 
               animation: { duration: 0 },
               responsive: true,
               scales: {
-                x: { display: false },
-                y: { display: true, ticks: { precision: 0 } }
+                x: { display: false, beginAtZero: true },
+                y: { display: true, ticks: { precision: 0 }, beginAtZero: true }
               }
             }
           });

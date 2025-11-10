@@ -88,8 +88,8 @@ export class ChannelDetailComponent extends BaseFormComponent implements OnInit,
               hover: { mode: 'nearest', intersect: true },
               responsive: true,
               scales: {
-                x: { display: false },
-                y: { display: true, ticks: { precision: 0 } }
+                x: { display: false, beginAtZero: true },
+                y: { display: true, ticks: { precision: 0 }, beginAtZero: true }
               }
             }
           });
